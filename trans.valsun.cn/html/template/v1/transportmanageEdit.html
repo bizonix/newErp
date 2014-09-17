@@ -1,0 +1,58 @@
+{header}
+<link rel="stylesheet" href="css/transportlist.css">
+<script type="text/javascript" src="./js/transportmanage.js"></script>
+{navbar}
+<div class="container" >
+    <form action='index.php?mod=transportmanage&act=editTransport'  id="transEditForm" method="post">
+    	<input type="hidden" name="carrierId" id="carrierId" value="{carrierId}" />
+        <p>
+            <label for="carrierNameCnInput">名称: </label>
+            <input value="{carrierNameCn}" id='carrierNameCnInput' class="mf validate[required] text-input" name="carrierNameCnInput" type="text" >
+            <span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="carrierNameEnInput">代码: </label>
+            <input value="{carrierNameEn}" class="mf validate[required] text-input" id="carrierNameEnInput" name="carrierNameEnInput" type="text" >
+            <span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="platform">平台列表: </label>
+            {platformList}
+            <span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="shippingAddress">发货地址列表: </label>
+            {shippingAddressList}
+            <span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="weightMinInput">重量最小值: </label>
+            <input value="{weightMin}" class="mf" id="weightMinInput" name="weightMinInput" type="text" >克
+        </p>
+        <p>
+            <label for="weightMaxInput">重量最大值: </label>
+            <input value="{weightMax}" class="mf" id="weightMaxInput" name="weightMaxInput" type="text" >克
+        </p>
+        <p>
+            <label for="timecountInput">递送时间: </label>
+            <input value="{timecount}" class="mf" id="timecountInput" name="timecountInput" type="text" >天
+        </p>
+        <p>
+            <label for="noteInput">备注: </label>
+            <textarea class="mf" id="noteInput" name="noteInput">{note}</textarea>
+        </p>
+        <p>
+            <label for="">是否启用: </label>
+            <!-- IF isopen -->
+            <select id="enable" name="enable"><option value="0">是</option><option value="1" selected="selected" >否</option></select>
+            <!-- ELSE isopen -->
+			<select id="enable" name="enable"><option value="0" selected="selected" >是</option><option value="1" >否</option></select>
+            <!-- ENDIF isopen -->
+        </p>
+        <p>
+            <input class="button" type="submit" value="提交">
+            <input class="button" onclick='window.location="index.php?mod=transportmanage&act=list"' type="reset" value="取消">
+        </p>
+    </form>
+</div>
+{footer}

@@ -1,0 +1,43 @@
+{include file="header.htm"}
+<div class="fourvar">
+	{include file="iqcnav.htm"}
+</div>
+<script type="text/javascript" src="./js/skuTypeQc.js"></script>	
+<div class="servar">
+    <span>
+        <button  id='skuTypeQcAdd' value="" />添加检测类别</button>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="5%" align="right"><input type="checkbox" class="checkall" /></td>
+                <td width="10%">SKU分类名</td>
+                <td width="10%">创建时间</td>
+                <td width="10%" align="center">操作</td>
+                <td width="65%"></td>
+            </tr>
+        </thead>
+        <!-- BEGIN list -->
+        <thead>
+        {foreach name=skuTypeQcArr item=listArr from=$skuTypeQcArrList}
+            <tr class="odd">	
+                 <td width="5%" align="right"><input type="checkbox" name="key_id" value="{$listArr['id']}"/></td>
+                 <td width="10%">{$listArr['typeName']}</td>
+                 <td width="10%">{$listArr['createdTime']|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                 <td width="10%" align="center">
+                 <a href="index.php?mod=sampleStandard&act=skuTypeQcEditList&EditId={$listArr['id']}">
+                	 <button  id='skuTypeQcAdd' value="" />编辑</button>
+                 </a>
+                 </td>
+                 <td width="65%"></td>                
+            </tr>
+        {/foreach}
+        </thead>
+    <!-- END list -->
+    </table>
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}

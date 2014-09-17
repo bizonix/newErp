@@ -1,0 +1,46 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whStoreList.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=warehouseManagement&act=warehouseSubmit&type=add' method="post" id="warehouseForm" onsubmit="return check();">
+    	<div style="width:500px; margin:auto; text-align:left;">
+            <label for="whNameInput" style="font-size:20px;">仓库名称：</label>        
+            <input value="" id='whNameInput' class="mf validate[required] text-input" name="whNameInput" type="text" style="width:200px;height:30px;font-size:20px">
+             <span id="whNameInputSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+            <label for="whCodeInput" style="font-size:20px;">仓库编码：</label>        
+            <input value="" id='whCodeInput' class="mf validate[required] text-input" name="whCodeInput" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="whCodeInputSpan" style="color: red;">*</span>
+		</div>        	
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+            <label for="whAddressInput" style="font-size:20px;">仓库位置：</label>    
+            <input value="" id='whAddressInput' class="mf validate[required] text-input" name="whAddressInput" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="whAddressInputSpan" style="color: red;">*</span>   
+        </div> 
+        <br />
+		<div style="width:500px; margin:auto; text-align:left;">
+            <label for="whLocationInput" style="font-size:20px;">仓库分布：</label>    
+            <input value="" id='whLocationInput' class="mf validate[required] text-input" name="whLocationInput" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="whLocationInputSpan" style="color: red;">*</span>   
+        </div> 
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+        	<label style="font-size:20px;">是否启用：</label>    
+            <span style="color: red;">启用</span>   
+        </div>
+        <br />
+        <div>   		       
+            <button  id='warehouseSubmit' value="" />提交</button>
+            &nbsp;
+            <input type="button"  id='returnPage' value="取消" class="input_button" />
+        </div>        
+    </form>
+</div>
+{include file="footer.htm"}

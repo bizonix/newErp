@@ -1,0 +1,82 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/tmpReturnPros.js"></script>
+<div class="fourvar">
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+			    <span style="font-size:20px;">SKU : </span>
+                <span><input id="modReturnSku" style="width:200px; height:25px;font-size:20px;"/></span>
+                {if isAccessAll('products','createModReturnBill') == true}
+                <span><button id="createModReturnBill">生成修改退料单</button></span>
+                
+                <span>&nbsp;|&nbsp;仓库：
+    			   <select id="whId" name="whId">
+                   {foreach getWhInfo() as $value}
+    				<option value="{$value['id']}" {if $smarty.get.whId == $value['id']}selected='selected'{/if}>{$value['whName']}</option>
+                   {/foreach}
+    			  </select>
+                </span>
+                {/if}
+                {if isAccessAll('products','clearModReturnBill') == true}
+                <span style="float: right; margin-right: 20px;"><button id="clearModReturn">清除</button></span>
+                {/if}
+                &nbsp;
+		        <span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <td>序号</td>
+                        <td>SKU</td>
+                        <td>描述</td>
+                        <td>仓位</td>
+                        <td>仓库</td>
+                        <td>数量</td>
+                        <td>添加人</td>
+                        <td>扫描时间</td>
+                        <td>操作</td>
+                    </tr>
+                    {foreach $tmpModReturnProsList as $value}
+                                {if $value@first}
+                                <tr style="color: green;" id="tr{$value['id']}">
+                                    <td>{$value@index + 1}</td>
+                                    <td>{$value['sku']}</td>
+                                    <td>{$value['goodsName']}</td>
+                                    <td>{$value['location']}</td>
+                                    <td>{$value['whName']}</td>
+                                    <td>{$value['count']}</td>
+                                    <td>{getPersonNameById($value['addUserId'])}</td>
+                                    <td>{$value['createdTime']|date_format:"Y-m-d H:i:s"}</td>
+                                    {if $smarty.session.userId == $value['addUserId']}
+                                    <td><input type="button" class="deleteTmpPros" tmpId="{$value['id']}" value="删除"/></td>
+                                    {/if}
+                                </tr>
+                                {else}
+                                <tr id="tr{$value['id']}">
+                                    <td>{$value@index + 1}</td>
+                                    <td>{$value['sku']}</td>
+                                    <td>{$value['goodsName']}</td>
+                                    <td>{$value['location']}</td>
+                                    <td>{$value['whName']}</td>
+                                    <td>{$value['count']}</td>
+                                    <td>{getPersonNameById($value['addUserId'])}</td>
+                                    <td>{$value['createdTime']|date_format:"Y-m-d H:i:s"}</td>
+                                    {if $smarty.session.userId == $value['addUserId']}
+                                    <td><input type="button" class="deleteTmpPros" tmpId="{$value['id']}" value="删除"/></td>
+                                    {/if}
+                                </tr>
+                                {/if}
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

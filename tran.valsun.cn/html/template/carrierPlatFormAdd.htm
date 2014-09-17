@@ -1,0 +1,97 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierPlatForm&act=index">运输平台管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>添加运输名</h1>
+    <form onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+                <td align="right" width="11%">所属运输方式：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select name="ship_id" id="ship_id">
+					<option value="">=请选择=</option>
+					{foreach item=list from=$lists}
+					<option value="{$list.id}">{$list.carrierNameCn}</option>
+					{/foreach}
+					</select>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">所属平台：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select name="plat_id" id="plat_id">
+					<option value="">=请选择=</option>
+					{foreach item=list from=$platFormlist}
+					<option value="{$list.id}">{$list.platformNameCn}</option>
+					{/foreach}
+					</select>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">运输名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="ship_name" id="ship_name" value="" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">服务名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="ship_service" id="ship_service" value="" maxlength="80"/>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=carrierPlatForm&act=index'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+{literal}
+<script type="text/javascript">
+function check(){
+	var ship_id = plat_id = ship_name = ship_service = "";
+	ship_id = $.trim($("#ship_id").val());
+	plat_id = $.trim($("#plat_id").val());
+	ship_name = $.trim($("#ship_name").val());
+	ship_service	= $.trim($("#ship_service").val());
+	if (ship_id == "") {
+		alertify.error("运输方式不能不选！");
+		$("#ship_id").focus();
+		return false;
+	}
+	if (plat_id == "") {
+		alertify.error("平台不能不选！");
+		$("#plat_id").focus();
+		return false;
+	}
+	if (ship_name == "") {
+		alertify.error("运输名不能为空！");
+		$("#ship_name").focus();
+		return false;
+	}
+	if (ship_service == "") {
+		alertify.error("服务名不能为空！");
+		$("#ship_service").focus();
+		return false;
+	}
+	var url  = web_url + "json.php?mod=carrierPlatForm&act=addCarrierPlatForm";
+	var data = {"ship_id":ship_id,"plat_id":plat_id,"ship_name":ship_name,"ship_service":ship_service};
+	$.post(url,data,function(res){
+		if(res.errCode == 0){
+			alertify.alert("添加成功！",function(){
+				window.location.reload();
+			});
+		}else {
+			 alertify.error(res.errMsg);
+		   }
+	}, "jsonp");
+	return false;
+}
+</script>
+{/literal}
+{include file="footer.htm"}

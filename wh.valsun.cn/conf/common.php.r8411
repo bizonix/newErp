@@ -1,0 +1,77 @@
+<?php
+if (!defined('WEB_PATH')) exit();
+define("WEB_URL","http://wh.valsun.cn/");
+define("PDA_WEB_URL","http://pda.wh.valsun.cn/");
+define("WEB_API","http://api.wh.valsun.cn/");
+//全局配置信息
+return  array(
+	//运行相关
+	"RUN_LEVEL"		=>	"DEV",		//	运行模式。 DEV(开发)，GAMMA(测试)，IDC(生产)
+
+	//日志相关
+	"LOG_RECORD"	=>	true,		//	开启日志记录
+	"LOG_TYPE"		=>	3,			//	1.mail  2.file 3.api
+	"LOG_PATH"	=>	"/data/web/wh.valsun.cn/log/",	//文件日志目录
+	"LOG_FILE_SIZE"	=>	2097152,
+	"LOG_DEST"		=>	"",			//	日志记录目标
+	"LOG_EXTRA"		=>	"",			//	日志记录额外信息
+
+	//数据接口相关
+	"DATAGATE"		=>	"db",		//	数据接口层 cache, db, socket
+	"DB_TYPE"		=>	"mysql",	//	mysql	mssql	postsql	mongodb		
+	
+
+	//mysql db	配置
+	"DB_CONFIG"		=>	array(
+		"master1"	=>	array("localhost","valsun_wh_121","o))Syq8@Rh,N","3306","valsun_wh")			//主DB
+		//"slave1"	=>	array("localhost","root","","3306")		//从DB
+	),
+	
+	
+	"CACHE_CONFIG"	=>	array(
+		array("10.160.55.24","11211"),
+		//array("192.168.200.122","11211")
+	),
+	
+	"LANG"	=>	"zh",	//语言版本开关  zh , en
+	
+	"CACHEGROUP" => 'wh_system_info',   //memcache上的保存组名
+    "CACHELIFETIME" => 7200,     //memcache 过期时间默认为 两小时
+	
+	'DB_PREFIX'=>'wh_',
+	
+	//RMQ	配置
+	"RMQ_CONFIG"		=>	array(
+		"sendOrder"	=>	array("112.124.41.121",'valsun_warehouse','warehouse%123',"5672","valsun_warehouse"),			                //测试机RabbitMQ
+		//"fetchOrder"	=>	array("112.124.41.121","valsun_order","order%123","5672","order"),			            //生产环境RabbitMQ 获取订单
+		//"sendOrder"     =>	array("112.124.41.121","valsun_sendOrder","sendOrder%123","5672","sendOrder"),			//生产环境RabbitMQ 发送订单
+		//"fetchPower"	=>	array("115.29.188.246","valsun_power","power%123","5672","power"),			            //生产环境RabbitMQ 获取权限
+	),
+	
+	//用户管理DEBUG
+	'IS_DEBUG' 			 		=> true,
+	'IS_AUTH_ON' 		 		=> true,	// 是否开启验证
+	'USER_AUTH_TYPE'	 		=> 2,		// 验证模式1为登录时验证，2为实时验证
+	'USER_AUTH_ID'		 		=> 'sysUserId', // 储存userId的SESSION 的 key
+	'USER_COM_ID'		 		=> 'companyId', // 储存companyId的SESSION 的 key
+	'USER_AUTH_KEY'		 		=> 'userpowers',
+	'USER_GO_URL'		 		=> 'index.php?mod=skuStock&act=searchSku',
+	'NOT_AUTH_NODE' 	 		=> 'public-userLogin,public-login,public-logout,pda_public-pda_login,pda_public-pda_logout,pda_index-pda_index,skuStock-searchSku',	// 默认无需认证模块
+	
+	//用户、权限、岗位表配置
+	'TABLE_USER_SESSION' 		=> 'power_session',
+	'TABLE_USER_INFO'	 		=> 'power_user',
+	'TABLE_GLOBAL_USER_INFO'	=> 'power_global_user',
+	'TABLE_USER_ONLINE'	 		=> '',
+	'TABLE_DEPT_INFO'	 		=> 'power_dept',
+	'TABLE_JOB_INFO'	 		=> 'power_job',
+	'TABLE_JOB_POWER'	 		=> 'power_jobpower',
+	'TABLE_ACTION_INFO'	 		=> 'power_action',
+	'TABLE_ACTION_GROUP' 		=> 'power_action_group',
+	'TABLE_COMPANY_INFO' 		=> 'power_company',
+	
+	//运输公司
+	'MAILWAYCONFIG' => array(0=>'EUB', 1=>'深圳', 2=>'福州', 3=>'三泰', 4=>'泉州', 5=>'义乌', 6=>'福建', 7=>'中外联', 8=>'GM', 9=>'香港', 10=>'快递'),
+);
+
+?>

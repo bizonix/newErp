@@ -1,0 +1,74 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/standard.js"></script>
+<div class="fourvar">
+            {include file="iqcnav.htm"}
+			<div class="pagination">
+			{$show_page}
+			</div>
+            </div>
+            <div class="servar">
+
+				<span>
+					查找：
+					<label for="typeId" >检测类型:</label>
+					<select  name="typeId" id="typeId" onchange="change_standard()">
+						<option value="0">请选择</option>
+						{foreach from=$sampleType key=listkey item=list}
+						 <option value="{$list.id}" {if $list.id==$typeId}selected{/if}>{$list.typeName}</option>
+						{/foreach}
+					</select>
+				</span>
+				<span id="standardname">
+					<label for="typeId">标准名称:</label>
+					<select  name="sName" id="sName">
+						<option value="">请选择</option>
+						{foreach from=$sampleList key=listkey item=list}
+						 <option value="{$list.sName}" {if $list.sName==$sName}selected{/if}>{$list.sName}</option>
+						{/foreach}
+					</select>
+				</span>
+				<span>
+					<button  id='seachstard' value="" />搜索</button>
+				</span>
+				<br/>
+                <span>
+					操作：<button  id='addStandard' value="" />增加检测样本标准</button>
+				</span>
+				<span>
+					<button  id='openStandard' value="" />开启检测样本标准</button>
+				</span>
+				<br>
+				<div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td>标准名称</td>
+						<td>检测类别</td>
+						<td>数量最小限制</td>
+						<td>数量最大限制</td>
+						<td>样本大小</td>
+						<td>是否已开启</td>
+						<td>操作</td>
+                    </tr>
+                    {foreach from=$SampleStandardList key=listkey item=list}
+                    <tr class="odd">
+                            <td>{$list.sName}</td>
+                            <td>{$type[$listkey]}</td>
+                            <td>{$list.minimumLimit}</td>
+                            <td>{$list.maximumLimit}</td>
+							<td>{$sizeCode[$listkey]}</td>
+                            <td>{if $list.is_open ==1} 是 {else} 否 {/if}</td>
+							<td>
+								<button  class="mod" tid="{$list.id}"/>编辑</button>
+							</td>
+                    </tr>
+					{/foreach}
+                </table>
+            </div>
+			<div class="bottomvar">
+				<div class="pagination">
+				{$show_page}
+				</div>
+			</div>
+{include file="footer.htm"}

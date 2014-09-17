@@ -1,0 +1,50 @@
+{header}
+<!-- 
+/*
+ * 运输方式对照国家列表修改页面  carrierCountriesManageEdit.html
+ * ADD BY 陈伟 2013.7.27
+ */
+-->
+<link rel="stylesheet" href="css/transportlist.css">
+<script type="text/javascript" src="./js/countriesManage.js"></script>
+{navdiv}
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="maincontentdiv" >
+    <form action='index.php?mod=countriesManage&act=carrierCountriesEdit' method="post" id="countriesAddForm">
+    	<input type="hidden" name="carrierCountryId" id="carrierCountryId" value="{carrierCountryId}" /> 
+        <p>
+            <label for="carrier_countryInput" style="font-size:20px;">运输提供国家名</label>
+            <input value="{carrier_country}" id='carrier_countryInput' class="mf validate[required] text-input" name="carrier_countryInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="countryNameInput" style="font-size:20px;">标准国家英文名</label>
+            <input value="{countryName}" class="mf validate[required] text-input" id="countryNameInput" name="countryNameInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="carrierNameCnInput" style="font-size:20px;">请选择运输方式</label>
+            {carrierNameCnInput}
+            <!--  
+            <input value="" class="mf validate[required] text-input" id="carrierNameCnInput" onchange="checkCcExist('CnCn')" name="carrierNameCnInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span id="showCnCnMsg" style="color: red;"></span>
+            -->
+            <span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <input class="button" type="submit" style="width:100px;height:35px;font-size:20px" value="提交">
+         <!--   <input class="button" type="reset" style="width:100px;height:35px;font-size:20px" value="重置"> -->
+            <input class="button" type="button" id='returnCarrierPage' style="width:100px;height:35px;font-size:20px" value="返回" />
+        </p>
+    </form>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+{footer}

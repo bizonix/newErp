@@ -1,0 +1,2 @@
+@CHARSET "UTF-8";
+.backToTop{display: none;width: 54px;height:54px;background:url(../img/back_top.png) no-repeat;position: fixed;_position: absolute;right:50px;bottom: 80px;_bottom: "auto";cursor: pointer;opacity: .3;filter: Alpha(opacity=30)}

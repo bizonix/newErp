@@ -1,0 +1,186 @@
+{include file = "header.htm"}
+
+<div class="fourvar">
+  <div class="pathvar">
+                	您的位置：<a href="index.php?mod=user&act=userList">首页</a>&nbsp;&gt;&gt;&nbsp;<a href="index.php?mod=notice&act=emailNoticeList">邮件记录</a>
+                	 {if $smarty.get.act=='emailNoticeList'}&nbsp;&gt;&gt;&nbsp;<a href="index.php?mod=notice&act=emailNoticeList">邮件接受记录</a>{/if}
+                	 {if $smarty.get.act=='emailNoticeList_receive'}&nbsp;&gt;&gt;&nbsp;<a href="index.php?mod=notice&act=emailNoticeList_receive">邮件发送记录</a>{/if}
+    </div>
+  	<div class="pagination">{$pageIndex}</div>
+  </div>
+ <div class="servar">
+     <span >
+    		{if $smarty.get.act=='emailNoticeList_receive' || $smarty.get.act=='smsNoticeList_receive' }
+    			<select  class = 'flexselect'  id="sender"  >
+	    			<option value = ''  name = 'flexselect' >{$sender}</option>
+					{foreach from = $allName item = all_name }
+					<option value = "{$all_name['name']}" {if $smarty.get.sender == $all_name['name']} selected {/if}>{$all_name['name']}</option>
+					{/foreach}
+    			</select>
+    		{/if}
+    		
+    		{if $smarty.get.act=='emailNoticeList' || $smarty.get.act=='smsNoticeList' } 
+    				<select  class = 'flexselect'  id="receiver"  >
+	    			<option value = ''  name = 'flexselect' >{$receiver}</option>
+					{foreach from = $allName item = all_name }
+					<option value = "{$all_name['name']}" {if $smarty.get.receiver == $all_name['name']} selected {/if}>{$all_name['name']}</option>
+					{/foreach}
+    			</select>
+    		{/if}
+      </span>
+      <span> 开始时间：<input id="start-date" onclick="WdatePicker()"
+		type="text" value="{$smarty.get.start_date}" />
+	</span> 
+	<span> 结束时间：<input id="end-date" onclick="WdatePicker()"
+		type="text" value="{$smarty.get.end_date}" />
+	</span>
+     <span>
+        	<a id="button-search">{$search_button}</a>
+     </span>
+     <span><a href="void(0);" data-loading-text="{$deleting}" id="all-delete">{$delete}</a>  </span>
+</div><!-- 搜索 -->     
+ 
+<div class="main underline-main">
+    <table cellspacing="0" width="100%">
+	<thead>
+		<tr class="title">
+			<th><input type="checkbox" id="checkAll" value=""></th>
+            <th>{$sender}</th>
+			<th>{$receiver}</th>
+			<th>{$contents}</th>
+            <th>{$state}</th>
+            <th>{$time}</th>		
+		</tr>
+	</thead>
+    
+    <tbody>    
+            {foreach $emailNoticelist as $emailNotice}
+            <tr>
+                <td><input type="checkbox" name="checkbox-list" value="{$emailNotice.id}"></td>
+            	<td>{$emailNotice.from_name}</td>
+            	<td>{$emailNotice.to_name}</td>	
+                <td>{$emailNotice.content}</td> 
+                <td>{if $emailNotice.status != '1' }<img src = 'http://misc.erp.valsun.cn/img/wrong.png'/>{else}<img src = 'http://misc.erp.valsun.cn/img/right.png'/> {/if}</td>                    
+               	<td>{if !empty($emailNotice.addtime)} {date("Y-m-d H:i:s",$emailNotice.addtime)} {/if}</td>          
+            </tr>  
+            {foreachelse}
+<!--     <div id="changpage"></div>   	 -->
+			<tr>
+				<td colspan='18'> {$search_empty}</td>
+			</tr>	
+	  		{/foreach}
+  </tbody>
+  </table>    
+	<div class="bottomvar">
+						<div class="pagination">{$pageIndex}</div>
+	</div>   
+
+  </div>
+{include file = "footer.htm"}
+
+<input type="hidden" value="{$delete_confirm}" id="delete_confirm"/>
+<input type="hidden" value="{$operat_failedMsg}" id="operat_failedMsg"/>
+<input type="hidden" value="{$select_item}" id="select_item"/>
+<input type="hidden" value="{$input_seach_condition}" id="input_seach_condition"/>
+
+<script>
+function getVarById(id){
+	return $("#"+id).val();
+}
+var web_api  = "{$smarty.const.WEB_API}";
+var checkflag = false;
+$("#checkAll").click(function() {    
+    if(!checkflag) {
+        $("input[name='checkbox-list']").attr("checked","true"); 
+        checkflag = true;
+    } else {
+        $("input[name='checkbox-list']").removeAttr("checked");
+        checkflag = false;
+    }    
+})
+
+$('#all-delete').click(function(e){
+	e.preventDefault();         
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	if(checkBoxArr.length==0){	
+        alertify.error(getVarById('select_item'));
+		return false;
+	}
+    alertify.confirm(getVarById('delete_confirm'),function(e){
+    	if(e){
+				var idArr=[];
+				checkBoxArr.each(function(i){
+					idArr.push($(this).val());
+				});    
+			   var url  = web_api+"json.php?mod=notice&act=delEmail";
+			   var data = { "idArr":idArr};
+			   $.post(url, data, function(rtn){
+			       if(rtn.errCode == "001") {
+			           window.location.reload();
+			       } else {
+			           var text = getVarById('operat_failedMsg') + rtn.errMsg;           
+			           alertify.error(text);
+			       } 
+			       window.location.reload();           
+			    },"jsonp"); 
+    	}
+    });
+});
+
+$('#button-search').click(function(e){
+    var act,sender,receiver,start_date,end_date,contFlag,date,starTime,endTime,nowTime;
+	var urlParam = "";
+    e.preventDefault();
+	contFlag = false;
+	sender = $.trim($('#sender').val());
+	receiver = $.trim($('#receiver').val());
+	act = $.trim("{$smarty.get.act}");
+	start_date = $.trim($("#start-date").val());
+	end_date = $.trim($("#end-date").val());
+	
+	urlParam += "&start_date="+start_date+"&end_date="+end_date;
+	if(start_date !== "" || end_date != ""){ //如果填了一个时间就验证
+		contFlag = true;
+		if(start_date == "" ){
+			alertify.error("起始时间不为空！");
+			$("#start-date").focus();
+			return;
+		}
+		if(end_date == "" ){
+			alertify.error("结束时间不为空！");
+			$("#end-date").focus();
+			return;
+		}
+		date = new Date(start_date);
+		starTime = date.getTime();
+		date = new Date(end_date);
+		endTime = date.getTime();
+		nowTime = {time()*1000};
+		if(starTime>endTime){
+			alertify.error("起点时间不应大于结束时间！");
+			return;
+		}else if(endTime > nowTime){
+			alertify.error("结束时间不应大于现在时间！");
+			return;
+		}
+	}
+	if(act == "emailNoticeList"){
+		if(receiver =='' && !contFlag){
+			alertify.error("收件人不为这空！");
+			$('#receiver').focus();
+			return false;
+		}
+	}else{
+		if( sender == '' && !contFlag ){
+			alertify.error("发件人不为这空！");
+			$('#sender').focus();
+			return false;
+		}
+	}
+
+    var url = "index.php?mod=notice&act="+act+"&sender="+sender+"&receiver="+receiver;
+          url += urlParam;
+    window.location.href = url;
+});
+
+</script>

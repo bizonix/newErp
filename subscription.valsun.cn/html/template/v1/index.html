@@ -1,0 +1,85 @@
+{include file="header.html"}
+{include file="mailNavLocation.html"}
+            <div class="main products-main" style="border:1px solid #ccc;" id="content">
+            <br />
+            	<div>
+            	<form name="searchMail" id="searchMail" method="post" action="index.php?mod=MailShow&act=getUserMailByCondition">
+            		所属系统：
+            		<select name="system" id="system">
+	          	  		<option value="default">-----请选择-----</option>
+	          			{foreach item=system from=$getSystem}
+	              		<option name="systemId" value="{$system.system_id}">--{$system.system_name}--</option>
+	          			{/foreach}
+	            	</select>
+	            	邮件名称：<input type="text" name="mailName" id="mailName" />
+	            	<input type="submit" name="search" id="search" value="搜索" />
+	            </form>
+            	</div>
+            	<br />
+                <div class="title font-18" style="font-weight:bold;padding:10px;">
+                    我订阅的邮件
+                </div>
+                <div style="padding:10px;">
+                {if $showUserMail}
+                {foreach item=mail from=$showUserMail}
+                    <span style="margin-right:40px;display:inline-block;" id="cancelMail">
+                        <a href="#">{$mail.list_name}</a>
+                        <a href="#" style="color:#a2a2a2;" onclick="cancelMail({$mail.list_id})" id="cancel">取消</a>
+                    </span>
+                {/foreach}
+                {else}
+                <span style="margin-right:40px;display:inline-block;">
+                   	亲，您暂时没有订阅任何邮件哦！
+                </span>
+                {/if}
+                </div>
+            </div>
+            <div class="main products-main" style="border:1px solid #ccc;margin-top:20px;">
+                <div class="title font-18" style="font-weight:bold;padding:10px;">
+                    华成云商邮件
+                </div>
+                <div style="padding:10px;">
+                {if $showMailList}
+                {foreach item=list from=$showMailList}
+                    <span style="width:150px;line-height:23px;margin-right:40px;display:inline-block; text-align:center;" id="addMail">
+                        <a href="#">
+                            <span>{$list.list_name|truncate:11:'...':true}</span>
+                        </a>
+                        <div style="color:#a2a2a2;height:25px;">{$list.list_description|truncate:11:'...':true}</div>
+                        <div style="color:#a2a2a2;height:25px;">{$list.system_name}</div>
+                        {if $list.issubscript == 1}
+                        <span class="Subscription">已订阅</span>
+                        {else}
+                        <input type="button" value="订阅"  onclick="addMail({$list.list_id})" />
+                        {/if}
+                   	</span>
+                {/foreach}
+                {else if $getUserMail}
+                {foreach item=user from=$getUserMail}
+                	<span style="width:150px;line-height:23px;margin-right:40px;display:inline-block; text-align:center;" id="addMail">
+                        <a href="#">
+                            <span>{$user.list_name}</span>
+                        </a>
+                        <div style="color:#a2a2a2;height:25px;">{$user.list_description}</div>
+                        <div style="color:#a2a2a2;height:25px;">{$user.system_name}</div>
+                        {if $user.issubscript eq 1}
+                        <span class="Subscription">已订阅</span>
+                        {else}
+                        <input type="button" value="订阅"  onclick="addMail({$user.list_id})" />
+                        {/if}
+                   	</span>
+                {/foreach}
+                <div class="main products-main" align="center">{$page_str}</div>
+                {else}
+                <span style="margin-right:40px;display:inline-block;">
+                   	亲，您暂时没有可以订阅的邮件哦！
+                </span>
+                {/if}
+                </div>
+            </div>
+           <div class="main products-main" align="center">{$pagestr}</div>
+        </div>
+    </div>
+{include file="footer.html"}
+</body>
+</html>

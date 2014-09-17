@@ -1,0 +1,36 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/expresstrackrecheck.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<div>
+	<div id="showMsgDiv" style="padding-left:80px; margin-top:10px;">
+		<span></span>
+	</div>
+    <div class="gd_divrow">
+        <div class="gd_labeldiv">
+           	 发货单号/配货单号:
+        </div>
+        <div calss="gd_input" style="dispaly:none;">
+            <input id="orderidinput" onkeypress="gonextinput(event)" class="orderidinput"/>
+        </div>
+        <div class="clear:both;">
+        </div>
+    </div>
+
+	<div class="gd_divrow " style="margin-top:5px;">
+        <div class="gd_labeldiv">
+        	跟踪号:
+        </div>
+        <div calss="gd_input">
+           	<textarea id="tracknumberinput"></textarea>
+        </div>
+        <div class="clear:both;">
+        </div>
+    </div>
+	<div class="gd_divrow " style="margin-top:5px; margin-left:250px; margin-top:10px;">
+		<input type="button" onclick="submitmul()" value="提交">
+	</div>
+	
+</div>
+{include file='footer.htm'}

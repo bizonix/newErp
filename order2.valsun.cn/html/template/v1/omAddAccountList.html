@@ -1,0 +1,51 @@
+{include file="header.html"}
+{include file='omNav.html'}
+<script type="text/javascript" src="./js/omAccountList.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=omAccount&act=addAccountList' method="post" id="omAddAccountList">
+    	<div>
+        	<label for="account" style="font-size:20px;">账户名称：</label>
+            <input value="" id='account' class="validate[required] text-input" name="account" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="accountSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div>
+            <label for="appname" style="font-size:20px;">账户简称：</label>
+            <input value="" id='auditorId' class="validate[required] text-input" name="appname" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="appnameSpan" style="color: red;">*</span>
+		</div>
+		<br />
+        <div>
+            <label for="platformId" style="font-size:20px;">所属平台：</label>
+            <select name="platformId" id="platformId" style="width:200px;height:30px;font-size:20px" class="validate[required]">
+                <option value="">请选择</option>
+                {foreach OmAvailableModel::getTNameList('om_platform','id,platform','WHERE is_delete=0') as $value}
+                <option value="{$value.id}" >{$value.platform}</option>
+                {/foreach}
+			 </select>
+            <span id="platformIdSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        <div>
+        	<label for="email" style="font-size:20px;">对应邮箱：</label>
+            <input value="" id='email' class="validate[required,custom[email]] text-input" name="email" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="emailSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        <div>
+            <label for="suffix" style="font-size:20px;">对应后缀：</label>
+            <input value="" id='suffix' class="validate[required] text-input" name="suffix" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="suffixSpan" style="color: red;">*</span>
+		</div>
+        <div>
+            <input type="submit" value="提交"/>
+            &nbsp;
+            <input type="button"  id='back' value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.html"}

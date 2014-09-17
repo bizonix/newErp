@@ -1,0 +1,65 @@
+{include file="header.htm"}
+<div class="index-main">
+            <div class="index-main-left">
+                <form onsubmit="return track_open()" id="trackForm">
+                    <p>
+                        <input class="search-select orange-border" id="carrier" type="text" readonly="readonly" value="WeDo" onclick="showCarrier()"/><a class="search-bt" href="#" onclick="showCarrier()"></a>
+						<input class="search-select" id="carrierEn" type="hidden" readonly="readonly" value="运德物流"/>
+					</p>
+                    <p>
+                        <input class="search-text font-color-c" type="text" id="tracknum" data="Please enter the tracking number !" onfocus="setDefault('tracknum')" onblur="setDefault('tracknum')"/>
+                    </p>
+                    <p>
+                        <input class="search-sub" type="submit" value="" />
+                    </p>
+                    <div class="search-box" style="display:none" id="carrierList">
+                        <div>
+                            <img class="poiner" src="./public/img/upway.png" />
+                        </div>
+                        <div class="select-text-box" id="carrierLists">
+							{foreach key=key item=list from=$carriers}
+							<a href="javascript:void(0);" data="{$list.trackNameEN}|{$list.trackName}" id="cid_{$key}" onclick="selCarrier({$key})" {if $list.trackName=='WeDo'}class="radio-selected"{/if}>{$list.trackName}</a>
+							{/foreach}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="index-main-right" id="advertisement">
+            </div>
+            <div style="clear:both;">
+            </div>
+            <h1 class="rank-title rank-padding-top">
+                LPI 2014
+            </h1>
+            <div class="index-main-rank">
+			    <div class="rank-ul-width">
+					<ul id="tradings1">
+						<div style="clear:both;"></div>
+					</ul>
+				</div>
+				<a class="no-prv" href="javascript:void(0)" onclick="upScreen(6,1)" id="upBtn1"></a>
+                <a class="next" href="javascript:void(0)" onclick="nextScreen(6,1)" id="nextBtn1"></a>
+            </div>
+            <h1 class="rank-title">
+                3PLs 2013
+            </h1>
+            <div class="index-main-rank">
+			    <div class="rank-ul-width">
+					<ul id="tradings2">
+						<div style="clear:both;"></div>
+					</ul>
+				</div>
+				<a class="no-prv" href="javascript:void(0)" onclick="upScreen(6,2)" id="upBtn2"></a>
+                <a class="next" href="javascript:void(0)" onclick="nextScreen(6,2)" id="nextBtn2"></a>
+            </div>
+			{include file="links.htm"}
+        </div>
+<script type="text/javascript" src="./public/js/track_info_new.js"></script>
+<script>
+$(function(){
+	getWebAd(3);
+	getWebAd(6,'tradings1');
+	getWebAd(7,'tradings2');
+});
+</script>
+{include file="footer.htm"}

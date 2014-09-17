@@ -1,0 +1,67 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script type="text/javascript" src="./js/skuStock.js"></script>
+<div class="servar wh-servar">
+ <div class="servar wh-servar" id="mes" style="display:none"></div>
+ <span>库存总金额:{$total_cost}</span>
+</div>
+ <div class="servar ser-ware products-main wh-servar">
+                <span>
+                	<input name="" id="searchContent" type="text" style="width:300px;" />
+                <span>
+                <span class="products-action">
+                	<a href="javascript:void(0);" id="searchSku">搜 索</a>
+                </span>
+                <div style="margin-top:10px; margin-left:-100px;">
+                	<label>
+                		<input name="searchtype" type="radio" value="1" checked="checked" />SKU
+                    </label>
+                    <label>
+                		<input name="searchtype" type="radio" value="2" />仓位
+                    </label>
+                    <label>
+                		<input name="searchtype" type="radio" value="3" />货品名称
+                    </label>
+                    <label>
+                		<input name="searchtype" type="radio" value="4" />采购负责人
+                    </label>
+                </div>
+				<div style="margin-top:10px; margin-left:-45px;">
+					<span style="width:60px;">产品状态：</span>
+					<select name="online" id="online" style="width:100px">
+						<option value="">请选择</option>
+						<option value="1">零库存</option>
+						<option value="2">下线</option>
+						<option value="3">在线</option>
+					</select>
+					<span style="width:60px;">仓库：</span>
+					<select name="warehouse" id="warehouse" style="width:100px">
+						<option value="">请选择</option>
+						{foreach from=$whName item=list}
+							<option value="{$list.id}">{$list.whName}</option>
+						{/foreach}
+					</select>
+				</div>
+				<div style="margin-top:10px; margin-left:-45px;">
+					<span style="width:60px;">新/老品：</span>
+					<select name="isnew" id="isnew" style="width:100px">
+						<option value="">请选择</option>
+						<option value="1">新品</option>
+						<option value="0">老品</option>
+					</select>
+					<span style="width:60px;">类别：</span>
+					<select id="pid_one" style="width:100px" onchange="change_one();">
+						<option value="">请选择</option>
+						{foreach from=$cate_f item=list}
+							<option value="{$list.id}">{$list.name}</option>
+						{/foreach}
+					</select>
+					<span id="div_two">
+					</span>
+					<span id="div_three">
+					</span>
+					<span id="div_four">
+					</span>
+				</div>
+            </div>
+{include file="footer.htm"}

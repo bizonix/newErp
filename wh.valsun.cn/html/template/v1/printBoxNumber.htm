@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>打印box</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body style="margin:0; padding:0">
+        <?php foreach($result as $num) { ?>
+	        <div style="text-align:center; width:10cm; height:5cm">
+	           <img width="240" height="60" src="http://192.168.200.188/barcode128.class.php?data=<?php echo $num; ?>"><br>
+	           [ <?php echo $num; ?> ]
+	        </div>
+        <?php } ?>
+    </body>
+</html>

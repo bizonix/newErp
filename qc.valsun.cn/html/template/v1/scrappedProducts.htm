@@ -1,0 +1,73 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/scrappedProducts.js"></script>
+<div class="fourvar">
+{include file="iqcnav.htm"}
+	            <div class="texvar">
+
+                </div>
+                <div class="pagination">
+                	{$show_page}
+                </div>
+</div>
+            <div class="servar">
+                <!--<span>
+                	<input type="button" id='' style="width:100px;height:35px;font-size:20px; cursor:pointer;" value="添加系数" />
+                </span>-->
+<!--                <span>
+                	<input type="button" id='' style="width:100px;height:35px;font-size:20px; cursor:pointer;" value="增加标准" />
+                </span>
+                <span>
+                	<input type="button" id='' style="width:150px;height:35px;font-size:20px; cursor:pointer;" value="增加标准详细" />
+                </span>-->
+                <!--<span style="float: right;">
+                    <span>系数：</span>
+                    <input id='cName' value="" />
+                    <span>检测样本类别：</span>
+                    <input id='sampleTypeId' value="" />
+                	<input type="button" id="search" value="搜索" />
+                    &nbsp;&nbsp;
+                </span>-->
+                <span style="color: red;">{$status}</span>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td>编号</td>
+						<td>检测样品记录编号</td>
+						<td>spu</td>
+						<td>sku</td>
+						<td>报废/内部处理数量</td>
+						<td>处理状态</td>
+						<td>备注</td>
+						<td>处理类型</td>
+						<td>处理时间</td>
+                        <td>操作</td>
+                    </tr>
+                    {foreach from=$scrappedProductsList item=value}
+                    <tr class="odd">
+                        <td>{$value.id}</td>
+						<td>{$value.infoId}</td>
+						<td>{$value.spu}</td>
+						<td>{$value.sku}</td>
+						<td>{$value.scrappedNum}</td>
+						<td>{if $value.scrappedStatus == 0}待处理{elseif $value.scrappedStatus == 1}已处理{/if}</td>
+						<td>{$value.note}</td>
+						<td>{if $value.processTypeId == 1}报废{elseif $value.processTypeId == 2}内部处理{/if}</td>
+						<td>{$value.processTime|date_format:"Y-m-d H:i"}</td>
+						<td>
+                            {if $value.scrappedStatus == 0}
+							<input type="button" class="audit" scrapped_id="{$value.id}" info_id="{$value.infoId}" status="{$value.scrappedStatus}" value="处理"/>
+	                        {/if}
+                        </td>
+                    </tr>
+                {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

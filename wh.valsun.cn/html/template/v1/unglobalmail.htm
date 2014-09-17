@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="css/unglbaomail.css"/>
+        <title>Global Mail打印</title>
+    </head>
+    <div class="gm2">
+        {foreach $ordersinfo as $key=>$orderval}
+        <table width="335" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+                <td height="" valign="top">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>
+                                <table width="335" border="0" cellspacing="0" cellpadding="0" class="box_bottom">
+                                    <tr>
+                                        <td width="85%">
+                                            <span class="font18">ZOLLINHALTSERKLÄRUNG</span>
+                                            Kann amtlich geöffnet werden.
+                                            <br/>
+                                            <span class="font18">DÉCLARATION EN DOUANE </span>Peut être ouvert d’office
+                                        </td>
+                                        <td width="15%" class="font16">
+                                            <strong>CN 22</strong>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="335" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="46%">
+                                            <p>
+                                                Postverwaltung
+                                                <br/>
+                                                Administration des postes
+                                                <br/>
+                                                <img src="images/logo.jpg" width="107" height="21" />
+                                            </p>
+                                        </td>
+                                        <td width="11%">
+                                            &nbsp;
+                                        </td>
+                                        <td width="43%">
+                                            <span class="font16">Wichtig! Important!</span>
+                                            <br/>
+                                            Hinweise auf der Rückseite
+                                            <br/>
+                                            Voir instructions au verso
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="335" border="0" cellspacing="0" cellpadding="0" class="box1">
+                                    <tr>
+                                        <td width="22%">
+                                            <table width="88%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td width="34%">
+                                                        <img src="images/kuan.jpg" width="14" height="14" />
+                                                    </td>
+                                                    <td width="66%">
+                                                        Geschenk
+                                                        <br/>
+                                                        Cadeau
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td width="28%">
+                                            <table width="93%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td>
+                                                        <img src="images/kuan.jpg" width="14" height="14" />
+                                                    </td>
+                                                    <td>
+                                                        Dokumente
+                                                        <br/>
+                                                        Documents
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td width="25%">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td width="26%">
+                                                        <img src="images/kuan.jpg" width="14" height="14" />
+                                                    </td>
+                                                    <td width="74%">
+                                                        Warenmuster
+                                                        <br/>
+                                                        Echantillon commercial
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td width="25%">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td>
+                                                        <img src="images/kuan0.jpg" width="14" height="14" />
+                                                    </td>
+                                                    <td>
+                                                        Sonstige
+                                                        <br/>
+                                                        Autre
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            Bitte ein oder mehrere Kästchen ankreuzen.
+                                            <br/>
+                                            Coucher la ou les cases appropriées.
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="335" border="1" cellpadding="2" cellspacing="0" style="border-collapse:collapse">
+                                    <tr>
+                                        <td valign="top" bgcolor="#FFFFFF">
+                                            Anzahl und detaillierte Beschreibung des Inhalts (1)
+                                            <br/>
+                                            Quantité et description detaillée du contenu
+                                        </td>
+                                        <td valign="top" bgcolor="#FFFFFF">
+                                            Gewicht (in kg) (2)
+                                            <br/>
+                                            Poids (en kg)
+                                        </td>
+                                        <td valign="top" bgcolor="#FFFFFF">
+                                            Wert (3)
+                                            <br/>
+                                            Valeur
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td bgcolor="#FFFFFF">
+                                            <strong style="font-size:11px">{$orderval.titleinfo}</strong>
+                                        </td>
+                                        <td bgcolor="#FFFFFF">
+                                            <strong style="font-size:11px">{$orderval.totalweight}KG</strong>
+                                        </td>
+                                        <td bgcolor="#FFFFFF">
+                                            <strong style="font-size:11px">EUR€ {$orderval.ordershipfee}</strong>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" bgcolor="#FFFFFF">
+                                            Nur für Handelswaren
+                                            <br/>
+                                            Pour les envois commerciaux seulement
+                                            <br/>
+                                            (Falls bekannt) Zolltarifnr. nach dem HS (4) und
+                                            <br/>
+                                            Ursprungsland per Waren (5)
+                                            <br/>
+                                            N° tarifaire du SH et pays d’origine des marchandises
+                                            <br/>
+                                            (si connus)
+                                        </td>
+                                        <td valign="top" bgcolor="#FFFFFF">
+                                            Gesamtgewicht
+                                            <br/>
+                                            (in kg) (6)
+                                            <br/>
+                                            Poids total (en kg)
+                                        </td>
+                                        <td valign="top" bgcolor="#FFFFFF">
+                                            Gesamtwert (7)
+                                            <br/>
+                                            Valeur totale
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" bgcolor="#FFFFFF">
+                                            Hong kong
+                                        </td>
+                                        <td bgcolor="#FFFFFF">
+                                            &nbsp;
+                                        </td>
+                                        <td bgcolor="#FFFFFF">
+                                            &nbsp;
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="335" border="0" cellspacing="4" cellpadding="0">
+                                    <tr>
+                                        <td>
+                                            Ich, der/die Unterzeichnende, dessen/deren Name und Adresse auf der Sendung angeführt sind, bestätige,dass die in der vorliegenden Zollinhaltserklärung angegebenen Daten korrekt sind und dass diese Sendung
+                                            keine gefährlichen, gesetzlich oder auf Grund postalischer oder zollrechtlicher Regelungen verbotenen
+                                            Gegenstände enthält. Ich übergebe insbesondere keine Güter, deren Versand, Beförderung oder Lagerung
+                                            gemäß den AGB von Deutsche Post ausgeschlossen ist.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Je, soussigné dont le nom et l’adresse figurent sur l’envoi, certifie que les renseignements donnés dansla présente déclaration sont exacts et que cet envoi ne contient aucun objet dangereux ou interdit par la
+                                            législation ou la réglementation postale ou l’entreposage est exclu par les Conditions générales de
+                                            <br/>
+                                            Deutsche Post.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Datum und Unterschrift des Absenders (8)/Date et signature de l’expéditeur:
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div style="page-break-after:always;">
+            &nbsp;
+        </div>
+        <table width="335" border="0" align="center" cellpadding="0" cellspacing="0">
+            <tr>
+                <td colspan="2" align="center">
+                    <table width="275" border="1" align="center" cellpadding="2" bgcolor="#000000" style="border-collapse:collapse ">
+                        <tr>
+                            <td colspan="2" valign="top" bgcolor="#FFFFFF">
+                                <span class="font18"><strong>PRIORITAIRE</strong></span>
+                                <br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="top" bgcolor="#FFFFFF">
+                                <strong class="font18">En cas de non remise
+                                    <br/>
+                                    Prière de retourner à
+                                    <br/>
+                                </strong>
+                                <span class="font18">Postfash 2007
+                                    <br/>
+                                    36243 Niederaula
+                                    <br/>
+                                    ALLEMAGNE
+                                    <br/>
+                                </span>
+                            </td>
+                            <td align="center" valign="top" bgcolor="#FFFFFF">
+                                <span class="font12"><strong>Deutsche Post</strong></span>
+                                <br/>
+                                <span class="font18">Port payé
+                                    <br/>
+                                    60544 Frankfurt
+                                    <br/>
+                                    (2378)
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="335" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td rowspan="2" valign="top">
+                                <table width="88%" border="0" align="center" cellpadding="3" cellspacing="0" bgcolor="#e1e1e1" class="box2">
+                                    <tr>
+                                        <td valign="top" bgcolor="#FFFFFF">
+											{foreach $orderval.finalposition as $skuval}
+											<span class="font14">{if $skuval.isPacking==2}Y{else}N{/if}&nbsp;[{$skuval.pName}] &nbsp;{$skuval.sku}*{$skuval.amount}&nbsp;</span><br />
+							              	{/foreach}
+                                            <span class="font18">Total Qty:{$orderval.totalnum}
+                                                <br>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table width="95%" border="0" align="center" cellpadding="3" cellspacing="0">
+                                    <tr>
+                                        <td width="52%" height="116">
+                                            {$orderval.recordNumber} 
+                                            <br/>
+                                            Global Mail 
+                                            <br/>
+                                            ZL: {$orderval.totalweight} 
+                                            <br/>
+                                            YF: {$orderval.ordershipfee} 
+                                            <br/>
+                                            {$orderval.pmNameStr}  {$orderval.total}
+                                            <br/>
+                                            mj&nbsp;{$orderval.platformUsername}  
+                                            <br/>
+                                            <span class="font12">Good
+                                                <br/>
+												{$orderval.appname}
+                                                <br/>
+                                                {$key+1}/{$totalCount} 
+                                            </span>
+                                            <br/>
+                                        </td>
+                                        <td width="48%" align="center" class="font70">
+                                            {$orderval.weightmark}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="95%" border="0" align="center" cellpadding="3" cellspacing="0" class="box3">
+                                    <tr>
+                                        <td width="53%" height="31">
+                                            <img src="barcode128.class.php?data={$orderval.id}" width="175" height="40" />
+                                        </td>
+                                        <td width="47%">
+                                            <span class="font16"><strong>IG</strong></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="font12">{$orderval.id}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="font12">
+                                                <font size="4">
+                                                    Send To:
+                                                    <br>
+                                                      {if $orderval.street != ''}{$orderval.street}</br>{/if}
+													  {if $orderval.address2 != ''}{$orderval.address2}</br>{/if}
+													  {if $orderval.city != ''}{$orderval.city}, {/if}
+													  {if $orderval.state != ''}{$orderval.state}</br>{/if}
+													  {if $orderval.zipCode != ''}{$orderval.zipCode}</br>{/if}
+													  {if $orderval.countryName != ''}{$orderval.countryName}</br>{/if}
+                                                </font>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div style="page-break-after:always;">
+            &nbsp;
+        </div>
+        {/foreach}
+    </div>
+</html>

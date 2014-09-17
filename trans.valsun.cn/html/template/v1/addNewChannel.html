@@ -1,0 +1,66 @@
+﻿{header}
+<script type="text/javascript" src="./js/channelsManage.js"></script>
+<link rel="stylesheet" href="css/transportlist.css">
+{navdiv}		
+				<!-- Main Content -->
+				<div id="content">
+					<div id="main1">
+					<h1>{operate}</h1>
+					<div class="pad20">
+					<!-- Big buttons -->
+						<form id="formID" name="formID" method="post" action="" >
+							<input type="hidden" id="hidden" value="{id}">
+							<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+								<tbody>
+									<tr class="odd">
+										<td>渠道名称</td>
+										<td><input name="channelname" class="validate[required]" type="text" id="channelname" value="{channelname}" /><span id="channelname_err" color="red"></span></td>
+									</tr>
+									<tr class="odd">
+										<td>运输方式名称</td>
+										<td><input name="transname" disabled="disabled" type="text" id="transname" value="{carrierName}" /><span id="transname_err" color="red"></span></td>
+									</tr>
+									<tr class="odd">
+										<td>渠道别名</td>
+										<td><input name="channelAlias" class="validate[required]" type="text" id="channelAlias" value="{channelAlias}" /><span id="channelAlias_err" color="red"></span></td>
+									</tr>
+								    <tr class="odd">
+										<td>折扣</td>
+										<td><input name="discount" type="text" id="discount" value="{discount}"></td>
+									</tr>
+                                    <tr class="odd">
+										<td>是否启用</td>
+										<td>
+										<!-- IF ispacking -->
+										<select id="enable"  name="{enable}"><option value="1" selected="selected">是</option><option  value="0">否</option></select>
+										<!-- ELSE ispacking -->
+										<select id="enable"  name="{enable}"><option value="1">是</option><option selected="selected" value="0">否</option></select>
+										<!-- ENDIF ispacking -->
+										</td>
+									</tr>
+                                    
+									
+										<td colspan="2">
+											<input type="button" value="提交" id="addNewChannel"/>
+											<input type="button" value="返回" id="back" />
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+						
+					</div>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					</div>
+				</div>
+				<!-- End of Main Content -->
+	
+				
+			</div>
+			<!-- End of bgwrap -->
+		</div>
+		<!-- End of Container -->
+		
+{footer}
+

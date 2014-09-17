@@ -1,0 +1,77 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/products.js"></script>
+<div class="fourvar">
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+                                  {if isAccessAll('products','productsCombineSpuTake') == true}
+                                  <span>
+                                    	<a href="javascript:void(0)" id="productsCombineSpuTake">领取料号</a>
+                                  </span>
+                                  {/if}
+            					  <span>&nbsp;|&nbsp;虚拟SPU：
+								   <textarea id="combineSpu" style="width: 250px;margin-bottom: -13px;margin-top: -15px;" rows="2" name="sku">{$smarty.get.combineSpu}</textarea>
+                                   </span>
+                    				</span>
+                                    <span>|&nbsp;产品制作人：
+                    				   <select name="webMakerId" id="webMakerId" style="width: 70px;">
+                    				    <option value="0" ></option>
+                    				    {foreach getAllPEInfo() as $value}
+                    					<option value="{$value['global_user_id']}" {if $smarty.get.webMakerId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+                    					{/foreach}
+                    				  </select>
+                    				</span>
+                                   <span><button id='seachProductsCombineSpuList'>搜索</button></span>
+                                   &nbsp;
+                                   <!-- TODO: <span><button id="syncCache">更新</button></span> -->
+			<span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <td align="left"><input type="checkbox" id="selectAll" /></td>
+                        <td align="left">SPU</td>
+						<td align="left">申请人</td>
+                        <td align="left">指派人</td>
+                        <td align="left">指派时间</td>						                       
+                    </tr>
+                    {foreach $productsCombineSpuList as $value}
+                                <tr>
+                                    <td align="left">{if $smarty.session.userId == $value['webMakerId']}<input type="checkbox" name="selectSing" value="{$value['id']}"/>{/if}</td>
+                                    <td align="left"><a href="index.php?mod=goods&act=getCombineList&searchComField=1&fieldValue={$value['spu']}" target="_blank">{$value['spu']}</a></td>
+                                    <td align="left">{getPersonNameById($value['purchaseId'])}</td>
+                                    <td align="left">{getPersonNameById($value['webMakerId'])}</td>
+                                    <td align="left">{if !empty($value['addTime'])}{$value['addTime']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+
+<script type="text/javascript">
+		$(document).ready(function() {
+          
+            $("#seachProductsCombineSpuList").click(function(){
+                var combineSpu = $("#combineSpu").val();
+                var webMakerId = $("#webMakerId").val();
+                location.href = "index.php?mod=products&act=getProductsCombineSpuList&combineSpu="+combineSpu+"&webMakerId="+webMakerId;
+            });
+        });
+
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachProductsCombineSpuList').click();
+			}  
+        });
+        
+</script>
+{include file="footer.htm"}

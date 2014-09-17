@@ -1,0 +1,27 @@
+{include file='header.htm'}
+{include file='owNav.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/pregoodsManage.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<div>
+<form action="index.php?mod=OwBoxManage&act=importBoxData" enctype="multipart/form-data" method="post" target="_blank" onSubmit="return checkSumbit()">
+	<input id="upfile" name="upfile" type="file" style="background:#CCCCCC">
+	<input type="submit" value="导入">
+</form>
+<table width="366" border="1" cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="5">导入格式</td>
+	</tr>
+	<tr>
+		<td>A列(箱号)</td>
+		<td>B列(长)</td>
+		<td>C列(宽)</td>
+		<td>D列(高)</td>
+		<td>E列(箱毛重)</td>
+		<td>F列(箱净重)</td>
+	</tr>
+</table>
+</div>
+{include file='footer.htm'}

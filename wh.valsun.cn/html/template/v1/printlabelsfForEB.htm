@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>国内顺丰快递单打印页面</title>
+<style type="text/css">
+#body{
+	padding:0;
+	margin:0;}
+#main{
+	font-family:宋体;
+	font-weight:bolder;
+	text-align:left;
+	height:409px;
+	width:742px;
+	position:relative;
+	left:0px;
+	top:5px;
+	}
+#From{
+	text-align:right;
+		height:20px;
+		width:87px;
+		position:absolute;
+		top:80px;
+		left:66px;}
+#Departure{
+	text-align: left;
+	height: 20px;
+	width: 200px;
+	position: absolute;
+	top: 103px;
+	left: 130px;
+}
+#Company{
+	height: 23px;
+	width: 161px;
+	position: absolute;
+	top: 129px;
+	left: 129px;
+}
+#Add{
+	height: 46px;
+	width: 280px;
+	position: absolute;
+	top: 150px;
+	left: 100px;
+}
+#Goods{
+	height: 47px;
+	width: 300px;
+	position: absolute;
+	top: 382px;
+	left: 90px;
+}
+#Name{
+	height: 20px;
+	width: 165px;
+	position: absolute;
+	top: 215px;
+	left: 197px;
+}
+#Sender{
+	height: 37px;
+	width: 140px;
+	position: absolute;
+	top: 300px;
+	left: 617px;
+}
+#Picked{
+		height:29px;
+		width:86px;
+		font-size:25px;
+		position:absolute;
+		top:360px;
+		left:206px;}
+#To{
+	height: 20px;
+	width: 130px;
+	font-size: 20px;
+	position: absolute;
+	top: 274px;
+	left: 250px;
+}
+#City{
+	height: 20px;
+	width: 150px;
+	font-size: 20px;
+	position: absolute;
+	top: 244px;
+	left: 148px;
+}
+#Paidtime{
+		height:20px;
+		width:180px;
+		font-size:20px;
+		position:absolute;
+		top:120px;
+		left:425px;}
+#Address{
+	height: 47px;
+	width: 280px;
+	font-size: 20px;
+	position: absolute;
+	top: 302px;
+	left: 103px;
+}
+#Mobile{
+	height: 22px;
+	width: 150px;
+	font-size: 20px;
+	position: absolute;
+	top: 356px;
+	left: 190px;
+}
+#BarCode{
+	text-align: right;
+	height: 72px;
+	width: 190px;
+	position: absolute;
+	top: 10px;
+	left: 70px;
+}
+</style>
+</head>
+<body>
+{foreach $orderInfo as $value}
+<div id="main">
+<div id="Departure">
+{$value.recordNumber}
+</div>
+<div id="Company">
+国内包小姐
+</div>
+<div id="Add">
+<br/>
+
+</div>
+<div id="Goods">
+{if strlen($value.goodsInfo)> 140}
+<span style='font-size:12px'>{$value.goodsInfo}</span>
+{else}
+{$value.goodsInfo}
+{/if}
+</div>
+<div id="Name">
+0755-89619815
+</div>
+<div id="Sender">
+{$smarty.now|date_format:"Y-m-d"}
+</div>
+<div id="Picked">
+
+</div>
+<div id="To">
+{$value.username}
+</div>
+<div id="City">
+{$value.platformUsername}
+</div>
+<div id="Address">
+{if strlen($value.address)> 75}
+<span style='font-size:16px'>{$value.address}</span>
+{else}
+{$value.address}
+{/if}
+</div>
+<div id="Mobile">
+{if $value.phone != ''}{$value.phone}{else}{$value.landline}{/if}
+</div>
+<div id='BarCode'>
+<font size='1'>{$value.id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$value@iteration}/{$value@total}</font>
+<img src="barcode128.class.php?data={$value.id}" alt="" width="240" height="35"/>
+<font size='1'>{$value.platformUsername}</font>
+</div>
+</div>
+{if $value@total > 1 && $value@iteration != $value@total}
+<div style="page-break-after:always;">&nbsp;</div>
+{/if}
+{/foreach}
+</body>
+</html>

@@ -1,0 +1,51 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=userCompetences&act=index">用户开放授权</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>修改开放授权</h1>
+    <form onSubmit="return edit_check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+                <td align="right" width="11%">开放授权名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="ucp_title" id="ucp_title" value="{$ucp_title}" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">开放授权键名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="ucp_item" id="ucp_item" value="{$ucp_item}" maxlength="30"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">键名授权内容：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="ucp_content" id="ucp_content" value="{$ucp_content}" maxlength="30"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">所属上级分类：</td>
+                <td width="27%" align="left">
+				<select name="ucp_pid" id="ucp_pid">
+					<option value="0">顶级</option>
+					{foreach item=list from=$lists}
+					<option value="{$list.id}|{$list.path}" {if $ucp_pid == $list.id}selected="selected"{/if}>{$list.title}</option>
+					{/foreach}
+				</select>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+					<input type="hidden" id="act-id" value="{$id}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=userCompetences&act=index'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript" src="./public/js/tran_user_competences.js"></script>
+{include file="footer.htm"}

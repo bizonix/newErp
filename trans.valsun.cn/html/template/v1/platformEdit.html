@@ -1,0 +1,41 @@
+{header}
+<!-- 
+/*
+ * 平台管理编辑页面 platformEdit.html
+ * ADD BY 陈伟 2013.7.27
+ */
+-->
+<link rel="stylesheet" href="css/transportlist.css">
+<script type="text/javascript" src="./js/platformManage.js"></script>
+{navdiv}
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="maincontentdiv" >
+    <form action='index.php?mod=platformManage&act=platformEditUp' method="post" id="platformAddForm">
+    	<input type="hidden" name="platformId" id="platformId" value="{platformId}" />
+        <p>
+            <label for="platformNameEnInput" style="font-size:20px;">平台英文名称</label>
+            <input value="{platformNameEn}" id='platformNameEnInput' onchange="checkExist('En')" class="mf validate[required] text-input" name="platformNameEnInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span id="showEnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="platformNameCnInput" style="font-size:20px;">平台中文名称</label>
+            <input value="{platformNameCn}" class="mf validate[required] text-input" id="platformNameCnInput" onchange="checkExist('Cn')" name="platformNameCnInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <input class="button" type="submit" id="platformAddFormSumit" style="width:100px;height:35px;font-size:20px" value="提交">
+          <!--  <input class="button" type="reset" style="width:100px;height:35px;font-size:20px" value="重置"> -->
+            <input class="button" type="button" id='returnPage' style="width:100px;height:35px;font-size:20px" value="返回" />
+        </p>
+    </form>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+{footer}

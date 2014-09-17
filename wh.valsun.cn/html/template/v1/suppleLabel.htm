@@ -1,0 +1,51 @@
+{include file="header.htm"}
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./js/suppleLabel.js"></script>
+{include file='whNav.htm'}
+
+<div class="servar wh-servar">
+<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+	<tr>
+		<td width="65%">
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				
+				<tr>
+					<td width="69%" nowrap="nowrap" class='paginationActionButtons'><!--form action="" enctype="multipart/form-data" method="post" target="_blank" --><!--onsubmit="return checkprint()"-->
+					<table border="0"  cellpadding="10" cellspacing="0" bgcolor="#77DDFF" id="content">
+					  <tr>
+						<td>料号：<textarea name="sku" id="sku" rows="8" cols="70" ></textarea><font color="red"> * </font>(料号格式，如5173_XL*5,7314_M*50)</td>
+					  </tr>
+					  <tr>
+						<td align="center"><button id="checksku" >检 测</button>&nbsp;&nbsp;&nbsp;&nbsp;
+						 <button id="PostSKU" >补标打印</button><font color="red"> * 注意：这里只是补打印标签，并没录入系统。</font>
+
+						</td>
+					  </tr>
+					</table>
+                    <!--/form-->
+					  <p>&nbsp;</p>
+					  <p><br />
+		              </p></td>
+					<td width="31%" valign="top" nowrap="nowrap" class='paginationActionButtons'>
+				       	  <div id="mstatus" style="font-size:36px"></div>
+				       	  <br />
+                          <div id="showdetail"></div>
+                      </td>
+			    </tr>
+			</table></td>
+	</tr>
+      
+	<tr class='pagination'>
+		<td>
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				<tr>
+					<td nowrap="nowrap" class='paginationActionButtons'></td>
+					</tr>
+			</table>		
+		</td>
+	</tr></table>
+
+    <div class="clear"></div>
+</div>
+
+{include file='footer.htm'}

@@ -1,0 +1,49 @@
+{include file="admin/header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=webConfig&act=index">网站后台配置</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>修改网站后台配置</h1>
+    <form onSubmit="return edit_check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+                <td align="right" width="11%">配置名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select name="cKey" id="cKey" class="flexselect">
+						<option value="">=请选择配置接口=</option>
+						<option value="WEB_TRACK_PIC" {if $cKey=='WEB_TRACK_PIC'}selected="selected"{/if}>跟踪图片域名</option>
+						<option value="WEB_INDEX_TITLE" {if $cKey=='WEB_INDEX_TITLE'}selected="selected"{/if}>网站首页标题</option>
+						<option value="WEB_INDEX_KEYWORD" {if $cKey=='WEB_INDEX_KEYWORD'}selected="selected"{/if}>网站首页关键词</option>
+						<option value="WEB_INDEX_DESCRIPTION" {if $cKey=='WEB_INDEX_DESCRIPTION'}selected="selected"{/if}>网站首页描述</option>
+					</select>
+                </td>
+			</tr>
+            <tr>
+                <td align="right" width="11%">配置内容：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="cValue" id="cValue" value="{$cValue}" maxlength="100" style="width:468px;"/> 
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">是否启用：</td>
+                <td width="27%" align="left">
+				<select name="is_enable" id="is_enable">
+					<option value="0" {if $is_enable=='0'}selected="selected"{/if}>启用</option>
+					<option value="1" {if $is_enable=='1'}selected="selected"{/if}>禁用</option>
+				</select>
+                </td>
+			</tr>			
+			<tr>
+                <td colspan="2" align="center">
+					<input type="hidden" name="act-id" id="act-id" value="{$id}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=webConfig&act=index'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript" src="./public/js/track_web_config.js"></script>
+{include file="admin/footer.htm"}

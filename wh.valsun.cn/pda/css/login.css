@@ -1,0 +1,89 @@
+*{ margin:0 1px; padding:0;}
+
+
+/*form{
+	padding:0;
+	margin:0;
+}
+*/
+h2{
+	font-size:14px;
+	color:#D01F3C;
+	margin:0 0 2px 0;
+	font-family: Arial;
+	padding:0;
+}
+
+.sign_form{
+	height:auto;
+	width:100%;
+	line-height:20px;
+}
+
+.logform{
+	height: 24px;
+	line-height:24px;
+	width: 90%;
+	padding: 0 8px;
+	background-color: #fff;
+	border: 1px solid #d9d9d9;
+	border-top: 1px solid #c0c0c0;
+	color: #000;
+	display: inline-block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-border-radius: 1px;
+}
+
+.logform:hover{
+	border: 1px solid #b9b9b9;
+	border-top: 1px solid #a0a0a0;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.logform:focus{
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+	outline: none;
+	border: 1px solid #4d90fe;
+}
+
+
+#B12{
+	margin: 5px 20px 0 5px;
+	padding:1px 0;
+	border:1px solid #aaa;
+	background-color: #ddd;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold; 
+	width:70px;
+	cursor:pointer;	
+}
+#B12:hover{
+	margin: 5px 20px 0 5px;
+	padding:1px 0;
+	border:1px solid #aaa;
+	background-color:#990;
+	font-family: Arial;
+	font-size: 12px;
+	color:#FFF;
+	font-weight: bold; 
+	width:70px;
+	cursor:pointer;	
+}
+
+.gray{ color:#333;}
+
+.underline { text-decoration:none;}
+a.underline:hover{ color:#990;}
+
+.notclear{ margin:0px 6px;}
+a.notclear{ text-decoration:none;}
+a.notclear:hover{ color:#990;}
+
+
+

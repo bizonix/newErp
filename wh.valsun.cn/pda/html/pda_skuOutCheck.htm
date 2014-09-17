@@ -1,0 +1,27 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_skuOutCheck.js"></script>
+		<div id="mstatus" class="floatright"></div>
+		<div id="scancontent" class="floatleft">
+            <span>调拨单号 : </span><input name="group_id" type="text" id="group_id" onkeydown="checkGroupID()" class="textinput" />
+        </div>
+		<div id="sku_info" class="floatleft" style="margin:4px 0;">
+
+        </div>
+		<div id="scan_sku" class="floatleft" style="display:none">
+        	<span>SKU : </span><input type="text" class="textinput" name="sku" id="sku" onkeydown="checkSku()" value="" />
+        </div>
+		<div id="operationcontents" class="floatleft" style="margin:4px 0;">
+
+        </div>
+		<!--input type="button" value="test" id="next_sku" class="buttonclass floatleft" onclick="showWindow();" /-->
+		<div id="operationcontent" class="floatleft">
+			<input type="hidden" id="now_group_id" value=""/>
+			<input type="hidden" id="now_sku" value=""/>
+			<!--<input type="hidden" id="now_pname" value=""/>-->
+			<input type="hidden" id="now_sku_num" value=""/>
+			<input type="hidden" id="submit_orders" value=""/>
+			<input type="hidden" id="submit_nums" value=""/>
+        	<!--<input type="button" style="display:none;" value="下一料号" id="next_sku" class="buttonclass floatleft" onclick="next_sku();" />
+            <input type="button" style="display:none;" value="下一清单" id="next_order_button" class="buttonclass floatleft" onclick="header_page(15);" />-->
+        </div>
+{include file="footer.htm"}

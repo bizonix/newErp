@@ -1,0 +1,51 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/cate.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+<div class="servar products-servar">
+            	<span>
+                {if isAccessAll('category','addCategory') == true}
+                	<a href="index.php?mod=category&act=addCategory">增加类别</a>
+                 {/if}
+                </span>
+                <span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <td>名称</td>
+                        <td>所属类级</td>
+						<td>父类</td>
+						<td>操作</td>
+                    </tr>
+                    {foreach $categoryList as $value}
+                                <tr class="odd" id="{$value['id']}">
+                                    <td>{$value['name']}</td>
+                                    <td>{$value['file']}</td>
+									<td>{getAllCateNameByPath(CategoryModel::getCategoryPathById($value['pid']))}</td>
+									<td align="center">
+                                    {if isAccessAll('category','modCategory') == true}
+									<input type="button" value="修改" tid="{$value['id']}" class="mod"/>
+                                    {/if}
+									<!-- <input type="button" value="删除" tid="{$value['id']}" class="del"/> -->
+									</td>
+                                </tr>
+                                {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

@@ -1,0 +1,96 @@
+{include file="header.htm"}
+<div class="main order-main" align="left">
+    <span></span>
+    <table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+	  <tr>
+		<td width="65%">
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				<tr>
+                    <td><span style="font-size: 25px;">SPU-海关编码/税率/监管条件导出：</span></td>
+                </tr>
+                <tr>
+					<td nowrap="nowrap" class='paginationActionButtons'>
+                    <form action="index.php?mod=excelOutPut&act=spuHscodeTaxExcelOutPutOn" enctype="multipart/form-data" title="SPU报关相关导出" method="post" target="_blank">
+						<div>
+            				有/无 <strong><font color="green">中文品名/材质</font></strong> 记录的SPU导出：
+                            <input type="hidden" value="1" name="type"/>
+                            <select id="isOrNot" name="isOrNot">
+                                <option value="1">有记录</option>
+                                <option value="2">无记录</option>
+                            </select>
+            				&nbsp;
+            				<input type="submit" value="导出到xls"/>
+            			</div>
+                    </form>
+                    <br />
+                    <form action="index.php?mod=excelOutPut&act=spuHscodeTaxExcelOutPutOn" enctype="multipart/form-data" title="SPU报关相关导出" method="post" target="_blank">
+						<div>
+            				有/无 <strong><font color="green">海关编码/税率</font></strong> 记录的SPU导出：
+                            <input type="hidden" value="2" name="type"/>
+                            <select id="isOrNot" name="isOrNot">
+                                <option value="1">有记录</option>
+                                <option value="2">无记录</option>
+                            </select>
+            				&nbsp;
+            				<input type="submit" value="导出到xls"/>
+            			</div>
+                    </form>
+                    <br />
+                    <form action="index.php?mod=excelOutPut&act=spuHscodeTaxExcelOutPutOn" enctype="multipart/form-data" title="SPU报关相关导出" method="post" target="_blank">
+						<div>
+            				有/无 <strong><font color="green">英文品名/材质</font></strong> 记录的SPU导出：
+                            <input type="hidden" value="3" name="type"/>
+                            <select id="isOrNot" name="isOrNot">
+                                <option value="1">有记录</option>
+                                <option value="2">无记录</option>
+                            </select>
+            				&nbsp;
+            				<input type="submit" value="导出到xls"/>
+            			</div>
+                    </form>
+                    <br />
+                    <form action="index.php?mod=excelOutPut&act=spuHscodeTaxExcelOutPutOn" enctype="multipart/form-data" title="SPU报关相关导出" method="post" target="_blank">
+						<div>
+            				有/无 <strong><font color="green">中文品名</font></strong> 记录的SPU导出：
+                            <input type="hidden" value="4" name="type"/>
+                            <select id="isOrNot" name="isOrNot">
+                                <option value="1">有记录</option>
+                                <option value="2">无记录</option>
+                            </select>
+            				&nbsp;
+            				<input type="submit" value="导出到xls"/>
+            			</div>
+                    </form>
+                    <br />
+                    <form action="index.php?mod=excelOutPut&act=spuHscodeTaxExcelOutPutOn" enctype="multipart/form-data" title="SPU报关相关导出" method="post" target="_blank">
+						<div>
+            				<strong><font color="green">SPU总表导出</font></strong>：
+            				&nbsp;
+            				<input type="submit" value="导出到xls"/>
+            			</div>
+                    </form>
+					  <p>
+                         <br />
+                         <br />
+                         <br />
+					  </p>
+                      
+                   </td>
+			    </tr>
+			</table>		
+         </td>
+	</tr>
+    <tr>
+        <td>
+        </td>
+    </tr>
+</table>
+</div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(function(){
+            jQuery("#skuPriceOptimizeExcelOutPutForm").validationEngine();
+        });       
+</script>
+
+

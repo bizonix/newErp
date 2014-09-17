@@ -1,0 +1,311 @@
+{include file='header.htm'}
+<script src="js/jquery/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="js/jquery/ui/jquery-ui-sliderAccess.js"></script>
+<script src="js/exportXls.js"></script>
+<script src="js/My97DatePicker/WdatePicker.js"></script>
+<div class="main order-main" align="left">
+    <div id="content" >
+        <div class='moduleTitle'>
+        <h2>&nbsp;</h2>
+        </div>
+        
+		<div id="accordion">
+        
+        <h3>ebay数据测试导出:</h3>
+			<div>
+				eBay帐号:
+				<select name="ebay_test_account" size="10" multiple="multiple" id="ebay_test_account">
+                    {foreach from=$ebayAccountList item=list}
+                     <option value="{$list.id}">{$list.account}</option>
+                    {/foreach}					
+				</select>
+				扫描开始时间:
+				<input name="ebay_test_start" id="ebay_test_start" type="text" onblur="validate_data('ebay_test_start')" value="{$curStartTime}" />
+				扫描结束时间:
+				<input name="ebay_test_end" id="ebay_test_end" type="text" onblur="validate_data('ebay_test_end')" value="{$curEndTime}" />
+				&nbsp;
+				<input type="button" value="导出到xls" onclick="exportXls('ebay_test')" />
+			</div>
+        <h3>ebay销售漏扫描报表导出：</h3>
+            <div>
+                eBay帐号:
+                <select name="ebay_no_scan_account" size="10" multiple="multiple" id="ebay_no_scan_account">
+                    {foreach from=$ebayAccountList item=list}
+                     <option value="{$list.id}">{$list.account}</option>
+                    {/foreach}                  
+                </select>
+                扫描开始时间:
+                <input name="ebay_no_scan_start" id="ebay_no_scan_start" type="text"  value="{$curStartTime}" />
+                扫描结束时间:
+                <input name="ebay_no_scan_end" id="ebay_no_scan_end" type="text"  value="{$curEndTime}" />
+                &nbsp;
+                <input type="button" value="导出到xls" onclick="exportXls('ebay_no_scan')" />
+            </div>
+        <h3>速卖通标记发货日志导出:</h3>
+        <div>速卖通帐号：
+            <select name="ali_tag_ship_log_account" id="ali_tag_ship_log_account">
+                {foreach from=$b2bAccountList item=list}
+                    <option value="{$list.id}">{$list.account}</option>
+                {/foreach}  
+            </select>
+        <!-- end -->  
+                查询日期:
+            <input name="ali_tag_ship_log_date" id="ali_tag_ship_log_date" class="datetime" type="text" value="{$chkTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('ali_tag_ship_log')" />
+        </div>
+        <h3>速卖通批量发货单订单格式化导出:</h3>
+        <div>速卖通帐号：
+            <select name="ali_batch_ship_order_format_account" id="ali_batch_ship_order_format_account">
+                {foreach from=$b2bAccountList item=list}
+                    <option value="{$list.id}">{$list.account}</option>
+                {/foreach}  
+            </select>
+        <!-- end -->  
+            扫描开始时间:
+            <input name="ali_batch_ship_order_format_start" id="ali_batch_ship_order_format_start" class="datetime" type="text" value="{$curStartTime}" />
+            扫描结束时间:
+            <input name="ali_batch_ship_order_format_end" id="ali_batch_ship_order_format_end" class="datetime" type="text" value="{$curEndTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('ali_batch_ship_order_format')" />
+        </div>
+        
+        <h3>paypal 退款数据导出:</h3>
+            <div>
+            退款开始时间:
+            <input name="paypal_refund_start" id="paypal_refund_start" class="datetime" type="text" value="{$curStartTime}" />
+            退款结束时间:
+            <input name="paypal_refund_end" id="paypal_refund_end" class="datetime" type="text" value="{$curEndTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('paypal_refund')" />
+            </div>
+        
+        <h3>B2B销售报表数据新版导出：</h3>
+            <div>
+            帐号：
+            <select name="b2b_sale_account" size="10" multiple="multiple" id="b2b_sale_account">
+                {foreach from=$b2bAccountList item=list}
+                <option value="{$list.id}">{$list.account}</option>
+                {/foreach}  
+            </select>
+            扫描开始时间:
+            <input name="b2b_sale_start" id="b2b_sale_start" class="datetime" type="text" value="{$curStartTime}" />
+            扫描结束时间:
+            <input name="b2b_sale_end" id="b2b_sale_end" class="datetime" type="text" value="{$curEndTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('b2b_sale')" />
+            </div>
+
+        <h3>国内-销售报表数据新版导出：</h3>
+            <div>
+                帐号：
+                <select name="inner_sale_account" size="10" multiple="multiple" id="inner_sale_account">
+                    {foreach from=$innerAccountList item=list}
+                    <option value="{$list.id}">{$list.account}</option>
+                    {/foreach} 
+                </select>
+                扫描开始时间:
+                <input name="inner_sale_start" id="inner_sale_start" class="datetime" type="text" value="{$curStartTime}" />
+                扫描结束时间:
+                <input name="inner_sale_end" id="inner_sale_end" class="datetime" type="text" value="{$curEndTime}" />               
+                <input type="button" value="导出到xls" onclick="exportXls('inner_sale')" />
+            </div>
+
+        <!--<h3>海外销售报表-新版导出:</h3>
+            <div>
+                eBay帐号：
+                <select name="abroad_sale_account" size="6" multiple="multiple" id="abroad_sale_account">
+                    {foreach from=$allAccountList item=list}
+                    <option value="{$list.id}">{$list.account}</option>
+                    {/foreach}
+                </select>
+                扫描开始时间:
+                <input name="abroad_sale_start" id="abroad_sale_start" class="datetime" type="text" onblur="validate_data('abroad_sale_start')" value="{$curStartTime}" />
+                扫描结束时间:
+                <input name="abroad_sale_end" id="abroad_sale_end" class="datetime" type="text" onblur="validate_data('abroad_sale_end')" value="{$curEndTime}" />
+                &nbsp;
+                <input type="button" value="导出到xls" onclick="exportXls('abroad_sale')" />
+            </div>-->
+        <h3>亚马逊销售报表导出:</h3>
+            <div>
+                帐号：
+                <select name="amazon_sale_account" size="10" multiple="multiple" id="amazon_sale_account">
+                    {foreach from=$amazonAccountList item=list}
+                    <option value="{$list.id}">{$list.account}</option>
+                    {/foreach} 
+                </select>
+                扫描开始时间:
+                <input name="amazon_sale_start" id="amazon_sale_start" class="datetime" type="text" value="{$curStartTime}" />
+                扫描结束时间:
+                <input name="amazon_sale_end" id="amazon_sale_end" class="datetime" type="text" value="{$curEndTime}" />               
+                <input type="button" value="导出到xls" onclick="exportXls('amazon_sale')" />
+            </div>
+            
+        <h3>DressLink.Com销售报表运费计算数据导出：</h3>
+            <div>
+            eBay帐号：
+            <select name="dresslink_sale_account" id="dresslink_sale_account">
+                {foreach from=$dresslinkAccountList item=list}
+                <option value="{$list.id}">{$list.account}</option>
+                {/foreach}
+            </select>
+
+            <select name="dress_type" id="dress_type"><option value="all">全部</option><option value="gift">礼品订单</option><option value="not-gift">非礼品订单</option></select>
+            扫描开始时间:
+            <input name="dresslink_sale_start" id="dresslink_sale_start" class="datetime" type="text" value="{$curStartTime}" />
+            扫描结束时间:
+            <input name="dresslink_sale_end" id="dresslink_sale_end" class="datetime" type="text" value="{$curEndTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('dresslink_sale')" />
+            </div>
+        <h3>手工退款记录导出:</h3>
+            <div>
+            帐号：
+            <select name="hand_refund_account" size="10" multiple="multiple" id="hand_refund_account">
+                {foreach from=$allAccountList key=key_id item=list}
+                <option value="{$list.id}">{$list.account}</option>
+                {/foreach}  
+            </select>
+
+            扫描开始时间:
+            <input name="hand_refund_start" id="hand_refund_start" class="datetime" type="text" value="{$curStartTime}" />
+            扫描结束时间:
+            <input name="hand_refund_end" id="hand_refund_end" class="datetime" type="text" value="{$curEndTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('hand_refund')" />
+            </div>  			
+		
+        <h3>速卖通中差评数据导出:</h3>
+            <div>
+            速卖通帐号：
+            <select name="aliexpress_app_account" size="10" multiple="multiple" id="aliexpress_app_account">
+                {foreach from=$aliexpressAccountList key=key_id item=list}
+                <option value="{$key_id}">{$list}</option>
+                {/foreach}  
+            </select>
+
+            扫描开始时间:
+            <input name="aliexpress_app_start" id="aliexpress_app_start" class="datetime" type="text" value="{$curStartTime}" />
+            扫描结束时间:
+            <input name="aliexpress_app_end" id="aliexpress_app_end" class="datetime" type="text" value="{$curEndTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('aliexpress_app')" />
+            </div> 
+		<h3>新蛋数据导出:</h3>
+            <div>
+            ebay帐号：
+            <select name="newegg_export_account" size="10" multiple="multiple" id="newegg_export_account">
+                {foreach from=$neweggAccountList key=key_id item=list}
+                <option value="{$list.id}">{$list.account}</option>
+                {/foreach}  
+            </select>
+
+            扫描开始时间:
+            <input name="newegg_export_start" id="newegg_export_start" class="datetime" type="text" value="{$curStartTime}" />
+            扫描结束时间:
+            <input name="newegg_export_end" id="newegg_export_end" class="datetime" type="text" value="{$curEndTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('newegg_export')" />
+            </div>  			
+		<h3>邮资报表导出:</h3>
+            <div>
+            ebay帐号：
+            <select name="xlsbaobiao4_account" size="10" multiple="multiple" id="xlsbaobiao4_account">
+                {foreach from=$allAccountList key=key_id item=list}
+                <option value="{$list.id}">{$list.account}</option>
+                {/foreach}
+            </select>
+			<select id="mailway4" name="mailway4">
+                {foreach from=$transType key=key_id item=list}
+                <option value="{$key_id}">{$list}</option>
+                {/foreach}
+				<option value="all">综合导出</option>
+			</select>
+            扫描开始时间:
+            <input name="xlsbaobiao4_start" id="xlsbaobiao4_start" class="datetime" type="text" value="{$curStartTime}" />
+            扫描结束时间:
+            <input name="xlsbaobiao4_end" id="xlsbaobiao4_end" class="datetime" type="text" value="{$curEndTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('xlsbaobiao4')" />
+            </div>  
+		<h3>亚马逊入库订单导出</h3>
+            <div>
+            亚马逊帐号：
+            <select name="amazonInStockExport_account" size="10" multiple="multiple" id="amazonInStockExport_account">
+                {foreach from=$amazonAccountList key=key_id item=list}
+                <option value="{$list.id}">{$list.account}</option>
+                {/foreach}  
+            </select>
+
+            扫描开始时间:
+            <input name="amazonInStockExport_start" id="amazonInStockExport_start" class="datetime" type="text" value="{$curStartTime}" />
+            扫描结束时间:
+            <input name="amazonInStockExport_end" id="amazonInStockExport_end" class="datetime" type="text" value="{$curEndTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('amazonInStockExport')" />
+            </div>  			
+
+		<h3>手工退款数据导出</h3>
+            <div>
+			<select id="manualRefundxls_account" style="display:none">
+				<option value=""></option>
+			</select>
+            扫描开始时间:
+            <input name="manualRefundxls_start" id="manualRefundxls_start" class="datetime" type="text" value="{$curStartTime}" />
+            扫描结束时间:
+            <input name="manualRefundxls_end" id="manualRefundxls_end" class="datetime" type="text" value="{$curEndTime}" />
+            <input type="button" value="导出到xls" onclick="exportXls('manualRefundxls')" />
+            </div>  			
+        <h3>组合料号价格信息表导出:</h3>
+            <div>
+				<input type="hidden" name="combSkuPageUrl" id="combSkuPageUrl" value="{$combSkuData['url']}" />
+				开始时间:
+				<input name="combSkuPrice_start" id="combSkuPrice_start" class="datetime" type="text" value="{$curStartTime}" />
+				结束时间:
+				<input name="combSkuPrice_end" id="combSkuPrice_end" class="datetime" type="text" value="{$curEndTime}" />
+				<input type="button" value="导出到xls" onclick="exportXls('combSkuPrice')" />
+				<div>
+				</div>
+            </div>
+        <h3>海外仓销售报表数据导出:</h3>
+            <div>
+				帐号：
+				<select name="ebay_oversea_account" size="10" multiple="multiple" id="ebay_oversea_account">
+					{foreach from=$allAccountList key=key_id item=list}
+					<option value="{$list.id}">{$list.account}</option>
+					{/foreach}  
+				</select>
+				开始时间:
+				<input name="ebay_oversea_start" id="ebay_oversea_start" class="datetime" type="text" value="{$curStartTime}" />
+				结束时间:
+				<input name="ebay_oversea_end" id="ebay_oversea_end" class="datetime" type="text" value="{$curEndTime}" />
+				<input type="button" value="导出到xls" onclick="exportXls('ebay_oversea')" />
+				<div>
+				</div>
+            </div>
+        <h3>paypal纠纷数据导出:</h3>
+            <div>
+				帐号：
+				<select name="paypal_account" size="10" multiple="multiple" id="ebay_oversea_account">
+					{foreach from=$allAccountList key=key_id item=list}
+					<option value="{$list.id}">{$list.account}</option>
+					{/foreach}  
+				</select>
+				开始时间:
+				<input name="paypal_case_start" id="paypal_case_start" class="datetime" type="text" value="{$curStartTime}" />
+				结束时间:
+				<input name="paypal_case_end" id="paypal_case_end" class="datetime" type="text" value="{$curEndTime}" />
+				<input type="button" value="导出到xls" onclick="javascript:alert('此功能还未开发!')" />
+				<div>
+				</div>
+            </div>
+        <h3>新EUB跟踪号报表导出</h3>
+            <div>
+				<input type="button" value="导出到xls" onclick="eub_trucknumber()" />
+            </div>
+		</div>
+        <h3>价格信息表新版导出:</h3>
+            <div>
+				<input type="hidden" name="priceInfoUrl" id="priceInfoUrl" value="{$priceInfoUrl}" />
+				开始时间:
+				<input name="priceInfo_start" id="priceInfo_start" class="datetime" type="text" value="{$curStartTime}" />
+				结束时间:
+				<input name="priceInfo_end" id="priceInfo_end" class="datetime" type="text" value="{$curEndTime}" />
+				<input type="button" value="导出到xls" onclick="exportXls('priceInfo')" />
+				<div>
+				</div>
+            </div>
+    	<div class="clear"></div>
+    </div>
+</div>
+{include file="footer.htm"}

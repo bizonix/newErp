@@ -1,0 +1,37 @@
+.page a
+{
+	border:1px #2958FF solid;
+	padding:2px 5px 2px 5px;
+	margin-right:10px;
+
+}
+.page a:link,.page a:visited
+{
+	 color:#0023A8; 
+	 text-decoration:none;
+}
+
+.page a:hover
+{
+	 color:#0023A8; 
+	 text-decoration:unde
+fengsaiming(冯赛明) 10:12:31
+rline;
+}
+
+.goPage>input
+{
+	width:50px;
+	text-align:center;
+	margin-right:5px;
+}
+.page .thispage
+{
+	padding:2px 5px 2px 5px;
+	border:1px solid #F00;
+	margin:0 10px 0 0;
+	color:red;
+}
+.fancybox-custom .fancybox-skin {
+	box-shadow: 0 0 50px #222;
+}

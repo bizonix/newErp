@@ -1,0 +1,106 @@
+{include file="header.html"}
+<script type="text/javascript" src="./js/addSampleCoefficient.js"></script>
+<div class="fourvar">
+{include file="iqcnav.html"}
+	            <div class="texvar">
+
+                </div>
+                <div class="pagination">
+                </div>
+</div>
+            <div class="servar">
+<!--                <span>
+                	<input type="button" id='' style="width:100px;height:35px;font-size:20px; cursor:pointer;" value="添加系数" />
+                </span>
+                <span>
+                	<input type="button" id='' style="width:100px;height:35px;font-size:20px; cursor:pointer;" value="增加标准" />
+                </span>
+                <span>
+                	<input type="button" id='' style="width:150px;height:35px;font-size:20px; cursor:pointer;" value="增加标准详细" />
+                </span>-->
+                <span id="check" style="color: red;"></span>
+            </div>
+            <div class="main">
+                <form id="addSampleCoff" action="index.php?mod=SampleCoefficient&act=addSampleCoefficient" method="post" onsubmit="return check();">
+                	<table cellspacing="0" width="100%">
+                                	<input type="hidden" id="id" name="id" value="{$id}" readonly="readonly"/>
+                            <tr>
+        						<td>
+                                    <span>系数名称：</span>
+                                	<input class="validate[required,custom[number],min[0]] text-input" id="cName" name="cName" value=""/>
+                                    <span id="cNameSpan" style="color: red;">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+    				<span>
+    					<label for="sampleTypeId">检测样本类别:</label>
+    					<select class="validate[required],min[1]" name="sampleTypeId" id="sampleTypeId">
+    						{foreach from=$sampleTypeList item=value}
+    						 <option value="{$value.id}">{$value.typeName}</option>
+    						{/foreach}
+    					</select>
+    					 <span style="color: red;">*</span>
+    				</span>
+
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>
+				    					<label for="sizeCodeId">样本大小:</label>
+				    					<select  class="validate[required]" name="sizeCodeId" id="sizeCodeId">
+				    						{foreach from=$sizeCodeList item=value}
+				    						 <option value="{$value.id}">{$value.sampleNum}</option>
+				    						{/foreach}
+				    					</select>
+				    					 <span style="color: red;">*</span>
+				    				</span>
+
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>允收数目：</span>
+                                	<input class="validate[required,custom[integer],min[0]] text-input" id="Ac" name="Ac" value="{$Ac}"/>
+                                    <span id="AcSpan" style="color: red;">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>拒收数目：</span>
+                                	<input class="validate[required,custom[integer],min[0]] text-input" id="Re" name="Re" value="{$Re}"/>
+                                    <span id="ReSpan" style="color: red;">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>追加数目：</span>
+                                	<input class="validate[required,custom[integer],min[0]] text-input" id="Al" name="Al" value="{$Al}"/>
+                                    <span id="AlSpan" style="color: red;">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>退回抽检百分比(%)：</span>
+                                	<input class="validate[required,custom[number],min[0],max[100]] text-input" id="Rt" name="Rt" value="{$Rt}"/>
+                                    <span id="RtSpan" style="color: red;">*</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+        						<td>
+                                    <input type="submit" value="提交"/>
+                                	<input type="button" id="back" value="返回"/>
+                                </td>
+                            </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.html"}

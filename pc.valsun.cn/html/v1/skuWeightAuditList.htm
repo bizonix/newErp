@@ -1,0 +1,158 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/jquery.flexselect.js"></script>
+<script type="text/javascript" src="./js/liquidmetal.js"></script>
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<script type="text/javascript" src="./js/publicDatePicker/WdatePicker.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+								   <span>SKU
+								   <input name="sku" type="text" id="sku" value="{$smarty.get.sku}" style="width: 120px;"/>
+								   </span>                                    
+                                    <span>|&nbsp;状态：
+    									<select name="status" id="status">
+    										<option value="0"></option>
+                                            <option value="1" {if $smarty.get.status == 1}selected='selected'{/if}>待审核 </option>
+                                            <option value="2" {if $smarty.get.status == 2}selected='selected'{/if}>审核通过</option>
+                                            <option value="3" {if $smarty.get.status == 3}selected='selected'{/if}>审核不通过</option>
+    									</select>
+                                    </span>
+                                    <span>|&nbsp;添加人：
+    									<select name="addUserId" id="addUserId" class="flexselect" style="width: 80px;">
+    										<option value="0"></option>
+                                            {foreach OmAvailableModel::getTNameList('power_global_user','global_user_id,global_user_name','WHERE global_user_company<=4 order by global_user_login_name') as $value}
+                            				<option value="{$value['global_user_id']}" {if $smarty.get.addUserId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+                            				{/foreach}
+    									</select>
+                                    </span>
+                                    <span>|&nbsp;审核人：
+    									<select name="auditerId" id="auditerId" class="flexselect" style="width: 80px;">
+    										<option value="0"></option>
+                                            {foreach OmAvailableModel::getTNameList('power_global_user','global_user_id,global_user_name','WHERE global_user_company<=4 order by global_user_login_name') as $value}
+                            				<option value="{$value['global_user_id']}" {if $smarty.get.auditerId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+                            				{/foreach}
+    									</select>
+                                    </span>
+                                    <span>
+                                        |&nbsp;
+    									<select name="timeSearchType" id="timeSearchType">
+                                            <option value="0"> </option>
+                                            <option value="1" {if $smarty.get.timeSearchType == 1}selected='selected'{/if}>添加时间</option>
+                                            <option value="2" {if $smarty.get.timeSearchType == 2}selected='selected'{/if}>审核时间</option>
+    									</select>                                       
+                                        开始时间：
+                        	           <input style="width: 100px;" name="startdate" type="text" id="startdate" onClick="WdatePicker()" value="{$smarty.get.startdate}"/>	  
+                                	    结束时间：
+                                	   <input style="width: 100px;" name="enddate" type="text" id="enddate" onClick="WdatePicker()" value="{$smarty.get.enddate}" />
+                                    </span>
+								
+                                   <span><button id='seachSkuWeightAuditList'>搜索</button></span>
+                                   &nbsp;
+                                   <span style="color: red;">{$smarty.get.errorStatus}</span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                    <tr class="title">                        
+                        <td>SKU</td>
+                        <td>原重量(KG)</td>
+                        <td>更新重量(KG)</td>                        
+                        <td>添加人</td>
+                        <td>添加时间</td>
+                        <td>状态</td>
+                        <td>审核人</td>
+                        <td>审核时间</td>
+						<td>操作</td>					
+                    </tr>
+                    {foreach $skuWeightAuditList as $value}                    
+                    <tr id="tr{$value['id']}">                        
+                		<td>{$value['sku']}</td>
+                		<td><span>{$value['oldWeight']}</span></td>
+                        <td><span>{$value['newWeight']}</span></td>
+                        <td>{getPersonNameById($value['addUserId'])}</td>
+                        <td>{if !empty($value['addTime'])}{$value['addTime']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                        <td>{if $value['status'] == 1}待审核{elseif $value['status'] == 2}审核通过{elseif $value['status'] == 3}审核不通过{else}--{/if}</td>
+                        <td>{if !empty($value['auditerId'])}{getPersonNameById($value['auditerId'])}{else}--{/if}</td>
+                        <td>{if !empty($value['auditTime'])}{$value['auditTime']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                        <td>
+                            {if isAccessAll('goods','auditSkuWeight')}
+                            {if $value['status'] == 1}
+                            <input type="button" value="审核通过" class="skuWeightAudit" auditValue="2" auditId="{$value['id']}"/>
+                            <input type="button" value="审核不通过" class="skuWeightAudit" auditValue="3" auditId="{$value['id']}"/>
+                            {/if}
+                            {/if}
+                        </td>
+            		</tr>           		
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachSkuWeightAuditList').click(); 
+			}        
+        });
+        
+        $(document).ready(function(){
+            $("#seachSkuWeightAuditList").click(function(){               
+                var sku = $("#sku").val();
+                var status = $("#status").val();
+                var addUserId = $("#addUserId").val();                
+                var auditerId = $("#auditerId").val();
+                var timeSearchType = $("#timeSearchType").val();
+                var startdate = $("#startdate").val();
+                var enddate = $("#enddate").val();
+                location.href = 'index.php?mod=goods&act=getSkuWeightAuditList&sku='+sku+'&status='+status+'&addUserId='+addUserId+'&auditerId='+auditerId+'&timeSearchType='+timeSearchType+'&startdate='+startdate+'&enddate='+enddate;     
+            });
+            
+            $(".skuWeightAudit").click(function(){
+                auditValue = $(this).attr("auditValue");
+                confirmStr = '';
+                if(auditValue == 2){
+                    confirmStr = '确认审核通过？';
+                }else if(auditValue == 3){
+                    confirmStr = '确认审核不通过？';
+                }else{
+                    alert('错误，请重试！');
+                    return;
+                }
+                if(confirm(confirmStr)){
+                    var id = $(this).attr('auditId');
+                    if(isNaN(id)){
+                        $("#error").html('无效记录，退出');
+                        return;
+                    }
+                    
+                    $.ajax({
+        				type	: "POST",
+        				dataType: "jsonp",
+        				url		: 'json.php?mod=goods&act=auditSkuWeight&jsonp=1',
+        				data	: { id:id,auditValue:auditValue },
+        				success	: function (msg){
+        				    alert(msg.errMsg);
+        					if(msg.errCode == '200'){
+                                $("#tr"+id).hide();
+        					}
+        				}
+        			});
+                }  
+            });
+            
+            $("select[class*=flexselect]").flexselect();
+        });       
+</script>

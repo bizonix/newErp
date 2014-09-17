@@ -1,0 +1,132 @@
+{include file='header.htm'}
+{include file='whNav.htm'}
+<script language="javascript" src="js/invOperate.js"></script>
+<div class="servar wh-servar">
+<span>
+	<button  id='waitinv' value="" />盘点申请列表</button>
+</span>
+<span>
+	<button  id='inv' value="" />盘点</button>
+</span>
+<span>
+	<button  id='invlist' value="" />盘点列表</button>
+</span>
+<span>
+	<button  id='invreason' value="" />盘点原因</button>
+</span>
+<span>
+	<button  id='invcond' value="" />盘点条件</button>
+</span>
+<br/>
+<div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<br/> 
+<div class="servar wh-servar" align="center">
+	<form action='index.php?mod=inventory&act=sumbInv' method="post" id="invForm">
+    <input  type="hidden" name="randStr" value="{$randStr}"/> 
+	<table width="100%" cellpadding="0" cellspacing="0" style="line-height:50px;">
+		<tr>
+			<td style="font-size:20px;padding-right:20px;" align="right" width="50%">
+				sku(料号):
+			</td>
+			<td align="left" width="50%">
+				<input value="" id='sku' class="mf validate[required] text-input" name="sku" type="text" style="width:200px;height:30px;font-size:20px">
+				<span style="color:#F00;">*</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-size:20px;padding-right:20px;" align="right">
+				仓位:
+			</td>
+			<td align="left">
+				<input value="" id='location' class="mf validate[required] text-input" name="location" type="text" style="width:200px;height:30px;font-size:20px">
+				<span style="color:#F00;">*</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-size:20px;padding-right:20px;" align="right">
+				盘点数量:
+			</td>
+			<td align="left">
+				<input value="" class="mf validate[required,custom[integer],min[0]] text-input" id="invNums"  name="invNums" type="text" style="width:200px;height:30px;font-size:20px">
+				<span style="color:#F00;">*</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-size:20px;padding-right:20px;" align="right">
+				盘点原因:
+			</td>
+			<td align="left">
+				<select style="width:200px;height:30px;font-size:20px" class="mf validate[required]" name="reasonId">
+				<option value="">请选择</option>
+				{foreach from=$reason item=list}
+				 <option value="{$list.id}" >{$list.reasonName}</option>
+				{/foreach}
+				</select>
+				<span style="color:#F00;">*</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-size:20px;padding-right:20px;" align="right">
+				盘点人:
+			</td>
+			<td align="left">
+				<input value="{$curusername|getUserNameById}" class="mf validate[required] text-input" id="invPeople" name="invPeople"  type="text" style="width:200px;height:30px;font-size:20px" readonly>
+				<span style="color:#F00;">*</span>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">
+				
+			</td>
+			<td align="left">
+				<input type="submit" id="AddFormSumit" class="input_button" value="提交">
+			</td>
+		</tr>
+	</table>
+	</form>
+	<!--form action='index.php?mod=inventory&act=sumbInv' method="post" id="invForm"> 
+		<p>
+			<label for="sku" style="font-size:20px;">sku(料号):&nbsp; </label>
+			<input value="" id='sku' class="mf validate[required] text-input" name="sku" type="text" style="width:200px;height:30px;font-size:20px">
+			<span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<label for="location" style="font-size:20px;">仓位: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<input value="" id='location' class="mf validate[required] text-input" name="location" type="text" style="width:200px;height:30px;font-size:20px">
+			<span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<label for="invNums" style="font-size:20px;">盘点数量： </label>
+			<input value="" class="mf validate[required,custom[integer],min[0]] text-input" id="invNums"  name="invNums" type="text" style="width:200px;height:30px;font-size:20px">
+			<span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<label for="reasonId" style="font-size:20px;">盘点原因： </label>
+			<select style="width:200px;height:30px;font-size:20px" class="mf validate[required]" name="reasonId">
+				<option value="">请选择</option>
+				{foreach from=$reason item=list}
+				 <option value="{$list.id}" >{$list.reasonName}</option>
+				{/foreach}
+			</select>
+			<span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<label for="invPeople" style="font-size:20px;">盘点人：&nbsp;&nbsp; </label>
+			<input value="{$curusername}" class="mf validate[required] text-input" id="invPeople" name="invPeople"  type="text" style="width:200px;height:30px;font-size:20px" readonly>
+			<span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<input type="submit" id="AddFormSumit" class="input_button" value="提交">
+		</p>
+	</form-->
+</div>
+ <div class="main">
+ </div>
+ 
+{include file='footer.htm'}

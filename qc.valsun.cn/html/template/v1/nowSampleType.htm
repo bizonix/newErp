@@ -1,0 +1,39 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/standard.js"></script>
+<div class="fourvar">
+            {include file="iqcnav.htm"} 
+            </div>
+            <div class="servar">
+                <span>               	
+					<button  id='updatast' value="" />更新检测标准</button>
+				</span>
+				<br>
+			   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td>检测类别</td>
+						<td>数量最小限制</td>
+						<td>数量最大限制</td>
+						<td>样本大小</td>
+						<td>允收数目</td>
+						<td>拒收数目</td>
+						<td>追加数目</td>
+						<td>检测退回百分比</td>
+                    </tr>
+                    {foreach from=$NowStandardList key=listkey item=list}
+                    <tr class="odd">
+                            <td>{$type[$listkey]}</td>
+                            <td>{$list.minimumLimit}</td>
+                            <td>{$list.maximumLimit}</td>
+                            <td>{$list.sampleNum}</td>
+							<td>{$list.Ac}</td>
+                            <td>{$list.Re}</td>
+                            <td>{$list.Al}</td>
+                            <td>{$list.Rt}</td>
+                    </tr>
+					{/foreach}
+                </table>
+            </div>
+{include file="footer.htm"}

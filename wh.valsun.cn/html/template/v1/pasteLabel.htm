@@ -1,0 +1,42 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/pasteLabel.js"></script>
+
+{include file='whNav.htm'}
+
+
+
+<div class="servar wh-servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button   type="button" onclick="javascript:window.location.href='./index.php?act=labelingList&mod=pasteLabel';" value="" >贴标列表</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="succeedLog" style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="errorLog" style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<br/>
+<div class="servar wh-servar" align="center">
+	<table width="100%" cellpadding="0" cellspacing="0" style="line-height:50px;">
+		<tr>
+			<td style="font-size:20px;padding-right:20px;" align="right" width="50%">
+				分组号扫描:
+			</td>
+			<td align="left" width="50%">
+                <input type="hidden" name="storeId" value="{$storeId}"/>
+				<input value="" id='groupId' name="groupId" onkeydown="checkGroupId()" type="text" style="width:200px;height:30px;font-size:20px">
+				<span style="color:#F00;">*</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-size:20px;padding-right:20px;" align="right">
+				完成贴标人:
+			</td>
+			<td align="left">
+				<select  style="width:200px;height:30px;font-size:20px" id="checkUser" name="checkUser">
+				{foreach from=$tally_user item=list}
+					<option value="{$list.global_user_id}" {if $list.global_user_id==$checkUser}selected{/if}>{$list.global_user_name}</option>
+				{/foreach}
+				</select>
+			</td>
+		</tr>
+	</table>
+</div>
+{include file='footer.htm'}

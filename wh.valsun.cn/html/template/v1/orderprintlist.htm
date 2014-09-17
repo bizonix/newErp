@@ -1,0 +1,134 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/printlist.css" rel="stylesheet" type="text/css" />
+<link href="css/getgoods-css.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="js/bootstrap.min.js"></script>
+<script language="javascript" src="js/printlist.js"></script>
+<div class="cneterdiv">
+	<div class="servar wh-servar">
+        <select onchange="goprint(this)" name="printid" id="printid" class="list_select">
+			<option value="" id="printidselect">打印订单</option>
+			<option value="1">标签打印-50*100</option>
+			<option value="209">快递50*100热敏打印</option>
+			<option value="6">带留言标签打印-50*100</option>
+			<option value="2">快递A4打印</option>
+			<option value="33">【UPS美国专线】快递A4打印</option>
+			<!--option value="3">国际EUB-热敏打印</option>
+            <option value="4">德国Global Mail-100*100打印</option>
+            <option value="5">非德国Global Mail-100*100打印</option>
+			<option value="7">新加坡热敏打印</option-->
+			<option value="8">新加坡/EUB/GlobalMail混合打印</option>
+			<option value="9">部分包货打印50*100</option>
+			<option value="11">芬哲圆通快递打印</option>
+			<option value="12">芬哲申通快递打印</option>
+			<option value="13">芬哲韵达快递打印</option>
+			<option value="131">芬哲天天快递打印</option>
+			<option value="132">芬哲中通快递打印</option>
+			<option value="133">芬哲EMS打印</option>
+			<option value="134">芬哲加运美打印</option>
+			<option value="135">芬哲顺丰打印</option>
+			<option value="14">哲果圆通快递打印</option>
+			<option value="15">哲果申通快递打印</option>
+			<option value="16">哲果韵达快递打印</option>
+			<option value="17">哲果顺丰快递打印</option>
+			<option value="161">哲果天天快递打印</option>
+			<option value="162">哲果中通快递打印</option>
+			<option value="163">哲果加运美快递打印</option>
+			<option value="164">哲果EMS打印</option>
+			<option value="18">EB0001申通快递打印</option>
+			<option value="19">EB0001速尔快递打印</option>
+			<option value="110">EB0001顺丰快递打印</option>
+			<option value="181">EB0001圆通快递打印</option>
+			<option value="182">EB0001加运美打印</option>
+			<option value="183">EB0001国通快递打印</option>
+			<option value="95">EB0001国内兰亭条码打印</option>
+			<option value="184">EB0001EMS打印</option>
+			<option value="31">Finejo快递-A4(横向打印)</option>
+			<option value="32">哲果发货清单-A4打印</option>
+			<option value="311">EB001快递-A4(横向打印)</option>
+			<option value="312">EB001发货清单-A4打印</option>
+		</select>
+		<a class="gdhref" href="javascript:applyfor()" onclick="">申请配货</a>
+		<a class="gdhref" href="javascript:unlock()">解锁</a>
+		<a class="gdhref" href="javascript:backwait()">退回待处理</a>
+		<a class="gdhref" href="javascript:printList()">订单最优打印</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a class="gdhref" href="javascript:applyforB()" onclick="">B仓申请提货</a>
+		<a class="gdhref" href="javascript:printListB()">生成B仓提货单</a>
+    </div>
+    <div class="main">
+        <table  cellspacing="0" width="100%" style="table-layout:fixed;table-layout:word-wrap:break-word;word-break:break-all">
+            <tbody><tr class="title">
+                    <td>
+                        <input onclick="chooseornot(this)" type="checkbox"/>
+                    </td>
+                    <td>
+                         该组发货单数量
+                    </td>
+                    <td>
+                        发货单id
+                    </td>
+                    <td>
+                        申请人
+                    </td>
+                    <td>
+                        申请时间
+                    </td>
+                    <td>
+                        状态
+                    </td>
+                    <!--td>
+                        打印人id
+                    </td>
+                    <td>
+                        打印时间
+                    </td-->
+                    <td>
+                        所在仓库
+                    </td>
+					<!--td>
+						 操作列表
+					</td-->
+                </tr>
+               {foreach $printlist as $pvalue }
+                <tr>
+                    <td  style="width:5%">
+                        <input class="checkclass" name="" type="checkbox" value="{$pvalue.id}" storeId="{$pvalue.storeId}">
+                    </td>
+                    <td style="width:10%">
+                        {$pvalue.orderCount}
+                    </td>
+                    <td style="width:45%">
+                        {$pvalue.orderIds}
+                    </td>
+                    <td style="width:10%">
+                        {$pvalue.applicantId|getUserNameById}
+                    </td>
+                    <td style="width:10%">
+                        {$pvalue.applicantTimestr}
+                    </td>
+                    <td style="width:10%">
+                        {$pvalue.statusstr}
+                    </td>
+                    <!--td>
+                        {$pvalue.printerId}
+                    </td>
+                    <td>
+                        {$pvalue.printTime}
+                    </td-->
+                    <td style="width:10%">
+                        {if $pvalue.storeId==1}A仓{elseif $pvalue.storeId==2}B仓{/if}
+                    </td>
+					<!--td>
+						<span><a href="javascript:applyfor({$pvalue.id})" onclick="">申请配货</a></span>
+						<span><a href="javascript:unlock({$pvalue.id})">解锁</a></span>
+					</td-->
+                {/foreach}
+            </tbody>
+        </table>
+        <div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+            {$pagestr}
+        </div>
+    </div>
+</div>
+{include file='footer.htm'}

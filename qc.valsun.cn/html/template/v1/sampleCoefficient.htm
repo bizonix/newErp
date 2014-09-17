@@ -1,0 +1,111 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/sampleCoefficient.js"></script>
+<div class="fourvar">
+            	{include file="iqcnav.htm"}
+	            <div class="texvar">
+                </div>
+                <div class="pagination">
+                	{$show_page}
+                </div>
+</div>
+            <div class="servar">
+               <!-- <span>
+                	<input type="button" id='' style="width:100px;height:35px;font-size:20px; cursor:pointer;" value="添加系数" />
+                </span>-->
+                
+<!--                <span>
+                	<input type="button" id='' style="width:100px;height:35px;font-size:20px; cursor:pointer;" value="增加标准" />
+                </span>
+                <span>
+                	<input type="button" id='' style="width:150px;height:35px;font-size:20px; cursor:pointer;" value="增加标准详细" />
+                </span>-->
+                
+                <span style="float: left;">
+                    <span><button onclick="window.location.href = 'index.php?mod=sampleCoefficient&act=addScanSampleCoefficient'">添加系数</button></span>
+    				<span>
+    					<label for="sampleTypeOnId">检测样本类别:</label>
+    					<select name="sampleTypeOnId" id="sampleTypeOnId" onchange="change_cNameSkip()">
+    						<option value="0">请选择</option>
+    						{foreach from=$sampleTypeList item=value}
+    						 <option value="{$value.sampleTypeId}">{$value.typeName}</option>
+    						{/foreach}
+    					</select>
+    				</span>
+                    <span id = "cNameSkip" >
+    					<label for="cNameOn">系数:</label>
+    					<select  name="cNameOn" id="cNameOn">
+    						<option value="0">请选择</option>
+    						{foreach from=$cNameList item=value}
+    						 <option value="{$value.cName}">{$value.cName}</option>
+    						{/foreach}
+    					</select>
+    				</span>
+                	<input type="button" id="on" value="开启" />
+                    &nbsp;&nbsp;
+                    <span style="color: red;">{$status}</span>
+                </span>
+                
+                <span style="float: right;">
+    				<span>
+    					<label for="sampleTypeId">检测样本类别:</label>
+    					<select name="sampleTypeId" id="sampleTypeId">
+    						<option value="0">请选择</option>
+    						{foreach from=$sampleTypeList item=value}
+    						 <option value="{$value.sampleTypeId}" {if $smarty.get.sampleTypeId == $value.sampleTypeId}selected='selected'{/if}>{$value.typeName}</option>
+    						{/foreach}
+    					</select>
+    				</span>
+                    <span>
+    					<label for="cName">系数:</label>
+    					<select  name="cName" id="cName">
+    						<option value="0">请选择</option>
+    						{foreach from=$cNameList item=value}
+    						 <option value="{$value.cName}" {if $smarty.get.cName == $value.cName}selected='selected'{/if}>{$value.cName}</option>
+    						{/foreach}
+    					</select>
+    				</span>
+                	<input type="button" id="search" value="搜索" />
+                    &nbsp;&nbsp;
+                </span>
+
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td>序号</td>
+						<td>系数名称</td>
+						<td>样品类型</td>
+						<td>样本大小</td>
+						<td>允收数目</td>
+						<td>拒收数目</td>
+						<td>追加数目</td>
+						<td>退回抽检百分比(%)</td>
+						<td>是否开启</td>
+						<td>操作</td>
+                    </tr>
+                    {foreach from=$sampleCoefficientList item=value}
+                    <tr class="odd">
+                        <td>{$value.id}</td>
+						<td>{$value.cName}</td>
+						<td>{$value.sampleTypeName}</td>
+						<td>{$value.sizeCodeNum}</td>
+						<td>{$value.Ac}</td>
+						<td>{$value.Re}</td>
+						<td>{$value.Al}</td>
+						<td>{$value.Rt}</td>
+						<td>{if $value.is_open == 0}否{else}是{/if}</td>
+						<td>
+							<input type="button" class="update" name="{$value.id}" value="编辑"/>
+						</td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

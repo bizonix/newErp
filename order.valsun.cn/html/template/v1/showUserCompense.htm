@@ -1,0 +1,113 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/usercompense.js"></script>
+<!--<div class="servar">
+	
+</div>-->
+<div class="main">
+    <div id="accordion">
+    	<h3>平台账号权限控制-{$uidUser = UserModel::getUsernameById($uid)}{$uidUser}</h3>
+        <div>
+        <form name="powerFrom" id="powerFrom" action="index.php?mod=omAccount&act=showUserCompense" method="post">
+            <input type="hidden" name="action" value="accountpower" />
+            <input type="hidden" id="uid" name="uid" value="{$uid}" />
+            {foreach key=pid item=viewaccountlist from=$arr_all_platform_account}
+                {assign var=platformName value=$viewaccountlist.platform}
+                {assign var=acountlists value=$viewaccountlist.acountlists}
+                <input type="checkbox" id="checkboxes_platform_{$pid}" name="checkboxes_platform[]" {if $visible_platform_account[$pid]}checked='checked'{/if} value="{$pid}" onclick="platformCheckBox({$pid});" />&nbsp;<b>{$platformName}</b><br>&nbsp;&nbsp;&nbsp;&nbsp;
+                {foreach key=aid item=viewaccount from=$acountlists}
+                	{if $viewaccount != ''}
+                	<input type="checkbox" id="checkboxes_account_{$aid}" name="checkboxes_account_{$pid}[]" {if in_array($aid,$visible_platform_account[$pid])}checked='checked'{/if} value="{$aid}" />&nbsp;{$viewaccount}&nbsp;&nbsp;
+                    {/if}
+                {/foreach}
+                <br>
+			{/foreach}
+              <!--<div id="tabs-2">
+                <p>待开发权限.</p>
+              </div>-->
+        	<input type="submit" value="update" />
+        </form>
+        </div>
+    	<h3>文件夹移动权限设置</h3>
+        <div>
+            <!--<form name="powerFrom" id="powerFrom" action="index.php?mod=omAccount&act=showUserCompense" method="post">
+            <input type="hidden" name="action" value="movefolder" />
+            <input type="hidden" name="uid" value="{$uid}" />-->
+            <!--<p>{html_checkboxes id="checkboxes_movefolder" name="checkboxes_movefolder" options=$StatusMenu checked=$key_visible_movefolder separator="&nbsp;&nbsp;"}</p>-->
+            <table cellpadding="0" cellspacing="0" style="border:0;">
+            <tr>
+            <td>
+            移出
+            </td>
+            <td>
+            移入
+            </td>
+            </tr>
+            <tr>
+            <td>
+            <select id="select_movefolder" name="select_movefolder" size="14">
+            	{foreach key=statusId item=statusvalue from=$StatusMenu}
+                <option value="{$statusId}" onclick="showInfolderList({$statusId});">{$statusvalue}</option>
+                {/foreach}
+            	{*html_options values=$key_StatusMenu selected=$key_visible_movefolder output=$StatusMenu*}
+            </select>
+            </td>
+            <td>
+            <!--<div id="infolderlist" style="text-align:right; border:#CCC solid 1px;">-->
+            	{foreach key=statusId item=statusvalue from=$StatusMenu}
+                <input type="checkbox" id="checkboxes_movefolder{$statusId}" onclick="clickmovefolder({$statusId});" name="checkboxes_movefolder" value="{$statusId}" />&nbsp;{$statusvalue}&nbsp;&nbsp;
+                {/foreach}
+            </td>
+            </tr>
+            </table>
+            <!--</div>-->
+            <!--<input type="submit" value="update" />
+            </form>-->
+        </div>
+
+        <h3>文件夹显示权限设置</h3>
+        <div> 
+            <p>            
+            {*foreach key=statusId item=statusvalue from=$StatusMenu}
+            <input type="checkbox" id="checkboxes_showfolder{$statusId}"  name="checkboxes_showfolder" value="{$statusId}" {if in_array($statusId,$visible_showfolder)}checked='checked'{/if} />&nbsp;{$statusvalue}&nbsp;&nbsp;
+            {/foreach*}
+
+            {foreach key=statusCode item=statusGroupList from=$statusGroupLists}
+            <input type="checkbox" id="checkboxes_showfolder{$statusCode}"  name="checkboxes_showfolder0" subCode="{$statusGroupList.subCode}" value="{$statusCode}" onclick="clickMainCheckBox({$statusCode});" />&nbsp;<b>{$statusGroupList.name}</b><br>&nbsp;&nbsp;&nbsp;&nbsp;
+                {foreach key=statusCode2 item=statusGroup from=$statusGroupList.list}
+                <input type="checkbox"  id="checkboxes_showfolder{$statusGroup.statusCode}" onclick="clickSubCheckBox({$statusCode});" name="checkboxes_showfolder" groupId="{$statusCode}" value="{$statusGroup.statusCode}" {if in_array($statusGroup.statusCode,$visible_showfolder)}checked='checked'{/if}/>&nbsp;{$statusGroup.statusName}&nbsp;&nbsp;&nbsp;
+                {/foreach}
+                <br><br>
+            {/foreach}
+
+            </p>
+            <input type="button" value="提交" onclick="updateShowFolders();"/>
+        </div>
+
+        <h3>订单编辑权限设置</h3>
+        <div>
+            <p>
+            {foreach key=optionId item=optionvalue from=$editorder_options}
+            <input type="checkbox" id="checkboxes_orderoptions{$optionId}" name="checkboxes_orderoptions" value="{$optionId}" {if in_array($optionId,$visible_editorder)}checked='checked'{/if} />&nbsp;{$optionvalue}&nbsp;&nbsp;
+            {/foreach}
+            </p>
+            <input type="button" value="提交" onclick="updateOrderOptions();"/>
+        </div>
+    </div>
+    <!--<table cellspacing="0" width="100%">
+        <tr class="title">
+            <td align="left">平台账号权限控制</td>
+        </tr>
+        <tr class="odd">
+            <td>
+                
+            </td>
+        </tr>
+        <tr class="title">
+            <td align="left">文件夹移动权限设置</td>
+        </tr>
+        <tr class="odd">
+        	
+        </tr>
+    </table>-->
+</div>
+{include file="footer.htm"}

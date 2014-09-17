@@ -1,0 +1,100 @@
+{include file="header.htm"}
+{include file="secendNav.htm"}
+{include file="thirdNav_ali.htm"}
+<link rel="stylesheet" href="./css/msglist.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./css/page.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/msglist.js"></script>
+	
+<div class="topmenue">
+	<form action="index.php" method="get">
+		<input type="hidden" name="mod" value="messagefilter">
+		<input type="hidden" name="act" value="getAliOrderList">
+		<span>买家ID：</span> <input type="text" name="keywords" value="{$keywords}">
+		<span>关键字：</span> <input type="text" name="conkeywords" value="{$conkeywords}">
+		<span>订单号：</span> <input type="text" name="orderid" value="{$orderId}">
+		<span>文件夹:</span>
+		<select name="catid">
+			<option value="-1">请选择文件夹</option>
+			{foreach $powerlist as $acuval}
+				<option {if $category eq $acuval.id}selected="selected"{/if} value="{$acuval.id}">{$acuval.category_name}</option>
+			{/foreach}
+		</select>
+		<span>操作状态:</span>
+		<select name="status">
+			<option {if $status eq 'all'}selected="selected"{/if} value="all">请选择</option>
+			<option {if $status eq 1}selected="selected"{/if} value="1">已读</option>
+			<option {if $status eq 2}selected="selected"{/if} value="2">未读</option>
+		</select>
+		<span>订单状态:</span>
+        <select name="orderstatus">
+            <option value="0">全部订单</option>
+            <option {if $orderstatus == 'PLACE_ORDER_SUCCESS'}selected="selected"{/if} value="PLACE_ORDER_SUCCESS">等待买家付款</option>
+            <option {if $orderstatus == 'WAIT_SELLER_SEND_GOODS'}selected="selected"{/if} value="WAIT_SELLER_SEND_GOODS">等待卖家发货</option>
+            <option {if $orderstatus == 'WAIT_BUYER_ACCEPT_GOODS'}selected="selected"{/if} value="WAIT_BUYER_ACCEPT_GOODS">等待买家收货</option>
+            <option {if $orderstatus == 'FINISH'}selected="selected"{/if} value="FINISH">已结束的订单</option>
+            <option {if $orderstatus == 'RISK_CONTROL'}selected="selected"{/if} value="RISK_CONTROL">资金未到账</option>
+            <option {if $orderstatus == 'SELLER_PART_SEND_GOODS'}selected="selected"{/if} value="SELLER_PART_SEND_GOODS">部分发货</option>
+            <option {if $orderstatus == 'IN_CANCEL'}selected="selected"{/if} value="IN_CANCEL">买家申请取消</option>
+            <option {if $orderstatus == 'IN_FROZEN'}selected="selected"{/if} value="IN_FROZEN">冻结中的订单</option>
+            <option {if $orderstatus == 'IN_ISSUE'}selected="selected"{/if} value="IN_ISSUE">含纠纷订单</option>
+            <option {if $orderstatus == 'WAIT_SELLER_EXAMINE_MONEY'}selected="selected"{/if} value="WAIT_SELLER_EXAMINE_MONEY">等待您确认金额</option>
+        </select></br>
+        <select name="sellerId">
+            <option value="">卖家账号</option>
+            {foreach $accountlist as $key=>$acval}
+                <option {if $sellerId == $key}selected="selected"{/if} value="{$key}">{$acval}</option>
+            {/foreach}
+        </select>
+		<input type="submit" value="搜索" class="order-search">
+	</form>
+</div>
+<div class="topmenue">
+		<input type="hidden" name="mod" value="messagefilter">
+		<input type="hidden" name="act" value="getMessageListByConditions">
+		<span>操作：</span> 
+		<select onchange="changecategory_aliorder(this)">
+			<option value="0">移动到文件夹：</option>
+			{foreach $catlist as $catval}
+			<option value="{$catval.id}">{$catval.category_name}</option>
+			{/foreach}
+		</select>
+		<button onclick="goreplymessage_aliorder()">回复留言</button>
+		<button onclick="changereadstatus(1)">标记为已读</button>
+		<button onclick="changereadstatus(0)">标记为未读</button>
+		<button onclick="selectAll()">全选</button>
+</div>
+<div class="main unhovercolor">
+    <div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+            {$pagestr}
+    </div>
+    <table cellspacing="1" width="100%">
+        <tbody>
+            <tr class="title hovercolor">
+            	<td><input onclick="setCheckbox(this)" type="checkbox"></td>
+				<td>账号名称</td>
+                <td>发送人名称</td>
+                <td width="7%"><a href="index.php?{$url}&sortname=orderstatus&sort={$resort}">订单状态</a></td>
+				<td width="13%"><a href="index.php?{$url}&sortname=xxxx&sort={$resort}">接收时间</a></td>
+				<td width="45%">留言内容</td>
+				<td width="">订单号</td>
+				<td width="13%">所属分类</td>
+            </tr>
+			{foreach $msglist as $msgval }
+            <tr class="odd" style="{if $msgval@iteration is div by 2}background-color:#f2f2f2;{/if}">
+                <td style="border-bottom:#60D7D7 solid 1px;"><input id="{$msgval@index}" class="msgcheckbox" type="checkbox" name="msgid" value="{$msgval.id}"></td>
+                <td style="border-bottom:#60D7D7 solid 1px;">{$msgval.accname}</td>
+				<td style="border-bottom:#60D7D7 solid 1px;">{$msgval.sendername}</td>
+				<td style="border-bottom:#60D7D7 solid 1px;">{$msgval.statusname}</td>
+                <td style="border-bottom:#60D7D7 solid 1px;">{$msgval.createtimestr}</td>
+                <td style="text-align:left;border-bottom:#60D7D7 solid 1px;"><a href="index.php?mod=messageReply&act=replyMessageFormAliOrder&msgids={$msgval.id}" style="{if $msgval.hasread==0}font-weight:bold;{/if}"; target="_blank">{$msgval.content}</a></td>
+                <td style="border-bottom:#60D7D7 solid 1px;"><a href="{$msgval.orderurl}" style="color:#00a9ff" target="_blank">{$msgval.orderid}</a><span style="font-weight:bold;">{if $msgval.num != ''}({$msgval.num}){/if}</span></td>
+                <td style="border-bottom:#60D7D7 solid 1px;">{$msgval.classname}</td>
+            </tr>
+			{/foreach}
+        </tbody>
+    </table>
+	<div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+            {$pagestr}
+    </div>
+</div>
+{include file="footer.htm"}

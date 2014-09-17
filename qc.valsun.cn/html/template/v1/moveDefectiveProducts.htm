@@ -1,0 +1,81 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/defectiveProducts.js"></script>
+<div class="fourvar">
+{include file="iqcnav.htm"}
+	            <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+</div>
+            <div class="servar">
+            </div>
+            <div class="main">
+                <form id="moveDefective" action="index.php?mod=defectiveProducts&act=updateDefectiveProducts" method="post" onsubmit="return submitUpdate();">
+                	<table cellspacing="0" width="100%">
+                            <tr>
+                                <td>
+                                    <span>不良品记录编号：</span><span style="color: red;">{$defectiveId}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>spu：</span><span style="color: red;">{$spu}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>sku：</span><span style="color: red;">{$sku}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>处理方式：</span><span style="color: red;">{if $type == 'scrapped'}报废{elseif $type == 'inter'}内部处理{elseif $type == 'return'}待退回{/if}</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>该不良品总数量：</span><span style="color: red;" id="defectiveNum">{$defectiveNum}</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>该不良品已处理数量：</span><span style="color: red;" id="processedNum">{$processedNum}</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>本次要处理数量：</span>
+                                	<input class="validate[required,custom[integer],min[1],max[{$leftNum}]] text-input" id="num" name="num" value="{$leftNum}"/>
+                                    <span id="numSpan" style="color: red;">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                	<input type="hidden" id="infoId" name="infoId" value="{$infoId}"/>
+                                    <input type="hidden" id="type" name="type" value="{$type}"/>
+                                    <input type="hidden" id="leftNum" name="leftNum" value="{$leftNum}"/>
+                                    <input type="hidden" id="defectiveId" name="defectiveId" value="{$defectiveId}"/>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>备注：</span>
+                                	<input id="note" name="note" value="不良品移至{if $type == 'scrapped'}报废{elseif $type == 'inter'}内部处理{elseif $type == 'return'}待退回{/if}"/>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <input type="submit" value="提交"/>
+                                	<input type="button" id="back" value="返回"/>
+                                </td>
+                            </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

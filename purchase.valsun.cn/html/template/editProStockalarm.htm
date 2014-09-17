@@ -1,0 +1,187 @@
+{include file="header.htm" title="编辑下单预警"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：
+		{if in_array($mod,array("editProStockAlarm"))}<a
+			href="index.php?mod=productStockalarm&act=index">采购下单预警管理</a>>>编辑下单预警内容{/if}
+	</div>
+</div>
+<div class="servar">
+
+	<table cellspacing="0" width="100%">
+		<tr>
+			<td>1,输入产品资料&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);"  id="save_all">保存</a></td>
+			<td></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr id="tr_table">
+			<td>
+				<table>
+					{foreach name=list1 from=$list item=listAlarm}
+					<tr>
+						<td>产品编号:<input type="hidden" id="goods_partnerid"
+							value="{$listAlarm['partnerid']}" /> <input type="hidden"
+							id="goods_id" value="{$listAlarm['id']}" /></td>
+						<td><input id='goods_sku' readonly
+							value="{$listAlarm['sku']}" />不可修改</td>
+					</tr>
+					<tr>
+						<td>产品名称:</td>
+						<td><input id='goods_goodsName'
+							value="{$listAlarm['goodsName']}" />*</td>
+					</tr>
+					<tr>
+						<td>产品成本:</td>
+						<td><input id='goods_goodsCost'
+							value="{$listAlarm['goodsCost']}" />元*</td>
+					</tr>
+					<tr>
+						<td>产品价格:</td>
+						<td><input id="goods_goods_price"  value="{$listAlarm['goods_price']}" />元*</td>
+					</tr>
+					<tr>
+						<td>产品单位:</td>
+						<td><input id="goods_goods_unit" value="{$listAlarm['goods_unit']}"/>*</td>
+					</tr>
+					<tr>
+						<td>产品货位号:</td>
+						<td><input id='goods_goods_location'
+							value="{$listAlarm['goods_location']}" />*</td>
+					</tr>
+					<tr>
+						<td>供应商:</td>
+						<td><select id="partner">
+								<option value="-1">请选择供应商</option> {foreach name=edit_partner
+								from=$listPartner item=liPartner }
+								<option value="{$liPartner['id']}" {if $listAlarm['partnerid'] eq $liPartner['id'] } selected  {/if}>{$liPartner['company_name']}</option>
+								{/foreach}
+						</select>*</td>
+					</tr>
+					<tr>
+						<td>产品销售人员:</td>
+						<td><select id="user" >
+								<option value="-1">请选择销售人员</option>
+								{foreach name=edit_user from=$listUser item=liUser }
+									<option value="{$liUser['id']}" {if $listAlarm['salesuser'] eq $liUser['id'] } selected {/if}>{$liUser['username']}</option>
+								{/foreach}
+						</select>*</td>
+					</tr>
+					<tr>
+						<td>产品备注:</td>
+						<td><textarea id="goods_goodsNote" cols="30" rows="3">{$listAlarm['goodsNote']}</textarea>*</td>
+					</tr>
+					{/foreach}
+				</table>
+			</td>
+	</table>
+</div>
+<!--
+            <div class="take-box">
+                <div class="take-header">
+                    <a href="javascript:void(0)"></a>
+                </div>
+                <div class="take-main">
+                    <span class="take-prompt">
+                        	
+                    </span>
+                    <a href="javascript:void(0)" class="take-def">
+                        确定
+                    </a>
+                    <span class="take-txt">
+                        恭喜你，注册成功。
+                    </span>
+                </div>
+            </div>
+            <div class="take">
+            </div>
+            -->
+{include file="footer.htm"}
+<input type="hidden" id="WEB_API" value="{$WEB_API}" />
+<input type="hidden" id="WEB_URL" value="{$WEB_URL}" />
+<script type="text/javascript">
+{literal}
+function getVarById(id){
+	return $("#WEB_API").val();
+}
+$("#tr_table td").css({"vertical-align":"top"});
+$("#tr_table td:first").css({ "width":"40%" });//控制表的样式
+//检查是否为数字格式
+function checkNum(){
+	var checkObj = $("#goods_goodsCost,#goods_goods_price");
+	var flag = true;
+	checkObj.each(function(i){
+		var self = $(this);
+		if(!isNum(self.val())){
+			var alertCont = self.closest("td").prev().text().replace(/:/g,"")+"是非数字";
+			alertify.error(alertCont);
+			self.focus(function(){
+				self.css({"border":"red solid 1px"});
+			});
+			self.focus();
+			flag = false;
+			return false;
+		}
+	});
+	return flag;
+}
+$("#save_all").click(function(){
+	var dataKey=[],dataVal=[],save,flag,save_add;
+	save=$("#tr_table input,#tr_table textarea,#tr_table select").not("#goods_sku,input[type='hidden']");
+	flag=true;
+	save.each(function(i){
+		self=$(this);
+		if(self.val()=='' || self.val()=="-1"){
+			self.css({"border-style":"none"});
+			alertCont=self.closest("td").prev().text();
+			alertCont=alertCont.replace(/:/,"");
+			if(self.val()=="-1"){
+				alertify.error(alertCont+"未选择");
+			}else{
+				alertify.error(alertCont+"不应为空");
+			}
+			self.css({"border":"red solid 1px"});
+			self.focus();
+			flag=false;
+			return false;
+		}
+	});
+	if(!flag){
+		return;
+	}
+	if(!checkNum()){
+		return false;
+	}
+	save_add=$("#goods_partnerid,#goods_id,#goods_sku");
+	save=save.add(save_add);
+	save.each(function(i){
+		self=$(this);
+		idName  =  self.attr("id");
+		dataKey.push(idName);
+		dataVal.push(self.val());
+	})
+	dataVal=dataVal.join("+++");
+	dataKey=dataKey.join("+++");
+// 	console.log(dataVal,dataKey);return;
+	$.get(getVarById("WEB_API")+"json.php?mod=productStockalarm&act=save_all",{ "dataVal":dataVal,"dataKey":dataKey },function(rtn){
+ 		if(rtn.errCode =="0105"){
+			alertify.success(rtn.errMsg);
+		}else{
+			alertify.error(rtn.errMsg);
+		}
+	},"jsonp");
+});
+function enterSave(e){
+	if(e.keyCode==13){
+		$("#save_all").trigger("click");
+		}
+}
+$(window).bind("keydown",enterSave);
+$("#goods_goodsNote").focus(function(){
+	$(window).unbind("keydown");
+});
+$("#goods_goodsNote").blur(function(){
+	$(window).bind("keydown",enterSave);
+});
+{/literal}
+
+</script>

@@ -1,0 +1,32 @@
+{include file="header.htm"}
+{include file="secendNav_tpl.htm"}
+{include file="thirdNav_alitpl.htm"}
+<link rel="stylesheet" href="./css/msg_tplform.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/tpledit.js"></script>
+<div class="maincontainer">
+	<div class="titlediv">
+		运输方式方式模板
+	</div>
+<form id="categoryform" action="index.php?mod=messageTemplate&act=aliAddNewShipTplSubmit" method="post" enctype ="multipart/form-data" >
+	<div class="inputline firstline">
+		<div class="line-left">账号：</div>
+		<div class="line-right">
+			<select name="aliaccount">
+			     <option value="0">请选择账号</option>
+			     {foreach $accountlist as $key=>$val}
+			     <option value="{$key}">{$val}</option>
+			     {/foreach}
+			</select>
+		</div>
+	</div>
+	<div class="inputline firstline">
+		<div class="line-left">文件：</div>
+		<div class="line-right">
+			<input name="tpl" type="file">
+		</div>
+	</div>
+	<button  class="submitbutton">提交</button>
+	<button type="button" onclick="window.location='index.php?mod=messageTemplate&act=aliShipingTemplate'" class="submitbutton">取消</button>
+</form>
+</div>
+{include file="footer.htm"}

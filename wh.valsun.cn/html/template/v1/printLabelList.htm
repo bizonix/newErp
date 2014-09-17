@@ -1,0 +1,97 @@
+{include file="header.htm"}
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./js/printLabel.js"></script>
+{include file='whNav.htm'}
+<div class="servar wh-servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="adjustPrint" style="">补标打印</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="lostPrint" style="">漏标打印</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="succeedLog" style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="errorLog" style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<br/>
+<div class="servar wh-servar">
+	
+    <!--form style="margin-left:25px" class="navbar-form pull-left" action="./index.php?act=printLabelList&mod=printLabel" method="POST"-->
+		&nbsp;&nbsp;&nbsp;打标员：&nbsp;&nbsp;&nbsp;<select class="queryformselect" style="width:130px" id="checkUser" name="checkUser">
+			<option value="">请选择</option>
+			{foreach from=$Marking_user item=list}
+				<option value="{$list.global_user_id}" {if $list.global_user_id==$checkUser}selected{/if}>{$list.global_user_name}</option>
+			{/foreach}</select>
+		
+        SKU:&nbsp;&nbsp;&nbsp;<input type="text" name="sku" value="{$sku}" id="sku" />
+		开始日期：&nbsp;&nbsp;&nbsp;<input name="start" type="text" value="{$start}" id="start" onclick="WdatePicker()" />
+		结束日期：&nbsp;&nbsp;&nbsp;<input name="end" type="text" id="end" value="{$end}" onclick="WdatePicker()" />
+		<button  id='pserch' value="" />搜 索</button>
+		<button id="delet" dtype="1" style="margin:0px 20px;">删除</button>
+        <button id="export_info">导出Excel</button>
+
+    <!--/form-->
+	<!--打印时分组的最大数量：&nbsp;&nbsp;&nbsp;<input type="text" name="max_num" id="max_num" value="" class="form-control "/>-->
+	
+	
+    <div style="clear: both;"></div>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="10%">全选：&nbsp;&nbsp;<input type="checkbox" id="allselect"/></td>
+                <td width="10%">sku</td>
+                <td width="10%">数量</td>
+				<td width="10%">到货库存</td>
+                <td width="10%">点货员</td>
+                <td width="10%">点货日期</td>
+				<td width="10%">录入员</td>
+                <td width="10%">打标员</td>
+                <td width="10%">打标日期</td>
+
+            </tr>
+        </thead>
+        
+        <tbody>
+        {foreach key=key_id from=$lists item=list}
+            <tr class="odd">	
+                
+                 <td width="10%"><input type="checkbox" name="ckbs" value="{$list.id}#{$list.sku}#{$list.num}#{$list.batchNum}" /></td>
+                 <td width="10%">{$list.sku}</td>
+                 <td width="10%">{$list.num}</td>
+				 <td width="10%">{$list.arrivalInventory}</td>
+                 <td width="10%">{$list.tallyUserId|getUserNameById}</td>
+                 <td width="10%">{$list.entryTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                 <td width="10%">{$list.entryUserId|getUserNameById}</td>
+				 <td width="10%">{$list.printerId|getUserNameById}</td>
+                 <td width="10%">{$list.printTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+   
+            </tr>
+         {/foreach}
+        </tbody>
+  
+    </table>
+</div>
+<div class="bottomvar">
+	<div class="texvar">
+	</div>
+	<div class="pagination">
+		{$pagestr}
+	</div>
+</div>
+<div id="adjust_print" title="补标打印页面" style="display:none;">
+	<form id="adjust_print" method="POST" action="" enctype="multipart/form-data">
+		<table id="show_tab" width="100%" border="1" cellpadding="0" cellspacing="0">
+			<thead><tr class="title"><td>sku</td><td>数量</td></tr></thead>
+			<tbody></tbody>
+		</table>
+	</form>
+</div>
+
+<div id="lost_print" title="漏标打印页面,请选择正确批次打印" style="display:none;">
+    <form id="lost_print" method="POST" action="" enctype="multipart/form-data">
+        <table id="show_tab_lost" width="100%" border="1" cellpadding="0" cellspacing="0">
+            <thead><tr class="title"><td><input type='checkbox'/></td><td>批次号</td><td>sku</td><td>数量</td></tr></thead>
+            <tbody></tbody>
+        </table>
+    </form>
+</div>
+{include file='footer.htm'}

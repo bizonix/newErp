@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>打印预览</title>
+<style media="print"> 
+.noprint { display: none } 
+</style> 
+<style type="text/css">
+<!--
+body {
+	margin: 0px;
+}
+.STYLE5 {font-size: 10px}
+-->
+</style>
+</head>
+<body>
+{foreach key=key_id from $lists item=list}
+
+<table width="420" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="200">
+    	<table width="100%" height="100" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+             <td height="10">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td height="50" style="border:1px solid #333;" valign="middle"><div style="text-align:center;padding:auto auto;margin:0px 0px;"><font size="4">标签分组号：{$first_id}</font></div></td>
+		  </tr>
+		  <tr>
+               <td height="40">&nbsp;</td>
+		  </tr>
+		</table>
+	
+	</td>
+	<td width="20"></td>
+	<td width="200">
+	
+    		<table width="100%" height="100" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+                <td height="10">&nbsp;</td>
+			  </tr>
+			  <tr>
+				<td height="50" valign="middle"><img src="http://192.168.200.200:9999/barcode128.class.php?data={$first_id}" alt="" width="200" height="45"/></td>
+			  </tr>
+               <tr><td height="40">&nbsp;</td></tr>
+			</table>
+
+	</td>
+  </tr>
+</table>	
+
+{section name=loop loop=$list.amount}
+
+{if n==($max_num*n+1)}
+<table width="420" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="200">
+    	<table width="100%" height="100" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+             <td height="10">&nbsp;</td>
+		  </tr>
+		  <tr>
+			<td height="50" style="border:1px solid #333;" valign="middle"><div style="text-align:center;padding:auto auto;margin:0px 0px;"><font size="4">标签分组号：{$list.group_id[n]}</font></div></td>
+		  </tr>
+		  <tr>
+               <td height="40">&nbsp;</td>
+		  </tr>
+		</table>
+
+	</td>
+	<td width="20"></td>
+	<td width="200">
+	
+    		<table width="100%" height="100" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+                <td height="10">&nbsp;</td>
+			  </tr>
+			  <tr>
+				<td height="50" valign="middle"><img src="http://192.168.200.200:9999/barcode128.class.php?data=<?php echo $id;?>" alt="" width="200" height="45"/></td>
+			  </tr>
+               <tr><td height="40">&nbsp;</td></tr>
+			</table>
+
+	</td>
+  </tr>
+</table>
+{/if}
+
+
+<table width="420" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="middle">
+    <td width="200">
+    	<table width="100%" height="100" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td width="117" height="10" align="center"><font size="1"><strong>Made In China</strong></font></td>
+			<td width="40" align="center"><font size="1"><strong><?php echo date("j/n");?></strong></font></td>
+			<td width="43" align="center"><font size="1"><strong><?php echo ($j+1);?>/<?php echo ($print_num);?></strong></font></td>
+		  </tr>
+		  <tr>
+			<td height="50" colspan="3" valign="middle"><img src="http://192.168.200.200:9999/barcode128.class.php?data=<?php echo $sql[$i]['goods_code'];?>" alt="" width="200" height="45"/></td>
+		  </tr>
+		  <tr>
+			<td height="40" colspan="3" align="center" valign="top"><font size="4"><strong><font size="4"><?php echo $sql[$i]['goods_sn'];?></font>&nbsp;&nbsp;
+			<?php 
+			if(strlen($sql[$i]['goods_sn']) > 12){
+				echo "<br>";
+			}
+			?>
+			<font size="3">仓:<?php echo $sql[$i]['goods_location'];?></font></strong></font></td>
+		  </tr>
+		</table>
+	</td>
+	<td width="20"></td>
+	<td width="200">
+	<?php if ($j+2<=$sql[$i]['check_count']){?>   	
+    		<table width="100%" height="100" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td width="117" height="10" align="center"><font size="1"><strong>Made In China</strong></font></td>
+				<td width="40" align="center"><font size="1"><strong><?php echo date("j/n");?></strong></font></td>
+				<td width="43" align="center"><font size="1"><strong><?php echo ($j+2);?>/<?php echo ($print_num);?></strong></font></td>
+			  </tr>
+			  <tr>
+				<td height="50" colspan="3" valign="middle"><img src="http://192.168.200.200:9999/barcode128.class.php?data=<?php echo $sql[$i]['goods_code'];?>" alt="" width="200" height="45"/></td>
+			  </tr>
+			  <tr>
+				<td height="40" colspan="3" align="center" valign="top"><font size="4"><strong><font size="4"><?php echo $sql[$i]['goods_sn'];?></font>&nbsp;&nbsp;
+				<?php
+    			if(strlen($sql[$i]['goods_sn']) > 12){
+					echo "<br>";
+				}
+				?>		
+				<font size="3">仓:<?php echo $sql[$i]['goods_location'];?></font></strong></font></td>
+			  </tr>
+			</table>
+		<?php }?>
+	</td>
+  </tr>
+</table>
+{/section}
+{/foreach}
+
+</body>
+</html>

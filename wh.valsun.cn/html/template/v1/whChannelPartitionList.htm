@@ -1,0 +1,42 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<div class="servar wh-servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button-normal" href="index.php?mod=whChannelPartition&act=add" >新增分渠道</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="30%">分渠道名称</td>
+                <td width="20%">运输方式</td>
+                <td width="20%">渠道</td>
+                <td width="10%">分渠道筒号</td>
+                <td width="20%" align="center">操作</td>
+            </tr>
+        </thead>
+        <!-- BEGIN list -->
+        <thead>
+        {foreach key=key_id from=$list item=vo}
+            <tr class="odd">	
+                 <input type="hidden" name="key_id" value="{$vo.id}" />
+                 <td  width="20%">{$vo.title}</td>
+                 <td  width="20%">{$vo.transportId}</td>
+                 <td  width="20%">{$vo.channelName}</td>
+                 <td  width="10%">{$vo.partition}</td>
+				 <td  width="20%" align="center">
+                     <a class="button-normal" href="index.php?mod=whChannelPartition&act=edit&id={$vo['id']}">编辑</a>
+                     &nbsp;|&nbsp; <a class="button-normal" onclick="return confirm('确定要删除{$vo.title}分区吗？');" href="index.php?mod=whChannelPartition&act=delete&id={$vo['id']}">删除</a>
+                 </td>
+            </tr>
+         {/foreach}
+        </thead>
+    <!-- END list -->
+    </table>
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}

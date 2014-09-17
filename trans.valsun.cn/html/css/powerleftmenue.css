@@ -1,0 +1,30 @@
+.power_lf_menue{
+    list-style: none;
+    width: 200px;
+    border-left:  #cccccc solid 1px;
+}
+.power_lf_menue li{
+    height: 50px;
+    line-height: 50px;
+}
+
+.power_lf_menue li:hover{
+    background-color: #006dcc;
+}
+
+.power_lf_menue li div{
+    width: 169px;
+    color: #666;
+    background-color:#eaf4f9;
+    padding-left: 25px;
+    height: 49px;
+    line-height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    border-bottom: #cccccc solid 1px;
+    border-right: #cccccc solid 1px;
+}
+.power_lf_menue li div a{
+    text-decoration: none;
+    color: #666
+}

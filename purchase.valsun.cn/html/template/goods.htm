@@ -1,0 +1,161 @@
+{include file="header.htm"}
+			<div  class="fourvar">
+            	<div class="pathvar">
+                	您的位置：<a href="index.php?mod=goods&act=goods_search_index">货品资料管理</a>&nbsp;>>&nbsp;货品清单
+                </div>
+				<div class="pagination">
+                	{$fpage}
+            	</div>
+            </div>
+            <div class="servar wh-servar">
+	<span>
+		<span>
+			<input name="searchContent" id="searchContent" value="{$smarty.get.searchContent}" size="50">
+			<input type="button" id="search" value="搜索">
+            <label>
+				<input name="searchtype" type="radio" value="1" {if $smarty.get.searchtype==1}checked="checked"{/if} {if empty($type)}checked="checked"{/if} />SKU
+			</label>
+		</span>
+            &nbsp;&nbsp;
+    <span style="color: red;"></span>
+    </span>
+	<div style="margin-top:10px;display:none">
+					<span style="width:60px;">产品状态：</span>
+					<select  name="online" id="online" style="width:100px">
+						<option value="">请选择</option>
+						<option value="0" {if $smarty.get.online ==="0"}selected{/if}>在线</option>
+						<option value="2" {if $smarty.get.online==2}selected{/if}>零库存</option>
+						<option value="3" {if $smarty.get.online==3}selected{/if}>停售</option>
+					</select>
+					<span style="width:60px;">新/老品：</span>
+					<select  name="isnew" id="isnew" style="width:100px">
+						<option value="">请选择</option>
+						<option value="1" {if $smarty.get.isnew==1}selected{/if}>新品</option>
+						<option value="0" {if $smarty.get.isnew==="0"}selected{/if}>老品</option>
+					</select>
+					<span style="width:60px;">类别：</span>
+					<select id="pid_one" style="width:100px" onchange="select_one1();">
+						<option value="">请选择</option>
+						{foreach from=$categoryList  item=list}
+							<option value="{$list.id}" {if $smarty.get.pid_one ==$list.id}selected{/if}>{$list.name}</option>
+						{/foreach}
+					</select>
+					<span id="div_two">
+						{if !empty($smarty.get.pid_one2)}
+						<select name='pid_one2' id='pid_one2' style='width:100px' onchange='select_one2();'>
+							<option value="">请选择</option>
+							{foreach from=$cate_two item=list}
+								<option value="{$list.id}" {if $smarty.get.pid_one2==$list.id}selected{/if}>{$list.name}</option>
+							{/foreach}
+						</select>
+						{/if}
+					</span>
+					<span id="div_three">
+						{if !empty($smarty.get.pid_one3)}
+							<select name='pid_one3' id='pid_one3' style='width:100px' onchange='select_one3();'>
+							<option value="">请选择</option>
+							{foreach from=$cate_three item=list}
+								<option value="{$list.id}" {if $smarty.get.pid_one3==$list.id}selected{/if}>{$list.name}</option>
+							{/foreach}
+							</select>
+						{/if}
+					</span>
+					<span id="div_four">
+						{if !empty($smarty.get.pid_one4) }
+							<select name='pid_one4' id='pid_one4' style='width:100px'>
+							<option value="">请选择</option>
+							{foreach from=$cate_four item=list}
+								<option value="{$list.id}" {if $smarty.get.pid_one4==$list.id}selected{/if}>{$list.name}</option>
+							{/foreach}
+							</select>
+						{/if}
+					</span>
+				</div>
+</div>
+<div class="main underline-main">
+	<table cellspacing="0" width="100%">
+		<tbody>
+        	<tr class="title purchase-title">
+				<td width="10%">图片</td>
+				<td align="left">sku</td>
+				<td>仓位</td>
+				<td>重量Kg</td>
+				<td>成本RMB</td>
+				<td>实际库存</td>
+				<td>虚拟库存</td>
+				<td>缺货库存</td>
+				<td>每天均量</td>
+				<td>产品类别</td>
+				<td>产品状态</td>
+				<td>新/老品</td>
+				<td>仓库</td>
+			</tr>	
+			{if !empty($goodsList)}
+			{foreach from = $goodsList key=key item=value}
+			<tr >
+                <td  rowspan="3"> 
+	               	<a href="javascript:void(0)" id="imgb-{$value.sku}" class="fancybox">
+						<img src=""  id="imgs-{$value.sku}" width="60"  height="60" class="skuimg" data-sku="{$value.sku}" data-spu="{$value.spu}">
+	               </a>
+                 </td>
+                <td align="left">{$value.sku}</td>
+                <td name="api_goodsCategory" data-goodscategory="1"></td>
+                <td>{$value.goodsWeight}</td>
+                <td>{$value.goodsCost}</td>
+                <td>{$value.actualStockCount}</td>
+                <td>{$value.availableStockCount}</td>
+                <td>{$value.availableStockCount-$value.shortageSendCount}</td>
+				<td>{$value.averageDailyCount}</td>
+				<td>{$categoryName}</td>
+				<td>{if $value.goodsStatus ==="0"}在线{elseif $value.goodsStatus ==1}下线{elseif $value.goodsStatus ==2}零库存{elseif $value.goodsStatus ==3}停售{elseif $value.goodsStatus ==4}部分停售{elseif $value.goodsStatus ==5}部分下线{elseif $value.goodsStatus ==6}缺货{elseif $value.goodsStatus ==7}无采购人{/if}</td>
+				<td>{if $value.isNew == 0}老品{else}新品{/if}</td>
+				<td>
+				{foreach from = $warehousList item = warehous}
+					{if $value.warehouseid == $warehous.id}
+						{$warehous.whName}	
+					{/if}
+				{/foreach}
+				</td>
+            </tr>
+            <tr >                    	     	              	
+                <td colspan="13" align="left">{$value.goodsName}</td>
+            </tr>
+            <tr >   	              	
+                <td colspan="4" align="left">采购员：{$value.global_user_name}</td>
+  			</tr>
+		{/foreach}			
+		{else}
+			<tr >
+					<td colspan="14">没有搜索值！</td>
+			</tr>
+		{/if}
+  		</tbody>
+    </table>
+</div>
+            <div class="bottomvar">
+            	<div class="pagination">
+                	{$pageStr}
+            	</div>
+            </div>
+{include file="footer.htm"}
+{literal}
+
+<script>
+$("#search").click(function(){
+	var searchContent,searchtype,online,warehouse,isnew,pid_one,url;
+	searchContent = $.trim($("#searchContent").val());
+	searchtype = $("input[name='searchtype']:checked").val();
+	url = "index.php?mod=goods&act=index";
+	window.location.href = url+"&searchContent="+searchContent+"&searchtype="+searchtype;
+});
+
+//全选反选入口
+$('#inverse-check').click(function(){
+  select_all('inverse-check','input[name="checkbox"]',0);
+});
+
+
+</script>
+{/literal}
+
+

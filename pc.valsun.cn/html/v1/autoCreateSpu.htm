@@ -1,0 +1,46 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+            </div>
+            <div class="main products-main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td align="left" colspan="2" style="font-size:16px; font-weight:bold; padding-left:15px;">
+                        生成SPU
+                        <span id="error" style="color: red;"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td align="right" width="10%">SPU前缀：</td>
+                        <td align="left">
+                        	{foreach $spuPrefixList as $value}
+                        	<label><input name="prefix" type="radio" value="{$value['prefix']}"/>{$value['prefix']}</label>
+                            {/foreach}
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td align="right">SPU：</td>
+                        <td align="left">
+                            <input id="createSpuText" name="createSpuText" type="text" value="" readonly="readonly" />
+                            <input id="sort" name="sort" type="hidden" value="" />
+                            <input id="prefixTmp" name="prefixTmp" type="hidden" value=""/>
+                            <input id="isSingSpu" name="isSingSpu" type="hidden" value=""/>
+                        </td>
+                    </tr>
+                </table>
+                <div align="center" style="padding-top:17px;" class="products-action">
+                	<input type="button" id="createSpu" value="自动生成"/>
+                    <input type="button" id="addSpu" value="添加"/>
+                    <input type="button" id="back" value="返回"/>
+                </div>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

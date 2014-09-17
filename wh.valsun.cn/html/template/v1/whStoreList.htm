@@ -1,0 +1,52 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whStoreList.js"></script>
+<div class="servar wh-servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button  id='warehouseAdd' />新增仓库</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="20%">仓库名称</td>
+                <td width="20%">仓库编码</td>
+                <td width="20%">仓库位置</td>
+				<td width="20%">仓库分布(仓库标签)</td>
+                <td width="20%" align="center">操作</td>
+                <!--td width="50%"></td-->
+            </tr>
+        </thead>
+        <!-- BEGIN list -->
+        <thead>
+        {foreach key=key_id from=$warehouseManagementArrList item=list}
+            <tr class="odd">	
+                 <input type="hidden" name="key_id" value="{$list.id}" />
+                 <td {if $list['status'] == 0}style="color:#999"{/if} width="20%">{$list.whName}</td>
+                 <td {if $list['status'] == 0}style="color:#999"{/if} width="20%">{$list.whCode}</td>
+                 <td {if $list['status'] == 0}style="color:#999"{/if} width="20%">{$list.whAddress}</td>
+                 <td {if $list['status'] == 0}style="color:#999"{/if} width="20%">{$list.whLocation}</td>
+				 <td width="20%" align="center">
+	                 <!--a href="index.php?mod=warehouseManagement&act=warehouseEdit&editId={$list['id']}">
+                	 <button  id='warehouseEdit' value="" />修改</button>
+                 	 </a-->
+                     <a href="index.php?mod=WhFloor&act=floorList&storeId={$list['id']}">
+                	 楼层设置
+                 	 </a> 
+                     <!--&nbsp;
+                     &nbsp;-->
+                    <!--input type="button" id = 'isEnabled' name = 'isEnabled' onclick="isEnabled('{$list['id']}',{$list['status']})" {if $list['status'] == 0}value="启用"{elseif $list['status'] == 1}value="停用"{/if} class="input_button" /-->	              
+                 </td>
+                 <!--td width="50%"></td-->                
+            </tr>
+         {/foreach}
+        </thead>
+    <!-- END list -->
+    </table>
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}

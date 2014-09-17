@@ -1,0 +1,96 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script type="text/javascript" src="./js/whRecManage.js"></script>
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+            <div class="servar wh-servar">
+    				<span>
+    					<label for="keyWord">关键字:</label>
+    					<input name="keyWord" id="keyWord" value="{$smarty.get.keyWord}"/>
+                        <select name="select" id="select">
+                            <option value='0' {if $smarty.get.select == 0}selected="selected"{/if}>请选择</option>
+                            <option value='1' {if $smarty.get.select == 1}selected="selected"{/if}>单据编码</option>
+                            <option value='2' {if $smarty.get.select == 2}selected="selected"{/if}>sku</option>
+                        </select>
+                        &nbsp;|&nbsp;
+                        <label for="reStatus">状态:</label>
+                        <select name="reStatus" id="reStatus">
+                            <option value='0' {if $smarty.get.reStatus == 0}selected="selected"{/if}>未完成</option>
+                            <option value='1' {if $smarty.get.reStatus == 1}selected="selected"{/if}>已完成</option>
+                        </select>
+                        &nbsp;|&nbsp;
+                        <label for="cStartTime">创建日期：</label>
+                        <input onclick="WdatePicker()" id='cStartTime' value='{$smarty.get.cStartTime}'/>
+                        &nbsp;至&nbsp;
+                        <input onclick="WdatePicker()" id='cEndTime' value='{$smarty.get.cEndTime}' />
+                        &nbsp;|&nbsp;
+                        <label for="eStartTime">审核日期：</label>
+                        <input onclick="WdatePicker()" id='eStartTime' value='{$smarty.get.eStartTime}'/>
+                        &nbsp;至&nbsp;
+                        <input onclick="WdatePicker()" id='eEndTime' value='{$smarty.get.eEndTime}' />
+
+                        <input class="input_button" type="button" id="search" value="搜索"/>
+						<!--button id="export">报表导出</button--></span>
+    				</span>
+                    &nbsp;&nbsp;
+                    <span style="color: red;">{$status}</span>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title" style="font-weight: bold;">
+                        <td>单据编号</td>
+						<td>单据编码</td>
+                        <td>状态</td>
+						<td>供应商</td>
+						<td>采购员</td>
+                        <td>审核日期</td>
+                        <td>订货备注</td>
+						<td>仓库</td>
+                        <td>创建时间</td>
+                    </tr>
+                    {foreach from=$whRecManageList item=value}
+                    <tr class="odd">
+                        <td>{$value.id}</td>
+                        <td>{$value.recordnumber}</td>
+						<td>{if $value.status == 4}已完成{else}未完成{/if}</td>            
+                        <td>{$value.partnerName}</td>
+                        <td>{$value.purchaseuser}</td>
+                        <td>{$value.aduittime|date_format:"Y-m-d"}</td>
+                        <td>{$value.note}</td>
+						<td>{$value.whName}</td>
+                        <td>{$value.addtime|date_format:"Y-m-d"}</td>
+                    </tr>
+                    
+                    <tr>
+            			<td colspan='4'></td>
+            			<td colspan="5">
+            				<table cellspacing="0" width="100%">
+            					<tr class="title">
+                                    <th>sku</th>
+									<th>订货数量</th>
+            						<th>到货数量</th>
+            						<th>订货金额</th>
+									<th>最后到货时间</th>
+            					</tr>
+            					{foreach from=$value.detail item=valueDetail }
+            					<tr style="text-align: center;background-color: #66FFFF;">
+                                    <td>{$valueDetail.sku}</td>
+                                    <td>{$valueDetail.count}</td>
+									<td>{$valueDetail.stockqty}</td>
+            						<td>{$valueDetail.price}</td>
+                                    <td>{$valueDetail.reach_time|date_format:"Y-m-d"}</td>
+            					</tr>
+            					{/foreach}
+            				</table>
+            			</td>
+            		</tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

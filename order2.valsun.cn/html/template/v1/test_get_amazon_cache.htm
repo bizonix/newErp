@@ -1,0 +1,26 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/omAccountList.js"></script>
+<br />
+<br />
+<br />
+<br />
+<script type="text/javascript">
+
+
+</script>
+<div align="center" class="main" >
+    <form action='index.php?mod=test&act=get_amazon_cache' method="post" id="omAddAccountList">
+    	<div>
+        	<label for="account" style="font-size:20px;">缓存内容：{$mydate}</label>
+            <textarea style="width:1200px;height:500px;" name="cache_content">{$cache_content}</textarea>
+          
+        </div>
+              <div>
+            <input type="submit" value="提交"/>
+            &nbsp;
+            <input type="button" id="back" value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.htm"}

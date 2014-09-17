@@ -1,0 +1,58 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+        您的位置：<a href="index.php?mod=partnerType&act=index">供应商类型管理</a>>>修改类型 
+    </div>     
+</div>
+<div class="main underline-main ">
+    <table width="75%" border="0" cellpadding="0" cellspacing="0"  class="products-action" >                        
+        <tr>
+            <td>类型名称</td><input name="category_id" type="hidden" id="category_id" value="{$category_id}">
+            <td><input name="category_name" type="text" id="category_name" value="{$category_name}"></td>                          
+        </tr> 			
+        <tr>        
+            <td><input name="editPartner" type="button" style="margin: 0;" value="保存" id="button_submit"></td>
+            <td colspan="3">&nbsp;</td>
+        </tr>
+    </table>              
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}
+
+<script>
+var web_api           = "{$WEB_API}";
+var category_name_old = "{$category_name}";
+
+{literal} 
+$('#button_submit').click(function(e){
+    e.preventDefault(); 
+    var category_id     = $.trim($('#category_id').val());       
+	var category_name   = $.trim($('#category_name').val()); 
+    if(category_name == '') {
+        alertify.alert('类型不能为空！');
+        return false;
+    }
+    if(category_name ==  category_name_old) {
+        alertify.alert('未对信息作任何更改！');
+        return false;
+    }
+      
+    var url  = "json.php?mod=partnerType&act=editPartnerType";
+    var data = { "category_id":category_id,"category_name":category_name};
+    $.post(url, data, function(rtn){        
+        console.log(rtn);
+        if(rtn.errCode == 0) { 
+            alertify.alert('修改成功！', function() {
+                window.location.reload(); 
+                });            
+        } else {
+            alertify.alert(rtn.errMsg); 
+        }                  
+     },"json");
+});
+
+{/literal}
+</script>
+
+            

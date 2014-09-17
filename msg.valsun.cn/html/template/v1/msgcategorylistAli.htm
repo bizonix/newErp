@@ -1,0 +1,46 @@
+{include file="header.htm"}
+{include file="secendNav_cat.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/categorylist.js"></script>
+
+<div class="topmenue">
+    <button onclick="window.location='index.php?mod=msgCategory&act=addNewCategoryAli'" class="msg_addcat">
+        添加分类
+    </button>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tbody>
+            <tr class="title">
+                <td width="3%">编号</td>
+                <td width="5%">分类名称</td>
+				<td width="15%">已读</td>
+				<td width="15%">未读</td>
+                <td width="20%">规则</td>
+                <td width="5%">所属账号</td>
+                <td width="5%">备注</td>
+                <td width="8%">操作</td>
+            </tr>
+			{foreach $categorylist as $catval }
+            <tr class="odd">
+                <td>{$catval.id}</td>
+                <td>{$catval.category_name}</td>
+				<td>
+					<a href="index.php?mod=messagefilter&act=getAliOrderList&catid={$catval.id}&status=1">订单留言（<span style="color:red;">{$catval.replyed_order}</span>)</a>
+					<a href="index.php?mod=messagefilter&act=getAliSiteList&catid={$catval.id}&status=1">站内信（<span style="color:red;">{$catval.replyed_site}</span>)</a>
+				</td>
+				<td><a href="index.php?mod=messagefilter&act=getAliOrderList&catid={$catval.id}&status=2">订单留言（<span style="color:red;">{$catval.noreply_order}</span>）</a>
+					<a href="index.php?mod=messagefilter&act=getAliSiteList&catid={$catval.id}&status=2">站内信（<span style="color:red;">{$catval.noreply_site}</span>）</a></td>
+                <td style="word-break: break-all;">{$catval.rules}</td>
+                <td >{$catval.ebay_account}</td>
+				<td>{$catval.ebay_note}</td>
+                <td>
+                	<button onclick="window.location='index.php?mod=msgCategory&act=addNewCategoryAli&cid={$catval.id}'" class="update" pid="1">修改</button>
+					<button onclick="deletecategory({$catval.id})" class="update" pid="1">删除</button>
+				</td>
+            </tr>
+			{/foreach}
+        </tbody>
+    </table>
+</div>
+{include file="footer.htm"}

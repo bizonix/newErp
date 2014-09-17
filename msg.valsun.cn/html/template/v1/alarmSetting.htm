@@ -1,0 +1,34 @@
+{include file="header.htm"} {include file="secendNav_localpower.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css"
+	media="screen" />
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+
+<div class="main">
+    <form method="post" action="index.php?mod=localPower&act=alarmDataSubmit">
+	    <div style="padding-top:15px;">
+	        <span style="font-size:30px;padding-left:30px;">账号:{$account}</span>
+	        <input type="hidden" name="account" value="{$account}">
+	    </div>
+		<div style="margin-top:30px;padding-left:30px; margin-bottom:20px;">
+		       设定模式:
+		  <select name="mode">
+	        <option {if $setting.mode == 1}selected="selected"{/if} value="1">单次模式</option>
+	        <option {if $setting.mode == 2}selected="selected"{/if}  value="2">循环模式</option>
+		  </select>
+		  推送时间:<input type="text" name="pushtime" value="{$setting.time}" onClick="WdatePicker()" >
+		</div>
+		<div style="margin-left:30px;"">
+		   <input {if in_array(1, $setting.days) }checked='checked'{/if} name="days[]" type="checkbox" value="1">星期一
+		   <input {if in_array(2, $setting.days) }checked='checked'{/if} name="days[]" type="checkbox" value="2">星期二
+		   <input {if in_array(3, $setting.days) }checked='checked'{/if} name="days[]" type="checkbox" value="3">星期三
+		   <input {if in_array(4, $setting.days) }checked='checked'{/if} name="days[]" type="checkbox" value="4">星期四
+		   <input {if in_array(5, $setting.days) }checked='checked'{/if} name="days[]" type="checkbox" value="5">星期五
+		   <input {if in_array(6, $setting.days) }checked='checked'{/if} name="days[]" type="checkbox" value="6">星期六
+		   <input {if in_array(7, $setting.days) }checked='checked'{/if} name="days[]" type="checkbox" value="7">星期天
+		</div>
+		<div style="text-align:center">
+		  <input type="submit" value="提交">
+		</div>
+	</form>
+</div>
+{include file="footer.htm"}

@@ -1,0 +1,11 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_contactPosition.js"></script>
+		<div id="mstatus" class="floatright" style="margin-bottom:5px;"></div>
+		<div class="floatleft">
+            <span>旧仓位: </span><input id="old_position" name="old_position" type="text"class="textinput" onkeydown="check_old_position();"/>
+        </div>
+		<div class="floatleft" style="margin-top: 10px;">
+        	<span>新仓位 : </span><input id="new_position" name="new_position" type="text" class="textinput" onkeydown="check_new_position()" />
+        </div>
+        <input type='hidden' id="old_positionId"/>
+{include file="footer.htm"}

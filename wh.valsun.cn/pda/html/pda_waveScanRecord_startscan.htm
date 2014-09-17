@@ -1,0 +1,202 @@
+{include file='header.htm'}
+
+<style>
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}	
+#detail table { width:195px; }
+#detail table td { border:1px solid #ccc; text-align:center; line-height:16px; }
+.readynum { width:50px; }
+.sku { width:110px; }
+.qtyrow { display:none; }
+.wavenum { width:155px; float:left; }
+.op { width:40px; float:left; }
+.header { width:195px; }
+.header div { height:25px; line-height:25px; float:left; margin:0px; padding:0px; }
+.detaillist { height:80px; overflow-x:hidden; width:220px; overflow-y:scroll; }
+.td1 { width:90px; overflow:hidden; }
+.td2 { width:30px; overflow:hidden; }
+.td3 { width:30px; overflow:hidden; }
+.td4 { width:40px; overflow:hidden; }
+</style>
+<div id="divcontent" style="height:200px;width:225px;">
+	<div id="errorInfo" style="color:#ff0000;line-height:20px;"><span></span></div>
+    <div style="padding-left:5px; line-height:25px; margin-bottom:5px;"><table>
+     	<tr><td>配货单号 </td><td><input name="waveId" id="waveId" class="waveId" onkeypress="waveKeypress()" value="{$waveId}" type="text" ></td></tr>
+        <tr><td>SKU</td><td><input name="sku" id="sku" class="sku" onkeypress="scanSku()" type="text" > <input disabled="disabled" id="cfmfinished" class="cfmfinished" onclick="cfmfinished()" type="button" value="完结"></td></tr>
+        <tr class="qtyrow" id="qtyrow"><td>数量</td><td><input name="readynum" class="readynum" id="readynum" type="text" ><input onclick="saveScan()" type="button" value="确认"></td></tr>
+    </table>
+    </div>
+    <div id="detail">
+    	<div class="header">
+    		<div class="td1">SKU</div><div class="td2">总数</div><div class="td3">已配</div><div class="td4">仓位</div>
+    	</div>
+    	<div class="detaillist">    	
+		    <table>
+		    	{foreach $skulist as $sku}
+		    	<tr><td class="skuitem {if $sku.scanStatus == 1}skuitemfinished{/if} td1" id="sku_{$sku.skucode}" {if $sku.scanStatus == 1}style="color:red;"{/if} skucode="{$sku.skucode}" onclick="setSkuItem('{$sku.skucode}')" realSku="{$sku.sku}" skuAmount="{$sku.skuAmount}" skuReady="{$sku.amount}" rid="{$sku.id}">{$sku.sku}</td><td class="td2">{$sku.skuAmount}</td><td class="td3">{$sku.amount}</td><td class="td4">{$sku.pName}
+		    		<input type="hidden" name="realsku_{$sku.sku}" id="realsku_{$sku.sku}" value="{$sku.skucode}">
+		    	</td></tr>
+		    	{/foreach}
+		    </table>
+		</div>
+    </div>
+</div>
+<script type="text/javascript">
+var waveId = '{$waveId}';
+var sku = '';
+
+function fuc_onload(){
+}
+function showInfo(msg){
+	var info = document.getElementById('errorInfo');
+	if(msg == ''){
+		info.style.display = 'none';
+	}else{
+		info.style.display = 'block';
+		info.innerHTML = '<span>'+msg+'</span>';
+	}
+}
+
+function activeSku(msg){
+	var skuInput = document.getElementById("sku");
+	skuInput.disabled = false;
+	skuInput.value = '';
+	sku = '';
+	skuInput.focus();
+	showInfo(msg);
+}
+
+function cfmfinished(){
+	var waveInput = document.getElementById("waveId");
+	var re = document.getElementById('sku_'+sku);
+	var rid = re.getAttribute('rid');
+	var waveId = waveInput.value;
+	showInfo('正在完结，请稍候.');
+	var url = "index.php?mod=pda_waveScanRecord&act=finished";
+	ajax(url, "id="+rid+"&waveId="+waveId, function(response){
+		if(response.status==1){
+			location.reload();
+		}else{
+			activeSku(response.msg);
+		}
+		hideinput();
+	});
+}
+
+function hideinput(){
+	var input = document.getElementById('qtyrow');
+	input.style.display = 'none';
+}
+
+function showinput(){
+	var input = document.getElementById('qtyrow');
+	input.style.display = 'block';
+}
+
+function saveScan(){
+	var waveInput = document.getElementById("waveId");
+	var re = document.getElementById('sku_'+sku);
+	if(re == undefined){
+		showInfo('配货ID错误');
+		return false;
+	}
+	var readynumInput = document.getElementById("readynum");
+	var rid = re.getAttribute('rid');
+	var neednum = parseInt(re.getAttribute('skuAmount'));
+	var readynum = readynumInput.value;
+	var realSku = re.getAttribute('realSku');
+	var waveId = waveInput.value;
+	showInfo(realSku+'正在配货,请稍候.');
+	var url = "index.php?mod=pda_waveScanRecord&act=savescan";
+	var data = "id="+rid+"&waveId="+waveId+"&neednum="+neednum+"&readynum="+readynum+"&sku="+sku;
+	ajax(url, data, function(response){
+		if(response.status==1){
+			location.reload();
+		}else{
+			activeSku(response.msg);
+		}
+		hideinput();
+	}, 'json');
+}
+
+function waveKeypress(ev){
+	ev = ev || window.event;
+	if(ev.keyCode==13){
+		var waveInput = document.getElementById("waveId");
+		var waveId = waveInput.value;
+       	if(waveId != ''){
+       		window.location.href="index.php?mod=pda_waveScanRecord&act=startscan&waveId="+waveId;
+       	}else{
+       		return false;	
+       	}
+    }
+}
+
+function setSkuItem(skucode){
+	var skutd = document.getElementById('sku_'+skucode);
+	var skuobj = document.getElementById('sku');
+	skuobj.value = skutd.getAttribute('realSku');
+	sku = skucode;
+	document.getElementById('cfmfinished').disabled = false;
+}
+
+function scanSku(ev){
+	ev = ev || window.event;
+	if(ev.keyCode != 13){
+		return true;
+	}
+	hideinput();
+	showInfo('');
+	if(ev.keyCode==13){
+		var skuobj = document.getElementById('sku');
+		var waveInput = document.getElementById("waveId");
+		sku = skuobj.value;
+		waveId = waveInput.value;
+		if(document.getElementById('realsku_'+sku) != undefined){
+			sku = document.getElementById('realsku_'+sku).value;
+		}
+		var re = document.getElementById('sku_'+sku);
+		if(re == undefined){
+			
+			showInfo(sku+'料号错误，不在配货列表中');
+			skuobj.value = '';
+			skuobj.focus();
+			return false;
+		}
+		var rid = re.getAttribute('rid');	
+		var neednum = parseInt(re.getAttribute('skuAmount'));
+		var readynum = parseInt(re.getAttribute('skuReady'));
+		var realSku = re.getAttribute('realSku');
+		skuobj.value = realSku;
+		readynum = neednum - readynum;
+		if(readynum <= 0){
+			activeSku(realSku+'已完成配货.');
+			return false;
+		}
+		skuobj.disabled = true;
+		if(neednum > 1){
+			var readyobj = document.getElementById('readynum');
+			readyobj.value = readynum;
+			showinput();
+			readyobj.focus();
+			return false;
+		}
+		showInfo(realSku+'正在配货,请稍候.');
+		var url = "index.php?mod=pda_waveScanRecord&act=savescan";
+		var data = "id="+rid+"&waveId="+waveId+"&neednum="+neednum+"&readynum="+readynum+"&sku="+sku;
+		ajax(url, data, function(response){
+			if(response.status==1){
+				location.reload();
+			}else{
+				activeSku(response.msg);
+			}
+		});
+	}
+}
+
+document.getElementById('sku').focus();
+
+</script>
+{include file='footer.htm'}

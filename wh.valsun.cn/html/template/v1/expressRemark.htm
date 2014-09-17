@@ -1,0 +1,73 @@
+<html>
+<head></head>
+<body>
+	<div style="height:440px;overflow:auto">
+		<div>
+			<h2>FedEx备注【总金额：{if $type == 1}{$total}{else if}0{/if}】</h2>
+		</div>
+		<table>
+			<tr>
+				<th nowrap="nowrap" scope="col">申报单价(数字)</th>
+				<th nowrap="nowrap" scope="col">数量(数字)</th>
+				<th nowrap="nowrap" scope="col">海关编码(不能为空)</th>
+				<th nowrap="nowrap" scope="col">品牌备注(没的可不填)</th>
+				<th nowrap="nowrap" scope="col">描述(不能含有中文)</th>
+			</tr>
+			{if $type == 1}
+				{foreach $data as $value}
+					<tr>
+						<td><input type="text" value="{$value.price}"></td>
+						<td><input type="text" value="{$value.amount}"></td>
+						<td><input type="text" value="{$value.hamcodes}"></td>
+						<td><input type="text" value="{$value.price}"></td>
+						<td>
+							<input type="checkbox" {if $value.isBrand == 1} checked {/if} name="brand">是否有牌
+							<input type="text" value="{if $value.isBrand == 1}{$value.branddescrip}{/if}" name="branddescrip[]">
+						</td>
+						<td><textarea rows="3" cols="35">{$value.description}</textarea></td>
+					</tr>
+				{/foreach}
+			{else if}
+					<tr>
+						<td><input type="text" value=""></td>
+						<td><input type="text" value=""></td>
+						<td><input type="text" value=""></td>
+						<td><input type="text" value=""></td>
+						<td>
+							<input type="checkbox" name="brand">是否有牌
+							<input type="text" value="" name="branddescrip[]">
+						</td>
+						<td><textarea rows="3" cols="35"></textarea></td>
+					</tr>
+			{/if}
+		</table>
+		<hr>
+		<div>
+			<h2>DHL备注【总金额：{if $type == 2}{$total}{else if}0{/if}】</h2>
+		</div>
+		<table>
+			<tr>
+				<th nowrap="nowrap" scope="col">申报单价(数字)</th>
+				<th nowrap="nowrap" scope="col">数量(数字)</th>
+				<th nowrap="nowrap" scope="col">描述(不能含有中文)</th>
+			</tr>
+			{if $type == 2}
+				{foreach $data as $value}
+					<tr>
+						<td><input type="text" value="{$value.price}"></td>
+						<td><input type="text" value="{$value.amount}"></td>
+						<td><input type="text" value="{$value.hamcodes}"></td>
+						<td><textarea rows="3" cols="35">{$value.description}</textarea></td>
+					</tr>
+				{/foreach}
+			{else if}
+					<tr>
+						<td><input type="text" value=""></td>
+						<td><input type="text" value=""></td>
+						<td><input type="text" value=""></td>
+						<td><textarea rows="3" cols="35"></textarea></td>
+					</tr>
+			{/if}
+		</table>
+	</div>
+</body>

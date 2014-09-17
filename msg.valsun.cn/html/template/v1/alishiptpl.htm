@@ -1,0 +1,35 @@
+{include file="header.htm"}
+{include file="secendNav_tpl.htm"}
+{include file="thirdNav_alitpl.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./css/page.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/tpllist.js"></script>
+
+<div class="topmenue">
+    <button onclick="window.location='{$addurl}'" class="msg_addcat">
+        添加模板
+    </button>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tbody>
+            <tr class="title">
+                <td>模板名称</td>
+                <td>所属账号</td>
+                <td>名称</td>
+                <td>操作</td>
+            </tr>
+			{foreach $tpllist as $tplval }
+            <tr class="odd">
+                <td>{$tplval.name}</td>
+                <td>{$tplval.account}</td>
+                <td>{$tplval.accountname}</td>
+                <td>
+					<button onclick="deleteshiptpl({$tplval.id})" class="update" pid="1">删除</button>
+				</td>
+            </tr>
+			{/foreach}
+        </tbody>
+    </table>
+</div>
+{include file="footer.htm"}

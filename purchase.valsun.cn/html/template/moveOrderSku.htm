@@ -1,0 +1,197 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">                
+    	您的位置：<a href="index.php?mod=purToWh&act=index">采购管理</a>>>订单料号到货数量跨订单迁移
+    </div>     
+</div>            
+<div class="main underline-main">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style=" text-align:inherit; " >
+    <tr>
+        <td style="font-size:20px;">订单号</td>
+        <td>
+			<input name="txt_ordersn" type="text" id="txt_ordersn" style="font-size:24px;" size="15" />
+		</td> 
+		<td style="font-size:20px;">料号</td>
+		<td><input name="txt_sku" type="text" id="txt_sku" style="font-size:24px;" size="10"/></td>
+		<td style="font-size:20px;">订货日期</td>
+		<td><input name="txt_addtime" type="text" id="txt_addtime" size="8" disabled="disabled" style="font-size:24px;"/></td>    
+		<td style="font-size:20px;">供应商</td>
+		<td><input name="txt_parnter" type="text" id="txt_parnter" disabled="disabled" style="font-size:24px;"/></td>    
+		<td style="font-size:20px;">到货数量</td>
+		<td><input name="txt_count" type="text" id="txt_count" size="5" disabled="disabled" style="font-size:24px; color:#006600"/></td>      
+    </tr>
+	<tr id="sign" style="display:none">
+		<th></th>
+		<th>订单号</th>
+        <th>料号</th>
+        <th>供应商</th>
+		<th>订货日期</th>
+        <th>订货数量</th>
+		<th>已入库数量</th>
+		<th colspan="3">迁入数量</th>
+    </tr>
+	<tr>
+		<td>
+			<input name="addInfo" type="button" value="提交" id="btn_submit" style="font-size:24px;" />
+		</td>
+		<td colspan="9"></td>
+	</tr>
+	<tr>
+		<td colspan="10" style="color:#FF0000">
+			操作方法:<br/>
+			一、录入需要迁出到货数量的订单号回车<br/>
+			二、录入需要迁出到货数量的料号回车,系统自动列出满足迁移条件的订单料号信息<br/>
+			三、勾选需要迁入的订单料号选择框,录入迁移数量<br/>
+			四、点击提交按钮完成迁移操作<br/>
+			注:迁入数量与已入库数量之和不能超过订货数量,总迁移数量不能大于被迁移订单料号的到货数量
+		</td>
+	</tr>
+</table>                      
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}
+
+<script>
+{literal}
+$(document).ready(function(){
+	$('#txt_ordersn').focus();
+})
+$('#txt_ordersn').keydown(function(event){
+	if(event.keyCode == 13){ 
+		var ordersn = $('#txt_ordersn').val();
+		if(ordersn == ''){
+			alertify.error('订单号不能为空');
+			$('#txt_ordersn').focus();
+			return false;
+		}else{
+			$('#txt_sku').focus();
+		}
+	}
+})
+
+$('#txt_sku').keydown(function(event){
+	if(event.keyCode == 13){ 
+		var ordersn = $('#txt_ordersn').val();
+		var sku 	= $('#txt_sku').val();
+		var html    = 0;
+		var len     = 0;
+		if(ordersn == ''){
+			alertify.error('订单号不能为空');
+			$('#txt_ordersn').focus();
+			return false;
+		}else{
+			if(sku == ''){
+				alertify.error('料号不能为空');
+				$('#txt_sku').focus();
+				return false;
+			}else{
+				var url  = "json.php?mod=purToWh&act=getMoveOrderSkuInfo";
+				$('.orderinfo').remove();
+				$.post(url, {"ordersn":ordersn, 'sku':sku}, function(rtnData){  
+					if(rtnData['code'] == 404 || rtnData['code'] == 403){
+						alertify.error(rtnData['msg']);
+						$('#txt_count').val('');
+						$('#txt_addtime').val('');
+						$('#txt_parnter').val('');
+					}else{
+						var info 	 = rtnData['msg'];
+						var stoInfo  = info[0];
+						var dataInfo = info[1];
+						$('#txt_count').val(stoInfo['stockqty']);
+						$('#txt_addtime').val(stoInfo['addtime']);
+						$('#txt_parnter').val(stoInfo['company_name']);
+						$.each(dataInfo ,function(i,item){
+							var ii = i+1;
+							len    = ii;
+							html += '<tr class="orderinfo"><td><input type="checkbox" class="skulist" value="'+item.detailid+'" data-purcount="'+item.count+'" data-incount="'+item.stockqty+'" data-recordnumber="'+item.recordnumber+'" /></td><td>'+item.recordnumber+'</td><td>'+item.sku+'</td><td>'+item.company_name+'</td><td>'+item.addtime+'</td><td>'+item.count+'</td><td>'+item.stockqty+'</td><td colspan="3"><input type="text" id="putincount'+item.detailid+'" size="5" /></td></tr>';
+						})
+						$('#sign').show();
+						$('#sign').after(html);
+					}
+				},'json')   
+			}
+		}
+	}
+})
+
+$('#btn_submit').click(function(e){
+   var dataArr   		= [];
+   var checkboxs 		= $('.skulist:checked');
+   var regqty    		= /^[0-9]+$/;
+   var stockqty         = $('#txt_count').val();//到货数量
+   var ordersn     		= $('#txt_ordersn').val();
+   var sku         		= $('#txt_sku').val();
+   var totalputincount 	= 0;//总迁移数量
+   var mark             = 'on';
+   if(checkboxs.length == 0){
+   		alertify.error('请选择迁移的订单料号');
+		return false;
+   }
+   $.each(checkboxs,function(i,item){
+		var obj = {};
+		var detailid    = $(item).val();
+		var purcount 	= $(item).data('purcount');//订货数量
+		var incount  	= $(item).data('incount');//已入库数量
+		var recordnumber = $(item).data('recordnumber');//迁入订单号
+		var putincount 	= $.trim($('#putincount'+detailid).val());//转入数量
+		if(putincount == '' || !regqty.test(putincount)){
+			alertify.error('迁入数量为空或格式错误');
+			$('#putincount'+detailid).focus();
+			mark = 'off';
+			return false;
+		}else{
+			putincount = parseInt(putincount);
+			purcount   = parseInt(purcount);
+			incount    = parseInt(incount);
+			diffnum    = purcount - (putincount + incount);
+			if(putincount == 0){
+				alertify.error('请录入迁入数量');
+				$('#putincount'+detailid).focus();
+				mark = 'off';
+				return false;
+			}
+			if(diffnum < 0){
+				alertify.error('已入库数量加迁入数量大于订货数量');
+				$('#putincount'+detailid).focus();
+				mark = 'off';
+				return false;
+			}else{
+				totalputincount += putincount;
+				obj.detailid 	 = detailid;
+				obj.recordnumber = recordnumber;
+				obj.incount  	 = incount;
+				obj.putincount 	 = putincount;
+				dataArr.push(obj);
+			}
+		}
+	});
+	if(mark == 'off'){
+		return false;
+	}
+	if(totalputincount > stockqty){
+		alertify.error('总迁入数量大于到货数量');
+		return false;
+	}else{
+		var url  = "json.php?mod=purToWh&act=moveOrderSku"; 
+		alertify.confirm('确认跨订单迁移到货数量？', function (e) {
+			if(e){
+				$.post(url, {"ordersn":ordersn, "sku":sku, "stockqty":stockqty, "outtotalamount":totalputincount, "dataArr":dataArr} , function(rtn){
+					var code = rtn.code;
+					var msg  = rtn.msg;
+					if(code == 200){
+						alertify.success(msg);
+						window.setTimeout("window.location.reload()", 2000);
+					}else{
+						alertify.error(msg);
+					}
+				},'json');
+			}
+		})
+	}
+});
+
+{/literal}
+</script>
+
+            

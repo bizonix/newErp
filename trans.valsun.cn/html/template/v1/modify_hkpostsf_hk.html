@@ -1,0 +1,68 @@
+{header}
+<script type="text/javascript" src="./js/shipfee.js"></script>	
+<link rel="stylesheet" href="css/transportlist.css">
+{navdiv}	
+				<!-- Main Content -->
+				<div id="content">
+					<div id="main1">
+					<h1>{operate}</h1>
+					<div class="pad20">
+					<!-- Big buttons -->
+						<form id="formID" name="formID" method="post" action="" >
+							<input  type="hidden" id="hidden" value="{id}">
+							<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+								<tbody>
+									<tr class="odd">
+										<td>分组</td>
+										<td><input class="validate[required]" name="groupName" type="text" id="groupName" value="{groupName}" /><span id="channelName_err" color="red"></span></td>
+									</tr>
+									<tr class="odd">
+										<td>渠道名称</td>
+										<td><input disabled="disabled" name="channelName" type="text" id="channelName" value="{channelName}" /><span id="channelName_err" color="red"></span></td>
+									</tr>
+									<tr class="odd">
+										<td>国家列表</td>
+										<td><textarea id="countries">{countries}</textarea></td>
+									</tr>
+								    <tr class="odd">
+										<td>首重</td>
+										<td><input class="validate[required]" name="firstweight" type="text" id="firstweight" value="{firstweight}"></td>
+									</tr>
+							   		<tr class="odd">
+										<td>nextweight</td>
+										<td><input name="nextweight" type="text" id="nextweight" value="{nextweight}"></td>
+									</tr>
+								
+
+                                    <tr class="odd">
+										<td>手续费</td>
+										<td><input name="handlefee" type="text" id="handlefee" value="{handlefee}"></td>
+									</tr>
+                                    
+								 
+
+									
+										<td colspan="2">
+											<input type="button" value="提交" id="modify_hkpostsf_hk"/>
+											<input type="button" value="返回" id="back"/>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+						
+					</div>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					</div>
+				</div>
+				<!-- End of Main Content -->
+	
+				
+			</div>
+			<!-- End of bgwrap -->
+		</div>
+		<!-- End of Container -->
+		
+{footer}
+

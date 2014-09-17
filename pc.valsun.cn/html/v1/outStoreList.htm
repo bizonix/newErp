@@ -1,0 +1,111 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/iostore.js"></script>
+<script type="text/javascript" src="./js/publicDatePicker/WdatePicker.js"></script>
+<div class="fourvar">
+                <div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+            					  <span>SPU：
+								   <input name="spu" type="text" id="spu" value="{$smarty.get.spu}"/>
+								   </span>
+                                   <span>|&nbsp;用途类型：
+								   <select name="useTypeId" id="useTypeId" >
+								    <option value="0" > </option>
+									<option value="1" {if $smarty.get.useTypeId == 1}selected='selected'{/if}>产品制作</option>
+									<option value="2" {if $smarty.get.useTypeId == 2}selected='selected'{/if}>产品修改</option>
+								  </select>   
+								   </span>
+								   <span>|&nbsp;审核状态：
+								   <select name="isAudit" id="isAudit" >
+								    <option value="0" > </option>
+									<option value="1" {if $smarty.get.isAudit == 1}selected='selected'{/if}>待审核</option>
+									<option value="2" {if $smarty.get.isAudit == 2}selected='selected'{/if}>审核通过</option>
+                                    <option value="3" {if $smarty.get.isAudit == 3}selected='selected'{/if}>审核不通过</option>
+								  </select>   
+								   </span>
+                                   <span>|&nbsp;仓库：
+								   <select id="whId" >
+                                   {foreach getWhInfo() as $value}
+									<option value="{$value['id']}" {if $smarty.get.whId == $value['id']}selected='selected'{/if}>{$value['whName']}</option>
+                                   {/foreach}
+								  </select>
+                                  </span>                                                                    
+            </div>
+            <div class="servar products-servar">
+                <span>
+                    开始时间：
+    	           <input name="startdate" type="text" id="startdate" onClick="WdatePicker()" value="{$smarty.get.startdate}"/>	  
+            	    结束时间：
+            	   <input name="enddate" type="text" id="enddate" onClick="WdatePicker()" value="{$smarty.get.enddate}" />
+                </span>
+               <span><button id='seachOutStoreList'>搜索</button></span>
+                &nbsp;
+    			<span style="color: red;">{$smarty.get.status}</span>
+              </div>
+              
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                            <td>单据编码</td>
+							
+							<td>用途类型</td>
+                            <td>添加人</td>
+                            <td>添加时间</td>
+                            <td>审核状态</td>
+							<td>审核人</td>
+                            <td>审核时间</td>
+                            <td>产品部确认状态</td>
+                            <td>确认人</td>
+                            <td>确认时间</td>
+                            
+                            <td>仓库</td>
+							<td>详细</td>    
+                    </tr>
+                    {foreach $outStoreList as $value}
+                                <tr>
+                                    <td>{$value['ordersn']}</td>
+                                    
+									<td>{if $value['useTypeId'] == 1}产品制作{elseif $value['useTypeId'] == 2}产品修改{/if}</td>
+                                    <td>{getPersonNameById($value['addUserId'])}</td>
+                                    <td>{if !empty($value['createdTime'])}{$value['createdTime']|date_format:"Y-m-d H:i"}{/if}</td>
+                                    <td>{if $value['isAudit'] == 1}待审核{elseif $value['isAudit'] == 2}审核通过{elseif $value['isAudit'] == 3}审核不通过{/if}</td>
+                                    <td>{getPersonNameById($value['auditorId'])}</td>
+                                    <td>{if !empty($value['auditTime'])}{$value['auditTime']|date_format:"Y-m-d H:i"}{/if}</td>
+                                    <td>{if $value['isComfirm'] == 1}未确认{elseif $value['isComfirm'] == 2}已确认{/if}</td>
+                                    <td>{getPersonNameById($value['comfirmUserId'])}</td>
+                                    <td>{$value['comfirmTime']|date_format:"Y-m-d H:i"}</td>
+                                                              
+                                    <td>{$value['whName']}</td>
+                                    <td>
+                                        {if isAccessAll('products','getOutStoreDetailList') == true}
+										<input type="button" onclick="window.location.href = 'index.php?mod=products&act=getOutStoreDetailList&iostoreId={$value['id']}'" value="详细"/>
+                                        {/if}
+                                        {if isAccessAll('products','deleteIoStore') == true && $value['isAudit'] == 1}
+                                        <input type="button" onclick="if(confirm('确认删除？')) { window.location.href = 'index.php?mod=products&act=deleteIoStore&id={$value['id']}';}" value="删除"/>
+                                        {/if}
+                                    </td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachOutStoreList').click(); 
+			}        
+        });       
+</script>

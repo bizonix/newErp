@@ -1,0 +1,159 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="./js/fancybox.js"></script>
+<script language="javascript" src="js/inventory.js"></script>
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script type="text/javascript" src="./js/ui/jquery-ui.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+<div class="servar wh-servar" style="padding:14px;">
+    <a class="gdhref" href="index.php?mod=waveInfoManage&act=index&storey=10">10楼配货单</a>
+	<a class="gdhref" href="index.php?mod=waveInfoManage&act=index&storey=9">9楼配货单</a>
+    <a class="gdhref" href="index.php?mod=waveInfoManage&act=index&storey=8">8楼配货单</a>
+</div>
+<br/>
+<div class="fourvar order-fourvar feedback-fourvar products-servar wh-fourvar">
+    <form id="queryform" method="get" class="queryform">
+    <input name='mod' value="waveInfoManage" type="hidden"/>
+    <input name='act' value="index" type="hidden"/>
+    <input name='storey' value="{$storey}" type="hidden"/>
+	<table>
+		<tr>
+			<td style="padding-left:20px;">
+				区域：
+			</td>
+			<td>
+				<select name="choose_area">
+                    <option value=''>全部区域</option>
+                    {foreach $areas as $v}
+                    <option {if $v.areaName == $choose_area} selected="selected" {/if} >{$v.areaName}</option>
+                    {/foreach}
+                </select>
+			</td>
+			<td style="padding-left:20px;">
+				区域负责人：
+			</td>
+			<td>
+				<select name="areaUser" >
+					<option></option>
+                </select>
+			</td>
+			<td style="padding-left:20px;">
+				波次编号：
+			</td>
+			<td>
+				<input type="text" name="waveNumber" value="{$waveNumber}"/>
+			</td>
+			<td style="padding-left:20px;">
+				波次日期：
+			</td>
+			<td>
+				<!--input value="{$ordertimestart}" type="text" id='ordertimestart' name='ordertimestart' onclick="WdatePicker()" /--> -
+				<input type="text" name="startdate" id="startdate" style="width: 150px;" value="{$startdate}"/> ~
+                <input type="text" name="enddate" id="enddate" style="width: 150px;" value="{$enddate}"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding-left:20px;">
+				包含发货单：
+			</td>
+			<td>
+				<input type='text' name="shipOrderId" value="{$shipOrderId}"/>
+			</td>
+			<td style="padding-left:20px;">
+				配货单状态：
+			</td>
+			<td>
+				<select name="waveStatus">
+                    <option value="">全部</option>
+                    {foreach $waveStatusArr as $k=>$v}
+                    <option {if $k==$waveStatus} selected=""{/if} value="{$k}">{$v}</option>
+                    {/foreach}
+                </select>
+			</td>
+			<td style="padding-left:20px;">
+				波次类型
+			</td>
+			<td colspan="3">
+				<select name="waveType">
+                    <option value="">全部</option>
+				    <option {if $waveType == 1}selected=''{/if} value="1">单发货单</option>
+                    <option {if $waveType == 2}selected=''{/if} value="2">单料号</option>
+                    <option {if $waveType == 3}selected=''{/if} value="3">多料号</option>
+				</select>
+			     &nbsp;&nbsp;
+				<select name="waveZone">
+                    <option value="">全部</option>
+					<option {if $waveZone == 1}selected=''{/if} value="1">同区域</option>
+                    <option {if $waveZone == 2}selected=''{/if} value="2">跨区域同楼层</option>
+                    <option {if $waveZone == 3}selected=''{/if} value="3">跨楼层</option>
+				</select>
+			
+				<input type="submit" value="查 询" class="btn"/>
+            </td>
+		</tr>
+	</table>
+	</form>
+	<div style="padding-top:5px; padding-left:18px;">
+        <button class="btn" id="application_print" storeId="{$smarty.get.storeId}">导出</button>
+		<button class="btn" onclick="wave_print()">打印</button>
+	</div>
+</div>
+
+<div class="bottomvar">
+	<div class="pagination">
+		{$pagestr}
+	</div>
+</div>
+<div class="main order-main wh-main">
+    <table cellspacing="0" width="100%" style="text-align:left;">
+        <tr class="title">
+            <td style="width:40px;" align="center" valign="middle">
+        		<input class="checkclass" onclick="chooseornot(this)" type="checkbox"/>
+        	</td>
+            <td colspan="20">
+        		<span style="width:150px;overflow:hidden;">波次编号</span>
+        		<span style="width:90px;overflow:hidden;">波次类型</span>
+        		<span style="width:90px;overflow:hidden;">区域类型</span>
+        		<span style="width:90px;overflow:hidden;">打印楼层</span>
+        		<span style="width:90px;overflow:hidden;">起始区域</span>
+        		<span style="width:90px;overflow:hidden;">区域负责人</span>
+        		<span style="width:90px;overflow:hidden;">箱子颜色</span>
+        		<span style="width:90px;overflow:hidden;">状态</span>
+        	</td>
+       </tr>
+    	{foreach $result as $wave }
+    	<tr>
+    		<td style="width:40px;" align="center" valign="middle">
+    			<input class="checkclass" name="orderids" type="checkbox" value="{$wave.id}"/>
+    		</td>
+    		<td colspan="20">
+    			<span style="width:150px;overflow:hidden;">{$wave.number}</span>
+    			<span style="width:90px;overflow:hidden;">{{$waveTypes[$wave.waveType]}}</span>
+    			<span style="width:90px;overflow:hidden;">{{$waveZones[$wave.waveZone]}}</span>
+    			<span style="width:90px;overflow:hidden;">{$wave.printStorey}</span>
+    			<span style="width:90px;overflow:hidden;">{$wave.startArea}</span>
+    			<span style="width:90px;overflow:hidden;">{$wave.userId|getUserNameById}</span>
+    			<span style="width:90px;overflow:hidden;">{{$color_config[$wave.waveZone]}}</span>
+    			<span style="width:90px;overflow:hidden;">{{$waveStatusArr[$wave.waveStatus]}}</span>
+    		</td>
+    	</tr>
+    	{foreachelse}
+        
+    	<table cellspacing="0" width="100%">
+    		<tr><td align="center">没有搜索值！</td></tr>
+    	</table>
+    	{/foreach}
+    </table>
+</div>
+
+<div class="bottomvar">
+	<div class="pagination">
+		{$pagestr}
+	</div>
+</div>
+
+<script type="text/javascript" src="js/waveInfoManage.js?vesion=1.0"></script>
+{include file="footer.htm"}

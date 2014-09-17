@@ -1,0 +1,368 @@
+{include file="header.htm"}
+	 <div class="row" style="margin:6px 3px">
+     	<span>
+			料号:<input type="text" id="sku" value=""/>
+        </span>
+			采购负责人:
+			<select id="cguser-id">
+			<option value="-1">请选择采购员</option> 
+				{foreach item=pur from=$purchaseList}
+					<option value="{$pur['global_user_id']}" {if $smarty.get.cguserid==$pur['global_user_id']} selected="selected"{/if}>{$pur["global_user_name"]}</option>
+				{/foreach}
+			</select> 
+        </span>
+		<span>
+			供应商<input type="text" id="partner" value=""/>
+		</span>
+		<span>
+			处理结果：
+			<select id="status">
+				<option value="-1">请选择处理结果</option> 
+				<option value="0" {if $smarty.get.status == 0}selected="selected"{/if}>未处理</option>
+				<option value="1" {if $smarty.get.status == 1}selected="selected"{/if}>采购补单</option>
+				<option value="2" {if $smarty.get.status == 2}selected="selected"{/if}>二次录入</option>
+				<option value="3" {if $smarty.get.status == 3}selected="selected"{/if}>取消订单退货</option>
+			</select> 
+		</span>
+        <span>入库日期：
+			<input type="text" id="instock_startTime" onclick="WdatePicker()"  value = "{$instock_startTime}"/>
+		</span>
+		<span>
+			-<input type="text" id="instock_endTime" onclick="WdatePicker()"  value = "{$instock_endTime}"/>
+		</span>
+        <span>
+			<button href="javascript:void(0);" class="btn btn-primary" id="search">搜 索</button>
+		</span><br/><br/>
+		<span>
+			<button href="javascript:void(0);" class="btn btn-primary" id="patchorder">采购补单</button>
+		</span>
+		<span>
+			<a href="javascript:void(0);" id="backorder" style="display:none">订单退货</a>
+		</span>
+		<span>
+			<a href="javascript:void(0);" class="btn btn-primary" style="display:none" id="secondorder">批量处理</a>
+		</span>
+			{if $smarty.session.userCnName=='肖金华' or $smarty.session.userCnName=='潘旭东' or $smarty.session.userCnName=='陈小霞' or $smarty.session.userCnName=='覃云云' or $smarty.session.userCnName=='李美琴' or $smarty.session.userCnName=='周聪' or $smarty.session.userCnName=='郑凤娇' or $smarty.session.userCnName=='罗莹' or $smarty.session.userCnName=='陈月葵' or $smarty.session.userCnName=='陈燕云'  or $smarty.session.userCnName=='曹莉'}
+		<span>
+			<a href="javascript:void(0);" id="returnwh" style="display:none" class="btn btn-primary" >返回仓库重点</a>
+		</span>
+		<span>
+			<a href="javascript:void(0);" id="del-btn" style="display:" class="btn btn-primary">批量删除</a>
+		</span>
+
+		<span>
+			<a href="javascript:void(0);" id="adjust-btn" class="btn btn-primary" style="display:none">调整正在上架数量</a>
+		</span>
+			{/if}
+    </div>
+	<div class="main underline-main ">
+    	<table cellspacing="0" width="100%" class="products-action">
+        	<tr class="title purchase-title">
+		    	<td><input type="checkbox" id="checkAll"></td>
+               	<td>记录号</td>
+			    <td>SKU</td>
+                <td>待确认数量</td>
+                <td>共到货</td>
+                <td>点货人</td>
+                <td>点货日期</td>
+                <td>处理结果</td>
+                <td>采购</td>
+                <td>供应商</td>
+                <td>处理时间</td>
+				<td>在途的数量</td>
+				<td style="display:none">等待上架的数量</td>
+				<td>备注</td>
+            </tr>
+			{section name=list loop=$list}
+			<tr>
+				<td><input type="checkbox" class="skulist" value="{$list[list]['id']}" data-sku="{$list[list]['sku']}" data-qty="{$list[list]['amount']}" data-toalnum = "{$list[list]['totalAmount']}" data-status="{$list[list]['status']}" data-user="{$list[list]['purchaseId']}" data-unOrderId="{$list[list]['unOrderId']}" data-purchaseId="{$list[list]['purchaseId']}" data-onnum="{$list[list]['sku']|checkSkuOnWayNum1}" data-waitnum="{$list[list]['sku']|getTallySkuNum}"/></td>
+                <td>{$list[list]['id']}</td>
+				<td>{$list[list]['sku']}</td>
+                <td>{$list[list]['amount']}</td>
+                <td>{$list[list]['totalAmount']}</td>
+                <td>{$list[list]['tallymanId']|getUserNameById}</td>
+                <td>{$list[list]['addtime']|date_format:'%Y-%m-%d '}</td>
+                <td>
+					{if ($list[list]['status'] == 0)}未处理{elseif ($list[list]['status']=='1')}采购已补单{elseif ($list[list]['status']=='2')}二次录入{elseif ($list[list]['status']=='3')}取消订单{/if}
+				</td>
+                <td>{$list[list]['purchaseId']|getUserNameById}</td>
+                <td>{$list[list]['sku']|getPartnerBySku}</td>
+                <td>{if ($list[list]['operatime']==0)}{else}{$list[list]['operatime']|date_format:'%Y-%m-%d'}{/if}</td>
+				<td>{$list[list]['sku']|checkSkuOnWayNum1}</td>
+				<td style="display:none">{$list[list]['sku']|getTallySkuNum}</td>
+				<td>{$list[list]['note']}</td>
+            </tr>
+			{/section}
+         </table>
+     </div>
+     <div class="bottomvar">
+     	<div class="pagination">
+        	{$pageStr}
+        </div>
+     </div>
+{include file="footer.htm"}
+
+<script type="text/javascript">
+{literal}
+
+
+function search(){
+	var sku,cguserid,partner,addTime_start,addTime_end,status,condition="";
+	sku = $("#sku").val();
+	cguserid = $("#cguser-id").val();
+	partner = $("#partner").val();
+	addTime_start = $("#instock_startTime").val();
+	addTime_end = $("#instock_endTime").val();
+	status = $("#status").val();
+	
+	if(sku != ""){
+		condition += "&sku=" + sku;
+	}
+	if(cguserid != -1){
+		condition += "&cguserid=" + cguserid 
+	}
+	if(partner != ""){
+		condition += "&partner=" + partner;
+	}
+	if(addTime_start != ""){
+		condition += "&addTime_start" + addTime_start;
+	}
+	if(addTime_end != ""){
+		condition += "&addTime_end" + addTime_start;
+	}
+	if(status != ""){
+		condition += "&status=" + status;
+	}
+
+	window.location.href = "index.php?mod=unusualOrder&act=index" + condition;
+}
+
+$("#search").click(function(){
+		search();
+});
+
+
+$(document).keyup(function(e){
+		if(e.keyCode == 13){
+			search();
+		}
+});
+
+$("#checkAll").click(function() {
+       var checkboxs = $('.skulist');
+		for(var i=0;i<checkboxs.length;i++){
+			if(checkboxs[i].checked == false){
+				checkboxs[i].checked = true;
+			}else{
+				checkboxs[i].checked = false;
+			}
+		}
+})
+
+
+/**********采购补单  Start****/
+$('#patchorder').click(function(){
+	var sku,num,url,dataArr=[],statusArr=[],checkboxs;
+	$(this).attr("disabled","disabled");
+	checkboxs = $('.skulist:checked');
+	url  = "json.php?mod=purchaseOrder&act=addOrder";
+	if(checkboxs.length == 0){
+		alertify.error('请选择要补单的sku');
+		return false;
+	}else{
+		$.each(checkboxs,function(i,item){
+			var skuObj = {};
+			skuObj.id = $(item).val();
+			skuObj.sku = $(item).data("sku");
+			skuObj.num = $(item).data("qty");
+			skuObj.user = $(item).data("user");
+			skuObj.unOrderId = $(item).data("unorderid");
+			skuObj.purchaseId = $(item).data("purchaseid");
+			statusArr.push($(item).data("status"));
+			dataArr.push(skuObj);
+		});
+		console.log(dataArr);
+		if($.inArray(1,statusArr) != -1 || $.inArray(3,statusArr) != -1){
+				alertify.alert("选择的料号已经进行采购补单 或 已经退货，无需要进行采购补单。。。");
+				return ;
+		}
+		$.post(url, {"dataArr":dataArr}, function(rtn){
+			if($.inArray(0,rtn) == -1){
+				alertify.alert("采购补单成功。。。。",function(){
+					window.location.reload();
+				});
+			}else{
+				alertify.success("采购补单失败。。。。");
+			}
+	 	},'json');
+	}
+});
+
+
+$("#secondorder").click(function(){
+	var statusArr=[],skuidArr =[],skuObjArr,data=[];
+	skuObjArr = $('.skulist:checked');
+	if(skuObjArr.length == 0){
+		alertify.error("请选择要二次录入的sku...");
+		return;
+	}
+	$.each(skuObjArr,function(i,item){
+		var dataObj		= {};
+		var toalnum 	= parseInt($(item).data('toalnum'));//共到货数量
+		var onnum 		= parseInt($(item).data('onnum'));//在途数量
+		var waitnum 	= $(item).data('waitnum');//等待上架数量
+		var qty    = $(item).data('qty');
+		var diffnum     = 0;
+		var sku = $(item).data('sku');
+		if(waitnum != ''){
+			waitnum 	= parseInt(waitnum);
+		}else{
+			waitnum     = 0;
+		}
+		diffnum = onnum - toalnum ;//在途数量 大于等于总共到货数量 才能符合二次录入条件
+		diffnum = parseInt(diffnum);
+		if(diffnum >= 0){
+			if($(item).data("status") == 0){
+				dataObj.id = $(item).val();
+				dataObj.qty = $(item).data('toalnum');
+				//dataObj.qty = $(item).data('qty');
+				dataObj.unorderid = $(item).data('unorderid');
+				dataObj.sku = $(item).data('sku');
+				data.push(dataObj);
+			}
+
+			alertify.success('sku:'+sku+'满足批量处理!');
+		}else{
+			alertify.error('sku:'+sku+'没有满足批量处理!');
+		}
+	});
+	
+	if(data.length == 0){
+		alertify.error('当前异常到货sku没有满足可以上架!');
+		return false;
+	}
+	console.log(data);
+	$.post("json.php?mod=common&act=secondComfirm",{"data":data},function(rtn){
+		if(rtn == 1){
+			alertify.alert("success。。。。",function(){
+				window.location.reload();
+			});
+		}
+	});
+});
+
+$("#del-btn").click(function(){
+	var statusArr=[],skuidArr =[],skuObjArr,data=[];
+	skuObjArr = $('.skulist:checked');
+	if(skuObjArr.length == 0){
+		alertify.alert("请选择要二次录入的sku。。。。");
+		return;
+	}
+	$.each(skuObjArr,function(i,item){
+		var dataObj = {};
+		if($(item).data("status") == 0){
+			dataObj.id = $(item).val();
+			dataObj.qty = $(item).data('qty');
+			dataObj.unorderid = $(item).data('unorderid');
+			dataObj.sku = $(item).data('sku');
+			data.push(dataObj);
+		}
+	});
+
+	console.log(data);
+	$.post("json.php?mod=common&act=deleteUnorder",{"data":data},function(rtn){
+		if(rtn == 1){
+			alertify.alert("success。。。。",function(){
+				window.location.reload();
+			});
+		}
+	});
+});
+
+$("#adjust-btn").click(function(){
+	var statusArr=[],skuidArr =[],skuObjArr,data=[];
+	skuObjArr = $('.skulist:checked');
+	if(skuObjArr.length == 0){
+		alertify.alert("请选择要二次录入的sku。。。。");
+		return;
+	}
+	$.each(skuObjArr,function(i,item){
+		var dataObj = {};
+		if($(item).data("status") == 0){
+			dataObj.id = $(item).val();
+			dataObj.qty = $(item).data('qty');
+			dataObj.unorderid = $(item).data('unorderid');
+			dataObj.sku = $(item).data('sku');
+			data.push(dataObj);
+		}
+	});
+	console.log(data);
+	alertify.prompt("Message", function (e, str) {
+		if (e) {
+			console.log(str);
+			$.post("json.php?mod=common&act=adjustNum",{"data":data,"number":str},function(rtn){
+				if(rtn == 1){
+					alertify.alert("success。。。。",function(){
+						window.location.reload();
+					});
+				}
+			});
+		} 
+	}, "Default Value");
+});
+
+$("#backorder").click(function(){
+	var statusArr=[],skuidArr =[],skuObjArr;
+	skuObjArr = $('.skulist:checked');
+	if(skuObjArr.length == 0){
+		alertify.alert("请选择要退货的sku。。。。");
+		return;
+	}
+	$.each(skuObjArr,function(i,item){
+		statusArr.push($(item).data("status"));
+		skuidArr.push($(item).val());
+	});
+	console.log(statusArr);
+	if($.inArray(1,statusArr) != -1 || $.inArray(3,statusArr) != -1 || $.inArray(2,statusArr) != -1){
+		alertify.alert("这条记录已经处理过了，不能进行退货处理。。。");
+		return ;
+	}
+	$.post("json.php?mod=purchaseOrder&act=returnSku",{"skuidArr":skuidArr},function(rtn){
+		if(rtn == 1){
+			alertify.alert("取消退货成功。。。。",function(){
+				window.location.reload();
+			});
+		}
+	});
+});
+
+/***返回仓库重点 wangminwei 2014-04-03 ***/
+$("#returnwh").click(function(){
+	var unOrderIdArr =[],skuObjArr;
+	skuObjArr = $('.skulist:checked');
+	if(skuObjArr.length == 0){
+		alertify.alert("请选择要返回仓库重点的sku。。。。");
+		return;
+	}
+	$.each(skuObjArr,function(i,item){
+		unOrderIdArr.push($(item).data("unorderid"));
+	});
+	var tips = '确认返回仓库重点？';
+	alertify.confirm(tips, function (e) {
+		if(e){
+			$.post("json.php?mod=purToWh&act=unusualSkuReturnWh",{"unOrderIdArr":unOrderIdArr},function(rtn){
+				var rtnCode = rtn.code;
+				var rtnMsg  = rtn.msg;
+				if(rtnCode == 1){
+					alertify.success(rtnMsg);
+					window.setTimeout("window.location.reload()",2000);
+				}else{
+					alertify.error(rtnMsg);
+				}
+			}, "json");
+		}
+	})
+});
+
+{/literal}
+</script>

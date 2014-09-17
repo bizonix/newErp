@@ -1,0 +1,134 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/whWaveEdit.js"></script>
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=whWaveEdit&act=edit">波次设置</a>
+    </div>     
+    </div>          
+    <div class="main">
+    <form name="waveAllocationForm" action="index.php?mod=whWaveEdit&act=edit" method="post">
+    	<h1>波次分配维度</h1> 
+    	 <input type="hidden" name="editType" value="waveAllocation">      
+		 <table width="100%" border="0" cellpadding="0" cellspacing="0" >     
+            <tr>
+              <td align="center">波次：</td>
+              <td align="center">重量（KG）</td>
+              <td align="center">体积（m³）</td>
+              <td align="center">SKU数量（个)</td>
+              <td align="center">发货单数量（个）</td>
+              </tr>
+              <tr>
+              	<td>单个发货单</td>
+              	<td><input type="text" name="singleInvoiceWeight" 		id="singleInvoiceWeight" value="{$singleInvoice.limitWeight}" size="35" maxlength="30"/>
+              		<input type="hidden" name="singleInvoiceId"			id="singleInvoiceId" 	 value="{$singleInvoice.id}" />
+              	</td>
+              	<td><input type="text" name="singleInvoiceVolume" 		id="singleInvoiceVolume" value="{$singleInvoice.limitVolume}" size="35" maxlength="30"/></td>
+              	<td><input type="text" name="singleInvoiceSkuNum" 		id="singleInvoiceSkuNum" value="{$singleInvoice.limitSkuNums}" size="35" maxlength="30"/></td>
+              	<td></td>
+              </tr>
+              <tr>
+              	<td>单SKU</td>
+             	<td><input type="text" name="singleSkuWeigh" 		id="singleSkuWeigh" 	value="{$singleSku.limitWeight}" 	size="35" maxlength="30"/>
+             		<input type="hidden" name="singleSkuId"			id="singleSkuId" 	 	value="{$singleSku.id}" />
+             	</td>
+              	<td><input type="text" name="singleSkuVolume" 		id="singleSkuVolume" 	value="{$singleSku.limitVolume}" 	size="35" maxlength="30"/></td>
+              	<td><input type="text" name="singleSkuNum" 			id="singleSkuNum" 		value="{$singleSku.limitSkuNums}" 	size="35" maxlength="30"/></td>
+              	<td><input type="text" name="singleSkuOrderNum" 	id="singleSkuOrderNum" 	value="{$singleSku.limitOrderNums}" size="35" maxlength="30"/></td>
+              </tr>
+              <tr>
+              	<td>多SKU</td>
+              	<td><input type="text" name="skusWeight" 		id="skusWeight" 	value="{$skus.limitWeight}" 	size="35" maxlength="30"/>
+              		<input type="hidden" name="skusId"			id="skusId" 	 	value="{$skus.id}" />
+              	</td>
+              	<td><input type="text" name="skusVolume" 		id="skusVolume" 	value="{$skus.limitVolume}" 	size="35" maxlength="30"/></td>
+              	<td><input type="text" name="skusNum" 			id="skusNum" 		value="{$skus.limitSkuNums}" 	size="35" maxlength="30"/></td>
+              	<td><input type="text" name="skusOrderNum" 		id="skusOrderNum" 	value="{$skus.limitOrderNums}" 	size="35" maxlength="30"/></td>
+              </tr>
+  			<tr>	
+         <td colspan="4">
+         <h1>单个发货单拆分波次维度</h1>
+          	 <table width="100%" border="0" cellpadding="0" cellspacing="0" style="border:none;" >     
+            <tr>
+              <td align="center">波次：</td>
+              <td align="center">重量（KG）</td>
+              <td align="center">体积（m³）</td>
+              <td align="center">SKU数量（个)</td>
+              </tr>
+              <tr>
+              	<td>拆分起点</td>
+              	<td><input type="text" 		name="singleInvoiceSplitWeight" 		id="singleInvoiceWeight" 	value="{$singleInvoiceSplit.limitWeight}" 	size="35" maxlength="30"/>
+              		<input type="hidden" 	name="singleInvoiceSplitId"				id="singleInvoiceSplitId" 	value="{$singleInvoiceSplit.id}" />
+              	</td>
+              	<td><input type="text" 		name="singleInvoiceSplitVolume" 		id="singleInvoiceVolume" value="{$singleInvoiceSplit.limitVolume}" 	size="35" maxlength="30"/></td>
+              	<td><input type="text" 		name="singleInvoiceSplitSkuNum" 		id="singleInvoiceSkuNum" value="{$singleInvoiceSplit.limitSkuNums}" size="35" maxlength="30"/></td>
+              </tr>
+              <tr>
+              	<td>每个波次</td>
+              	<td><input type="text" 		name="singleInvoiceSplitEachWeigh" 	id="singleInvoiceSplitEachWeigh" 	value="{$singleInvoiceSplitEach.limitWeight}" size="35" maxlength="30"/>
+              		<input type="hidden" 	name="singleInvoiceSplitEachId"		id="singleInvoiceSplitEachId" 		value="{$singleInvoiceSplitEach.id}" />
+              	</td>
+              	<td><input type="text" name="singleInvoiceSplitEachVolume" 	id="singleInvoiceSplitEachVolume" 	value="{$singleInvoiceSplitEach.limitVolume}" size="35" maxlength="30"/></td>
+              	<td><input type="text" name="singleInvoiceSplitEachNum" 	id="singleInvoiceSplitEachNum" 		value="{$singleInvoiceSplitEach.limitSkuNums}" size="35" maxlength="30"/></td>
+              </tr>
+         </table>
+         </td>
+         </tr>
+         <tr>
+         	<td colspan="4">
+              <button name="button" type="submit" onclick="return waveAllocation();">保存</button>
+            </td>
+           </tr>
+           </table>
+           </form>
+           
+        <h1>箱子设置&nbsp;&nbsp;{if $messagetype == 200}<font color="green">{$boxmessage}</font>{/if}</h1>
+    	<form name="waveBoxColorForm" action="index.php?mod=whWaveEdit&act=edit" method="post">
+    	<input type="hidden" name="editType" value="waveBoxColor">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" > 
+        	<tr>
+        		<td>波次</td>
+        		<td>箱子颜色</td>
+        	</tr>    
+            <tr>
+            	<td>同区域</td>
+            	<td>
+	            	<select name="sameZoneColor" id="sameZoneColor">
+	            	{foreach from=$boxColors item=color}
+	            		<option value="{$color}" {if $color == $sameZoneColor} selected="selected" {/if}>{$color}</option>
+	            	{/foreach}
+	            	</select>
+            	</td>																						
+              </tr>
+               <tr>
+            	<td>跨区域（同楼层）</td>
+            	<td>
+	            	<select name="crossZoneColor" id="crossZoneColor">
+	            	{foreach from=$boxColors item=color}
+	            		<option value="{$color}" {if $color == $crossZoneColor} selected="selected" {/if}>{$color}</option>
+	            	{/foreach}
+	            	</select>
+            	</td>																						
+              </tr>
+               <tr>
+            	<td>跨楼层</td>
+            	<td>
+	            	<select name="crossStoreyColor" id="crossStoreyColor">
+	            	{foreach from=$boxColors item=color}
+	            		<option value="{$color}" {if $color == $crossStoreyColor} selected="selected" {/if}>{$color}</option>
+	            	{/foreach}
+	            	</select>
+            	</td>																						
+              </tr>
+                <tr>
+	                <td colspan="2">
+	                	<button name="button" type="button" onclick="waveBoxColor();">保存</button>
+	                </td>
+           		 </tr>
+         </table>
+     </form>  
+        </table>
+    </form>
+    </div>
+    <div class="bottomvar"></div>
+</div>
+{include file="footer.htm"}

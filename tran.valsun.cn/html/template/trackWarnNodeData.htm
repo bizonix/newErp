@@ -1,0 +1,54 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=trackWarnNodeData&act=index">运输方式节点预警数据管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='country'{if ($type=='country')} selected="selected"{/if}>国家全名</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>国家名</th>
+			<th>节点名称</th>
+			<th>节点时效(小时)</th>
+			<th>是否自动更新</th>
+			<th>创建时间</th>
+			<th>最后更新时间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.country}</td>
+			<td>{$list.nodeName}</td>
+			<td>{$list.aging}</td>
+			<td>{if empty($list.is_auto)}是{else}否{/if}</td>
+			<td>{if empty($list.addTime)}暂无{else}{date('Y-m-d H:i:s',$list.addTime)}{/if}</td>
+			<td>{if empty($list.editTime)}暂无{else}{date('Y-m-d H:i:s',$list.editTime)}{/if}</td>
+			<td><a href="index.php?mod=trackWarnNodeData&act=modify&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info({$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<script type="text/javascript" src="./public/js/track_warn_node_data.js"></script>
+{include file="footer.htm"}

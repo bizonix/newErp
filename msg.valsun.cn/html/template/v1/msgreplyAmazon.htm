@@ -1,0 +1,118 @@
+{include file="header.htm"}
+{include file="secendNav.htm"}
+<link rel="stylesheet" href="./css/replylist.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/replylistAmazon.js"></script>
+<script src="js/jquery/ui/jquery-ui.custom.js"></script>
+<link rel="stylesheet" href="js/jquery/css/ui-lightness/jquery-ui-1.9.2.custom.css">
+<script type="text/javascript">
+<!--
+var messagelist_amazon = [
+                   {foreach $msglist as $msgval}
+                       ['{$msgval.sendid}', '{$msgval.id}', '{$msgval.amazon_account}','{mysql_escape_string($msgval.subject)}','{$msgval.ordernum}','{$msgval.buyer}','{$msgval.seller}']{if !$msgval@last},{/if}
+                   {/foreach}
+                   ];
+window.onload=amazonReplyajax;
+//-->
+</script>
+<div class="main products-main reply-main">
+	{foreach $msglist as $msgval}
+	<div class="message-unfold"> 
+	<div id="topline_{$msgval.id}" style="display:inline;visibility:visible;">
+	<span style="font-weight:bold; color:red;">{$msgval@iteration}</span>
+		<span>发件人：{$msgval.sendid}</span>
+	           <span>收件人：{$msgval.recieveid}</span>
+	           <span>发件时间:{$msgval.sendtime}</span>
+	</div>
+	<a href="javascript:hidetable({$msgval.id})"></a>
+  </div>
+    <table id="replaytb_{$msgval.id}" class="products-action" cellspacing="0" width="100%">
+        <tr>
+            <td colspan="2">
+                <div style="font-size:13px;" >
+                        <div>
+                            <span style="margin-left:3px;">收货地址：</span><span id="addressspan_{$msgval.id}"></span>
+                        </div>
+                </div>
+                    <table id="skulisttb_{$msgval.id}" cellspacing="0" style="text-align:center;width:100%; font-size: 13px; border-collapse: separate; display: table; border-spacing: 0;">                    
+                        
+                    </table>
+                        <a id="showhisbut_{$msgval.id}" href="javascript:showhistory({$msgval.id})" style="width:170px;height:30; margin:15px auto; text-align:center; background-color:#0092dc; color:#fff;display:block;font-size:14px;padding-top:5px;padding-bottom:5px;text-decoration:inherit;">
+                            显示更多
+                        </a>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="padding-top:20px; width:690px;">
+            <span style="color:orange;font-family:'华文楷书';border:'1px solid #fff';font-size:20px;margin-left:-2px;margin-bottom:10px;">邮件编号:{$msgval.id}</span>
+                <div id="content_{$msgval.id}" style="border:1px #ccc solid;display:block; width:700px; height:500px; overflow:scroll;">
+				
+				{$msgval.msgcontent}
+				<br />
+                </div>
+                <br />
+                <br />
+                {if $msgval.attachname != ''}
+                <a id="downloadattach" title="点击下载"  href ="index.php?mod=amazonMessageReply&act=downLoadAttach&mid={$msgval.id}">附件：{$msgval.attachname}</a>
+                {/if}
+            </td>
+            <td style="width:575px;" valign="top">
+                <div id="historyview_{$msgval.id}">
+                	<table id="skulisttb2_{$msgval.id}" cellspacing="0" style="text-align:center;width:100%; font-size: 13px; border-collapse: separate; display: table; border-spacing: 0;">                    
+                        
+                    </table>
+                   
+                </div>
+                <script>
+                    $( "#historyview_{$msgval.id}" ).dialog({ autoOpen: false });
+                </script>
+               
+                <textarea contenteditable id="reply_content_{$msgval.id}" onkeypress="quicksend(event,{$msgval.id})" value='{$msgval.id}'  style="border:2px #666 solid; width:600px; height:500px; overflow:scroll;padding:10px;">{$msgval.replycontent}</textarea>
+                    <input onclick="SubmitReply({$msgval.id}, this)"  type="button" id="reply_btn_{$msgval.id}"
+						value="{if $msgval.status!=0}已回复{else}回复{/if}" {if $msgval.status!=0}style="color:red"{else}{/if} ><span style="color:#48815d;">(快捷键：Ctrl+Enter)</span>
+						<input onclick="uploadattach()" class="up_btn" type="button" value="上传附件" />
+						<form target="upload" action="../../upload/uploadattach.php?mid={$msgval.id}" method="post" enctype="multipart/form-data" id="uploadform" style="display:none;">
+						<input  class="up_real" type="file" value="上传附件" title='无法发送或接收以下文件类型：.ade、.adp、.bat、.chm、.cmd、.com、.cpl、.exe、.hta、.ins、.isp、.jse、.lib、.lnk、.mde、.msc、.msp、.mst、.pif、.scr、.sct、.shb、.sys、.vb、.vbe、.vbs、vxd、.wsc、.wsf、.wsh' name="attach" style="display:none;" />
+						</form><a href="javascript:void(0)"><span id="attachname" style="color:purple;margin-left:-3px;"></span></a>
+						<iframe name="upload" style="display:none" ></iframe>
+					{foreach $tpllist as $tplval}
+						{if $tplval.type== 2 or $tplval.type == 3}
+	                    <label>
+	                        <input onclick="getremessage({$tplval.id}, {$msgval.id})" name="1" type="radio" value="{$tplval.id}" />{$tplval.name}
+	                    </label>
+						{/if}
+					{/foreach}
+					<select onchange="selectTpl(this, {$msgval.id})">
+						<option>一般模板</option>
+						{foreach  $tpllist as $tplval}
+							{if $tplval.incommonuse !=1}
+								<option value="{$tplval.id}">{$tplval.name}</option>
+							{/if}
+						{/foreach}
+					</select>
+                </div>
+                <div style=" margin-top:7px;">
+					
+                    <input type="button" id="marktoreply" value="{if $msgval.status==0 ||$msgval.status==1 ||$msgval.status==4}标记为已回复 {elseif $msgval.status==2}已回复{elseif $msgval.status==3}已标记回复{/if}" onclick="marktoread({$msgval.id}, this)">
+					<input type="button" value="变更收件夹" onclick="changeCategory({$msgval.id})">
+                    <select id="categorylist_{$msgval.id}">
+                    	<option value="0">请选择文件夹</option>
+                        {foreach $catlist as $catval}
+						<option value="{$catval.id}">{$catval.category_name}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </td>
+        </tr>
+    </table>
+    {/foreach}
+    {foreach  $tpllist as $tplval}
+        <div id="tpldiv_{$tplval.id}" style="display:none;">{$tplval.content}</div>
+    {/foreach}
+    
+</div>
+
+<div id="trackInfo">
+    
+</div>
+
+{include file="footer.htm"}

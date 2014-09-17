@@ -1,0 +1,91 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script type="text/javascript" src="./js/whIoRecords.js"></script>
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<!--div class="fourvar">
+	            <div class="texvar">
+                
+                <!-- TODO: <br />
+                <span style="color: black;font-weight: bolder;font-size: medium;">{$ioName}</span> -->
+                </div-->
+                <!--div class="pagination">
+                {$show_page}
+                </div-->
+</div-->
+            <div class="servar wh-servar">
+    				<span>
+                        <input id="ioType" type="hidden" value="{$smarty.get.ioType}"/>
+    					<label for="keyWord">关键字:</label>
+    					<input name="keyWord" id="keyWord" value="{$smarty.get.keyWord}"/>
+                        <select name="select" id="select">
+                            <option value='0' {if $smarty.get.select == 0}selected="selected"{/if}>请选择</option>
+                            <option value='1' {if $smarty.get.select == 1}selected="selected"{/if}>编号</option>
+                            <option value='2' {if $smarty.get.select == 2}selected="selected"{/if}>单据编码</option>
+                            <option value='3' {if $smarty.get.select == 3}selected="selected"{/if}>sku</option>
+                            <option value='4' {if $smarty.get.select == 4}selected="selected"{/if}>采购员</option>
+                            <option value='5' {if $smarty.get.select == 5}selected="selected"{/if}>添加人</option>
+                            <option value='6' {if $smarty.get.select == 6}selected="selected"{/if}>仓位</option>
+                        </select>
+                        &nbsp;|&nbsp;
+                        <label for="ioTypeId">{$ioSearchName}：</label>
+                        <select name="ioTypeId" id="ioTypeId">
+                            <option value='0' {if $smarty.get.select == 0}selected="selected"{/if}>请选择</option>
+                            {foreach from=$ioTypeList item=value}
+                            <option value='{$value.id}' {if $smarty.get.ioTypeId == $value.id}selected="selected"{/if}>{$value.typeName}</option>
+                            {/foreach}
+                        </select>
+                        &nbsp;|&nbsp;
+                        <label for="cStartTime">创建时间：</label>
+                        <input onclick="WdatePicker()" id='cStartTime' value='{$smarty.get.cStartTime}'/>
+                        &nbsp;至&nbsp;
+                        <input onclick="WdatePicker()" id='cEndTime' value='{$smarty.get.cEndTime}' />
+                        &nbsp;|&nbsp;
+						<button id="search" >搜索</button>
+						
+						<button id="" onclick="exportStatusInfo()">导出到XLS</button>
+    				</span>
+                    &nbsp;&nbsp;
+                    <span style="color: red;">{$status}</span>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td>编号</td>
+						<td>单据编码</td>
+                        <td>出/入库</td>
+                        <td>出入库类型</td>
+                        <td>sku</td>
+                        <td>数量</td>
+						<td>仓位</td>
+                        <td>采购员</td>
+                        <td>添加人</td>
+                        <td>原因</td>
+						<td>创建时间</td>
+						<td>仓库</td>
+                    </tr>
+                    {foreach from=$whIoRecordsList item=value}
+                    <tr class="odd">
+                        <td>{$value.id}</td>
+                        <td>{$value.ordersn}</td>
+						<td>{if $value.ioType == 1}出库{else}入库{/if}</td>
+                        <td>{$value.ioTypeName}</td>
+                        <td>{$value.sku}</td>
+                        <td>{$value.amount}</td>
+						<td>{$value.pName}</td>
+                        <td>{$value.purchaseName}</td>
+                        <td>{$value.userName}</td>
+                        <td>{$value.reason}</td>
+                        <td>{$value.createdTime|date_format:"Y-m-d H:i"}</td>
+                        <td>{$value.whName}</td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

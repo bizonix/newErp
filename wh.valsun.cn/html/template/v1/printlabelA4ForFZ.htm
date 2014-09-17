@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>finejo</title>
+<style>
+	body{ font-size:14px;}
+	.nu span{ width:260px; float:left;}
+	td{ padding:3px 0;}
+</style>
+</head>
+<body>
+{foreach $ordersinfo as $value}
+<div style="padding:20px; width:1070px;">
+	<span style="font-size:18px; font-weight:bold;">
+		Finejo发货清单
+	</span>
+	<span style="margin-left:720px;">
+		<img src="barcode128.class.php?data={$value.id}" width="180" height="40" /> 
+		<div style="margin-left:500px;" align="right">
+			{$value.id}
+		</div>
+	</span>
+	<div class="nu" style="line-height:38px;">
+		<span>
+			客户姓名：{$value.username}
+		</span>
+		<span>
+			客户名称：{$value.platformUsername}
+		</span>
+		<span>
+			联系电话：{$value.phone}
+		</span>
+		<span>
+			付款日期：{$value.createdTime|date_format:'%Y-%m-%d %H:%M:%S'}
+		</span>
+		<span>
+			物流公司：{$value.carrier}
+		</span>
+		<span>
+			所在店铺：芬哲服饰旗舰店
+		</span>
+		<span>
+			发货仓库：深圳总仓
+		</span>
+		<span>
+			打单日期：{$smarty.now|date_format:'%Y-%m-%d'} 
+		</span>
+	</div>
+	<!--div style="color:#F33; clear:left;"-->
+	<div style="clear:left;">
+		退换货原因：□ 1.尺码偏大 □ 2.尺码偏小 □ 3.面料不喜欢 □ 4.试穿效果不喜欢 □ 5.发错货 □ 6.质量问题 □ 7.色差 □ 8.其他（请在退换货原因前打”√“）
+	</div>
+	<table cellspacing="0" border="1" style="text-align:center;border-collapse:collapse; width:1065px; margin-top:10px;">
+		<tbody>
+			<tr>
+				<td colspan="2">
+					<?php echo $i+1; ?>
+				</td>
+				<td colspan="3">
+					发货清单
+				</td>
+				<td colspan="8">
+					退换货清单
+				</td>
+			</tr>
+			<tr>
+				<td rowspan="2">
+					仓位
+				</td>
+				<td rowspan="2">
+					货号
+				</td>
+				<td rowspan="2">
+					规格
+				</td>
+				<td rowspan="2">
+					数量
+				</td>
+				<td rowspan="2">
+					单价
+				</td>
+				<td colspan="2">
+					退货
+				</td>
+				<td colspan="5">
+					换货
+				</td>
+				<td>
+					退换货原因
+				</td>
+			</tr>
+			<tr>
+				<td>
+					请打勾
+				</td>
+				<td>
+					数量
+				</td>
+				<td>
+					请打勾
+				</td>
+				<td>
+					换出货号
+				</td>
+				<td>
+					数量
+				</td>
+				<td>
+					颜色
+				</td>
+				<td>
+					尺码
+				</td>
+				<td>
+					填下方数字
+				</td>
+			</tr>
+			{foreach $value.finalposition as $skuinfo}
+				<tr>
+				   <td>{$skuinfo.location}</td>
+				   <td>{$skuinfo.sku}</td>
+				   <td>{$skuinfo.itemTitle}</td>
+				   <td>{$skuinfo.amount}</td>
+				   <td>{$skuinfo.price}</td>
+				   <td></td>
+				   <td></td>
+				   <td></td>
+				   <td></td>
+				   <td></td>
+				   <td></td>
+				   <td></td>
+				   <td></td>
+			   </tr>
+			{/foreach}
+			<tr>
+				<td align="right" colspan="3">
+					总计：
+				</td>
+				<td>
+					{$value.totalnum}
+				</td>
+				<td>
+					<span class="red font_16">{$value.total}</span>
+				</td>
+				<td>
+					
+				</td>
+				<td>
+					
+				</td>
+				<td>
+					
+				</td>
+				<td>
+					
+				</td>
+				<td>
+					
+				</td>
+				<td>
+					
+				</td>
+				<td>
+				</td>
+				<td>	
+				
+					
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					买家备注
+				</td>
+				<td colspan="11" align="left">
+					{$value.notes}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					卖家备注
+				</td>
+				<td colspan="11" align="left">
+					{$value.notes}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					退换货提醒
+				</td>
+				<td colspan="11" align="left">
+					请退货的客户及时申请退款，请换货的客户及时联系客服延长交易时间，以免系统到时自动确认付款。
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					退换货地址
+				</td>
+				<td colspan="11" align="left">
+					广东省深圳市龙岗区新生村耀仙田路53号耀安工业园2栋3楼
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div style="margin-top:150px;width:1065px;">
+		芬哲（Finejo）温馨提示：如需办理退换货，请先详细阅读背面退换货需知，再完整填写退换货表格，并务必将此单与退换商品一起寄回，我们需要核实包裹信息，以便快递处理您的包裹。请退货的买家将宝贝寄回后，再申请退款。请换货的买家联系客服延长交易时间，以免系统到时自动确认付款。谢谢配合！
+	</div>
+	<div style="font-size:16px;width:1065px;">
+		邮寄地址：广东省深圳市龙岗区新生村耀仙田路53号耀安工业园2栋3楼 收件人：罗小姐 电话：0755-89619770 服务热线：4001681558 邮编：5181128
+	</div>
+</div>
+
+{if $value@total > 1 && $value@iteration != $value@total}
+	<div style="page-break-after:always;">&nbsp;</div>
+{/if}
+{/foreach}
+</body>
+</html>

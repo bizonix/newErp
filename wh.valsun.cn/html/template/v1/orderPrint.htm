@@ -1,0 +1,49 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script language="javascript" src="js/LodopFuncs.js"></script>
+<object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+       <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+</object>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+
+<br/>
+<div style="margin-bottom: 10px;margin-left:10px;">
+    <span style="color: red;font-size:24px;">请先配置打印机设置：</span>
+</div>
+<div class="fourvar order-fourvar feedback-fourvar products-servar wh-fourvar">
+    <div><span>1：请选择打印机：</span>
+        <input style="width: 20px;" type="radio" id="Radio1" name="RadioS1" checked="" />默认打印机                         
+        <input style="width: 20px;" type="radio" id="Radio2" name="RadioS1" onclick="CreatePrinterList()"/>指定打印机:                  
+        <select id="PrinterList" size="1"></select>
+    </div>
+    <p>2：选择上一步所指定打印机的如下纸张类型：<input style="width: 20px;" type="radio" id="Radio3" name="RadioS2" checked='' />不指定纸张                         
+    <input style="width: 20px;" type="radio" id="Radio4" name="RadioS2" onclick="CreatePagSizeList()"/>指定纸张:<select id="PagSizeList" size="1"></select> </p>
+</div>
+<div style="margin-top: 10px;margin-left:10px;">
+    <button class="btn" style="font-size:24px;" onclick="gotoprint();">配置完成，开始打印</button>
+</div>
+
+<div class="main order-main wh-main feedback-fourvar" style="font-size: 24px;">
+    <div style="height: 40px; width:350px;">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+    <div id="show_msg" style="margin-left:60px; margin-bottom:10px;font-size: 26px;display:hidden;">
+
+    </div>
+    
+    <div style="min-height:120px; width:500px;">
+        <span style="font-size: 20px; margin-left: 100px;margin-bottom:10px;">
+            <input style="width: 20px;" type='radio' name="print_type" checked="" value='1'/>预览打印
+            <!--<input style="width: 20px;" type='radio' name="print_type" checked="" value='2'/>直接打印-->
+        </span>
+        <span style="padding-left: 30px;">请扫描发货单号：
+            <input style="width: 200px;height:30px;" type="text" id="ebay_id" name="ebay_id" onkeypress="print_order(this, event)"/>
+        </span>
+    </div>
+</div>
+
+<iframe id="print_order" style="display: block;" width="1" height="1">
+
+</iframe>
+<script type="text/javascript" src="js/orderPrint.js?vesion=1.0"></script>
+{include file="footer.htm"}

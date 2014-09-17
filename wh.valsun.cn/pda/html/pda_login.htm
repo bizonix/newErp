@@ -1,0 +1,78 @@
+{include file="header.htm"}
+<link rel="stylesheet" href="css/login.css" />
+<div id="divcontent" style="height:200px;width:225px">
+<div class="sign_blk">
+ <form action="index.php?mod=pda_public&act=pda_userLogin" method="post" id="loginForm" onsubmit="return false">
+	<div class="sign_form">
+        <h2>Login To SCAN</h2>
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr><td><label for="username">用户名 :</label></td></tr>
+            <tr><td><input type="text" class="logform" id="username" name="username" value=""/></td></tr>
+            <tr><td><label for="password">密&nbsp;&nbsp;&nbsp;&nbsp;码 :</label></td></tr>
+            <tr><td><input type="password" class="logform" name="password" onkeydown="checkkey()" id="password"/></td></tr>
+            <tr><td><span id="msg"></span></td></tr>
+            <tr><td align="right"><input type="button" value="登陆" id="B12" onclick="checkLogin();"/><input type="reset" value="重置" id="B12"/></td></tr>
+        </table>
+	</div>
+ </form>
+</div>
+</div>
+{include file="footer.htm"}
+{literal}
+<script language="javascript">
+function checkLogin(){
+
+    var username,password;
+    username = document.getElementById("username").value;
+    password = document.getElementById("password").value;
+	/*if(username.indexOf("@") == -1){
+		username = username+"@sailvan.com";
+	}*/
+	if(username == ''){
+		document.getElementById("msg").innerHTML = "用户名不能为空!";
+		document.getElementById("username").focus();
+		return false;
+	}else {
+		document.getElementById("msg").innerHTML = "";
+	}
+	if(password == ''){
+		document.getElementById("msg").innerHTML = "密码不能为空!";
+		document.getElementById("password").focus();
+		return false;
+	}
+	document.getElementById("msg").innerHTML = "登录中,请稍候...";
+	createXMLHttpRequest();
+
+	var url = 'jsonlogin.php?mod=User&act=pdaUserLogin&jsonp=1';
+	var param = 'username='+username+'&password='+password;
+	xmlHttpRequest.open("POST",url,true); 
+	xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+	xmlHttpRequest.onreadystatechange = checkLoginResponse;
+	xmlHttpRequest.send(param);
+
+}
+function checkLoginResponse(){
+	if(xmlHttpRequest.readyState == 4){  
+		if(xmlHttpRequest.status == 200){  
+			var res = xmlHttpRequest.responseText;		
+			res = eval("("+res+")");
+			if(res.data == "ok"){
+				window.location.href = "index.php?mod=pda_index&act=pda_index0";
+			}else{
+				document.getElementById("msg").innerHTML = "登录失败,请检查帐号密码是否正确！";
+			}
+			
+		}
+	}	
+}
+function fuc_onload(){
+	document.getElementById("username").focus();
+}
+function checkkey(){
+	var e = event || e;
+	if(e.keyCode == 13){
+		checkLogin();
+	}
+}
+</script>
+{/literal}

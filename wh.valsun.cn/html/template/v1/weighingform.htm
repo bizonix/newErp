@@ -1,0 +1,48 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/weighing.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<div>
+	<div id="showMsgDiv" style="padding-left:80px; margin-top:10px;">
+		<span></span>
+	</div>
+    <div class="gd_divrow">
+        <div class="gd_labeldiv">
+           	 发货单号:
+        </div>
+        <div calss="gd_input" style="dispaly:none;">
+            <input id="orderidinput" onkeypress="getSkuList(event)" class="orderidinput"/>
+        </div>
+        <div class="clear:both;">
+        </div>
+    </div>
+
+	<div class="gd_divrow " style="margin-top:5px;">
+        <div class="gd_labeldiv">
+        	重量:
+        </div>
+        <div calss="gd_input">
+           	<input onkeypress="scansubmit(event)" id="skunumberinput" class="orderidinput"/> KG
+        </div>
+        <div class="clear:both;">
+        </div>
+    </div>
+	 <!--<div class="gd_divrow " style="margin-top:5px;">
+        <div class="gd_labeldiv">
+        	包装员:
+        </div>
+    <div calss="gd_input">
+        	
+            <select id="skulistselect" class="skulist" >
+			{foreach $packinguser as $uval }
+				<option value="{$uval.global_user_id}">{$uval.global_user_name}</option>
+			{/foreach}
+        	</select>
+			
+        </div>
+        <div class="clear:both;">
+        </div>
+    </div>-->   
+</div>
+{include file='footer.htm'}

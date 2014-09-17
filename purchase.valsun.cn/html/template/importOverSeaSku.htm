@@ -1,0 +1,51 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">                
+    	您的位置：<a href="index.php?mod=productStockalarm&act=oversea">海外仓预警</a>>>料号海外采购负责人导入页面
+    </div>     
+</div>
+<div class="servar products-servar"> 
+<span>
+<form action="index.php?mod=purToWh&act=importOverSeaSku" enctype="multipart/form-data" method="post" target="_blank" onSubmit="return checkSumbit()">
+	<table>
+		<tr>
+			<td><input id="upfile" name="upfile" type="file" style="background:#CCCCCC"></td>
+			<td><input type="submit" value="导入"></td>
+		</tr>
+	</table>
+</form>
+</span>
+</div>      
+<div class="main underline-main">
+  <table width="30%" border="1" cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="2" style="color:#FF0000; font-weight:bolder">导入格式</td>
+	</tr>
+	<tr>
+		<td>A列(料号)</td>
+		<td>B列(海外负责人)</td>
+	</tr>
+</table>                 
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}
+<script>
+{literal}
+function checkSumbit(){
+	var upfile		= $('#upfile').val();
+	var str			= upfile.split(".");
+	var extend      = str[1];
+	if(extend != 'xls' && extend != 'xlsx'){
+		alert('请上传表格文件');
+		return false;
+	}
+	if(upfile.length == ''){
+		alert('请选择文件上传');
+		return false;
+	}
+}
+{/literal}
+</script>
+
+            

@@ -1,0 +1,157 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+        您的位置：<a href="index.php?mod=user&act=index">用户信息管理</a>&nbsp;&gt;&gt;&nbsp;添加用户
+    </div>    
+    </div>          
+    <div class="main">
+    <h1>添加用户</h1>
+    <form onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+				<td align="right" width="11%">登录名：</td>
+                <td align="left">
+                    <input type="text" name="loginname" id="loginname" value=""/>
+					<span class="red">*</span>
+                </td>
+                <td align="right">Email：</td>
+                <td align="left">
+                    <input type="text" name="email" id="email" value="" size="35" maxlength="80"/>
+					<span class="red">*</span>
+				</td>
+            </tr>
+			<tr>
+                <td align="right" width="11%">姓名：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="username" id="username" value=""/>
+                  <span class="red">*</span>
+                </td>
+              <td align="right" width="13%">密码：</td>
+                <td width="49%" align="left">
+                <input type="password" name="password" id="password" value=""/>
+                <span style="color:red;">用户密码，不低于六位</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" width="11%">工号：</td>
+                <td align="left">
+                    <input type="text" name="jobno" id="jobno" value=""/>
+                </td>
+              <td align="right">联系电话：</td>
+                <td align="left">
+                    <input type="text" name="phone" id="phone" value="" maxlength="20"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">性别：</td>
+                <td align="left">
+                    <label><input name="usersex" type="radio" value="1" checked="checked"/>男</label>
+                    <label><input name="usersex" type="radio" value="2"/>女</label>
+                <span class="red">*</span>
+                </td>
+              <td align="right" width="13%">婚姻：</td>
+                <td align="left">
+                    <label><input name="usermarry" type="radio" value="0" checked="checked"/>未婚</label>
+                    <label><input name="usermarry" type="radio" value="1"/>已婚</label>
+                <span class="red">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">所属岗位权限：</td>
+                <td align="left">
+                <select name="userjob" id="userjob">
+                    <option value=""> 请选择岗位 </option>
+                    {foreach item=joblist from=$joblists}
+                    <option value="{$joblist.jobpower_id}|{$joblist.job_id}|{$joblist.job_path}" {if $joblist.job_id==$modifyuser.user_job}selected="selected"{/if}>{$joblist.job_name}</option>
+                    {foreachelse}
+                    <option value="" selected="selected"> 无岗位权限 </option>
+                    {/foreach}
+                </select>
+                <span class="red">*</span>
+                </td>
+              <td align="right">所属部门：</td>
+                <td align="left">                
+                <select name="userdept" id="userdept">
+                    <option value=""> 请选择部门 </option>
+                    {foreach item=deptlist from=$deptlists}
+                    <option value="{$deptlist.dept_id}" {if $deptlist.dept_id==$userself.user_dept}selected="selected"{/if}>{$deptlist.dept_name}</option>
+                    {foreachelse}
+                    <option value=""> 无部门 </option>
+                    {/foreach}
+                </select>
+                <span class="red">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+                    <button name="button" type="submit" id="submit-btn" value="search" />提 交</button>
+                    <button name="button" type="button" id="bottom" value="history" onclick="location.href='index.php?mod=user&act=index'"/>返 回</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    </div>
+    <div class="bottomvar"></div>
+</div>
+{include file="footer.htm"}
+<script>
+{literal}
+$("#submit-btn").click(function(){
+    var loginname,username,password,jobno,phone,email,usersex,usermarry,userjob,userdept;
+	loginname= $.trim($("#loginname").val());
+	username = $.trim($("#username").val());
+    password = $.trim($("#password").val());
+    jobno 	 = $.trim($("#jobno").val());
+    phone	 = $.trim($("#phone").val());
+    email	 = $.trim($("#email").val());
+    usersex  = $('input[name="usersex"]:checked').val();
+    usermarry= $('input[name="usermarry"]:checked').val();
+    userjob	 = $.trim($("#userjob").val());
+    userdept = $.trim($("#userdept").val());
+	if(loginname == ''){
+		alertify.error("亲,登录名不能为空!");
+		$("#loginname").focus();
+		return false;
+	}
+	if(email == ''){
+		alertify.error("亲,email不能为空!");
+		$("#email").focus();
+		return false;
+	}
+	if(username == ''){
+		alertify.error("亲,姓名不能为空!");
+		$("#username").focus();
+		return false;
+	}
+	if(password == '' || password.length < 5){
+		alertify.error("亲,密码不能为空且长度不能低于6位!");
+		$("#password").focus();
+		return false;
+	}
+	if(userjob == ''){
+		alertify.error("亲,所属岗位不能为空!");
+		$("#userjob").focus();
+		return false;
+	}
+	if(userdept == ''){
+		alertify.error("亲,所属部门不能为空!");
+		$("#userdept").focus();
+		return false;
+	}
+	
+	$("#submit-btn").html("提交中,请稍候...");
+	$.post("index.php?mod=user&act=insert",{"loginname":loginname,"username":username,"password":password,"jobno":jobno,"phone":phone,"email":email,"usersex":usersex,"usermarry":usermarry,"userjob":userjob,"userdept":userdept},function(rtn){
+		if($.trim(rtn) == "ok"){
+			alertify.success("亲,帐号添加成功,5秒后跳转到首页！"); 
+			window.setTimeout(window.location.href = "index.php?mod=user&act=index",5000);        
+		}else {
+			$("#submit-btn").html("提 交");
+			alertify.error("亲,帐号添加失败,请检查数据是否有异常！");        
+		}
+	});
+});
+function check(){
+	return false;
+}
+{/literal}
+</script>

@@ -1,0 +1,84 @@
+{include file='header.htm'}
+{include file='owNav.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/pregoodsManage.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<div>
+<div style="margin-top:5px;">
+    <form action="index.php?mod=owGoodsReplenishManage&act=showOrderList" method="get" style="display:inline-block">
+	备货单号：<input type="text" value="{$orderSn}" name="ordersn" />
+	状态:
+	<select name="status">
+	    <option value="NULL">请选择类型</option>
+	    <option {if $status==1 }selected="selected"{/if} value="1">待处理</option>
+	    <option {if $status==2 }selected="selected"{/if} value="2">待配货</option>
+	    <option {if $status==3 }selected="selected"{/if} value="3">待复核</option>
+	    <option {if $status==4 }selected="selected"{/if} value="4">配货完毕</option>
+	</select>
+	SKU:<input type="text" value="{$sku}" name="sku" size="10" />
+	SKU配货状态:
+	<select name="skustatus">
+	    <option value="NULL">请选择类型</option>
+	    <option {if $skustatus==1 }selected="selected"{/if} value="1">未配货</option>
+	    <option {if $skustatus==2 }selected="selected"{/if} value="2">已配货</option>
+	</select>
+	开始时间:<input type="text" onClick="WdatePicker()" name="startTime" size="8" />
+	结束时间:<input type="text" onClick="WdatePicker()" name="endTime" size="8" />
+	<input type="hidden" name="mod" value="owGoodsReplenishManage">
+	<input type="hidden" name="act" value="showOrderList">
+	<input type="submit" value="搜索">
+    </form>
+    <input style="margin-left:30px;" type="button" onclick="goPrintOrder()" value="打印拣货单">
+</div>
+	<div class="main underline-main order-main">
+        <table cellspacing="0" width="100%">
+            <tr class="title">
+                <td><input type="checkbox" onclick="chooseCheckBox()" /></td>
+                <td>备货单号</td>
+                <td>下单时间</td>
+                <td>下单人</td>
+                <td>备货单状态</td>
+                <td>同步时间</td>
+                <td>操作</td>
+				<td>详情</td>
+            </tr>
+			{foreach $orderList as $order}
+            <tr class="title">
+                <td><input type="checkbox" value="{$order.id}" class="ordercheckbox"></td>
+                <td>{$order.ordersn}</td>
+                <td>{$order.createTimeStr}</td>
+                <td>{$order.ownerName}</td>
+                <td>{$order.statusStr}</td>
+                <td>{$order.synctimeStr}</td>
+                <td><a href="index.php?mod=owGoodsReplenishManage&act=editOrder&orderId={$order.id}">修改</a></td>
+				<td>
+					<table cellspacing="0" width="100%" style="border: none; margin: 0;">
+                        <tr>
+                            <td>sku</td>
+                            <td>备货数量</td>
+                            <td>配货数量</td>
+                            <td>扫描时间</td>
+                            <td>配货人</td>
+                        </tr>
+                     {foreach $order.skulist as $skuinfo}
+                        <tr>
+                            <td>{$skuinfo.sku}</td>
+                            <td>{$skuinfo.amount}</td>
+                            <td>{$skuinfo.scantnum}</td>
+                            <td>{$skuinfo.scantime}</td>
+                            <td>{$skuinfo.userName}</td>
+                        </tr>
+                     {/foreach}
+                    </table>
+				</td>
+            </tr>
+		{/foreach}
+        </table>
+    </div>
+<div style="text-align:center;">
+    {$pagestr}
+</div>
+</div>
+{include file='footer.htm'}

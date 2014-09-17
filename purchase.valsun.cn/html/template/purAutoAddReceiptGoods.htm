@@ -1,0 +1,91 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">                
+    	您的位置：<a href="index.php?mod=purToWh&act=index">收货管理</a>>>采购员手工录入收货信息
+    </div>     
+</div>            
+<div class="main underline-main">
+<table width="70%" border="0" cellpadding="0" cellspacing="0" style=" text-align:inherit; padding-left:40px;" >
+    <tr>
+        <td>订单号</td>
+        <td colspan="6">
+			<input name="txt_ordersn" type="text" id="txt_ordersn" />
+			<input type="hidden" value="{$dataInfo.id}" id="hid_id" />
+		</td>           
+    </tr>
+	<tr id="sign" style="display:none">
+		<td>订货时间</td>
+        <td>料号</td>
+        <td>供应商</td>
+        <td>订货数量</td>
+		<td>订货价格</td> 
+		<td>订货金额</td>                                      
+		<td>订货备注</td>
+    </tr>
+    <tr>
+        <td><input name="addInfo" type="button" value="保存" id="button_submit" /></td>
+        <td colspan="6">&nbsp;</td>
+    </tr>
+</table>                      
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}
+
+<script>
+{literal}
+$(document).ready(function(){
+	$('#txt_ordersn').focus();
+})
+$('#txt_ordersn').keydown(function(event){
+	var len 	= 0;
+	var html 	= '';
+	if(event.keyCode == 13){ 
+		var ordersn = $('#txt_ordersn').val();
+		if(ordersn == ''){
+			alertify.error('订单号不能为空');
+			$('#txt_ordersn').focus();
+			return false;
+		}else{
+			var url  = "json.php?mod=purToWh&act=getOrderInfo"; 
+			$('.orderinfo').remove();
+			$.post(url, {"ordersn":ordersn}, function(rtnData){   
+				$.each(rtnData,function(i,item){
+					var ii 	= i+1;
+					len  	= ii;
+					html += '<tr class="orderinfo"><td>'+item.addtime+'</td><td>'+item.sku+'</td><td>'+item.company_name+'</td><td>'+item.count+'</td><td>'+item.price+'</td><td>'+item.price * item.count+'</td><td>'+item.note+'</td></tr>';
+				});
+				html += '<tr style="display:none" class="orderinfo"><td colspan="7"><input type="hidden" id="lencount" value="'+len+'" /></td></tr>';
+				$('#sign').show();
+				$('#sign').after(html);
+			},'json')    
+		}
+	}
+})
+$('#button_submit').click(function(e){
+    var url  	= "json.php?mod=purToWh&act=autoAdd";  
+	var ordersn = $('#txt_ordersn').val();
+	var len     = $('#lencount').val();
+	if(len > 0){
+		$.post(url, {"ordersn":ordersn} , function(rtn){        
+			var code = rtn.code;
+			var msg  = rtn.msg;
+			if(code == 1){
+				alertify.alert(msg,function(){
+					window.location.reload(); 
+				}); 
+			}else{
+				alertify.error(msg); 
+			}
+		 },"json");
+	}else{
+		alertify.error('没有数据');
+		$('#txt_ordersn').focus();
+		return false;
+	}
+});
+
+{/literal}
+</script>
+
+            

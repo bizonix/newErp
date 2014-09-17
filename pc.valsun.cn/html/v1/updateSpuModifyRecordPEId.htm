@@ -1,0 +1,99 @@
+{include file="header.htm"}
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+            <div class="main products-main">                    
+					<table class="products-action" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="width: 500px;" align="right"><span style="color:#F00;">&nbsp;</span>状态：</td>
+							<td align="left">
+                            <input disabled="disabled" value="{if $spuModifyRecord['status'] == 1}待处理{elseif $spuModifyRecord['status'] == 2}处理中{elseif $spuModifyRecord['status'] == 3}已处理{/if}"/>
+							</td>
+						</tr>
+						<tr>
+                            <td style="width: 500px;" align="right"><span style="color:#F00;">&nbsp;</span>SPU：</td>
+							<td align="left">
+                            <input disabled="disabled" value="{$spuModifyRecord['spu']}"/>
+                            <input type="hidden" id="spuModifyRecordId" value="{$spuModifyRecord['id']}"/>
+							</td>
+						</tr>
+                        <tr>
+                       	    <td align="right">
+                                <span style="color:#F00;">&nbsp;</span>所关联的虚拟SPU：
+                            </td>
+                            <td align="left">
+								<textarea disabled="disabled" cols="60" rows="3">{$spuModifyRecord['combineSpuRelativeContent']}</textarea>
+							</td>
+						</tr>
+                        <tr>
+                            <td align="right" width="200px"><span style="color:#F00;">&nbsp;</span>修改/优化：</td>
+                            <td align="left">
+                                 <select disabled="disabled">
+                                    <option value=""></option>
+                                    <option value="1" {if $spuModifyRecord['recordType'] == 1}selected="selected"{/if}>修改</option>
+                                    <option value="2" {if $spuModifyRecord['recordType'] == 2}selected="selected"{/if}>优化</option>
+                                 </select>
+							</td>
+						</tr>
+                        <tr>
+                            <td style="width: 500px;" align="right"><span style="color:#F00;">*</span>产品工程师：</td>
+							<td align="left">
+                                <select name="PEId" id="PEId" style="width: 80px;">
+									<option value="" ></option>
+                				    {foreach getAllPEInfo() as $value}
+                					<option value="{$value['global_user_id']}" {if $spuModifyRecord['PEId'] == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+                					{/foreach}                                           
+								</select>
+							</td>
+						</tr>        
+                        <tr>
+                            <td></td>                            
+							<td align="left"><input type="button" value="提交" id="updateSpuModifyRecordPEIdOn"/><input type="button" value="返回" id="back"/></td>
+						</tr>
+					</table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">        
+        $(document).ready(function(){
+            
+            $("#back").click(function(){
+        		history.back();
+        	});
+            
+            $('#updateSpuModifyRecordPEIdOn').click(function(){
+                id = $("#spuModifyRecordId").val();
+                PEId = $("#PEId").val();
+                if(id == 0){
+                   alert('非法记录');
+                   return; 
+                }
+                if(PEId == '' || PEId == 0){
+                    alert('产品工程师不能为空');
+                    return;
+                }
+                
+                $.ajax({
+    				type	: "POST",
+    				dataType: "jsonp",
+    				url		: 'json.php?mod=goods&act=updateSpuModifyRecordPEIdOn&jsonp=1',
+    				data	: { id:id,PEId:PEId },
+    				success	: function (msg){
+    				    alert(msg.errMsg);
+    				}
+    			});
+            });
+        });       
+</script>

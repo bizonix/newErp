@@ -1,0 +1,155 @@
+{include file='header.htm'}
+{include file='whNav.htm'}
+<script language="javascript" src="js/printOrder.js"></script>
+ <div class="servar wh-servar">
+<input name="hiddenuserid" type="hidden" value="" id="hiddenuserid" />
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tr>	
+		<td nowrap="nowrap" scope="row" width="10%"><h4>订单分组打印</h4></td>
+		<td>
+		（非单料号操作顺序：点击订单生成最优配货索引--->>打印订单--->>将已打印的订单移动到其他文件夹--->>点击生成订单配货分组-->>打印配货清单）
+		<br/>（单料号操作顺序：点击生成订单配货分组-->>打印配货清单)
+		</td>
+	</tr>
+	<tr>	
+		<td colspan="2"><div id="operate">{$status}</div></td>
+	</tr>
+</table>
+</div>
+<br/>
+<div class="servar wh-servar">
+<br/>
+<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+	<tr>
+		<td width="26%">
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				<tr>
+					<td nowrap="nowrap" class='paginationActionButtons'>			
+                    	<!--form id="form" name="form" method="post" action="print_order.php"-->
+                  			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+								
+								<input name="ebay_id" id="ebay_id" type="hidden" value="" >
+								<tr>
+									<td align="right" style="color:#000000">如果是单料号请跳过该步骤</td>
+									<td><div align="right">&nbsp;</div></td>
+									<td align="center" style="color:#000000">请输入打印条数（以30的倍数为佳），如果没输入将打印该组全部订单</td>
+				                    <td></td>
+			                    </tr>
+								<tr>
+									<td width="15%" align="right" >
+									<div align="right">
+									<form id="form" name="form" method="post" action="index.php?mod=printOrder&act=printOptimal&list={$list}">
+									<input name="print_list" id="print_list" type="hidden" value="{$list}" >
+									<input name="group_bool" id="group_bool" type="hidden" value="{$group_bool}" >
+									<input name="print_group" id="print_group" type="hidden" value="0" >
+									<input type="hidden" name="originator" value="{$code}"> 
+									<input name="route_index" type="submit" class="input_button"" value="订单生成最优配货索引">
+									</form>
+									</div>
+									</td>
+			        				<td width="10%" align="right"><div align="right">&nbsp;</div></td>
+			        				<td width="40%" align="center">
+										{if isset($count)}
+											(该组共有<font color='red'>{$count}</font>笔订单)
+										{/if}
+			        					打印从<input type="text" name="start_num" id="start_num" value=""/>
+										条到<input type="text" name="end_num" id="end_num" value=""/>条
+										<select name="printid" id="printid" onchange="printtofiles()" >
+										<option value="0" id="printidselect">打印订单</option>
+										</select>
+										<!--input name="sure_num" type="submit" value="确定"-->
+			        				</td>
+									<td width="35%" align="left" >
+			        					<div align="left">
+										请将已打印的订单移动到其他文件夹
+									        <select name="status" id="status">
+					                            <option value="0" >请选择</option>
+						                    </select>
+											<button  id="sure_move" disabled="disabled">确定</button>
+			       						</div>
+			        				</td>
+			      				</tr>
+                			</table>
+                 		<!--/form--> 
+               		</td>
+	    		</tr>
+			</table>		
+		</td>
+	</tr>      
+</table>
+<br/>
+</div>
+<br/>
+<div class="servar wh-servar">
+<br/>
+<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+	<tr>
+		<td width="26%">
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' >
+				<tr>
+					<td nowrap="nowrap" class='paginationActionButtons'>			
+                    	<!--form id="form" name="form" method="post" action="print_order.php"-->
+                  			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+								
+								<input name="ebay_id" id="ebay_id" type="hidden" value="" >
+								<tr>
+									<td width="15%" align="right" >
+									<div align="right">
+									<!--button  id="order_group" >生成订单配货分组</button-->
+									<input type="button" class="input_button" id="order_group" value="生成订单配货分组">
+									</div>
+									</td>
+									<td width="10%" align="right" ></td>
+									<td width="75%" align="right" >
+									<div align="left">
+									配货清单号：<input type="text" id="select_order_group" value=""/>
+									<!--button id="print_order_group">打印配货清单</button-->
+									<input type="button" class="input_button" id="print_order_group" value="打印配货清单">
+									(如果没有输入指定的配货清单号，即打印刚刚生成的配货分组的全部配货清单)
+									</div>
+									</td>
+									<td></td>
+								</tr>
+                			</table>
+                 		<!--/form--> 
+               		</td>
+	    		</tr>
+			</table>		
+		</td>
+	</tr>      
+</table>
+<br/>
+</div>
+<br/>
+ <div class="servar wh-servar">
+ <br/>
+ <table cellpadding='0' cellspacing='0' width='100%' border='0' >
+	<tr>
+		<td>
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' >
+				<tr>
+					<td width="10%"></td>
+					<td width="30%">
+						<div align="left">
+						配货清单号打印订单：<input type="text" id="scan_order_group" value="" onkeydown="scan_order_group()"/>
+						(请扫描配货清单)
+						</div>
+					</td>
+					<td>
+						<select name="printid" id="group_printid" onchange="printtofile()" disabled="disabled">
+							<option value="0" id="printidselect">打印订单</option>
+							<option value="1" >标签打印-50*100</option>
+							<option value="3" >异常留言标签打印-50*100</option>
+							<option value="2" >标签打印-100*100</option>
+						</select>	
+					</td>
+					<td ><button id="today_order_group">今日打印配货清单查询</button>&nbsp;&nbsp;<button id="today_not_order_group">今日未打印地址条配货清单查询</button></td>
+				</tr>
+			</table>
+		</td>
+		
+	</tr>      
+</table>
+<br/>
+ </div>
+{include file='footer.htm'}

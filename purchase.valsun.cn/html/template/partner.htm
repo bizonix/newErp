@@ -1,0 +1,206 @@
+{include file="header.htm"}
+
+<div class="row well" style="clear:both">
+	<div class="col-md-4">
+        <input name="" type="text" id="keyword" value="{$keyword}" class="form-control"/>
+	</div>   
+	<div class="col-md-8">
+		<button type="button" class="btn btn-primary" id="button_search" >搜索</button>
+		<a href="index.php?mod=partner&act=addPartner" type="button" class="btn btn-success" id="button_add" >添加</a>
+		<button type="button" class="btn btn-warning" id="button_warning" >加入黑名单</button>
+		{if $power eq 1}
+		<button type="button" class="btn btn-danger" id="button_delete" >删除</button>
+		<button type="button" class="btn btn-primary" id="export-btn" >供应商导出</button>
+		{/if}
+	</div>   
+    <!--<span>
+        <a href="javascript:void(0)" id="button_export" >导出</a>
+    </span>
+    <span>
+        <a href="index.php?mod=partner&act=import" id="button_import" >批量导入</a>
+    </span>-->
+    <!-- 
+	    <span>
+	        <a href="javascript:void(0)" id="button_moveinWhite" >加入优质供应商</a>
+	    </span>
+     -->
+</div>
+<!--div class="main main-in purchase-main"-->
+<div class="row well ">
+
+	<table class="table table-bordered ">
+		<thead>
+			<tr>
+				<td><input type="checkbox" id="checkAll" value=""></td>
+				<td></td>
+				<td>公司名称</td>
+				<td >添加时间</td>
+				<td >公司类型</td>
+				<td >联系人</td>
+				<td >状态</td>
+				<td >座机</td>
+				<td >手机</td>
+				<td >采购员</td>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach key=uk item=userList from=$userLists}
+			<tr>
+				<td><input name="checkbox-list" type="checkbox" value="{$userList.id}" /></td>
+				<td>
+					<button type="button" onclick="jumpUrl('index.php?mod=partner&act=editPartner&id={$userList.id}')" class="btn btn-info">修改</button>
+				</td>
+				<td name="changeLine"><a href="{$userList.shoplink}" target="_blank">{$userList.company_name}</td>
+
+				{if $userList.addtime eq  0}
+				<td></td>
+				{else}
+				<td>{$userList.addtime|date_format:'%Y-%m-%d'}</td>
+				{/if}
+				<td>{$userList.category_name}</td>
+				<td>{$userList.username}</td>
+				<td>{$userList.status}</td>
+				<td>{$userList.tel}</td>
+				<td>{$userList.phone}</td>
+				<td>{$userList.purchaseuser_id|getUserNameById}</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+<div>
+<div class="bottomvar">
+    <div class="pagination">
+        {$pageStr}
+    </div>
+</div>
+{include file="footer.htm"}
+
+{literal}
+<script>
+
+
+$('#checkAll').click(function(){
+  select_all('checkAll','input[name="checkbox-list"]',0);
+});
+
+$('#button_search').click(function(e){
+    e.preventDefault();
+	var type = $.trim($('#type').val());
+	var keyword  = $.trim($('#keyword').val());
+    var url = "index.php?mod=partner&act=index&type="+type+"&keyword="+keyword;
+    window.location.href = url;
+});
+
+$('#button_blackList').click(function(e){
+ 	e.preventDefault();
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	if(checkBoxArr.length==0){
+	    alertify.alert('请选择要操作的项！');
+		return false;
+	}
+
+
+	/*
+    alertify.confirm( '确定加入黑名单吗？', function(e) {
+        if(!e) {
+           return false;
+        }
+    });
+	*/
+
+	idArr=[];
+	checkBoxArr.each(function(i){
+		idArr.push($(this).val());
+	});
+
+    var url  = "json.php?mod=partner&act=addBlackList";
+    $.post(url, {"idArr":idArr}, function(rtn) {
+        console.log(rtn);
+         window.location.reload();
+		 /*
+        if(rtn.errCode == 0) {
+            window.location.reload();
+        } else {
+            alertify.alert(rtn.errMsg);
+        }
+		*/
+     },"json");
+});
+
+$('#button_moveinWhite').click(function(e){
+	e.preventDefault();
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	if(checkBoxArr.length==0){
+	    alertify.alert('请选择要操作的项！');
+		return false;
+	}
+	if(!confirm('确定加入优质供应商吗？')){
+		return false;
+    };
+	idArr=[];
+	checkBoxArr.each(function(i){
+		idArr.push($(this).val());
+	});
+
+    var url  = web_api+"json.php?mod=partner&act=moveinWhiteList";
+    $.post(url, {"idArr":idArr}, function(rtn) {
+        console.log(rtn);
+        if(rtn.errCode == 0) {
+            window.location.reload();
+        } else {
+            alertify.alert(rtn.errMsg);
+        }
+     },"jsonp");
+});
+
+$('#button_delete').click(function(e){
+	e.preventDefault();
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	if(checkBoxArr.length==0){
+	    alertify.alert('请选择要操作的项！');
+		return false;
+	}
+
+	idArr=[];
+	checkBoxArr.each(function(i){
+		idArr.push($(this).val());
+	});
+    var url  = "json.php?mod=partner&act=delPartners";
+    $.post(url, {"idArr":idArr}, function(rtn) {
+        console.log(rtn);
+        if(rtn.errCode == 0) {
+            window.location.reload();
+        }else{
+            alertify.alert(rtn.errMsg);
+        }
+     },"json");
+});
+
+$('#export-btn').click(function(e){
+	e.preventDefault();
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	/*if(checkBoxArr.length==0) {
+        alertify.alert('如果您不选择供应商，将会导出所有供应商数据！');
+	}*/
+	idArr=[];
+	checkBoxArr.each(function(i){
+		idArr.push($(this).val());
+	});
+   	url	 = "exportPartner.php";
+	window.open(url);
+});
+
+function jumpUrl(url){
+    window.location.href = url;
+}
+
+function openUrl(url){
+	if(url == ''){
+		return false;
+	}
+    window.open(url);
+} 
+{/literal}
+
+</script>
+

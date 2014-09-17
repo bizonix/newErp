@@ -1,0 +1,84 @@
+{include file="header.html"}
+<script type="text/javascript" src="./js/pendingProducts.js"></script>
+<div class="fourvar">
+{include file="iqcnav.html"}
+	            <div class="texvar">
+
+                </div>
+                <div class="pagination">
+                	{$show_page}
+                </div>
+</div>
+            <div class="servar">
+                <!--<span>
+                	<input type="button" id='' style="width:100px;height:35px;font-size:20px; cursor:pointer;" value="添加系数" />
+                </span>-->
+<!--                <span>
+                	<input type="button" id='' style="width:100px;height:35px;font-size:20px; cursor:pointer;" value="增加标准" />
+                </span>
+                <span>
+                	<input type="button" id='' style="width:150px;height:35px;font-size:20px; cursor:pointer;" value="增加标准详细" />
+                </span>-->
+                <!--<span style="float: right;">
+                    <span>系数：</span>
+                    <input id='cName' value="" />
+                    <span>检测样本类别：</span>
+                    <input id='sampleTypeId' value="" />
+                	<input type="button" id="search" value="搜索" />
+                    &nbsp;&nbsp;
+                </span>-->
+                <span style="color: red;">{$status}</span>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td>编号</td>
+						<td>检测样品记录编号</td>
+						<td>spu</td>
+						<td>sku</td>
+						<td>待定数量</td>
+						<td>已处理数量</td>
+						<td>处理状态</td>
+						<td>备注</td>
+						<td>卖家id</td>
+						<td>首次处理时间</td>
+						<td>最后处理时间</td>
+						<td>操作</td>
+                    </tr>
+                    
+                    {foreach from=$pendingProductsList item=value}
+                    <tr class="odd">
+                        <td>{$value.id}</td>
+						<td>{$value.infoId}</td>
+						<td>{$value.spu}</td>
+						<td>{$value.sku}</td>
+						<td>{$value.pendingNum}</td>
+						<td>{$value.processedNum}</td>
+						<td>{if $value.pendingStatus == 0}待处理{elseif $value.pendingStatus == 1}正在修改图片{elseif $value.pendingStatus == 2}完成图片修改{elseif $value.pendingStatus == 3}已处理{/if}</td>
+						<td>{$value.note}</td>
+						<td>{$value.sellerId}</td>
+						<td>{$value.startTime|date_format:"Y-m-d H:i"}</td>
+						<td>{$value.lastModified|date_format:"Y-m-d H:i"}</td>
+						<td>
+                            {if $value.pendingStatus == 0}
+                            <input type="button" class="updatePic" pending_id="{$value.id}" info_id="{$value.infoId}" status="{$value.pendingStatus}" value="修改图片"/>
+							{/if}
+                            {if $value.pendingStatus == 0 || $value.pendingStatus == 2}
+                            <input type="button" class="back" pending_id="{$value.id}" info_id="{$value.infoId}" status="{$value.pendingStatus}" value="正常回测"/>
+							{/if}
+                            {if $value.pendingStatus == 0}
+                            <input type="button" class="return" pending_id="{$value.id}" info_id="{$value.infoId}" status="{$value.pendingStatus}" value="待退回"/>
+	                        {/if}
+                        </td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.html"}

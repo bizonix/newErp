@@ -1,0 +1,62 @@
+{include file='headerNoNav.htm'}
+<script src="js/expressRemark.js"></script>
+<div align="left">
+    <div id="content" >
+		<div style="margin-left:10px">
+			<br>
+            <font size="5" style="font-weight:bold">添加中差评</font>	
+            <br><br>
+			<form id="addNagetiveForm" style="border:1px solid;width:800px;padding:10px" name="addNagetiveForm" method="post" action="index.php?mod=negativeFeedback&act=index&jsonp=1&orderid={$orderid}" onSubmit="return check();">
+				<input type="hidden" name="orderid" value="{$orderid}">
+				<table id="gallery-table" border="0" cellspacing="0" cellpadding="0" width="100%">
+					<tr>
+						<th align="center" valign="middle"></th>
+						<th align="center" valign="middle" scope='col' nowrap="nowrap">料号</th>
+						<th align="center" valign="middle" scope='col' nowrap="nowrap">评价类型</th>
+						<th align="center" valign="middle" scope='col' nowrap="nowrap">中差评原因1</th>
+						<th align="center" valign="middle" scope='col' nowrap="nowrap">中差评原因2</th>
+						<th align="center" valign="middle" scope='col' nowrap="nowrap">备注</th>
+					</tr>
+					{foreach key=kid item=list  from=$skuinfoList}
+						  <tr>
+							
+                            <td  style="padding:5px" align="center" valign="middle"><input name="checksku" type="checkbox" value="{$list.sku}" /></td>
+							<td align="center" valign="middle">{$list.sku}</td>
+							<td align="center" valign="middle">
+								<input type="radio" name="{$list.sku}*app" {if $list.type==="0"}checked="checked"{/if} value="0" >中评
+								<input type="radio" name="{$list.sku}*app" {if $list.type==="1"}checked="checked"{/if} value="1" >差评
+							</td>
+							<td align="center" valign="middle">
+								<select name="{$list.sku}*reason1" id="_reason1" >
+									<option value="">请选择原因</option>
+									{foreach key=rid item=reason from=$reasonList}
+									<option value="{$rid}" {if $list.reason1=={$rid}}selected="selected"{/if}>{$reason}</option>
+									{/foreach}
+								</select>
+							</td>
+							<td align="center" valign="middle">
+								<select name="{$list.sku}*reason2" id="_reason2" >
+									<option value="">请选择原因</option>
+									{foreach key=rid item=reason from=$reasonList}
+									<option value="{$rid}" {if $list.reason2=={$rid}}selected="selected"{/if}>{$reason}</option>
+									{/foreach}
+								</select>
+							</td>
+							
+							<td align="center" valign="middle">
+								<input type="text" name="{$list.sku}*remark"  value="{$list.remark}">
+							</td>
+						  </tr>
+					{/foreach}
+				</table>
+				<br>
+				<button type="submit" name="submit">保存</button>
+				
+				<br>
+            </form>
+        </div>
+        <div style="padding:10px">{$message}</div>
+    	<div class="clear"></div>
+    </div>
+</div>
+{*include file="footer.htm"*}

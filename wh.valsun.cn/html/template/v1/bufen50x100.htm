@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/label50x100.css"/>
+<title>Print</title>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+{foreach $ordersinfo as $key=>$orderval}
+	<table width="" height="100" border="0" cellpadding="0" cellspacing="0" style="border:1px dashed #999999; height:46mm; width:120mm">
+	  <tr>
+				<td width="75" valign="top"  style="border-right:#000000 1px dashed;padding:2px 0 0 4px;">
+					<table width="75" border="0" cellpadding="0" cellspacing="0" style="width:75px; table-layout:fixed; overflow: scroll;word-break:break-all;">
+						<tr>
+						  <td><span class="STYLE5">{$orderval.recordNumber}&nbsp;</span></td>
+						</tr>
+						<tr>
+						  <td><span class="STYLE5">{$orderval.carrier}&nbsp;</span></td>
+						</tr>
+						<tr>
+						  <td><span class="STYLE5">ZL:{$orderval.calcWeight}&nbsp;</span><span class="STYLE5">&nbsp;</span></td>
+						</tr>
+						  <tr>
+							<td><span class="STYLE5">YF:</span><span class="STYLE5">{$orderval.calcShipping}</span></td>
+						  </tr>
+						  <tr>
+							<td><span class="STYLE5">&nbsp;</span>
+							  <span class="STYLE5">&nbsp;</span></td>
+						  </tr>
+						  <tr>
+							<td><span class="STYLE5">mj:</span><span class="STYLE5">{$orderval.username}&nbsp;</span></td>
+						  </tr>
+						  <tr>
+							<td><span class="STYLE5">zh:</span><span class="STYLE5">{$orderval.platformUsername}&nbsp;</span></td>
+						  </tr>
+						  <tr>
+							<td>{$key+1}/{$totalCount}&nbsp;</td>
+						  </tr>
+					  </table>
+				  </td>
+				<td width="400" valign="top" style="border-right:#000000 1px dashed" >
+					  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="word-break:break-all;">
+					  {foreach $orderval.finalposition as $pinfo}
+						<tr><td><strong>[{$pinfo.location}]&nbsp;{$pinfo.sku}*{$pinfo.amount}</strong></td></tr>
+					  {/foreach}
+					  <tr>
+						<td><strong>Total Qty:{$orderval.totalnum}</strong></td>
+					  </tr>
+					</table>
+				</td>
+				<td width="180" valign="top">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						   <tr>
+							   <td align="center">{$orderval.id}</td>
+						   </tr>
+						  <tr>
+							<td align="center"><img src="barcode128.class.php?data={$orderval.id}" alt="" width="180" height="40"/></td>
+						  </tr>
+						  <tr>
+							<td colspan="2"><div style="font-size:15px; font-weight:bold" align="center">{$orderval.packinglog}</div></td>
+						  </tr>
+						  <tr>
+							<td height="21" valign="top">{$orderval.streetInfo}</td>
+						  </tr>
+					</table>
+			   </td>
+	  </tr>
+	</table>
+	<div style="page-break-after:always;">&nbsp;</div>
+{/foreach}
+</body>
+</html>

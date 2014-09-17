@@ -1,0 +1,81 @@
+{include file="header.html"}
+<script type="text/javascript" src="./js/backScan.js"></script>
+<div class="fourvar">
+            {include file="iqcnav.html"}    
+            </div>
+            <div class="servar">
+				<div id="mess" style="font-size:24px;"></div>
+            	<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				<tr>
+				  <td nowrap="nowrap" class='paginationActionButtons'>
+				    <table width="100%" border="0" align="center">
+				      <tr>
+				        <td width="24%">
+						  <div style="font-size:24px">检测料号:
+				            <input name="sku" type="text" id="sku" onkeydown="checksku()" style="width:150px;height:30px;" class="textinput" />
+							<input type="hidden" id="typeid" value="3">
+							<input type="hidden" id="infoid" value="">
+							<input type="hidden" id="nownum" value="">
+						 </div>
+						  <div id="mstatus" style="font-size:24px"></div>						</td>
+					    <td width="76%">&nbsp;</td>
+				      </tr>
+					</table>
+				 </td>
+			   </tr>
+				<tr>
+				  <td nowrap="nowrap" class='paginationActionButtons'>
+				    <table width="100%" border="0" align="center">
+				      <tr>
+				        <td width="24%">
+						  <div style="font-size:24px">全检数目:
+				            <input name="check_num" type="text" id="check_num" onkeydown="checknum()" style="width:150px;height:30px;" class="textinput" />
+				         </div>	
+						<div id="mstatus1" style="font-size:24px"></div>		</td>
+			            <td width="76%"><div style="font-size:10px">注意：这里的全检数目就是退回总数，需全测。</div>&nbsp;</td>
+				      </tr>
+					</table>
+				 </td>
+			   </tr>
+				<tr>
+				  <td nowrap="nowrap" class='paginationActionButtons'>
+				    <table width="100%" border="0" align="center">
+				      <tr>
+				        <td>
+						  <div style="font-size:24px">不良品数:
+				            <input name="rejects_num" type="text" id="rejects_num" onkeydown="check_rejects_num()" style="width:150px;height:30px;" class="textinput" />							
+                           <!--
+						   状态:
+						  <select name="rejects_status" id="rejects_status" onkeydown="check_rejects_status()">
+						    <option value="0">请选择</option>
+						    <option value="1">待退回</option>
+						    <option value="2">待定</option>
+						    </select-->
+						  </div>
+						<div id="mstatus2" style="font-size:24px"></div>
+						  </td>
+			          </tr>
+					</table>
+				 </td>
+			   </tr>			   
+				<tr>
+				  <td nowrap="nowrap" class='paginationActionButtons'>
+				    <table width="100%" border="0" align="center">
+				      <tr>
+				        <td valign="top">
+						  <div style="font-size:24px">不良原因:
+				            <textarea name="bad_reason" class="textinput" id="bad_reason" style="width:350px;height:100px;" onkeydown="check_bad_reason()"></textarea>
+				          </div>
+							<div id="mstatus3" style="font-size:24px"></div>
+						  </td>
+			          </tr>
+					</table>
+				 </td>
+			   </tr>
+
+			</table>
+            </div>
+            <div class="main">
+            	
+            </div>
+{include file="footer.html"}

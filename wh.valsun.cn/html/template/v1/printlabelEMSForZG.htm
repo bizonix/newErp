@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+#body{
+	padding:0;
+	margin:0;}
+#main{
+	font-family:宋体;
+	font-weight:bolder;
+	text-align:left;
+	height:409px;
+	width:742px;
+	position:relative;
+	left:0px;
+	top:5px;
+	}
+#From{
+	text-align:right;
+		height:20px;
+		width:87px;
+		position:absolute;
+		top:80px;
+		left:66px;}
+#Departure{
+	text-align: left;
+	height: 20px;
+	width: 200px;
+	position: absolute;
+	top: 170px;
+	left: 150px;
+}
+#Company{
+	height: 23px;
+	width: 161px;
+	position: absolute;
+	top: 83px;
+	left: 140px;
+}
+#Add{
+	height: 46px;
+	width: 280px;
+	position: absolute;
+	top: 129px;
+	left: 129px;
+}
+#Goods{
+	height: 47px;
+	width: 300px;
+	position: absolute;
+	top: 350px;
+	left: 120px;
+}
+#Name{
+	height: 20px;
+	width: 165px;
+	position: absolute;
+	top: 83px;
+	left: 310px;
+}
+#Sender{
+	height: 37px;
+	width: 140px;
+	position: absolute;
+	top: 300px;
+	left: 617px;
+}
+#Picked{
+		height:29px;
+		width:86px;
+		font-size:25px;
+		position:absolute;
+		top:360px;
+		left:206px;}
+#To{
+	height: 20px;
+	width: 130px;
+	font-size: 20px;
+	position: absolute;
+	top: 205px;
+	left: 170px;
+}
+#City{
+	height: 20px;
+	width: 150px;
+	font-size: 20px;
+	position: absolute;
+	top: 245px;
+	left: 340px;
+}
+#Paidtime{
+		height:20px;
+		width:180px;
+		font-size:20px;
+		position:absolute;
+		top:120px;
+		left:425px;}
+#Address{
+	height: 47px;
+	width: 280px;
+	font-size: 20px;
+	position: absolute;
+	top: 272px;
+	left: 103px;
+}
+#Mobile{
+	height: 22px;
+	width: 150px;
+	font-size: 20px;
+	position: absolute;
+	top: 205px;
+	left: 310px;
+}
+#BarCode{
+	text-align: right;
+	height: 72px;
+	width: 190px;
+	position: absolute;
+	top: 110px;
+	left: 170px;
+}
+</style>
+<title>哲果EMS打印页面</title>
+</head>
+<body>
+{foreach $orderInfo as $value}
+<div id="main">
+<div id="From">
+</div>
+<div id="Departure">
+
+</div>
+<div id="Company">
+哲果旗舰店
+</div>
+<div id="Add">
+<br/>
+</div>
+<div id="Goods">
+{if strlen($value.goodsInfo)> 140}
+<span style='font-size:12px'>{$value.goodsInfo}</span>
+{else}
+{$value.goodsInfo}
+{/if}
+</div>
+<div id="Name">
+0755-89619926
+</div>
+<div id="Sender">
+</div>
+<div id="Picked">
+</div>
+<div id="To">
+{$value.username}
+</div>
+<div id="City">
+{$value.platformUsername}
+</div>
+<div id="Address">
+{if strlen($value.address)> 75}
+<span style='font-size:16px'>{$value.address}</span>
+{else}
+{$value.address}
+{/if}
+</div>
+<div id="Mobile">
+{if $value.phone != ''}{$value.phone}{else}{$value.landline}{/if}
+</div>
+<div id='BarCode'>
+<font size='3'>{$value.id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$value@iteration}/{$value@total}</font>
+<img src="barcode128.class.php?data={$value.id}" alt="" width="260" height="45"/>
+<font size='3'>{$value.platformUsername}</font>
+</div>
+</div>
+{if $value@total > 1 && $value@iteration != $value@total}
+<div style="page-break-after:always;">&nbsp;</div>
+{/if}
+{/foreach}
+</body>
+</html>

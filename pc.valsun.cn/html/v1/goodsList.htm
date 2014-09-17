@@ -1,0 +1,263 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<link rel="stylesheet" type="text/css" href="./js/fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<script type="text/javascript" src="./js/jquery.flexselect.js"></script>
+<script type="text/javascript" src="./js/liquidmetal.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+								  <span>查找：
+								   <input name="seachdata" type="text" id="seachdata" value="{$smarty.get.seachdata}" />
+								   <select name="searchs" id="searchs" >
+									<option value="1" {if $smarty.get.searchs == 1}selected='selected'{/if}>SPU</option>
+									<option value="2" {if $smarty.get.searchs == 2}selected='selected'{/if}>SKU</option>
+								  </select>
+								   </span>
+								   <span>|&nbsp;新/老品：
+								   <select name="isNew" id="isNew" >
+								    <option value="0" ></option>
+									<option value="1" {if $smarty.get.isNew == 1}selected='selected'{/if}>新品</option>
+									<option value="2" {if $smarty.get.isNew == 2}selected='selected'{/if}>老品</option>
+								  </select>
+								   </span>
+                                   <span>|&nbsp;状态：
+								   <select name="goodsStatus" id="goodsStatus" >
+								    <option value="0" ></option>
+                                    {foreach displayAllSkuStatus() as $value}
+									<option value="{$value['id']}" {if $smarty.get.goodsStatus == $value['id']}selected='selected'{/if}>{$value['statusName']}</option>
+									{/foreach}
+                                  </select>
+								   </span>
+                                   <span>|&nbsp;采购员：
+								   <select name="purchaseId" id="purchaseId" class="flexselect" style="width: 90px;">
+								    <option value="0"> </option>
+								    {foreach OmAvailableModel::getTNameList('power_global_user','global_user_id,global_user_name','WHERE global_user_company<=4 order by global_user_login_name') as $value}
+									<option value="{$value['global_user_id']}" {if $smarty.get.purchaseId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+									{/foreach}
+								  </select>
+								   </span>
+								<span>|&nbsp;类别&nbsp;&nbsp;
+									<select name="sku_category" id="pid_one" onchange="select_one();">
+										<option value="0">请选择</option>
+										{foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid=0") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[0]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+									</select>
+									<span align="left" id="div_two" {if empty($pidArr[1])}style="width:auto; display:none"{/if}>
+                                        {if !empty($pidArr[1])}
+                                        <select name='pid_two' id='pid_two' onchange='select_two()'>
+                                        <option value='0'>请选择</option>
+                                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[0]}") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[1]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+                                        </select>
+                                        {/if}
+                                    </span>
+									<span align="left" id="div_three" {if empty($pidArr[2])}style="width:auto; display:none"{/if}>
+                                        {if !empty($pidArr[2])}
+                                        <select name='pid_three' id='pid_three' onchange='select_three()' >
+                                        <option value='0'>请选择</option>
+                                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[1]}") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[2]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+                                        </select>
+                                        {/if}
+                                    </span>
+									<span align="left" id="div_four" {if empty($pidArr[3])}style="width:auto; display:none"{/if}>
+                                        {if !empty($pidArr[3])}
+                                        <select name='pid_four' id='pid_four'>
+                                        <option value='0'>请选择</option>
+                                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[2]}") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[3]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+                                        </select>
+                                        {/if}
+                                    </span>
+								</span>
+                                   <span><button id='seachGoods'>搜索</button></span>
+                                  &nbsp;
+                                   <span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="main products-main">
+                <table class="products-action" cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td width="5%">操作</td>
+                        <td width="10%">产品图片</td>
+						<td align="left">SPU</td>
+						<td>SKU</td>
+						<td>产品类别</td>
+						<td>产品成本(RMB)</td>
+						<td>包材</td>
+						<td>重量(KG)</td>
+                        <td>长(CM)</td>
+                        <td>宽(CM)</td>
+                        <td>高(CM)</td>
+						<td>采购负责人</td>
+                        <td>状态</td>
+						<td>新/老品</td>
+                    </tr>
+                    {foreach $productList as $value}
+                    {if $value@iteration is odd by 1}
+                    <tr>
+                        <td rowspan="3">
+
+						<input type="button" value="修改" tid="{$value['id']}" class="mod" {if !getIsAccess($value['purchaseId'])}disabled="disabled"{/if}/>
+
+                        </td>
+                		<td rowspan="3">
+                            <a id="ajaxA_{$value['sku']}" class="fancybox" href="javascript:void(0)" target="_blank">
+							<img src="javascript:void(0)" id="ajaxImg_{$value['sku']}" width="50" height="50" style="border-style:solid;border-width:0" name="ajaxImg" sku="{$value['sku']}" spu="{$value['spu']}"/>
+                            </a>
+                        </td>
+                		<td align="left">{$value['visibleSpu']}</td>
+                        <td>{$value['sku']}</td>
+                		<td name="api_goodsCategory" data-goodscategory="1">{getAllCateNameByPath($value['goodsCategory'])}
+                        </td>
+                		<td>{$value['goodsCost']}</td>
+              		    <td>{if $value['pmId'] != ''}{PackingMaterialsModel::getPmNameById($value['pmId'])}{/if}</td>
+						<td>{$value['goodsWeight']}</td>
+                        <td>{$value['goodsLength']}</td>
+                        <td>{$value['goodsWidth']}</td>
+                        <td>{$value['goodsHeight']}</td>
+                		<td>{getPersonNameById($value['purchaseId'])}</td>
+                        <td>
+                        {if $value['goodsStatus'] == 1}在线{/if}
+                        {if $value['goodsStatus'] == 2}停售{/if}
+                        {if $value['goodsStatus'] == 3}暂时停售{/if}
+                        {if $value['goodsStatus'] == 4}部分侵权-ebay{/if}
+                        {if $value['goodsStatus'] == 5}部分侵权-B2B{/if}
+                        {if $value['goodsStatus'] == 6}部分侵权-其他平台{/if}
+                        {if $value['goodsStatus'] == 51}PK产品{/if}
+                        </td>
+                		<td>{if $value['isNew'] == 0}老品{else}新品{/if}</td>
+            		</tr>
+            		<tr>
+                		<td></td><td></td><td colspan="10" align="left">描述：{if OmAvailableModel::getTNameCount('pc_spu_archive',"WHERE spu='{$value['spu']}' and is_delete=0") > 0}<a href="index.php?mod=autoCreateSpu&act=scanSpuArchive&spu={$value['spu']}">{$value['goodsName']}</a>{else}{$value['goodsName']}{/if}</td>
+            		</tr>
+            		<tr>
+                		<td></td><td></td><td colspan="10" align="left"></td>
+            		</tr>
+                    {else}
+                        <tr style="background-color: #F2F2F2;">
+                        <td rowspan="3">
+                        <input type="button" value="修改" tid="{$value['id']}" class="mod" {if !getIsAccess($value['purchaseId'])}disabled="disabled"{/if}/>
+                        </td>
+                		<td rowspan="3">
+							<a id="ajaxA_{$value['sku']}" class="fancybox" href="javascript:void(0)" target="_blank">
+							<img src="javascript:void(0)" id="ajaxImg_{$value['sku']}" width="50" height="50" style="border-style:solid;border-width:0" name="ajaxImg" sku="{$value['sku']}" spu="{$value['spu']}"/>
+                            </a>
+                        </td>
+                		<td align="left">{$value['visibleSpu']}</td>
+                        <td>{$value['sku']}</td>
+                		<td name="api_goodsCategory" data-goodscategory="1">{getAllCateNameByPath($value['goodsCategory'])}
+                        </td>
+                		<td>{$value['goodsCost']}</td>
+              		    <td>{if $value['pmId'] != ''}{PackingMaterialsModel::getPmNameById($value['pmId'])}{/if}</td>
+						<td>{$value['goodsWeight']}</td>
+                		<td>{$value['goodsLength']}</td>
+                        <td>{$value['goodsWidth']}</td>
+                        <td>{$value['goodsHeight']}</td>
+                		<td>{getPersonNameById($value['purchaseId'])}</td>
+                        <td>
+                        {if $value['goodsStatus'] == 1}在线{/if}
+                        {if $value['goodsStatus'] == 2}停售{/if}
+                        {if $value['goodsStatus'] == 3}暂时停售{/if}
+                        {if $value['goodsStatus'] == 4}部分侵权-ebay{/if}
+                        {if $value['goodsStatus'] == 5}部分侵权-B2B{/if}
+                        {if $value['goodsStatus'] == 6}部分侵权-其他平台{/if}
+                        {if $value['goodsStatus'] == 51}PK产品{/if}
+                        </td>
+                		<td>{if $value['isNew'] == 0}老品{else}新品{/if}</td>
+            		</tr>
+            		<tr style="background-color: #F2F2F2;">
+                		<td></td><td></td><td colspan="10" align="left">描述：{if OmAvailableModel::getTNameCount('pc_spu_archive',"WHERE spu='{$value['spu']}' and is_delete=0") > 0}<a href="index.php?mod=autoCreateSpu&act=scanSpuArchive&spu={$value['spu']}">{$value['goodsName']}</a>{else}{$value['goodsName']}{/if}</td>
+            		</tr>
+            		<tr style="background-color: #F2F2F2;">
+                		<td></td><td></td><td colspan="10" align="left"></td>
+            		</tr>
+                    {/if}
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+		$(document).ready(function() {
+			$(".fancybox").fancybox({
+				helpers: {
+					title : {
+						type : 'outside'
+					},
+					overlay : {
+						speedOut : 0
+					}
+				}
+			});
+
+            var spuArr = new Array();
+        	$("img[name='ajaxImg']").each(function(index){
+  	            var sku = $(this).attr('sku');
+                var spu = $(this).attr('spu');
+                if(sku == '' || spu == ''){
+                    return true;
+                }
+                if($.inArray(spu, spuArr) == -1){
+                    spuArr.push(spu);
+                }
+        	});
+            //alert(spuArr);
+
+            $.ajax({
+				type	: "POST",
+				dataType: "jsonp",
+				url		: 'json.php?mod=goods&act=ajaxGetAllArtPicBySpuArr&jsonp=1',
+				data	:  { spu:spuArr } ,
+				success	: function (msg){
+					if(msg.data != false){
+					   $("img[name='ajaxImg']").each(function(index){
+              	            var sku = $(this).attr('sku');
+                            var spu = $(this).attr('spu');
+                            if(sku == '' || spu == ''){
+                                return true;
+                            }
+                            //alert(msg.data[spu]);
+                            if(msg.data[spu] == null || msg.data[spu] == ''){
+                                $("#ajaxImg_"+sku).attr("src","css/images/Testera.jpg");
+                                $("#ajaxA_"+sku).attr("href","css/images/Testera.jpg");
+                            }else{
+                                $("#ajaxImg_"+sku).attr("src",msg.data[spu]);
+                                $("#ajaxA_"+sku).attr("href",msg.data[spu]);
+                            }
+                            
+                    	});
+					}
+				}
+			});
+            
+            $("select[class*=flexselect]").flexselect();
+        });
+
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachGoods').click();
+			}
+            
+            
+        });
+        
+</script>

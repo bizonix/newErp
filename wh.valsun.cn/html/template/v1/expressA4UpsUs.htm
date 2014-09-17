@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/expressa4print.css" />
+<script language="javascript" src="js/jquery-1.8.3.js"></script>
+<link rel="stylesheet" href="./css/alertify/alertify.core.css" />
+<link rel="stylesheet" href="./css/alertify/alertify.default.css" />
+<script language="javascript" type="text/javascript" src="./js/alertify/alertify.min.js"></script>
+<title>UPS美国专线快递A4</title>
+</head>
+<body>
+<input type="hidden" id="pglist" value="{$pglist}">
+{foreach $ordersinfo as $key=>$orderval}
+	<table width="100%" height="10" border="0" cellpadding="0" cellspacing="0">
+	</table>
+	<table width="100%" height="100" border="0" cellpadding="0" cellspacing="0" style="border:1px dashed #999999; ">
+	  <tr>
+	    <td colspan="4" align="center" valign="middle"><img src="barcode128.class.php?data={$orderval.id}" alt="" width="200" height="50"/>&nbsp;{$orderval.id}</td>
+	  </tr>
+	  <tr>
+	    <td width="30%" valign="top"  style="border-right:#000000 1px dashed"><table width="100%" height="187" border="0" cellpadding="0" cellspacing="0" style="table-layout:fixed; overflow: scroll;word-break:break-all;">
+	        <tr>
+	          <td width="100%"><span class="STYLE5">&nbsp;订单号:{$orderval.recordNumber}&nbsp;</span></td>
+	        </tr>
+	        <tr>
+	          <td width="100%"><span class="STYLE5">&nbsp;运输方式:{$orderval.carrier}&nbsp;</span></td>
+	        </tr>
+	        <tr>
+	          <td width="100%"><span class="STYLE5">&nbsp;重量:</span><span class="STYLE5"> {$orderval.calcWeight}			&nbsp;</span></td>
+	        </tr>
+	        <tr>
+	          <td width="100%"><span class="STYLE5">&nbsp;客户:{$orderval.username}</span></td>
+	        </tr>
+	        <tr>
+	          <td width="100%"><span class="STYLE5">&nbsp;帐号:</span><span class="STYLE5">{$orderval.account}</span></td>
+	        </tr>
+	        <tr>
+	          <td width="100%">&nbsp;总金额:<span class="STYLE5">{$orderval.total}</span></td>
+	        </tr>
+	        <tr>
+	          <td width="100%">&nbsp;申报价值:<span class="STYLE5"></span></td>
+	        </tr>
+	        <tr>
+	          <td width="100%" colspan="2"><div style="font-size:15px; font-weight:bold">&nbsp;&nbsp;Jesse Smith<br>
+	              {if $orderval.street != ''}{$orderval.street}</br>{/if}
+					  {if $orderval.address2 != ''}{$orderval.address2}</br>{/if}
+					  {if $orderval.city != ''}{$orderval.city}, {/if}
+					  {if $orderval.state != ''}{$orderval.state}</br>{/if}
+					  {if $orderval.countryName != ''}{$orderval.countryName}({$orderval.countryZh}){/if}
+					  {if $orderval.zipCode != ''}{$orderval.zipCode}{/if}
+			  </td>
+	        </tr>
+	        <tr>
+	          <td width="100%">&nbsp;&nbsp;{$orderval.appname}<br>
+	            {$key+1}/{$totalCount}&nbsp; </td>
+	        </tr>
+	      </table>
+	        <span class="STYLE5"> <br/>
+	      phone:{$orderval.landline} </span> </td>
+	    <td width="50%" colspan="2" valign="top" style="border-right:#000000 1px dashed" ><table width="100%" border="0" cellspacing="0" cellpadding="0" style="word-break:break-all;">
+	        {foreach $orderval.finalposition as $skuval}
+			<tr>
+				{foreach $skuval as $inval}
+	                <td width='50%'>
+	                	<strong>[{$inval.location}] {$inval.sku}*{$inval.amount}</strong>
+					</td>
+				{/foreach}
+	        </tr>
+			{/foreach}
+	        <tr>
+	          <td colspan="2" width="100%"><div> Total Qty:{$orderval.totalnum}<br>
+	            </div>
+	            <center class="upsNumber" data-carrier="{$orderval.carrier}" data-orderid="{$orderval.id}" style="margin-top:10px;font-size:80px;font:bold">
+	            </center></td>
+	        </tr>
+	      </table></td>
+	    <td width="20%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">  
+			<tr>
+	          <td>
+	          	<span class="STYLE1">
+				{foreach $orderval.goods_title as $key=>$goods}
+	          		 {$key+1}. {$goods}<br/>
+				{/foreach}
+				</span> 
+				</td>
+	        </tr>
+	      </table></td>
+	  </tr>
+	  <tr>
+	    <table>
+	      <tbody>
+	        <tr>
+	          <td style="border-right:#000000 1px dashed; width:300px" valign="top" rowspan="3">实际重量:<br/></td>
+	          <td style="height:300px;" valign="top" rowspan="3">实际体积:</td>
+	        </tr>
+	      </tbody>
+	    </table>
+	  </tr>
+	</table>
+	<div style="page-break-after:always;">&nbsp;</div>
+{/foreach}
+</body>
+</html>
+<script type="text/javascript">
+{literal}
+
+function getCookie(name){
+	var value=(document.cookie.match(new RegExp('(^' + name + '| ' + name + ')=([^;]*)')) == null)?'':RegExp.$2;
+	if(value!=''){
+		return decodeURIComponent(value);
+	}
+	return '';
+}
+function setCookie(name,value,hours){
+	var expire = "; path=/";
+	if(hours != null) {
+		expire = new Date((new Date()).getTime() + hours * 3600000);
+		expire = "; expires=" + expire.toGMTString() + "; path=/";
+	}
+	//document.cookie = name + "=" + escape(value)+';domain=112.124.41.121;'+expire;
+	document.cookie = name + "=" + escape(value)+';domain=;'+expire;
+}
+
+
+function get_parameter(name){
+	var search = document.location.search;
+	var pattern = new RegExp("[?&]"+name+"\=([^&]+)", "g");
+	var matcher = pattern.exec(search);
+	var items = null;
+	if(null != matcher){
+		items = decodeURIComponent(matcher[1]);
+	}
+	return items;
+}
+
+alertify.confirm("UPS美国专线的订单需要生成序号么？", function (e) {
+    if (e) {
+        // user clicked "ok"
+		var data = [];
+		$.each($('.upsNumber'),function(i,item){
+			if($(item).data('carrier') == "UPS美国专线"){
+				var upsNumber = getCookie('upsNumber');
+				var nowDate = new Date().getDate();
+				var cookieDate = getCookie('nowDate');
+				var numberObj = {};
+				var order_id = $(item).data('orderid');
+				if(upsNumber == '' ) upsNumber = "U1";
+				if(cookieDate == '' || cookieDate != nowDate){
+					setCookie('nowDate',nowDate);
+					upsNumber = "U1";
+				}
+				//console.log(upsNumber);
+				$(item).html(upsNumber);
+				//console.log(item);
+				numberObj.number = upsNumber;
+				numberObj.order_id = order_id;
+				data.push(numberObj);
+				var numi = parseInt(upsNumber.substr(1));
+				numi++;
+				setCookie('upsNumber',"U"+numi);
+			}
+		});
+		/*
+		$.post("set_order_number_api.php",{"data":data},function(rtn){
+				//alertify.set({ delay: 5000 });
+				//alertify.error("订单号" + rtn + "已经打印过了吧");
+		});
+		*/
+    } else {
+        // user clicked "cancel"
+    }
+});
+  
+document.onkeypress = function printPage(event){
+                            if( window.event.keyCode == 112 ) {
+								var pglist = [];
+								pglist = $('#pglist').val().split(',');
+                                window.print(); //打印A4页面
+                                var cclist = document.getElementsByTagName ('center');
+							    var printstr = '';
+                                var newwindow = window.open("热敏纸打印","_blank");
+                                var head = '<html><body style="margin:0; padding-top:0;">';
+                                var foot = '<body></html>';
+                                var number = '';
+                                for(var i=0; i<pglist.length; i++){
+                                    for(var k=0; k<cclist.length; k++){
+                                        if(cclist[k].getAttribute('data-orderid') == pglist[i]){
+											number =  cclist[k].innerHTML; break;
+                                        }
+                                    }
+                                    printstr += '<div style="margin:0;padding:0; width:377px; height:188px; text-align:center;"></br><div style="margin-top:0px;font-size:30px;">' +  pglist[i] + '</div><img style="margin-top:10px;" width="200" height="50" src="barcode128.class.php?data='+pglist[i]+'"></img>\n\
+                                        <div style="margin-top:5px;" ><span style="font-size:18px; font-weight:bold;">[Made In China]</span><span style="font-size:40px; font-weight:bold;">[ '+number+' ]</span></div></div>';
+                                }
+                                // alert(head+printstr+foot);
+                                newwindow.document.write(head+printstr+foot);
+                                newwindow.print();
+                            }
+                        };
+
+{/literal}  
+</script>

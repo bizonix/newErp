@@ -1,0 +1,59 @@
+{include file="header.htm"}
+<div class="fourvar">
+            	<div class="pathvar">
+                	{$your_position}{$first_position}{$second_position}
+                </div>               
+            </div>
+            <div class="servar">
+            	<span>
+                	{$key_value}：<input name="" type="text" id="keyword" value="{$keyword}"/>
+                </span>
+                <span>
+                	{$select_type}：               
+                <select name=states id="type">
+                    {html_options values=$option_values selected=$option_selected output=$option_output}
+                </select>
+
+                </span>      
+                <span>
+                	<a href="javascript:void(0)" id="button_search" >{$button_search}</a>
+                </span>               
+                <span>
+                	<a href="javascript:void(0)" id="button_export" >{$button_export}</a>
+                </span>      
+            </div>
+            <div class="main underline-main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">                                           
+                        {foreach key=key item=item from=$tableHeads}   
+                            <td>{$item}</td>   
+                        {/foreach}
+                    </tr>                              
+                    <tr>  
+                        {foreach key=key item=item from=$tableDatas}   
+                            <td>{$item}</td>   
+                        {/foreach}
+                        <td>
+                        	<a href="index.php?mod=partner&act=editPartner&id={$userList[index1].id}">{$button_edit}</a>
+                        </td>
+                    </tr>                                    
+                </table>
+            </div>
+            <div class="bottomvar">
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript" src="./public/js/d3.v3.min.js"></script>
+<script>
+{literal}
+$('#button_search').click(function(e){
+    e.preventDefault();        
+	var type = $.trim($('#type').val());
+	var keyword  = $.trim($('#keyword').val());	
+    var url = "index.php?mod=partner&act=index&type="+type+"&keyword="+keyword;
+    window.location.href = url;
+});
+{/literal}
+</script>
+
+            

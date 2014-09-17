@@ -1,0 +1,87 @@
+{header}
+		<script type="text/javascript" src="./js/newGoodsList.js"></script>
+		<script type="text/javascript" src="./js/publicDatePicker/WdatePicker.js"></script>
+				<!-- Main Content -->
+				<div id="content">
+					<div id="main">
+                        <h1><span>新品预览</span>  <span id="hint" style="color: red;"></span></h1>
+					<div class="pad20">
+					<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+						 <tbody>
+                                <tr>
+                                   <td>操作区域：</td>
+                                   <td>
+                                   <form action="index.php?mod=NewPre&act=apiTest" method="post" onsubmit="return createBills()">
+                                        <input type="hidden" id="bills" name="id" value="" />
+                                        <input type="submit" style="width:150px;height:45px;font-size:20px" value="生成领料单" />
+                                   </form>
+                                   
+                                   </td>
+                                   <td>SKU:<input name="seachdate" type="text" id="seachdate" value="{sku}"/></td>
+                                   <td>开始时间：<input name="startdate" type="text" id="startdate" onClick="WdatePicker()" value="{startdate}"/>
+                                   </td>
+                                   <td>结束时间：<input name="enddate" type="text" id="enddate" onClick="WdatePicker()" value="{enddate}"/></td>
+                                   <td><button id='seachNewGoods' style="width:100px;height:45px;font-size:20px"/>搜索</td>
+                                </tr>
+					<!-- Big buttons -->
+						<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+                            <tr><span style="font-size: 10pt;">共有 {spuCount} 个spu , {skuCount} 个sku</span></tr>
+                            <thead>
+                                <tr>
+                                    <td><input type="checkbox" class="checkall" /></td>
+                                    <td>S P U</td>                                    
+                                    <td>S K U</td>
+                                    <td>描述</td>
+                                    <td>领料数量</td>
+                                    <td>录  入  时  间</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<!-- BEGIN list -->
+                                <tr class="odd">
+                                	<td><input type="checkbox" name="newGoods" value="{t_id}"/></td>
+                                    <td>{spu}</td>
+                                    <td>{t_sku}</td>
+                                    <td>{goodsName}</td>  
+                                    <td><input id="goodsCount{t_id}" value="1"/></td>
+                                    <td>{t_time}</td>
+                                </tr>
+                                <!-- END list -->
+                            </tbody>
+                            <tfoot>
+                                <tr class="odd">
+                                    <td colspan="7">
+                                    {show_page}
+                                    </td>
+                                </tr>
+                        	</tfoot>
+                        </table>
+					</div>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					</div>
+				</div>
+				<!-- End of Main Content -->
+
+
+			</div>
+			<!-- End of bgwrap -->
+		</div>
+		<!-- End of Container -->
+
+		<!-- Footer -->
+		<div id="footer">
+			<p class="mid">
+				<a href="#" title="Top" class="tooltip">Top</a>&middot;<a href="#" title="Main Page" class="tooltip">Home</a>&middot;<a href="#" title="Change current settings" class="tooltip">Settings</a>&middot;<a href="index.php?mod=login&act=logout" title="Logout" class="tooltip">Logout</a>
+			</p>
+			<p class="mid">
+				<!-- Change this to your own once purchased -->
+				Copyright © 2013 valsun.com. All Rights Reserved.
+				<!-- -->
+			</p>
+		</div>
+		<!-- End of Footer -->
+	</body>
+</html>
+
+

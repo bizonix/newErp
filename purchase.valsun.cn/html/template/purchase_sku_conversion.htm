@@ -1,0 +1,131 @@
+{include file="header.htm"}
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=purchaseOrder&act=index">采购管理</a>&nbsp;&gt;&gt;&nbsp;料号转换
+    </div>
+	<div class="pagination">{$pageStr}</div>
+</div>
+<div class="servar products-servar">
+	<a href = "javascript:void(0);" onclick = "addSku();">添加料号转换</a>
+</div>
+<div class="main underline-main feedback-main">
+    <table cellspacing="0" width="100%" class="products-action">
+        <tr class="title">
+                      <th width="10%" valign="middle" align="left">ID</th>
+                      <th width="16%" valign="middle" align="left">旧料号名称<br><font size="1" color="blue">（子料号，不带#号）</font></th>
+                      <th width="16%" valign="middle" align="left">新料号名称<br><font size="1" color="blue">（子料号，不带#号）</font></th>
+                      <th width="16%" valign="middle" align="left">修改人</th>
+                      <th width="16%" valign="middle" align="left">添加时间</th>
+                      <th width="16%" valign="middle" align="left">最后修改时间</th>
+                      <th width="10%" valign="middle" align="left">操作</th>
+        </tr> 
+        {foreach $purchase_sku_conversion as $sku_conversion}
+        <tr>
+                      <td align='left' valign="middle" >{$sku_conversion['id']}</td>
+                      <td align='left' valign="middle" >{$sku_conversion['old_sku']}</td>
+                      <td align='left' valign="middle" >{$sku_conversion['new_sku']}</td>
+                      <td align='left' valign="middle" >{$sku_conversion['user']}</td>
+                       <td align='left' valign="middle" >{if !empty($sku_conversion['createdtime'])}{date("Y-m-d H:i:s",$sku_conversion['createdtime'])}{/if}</td>
+                      <td align='left' valign="middle" >{if !empty($sku_conversion['modifiedtime'])}{date("Y-m-d H:i:s",$sku_conversion['modifiedtime'])}{/if}</td>
+                      <td align='left' valign="middle" ><input type="button" value="删除" onclick = "del({$sku_conversion['id']});" />
+                      <br/><input type="button" value="修改" data-id="{$sku_conversion['id']}" data-newsku ="{$sku_conversion['new_sku']}" data-oldsku = "{$sku_conversion['old_sku']}"  onclick = "edit(this);" />
+                      </td>
+        </tr> 
+        {/foreach}
+  </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination">{$pageStr}</div>
+</div>
+{include file="footer.htm"}
+<script>
+var web_api = "{$smarty.const.WEB_API}";
+var user = "{$smarty.session.userName}";
+{literal}
+function del(id){
+		if(typeof(id)=="undefined"){
+			alertify.alert("未传参");
+			return false;
+		}
+		alertify.confirm("亲，确实要删除吗？",function(e){
+			if(e){
+						var url  = web_api + "json.php?mod=purchaseOrder&act=del_sku_conversion";
+						$.post(url,{"id":id},function(rtn){
+							if(rtn.errCode == '001'){
+								window.location.reload();
+							}else{
+								alertify.error(rtn.errMsg);
+							}
+						},"jsonp");
+			}
+		});
+}
+function edit(dom){
+	var self = $(dom);
+	var data = {};
+	var content = "旧料号<input id='oldSku' type='text' value='"+self.data('oldsku')+"'/>";
+	content += "<br/>";
+	content += "转换成<input id='newSku' type='text' value='"+self.data('newsku')+"'/>";
+	alertify.confirm(content,function(e){
+		if(e){
+			data.id =  self.data('id');
+			data.old_sku = $('#oldSku').val();
+			data.new_sku = $('#newSku').val();
+			data.user  = user;
+			if(data.old_sku == self.data('oldsku') && data.new_sku == self.data('newsku')){
+				alertify.alert("未做任何修改");
+				return false;
+			}
+			var url  = web_api + "json.php?mod=purchaseOrder&act=edit_sku_conversion";
+			$.post(url,{"data":data},function(rtn){
+				if(rtn.errCode == '001'){
+					window.location.reload();
+				}else{
+					alertify.error(rtn.errMsg);
+				}
+			},"jsonp");
+		}	
+	});
+}
+function addSku(){
+	var content = "旧料号<input id='oldSku' type='text' value=''/>";
+	content += "<br/>";
+	content += "转换成<input id='newSku' type='text' value=''/>";
+	alertify.confirm(content,function(e){
+		if(e){
+			var data = {};
+			var reg  = /#/g;
+			data.old_sku = $.trim($('#oldSku').val());
+			data.new_sku = $.trim($('#newSku').val());
+			if(data.old_sku==''){
+				alertify.error('旧料号不能为空!');
+				return false;
+			}
+			if(data.new_sku==''){
+				alertify.error('新料号不能为空!');
+				return false;
+			}
+			if(reg.test(data.old_sku) || reg.test(data.new_sku) ){
+				alertify.error('料号不能包含#');
+				return false;
+			}		
+			
+			data.user  = user;
+			var url  = web_api + "json.php?mod=purchaseOrder&act=add_sku_conversion";
+			$.post(url,{"data":data},function(rtn){
+				if(rtn.errCode == '001'){
+					window.location.reload();
+				}else{
+					alertify.error(rtn.errMsg);
+				}
+			},"jsonp");
+	}	
+	});
+}
+
+
+{/literal}
+$(document).ready(function(){
+	$(".main button").css("margin-top","5px");
+});
+</script>        

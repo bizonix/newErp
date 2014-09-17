@@ -1,0 +1,51 @@
+{header}
+<!-- 
+/*
+ * 小语种国家关系编辑页面 smallCountriesManageEdit.html
+ * ADD BY 陈伟 2013.7.27
+ */
+-->
+<link rel="stylesheet" href="css/transportlist.css">
+<script type="text/javascript" src="./js/countriesManage.js"></script>
+{navdiv}
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="maincontentdiv" >
+    <form action='index.php?mod=countriesManage&act=smallCountriesEdit' method="post" id="countriesAddForm">
+    	<input type="hidden" name="smallCountriesId" id="smallCountriesId" value="{smallCountriesId}" /> 
+        <p>
+            <label for="small_countryInput" style="font-size:20px;">小语种国家名称</label>
+            <input value="{small_country}" id='small_countryInput' onblur="checkSmallExist('Sc')" class="mf validate[required] text-input" name="small_countryInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span id="showScMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+        </p>
+        <p>
+          	<label for="countryNameInput" style="font-size:20px;">标准国家英文名</label>
+            <input value="{countryName}" class="mf validate[required] text-input" id="countryNameInput" onblur="checkSmallExist('En')" name="countryNameInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span id="showEnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="conversionTypeInput" style="font-size:20px;">转换语种类型码</label>
+            {conversionTypeInput}
+        <span style="color:#F00;">*</span>    
+        </p>
+        <!--  
+        <p>
+        <span style="color:#F00; font-size:10px;">*转换类型请输入相应数字：<br />西班牙转英文为1，法国转英文2，德文转英文为3，俄文转英文为4，意大利文转英文为5，<br />拉丁文转英文为6，阿拉伯文转英文为7，日文转英文为8，韩文转英文为9，泰文转英文为10，葡萄牙语转英文为11。</span>
+        </p>
+        -->
+        <p>
+            <input class="button" type="submit" style="width:100px;height:35px;font-size:20px" value="提交">
+         <!--   <input class="button" type="reset" style="width:100px;height:35px;font-size:20px" value="重置"> -->
+            <input class="button" type="button" id='returnSmallPage' style="width:100px;height:35px;font-size:20px" value="返回" />
+        </p>
+    </form>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+{footer}

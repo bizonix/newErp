@@ -1,0 +1,29 @@
+{include file="header2.htm"}
+<script type="text/javascript" src="./js/paypalEmail.js"></script>
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+{include file='omNav.htm'}
+
+<div class="servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="successLog" style="color: #0F0">{$successLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="errorLog" style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<div class="mail" style="padding-top:20px">
+    <form name="addemails" id="addemails" style="text-align:center;margin:auto">
+     <input type="hidden" value="add" id="hidden"/>
+	   批量添加邮箱(两个邮箱请以半角逗号分隔):<textarea style="width:200px; height:50px;" type="text" name="emailnames" id="emailnames" /></textarea>&nbsp;&nbsp;&nbsp;
+	   
+	   <select name="accounts[]" id="accounts" multiple="multiple" size="10">
+			{foreach from=$accountAll key=key_id item=list}
+				<option value="{$list.id}">{$list.account}</option>
+			{/foreach}
+	   </select><br><br>
+	</form>
+	<div style="margin:auto auto;text-align:center" >
+	<button  id="submitform" name="submitform">提交</button>
+	<button  id="back" name="back">返回</button>
+	</div>
+
+</div>
+{include file="footer.htm"}

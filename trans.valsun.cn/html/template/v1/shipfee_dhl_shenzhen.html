@@ -1,0 +1,46 @@
+{header}
+<link rel="stylesheet" href="css/transportlist.css">
+{navdiv}
+<script type="text/javascript" src="./js/partitionManage.js"></script>	
+<div class="miancontainer ">
+    <table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                    <tr>
+                            
+                            <td>分组</td>
+                            <td>渠道名称</td>
+                            <td>国家列表</td>
+                            <td>重量区间——运费</td>
+                            <td>燃油费率</td>
+							<td>模式</td>
+                    </tr>
+            </thead>
+            <tbody>
+            	<!-- BEGIN list -->
+                    <tr class="odd">
+                            
+                            <td>{groupName}</td>
+                            <td>{channelName}</td>
+                            <td>{countries}</td>
+                            <td>{weight_freight}</td>
+                            <td>{fuelcosts}</td>
+                            <td>{mode}</td>
+                    </tr>
+                <!-- END list -->
+            </tbody>
+			<tfoot>
+
+			</tfoot>
+    </table>
+		<input type="button" id="modify_dhl_shenzhen" value="修改运费价目表"/>
+		 <div id="importexcel" style="display:none">
+		
+		<form method="post" id="importform" target="_blank" enctype="multipart/form-data" action="json.php?mod=shipfee&act=modify_dhl_shenzhen&channelName={chanenelName}">
+			
+			<span>重量在20kg以内到报表</span><input type="file" id="upfile1"/>
+			<br><br><span>重量在20kg以上到报表</span><input type="file" id="upfile2"/>
+			<br><br><input type="submit" name="import" value="提交"/>
+		</form>
+	 </div>
+</div>
+{footer}

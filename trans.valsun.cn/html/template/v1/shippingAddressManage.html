@@ -1,0 +1,85 @@
+{header}
+<!-- 
+/*
+ * 发货地址管理HTML页面 shippingAddressManage.html
+ * ADD BY 陈伟 2013.7.26
+ */
+-->
+		<link rel="stylesheet" href="css/transportlist.css">
+		<script type="text/javascript" src="./js/shippingAddressManage.js"></script>
+{navdiv}
+        
+     
+				<!-- Main Content -->
+				<div id="content">
+					<div id="main">
+					<div class="pad20">
+					<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+						 <tbody>                       		                                
+                                <tr>
+                                   <td>操作区域：</td>
+                                   <td align="left"><input type="button" id='addNewShippingAddress' style="width:180px;height:45px;font-size:20px" value="添加发货地址" />
+                                   &nbsp;
+                                   <!--
+                                    <input type="button" id='enabled' style="width:50px;height:30px;font-size:10px;" value="启用" />
+                                    &nbsp;
+                                    <input type="button" id='disenable' style="width:50px;height:30px;font-size:10px" value="禁用" />
+                                    -->
+                                   </td>
+                                   <td align="right">
+                                    {show_page}
+                                   </td>                                   
+                                </tr>
+                                
+					<!-- Big buttons -->
+						<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <td><input type="checkbox" class="checkall" /></td>
+                                    <td>发货地址中文名称</td>
+                                    <td>发货地址英文名称</td>
+                                    <td>发货地址代码</td>
+                                    <td>大卖家</td>
+                                    <td>创建时间</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<!-- BEGIN list -->
+                                <tr class="odd">
+                                	<td><input type="checkbox" name="c_id" value="{c_id}"/></td>
+                                    <td>{addressNameCn}</td>
+                                    <td>{addressNameEn}</td>
+                                    <td>{addressCode}</td>
+                                    <td>{sellerName}</td>
+                                    <td>{createdTime}</td>
+                                    <td>                                                                                                                                        
+                                    <a href="index.php?mod=shippingAddressManage&act=shippingAddressEditPage&shippingAddressId={c_id}"><input type="button" style="width:50px;height:30px;font-size:10px" value="编辑" /></a>
+                                    &nbsp;
+                                    <input type="button" name='shippingAddress_del' style="width:50px;height:30px;font-size:10px" value="删除" />
+                                    </td>
+                                </tr>
+                                <!-- END list -->
+                            </tbody>
+                            <tfoot>
+                                <tr class="odd">
+                                    <td colspan="7" align="right">
+                                    {show_page}
+                                    </td>
+                                </tr>
+                        	</tfoot>
+                        </table>
+					</div>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					</div>
+				</div>
+				<!-- End of Main Content -->
+
+
+			</div>
+			<!-- End of bgwrap -->
+		</div>
+{footer}
+
+

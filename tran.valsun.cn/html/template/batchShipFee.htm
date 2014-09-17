@@ -1,0 +1,26 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=shipfeeQuery&act=batch">批量运费查询</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="servar">
+    <form onsubmit = "return file_upload()" action="index.php?mod=shipfeeQuery&act=saveBatch" enctype="multipart/form-data" method="post">
+	<span>
+		上传EXCELL文件:&nbsp;&nbsp;<input name="upfile" id="upfile" type="file"/>
+	</span>
+	<span>
+		<input name="submit" type="submit" value="上传"/>&nbsp;&nbsp;<a href="temp/template/batchShipFee.xls"><font color="blue">批量运费查询模版下载</font></a>
+	</span>
+	</form>
+</div>
+<div class="main">
+<p style="line-height:180%;padding-left:10px;font-size:14px;">
+{if empty($errMsg) && $act=='saveBatch'}
+<font color="red">批量运费查询失败</font>
+{else}
+{$errMsg}
+{/if}
+</p>
+</div>
+{include file="footer.htm"}

@@ -1,0 +1,72 @@
+{include file="admin/header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=webAdStat&act=index">网站广告统计管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=webAdStat&act=index&id={$id}">网站广告统计</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select name="adId" id="adId" class="flexselect">
+			<option value="0">==全部广告位==</option>
+			{foreach item=list from=$adList}
+			<option value="{$list.id}" {if $adId == $list.id}selected="selected"{/if}>{$list.topic}</option>
+			{/foreach}
+		</select>
+	</span>
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='ip'{if ($type=='ip')} selected="selected"{/if}>IP地址</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<select id="times">
+			<option value='0'>请选择时间节点</option>
+			<option value='addTime'{if ($timeNode == 'addTime')} selected="selected"{/if}>首次点击时间</option>
+			<option value='lastTime'{if ($timeNode == 'lastTime')} selected="selected"{/if}>最后点击时间</option>
+		</select>
+		<input type="hidden" id="now-time" value="{(time()*1000)}"/>
+	</span>
+	<span>
+		开始时间：<input type="text" id="start-date" onclick="WdatePicker()"  value = "{$startTimeValue}" style="width:80px;"/>
+	</span>
+	<span>
+		结束时间：<input type="text" id="end-date" onclick="WdatePicker()"  value = "{$endTimeValue}" style="width:80px;"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>广告名称</th>
+			<th>访问IP</th>
+			<th>点击次数</th>
+			<th>首次点击时间</th>
+			<th>最近一次点击时间</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.topic}</td>
+			<td>{$list.ip}</td>
+			<td>{$list.count}</td>
+			<td>{if empty($list.addTime)}暂无{else}{date('Y-m-d H:i:s',$list.addTime)}{/if}</td>
+			<td>{if empty($list.lastTime)}暂无{else}{date('Y-m-d H:i:s',$list.lastTime)}{/if}</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<script type="text/javascript" src="./public/js/track_web_ad_stat.js"></script>
+{include file="admin/footer.htm"}

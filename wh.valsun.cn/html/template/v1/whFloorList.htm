@@ -1,0 +1,89 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whFloorList.js"></script>
+<div class="servar wh-servar">
+    <span>  
+		<button  id='warehouseAdd' />新增楼层</button>
+    </span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="20%">楼层名</td>
+                <td width="20%">楼层值</td>
+                <td width="20%">仓库</td>
+                <td width="40%" align="center">操作</td>
+            </tr>
+        </thead>
+        <!-- BEGIN list -->
+        <thead>
+        {foreach key=key_id from=$getFloorList item=list}
+            <tr class="odd">	
+                 <input type="hidden" name="key_id" value="{$list.id}" />
+                 <td {if $list['status'] == 0}style="color:#999"{/if} width="20%">{$list.whFloor}</td>
+                 <td {if $list['status'] == 0}style="color:#999"{/if} width="20%">{$list.whCode}</td>
+                 <td {if $list['status'] == 0}style="color:#999"{/if} width="20%">{$list.storeId}</td>
+				 <td width="40%" align="center">
+                     <a href="index.php?mod=WhArea&act=areaList&storeId={$storeId}&floorId={$list['id']}">
+                	 区域设置
+                 	 </a> 
+                 </td>               
+            </tr>
+         {/foreach}
+        </thead>
+    <!-- END list -->
+    </table>
+    <!--<table cellspacing="0" width="100%">
+        <tr>
+            <td>
+                <table>
+                    {section name="loop2" loop=$line}
+                    <tr>
+                        {section name="loop3" loop=$row_position_nums}
+                            {$x = $smarty.section.loop3.index+($smarty.section.loop2.index*$distance_row)}
+                            {$y = $smarty.section.loop2.index}
+                            {$coordinate = "$x,$y,0"}
+                            {$position = "($x,$y,0)"}
+                        <td>
+                            <div style="width:56px" axis_x="{$x}"  axis_y="{$y}" axis_z="0" floor="0">
+                            <span id="{$x}_{$y}_0_0">{$position_arr[$position]}</span><br/>									           
+                            <button class="position" style="display:block" id="{$x}_{$y}_0" store="1">编辑</button>
+                            </div>
+                            <div style="width:104px;display:none">
+                            <input type="text" size="11" value="{$position_arr[$position]}" coordinate="{$coordinate}"/><br/>
+                            <button class="save">保存</button>
+                            <button class="cancel">取消</button>
+                            </div>
+                        </td>
+                        {/section}
+                    </tr>
+                    {if $smarty.section.loop2.index%2!=0}
+                    <tr><td><div style="height:5px"></div></td></tr>
+                    {/if}
+                </table>
+            </td>
+            <td><div style="width:10px"></div></td>
+            {/section}
+        </tr>
+    </table>-->
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}
+<form id="warehouseAddForm" name="warehouseAddForm" action="index.php?mod=orderindex&act=applyTheLineEUBTrackNumber" enctype="multipart/form-data" title="添加楼层" method="post" style="display:none">
+<input type="hidden" name="storeId" id="storeId" value="{$storeId}" />
+<table cellpadding='0' cellspacing='0' width='100%' border='0'>
+	<tr>
+		<td width="30%"><span>楼层</span></td><td width="70%">
+        <select name="whFloorName" id="whFloorName">
+        {foreach key=key_id from=$floors_DC item=floor}
+            <option value="{$key_id}">{$floor} 楼</option>
+        {/foreach}
+        </select>
+    </tr>
+    <tr>
+		<td colspan="2"><span id="thelineshowmsg"></span></td>
+   </tr>
+</table>
+</form>

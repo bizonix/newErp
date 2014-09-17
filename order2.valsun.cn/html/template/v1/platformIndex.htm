@@ -1,0 +1,44 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/omPlatform.js"></script>
+<div class="servar">
+    <span>
+        <form action="index.php?mod=Platform&act=insert" method="post" id="omAddPlatformList">
+            <label for="platform">平台名称：</label>
+            <input value="" id='platform' class="validate[required] text-input" name="platform" type="text"/>
+            <label for="shortcode">平台简码：</label>
+            <input value="" id='shortcode' class="validate[required] text-input" name="shortcode" type="text"/>
+            <label for="suffix">扩展表后缀：</label>
+            <input value="" id='suffix' class="validate[required] text-input" name="suffix" type="text"/>
+            <input type="submit" value="添加平台"/>
+        </form>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+            <td>编号</td>
+            <td>平台名称</td>
+            <td>平台简码</td>
+            <td>扩展表名称</td>
+            <td>添加人</td>
+            <td>添加时间</td>
+            <td>操作</td>
+        </tr>
+        {foreach $PlatformList as $Platform}
+        <tr class="odd" id="{$Platform.id}">
+            <td>{$Platform.id}</td>
+            <td><span>{$Platform.platform}</span></td>
+            <td><span>{$Platform.shortcode}</span> </td>
+            <td><span>{$Platform.suffix}</span> </td>
+            <td>{$Platform.addUser|get_usernamebyid}</td>
+            <td>{if $Platform.addTime!=0}{$Platform.addTime|date_format:"Y-m-d H:i"}{/if}</td>
+            <td>
+                <button class='update' pid='{$Platform.id}'>修改</button>
+               <!--  <button class='delete' pid='{$Platform.id}'>删除</button> -->
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+{include file="footer.htm"}

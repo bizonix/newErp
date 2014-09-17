@@ -1,0 +1,59 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+    	您的位置：<a href="javascript:void(0);">报表导出</a>&nbsp;>>&nbsp;{$title}
+     </div>
+	<div class="pagination">
+    	{$pageStr}
+	</div>
+</div>
+    <div class="servar">
+		<span>收货管理表导出:   </span>
+		<br>
+		<span>
+			开始时间：<input type="text" id="start-date" onclick="WdatePicker()"  value = "{$startTimeValue}"/>
+		</span>
+		<span>
+			结束时间：<input type="text" id="end-date" onclick="WdatePicker()"  value = "{$endTimeValue}"/>
+		</span>
+		<span>
+			<a href="javascript:void(0);" id="export-btn">导出</a>
+		</span>
+		
+	</div>
+	<div style="padding:10px;line-height:22px;" id="excel-info" class="unpicurl"></div>
+	<script>
+
+function formatDate(timestamp){
+	var time ,year,month,date;
+	time  = new Date(timestamp);
+	year  = time.getFullYear();
+	month = time.getMonth() + 1;
+	date  = time.getDate();
+	if(month < 10){
+		month = "0"+month;
+	}
+	if(date < 10){
+		date = "0"+date;
+	}
+	return year + '-' + month + '-' + date;
+}
+
+$("#export-btn").click(function(){
+		var start,end,startTimeStamp,endTimeStamp,timePeriod,days,htmlStr = '';
+		start = $("#start-date").val();
+		end = $("#end-date").val();
+		startTimeStamp = Date.parse(start);
+		endTimeStamp = Date.parse(end);
+		timePeriod = endTimeStamp - startTimeStamp;
+		days = timePeriod / 86400000+1;
+		for(var i = 0;i < days; i++){
+			var itemDate ,timestamp;
+			timestamp = endTimeStamp - i*86400000;
+			itemDate = formatDate(timestamp);
+			htmlStr += "<a href='http://purchase.valsun.cn/download/receipt_info_"+itemDate+".xls' target='_blank'>收货管理表"+itemDate+"</a><br />";
+		}
+		$("#excel-info").html(htmlStr);
+
+});
+	</script>

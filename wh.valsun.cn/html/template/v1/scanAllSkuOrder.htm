@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>拣货扫描页面</title>
+<link rel="stylesheet" href="css/content.css" type="text/css" >
+<script type="text/javascript" src="js/scanAllSkuOrder.js"></script>
+</head>
+<body scroll=no onload="fuc_onload()">
+    <div id="wrapper_content">
+        <div id='moduleTitle' class="floatleft">
+            <span>(<?php echo $pda_username; ?>)拣货出库</span><span style="color:blue;" id="showTime"></span>
+            <div id="smenu" class="floatright">
+            	<!--<span class="menuclass" onclick="showmenu()">菜单</span>-->
+                <ul id="nav">
+                    <li><span onclick="show_menu_list()">操作</span>
+                        <ul id="menuname">
+                           <li><a href="./scan_pda_index3.php">出库</a></li>
+                           <li><a href="./scan_pda_index.php?action=Loginout">退出</a></li>
+                        </ul>
+                   	</li>
+                </ul>
+  		    </div>
+            <div id="mstatus" class="floatright"></div>
+        </div>
+        <div id="scancontent" class="floatleft">
+            <span>订单号 : </span><input name="order" type="text" id="ebay_id" onkeydown="checkeBayID()" class="textinput" />
+        </div>
+        <div id="detailcontent" class="floatleft">
+            <div id="showdetail" class="floatleft"></div>
+            <!--<div id="iscomplete" class="floatleft"></div>-->
+            <div id="scansku" class="floatleft"></div>
+        </div>
+        <div id="operationcontent" class="floatleft">
+        	<input type="button" style="display:none;" value="查询" id="inquire_sku" class="buttonclass floatleft" onclick="showWindow();" />
+            <input type="button" style="display:none;" value="下一订单" id="next_order_button" class="buttonclass floatleft" onclick="header_page(7);" />
+        </div>
+        <!--<div id="popupcontent"></div>-->
+        <div id="footcontent" class="floatleft">
+        	<span>Created By Herman.Xi 2012-11-08</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

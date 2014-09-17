@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+.topmenue{
+	border:solid 1px #c0c0c0;
+	margin:3px 5px;
+	padding:13px;
+}
+
+.topmenue span{
+	font-size:13px;
+}
+a.subject{
+	overflow:hidden;
+}

@@ -1,0 +1,40 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=trackNumber&act=index">跟踪号管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="servar">
+    <form onsubmit = "return file_upload()" action="index.php?mod=trackNumber&act=batchTrackNumberImport" enctype="multipart/form-data" method="post">
+	<span>
+		<select name="carrierId" id="carrierId" onchange = "show_channel_list(this.value)">
+		<option value="">=请选择运输方式=</option>
+		{foreach item=list from=$lists}
+		{if !$list.is_track}<option value="{$list.id}">{$list.carrierNameCn}</option>{/if}
+		{/foreach}
+		</select>&nbsp;&nbsp;<span id="nodeList"></span>&nbsp;&nbsp;跟踪号所属国家：<select name="country" id="country" class="flexselect">
+												<option value="">===不限===</option>
+												{foreach item=list from=$countrys}
+												<option value="{$list.countryNameEn}">{$list.countryNameEn}--{$list.countryNameCn}</option>
+												{/foreach}
+												</select>&nbsp;&nbsp;上传EXCELL文件:&nbsp;&nbsp;<input name="upfile" id="upfile" type="file"/>
+	</span>
+	<span>
+		<input name="submit" type="submit" value="上传"/>&nbsp;&nbsp;<a href="temp/template/tracknum_import_sample.xls" target="_blank"><font color="white">跟踪号导入模版下载</font></a>
+	</span>
+	</form>
+</div>
+<div class="main">
+{if empty($errMsg) && $act == "batchTrackNumberImport"}
+<p style="line-height:180%;padding-left:10px;">
+<font color=green>恭喜您，跟踪号信息导入成功！</font>
+</p>
+{elseif $act == "batchTrackNumberImport"}
+<p style="line-height:180%;padding-left:10px;">
+<font color=red>温馨提示，以下跟踪号信息未导入成功！</font><br/>
+{$errMsg}
+</p>
+{/if}
+</div>
+<script type="text/javascript" src="./public/js/track_number.js"></script>
+{include file="footer.htm"}

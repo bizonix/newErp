@@ -1,0 +1,214 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/jquery.flexselect.js"></script>
+<script type="text/javascript" src="./js/liquidmetal.js"></script>
+<script type="text/javascript" src="./js/publicDatePicker/WdatePicker.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+								   <span>SPU：
+								   <input name="spu" type="text" id="spu" value="{$smarty.get.spu}" style="width: 100px;"/>
+								   </span>
+                                   <span>|&nbsp;修改/优化：
+    									<select name="recordType" id="recordType">
+    										<option value="0"></option>
+                                            <option value="1" {if $smarty.get.recordType == 1}selected='selected'{/if}>修改</option>
+                                            <option value="2" {if $smarty.get.recordType == 2}selected='selected'{/if}>优化</option>
+    									</select>
+                                    </span>
+                                    <span>|&nbsp;产品工程师：
+    									<select name="PEId" id="PEId" style="width: 80px;">
+    										<option value="0"></option>
+                                            <option value="9999" {if $smarty.get.PEId == 9999}selected='selected'{/if}>无</option>
+                        				    {foreach getAllPEInfo() as $value}
+                        					<option value="{$value['global_user_id']}" {if $smarty.get.PEId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+                        					{/foreach}                                           
+    									</select>
+                                    </span>
+                                    <span>|&nbsp;状态：
+    									<select name="status" id="status">
+    										<option value="0"></option>
+                                            <option value="1" {if $smarty.get.status == 1}selected='selected'{/if}>待处理</option>
+                                            <option value="2" {if $smarty.get.status == 2}selected='selected'{/if}>处理中</option>
+                                            <option value="3" {if $smarty.get.status == 3}selected='selected'{/if}>已处理</option>
+    									</select>
+                                    </span>
+                                    <span>|&nbsp;添加人：
+    									<select name="addUserId" id="addUserId" class="flexselect" style="width: 80px;">
+    										<option value="0"></option>
+                                            {foreach OmAvailableModel::getTNameList('power_global_user','global_user_id,global_user_name','WHERE global_user_company<=4 order by global_user_login_name') as $value}
+                            				<option value="{$value['global_user_id']}" {if $smarty.get.addUserId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+                            				{/foreach}
+    									</select>
+                                    </span>
+                                    <span>
+                                        |&nbsp;
+    									<select name="timeSearchType" id="timeSearchType">
+                                            <option value="0"> </option>
+                                            <option value="1" {if $smarty.get.timeSearchType == 1}selected='selected'{/if}>添加时间</option>
+                                            <option value="2" {if $smarty.get.timeSearchType == 2}selected='selected'{/if}>处理时间</option>
+                                            <option value="3" {if $smarty.get.timeSearchType == 3}selected='selected'{/if}>完成时间</option>
+    									</select>                                       
+                                        开始时间：
+                        	           <input style="width: 100px;" name="startdate" type="text" id="startdate" onClick="WdatePicker()" value="{$smarty.get.startdate}"/>	  
+                                	    结束时间：
+                                	   <input style="width: 100px;" name="enddate" type="text" id="enddate" onClick="WdatePicker()" value="{$smarty.get.enddate}" />
+                                    </span>
+								
+                                   <span><button id='seachModifyRecord'>搜索</button></span>
+                                   &nbsp;
+                                   <span style="color: red;">{$smarty.get.statusSee}</span>
+            </div>
+            {if isAccessAll('autoCreateSpu','addSpuModityRecord') == true}
+            <div class="servar products-servar">
+                <span>
+                	<a href="index.php?mod=autoCreateSpu&act=addSpuModityRecord">添加记录</a>
+                </span>
+            </div>
+            {/if}
+            <div class="main feedback-main firefox-table">
+            	<table class="products-action" cellspacing="0" width="100%">                    
+                    <tr class="title">
+                        <td>♀♂</td>                        
+                        <td>状态</td>
+                        <td>SPU</td>
+                        <td>修改/优化</td>
+                        <td>产品工程师</td>
+                        <td>添加人</td>
+                        <td>添加时间</td>
+                        <td>处理时间</td>
+                        <td>完成时间</td>
+                        <td>修订时间</td>
+						<td>操作</td>					
+                    </tr>
+                    {foreach $spuModityRecordList as $value}
+                    <tr class="tr{$value['id']}">
+                        <td><a style="color: #0000FF;" href="index.php?mod=autoCreateSpu&act=getAutoCreateSpuList&spu={$value['spu']}" target="_blank">♂♀</a></td>                        
+                		<td>{if $value['status'] == 1}待处理{elseif $value['status'] == 2}处理中{elseif $value['status'] == 3}已处理{/if}{if !empty($value['appendContent1'])}(已修订){elseif $smarty.session.userId == $value['addUserId'] && isAccessAll('autoCreateSpu','appendSpuModityRecord') && $value['status'] != 3}<a target="_blank" href="index.php?mod=autoCreateSpu&act=appendSpuModityRecord&id={$value['id']}" title="点击后修订信息" style="color: #0000FF;">(修订)</a>{/if}</td>
+                		<td>{if isAccessAll('autoCreateSpu','getSpuModifyDetail')}<a style="color: #0000FF;" href="index.php?mod=autoCreateSpu&act=getSpuModifyDetail&id={$value['id']}" title="查看详情" target="_blank">{if !empty($value['spu'])}{$value['spu']}{else}--{/if}</a>{else}{if !empty($value['spu'])}{$value['spu']}{else}--{/if}{/if}</td></span></td>
+                        <td>{if $value['recordType'] == 1}修改{elseif $value['recordType'] == 2}优化{else}--{/if}</td>
+                        <td>{if isAccessAll('autoCreateSpu','updateSpuModifyRecordPEId')}<a style="color: #0000FF;" href="index.php?mod=autoCreateSpu&act=updateSpuModifyRecordPEId&id={$value['id']}" title="修改指派产品工程师" target="_blank">{if !empty($value['PEId'])}{getPersonNameById($value['PEId'])}{else}无{/if}</a>{else}{if !empty($value['PEId'])}{getPersonNameById($value['PEId'])}{else}无{/if}{/if}</td>
+                        <td>{getPersonNameById($value['addUserId'])}</td>
+                        <td>{if !empty($value['addTime'])}{$value['addTime']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                        <td>{if !empty($value['handleTime'])}{$value['handleTime']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                        <td>{if !empty($value['completeTime'])}{$value['completeTime']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                        <td>{if !empty($value['appendContent1Time'])}{$value['appendContent1Time']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                        <td valign="top">
+                        {if $value['status'] == 1 && $smarty.session.userId == $value['addUserId']}
+                            <input type="button" value="删除" class="del" recordId="{$value['id']}"/>
+                        {/if}
+                        </td>
+            		</tr>            		
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachModifyRecord').click(); 
+			}        
+        });
+        
+        $(document).ready(function(){
+            $("#seachModifyRecord").click(function(){               
+                var spu = $("#spu").val();
+                var recordType = $("#recordType").val();
+                var PEId = $("#PEId").val();
+                var status = $("#status").val();
+                var addUserId = $("#addUserId").val();
+                var timeSearchType = $("#timeSearchType").val();
+                var startdate = $("#startdate").val();
+                var enddate = $("#enddate").val();
+                location.href = 'index.php?mod=autoCreateSpu&act=getSpuModityRecordList&spu='+spu+'&recordType='+recordType+'&PEId='+PEId+'&status='+status+'&addUserId='+addUserId+'&timeSearchType='+timeSearchType+'&startdate='+startdate+'&enddate='+enddate;     
+            });
+            
+            $(".del").click(function(){
+                if(confirm('确认删除？')){
+                    var id = $(this).attr('recordId');
+                    if(isNaN(id)){
+                        $("#error").html('无效记录，删除失败');
+                        return;
+                    }
+                    
+                    $.ajax({
+        				type	: "POST",
+        				dataType: "jsonp",
+        				url		: 'json.php?mod=goods&act=deleteSpuModifyRecordById&jsonp=1',
+        				data	: { id:id },
+        				success	: function (msg){				        
+        					if(msg.errCode == '200'){
+                                $(".tr"+id).hide();
+                                $("#error").html('删除成功');
+        					}else{
+        					   $("#error").html('删除失败');
+        					}
+        				}
+        			});
+                }  
+            });
+            
+            $(".takeSpuModifyRecord").click(function(){
+                if(confirm('确认领取？')){
+                    var id = $(this).attr('recordId');
+                    if(isNaN(id)){
+                        $("#error").html('无效记录');
+                        return;
+                    }
+                    
+                    $.ajax({
+        				type	: "POST",
+        				dataType: "jsonp",
+        				url		: 'json.php?mod=goods&act=takeSpuModifyRecordById&jsonp=1',
+        				data	: { id:id },
+        				success	: function (msg){
+        				    alert(msg.errMsg);
+        					if(msg.errCode == '200'){
+                                $("#takeSpuModifyRecord"+id).hide();
+        					}
+        				}
+        			});
+                }  
+            });
+            
+            $(".completeSpuModifyRecord").click(function(){
+                if(confirm('确认完成？')){
+                    var id = $(this).attr('recordId');
+                    if(isNaN(id)){
+                        $("#error").html('无效记录');
+                        return;
+                    }
+                    
+                    $.ajax({
+        				type	: "POST",
+        				dataType: "jsonp",
+        				url		: 'json.php?mod=goods&act=completeSpuModifyRecordById&jsonp=1',
+        				data	: { id:id },
+        				success	: function (msg){
+        				    alert(msg.errMsg);
+        					if(msg.errCode == '200'){
+                                $("#completeSpuModifyRecord"+id).hide();
+        					}
+        				}
+        			});
+                }  
+            });
+            
+            
+            $("select[class*=flexselect]").flexselect();
+        });       
+</script>

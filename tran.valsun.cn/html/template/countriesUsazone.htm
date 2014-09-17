@@ -1,0 +1,56 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=countriesUsazone&act=index">美国邮政分区管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='zip_code'{if ($type=='zip_code')} selected="selected"{/if}>邮编</option>
+			<option value='zone'{if ($type=='zone')} selected="selected"{/if}>分区</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=countriesUsazone&act=add">添加</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>转运中心</th>
+			<th>邮编</th>
+			<th>分区</th>
+			<th>添加时间</th>
+			<th>修改时间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.cn_title}</td>
+			<td style="width:50%;word-break:break-all;">{$list.zip_code}</td>
+			<td>{$list.zone}</td>
+			<td>{if empty($list.add_time)}暂无{else}{date('Y-m-d H:i:s',$list.add_time)}{/if}</td>
+			<td>{if empty($list.modify_time)}暂无{else}{date('Y-m-d H:i:s',$list.modify_time)}{/if}</td>
+			<td><a href="index.php?mod=countriesUsazone&act=modify&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info({$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<script type="text/javascript" src="./public/js/country_usa_zone.js"></script>
+{include file="footer.htm"}

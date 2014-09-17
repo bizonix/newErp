@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="vamapaull - flash designer and developer - vamapaull's portfolio" />
+<meta name="keywords" content="flash,web,design,development,developer,designer,coder,code,actionscript,script,animation,animations,interactive" />
+<title>Photo booth</title>
+<script src="swfobject.js" language="javascript"></script>
+<script src="js/jquery/jquery-1.8.3.min.js"></script>
+
+</head>
+<body>
+<div><h2>初始化步骤：点击允许-->>右击摄像头画面-->>点击设置，把"允许"下面"记住"的选择框勾上，点击关闭-->>关闭该页面，回到复核页面，即可拍照</h2></div>
+<div id="flashArea" class="flashArea" style="height:100%;"><p align="center">This content requires the Adobe Flash Player.<br /><a href="http://www.adobe.com/go/getflashplayer">
+<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /><br />
+<a href=http://www.macromedia.com/go/getflash/>Get Flash</a></p>
+</div>
+<button id="btn1">隐藏FLASH</button><button id="btn2">显示FLASH</button>
+
+<div id="rest"></div>
+<script type="text/javascript">
+	var mainswf = new SWFObject("take_picture.swf", "main", "1400", "400", "9", "#ffffff");
+	mainswf.addParam("scale", "noscale");
+	mainswf.addParam("wmode", "window");
+	mainswf.addParam("allowFullScreen", "true");
+	mainswf.write("flashArea");
+</script>
+<script>
+function check(){
+	$.getJSON("get_flashcam_order.php",{action:"check",dataformat:"json",rndtime:Math.random(1,10)},function(json){
+	$("#rest").html('<img  id="'+json['orderid']+'" width=100 height=80 src="'+json['imgurl']+'" style="padding:5px;"/><br/>'+json['orderid']);
+	});
+}
+setInterval(check,500);
+$("#btn1").click(function(){
+	$("#main").css({width:"0",height:"0"});
+});
+$("#btn2").click(function(){
+	$("#main").css({width:"1400",height:"400"});
+});
+</script>
+</body>
+</html>

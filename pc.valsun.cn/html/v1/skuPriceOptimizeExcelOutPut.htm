@@ -1,0 +1,48 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/publicDatePicker/WdatePicker.js"></script>
+<div class="main order-main" align="left">
+    <span></span>
+    <table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+	  <tr>
+		<td width="65%">
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				<tr>
+                    <td><span style="font-size: 25px;">SKU价格优化导出：</span></td>
+                </tr>
+                <tr>
+					<td nowrap="nowrap" class='paginationActionButtons'>
+                    <form id="skuPriceOptimizeExcelOutPutForm" action="index.php?mod=excelOutPut&act=skuPriceOptimizeExcelOutPutOn" enctype="multipart/form-data" title="SKU价格优化导出" method="post" target="_blank">
+						<div>
+            				开始时间:
+            				<input name="skuPriceOptimizeStartTime" onClick="WdatePicker()" type="text" class='validate[required]'/>
+            				结束时间:
+            				<input name="skuPriceOptimizeEndTime" onClick="WdatePicker()" type="text" class='validate[required]'/>
+            				&nbsp;
+            				<input type="submit" value="导出到xls"/>
+            			</div>
+                    </form>
+					  <p>
+                         <br />
+                         <br />
+                         <br />
+					  </p>
+                      
+                   </td>
+			    </tr>
+			</table>		
+         </td>
+	</tr>
+    <tr>
+        <td>
+        </td>
+    </tr>
+</table>
+</div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(function(){
+            jQuery("#skuPriceOptimizeExcelOutPutForm").validationEngine();
+        });       
+</script>
+
+

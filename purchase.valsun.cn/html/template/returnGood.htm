@@ -1,0 +1,208 @@
+{include file="header.htm"}
+	<div class="fourvar">
+    	<div class="pathvar">
+        	您的位置：<a href="index.php?mod=unusualOrder&act=index">异常到货处理</a>&nbsp;>>&nbsp;待退回列表
+        </div>
+		<div class="pagination">
+            {$pageStr}
+        </div>
+    </div>
+	 <div class="servar products-servar">
+	 	<span>
+			料号:<input type="text" class="ser_sku" value="{$ser_sku}"/>
+        </span>
+		<span>处理状态:
+			<select class="ser_status">
+				<option value=''>请选择</option>
+				<option value='0' {if ($ser_status=='0')} selected="selected"{/if}>待处理</option>
+				<option value='1' {if ($ser_status=='1')} selected="selected"{/if}>已生成退货单</option>
+				<option value='2' {if ($ser_status=='2')} selected="selected"{/if}>已处理</option>
+			</select>
+        </span>
+		 <span>时间类型:
+			<select class="ser_timetype">
+				<option value='0'>请选择</option>
+				<option value='1' {if ($ser_timetype=='1')} selected="selected"{/if}>审核时间</option>
+				<option value='2' {if ($ser_timetype=='2')} selected="selected"{/if}>首次处理时间</option>
+				<option value='3' {if ($ser_timetype=='3')} selected="selected"{/if}>最后处理时间</option>
+			</select>
+			开始时间：<input type="text" class="startTime" onclick="WdatePicker()"  value = "{$ser_startTime}"/>
+		</span>
+		<span>
+			结束时间：<input type="text" class="endTime" onclick="WdatePicker()"  value = "{$ser_endTime}"/>
+		</span>
+		 <span>
+			<a href="javascript:void(0);" class="search">搜 索</a>
+		</span>
+		<span>
+			<a href="javascript:void(0);" class="createorder">生成采购退货清单</a>
+		</span>
+    </div>
+	<div class="main underline-main ">
+    	<table cellspacing="0" width="100%" class="products-action">
+        	<tr class="title purchase-title">
+		    	<td><input type="checkbox" id="checkAll"></td>
+				<td>检测样品记录编号</td>
+				<td>spu</td>
+				<td>sku</td>
+				<td>待退回数量</td>
+				<td>已处理数量</td>
+                <td>处理状态</td>
+				<td>备注</td>
+                <td>审核时间</td>
+				<td>首次处理时间</td>
+				<td>最后处理时间</td>
+            </tr>
+			{section name=v loop=$list}
+			<tr>
+		    	<td><input type="checkbox" class="skulist" value="{$list[v]['id']}" data-sku="{$list[v]['sku']}" data-qty="{$list[v]['returnNum']}" data-status="{$list[v]['returnStatus']}"/></td>
+				<td>{$list[v]['infoId']}</td>
+				<td>{$list[v]['spu']}</td>
+				<td>{$list[v]['sku']}</td>
+				<td>{$list[v]['returnNum']}</td>
+				<td>{$list[v]['processedNum']}</td>
+				<td>
+					{if $list[v]['returnStatus'] == 0}待处理
+					{elseif $list[v]['returnStatus'] == 1}已生成退货单
+					{elseif $list[v]['returnStatus'] == 2}已处理{/if}
+				</td>
+				<td>{$list[v]['note']}</td>
+                <td>{$list[v]['auditTime']|date_format:"Y-m-d H:i"}</td>
+				<td>{$list[v]['startTime']|date_format:"Y-m-d H:i"}</td>
+				<td>{$list[v]['lastModified']|date_format:"Y-m-d H:i"}</td>
+            </tr>
+			{/section}
+         </table>
+     </div>
+     <div class="bottomvar">
+     	<div class="pagination">
+			{$pageStr}
+        </div>
+     </div>
+	 <input type="hidden" value="{$web_api}" class="wep_api" />
+	 <input type="hidden" value="{$userid}" id="userid" />
+{include file="footer.htm"}
+<script type="text/javascript">
+{literal}
+$(".servar.products-servar").keydown(function(e){
+	if(e.keyCode !== 13){
+		return ;
+	}
+	$(".search").trigger('click');
+});
+
+$(".search").click(function(){
+	var sku 			= $.trim($('.ser_sku').val());
+	var timetype	= $('.ser_timetype').val();
+	var starttime 	= $('.startTime').val();
+	var endtime 	= $('.endTime').val();
+	var status 		= $('.ser_status').val();
+	var purid       	= $('#userid').val();
+	var contFlag   = false ;  
+	if(timetype!=0&&(starttime==''||endtime=='')){
+		alertify.error('请选择时间');
+		if(starttime==''){
+			$('.startTime').focus();
+			return;
+		}
+		if(endtime==''){
+			$('.endTime').focus();
+			return;
+		}
+		return false;
+	}
+	if(timetype==0&&(starttime!=''||endtime!='')){
+		alertify.error('请选择搜索时间类型');
+		return false;
+	}
+	if(starttime>endtime){
+		alertify.error('时间范围有误,请确认');
+		return false;
+	}
+	if(timetype !==0 && starttime!=''  && endtime!=''){
+			contFlag = true;
+	}
+	if(sku !== '' || status !=='' ){
+		contFlag = true;
+	}
+	if(	contFlag == false){
+		alertify.error('请选择搜索内容');
+		$('.ser_sku').focus();
+		return;
+	}
+	window.location.href = "index.php?mod=returnGood&act=index&sku="+sku+'&startTime='+starttime+'&endTime='+endtime+'&status='+status+'&timetype='+timetype+'&purid='+purid;
+})
+
+$("#checkAll").click(function() {
+       var checkboxs = $('.skulist');
+		for(var i=0;i<checkboxs.length;i++){
+			if(checkboxs[i].checked == false){
+				checkboxs[i].checked = true;
+			}else{
+					checkboxs[i].checked = false;
+				}	
+		}
+})
+
+
+/**********生成退货清单  Start****/
+$('.createorder').click(function(){
+	var datalist   = [];
+	var statuslist = [];
+	var checkboxs = $('.skulist');
+	$.each(checkboxs,function(i,item){
+		if($(item).attr('checked')=='checked'){
+			var datalistobj = {};
+			datalistobj.id = checkboxs[i].value;
+			datalistobj.sku = $(item).data('sku');
+			datalistobj.qty = $(item).data('qty');
+			datalist.push(datalistobj);
+			statuslist.push($(item).data('status'));
+		}
+	})
+	if(datalist.length == 0){
+		alertify.alert('请选择生成退货清单的sku');
+		return false;	
+	}else{
+		for(var kk=0;kk<statuslist.length;kk++){
+			if(statuslist[kk]!=0){
+				alertify.alert('存在已处理过的sku');
+				return false;
+			}
+		}
+		var url   = $('.wep_api').val()+"json.php?mod=purchaseOrder&act=createReturnOrder";
+		var purid = $('#userid').val();
+		console.log(purid);
+		console.log(datalist);
+		$.post(url, { "purid":purid, "datalist":datalist }, function(rtn){
+			if(rtn.errCode == '8001'){
+				alertify.alert('生成退货单成功',function(){
+					window.location.reload();
+				});
+			}else{
+				alertify.error('生成退货单失败');
+				return false;
+			}
+	 	},'jsonp');
+	}
+})
+/**********生成退货清单  End****/
+
+//审核
+$('.audit').click(function(){
+	var id 	= $(this).data('id');
+	var url  = $('.wep_api').val()+"json.php?mod=rtnQcData&act=updateQcReturnGoodData";
+	$.post(url, { "numid":id, }, function(rtn){
+		var msg = rtn.data;
+		if(msg.data == '1'){
+			alertify.alert('审核成功',function(){
+				window.location.reload();
+			});
+		}else{
+			alertify.alert('审核失败');
+			return false;
+		}
+	},'jsonp');
+})
+{/literal}
+</script>

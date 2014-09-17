@@ -1,0 +1,308 @@
+{include file="header.htm"}
+{include file="secendNav.htm"}
+<link rel="stylesheet" href="./css/replylist.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./js/jquery/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/replylist.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery-ui.min.js"></script>
+<script language="javascript">
+var messagelist = [
+        {foreach $msglist as $msgval}
+            [{foreach $msgval.orderids as $oror}
+             ['{$oror.account}','{$oror.orderid}']{if !$oror@last},{/if}
+            {/foreach}]
+        {if !$msgval@last},{/if}
+        {/foreach}
+        ];
+        
+var flag    = 0;
+
+var itemlist = [
+                {foreach $msglist as $msgval}
+                    [{$msgval@index},0]{if !$msgval@last},{/if}
+                {/foreach}
+                ];
+
+//window.onload=startSync_site;
+</script>
+<div class="main products-main reply-main nospan-main">
+    {foreach $msglist as $msgval}
+    <div class="message-unfold" id="ordermark{$msgval@index}"> 
+    <div id="topline_{$msgval.id}" style="display:inline;">
+    <span style="font-weight:bold; color:red;">NO:{$msgval@iteration}</span>
+        <span>发件人：{$msgval.sendername}</span>
+               <span>收件人：{$msgval.recievername}</span>
+               <span>发件时间:{$msgval.createtime}</span>
+    </div>
+    <a href="javascript:hidetable({$msgval.id})"></a>
+    <span onclick="ShowHandleResult()" style="float:right;cursor:pointer; font-weight:bold;margin-right:15px;color:red">查看</span>
+  </div>
+    <table id="replaytb_{$msgval.id}" class="products-action" cellspacing="0" width="100%">
+        <tr>
+            <td style="width:700px;">
+            {foreach $msgval.orderids as $orderid}
+                <table width="100%" style="text-align:center;">
+                    <tr class="title">
+                        <td>
+                            产品总额
+                        </td>
+                        <td>
+                            运费总金额
+                        </td>
+                        <td style="width:60px;">
+                            订单总额
+                        </td>
+                        <td>
+                            交易手续费
+                        </td>
+                        <td style="width:60px;">
+                            预计可得
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="productmoney_{$orderid.orderid}">
+                        </td>
+                        <td>
+                        </td >
+                        <td id="ordermoney_{$orderid.orderid}">
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+
+                </table>
+                <table width="100%" style="text-align:center;" id="skulist_{$orderid.orderid}">
+                    
+                </table>
+                <table width="100%" cellspacing="0" border="1" style="border-collapse:collapse; border-color:#ccc;">
+                    <tr>
+                        <td>
+                            订单号：
+                            <a href="http://trade.alibaba.com/order_detail.htm?orderId={$orderid.orderid}" target="_blank"><span style="color:#257109;font-weight:bold;">{$orderid.orderid}</span></a> 
+                        </td>
+                        <td>
+                            买家：
+                            <span style="color:#257109;font-weight:bold;" id="buyername_{$orderid.orderid}"></span>
+                        </td>
+                        <td>
+                            订单金额：
+                            <span style="color:#257109;font-weight:bold;" id="amount_{$orderid.orderid}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            下单时间：
+                            <span style="color:#257109;font-weight:bold;" id="createtime_{$orderid.orderid}"></span> 
+                        </td>
+                        <td>
+                            订单状态：
+                            <span style="color:#06F;" id="orderstatus_{$orderid.orderid}"></span>
+                        </td>
+                        <td>
+                            订单状态提醒：
+                            <span style="color:#06F;" id="alarm_{$orderid.orderid}" need="0"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            付款时间：
+                            <span style="color:#06F;" id="paytime_{$orderid.orderid}"></span> 
+                        </td>
+                        <td>
+                            付款方式：
+                            <span style="color:#06F;" id="paytype_{$orderid.orderid}"></span>
+                        </td>
+                        <td>
+                            资金状态：
+                            <span style="color:#06F;"  id="fundStatus_{$orderid.orderid}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            发货时间：
+                            <span style="color:#06F;" id="sysshiptime_{$orderid.orderid}"></span> 
+                        </td>
+                        <td>
+                            物流状态：
+                            <span style="color:#06F;"  id="logisticsStatus_{$orderid.orderid}"></span>
+                        </td>
+                        <td>
+                            物流信息：
+                            <span style="color:#06F;" id="logisticsInfo_{$orderid.orderid}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            放款状态：
+                            <span style="color:#06F;" id="loanStatus_{$orderid.orderid}"></span> 
+                        </td>
+                        <td>
+                            退款时间：
+                            <span style="color:#06F;"></span>
+                        </td>
+                        <td>
+                            退款金额：
+                            <span style="color:#06F;"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            纠纷状态：
+                            <span style="font-weight:bold;"  id="issueStatus_{$orderid.orderid}"></span> 
+                        </td>
+                        <td>
+                            纠纷信息：
+                            <span style="color:#06F;">-----</span>
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            收件人：
+                            <span style="color:#06F;" id="buyerSignerFullname_{$orderid.orderid}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            地址：
+                            <span style="color:#06F;" id="address_{$orderid.orderid}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            邮编：
+                            <span style="color:#06F;" id="zipcode_{$orderid.orderid}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            邮箱：
+                            <span style="color:#06F;" id="mail_{$orderid.orderid}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            手机：
+                            <span style="color:#06F;"  id="mobileNo_{$orderid.orderid}"></span> 
+                        </td>
+                        <td>
+                            电话：
+                            <span style="color:#06F;"  id="phoneNumber_{$orderid.orderid}"></span>
+                        </td>
+                        <td>
+                            传真：
+                            <span style="color:#06F;">-----</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            留言：
+                            <span style="color:#06F;" id="sysnote_{$orderid.orderid}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            系统订单编号：
+                            <span style="color:#06F;" id="sysnum_{$orderid.orderid}"></span> 
+                        </td>
+                        <td>
+                            系统订单状态：
+                            <span style="color:#06F;" id="sysstatus_{$orderid.orderid}"></span>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            运输方式：
+                            <span style="color:#06F;" id="syscarrier_{$orderid.orderid}"></span> 
+                        </td>
+                        <td>
+                            跟踪号：
+                            <span style="color:#06F;" id="systracknum_{$orderid.orderid}"></span>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+                {/foreach}
+            </td>
+            <td style="width:560px;font-size:14px;line-height:20px;" valign="top">
+                <div style="border-bottom:1px #ccc solid; padding:6px 0; margin-bottom:6px;">
+                    <span>
+                        发件人：{$msgval.sendername}
+                    </span>
+                    <span style="margin-left:20px;">
+                        收件人：{$msgval.receivername}
+                    </span>
+                    <span style="margin-left:20px;">
+                                                                订单号：{if !empty($msgval.orderUrl)}<a href="{$msgval.orderUrl}" target="_blank">{$msgval.orderId}</a>{else}未关联订单{/if}
+                    </span>
+                    <input type="hidden" id="fetchtime_{$msgval@index}" value="0">
+                </div>
+                <input type="hidden" id="bigestid_{$msgval@index}" value="{$msgval.bigestid}">
+                <div id="commni_{$msgval@index}">
+                    {foreach $msgval.commnuni as $commn}
+	                    <div style="{if $commn.role==1}background-color:#D9EEEC;{/if} padding:2px; margin-top:3px;margin-bottom:3px;">
+	                        <div><span style=" width:100px;font-family:Arial,Verdana,Helvetica,sans-serif; font-size:13px;">{$commn.sendername}</span>&nbsp;:{$commn.createtimestamp}</div>
+	                        <div style="padding-left:113px;color:#525252;font-family:Arial,Verdana,Helvetica,sans-serif;font-size:13px;">{$commn.content}</div>
+		                    <div style="background-color:#fff">
+			                    {if $commn.fileUrl != ''}
+				                    <div style="float:left;padding-left:3px;padding-top:1px;">
+				                     <a href="{$commn.fileUrl}" target="_blank"><img src="{$commn.fileUrl}" style="width:78px; height:78px;"></a>
+				                    </div>
+			                    {/if}
+			                    {if $commn.orderUrl !=''}
+				                    <div style="float:left; margin-left:10px;">
+	                                   <a href="{$commn.orderUrl}" target="_blank">{$commn.orderId}</a>
+	                                </div>
+			                    {/if}
+			                    {if $commn.productUrl!=''}
+			                         <div style="float:left;margin-left:10px;">
+			                             <a href="{$commn.productUrl}" target="_blank">{$commn.productName}</a>
+			                         </div>
+			                    {/if}
+			                    <div style="clear:both;"></div>
+	                        </div>
+	                    </div>
+	                    
+                    {/foreach}
+                </div>
+                <textarea onfocus="trigger_site({$msgval@index})" id="remsgtext_{$msgval@index}" name="" cols="" rows="" style="font-family:Arial,Verdana,Helvetica,sans-serif; width:550px; height:300px;">{$msgval.replyconten}</textarea>
+                <div>
+                    {foreach $tpllist as $tplval}
+                        {if $tplval.iscommon==1 and $tplval.incommonuse==1}
+                        <label>
+                            <input onclick="getremessage({$tplval.id}, {$msgval@index})" name="1" type="radio" value="{$tplval.id}" />{$tplval.name}
+                        </label>
+                        {/if}
+                    {/foreach}
+                    <select onchange="selectTpl(this, {$msgval@index})">
+                        <option>一般模板</option>
+                        {foreach  $tpllist as $tplval}
+                            {if $tplval.incommonuse !=1}
+                                <option value="{$tplval.id}">{$tplval.name}</option>
+                            {/if}
+                        {/foreach}
+                    </select>
+                    <input type="button" onclick="SubmitReplyAliSite({$msgval@index}, '{$msgval.senderid}', '{$msgval.receiverid}', '{$msgval.relationId}', '{$msgval.idregion_h}', '{$msgval.idregion_e}')" type="button" 
+                        value="回复" />
+                    <input  type="button" onclick="createTemplate({$msgval@index})" value="生成模板">
+                    <input  type="button" onclick="markhandle({$msgval@index})" value="标记已处理">
+                </div>
+            </td>
+        </tr>
+    </table>
+    {/foreach}
+</div>
+{foreach  $tpllist as $tplval}
+      <div id="tpldiv_{$tplval.id}" style="display:none;">{$tplval.content}</div>
+{/foreach}
+<div style="" id="showprocess">
+</div>
+<div id="trackInfo">
+</div>
+{include file="footer.htm"}

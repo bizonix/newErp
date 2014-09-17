@@ -1,0 +1,44 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/omPlatform.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=platform&act=update' method="post" id="platformlist">
+    	<div>
+            <input type="hidden" name="id" value="{$platform.id}"/>
+        	<label for="platform" style="font-size:20px;">平台名称：</label>
+            <input value="{$platform.platform}" id='platform' class="validate[required] text-input" name="platform" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="platformSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        
+        
+        	
+        <div>
+            <label for="shortcode" style="font-size:20px;">平台简码：</label>
+             <input value="{$platform.shortcode}" id='shortcode' class="validate[required] text-input" name="shortcode" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="errormsgSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        
+        <div>
+        	<label for="suffix" style="font-size:20px;">扩展表名称：</label>
+            <input value="{$platform.suffix}" id='suffix' class="validate[required] text-input" name="suffix" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="platformSpan" style="color: red;">*</span>
+        </div>
+		<br />
+		
+	
+        
+        
+        <div>
+            <input type="submit" value="提交"/>
+            &nbsp;
+            <input type="button" id="back" value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.htm"}

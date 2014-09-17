@@ -1,0 +1,89 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelManage&act=index&id={$id}">渠道管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='channelName'{if ($type=='channelName')} selected="selected"{/if}>渠道名称</option>
+			<option value='channelAlias'{if ($type=='channelAlias')} selected="selected"{/if}>渠道别名</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=channelManage&act=add&id={$id}">添加</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>渠道名称</th>
+			<th>渠道别名</th>
+			<th>渠道折扣</th>
+			<th>是否启用</th>
+			<th>添加时间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.channelName}</td>
+			<td>{$list.channelAlias}</td>
+			<td>{$list.discount}</td>
+			<td>{if empty($list.is_enable)}否{else}是{/if}</td>
+			<td>{if empty($list.createdTime)}no{else}{date('Y-m-d H:i:s',$list.createdTime)}{/if}</td>
+			<td><a href="index.php?mod=channelPrice&act=index&chid={$list.id}&chname={$list.channelAlias}"><b>渠道价目表管理</b></a> | <a href="index.php?mod=partitionManage&act=index&chid={$list.id}"><b>分区管理</b></a> | <a href="index.php?mod=channelManage&act=modify&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info({$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+
+<script type="text/javascript">
+//搜索入口
+$("#search").click(function(){
+	type  = $.trim($("#type").val());
+	key   = encodeURIComponent($.trim($("#key").val()));
+	if (type!='0' && key!=''){
+		window.location.href = "index.php?mod=channelManage&act=index&id={$id}&type="+type+"&key="+key;
+	} else {
+		alertify.error("搜索条件没选或搜索关键词不能为空！");
+		return false;
+	}
+});
+{literal}
+//删除入口
+function del_info(id){
+	var url  = web_url + "json.php?mod=channelManage&act=delChannelManage";
+	var data = {"id":id};
+	alertify.confirm("真的要删除吗？", function (e) {
+		if (e) {
+			$.post(url,data,function(res){
+				if(res.errCode == 0){
+					alertify.alert("删除成功！",function(){
+						window.location.reload();
+					});
+				}else {
+					 alertify.error(res.errMsg);
+				   }
+			}, "jsonp");
+		}
+	});
+}
+{/literal}
+</script>
+{include file="footer.htm"}

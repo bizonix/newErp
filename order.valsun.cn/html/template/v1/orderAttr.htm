@@ -1,0 +1,32 @@
+{include file='header.htm'}
+{include file='omNav.htm'}
+<script language="javascript" src="js/orderAttr.js"></script>
+
+<div class="servar">
+   <span>
+		<button  id='addAttr' value="" />新增属性</button>
+   </span>
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td>id</td>
+			<td>属性名称</td>
+			<td>操作</td>
+		</tr>
+		{if !empty($property)}
+		{foreach from=$property item=list}
+		<tr class="odd">
+				<td>{$list.id}</td>
+				<td>{$list.attributesName}</td>
+				<td><button  class="attr_mod" tid="{$list.id}"/>编辑</button></td>
+		</tr>
+		{/foreach}
+		{/if}
+	</table>
+</div>
+
+ 
+{include file='footer.htm'}

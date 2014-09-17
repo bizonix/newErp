@@ -1,0 +1,132 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelManage&act=index&id={$carrierId}">渠道管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='country'{if ($type=='country')} selected="selected"{/if}>国家名</option>
+			<option value='weight_freight'{if ($type=='weight_freight')} selected="selected"{/if}>重量区间及运费</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=channelPrice&act=add&chname={$chname}&chid={$chid}">添加</a>
+	</span>
+	<span>
+		<a href="javascript:void(0)" onclick= "batch_update('{$chname}')">批量更新</a>
+	</span>
+</div>
+<div class="main">
+	<table class="firefox-table" cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>分区名称</th>
+			<th>国家列表</th>
+			<th>重量区间及运费</th>
+			<th>燃油费率</th>
+			<th>重量区间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.pr_group}</td>
+			<td width="40%">{if empty($list.pr_country)}暂无{else}{stripslashes($list.pr_country)}{/if}</td>
+			<td width="20%" style="word-break : break-all;">{$list.pr_kilo}</td>
+			<td>{$list.pr_discount}</td>
+			<td>{if $list.pr_handlefee=='2'}大于20KG{else}20KG(含)以下{/if}</td>
+			<td><a href="index.php?mod=channelPrice&act=modify&chid={$chid}&chname={$chname}&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info('{$chname}', {$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div id="dialog-menu" title="批量更新运费信息" class="">
+  <table id="dialog-content" cellspacing="0" width="100%">
+  <tr><td>正在努力为您加载批量更新信息...</td></tr>
+  </table>
+</div>
+<script type="text/javascript">
+//搜索入口
+$("#search").click(function(){
+	type  = $.trim($("#type").val());
+	key   = encodeURIComponent($.trim($("#key").val()));
+	if (type!='0' && key!=''){
+		window.location.href = "index.php?mod=channelPrice&act=index&chid={$chid}&chname={$chname}&type="+type+"&key="+key;
+	} else {
+		alertify.error("搜索条件没选或搜索关键词不能为空！");
+		return false;
+	}
+});
+{literal}
+//删除入口
+function del_info(chname,id){
+	var url  = web_url + "json.php?mod=channelPrice&act=delChannelPrice";
+	var data = {"id":id,"chname":chname};
+	alertify.confirm("真的要删除吗？不可恢复哦？", function (e) {
+		if (e) {
+			$.post(url,data,function(res){
+				if (res.errCode == 0) {
+					alertify.alert("删除成功！",function() {
+						window.location.reload();
+					});
+				} else {
+					alertify.error(res.errMsg);
+				}
+			}, "jsonp");
+		}
+	});
+}
+//批量更新入口
+function batch_update(chname){
+	var trs	= "";
+	trs	= trs + '<tr><td><select id="selItem"><option value="">==请选择项目==</option><option value="fuelcosts">燃油附加费</option></select></td><td><input type="text" id="itemVal" values="" maxlength="5" style="ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)"/></td></tr>';
+	$("#dialog-content").html(trs);
+	$("#dialog-menu").dialog( "option", "title", "批量更新价目表信息！" );
+	$("#dialog-menu").dialog("option", "buttons", [ { text: "提交", click: function() { batch_update_commit(chname); } },{ text: "取消", click: function() { $( "#dialog-menu" ).dialog( "close" ); } } ] );
+	$("#dialog-menu").dialog( "open" );
+}
+//批量更新提交
+function batch_update_commit(chname){
+	var selItem,itemVal;
+	selItem	 = $.trim($("#selItem").val());
+	itemVal	 = $.trim($("#itemVal").val());
+	if(selItem=='') {
+		alertify.error('请选择要修改的项目！');
+		return false;
+	}
+	if(itemVal=='') {
+		alertify.error('值不能为空！');
+		$("#itemVal").focus();
+		return false;
+	}	
+	var url  = web_url + "json.php?mod=channelPrice&act=batchChannelPrice";
+	var data = {"chname":chname,"selItem":selItem,"itemVal":itemVal};
+	$.post(url,data,function(res){
+		if(res.errCode == 0) {
+			alertify.alert("批量修改成功！",function(){
+				window.location.reload();
+			});
+		} else {
+			alertify.error(res.errMsg);
+		}
+	}, "jsonp");
+	return false;
+}
+{/literal}
+</script>
+{include file="footer.htm"}

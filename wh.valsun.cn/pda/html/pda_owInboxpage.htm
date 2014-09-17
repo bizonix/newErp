@@ -1,0 +1,20 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_ajaxwraper.js"></script>
+<script type="text/javascript" src="js/ow_inboxOp.js"></script>
+	<div id="mstatus" class="floatright"></div>
+	<div id="divcontent" style="">
+        <div id="" >
+            箱号:<input name="order" type="text" id="boxNumber_id" onkeydown="scanBoxNum(event)" class="textinput" />
+	   </div>
+	</div>
+	<div>
+	   已扫描:<select id="inboxList"></select><br><br>
+	   料号:<input id="sku" onkeydown="inboxSku(event)" class="textinput" /><br><br>
+	   数量:<input id="skunum" onkeydown="inboxNum(event)" size="6" />
+	</div>
+	<div style="text-align:center">
+	   <br>
+	   <button onclick="inboxSubmit()">&nbsp;提&nbsp;交&nbsp;</button>
+	</div>
+	<div id="showMsg"></div>
+{include file="footer.htm"}

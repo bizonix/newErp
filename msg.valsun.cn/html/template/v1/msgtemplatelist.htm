@@ -1,0 +1,38 @@
+{include file="header.htm"}
+{include file="secendNav_tpl.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./css/page.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/tpllist.js"></script>
+
+<div class="topmenue">
+    <button onclick="window.location='{$addurl}'" class="msg_addcat">
+        添加模板
+    </button>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tbody>
+            <tr class="title">
+                <td>编号</td>
+                <td>模板名称</td>
+                <td>所属人</td>
+                <td>操作</td>
+            </tr>
+			{foreach $tpllist as $tplval }
+            <tr class="odd">
+                <td>{$tplval.id}</td>
+                <td>{$tplval.name}</td>
+                <td>{$tplval.username}</td>
+                <td>
+                	<button onclick="window.location='{$addurl}&tid={$tplval.id}'" class="update" pid="1">修改</button>
+					<button onclick="deletetpl({$tplval.id})" class="update" pid="1">删除</button>
+				</td>
+            </tr>
+			{/foreach}
+        </tbody>
+    </table>
+	<div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+            {$pagestr}
+        </div>
+</div>
+{include file="footer.htm"}

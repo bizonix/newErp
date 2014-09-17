@@ -1,0 +1,54 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whStoreList.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=warehouseManagement&act=warehouseSubmit&type=edit' method="post" id="warehouseForm" onsubmit="return editCheck();">
+    	<input type="hidden" id="key_id" name="key_id" value="{$key_id}" readonly="readonly"/>
+    	<div style="width:500px; margin:auto; text-align:left;">
+            <label for="whNameEdit" style="font-size:20px;">仓库名称：</label>        
+            <input value="{$whName}" id='whNameEdit' class="mf validate[required] text-input" name="whNameEdit" type="text" style="width:200px;height:30px;font-size:20px">
+             <span id="whNameInputSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+            <label for="whCodeEdit" style="font-size:20px;">仓库编码：</label>        
+            <input value="{$whCode}" id='whCodeEdit' class="mf validate[required] text-input" name="whCodeEdit" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="whCodeInputSpan" style="color: red;">*</span>
+		</div>        	
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+            <label for="whAddressEdit" style="font-size:20px;">仓库位置：</label>    
+            <input value="{$whAddress}" id='whAddressEdit' class="mf validate[required] text-input" name="whAddressEdit" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="whAddressInputSpan" style="color: red;">*</span>   
+        </div> 
+        <br />
+		<div style="width:500px; margin:auto; text-align:left;">
+            <label for="whLocationEdit" style="font-size:20px;">仓库分布：</label>    
+            <input value="{$whLocation}" id='whLocationEdit' class="mf validate[required] text-input" name="whLocationEdit" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="whLocationInputSpan" style="color: red;">*</span>   
+        </div> 
+        <br />
+        <!--
+        <div>               
+            <label for="isEnabled" style="font-size:20px;">是否启用：</label> 
+                <select style="width:200px;height:30px;font-size:20px" class="mf validate[required]" name="isEnabled" id="isEnabled">
+                    {foreach from=$sampleTypeList item=value}
+                     <option value="{$value.id}">{$value.typeName}</option>
+                    {/foreach}
+                </select>
+            <span id="isEnabledSpan" style="color: red;">*</span>   
+        </div> 
+        <br />
+        -->
+        <div>   		       
+            <button  id='warehouseSubmit' value="" />提交</button>
+            &nbsp;
+            <input type="button"  id='returnPage' value="取消" class="input_button" />
+        </div>        
+    </form>
+</div>
+{include file="footer.htm"}

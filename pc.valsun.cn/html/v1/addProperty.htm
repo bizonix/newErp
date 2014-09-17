@@ -1,0 +1,78 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/property.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+{if $smarty.get.status != ''}
+<div class="servar products-servar">
+<span style="color: red;">{$smarty.get.status}</span>
+</div>
+{/if}
+            
+            <div class="main products-main">
+					<table class="products-action" width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+                            <td style="width: 500px;" align="right"><span style="color:#F00;">*</span>属性名：</td>
+							<td align="left">
+                            <input name="propertyName" id="propertyName"/>
+							</td>
+						</tr>
+                        <tr>
+                           	    <td align="right">
+                                    <span style="color:#F00;">*</span>类别：
+                                </td>
+                                <td align="left">
+									<select style="width:153px;" name="sku_category" id="pid_one" onchange="select_one();">
+										<option value="0">请选择</option>
+										{foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid=0") as $value}
+										<option value="{$value['id']}">{$value['name']}</option>
+										{/foreach}
+									</select>
+									<span align="left" id="div_two" style="width:auto; display:none"></span>
+									<span align="left" id="div_three" style="width:auto; display:none"></span>
+									<span align="left" id="div_four" style="width:auto; display:none"></span>
+								</td>
+						</tr>
+                        <tr>
+                            <td></td>
+                            <td align="left"><span style="color: red;">(只允许在最小分类下添加属性)</span></td>
+						</tr>
+                        <tr>
+                            <td align="right"><span style="color:#F00;">*</span>录入方式：</td>
+                            <td align="left">
+									<select style="width:153px;" name="isRadio" id="isRadio">
+										<option value="1">单选</option>
+										<option value="2">多选</option>
+									</select>
+							</td>
+						</tr>
+                        <tr>
+                            <td align="right"><span style="color:#F00;">*</span>是否必填项：</td>
+                            <td align="left">
+									<select style="width:153px;" name="isRequired" id="isRequired">
+										<option value="1">非必填</option>
+										<option value="2">必填</option>
+									</select>
+							</td>
+						</tr>
+                        <tr>
+                            <td></td>
+                            
+							<td align="left"><input type="button" value="提交" id="addPP"/><input type="button" value="返回" id="back"/></td>
+						</tr>
+					</table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

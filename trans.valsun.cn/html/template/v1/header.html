@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Meta -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<!-- End of Meta -->
+		
+		<!-- Page title -->
+		<title>{module}--运输方式管理系统</title>
+		<!-- End of Page title -->
+		
+		<!-- Libraries -->
+		<link type="text/css" href="css/layout.css" rel="stylesheet" />	
+		<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+        <script type="text/javascript" src="js/easyTooltip.js"></script>
+		<script type="text/javascript" src="js/hoverIntent.js"></script>
+		<script type="text/javascript" src="js/superfish.js"></script>
+        <script type="text/javascript" src="js/jquery.wysiwyg.js"></script>
+		<script type="text/javascript" src="js/custom.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+        <link rel="stylesheet" href="./css/validationEngine/validationEngine.jquery.css" type="text/css"/>
+		<script src="./js/languages/jquery.validationEngine-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+        <script src="./js/general.js" type="text/javascript" charset="utf-8"></script>
+		<!-- End of Libraries -->	
+	</head>
+	<body>
+		<!-- Container -->
+		<div id="container">
+		
+			<!-- Header -->
+			<div id="header">
+				
+				<!-- Top -->
+				<div id="top">
+					<!-- Logo -->
+					<div class="logo"> 
+						<a href="#" title="Administration Home" class="tooltip"><img src="images/logo.png" alt="Wide Admin" /></a> 
+					</div>
+					<!-- End of Logo -->
+					
+					<!-- Meta information -->
+					<div class="meta">
+						<p>Welcome, {username}! </p>
+						<ul>
+                        <li><a href="index.php?mod=login&act=logout" title="End administrator session" class="tooltip"><span class="ui-icon ui-icon-power"></span>退出</a></li>                         
+						</ul>	
+					</div>
+					<!-- End of Meta information -->
+				</div>
+				<!-- End of Top-->
+			
+				<!-- The navigation bar -->
+				<div id="navbar">
+					<ul class="nav">
+						<li><a href="index.php?mod=query&act=showform">运费查询</a></li>
+						<li><a href="index.php?mod=transportmanage&act=list">运输方式管理</a></li>
+						<li><a href="index.php?mod=countriesManage&act=countriesList">国家列表管理</a></li>
+                        <li><a href="index.php?mod=shippingAddressManage&act=shippingAddressList">发货地址管理</a></li>
+                        <li><a href="index.php?mod=platformManage&act=platformShow">平台管理</a></li>
+						<li><a href="index.php?mod=poweruser&act=list">授权管理</a></li>
+					</ul>
+				</div>
+				<!-- End of navigation bar" -->
+			</div>
+			<!-- End of Header -->

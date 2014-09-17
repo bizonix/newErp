@@ -1,0 +1,60 @@
+{header}
+<link rel="stylesheet" href="css/powermanage.css">
+<script language="javascript" src="js/powergrouplistpage.js" ></script>
+{navbar}
+<div class="maincontentdiv" style="height: 405px;">
+    <div style="float: left; margin-right: 10px;">
+        {powerleftmenu}
+    </div>
+    <div class="leftcontainer">
+        <div class="topmenudiv">
+            <form action="index.php?mod=powergroup&act=searchgroup" method="post" style="display: inline">
+                <label for="lf">搜索权限组: </label>
+                <input class="lf" value="{keywords}" style="width: 200px;" name="keywords" type="text">
+                <input type="submit" value="搜索权限组">
+            </form>
+            <a href="index.php?mod=powergroup&act=addgroup">添加权限组</a>
+        </div>
+        <div class='power_user_list_table'>
+            <table class="powerusertable">  	
+                    <thead>        	
+                        <tr class="alt">
+                            <th width="5%" scope="col">编号</th>
+                            <th width="15%" scope="col">权限组名</th>
+                            <th scope="col" width="50%">简述</th>
+                            <th scope="col" width="15%">更新日期</th>
+                            <th scope="col" width="15%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- BEGIN grouplist -->
+                        <tr>
+                            <td align="center">{gid}</td>
+                            <td align="center">{gname}</td>
+                            <td align="center">
+                             {gnamezh}
+                            </td>
+                            <td align="center">
+                                {updatetime}
+                            </td>
+                            <td align="center">
+                                <a href="index.php?mod=powergroup&act=addgroup&gid={gid}">修改</a>&nbsp;
+                                <a href="#" onclick="deletegroup({gid})">删除</a>
+                            </td>
+                        </tr>
+                        <!-- END grouplist -->
+                       </tbody>
+                       <tfoot>
+                        <tr class="nu">
+                            <td colspan="9" style="font-size:15px">
+                                {pagehtml}
+                            </td>
+                        </tr>
+                    </tfoot>
+               </table>
+
+        </div>
+    </div>
+    <div style="clear: both"></div>
+</div>
+{footer}

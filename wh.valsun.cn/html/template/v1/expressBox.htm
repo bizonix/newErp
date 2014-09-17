@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--link rel="stylesheet" type="text/css" href="css/label50x100.css"/-->
+<title>快递箱号打印</title>
+<style>
+    td{ padding:4px 0px;}
+    body{ padding: 0; margin: 0;}
+</style>
+</head>
+<body>
+{foreach $box_arr as $key=>$val}
+  {section name=loop loop = $val.boxCount}
+	<table style="width:373px; height:100; padding: 0; margin:0 10px; height:46mm;">
+    	<tbody>
+			<tr><td style="text-align: center;">{$smarty.section.loop.iteration}/{$val.boxCount}</td></tr>
+        	<tr>
+            	<td valign="center" style=" width:185px;font-size:10px;height: 70px;">
+                    <div style="TEXT-ALIGN: center;">                        
+               	   		 <img src="barcode128.class.php?data={$key}" width="300" height="70" />                                               
+                    </div>
+                </td>
+            </tr>
+			<tr>
+				<td><div style="TEXT-ALIGN:center;font-size:43px; font:Arial, Helvetica, sans-serif;">{$key}</div></td>
+			</tr>
+            
+        </tbody>
+    </table>
+    {/section}
+	<div style="page-break-after:always;">&nbsp;</div>
+{/foreach}
+</body>
+</html>

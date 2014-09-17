@@ -1,0 +1,63 @@
+{include file='header.htm'}
+{include file='whNav.htm'}
+<script language="javascript" src="js/invOperate.js"></script>
+ <div class="servar">
+ <span>
+	<button  id='waitinv' value="" />盘点申请列表</button>
+</span>
+<span>
+	<button  id='inv' value="" />盘点</button>
+</span>
+<span>
+	<button  id='invlist' value="" />盘点列表</button>
+</span>
+<span>
+	<button  id='invreason' value="" />盘点原因</button>
+</span>
+<span>
+	<button  id='invcond' value="" />盘点条件</button>
+</span>
+</div>
+<br/>
+<div class="servar">
+   <!--span>
+		<button  id='addcondition' value="" />新增条件</button>
+   </span>
+   <br-->
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td>id</td>
+			<td>审核名称</td>
+			<td>审核盘点限制值</td>
+			<td>审核备注</td>
+			<td>是否启用</td>
+			<td>操作</td>
+		</tr>
+		{if !empty($inv_Condition)}
+		{foreach from=$inv_Condition item=list}
+		<tr class="odd">
+				<td>{$list.id}</td>
+				<td>{$list.auditName}</td>
+				<td>{$list.auditValues}</td>
+				<td>{$list.notes}</td>
+				<td>{if $list.is_enable eq 1}是{else}否{/if}</td>
+				<td><button  class="con_mod" tid="{$list.id}"/>编辑</button></td>
+		</tr>
+		{foreachelse}
+		<tr class="odd">
+				<td colspan="9">没有搜索值！</td>
+		</tr>
+		{/foreach}
+		{/if}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination" id="spage">
+		{$show_page}
+	</div>
+</div>
+ 
+{include file='footer.htm'}

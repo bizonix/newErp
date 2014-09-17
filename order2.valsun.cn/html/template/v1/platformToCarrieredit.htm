@@ -1,0 +1,99 @@
+{include file='header2.htm'}
+{include file='omNav.htm'}
+<script language="javascript" src="js/platformToCarrier.js"></script>
+{literal}
+<style>
+.cul .cli {width:50%;float:left;list-style-type:none}
+#mlabelk{width:10%;float:left;}
+#mselectk{width:90%;float:left;}
+#mlabelnk{width:10%;float:left;}
+#mselectnk{width:90%;float:left;}
+.cklabel {
+float: left;
+}
+.clear{
+	clear:both;
+}
+</style>
+{/literal}
+<div class="servar" align="center">
+	<form action='index.php?mod=platformToCarrier&act=update' method="post" id="CarrierupdateForm"> 	
+		<input type="hidden" id="id" name="id" value="{$carrier.id}"/>
+		<p>
+			<label for="platformId" style="font-size:20px;"> &nbsp; &nbsp; &nbsp; 平台名称:</label>
+			<select  onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;"  class="mf validate[required] text-input" id="platformId"  name="platformId" type="text" style="width:200px;height:30px;font-size:20px"/>
+			{foreach from=$platfromList item=list}
+			<option value="{$list.id}" {if $list.id==$carrier.platformId }selected="selected"{/if}>{$list.platform}</option>
+			{/foreach}
+			</select>
+		</p>
+		<br/>
+		<p>
+			<label for="carrierName" style="font-size:20px;"> &nbsp;平台运输方式:</label>
+			<input  readonly="readonly"  class="mf validate[required] text-input" id="upcarrierName"  name="carrierName" value="{$carrier.platformCarrierName}" type="text" style="width:200px;height:30px;font-size:20px" />
+			<!-- <span style="color:#F00;">*</span> -->
+		</p>
+		<br/>
+		
+		<p>
+			<label for="returnCarrierName" style="font-size:20px;">运输方式别名：</label>
+			<input class="mf validate[required] text-input" id="returnCarrierName"  name="returnCarrierName" value="{$carrier.platformReturnCarrierName}" type="text" style="width:200px;height:30px;font-size:20px" />
+			<!-- <span style="color:#F00;">*</span> -->
+		</p>
+		<br/>
+			<div style=" width:80%;font-size:20px" name="groupId">
+				<div id="mlabelk">
+				非快递：<br/><label for="ckall0"><input type="checkbox"  id="ckall0" name="ckall0" value="0"/>(全/反)选</label>
+				</div>
+				
+				<div id="mselectk">
+				 <ul class="cul">
+					{foreach from=$carrierListk item=list}
+					<li class="cli">
+					<label style="float:left;color:green">{$list.carrierNameCn}:</label>
+					{foreach from=getChinnelbyCarrierId($list.id) item=tcnl}
+					<label for="{$tcnl.id}" class="cklabel">
+					
+					<input type="checkbox" class="list0" id="{$tcnl.id}" name="carriers0[]" value="{$tcnl.id}" {if instr($carrier.channelIds,$tcnl.id)}checked="checked"{/if}/>
+					{$tcnl.channelName}
+					</label>
+					{/foreach}
+					<li>
+					{/foreach}
+				</ul>
+				</div>	
+				
+				<div class='clear'>
+				<br/><br/><br/>
+				</div>
+				
+				<div id="mlabelnk">
+				快递：<br/><label for="ckall1"><input  type="checkbox" id="ckall1" name="ckall1" value="1"/>(全/反)选</label>
+				</div>
+				
+				<div id="mselectnk">
+			    <ul class="cul">
+					{foreach from=$carrierListnk item=list1}
+					<li class="cli">
+					<label style="float:left;color:green">{$list1.carrierNameCn}:</label>
+					{foreach from=getChinnelbyCarrierId($list1.id) item=tncl1}
+					<label for="{$tncl1.id}" class="cklabel">
+					<input type="checkbox" class="list1" id="{$tncl1.id}" name="carriers1[]" value="{$tncl1.id}" {if instr($carrier.channelIds,$tncl1.id)}checked="checked"{/if}/>
+					{$tncl1.channelName}
+					</label>
+					{/foreach}
+					<li>
+					{/foreach}
+				</ul>
+				</div>
+			</div>
+			
+		<br/>
+		<div class="clear"></div>
+		<p>
+			<input type="submit" id="carrierupdateFormSumit" class="input_button" value="提交">
+			<input type="button" class="input_button" id='back' value="返回" />
+		</p>
+	</form>
+</div>
+{include file="footer.htm"}

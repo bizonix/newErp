@@ -1,0 +1,124 @@
+{header}
+		<script type="text/javascript" src="./js/products.js"></script>
+        <script type="text/javascript" src="./js/publicDatePicker/WdatePicker.js"></script>
+			<div id="bgwrap">
+				<!-- Main Content -->
+				<div id="content">
+					<div id="main">
+					<p>{step}</p>
+                    <div class="pad20">
+                    {link}
+                    <br />
+						<div id="status" style="text-decoration: none; color:#000;">
+							<span id="status1">
+								<a id="a1" style="color:#000; font-size: 10pt;" href="index.php?mod=products&act=getProducts&productsStatus=1&productsType={productsType}">1.确认收到料号</a>
+                                <!-- IF button1 -->
+                                <button id="bt1" class="add" style="width:70px;height:20px;font-size:15px">领取料号</button>
+			                    <!-- ENDIF button1 -->
+                            </span>
+                            &nbsp;
+							<span id="status2">
+								<a id="a2" style="color:#000; font-size: 10pt;" href="index.php?mod=products&act=getProducts&productsStatus=2&productsType={productsType}">2.成功领取料号</a>
+								<!-- IF button2 -->
+                                <button id="bt2" class="add" style="width:70px;height:20px;font-size:15px">制作完成</button>
+                                &nbsp;
+                                <button id="dc2" class="add" style="width:70px;height:20px;font-size:15px">退还料号</button>
+                                <!-- ENDIF button2 -->
+							</span>
+                            &nbsp;
+
+							<span id="status3">
+								<a id="a3" style="color:#000; font-size: 10pt;" href="index.php?mod=products&act=getProducts&productsStatus=3&productsType={productsType}">3.完成制作料号</a>
+							    <!-- IF button3 -->
+                                <button id="bt3" class="add" style="width:70px;height:20px;font-size:15px">归还文员</button>
+                                <!-- ENDIF button3 -->
+                            </span>
+                            &nbsp;
+
+							<span id="status4">
+								<a id="a4" style="color:#000; font-size: 10pt;" href="index.php?mod=products&act=getProducts&productsStatus=4&productsType={productsType}">4.归还文员料号</a>
+							    <!-- IF button4 -->
+                                <button id="bt4" class="add" style="width:70px;height:20px;font-size:15px">确认归还</button>
+                                <!-- ENDIF button4 -->
+                            </span>
+                            &nbsp;
+
+							<span id="status5">
+								<a id="a5" style="color:#000; font-size: 10pt;" href="index.php?mod=products&act=getProducts&productsStatus=5&productsType={productsType}">5.文员确认收到料号</a>
+							</span>
+                            &nbsp;
+
+							<span id="status6">
+								<a style="color:#000; font-size: 10pt;" href="index.php?mod=products&act=getProducts&productsStatus=6&productsType={productsType}">6.已归还仓库料号</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+                                <!--<input type="button" id="bt6" style="width:70px;height:30px;font-size:15px" value="报表导出" />
+                                    <div id="export" style="display: none;">
+                                        <button id="exp1">完成制作报表</button>
+                                        起:<input id="startdate1" onclick="WdatePicker()"/>止:<input id="enddate1" onclick="WdatePicker()"/>
+                                        <button id="exp2">统计报表</button>
+                                        起:<input id="startdate2" onclick="WdatePicker()"/>止:<input id="enddate2" onclick="WdatePicker()"/>
+                                    </div>
+                                    -->
+							</span>
+                            &nbsp;
+						</div>
+                        <br />
+						<div class="skuSearch">
+							<span style="color:#000; font-size: 20px;">搜索料号：</span>
+							<input id="skuSearchText" value="{searchSku}"/>
+                            <input id="productsStatus" value="{productsStatus}" type="hidden"/>
+                            <input id="productsType" value="{productsType}" type="hidden"/>
+						   	<button id="skuSearchButton" style="width: 50px; height: 30px; font-size: 30;">搜索</button>
+						</div>
+
+					<!-- Big buttons -->
+						<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <td><input type="checkbox" class="checkall" /></td>
+                                    <td>spu</td>
+                                    <td>sku</td>
+                                    <td>数量</td>
+                                    <td>状态</td>
+                                    <td>类型</td>
+                                    <td>签收</td>
+                                    <td>领取</td>
+                                    <td>制作完成</td>
+                                    <td>内部归还文员</td>
+                                    <td>文员确认收到</td>
+                                    <td>归还仓库</td>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size: small;>
+                            	<!-- BEGIN list -->
+                                <tr class="odd">
+                                	<td><input type="checkbox" name="products" value="{t_id}"/></td>
+                                    <td>{t_spu}</td>
+                                    <td>{t_sku}</td>
+                                    <td>{t_productsCount}</td>
+                                    <td>{t_productsStatus}</td>
+                                    <td>{t_productsType}</td>
+                                    <td>{t_productsComfirmerId} {t_productsComfirmTime}</td>
+                                    <td>{t_productsTakerId} {t_productsTakeTime}</td>
+                                    <td>{t_productsCompleterId} {t_productsCompleteTime}</td>
+                                    <td>{t_productsBackerId} {t_productsBackTime}</td>
+                                    <td>{t_productsReceiverId} {t_productsReceiveTime}</td>
+                                    <td>{t_productsReturnerId} {t_productsReturneTime}</td>
+                                </tr>
+                                <!-- END list -->
+                            </tbody>
+                            <tfoot >
+                                <tr class="odd">
+                                    <td colspan="18" style="text-align: center;">
+                                    {show_page}
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+					</div>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					</div>
+				</div>
+				</div>
+{footer}

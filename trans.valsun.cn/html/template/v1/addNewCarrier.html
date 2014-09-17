@@ -1,0 +1,69 @@
+{header}
+<script type="text/javascript" src="./js/newTrans.js"></script>	
+<link rel="stylesheet" href="css/transportlist.css">
+{navdiv}	
+				<!-- Main Content -->
+				<div id="content">
+					<div id="main1">
+					<h1>{operate}</h1>
+					<div class="pad20">
+					<!-- Big buttons -->
+						<form id="addform" name="addform" method="post" action="" >
+							<!--<input name="goodid" type="hidden" id="goodid" value="{id}">-->
+							<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+								<tbody>
+									<tr class="odd">
+										<td>运输方式名称（中文）</td>
+										<td><input name="transnamec" type="text" id="transnamec" value="{transnamec}" /><span id="transnamec_err" color="red"></span></td>
+									</tr>
+									<tr class="odd">
+										<td>运输方式名称（英文）</td>
+										<td><input name="transnamee" type="text" id="transnamee" value="{transnamee}" /><span id="transnamee_err" color="red"></span></td>
+									</tr>
+									<tr class="odd">
+										<td>对应导出值</td>
+										<td><table class="fullwidth">
+										         <!-- BEGIN list -->
+												     <tr><td><input type="text" name="carrierToPlatform" value="{carrierToPlatform}"/><span>{platform}</span></td></tr>
+												 <!-- END list -->
+											</table></td>
+									</tr>
+								    <tr class="odd">
+										<td>接受重量最小值（KG）</td>
+										<td><input name="weightmin" type="text" id="weightmin" value="{weightmin}"></td>
+									</tr>
+                                    <tr class="odd">
+										<td>接受重量最大值（KG）</td>
+										<td><input name="weightmax" type="text" id="weightmax" value="{weightmax}"></td>
+									</tr>
+                                    
+								
+									<tr class="odd">
+										<td>递送时间</td>
+										<td><input name="timeCount" type="text" id="timeCount" value="{timeCount}">天</td>
+									</tr>
+									
+										<td colspan="2">
+											<input type="button" value="提交" class="addNewCarrier" id="addNewCarrier" onclick="submitback()"/>
+											<input type="button" value="返回" id="back"/>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+						
+					</div>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					</div>
+				</div>
+				<!-- End of Main Content -->
+	
+				
+			</div>
+			<!-- End of bgwrap -->
+		</div>
+		<!-- End of Container -->
+		
+{footer}
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
+<Styles>
+<Style ss:ID="sDT"><NumberFormat ss:Format="Short Date"/></Style>
+</Styles>
+<Worksheet ss:Name="Sheet1">
+    <Table>
+        <Row>
+            <Cell><Data ss:Type="String">spu</Data></Cell>
+            <Cell><Data ss:Type="String">sku</Data></Cell>
+            <Cell><Data ss:Type="String">产品制作状态</Data></Cell>
+            <Cell><Data ss:Type="String">产品待处理类型</Data></Cell>
+            <Cell><Data ss:Type="String">签收人</Data></Cell>
+            <Cell><Data ss:Type="String">签收时间</Data></Cell>
+            <Cell><Data ss:Type="String">领取人</Data></Cell>
+            <Cell><Data ss:Type="String">领取时间</Data></Cell>
+            <Cell><Data ss:Type="String">完成人</Data></Cell>
+            <Cell><Data ss:Type="String">完成时间</Data></Cell>
+            <Cell><Data ss:Type="String">内部归还文员</Data></Cell>
+            <Cell><Data ss:Type="String">内部归还时间</Data></Cell>
+            <Cell><Data ss:Type="String">文员确认收到</Data></Cell>
+            <Cell><Data ss:Type="String">文员确认收到时间</Data></Cell>
+            <Cell><Data ss:Type="String">归还仓库</Data></Cell>
+            <Cell><Data ss:Type="String">归还仓库时间</Data></Cell>
+            <Cell><Data ss:Type="String">产品备注</Data></Cell>
+        </Row>
+    </Table>
+</Worksheet>
+</Workbook>

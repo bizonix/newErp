@@ -1,0 +1,42 @@
+{include file="header.htm"}
+{include file="secendNav_cat.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/categorylist.js"></script>
+
+<div class="topmenue">
+    <button onclick="window.location='index.php?mod=msgCategory&act=addNewCategory'" class="msg_addcat">
+        添加分类
+    </button>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tbody>
+            <tr class="title">
+                <td width="5%">编号</td>
+                <td width="13%">分类名称</td>
+				<td width="5%">已回复</td>
+				<td width="5%">未回复</td>
+                <td>规则</td>
+                <td>所属账号</td>
+                <td width="10%">备注</td>
+                <td width="12%">操作</td>
+            </tr>
+			{foreach $categorylist as $catval }
+            <tr class="odd">
+                <td>{$catval.id}</td>
+                <td>{$catval.category_name}</td>
+				<td><a href="index.php?mod=messagefilter&act=getMessageListByConditions&catid={$catval.id}&status=1">已回复（<span style="color:red;">{$catval.replyed}）</span></a></td>
+				<td><a href="index.php?mod=messagefilter&act=getMessageListByConditions&catid={$catval.id}&status=2">未回复（<span style="color:red;">{$catval.noreply}</span>）</a></td>
+                <td>{$catval.rules}</td>
+                <td>{$catval.ebay_account}</td>
+				<td>{$catval.ebay_note}</td>
+                <td>
+                	<button onclick="window.location='index.php?mod=msgCategory&act=addNewCategory&cid={$catval.id}'" class="update" pid="1">修改</button>
+					<button onclick="deletecategory({$catval.id})" class="update" pid="1">删除</button>
+				</td>
+            </tr>
+			{/foreach}
+        </tbody>
+    </table>
+</div>
+{include file="footer.htm"}

@@ -1,0 +1,93 @@
+{include file='header.html'}
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<div class="twovar">
+    <ul>
+        {if $secnev == 1}
+        <li>
+            <a href="index.php?mod=goodsInfo&act=showSearchForm">货品资料</a>
+        </li>
+        <li>
+            <a href="#">内部购买</a>
+        </li>
+        <li>
+            <a href="index.php?mod=inventory&act=invProfit">盘点</a>
+        </li> 
+        <li>
+            <a href="index.php?mod=warehouseManagement&act=whStore">仓库管理</a>
+        </li> 
+		<li>
+			<a href="index.php?mod=position&act=positionList">仓位管理</a>
+		</li>
+        {/if}               
+    </ul>
+</div>
+{include file='whNav.html'}
+<script language="javascript" src="js/position_manage.js"></script>
+ <div class="servar">
+<span>
+	<button  id='' value="" />盘点</button>
+</span>
+<span>
+	<button  id='' value="" />盘点类表</button>
+</span>
+<span>
+	<button  id='' value="" />盘点设置</button>
+</span>
+</div>
+<br/>
+<div class="servar">
+<table cellspacing="0" width="100%" id="">
+	<tr>
+		<td>
+			<table cellspacing="0" width="100%" id="">
+				<tr>
+					<td>盘点原因：</td>
+					<td>
+						<table cellspacing="0" width="100%" id="">
+							<tr>
+								<td><input type="text" value=""></td>
+							</tr>
+							<tr>
+								<td><input type="text" value=""></td>
+							</tr>
+							<tr>
+								<td><input type="text" value=""></td>
+							</tr>
+							<tr>
+								<td><input type="text" value=""></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td>
+			<table cellspacing="0" width="100%" id="">
+				<tr>
+					<td>盘点审核条件：</td>
+					<td>
+						<table cellspacing="0" width="100%" id="">
+							<tr>
+								<td><input type="checkbox"> 数量盘亏不超过 <input type="text" value=""></td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"> 金额盘亏不超过 <input type="text" value=""></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<button  id='' value="" />保存</button><button  id='' value="" />新增行</button>
+		</td>
+		<td></td>
+	</tr>
+</table>
+</div>
+<div class="main">
+</div>
+
+{include file='footer.html'}

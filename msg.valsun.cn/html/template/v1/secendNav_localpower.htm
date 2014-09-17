@@ -1,0 +1,22 @@
+<div class="twovar">
+    <ul>
+        <li>
+            <a href="index.php?mod=user&act=index" {if $mod=='user' }class="cho"{/if}>用户管理</a>
+        </li>
+        <li>
+            <a href="index.php?mod=job&act=index" {if $mod=='job' }class="cho"{/if}>岗位管理</a>
+        </li>
+        <li>
+            <a href="index.php?mod=dept&act=index" {if $mod=='dept' }class="cho"{/if}>部门管理</a>
+        </li>
+		<li>
+            <a href="index.php?mod=localPower&act=localUserList" {if $sec_menue==1 }class="cho"{/if}>ebay用户管理</a>
+        </li>
+        <li>
+            <a href="index.php?mod=localPower&act=localUserListAli" {if $sec_menue==2 }class="cho"{/if}>速卖通用户管理</a>
+        </li>
+        <li>
+            <a href="index.php?mod=localPowerAmazon&act=localUserList" {if $sec_menue==3 }class="cho"{/if}>Amazon用户管理</a>
+        </li>
+    </ul>
+</div>

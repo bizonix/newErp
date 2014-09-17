@@ -1,0 +1,33 @@
+{include file="header.html"}
+<script type="text/javascript" src="./js/standard.js"></script>
+<div class="fourvar">
+            {include file="iqcnav.html"}
+            </div>
+            <div class="servar">
+				<span>
+					<button  id='back' value="" />返回</button>
+				</span>
+            </div>
+			<div id="showMessage"></div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">                      
+						<td>检测类别</td>
+						<td>选择开启类别标准名称</td>
+						<td>操作</td>
+                    </tr>
+                    {foreach from=$sampleType item=list}
+                    <tr class="odd">
+                            <td>{$list.typeName}</td>
+							<td>
+							{foreach from=$standard_arr[$list.id] item=standard}
+								<input type="radio" name="st{$list.id}" value="{$standard.sName}" {if $standard.is_open==1}checked{/if}>{$standard.sName}   
+							{/foreach}
+							</td>
+							<td><button  class="openst" value="{$list.id}" />开启</button></td>
+                    </tr>
+					{/foreach}
+                </table>
+            </div>
+
+{include file="footer.html"}

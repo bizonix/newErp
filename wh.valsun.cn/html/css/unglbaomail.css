@@ -1,0 +1,12 @@
+/* CSS Document */
+@charset "utf-8";
+div.gm2{ font-size:8px; color:#000000;font-family: Arial, Helvetica, sans-serif;}
+.font18{ font-size:11px; color:#000000; }
+.font16{ font-size:16px;}
+.box_bottom{ border-bottom:1px dashed #000;}
+.box1{ border-top:1px solid #000;}
+.box2{ border-left:1px dashed #000; border-right:1px dashed #000;}
+.font12{ font-size:12px; font-weight:bold;}
+.font14{ font-size:14px; font-weight:bold;}
+.box3{ border-bottom:1px dashed #000; border-top:1px dashed #000;}
+.font70{ font-size:80px;}

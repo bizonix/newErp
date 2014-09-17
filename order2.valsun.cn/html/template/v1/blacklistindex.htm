@@ -1,0 +1,73 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/onBlackList.js"></script>
+            <div class="servar">
+                 <span><button id="add">添加黑名单</button></span>&nbsp;|&nbsp;
+                 <span>
+                 平台user名称<input type="text" name='platformUsername' id="platformUsername" value="{$g_platformUsername}"/>
+                 </span>
+                 <span>
+			        <label for="platformId">所属平台：</label>
+			        <select name="platformId" id="platformId">
+			            <option value="">全部</option>
+			            {foreach $platfromIAN as $value}
+			            <option value="{$value.id}" {if $g_platformId == $value.id} selected {/if}>{$value.platform}</option>
+			            {/foreach}
+			        </select>
+			    </span>
+                 <span>
+                     <label for="accountId">账号：</label>
+                     <select name="accountId" id="accountId"><!-- class="flexselect" -->
+                        <option value="">全部</option>
+                        {foreach $accountAll as $value}
+                       <option value="{$value.id}"  {if $value.id==$g_accountId}selected{/if}>{$value.account}</option>
+                        {/foreach}
+                    </select>
+                </span>
+			    &nbsp;|&nbsp;
+              <input type="button" value="搜索" id="search"/>
+            </div>
+            
+           <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+						<!-- <td>编号</td> -->
+                        <td>平台user名称</td>
+						<td>用户全名</td>
+						<td>所属平台</td>
+						<td>用户邮箱</td>
+						<td>街道地址</td>
+						<td>电话</td>
+						<td>添加/修改时间</td>
+						<td>帐号</td>
+						<td>添加人</td>
+                        <td>操作</td>
+                    </tr>
+                    {foreach $BlackList as $value}
+                    <tr class="odd">
+                       <!--  <td>{$value.id}</td> -->
+						<td>{$value.platformUsername}</td>
+                        <td>{$value.username}</td>
+						<td>{$value.platformId|get_platnamebyid}</td>
+						<td>{$value.usermail}</td>
+						<td>{$value.street}</td>
+						<td>{$value.phone}</td>
+                        <td>{$value.addTime}</td>
+						<td>{$value.account|get_accountnamebyid}</td>
+						<td>{$value.addUser|get_usernamebyid}</td>
+                        <td>
+                            <button class='update' pid='{$value.id}'>修改</button>
+                            <button class='delete' pid='{$value.id}'>删除</button>
+                        </td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div> 
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

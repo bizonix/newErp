@@ -1,0 +1,60 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/iostore.js"></script>
+<div class="fourvar">
+                <div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+                                   <span>用途类型：
+								   <select name="useTypeId" id="useTypeId" >
+								    <option value="0" > </option>
+									<option value="1" {if $smarty.get.useTypeId == 1}selected='selected'{/if}>产品制作</option>
+									<option value="2" {if $smarty.get.useTypeId == 2}selected='selected'{/if}>产品修改</option>
+								  </select>   
+								   </span>
+                                   <span>|&nbsp;仓库：
+								   <select id="whId" >
+                                   {foreach getWhInfo() as $value}
+									<option value="{$value['id']}" {if $smarty.get.whId == $value['id']}selected='selected'{/if}>{$value['whName']}</option>
+                                   {/foreach}
+								  </select>
+                                  </span>
+                                  <span><button id='seachIsNotBackSkuList'>搜索</button></span>
+                                    &nbsp;
+       			                  <span style="color: red;">{$smarty.get.status}</span>                                                                    
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                            <td>序号</td>
+							<td>SKU</td>
+							<td>数量</td>   
+                    </tr>
+                    {foreach $isNotBackArr as $key=>$value}
+                                <tr>
+                                    <td>{$value@iteration}</td>                                  
+                                    <td>{$key}</td>
+                                    <td>{$value}</td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachIsNotBackSkuList').click(); 
+			}        
+        });       
+</script>

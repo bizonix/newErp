@@ -1,0 +1,82 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+               {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+			<div class="servar products-servar">
+			&nbsp;
+			<span style="color: red;" id="error"></span>
+            </div>
+            <form action="index.php?mod=goods&act=updateCombineOn" method="post" id="CombineValidation">
+            <div class="main products-main basic-main">
+            	<table cellspacing="0" width="100%" id="updateCom">
+                	<tr class="title">
+                    	<td align="left" colspan="5" style="font-size:16px; font-weight:bold; padding-left:15px;">基本信息</td>
+                    </tr>
+                    <tr>
+                        <td class="products-action" rowspan="100" style="width:450px;">
+
+                    	</td>
+                        <td width="4%"><span style="color:#F00;">*</span>SPU</td>
+                        <td width="10%">
+                            <input value="{$combine.combineSpu}" disabled="disabled"/>
+                            <input name="id" value="{$combine.id}" type="hidden"/>
+                            <input name="combineSpu" value="{$combine.combineSpu}" type="hidden"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td ><span style="color:#F00;">*</span>SKU</td>
+                        <td><!-- TODO: <input value="{$combine.combineSku}" disabled="disabled"/> -->
+                            <input name="combineSku" id="combineSku" value="{$combine.combineSku}"/>
+                        </td>
+                    </tr>
+                    <!-- TODO: <tr>
+                        <td><span style="color:#F00;">*</span>成本(RMB)</td>
+                        <td><input class="validate[required,custom[number],min[0.001]] text-input" name="combineCost" id="combineCost" value="{$combine.combineCost}"/></td>
+
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;">*</span>重量(KG)</td>
+                        <td><input class="validate[required,custom[number],min[0.001]] text-input" name="combineWeight" id="combineWeight" value="{$combine.combineWeight}"/></td>
+                    </tr> -->
+                    <tr>
+                        <td><span style="color:#F00;"></span>长(CM)</td>
+                        <td><input class="validate[option,custom[number],min[0]] text-input" name="combineLength" id="combineLength" value="{$combine.combineLength}"/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>宽(CM)</td>
+                        <td><input class="validate[option,custom[number],min[0]] text-input" name="combineWidth" id="combineWidth" value="{$combine.combineWidth}"/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>高(CM)</td>
+                        <td><input class="validate[option,custom[number],min[0]] text-input" name="combineHeight" id="combineHeight" value="{$combine.combineHeight}"/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>备注</td>
+                        <td><input name="combineNote" id="combineNote" value="{$combine.combineNote}"/></td>
+                    </tr>
+                    <tr><td class="products-action" colspan="4"><input type="button" id="addElement2" value="添加真实料号"/></td></tr>
+                    {foreach OmAvailableModel::getTrueSkuForCombine($combine.combineSku) as $value}
+                    <tr><td><span style='color:#F00;'>*</span>料号</td><td><input name='sku[]' value="{$value['sku']}"/></td> <td width="4%"><span style='color:#F00;'>*</span>数量</td><td><input name='count[]' class="validate[option,custom[integer],min[1]]" value="{$value['count']}"/>&nbsp;<a href='javascript:void(0)' class='delTr'>删除行</a></td></tr>
+                    {/foreach}
+                </table>
+                <div align="center" class="products-action">
+                	<input type="submit" value="保存"/>
+                    <input type="button" value="返回" id="back"/>
+                </div>
+            </div>
+            </form>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

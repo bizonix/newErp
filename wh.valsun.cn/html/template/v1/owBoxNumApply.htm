@@ -1,0 +1,61 @@
+{include file='header.htm'}
+{include file='owNav.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/boxmanage.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<div>
+    申请数量:<input id="boxnum"><input type="button" onclick="applyNum()" value="申请">
+	<form action="index.php?mod=OwBoxManage&act=applyBox" method="get" style="display:inline-block">
+	箱子使用状态:
+		<select name="status">
+			<option value="">请选择类型</option>
+			<option {if $status==1 }selected="selected"{/if} value="1">未使用</option>
+			<option {if $status==2 }selected="selected"{/if} value="2">已使用</option>
+		</select>
+		<input type="hidden" name="mod" value="OwBoxManage">
+		<input type="hidden" name="act" value="applyBox">
+		<input type="submit" value="搜索">
+    </form>
+	<input style="margin-left:20px;" onclick="chooseCheckBox()" type="checkbox" />全选
+	<input style="margin-left:20px;" onclick="printBox()" type="button" value="打印箱号" />
+</div>
+   
+<div>
+	<div class="main underline-main order-main">
+        <table>
+			<tr class="title">
+                <td>箱号</td>
+				<td>箱号</td>
+                <td>箱号</td>
+				<td>箱号</td>
+                <td>箱号</td>
+				<td>箱号</td>
+                <td>箱号</td>
+				<td>箱号</td>
+                <td>箱号</td>
+				<td>箱号</td>
+                <td>箱号</td>
+				<td>箱号</td>
+                <td>箱号</td>
+				<td>箱号</td>
+            </tr>
+			{foreach $boxApplyRecord as $box}
+			<tr>
+				{foreach $box as $vk}
+					{if $useArr[$vk] == 1}
+						<td style="color:#009900; font-size:18px; font-weight:900;"><input type="checkbox" class="chkbox" value="{$vk}" />{$vk}</td>
+					{else}
+						<td  style="color:#FF0000; font-size:18px; font-weight:bolder" ><input type="checkbox" class="chkbox" value="{$vk}" disabled="disabled" />{$vk}</td>
+					{/if}
+				{/foreach}
+            </tr>
+			{/foreach}
+        </table>
+    </div>
+<div style="text-align:center;">
+    {$pagestr}
+</div>
+</div>
+{include file='footer.htm'}

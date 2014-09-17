@@ -1,0 +1,116 @@
+<!--
+ * 内部使用出入库单操作列表  internalUseIostoreList.htm
+ * ADD BY chenwei 2013.8.29
+-->
+{include file='header.htm'}
+{include file='warehouseSubnav.htm'}
+<!--link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" /-->
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="js/bootstrap.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="./js/ui/jquery-ui-sliderAccess.js"></script>
+<script type="text/javascript" src="./js/internalUseIostoreList.js"></script>
+<div class="servar wh-servar">
+<form name="internalUseIostoreFrom" id="internalUseIostoreFrom" action="index.php?mod=internalIoSell&act=internalUseIostoreList" method="post">     
+     <span class="queryformspan">单据号：</span>             
+    <input type="text" value="{$ordersn}" name='ordersnInput' id='ordersnInput' class="form-control inputinput" style="width: 220px; height:20px;display: inline;">
+    
+    <span class="queryformspan">出入库单类型：</span>
+    <select class="queryformselect" name="ioTypeinvoiceChoose" id="ioTypeinvoiceChoose" style="width: 130px;">
+        <option value="0" {if $choose_status == 0} selected="selected"{/if} >全部类型</option>
+        {foreach key = keyChoose from=$invoiceNameArr item=chooseList}
+        <option {if $choose_status == $keyChoose} selected="selected"{/if} value="{$keyChoose}" >{$chooseList}</option>
+        {/foreach}
+    </select>
+    
+    <span class="queryformspan">审核状态：</span>
+    <select class="queryformselect" name="ioStatus" id="ioStatus" style="width: 80px;">
+        <option value="0" {if $ioStatus == 0} selected="selected"{/if} >全部状态</option>
+        <option value="1" {if $ioStatus == 1} selected="selected"{/if} >未审核</option>
+        <option value="2" {if $ioStatus == 2} selected="selected"{/if} >审核通过</option>
+        <option value="3" {if $ioStatus == 3} selected="selected"{/if} >审核不通过</option>       
+    </select>
+    
+    <span class="queryformspan">申请时间</span>
+    <input value="{$startTime}" type="text" id="startTime" name="startTime" class="form-control inputinput" style="width: 160px;height:20px;display: inline;">
+    <span class="queryformspan">到:</span>
+    <input type="text" value="{$endTime}" id="endTime" name="endTime" class="form-control inputinput" style="width: 160px;height:20px;display: inline;">
+    <br  /><br  />
+	<span class="queryformspan">操作：</span>
+    <button class="btn" type="submit">搜索</button>
+    <button class="btn" id="exportExcelButton" type="button" />导出到EXCLS</button>
+    <button class="btn" id="internalUseIostoreAdd" type="button" />内部使用申请</button>
+</form>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+        <tr class="title">
+        	<td>
+            	<input onclick="chooseornot(this)" type="checkbox"/>
+            </td>
+            <td>单据号</td>
+            <td>单据类型</td>
+            <td>出入库类型</td>
+            <td>申请人</td>
+            <td>付款方式</td>
+            <td>申请时间</td>          
+            <td>备注</td>
+            <td>审核状态</td>
+            <td>最终审核人</td>
+            <td>审核时间</td>
+            <td>操作</td>
+        </tr>
+		{foreach key = key_id from=$iostoreArr item=list}
+        <tr class="odd">
+        	<td>
+            	<input class="checkclass" id="orderids" name="orderids" type="checkbox" value="{$list.id}">
+            </td>
+            <td>{$list.ordersn}</td>
+            <td>{$invoiceNameArr[$list.invoiceTypeId]}</td>
+            <td>{if $list.ioType == 1}出库{elseif $list.ioType == 2}入库{/if}</td>
+            <td>{$list.userName}</td>
+            <td>{$payMethods[$list.paymentMethodsId]}</td>
+            <td>{$list.createdTime|date_format:"%Y-%m-%d %H-%M-%S"}</td>
+            <td>{$list.note}</td>
+            <td>{if $list.ioStatus == 1}<span style="color:#F00">未审核</span>{elseif $list.ioStatus == 2}<span style="color:#3C6">审核通过</span>{elseif $list.ioStatus == 3}<span style="color:#F00">审核不通过</span>{/if}</td>
+            <td>{$list.operatorName}</td>
+            <td>{if empty($list.endTime)} {else}{$list.endTime|date_format:"%Y-%m-%d %H-%M-%S"}{/if}</td>
+            <td>
+            {if $list.ioStatus == 1}{if $list.ioType == 1}<button class="btn" type="submit" name='approvedOut'>审核出库</button> &nbsp;&nbsp; <button class="btn" type="submit" name="unApproveOut">拒绝</button>{elseif $list.ioType == 2}<button class="btn" type="submit" name='approvedIn'>审核入库</button> &nbsp;&nbsp; <button class="btn" type="submit" name="unApproveIn">拒绝</button>{/if}
+            {else}<span style="color:#F00">操作完成</span>{/if}           
+            </td>
+        </tr>
+		<tr>
+            <td colspan="12">
+                <ul class="skulistul">
+                    <li style="background-color:#e1fbfb;">料号列表</li>
+                    {foreach from=$iostoreDetails[$list.id] item=detailList}
+                    <li>
+                        SKU:<span class="valuespan">{$detailList.sku}</span>
+                        数量 ：<span class="valuespan">{$detailList.amount}</span>
+                        单价 ：<span class="valuespan">{$detailList.cost}元</span>
+                        采购 ：<span class="valuespan">{$detailList.purchaseId}</span>
+                        仓位 ：<span class="valuespan">{$detailList.positionId}</span>
+                       <!--	采购审核结果:<span class="valuespan">状态</span> -->
+                    </li>
+                   {/foreach}
+                     <li style="text-align:right">
+                        合计数量：<span style="text-align:center" class="valuespan">{$iostoreDetailNum[$list.id]}</span>
+                       	应付款：<span style="text-align:center" class="valuespan">{$iostoreDetailDue[$list.id]}元</span>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        {foreachelse}       
+        {/foreach}
+    </table>
+</div>
+
+<div class="pagination">
+    {$show_page}
+</div>
+<br />
+<br />
+{include file='footer.htm'}

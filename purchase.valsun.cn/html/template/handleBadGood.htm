@@ -1,0 +1,114 @@
+{include file="header.htm"}
+	<div class="fourvar">
+    	<div class="pathvar">
+        	您的位置：<a href="index.php?mod=unusualOrder&act=index">异常到货处理</a>&nbsp;>>&nbsp;<a href="index.php?mod=badGood&act=index">不良品列表</a>&nbsp;>>&nbsp;{$sign}
+        </div>
+		<div class="pagination"></div>
+    </div>
+	 <div class="servar"></div>
+	<div class="main underline-main">
+    	<table cellspacing="0" width="50%">
+			<tr>
+		    	<th colspan="4">不良品{$sign}<input type="hidden" id="numid" value="{$numid}" /> </th>
+            </tr>
+        	<tr>
+		    	<td align="right" width="15%">记录编号:</td>
+				<td align="left" id="td_infoId">{$infoId}</td>
+            </tr>
+			<tr>
+				<td align="right">spu:</td>
+				<td align="left" id="td_spu">{$spu}</td>
+			</tr>
+			<tr>
+				<td align="right">sku:</td>
+				<td align="left" id="td_sku">{$sku}</td>
+			</tr>
+			<tr>
+				<td align="right">处理方式:</td>
+				<td align="left">
+					{$sign}<input type="hidden" id="category" value="{$category}" />
+				</td>
+			<tr>
+			<tr>
+				<td align="right">不良品总数:</td>
+                <td align="left" id="td_defectiveNum">{$defectiveNum}</td>
+				</tr>
+			<tr>
+				<td align="right">已处理数量:</td>
+				<td align="left" id="td_processedNum">{$processedNum}</td>
+			</tr>
+			<tr>
+				<td align="right">本次处理数量:</td>
+				<td align="left">
+					<input type="text" value="{$hasNum}" id="handleNum" style="width:50px;" />
+					<span id="msg_num" style="font-size:smaller; color:#FF0000; display:none">数量有误</span>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">备注:</td>
+                <td align="left">
+					<textarea cols="30" rows="2" id="note">{$data['note']}</textarea>
+					<span id="msg_note" style="font-size:smaller; color:#FF0000;  display:none">*</span>
+				</td>
+			</tr>
+			</tr>
+			<tr  style="text-align:center">
+				<td colspan="2" align="center"><input type="button" value="提交" class="btn_sumbit"/><input type="button" value="返回" class="btn_back" /></td>
+			</tr>
+			
+         </table>
+     </div>
+     <div class="bottomvar">
+     	<div class="pagination"></div>
+     </div>
+	 <input type="hidden" value="{$web_api}" class="wep_api" />
+{include file="footer.htm"}
+<script type="text/javascript">
+{literal}
+$('.btn_sumbit').click(function(){
+	var numid        = $('#numid').val();
+	var num 		 = $('#handleNum').val();
+	var note 		 = $('#note').val().trim();
+	var category     = $('#category').val();//1为报废，2为内部处理，3为待退回
+	var infoId 		 = document.getElementById('td_infoId').innerHTML;
+	var defectiveNum = document.getElementById('td_defectiveNum').innerHTML;
+	var processedNum = document.getElementById('td_processedNum').innerHTML;
+	var hasNum       = defectiveNum - processedNum;
+	var reg = /^[0-9]*$/
+	if(!reg.test(num)||num==0){
+		$('#msg_num').show();
+		return false;
+	}else{
+		
+		if(num > hasNum){
+			$('#msg_num').show();
+			return false;
+		}else{
+			$('#msg_num').hide();
+			if(note==''){
+				$('#msg_note').show();
+				return false;
+			}else{
+				$('#msg_note').hide();
+			}
+			var url  = $('.wep_api').val()+"json.php?mod=rtnQcData&act=updateQcBadGoodData";
+			$.post(url, { "defectiveId":numid, "infoId":infoId, "num":num, "category":category, "note":note }, function(rtn){
+				console.log(rtn);
+				if(rtn.data== '1'){
+					alertify.alert('处理成功',function(){
+						window.location.href = "index.php?mod=badGood&act=index";
+					});
+				}else{
+					alertify.alert('处理失败');
+					return false;
+				}
+			},'jsonp');
+		}
+	}
+})
+
+$('.btn_back').click(function(){
+	history.back();
+})
+{/literal}
+</script>

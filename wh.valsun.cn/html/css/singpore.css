@@ -1,0 +1,14 @@
+/* CSS Document */
+.STYLE2 {font-size: 9px}
+.footStyle0{ font-family:Arial; font-size:23.5px; text-align:center;}
+.footStyle1{ font-family:Arial; font-size:18.5px; text-align:center;}
+.footStyle2{ font-family:Arial; font-size:12px; line-height:11px;}
+.footStyle3{ font-family:Arial; font-size:12px;}
+.styleBottom{ border-bottom: 1px solid #000;}
+.styleBorder{ border: 10px solid #000;}
+.styleRight{ border-right: 1px #000 solid;}
+.styleLeft{ border-left: 1px #000 solid;}
+.font10px{font-size:10px;}
+.paddingRight{ padding-right:0;}
+.floatRight{ float:right;}
+.textalignR{ text-align:left;}

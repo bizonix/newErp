@@ -1,0 +1,52 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/paypalEmail.js"></script>
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+{include file='omNav.htm'}
+
+<div class="servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="add" onclick="javascript:window.location.href='index.php?act=addNewEmail&mod=paypalEmail'" style="margin-left:20px;float:left;">添加paypal付款邮箱</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="successLog" style="color: #0F0">{$successLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="errorLog" style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+
+
+<div class="main">
+    <table cellspacing="0" width="100%" style="font-size:15px">
+        <thead>
+            <tr class="title">
+                <td width="20%">paypal付款邮箱</td>
+                <td width="20%">平台</td>
+                <td width="20%">账号</td>
+                <td width="20%">状态</td>
+                <td width="20%">操作</td>
+                
+               
+            </tr>
+        </thead>
+        
+        <tbody>
+        {foreach key=key_id from=$lists item=list}
+            <tr class="odd">	
+                
+                 <td width="20%">{$list.email}</td>
+                 <td width="20%">{$list.plateform}</td>
+                 <td width="20%">{$list.account}</td>
+                 <td width="20%">{if $list.status==1}启用{elseif $list.status==0}停用{/if}</td>
+                 <!--<td ><a href="" >修改</a>&nbsp;&nbsp;<a href="javascript:void(0)" onclick="del('{$list.id}')">删除</a></td>-->
+                 <td width="20%">
+					<button class='update' onclick="javascript:window.location.href='index.php?act=paypalEmailModify&mod=paypalEmail&id={$list.id}'">修改</button>
+					<button class='delete' onclick="del('{$list.id}')" >删除</button>
+				 </td>
+                        
+            </tr>
+         {/foreach}
+        </tbody>
+  
+    </table>
+	<div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+		{$pagestr}
+	</div>
+</div>
+{include file='footer.htm'}

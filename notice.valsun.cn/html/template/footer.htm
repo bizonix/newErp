@@ -1,0 +1,32 @@
+  
+  <div class="footer">
+        		<p>版权所有Copyright©深圳市赛维网络科技有限公司 粤IPC备12055809</p>
+        		       	    <p>地址:深圳市龙岗区龙岗中心城新生村仙田路53号耀安工业园2栋2-3楼 联系电话:0755-89619666</p>
+   </div><!-- 底部 -->
+</div><!-- content -->
+</div><!-- container -->
+<div class="backToTop" style="display: block;" id="back-top"></div>
+</body>
+</html>
+
+<script>
+	jQuery(document).ready(function() {
+		  var select_val,yum_search_id,flexselect ,default_tip;
+			yum_search_id = $("select[class *= flexselect]").eq(0).attr('id');
+			default_tip = $("option[name *= flexselect]").eq(0).text();
+			$("select[class*=flexselect]").flexselect();
+			flexselect_obj = $("#"+yum_search_id+"_flexselect"); 
+			flexselect_obj.focus(function(){   //获取焦点如果未选择则自动清空
+				select_val = flexselect_obj.val();
+				if(select_val== default_tip){
+					flexselect_obj.val('');
+				}
+			});
+			flexselect_obj.blur(function(){   //失败焦点如果未做选择则自动提示
+				select_val = flexselect_obj.val();
+				if(select_val==''){
+					flexselect_obj.val(default_tip);
+				}
+			});
+	});
+</script>

@@ -1,0 +1,17 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_ajaxwraper.js"></script>
+<script type="text/javascript" src="js/ow_checkpreplenshOrder.js"></script>
+	<div id="mstatus" class="floatright"></div>
+	<div id="divcontent" style="">
+        <div id="" >
+            补货单号:<input name="order" type="text" id="preorder_id" onkeydown="checkpreplenshOrder(event)" />
+	   </div>
+	</div>
+	<div><br>
+	   箱&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号:<input id="boxid" onkeydown="chkBox(event)" class="textinput" /><br><br>
+	</div>
+	<div align="center">
+	   <input id="btnsumbit" type="text" onkeydown="scansendBox(event);" style="width:50px; height:20px;" /><br><br>
+	</div>
+	<div id="showMsg"></div>
+{include file="footer.htm"}

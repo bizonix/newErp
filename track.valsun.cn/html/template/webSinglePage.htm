@@ -1,0 +1,15 @@
+{include file="header.htm"}
+{if $id!=2}
+<div class="path-nav">
+    <a class="home" href="index.php?mod=trackInquiry&act=index"></a><img class="float-left" src="./public/img/home_right.png"><a class="sec-nav" href="#">{$title}</a>
+    <div style="clear:both;"></div>
+</div>
+{else}
+<div class="rank-title">
+    Please use our Standard Code for getting our API service
+</div>
+{/if}
+<div class="index-main index-min-height">
+{$content}
+</div>
+{include file="footer.htm"}

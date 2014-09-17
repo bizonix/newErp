@@ -1,0 +1,21 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+
+<br/>
+
+<div class="fourvar order-fourvar feedback-fourvar products-servar wh-fourvar">
+<center>
+    
+    <p style="color:green;">单料号及单发货单配货单共成功分配  <span style="color:red;font-size:24px">{$single_info}</span> 个发货单!</p>
+    <p style="color:green;">多料号配货单共成功分配  <span style="color:red;font-size:24px">{$multi_info.success}</span> 个发货单!</p>
+
+    {foreach $multi_info.fail as $val}
+        <p style="color:red;">发货单号:{$val.shipOrderId} ----{$val.reason}</p>
+    {/foreach}
+    </center>
+</div>
+{include file="footer.htm"}

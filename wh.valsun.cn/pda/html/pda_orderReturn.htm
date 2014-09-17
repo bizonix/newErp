@@ -1,0 +1,22 @@
+{include file="header.htm"}
+<script language="javascript" src="./js/pda_skuReturn.js"></script>
+<div onload="loaded()" id="divcontent" style="height:200px;width:225px">  
+        <div id="scancontent" class="floatleft">
+            <span>订单编号 : </span><input name="ebay_id" type="text" id="ebay_id" onkeydown="check_order()" class="skuinput" />
+        </div>
+        <div id="detailcontent" class="floatleft">
+            <div id="join_sku" class="floatleft" style="display:none; width:100%;height:35%;">
+                <span>入库sku : </span>
+              <input name="insert_sku" type="text" id="insert_sku" onkeydown="check_insert_sku()" class="skuinput" />
+            </div> 
+            <div id="join_num" class="floatleft" style="display:none;">
+              <span>入库数量 : </span>
+              <input name="insert_num" type="text" id="insert_num" class="numinput" onkeydown="check_insert_num()"/>
+              <input type="button" value="  确 定  " id="submit_rk" class="buttonclass floatcenter" onclick="submit_abnormal_rk();" />
+            </div>
+         	 <div id="scancontent" class="floatleft" style="text-align:center;">
+       		   <div id="mstatus" class="floatright"></div>
+     		</div>
+        </div>
+</div>		
+{include file="footer.htm"}		

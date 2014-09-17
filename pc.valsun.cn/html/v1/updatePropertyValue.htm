@@ -1,0 +1,51 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/property.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+{if $smarty.get.status != ''}
+<div class="servar products-servar">
+<span style="color: red;">{$smarty.get.status}</span>
+</div>
+{/if}
+            <div class="main feedback-main">
+					<table class="products-action" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <input type="hidden" value="{$propertyId}" id='propertyId'/>
+                        <tr>
+                            <td colspan="4">属性名：{OmAvailableModel::getProValNameById($propertyId)}</td>
+                        </tr>
+					    {foreach $propertyValueList as $value }
+						<tr>
+                            <td>
+                            属性值:
+                            <input id="propertyValue{$value['id']}" value="{$value['propertyValue']}"/>
+							</td>
+                            <td>
+                            别名：
+                            <input id="propertyValueAlias{$value['id']}" value="{$value['propertyValueAlias']}"/>
+							</td>
+                            <td>
+                            字母简写：
+                            <input id="propertyValueShort{$value['id']}" value="{$value['propertyValueShort']}"/>
+							</td>
+                            <td>
+                            <input type="button" class="updatePPV" pid="{$value['id']}" value="修改"/>
+							</td>
+						</tr>
+                        {/foreach}
+					</table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

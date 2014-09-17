@@ -1,0 +1,125 @@
+{include file="header.htm"}
+<div class="fourvar">
+            	<div class="pathvar">
+                	{$your_position}<a href="#">{$first_page}</a>>><a href="#">{$second_title}</a> 
+                </div>     
+            </div>
+            
+            <div class="main underline-main">
+             <table width="75%" border="0" cellpadding="0" cellspacing="0" >
+                        <tr>
+                          <td width="13%">{$company_name}</td>
+                          <td width="41%"><input name="company_name" type="text" id="company_name" value="{$company_name}"></td>                          
+                        </tr>
+                        <tr>
+                          <td>{$username}</td>
+                          <td><input name="username" type="text" id="username" value="{$username}"></td>
+                          <td>{$tel}</td>
+                          <td><input name="tel" type="text" id="tel" value="{$tel}"></td>
+                        </tr>
+                        <tr>
+                          <td>{$phone}</td>
+                          <td><input name="phone" type="text" id="phone" value="{$phone}"></td>
+                          <td>{$fax}</td>
+                          <td><input name="fax" type="text" id="fax" value="{$fax}"></td>
+                        </tr>
+                        <tr>
+                          <td>{$e_mail}</td> 
+                          <td><input name="e_mail" type="text" id="e_mail" value="{$e_mail}"></td>
+                          <td>{$address}</td>
+                          <td><input name="address" type="text" id="address" value="{$address}"></td>
+                        </tr>
+                        <tr>
+                          <td>{$note}</td>
+                          <td><input name="note" type="text" id="note" value="{$note}"></td>
+                          <td>{$city}</td>
+                          <td><input name="city" type="text" id="city" value="{$city}"></td>
+                        </tr>
+                        <tr>
+                          <td>{$QQ}</td>
+                          <td><input name="QQ" type="text" id="QQ" value="{$QQ}"></td>
+                          <td>{$AliIM}</td>
+                          <td><input name="AliIM" type="text" id="AliIM" value="{$AliIM}" /></td>
+                        </tr>
+						<tr>
+							<td>{$shoplink}</td>
+							<td colspan="3"><input name="shoplink" type="text" id="shoplink" value="{$shoplink}" style="width:500px" /></td>
+						</tr>
+						<tr>
+							<td>{$notice_way}</td>
+							<td colspan="3">
+                            <label for="is_sms">{$notice_sms}
+                            <input type="checkbox" name="is_sms" id="is_sms" value="1"/></label>&nbsp;&nbsp;
+                            <label for="is_email">{$notice_email}
+                            <input type="checkbox" name="is_email" id="is_email" value="1"/></label></td>
+						</tr>
+                        <tr>
+                          <td><input name="ad" type="button" value="{$button_submit}" id="button_submit"></td>
+                          <td colspan="3">&nbsp;</td>
+                        </tr>
+                      </table>                      
+              
+            </div>
+            <div class="bottomvar">
+            </div>            
+
+{include file="footer.htm"}
+<input type="hidden" value="{$WEB_API}" id="WEB_API"/>
+<script>
+{literal} 
+function getVarById(id){
+	return $("#"+id).val();
+}
+
+var web_api  = getVarById('WEB_API');
+
+
+$('#button_submit').click(function(e){
+    e.preventDefault();
+    
+	var company_name   = $.trim($('#company_name').val());
+	var username       = $.trim($('#username').val());
+    var tel            = $.trim($('#tel').val());     
+    var phone          = $.trim($('#phone').val());  
+    var fax            = $.trim($('#fax').val());  
+    var e_mail         = $.trim($('#e_mail').val());  
+    var address        = $.trim($('#address').val());  
+    var note           = $.trim($('#note').val());  
+    var city           = $.trim($('#city').val());  
+    var QQ             = $.trim($('#QQ').val());  
+    var AliIM          = $.trim($('#AliIM').val());  
+    var shoplink       = $.trim($('#shoplink').val());     
+    var is_sms         = $("#is_sms").attr("checked");
+    is_sms             = (is_sms == "checked") ? '1' : '0';    
+    var is_email       = $("#is_email").attr("checked");
+    is_email           = (is_email == "checked") ? '1' : '0';
+
+    if(company_name.length <= 0){
+    	//popWin.showAlert(getVarById('lang_username_length'), "3");    	
+    	$('#username').focus();
+    	return false;
+    }
+    
+    var url  = web_api+"json.php?mod=partner&act=addPartner";
+    var data = { "company_name":company_name,"username":username,"tel":tel,"phone":phone,"fax":fax,"e_mail":e_mail,"address":address,"note":note,"city":city,"QQ":QQ,"AliIM":AliIM,"shoplink":shoplink,"is_sms":is_sms,"is_email":is_email};        
+
+    //console.log(data);
+    $.post(url, data, function(rtn){        
+        console.log(rtn);
+        if(rtn.errCode == 0) {              
+         	//popWin.showAlert(getVarById('lang_operate_success'), "2",function(){
+         	  //window.location.href = "index.php?mod=partner&act=index";
+         	//});  
+        } else {
+            console.log(rtn.errMsg);
+            //var text = getVarById('lang_operat_failedMsg') + rtn.errMsg;               
+          	//popWin.showAlert(text, "1");   
+        }            
+     },"jsonp"); 
+
+});
+
+{/literal}
+</script>
+
+            

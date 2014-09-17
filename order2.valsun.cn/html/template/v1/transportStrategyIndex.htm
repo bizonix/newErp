@@ -1,0 +1,801 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/jquery.flexselect.js"></script>
+<script type="text/javascript" src="./js/liquidmetal.js"></script>
+<link href="http://misc.erp.valsun.cn/css/flexselect.css" rel="stylesheet" type="text/css" />
+<div class="servar">
+    <span>
+        <select id="searchAccountId" class="flexselect">
+            {foreach $accountListSearch as $value}
+            <option value="{$value.id}">{$value.account}</option>
+            {/foreach}
+        </select>
+        <button id="searchAccount">搜索</button>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+            <td>是否启用</td>
+            <td>平台</td>
+            <td>账号</td>
+            <td>约束/优先</td>
+            <td>基础运输方式</td>
+            <td>约束条件-国家</td>
+            <td>约束条件-币种</td>
+            <td>约束条件-金额</td>
+            <td width="10%">操作</td>
+        </tr>
+        {foreach $accountList as $value}
+        <tr>
+            <td>{if $value.constraintType.isOn == 1}启用{else}禁用{/if}</td>
+            <td>{get_platnamebyid($value.platformId)}</td>
+            <td>{$value.account}</td>
+            <td>{if empty($value.accountConstraintTypeStr)}--{else}{$value.accountConstraintTypeStr}{/if}</td>
+            <td>{if empty($value.conditionTransportStr)}--{else}{$value.conditionTransportStr}{/if}</td>
+            <td>{if empty($value.conditionCountryStr)}--{else}{$value.conditionCountryStr}{/if}</td>
+            <td>{if empty($value.conditionCurrencyStr)}--{else}{$value.conditionCurrencyStr}{/if}</td>
+            <td>{if empty($value.conditionAmountStr)}--{else}{$value.conditionAmountStr}{/if}</td>
+            <td>
+                <button edit="accountConstraintType" platformId="{$value.platformId}" accountId="{$value['id']}">账号约束/优先级编辑</button>
+                <button edit="conditionTransport" platformId="{$value.platformId}" accountId="{$value['id']}">基础运输方式编辑</button>
+                <button edit="conditionCountry" platformId="{$value.platformId}" accountId="{$value['id']}">国家-约束编辑</button>
+                <button edit="conditionCurrency" platformId="{$value.platformId}" accountId="{$value['id']}">币种-约束编辑</button>
+                <button edit="conditionAmount" platformId="{$value.platformId}" accountId="{$value['id']}">金额-约束编辑</button>
+            </td>          
+        </tr>
+        <tr>
+            <td>
+                <div dialogType="accountConstraintType{$value['id']}" title="账号约束/优先级编辑" style="display:none;">
+                    <table cellspacing="0" width="100%">
+                        <tr>
+                            <td><span style="color:#F00;"></span>平台</td>                        
+                            <td><input id="accountConstraintTypeEditPlatform{$value['id']}" value="{get_platnamebyid($value.platformId)}" disabled="disabled"/></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;"></span>账号</td>
+                            <td><input id="accountConstraintTypeEditAccount{$value['id']}" value="{$value.account}" disabled="disabled"/></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>特殊料号强制类型</td>
+                            <td>
+                                <select id="isSpecialSpuForce{$value['id']}" name="isSpecialSpuForce{$value['id']}">
+                                    <option value="1" {if $value.constraintType.isSpecialSpuForce == 1}selected="selected"{/if}>非强制型-允许特殊料号条件</option>
+                                    <option value="2" {if $value.constraintType.isSpecialSpuForce == 2}selected="selected"{/if}>强制型-无视特殊料号条件</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>平台/账号优先级设定</td>
+                            <td>
+                                <select id="isPlatOrAccountPri{$value['id']}" name="isPlatOrAccountPri{$value['id']}">
+                                    <option value="1" {if $value.constraintType.isPlatOrAccountPri == 1}selected="selected"{/if}>平台优先</option>
+                                    <option value="2" {if $value.constraintType.isPlatOrAccountPri == 2}selected="selected"{/if}>账号优先</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>是否启用</td>
+                            <td>
+                                <select id="isOn{$value['id']}" name="isOn{$value['id']}">
+                                    <option value="2" {if $value.constraintType.isOn == 2}selected="selected"{/if}>禁用</option>
+                                    <option value="1" {if $value.constraintType.isOn == 1}selected="selected"{/if}>启用</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div dialogType="conditionTransport{$value['id']}" title="基础运输方式编辑" style="display:none;">
+                    <table cellspacing="0" width="100%">
+                        <tr>
+                            <td><span style="color:#F00;"></span>平台</td>                        
+                            <td>
+                            <input value="{get_platnamebyid($value.platformId)}" disabled="disabled"/>
+                            {if !empty($value.conditionTransport)}
+                            <button status="delConditionTransport" accountId="{$value['id']}" onclick="delCondition('conditionTransport', {$value['id']})">删除记录</button>
+                            {/if}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;"></span>账号</td>
+                            <td><input value="{$value.account}" disabled="disabled"/></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>运输方式/渠道</td>
+                            <td>
+                                <div style="height: 400px;width: 600px; overflow-y:auto;">                              
+                                    {foreach returnTCArrAll() as $k=>$v}
+                                        <div>
+                                            <span style="color: green;">{$transportIdArr[$k]['carrierNameCn']}</span>
+                                            <div style="float: left; width: 100%;">                                        
+                                                {foreach $v as $v2}
+                                                    <div style="float: left; width: 35%;">                                            
+                                                        <input value="{$v2['id']}" name="abtTransportId{$value['id']}" type="checkbox" id="abtTransportId{$value['id']}{$v2['id']}" {if in_array($v2['id'], $value.conditionTransport.transportIdArr)}checked='checked'{/if}/>
+                                                        <label for="abtTransportId{$value['id']}{$v2['id']}" {if in_array($v2['id'], $value.conditionTransport.transportIdArr)}style="color: red;"{/if}>{$v2['channelName']}</label>
+                                                    </div>
+                                                {/foreach}
+                                            </div>
+                                        </div>
+                                    {/foreach}
+                                </div>                                
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div dialogType="conditionAmount{$value['id']}" title="金额-约束编辑" style="display:none;">
+                    <table cellspacing="0" width="100%">
+                        <tr>
+                            <td><span style="color:#F00;"></span>平台</td>                        
+                            <td>
+                            <input value="{get_platnamebyid($value.platformId)}" disabled="disabled"/>
+                            {if !empty($value.conditionAmount)}
+                            <button status="delConditionAmount" accountId="{$value['id']}" onclick="delCondition('conditionAmount', {$value['id']})">删除记录</button>
+                            {/if}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;"></span>账号</td>
+                            <td><input value="{$value.account}" disabled="disabled"/></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>优先级</td>
+                            <td>
+                                <select name="amountPriority{$value['id']}" id="amountPriority{$value['id']}">
+                                    {foreach $priorityList as $k=>$v}
+                                    <option value="{$k}" {if $value.conditionAmount.priority == $k}selected="selected"{/if}>{$v}</option>
+                                    {/foreach}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>允许条件</td>
+                            <td>
+                                <select name="allowType{$value['id']}" id="allowType{$value['id']}">
+                                    <option value="1" {if $value.conditionAmount.allowType == 1}selected="selected"{/if}>满足其中一项条件</option>
+                                    <option value="2" {if $value.conditionAmount.allowType == 2}selected="selected"{/if}>满足所有条件</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>条件一</td>
+                            <td>
+                                <span style="font-weight: bold;">符号</span>
+                                <select id="symbolCondition1{$value['id']}" name="symbolCondition1{$value['id']}" >
+                                    <option value=">" {if $value.conditionAmount.symbolCondition1 == '>'}selected="selected"{/if}>></option>
+                                    <option value=">=" {if $value.conditionAmount.symbolCondition1 == '>='}selected="selected"{/if}>>=</option>
+                                    <option value="<" {if $value.conditionAmount.symbolCondition1 == '<'}selected="selected"{/if}><</option>
+                                    <option value="<=" {if $value.conditionAmount.symbolCondition1 == '<='}selected="selected"{/if}><=</option>
+                                </select>
+                                <span style="font-weight: bold;">数值</span>
+                                <input id="amountCondition1{$value['id']}" name="amountCondition1{$value['id']}" value="{$value.conditionAmount.amountCondition1}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>条件二</td>
+                            <td>
+                                <span style="font-weight: bold;">符号</span>
+                                <select id="symbolCondition2{$value['id']}" name="symbolCondition2{$value['id']}" >
+                                    <option value=">" {if $value.conditionAmount.symbolCondition2 == '>'}selected="selected"{/if}>></option>
+                                    <option value=">=" {if $value.conditionAmount.symbolCondition2 == '>='}selected="selected"{/if}>>=</option>
+                                    <option value="<" {if $value.conditionAmount.symbolCondition2 == '<'}selected="selected"{/if}><</option>
+                                    <option value="<=" {if $value.conditionAmount.symbolCondition2 == '<='}selected="selected"{/if}><=</option>
+                                </select>
+                                <span style="font-weight: bold;">数值</span>
+                                <input id="amountCondition2{$value['id']}" name="amountCondition2{$value['id']}" value="{$value.conditionAmount.amountCondition2}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>运输方式/渠道</td>
+                            <td>
+                                <div style="height: 400px;width: 600px; overflow-y:auto;">                              
+                                    {foreach returnTCArrAll() as $k=>$v}
+                                        <div>
+                                            <span style="color: green;">{$transportIdArr[$k]['carrierNameCn']}</span>
+                                            <div style="float: left; width: 100%;">                                        
+                                                {foreach $v as $v2}
+                                                    <div style="float: left; width: 35%;">                                            
+                                                        <input value="{$v2['id']}" name="amountTransportId{$value['id']}" type="checkbox" id="amountTransportId{$value['id']}{$v2['id']}" {if in_array($v2['id'], $value.conditionAmountTransportIdArr)}checked='checked'{/if}/>
+                                                        <label for="amountTransportId{$value['id']}{$v2['id']}" {if in_array($v2['id'], $value.conditionAmountTransportIdArr)}style="color: red;"{/if}>{$v2['channelName']}</label>
+                                                    </div>
+                                                {/foreach}
+                                            </div>
+                                        </div>
+                                    {/foreach}
+                                </div>                                
+                            </td>
+                        </tr>                       
+                    </table>
+                </div>
+                
+                <div dialogType="conditionCountry{$value['id']}" title="国家-约束编辑" style="display:none;">
+                    <table cellspacing="0" width="100%" id="countryTransportTable{$value.id}">
+                        <tr>
+                            <td><span style="color:#F00;"></span>平台</td>                        
+                            <td>
+                                <input value="{get_platnamebyid($value.platformId)}" disabled="disabled"/>
+                                {if !empty($value.conditionCountry)}
+                                <button status="delConditionCountry" accountId="{$value['id']}" onclick="delCondition('conditionCountry', {$value['id']})">删除记录</button>
+                                {/if}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;"></span>账号</td>
+                            <td><input value="{$value.account}" disabled="disabled"/></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;"></span>优先级</td>
+                            <td>
+                                <select name="countryTransportPriority{$value['id']}" id="countryTransportPriority{$value['id']}">
+                                    {foreach $priorityList as $k=>$v}
+                                    <option value="{$k}" {if $value['conditionCountry'][0]['priority'] == $k}selected="selected"{/if}>{$v}</option>
+                                    {/foreach}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                            <span style="color: green;font-weight: bold;font-size: larger;">国家-运输方式（输入国家的文本域中，国家之间请用英文逗号隔开，注意大小写）</span>
+                            <br/>
+                            <button bt="addCountryTransportButton" accountId="{$value['id']}">添加国家-运输方式数据</button>
+                            </td>
+                        </tr>
+                        <tr><td colspan='2'><hr /></td></tr>
+                        {foreach $value.conditionCountry as $v1}
+                        <tr status="specail">
+                            <td colspan='2'>
+                                <div>
+                                <a style="color: #0000FF;" href="javascript:void(0)" status="delCountryTransportA">删除下方一行数据</a>
+                                </div>
+                                <div>
+                                国家：
+                                    <div>
+                                        <textarea name="countryNameStr{$value.id}" cols="75" rows="3">{implode(',', $v1.countryNameArr)}</textarea>
+                                    </div>
+                                </div>
+                                    <div>
+                                    运输方式/渠道:
+                                        <div style="height: 400px;width: 600px; overflow-y:auto;">                              
+                                            {foreach returnTCArrAll() as $k=>$v}
+                                                <div>
+                                                    <span style="color: green;">{$transportIdArr[$k]['carrierNameCn']}</span>
+                                                    <div style="float: left; width: 100%;">                                        
+                                                        {foreach $v as $v2}
+                                                            <div style="float: left; width: 35%;">                                            
+                                                                <input value="{$v2['id']}" name="countryTransportId{$value['id']}" type="checkbox" id="countryTransportId{$value['id']}{$v2['id']}" {if in_array($v2['id'], $v1.transportIdArr)}checked='checked'{/if}/>
+                                                                <label for="countryTransportId{$value['id']}{$v2['id']}" {if in_array($v2['id'], $v1.transportIdArr)}style="color: red;"{/if}>{$v2['channelName']}</label>
+                                                            </div>
+                                                        {/foreach}
+                                                    </div>
+                                                </div>
+                                            {/foreach}
+                                        </div>
+                                    </div>
+                                <hr />
+                            </td>
+                        </tr>
+                        {foreachelse}
+                        <tr status="specail">
+                            <td colspan="2">
+                                <div>
+                                <a style="color: #0000FF;" href="javascript:void(0)" status="delCountryTransportA">删除下方一行数据</a>
+                                </div>
+                                <div>
+                                国家：
+                                <div>
+                                    <textarea name="countryNameStr{$value.id}" cols="75" rows="3"></textarea>
+                                </div>
+                                </div>
+                                    <div>
+                                    运输方式/渠道:
+                                    <div style="height: 400px;width: 600px; overflow-y:auto;">                              
+                                        {foreach returnTCArrAll() as $k=>$v}
+                                            <div>
+                                                <span style="color: green;">{$transportIdArr.$k.carrierNameCn}</span>
+                                                <div style="float: left; width: 100%;">                                        
+                                                    {foreach $v as $v2}
+                                                        <div style="float: left; width: 35%;">                                            
+                                                            <input value="{$v2.id}" name="countryTransportId{$value.id}" type="checkbox"/>
+                                                            {$v2['channelName']}
+                                                        </div>
+                                                    {/foreach}
+                                                </div>
+                                            </div>
+                                        {/foreach}
+                                    </div>
+                                </div>
+                                <hr />
+                            </td>
+                        </tr>
+                        {/foreach}
+                    </table>
+                    </form>
+                </div>
+                
+                <div dialogType="conditionCurrency{$value['id']}" title="币种-约束编辑" style="display:none;">
+                    <table cellspacing="0" width="100%" id="currencyTransportTable{$value.id}">
+                        <tr>
+                            <td><span style="color:#F00;"></span>平台</td>                        
+                            <td>
+                                <input value="{get_platnamebyid($value.platformId)}" disabled="disabled"/>
+                                {if !empty($value.conditionCurrency)}
+                                <button status="delConditionCurrency" accountId="{$value['id']}" onclick="delCondition('conditionCurrency', {$value['id']})">删除记录</button>
+                                {/if}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;"></span>账号</td>
+                            <td><input value="{$value.account}" disabled="disabled"/></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color:#F00;"></span>优先级</td>
+                            <td>
+                                <select name="currencyTransportPriority{$value['id']}" id="currencyTransportPriority{$value['id']}">
+                                    {foreach $priorityList as $k=>$v}
+                                    <option value="{$k}" {if $value['conditionCurrencyPriority'] == $k}selected="selected"{/if}>{$v}</option>
+                                    {/foreach}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr><td colspan='2'><hr /></td></tr>
+                        {foreach $currencyList as $currencyId=>$currencyArr}
+                        <tr status="currency">
+                            <td colspan='2'>
+                                <input type="hidden" value="{$currencyId}"/>
+                                <div>
+                                    <span style="font-weight: bold;">币种：</span>
+                                    <span style="color: green; font-size: large;">
+                                    {$currencyArr.CN}&nbsp;{$currencyArr.EN}
+                                    </span>
+                                </div>
+                                <div>
+                                运输方式:
+                                    <div style="height: 400px;width: 600px; overflow-y:auto;">                              
+                                        {foreach returnTCArrAll() as $k=>$v}
+                                            <div>
+                                                <span style="color: green;">{$transportIdArr[$k]['carrierNameCn']}</span>
+                                                <div style="float: left; width: 100%;">                                        
+                                                    {foreach $v as $v2}
+                                                        <div style="float: left; width: 35%;">                                            
+                                                            <input value="{$v2['id']}" name="currencyTransportId{$value['id']}" type="checkbox" id="currencyTransportId{$value['id']}{$v2['id']}" {if in_array($v2['id'], $value['conditionCurrency'][$currencyId])}checked='checked'{/if}/>
+                                                            <label for="currencyTransportId{$value['id']}{$v2['id']}" {if in_array($v2['id'], $value['conditionCurrency'][$currencyId])}style="color: red;"{/if}>{$v2['channelName']}</label>
+                                                        </div>
+                                                    {/foreach}
+                                                </div>
+                                            </div>
+                                        {/foreach}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr><td colspan='2'><hr /></td></tr>
+                        {/foreach}
+                    </table>
+                    </form>
+                </div>
+                
+                
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+<div class="bottomvar">
+	<span id="showSelectNum"></span>
+    {if $status == ''}
+    <div class="pagination">
+        {$show_page}
+    </div>
+    {/if}
+</div>
+
+{include file="footer.htm"}
+<script type="text/javascript">
+$(function(){
+    $('a[status="delCountryTransportA"]').live('click',function(){
+        $(this).parent().parent().parent().remove();
+    });
+    
+    $(":button[bt='addCountryTransportButton']").click(function(){
+        accountId = $(this).attr('accountId');
+        if(accountId == ''){
+            alert('异常');
+            return;
+        }
+        //addHtml = '<tr status="specail"><td colspan="2"><div><a style="color: #0000FF;" href="javascript:void(0)" status="delCountryTransportA">删除下方一行数据</a></div><div>国家：<div><textarea name="countryNameStr'+accountId+'" cols="75" rows="3"></textarea></div></div><div>运输方式:<div style="float: left; width: 100%;">{foreach $transportIdArr as $k=>$v2}<div style="float: left; width: 20%;"><input value="{$v2.id}" name="countryTransportId'+accountId+'" type="checkbox"/><label>{$v2.carrierNameCn}</label></div>{/foreach}</div></div><hr /></td></tr>';
+        addHtml = '<tr status="specail"><td colspan="2"><div><a style="color: #0000FF;" href="javascript:void(0)" status="delCountryTransportA">删除下方一行数据</a></div><div>国家：<div><textarea name="countryNameStr'+accountId+'" cols="75" rows="3"></textarea></div></div><div>运输方式/渠道:<div style="height: 400px;width: 600px; overflow-y:auto;">{foreach returnTCArrAll() as $k=>$v}<div><span style="color: green;">{$transportIdArr.$k.carrierNameCn}</span><div style="float: left; width: 100%;">{foreach $v as $v2}<div style="float: left; width: 35%;"><input value="{$v2.id}" name="countryTransportId'+accountId+'" type="checkbox"/>{$v2.channelName}</div>{/foreach}</div></div>{/foreach}</div></div><hr /></td></tr>';
+        $("#countryTransportTable"+accountId).append(addHtml);
+    });
+    
+    $(":button[edit='accountConstraintType']").click(function(){
+        accountId = $(this).attr('accountId');
+        platformId = $(this).attr('platformId');
+        
+        if(accountId =='' || platformId == ''){
+            alert('异常');
+            return;
+        }
+        $('div[dialogType="accountConstraintType'+accountId+'"]').dialog({
+            width : 550,
+            height : 400,
+            modal : true,
+            autoOpen : true,
+            show : 'drop',
+            hide : 'explode',
+            buttons : {
+            	'保存' : function() {       	    
+            	    isSpecialSpuForce = $('#isSpecialSpuForce'+accountId).val();
+            		isPlatOrAccountPri = $('#isPlatOrAccountPri'+accountId).val();
+                    isOn = $('#isOn'+accountId).val();
+                    //alert(accountId+'  '+platformId+'   '+isSpecialSpuForce+'  '+isPlatOrAccountPri+"   "+isOn);return;
+                    if(isSpecialSpuForce == '' || isPlatOrAccountPri == '' || isOn == ''){
+                        alert("必填信息不能为空");
+                        return;
+                    }                    
+            		//alert(spu + '   '+ pid);return;
+                    if(confirm('确定提交？')){
+                        $.ajax({
+            				type	: "POST",
+                    		dataType: "json",
+                    		url		: 'index.php?mod=transportStrategy&act=editConstraintType',
+            				data	: { accountId:accountId,platformId:platformId,isSpecialSpuForce:isSpecialSpuForce,isPlatOrAccountPri:isPlatOrAccountPri,isOn:isOn },
+            				success	: function (msg){
+            				    alert(msg.errMsg);
+            					if(msg.errCode==200){
+            					    $('div[dialogType="accountConstraintType'+accountId+'"]').dialog('close');
+            						window.location.reload();
+            					}				
+            				}		
+            			});
+                    }
+            	},            
+            	'关闭' : function() {
+            		$(this).dialog('close');								
+            	}
+            }
+        });
+    });
+    
+    $(":button[edit='conditionTransport']").click(function(){
+        accountId = $(this).attr('accountId');
+        platformId = $(this).attr('platformId');
+        if(accountId =='' || platformId == ''){
+            alert('异常');
+            return;
+        }
+        $('div[dialogType="conditionTransport'+accountId+'"]').dialog({
+            width : 750,
+            height : 650,
+            modal : true,
+            autoOpen : true,
+            show : 'drop',
+            hide : 'explode',
+            buttons : {
+            	'保存' : function() {
+            	    transportArr = [];
+     	            $(':checkbox[name="abtTransportId'+accountId+'"]:checked').each(function(){
+     	               transportArr.push($(this).val());
+     	            });
+                    transportIdStr = transportArr.join(',');
+                    if(transportIdStr == ''){
+                        alert("运输方式为空");
+                        return;
+                    }
+                    if(confirm('确定提交？')){
+                        $.ajax({
+            				type	: "POST",
+                    		dataType: "json",
+                    		url		: 'index.php?mod=transportStrategy&act=editConditionTransport',
+            				data	: { accountId:accountId,platformId:platformId,transportIdStr:transportIdStr },
+            				success	: function (msg){
+            				    alert(msg.errMsg);
+            					if(msg.errCode==200){
+            					    $('div[dialogType="conditionTransport'+accountId+'"]').dialog('close');
+            						window.location.reload();
+            					}				
+            				}		
+            			});
+                    }
+            	},            
+            	'关闭' : function() {
+            		$(this).dialog('close');								
+            	}
+            }
+        });
+    });
+    
+    $(":button[edit='conditionAmount']").click(function(){
+        accountId = $(this).attr('accountId');
+        platformId = $(this).attr('platformId');
+        if(accountId =='' || platformId == ''){
+            alert('异常');
+            return;
+        }
+        $('div[dialogType="conditionAmount'+accountId+'"]').dialog({
+            width : 750,
+            height : 650,
+            modal : true,
+            autoOpen : true,
+            show : 'drop',
+            hide : 'explode',
+            buttons : {
+            	'保存' : function() {
+            	    allowType = $('#allowType'+accountId).val();
+                    symbolCondition1 = $('#symbolCondition1'+accountId).val();
+                    symbolCondition2 = $('#symbolCondition2'+accountId).val();
+                    amountCondition1 = $('#amountCondition1'+accountId).val();
+                    amountCondition2 = $('#amountCondition2'+accountId).val();
+                    priority = $('#amountPriority'+accountId).val();
+                    tmpTransportArr = [];
+                    $(':checkbox[name="amountTransportId'+accountId+'"]:checked').each(function(){
+                        tmpTransportArr.push($(this).val());
+                    });                    
+                    if(symbolCondition1 == '' || symbolCondition2 == '' || amountCondition1 == '' || amountCondition2 == ''){
+                        alert('必填项为空');
+                        return;
+                    }
+                    if(tmpTransportArr.length < 1){
+                        alert('运输方式为空');
+                        return;
+                    }
+                    tmpTransportStr = tmpTransportArr.join(',');
+                    //alert(tmpTransportStr);return;
+                    if(confirm('确定提交？如果存在多个约束条件，请确保各个条件的优先级不一样，否则系统只会选择一个进行运输方式策略计算')){
+                        $.ajax({
+            				type	: "POST",
+                    		dataType: "json",
+                    		url		: 'index.php?mod=transportStrategy&act=editConditionAmount',
+            				data	: { accountId:accountId,platformId:platformId,allowType:allowType,symbolCondition1:symbolCondition1,symbolCondition2:symbolCondition2,amountCondition1:amountCondition1,amountCondition2:amountCondition2,priority:priority,tmpTransportStr:tmpTransportStr },
+            				success	: function (msg){
+            				    alert(msg.errMsg);
+            					if(msg.errCode==200){
+            					    $('div[dialogType="conditionAmount'+accountId+'"]').dialog('close');
+            						window.location.reload();
+            					}				
+            				}		
+            			});
+                    }
+            	},            
+            	'关闭' : function() {
+            		$(this).dialog('close');								
+            	}
+            }
+        });
+    });
+    
+    $(":button[edit='conditionCountry']").click(function(){
+        accountId = $(this).attr('accountId');
+        platformId = $(this).attr('platformId');
+        if(accountId =='' || platformId == ''){
+            alert('异常');
+            return;
+        }
+        //alert(accountId);
+        $('div[dialogType="conditionCountry'+accountId+'"]').dialog({
+            width : 950,
+            height : 650,
+            modal : true,
+            autoOpen : true,
+            show : 'drop',
+            //hide : 'explode',
+            buttons : {
+            	'保存' : function() {
+            	    countryTransportPriority = $('#countryTransportPriority'+accountId).val();
+                    if(countryTransportPriority == ''){
+                        alert('优先级有误，请检查');
+                        return;
+                    }
+            	    trObject = $('#countryTransportTable'+accountId+' tr[status="specail"]');
+                    tmpArr1 = [];
+                    flag = true;
+                    $(trObject).each(function(index){
+                        tmpCountryName = $(this).find('textarea').val();
+                        tmpTransportIdArr = [];
+                        tmpArr2 = [];
+                        $(this).find('input[name="countryTransportId'+accountId+'"]:checked').each(function(){
+                            tmpTransportIdArr.push($(this).val());
+                        });
+                        if(!$.trim(tmpCountryName) || tmpTransportIdArr.length == 0){
+                            tmpI = index + 1;
+                            //alert(tmpCountryName+'  '+tmpTransportIdArr);
+                            alert('第 '+tmpI+' 个区域内的数据为空，请检查');
+                            flag = false;
+                            return false;
+                        }else{
+                            tmpArr2['countryName'] = tmpCountryName;
+                            tmpArr2['countryTransportIdArr'] = tmpTransportIdArr;
+                            tmpArr1.push(tmpArr2);
+                            //tmpArr1[index] = tmpArr2;
+                        }
+                    });
+                    if(!flag){
+                        //alert('存在空的数据，请检查');
+                        return;
+                    }
+                    if(tmpArr1.length < 1){
+                        alert('存在空的数据，请检查');
+                        return false;
+                    }
+                    tmpArr1 = Serialize(tmpArr1);
+                    if(confirm('确定提交？如果存在多个约束条件，请确保各个条件的优先级不一样，否则系统只会选择一个进行运输方式策略计算')){
+                        $.ajax({
+            				type	: "POST",
+                    		dataType: "json",
+                    		url		: 'index.php?mod=transportStrategy&act=editConditionCountry',
+            				data	: { accountId:accountId,platformId:platformId,countryTransportPriority:countryTransportPriority,tmpArr1:tmpArr1 },
+            				success	: function (msg){
+            				    alert(msg.errMsg);
+            					if(msg.errCode==200){
+            					    $('div[dialogType="conditionCountry'+accountId+'"]').dialog('close');
+            						window.location.reload();
+            					}				
+            				}		
+            			});
+                    }
+            	},            
+            	'关闭' : function() {
+            		$(this).dialog('close');								
+            	}
+            }
+        });
+    });
+    
+    $(":button[edit='conditionCurrency']").click(function(){
+        accountId = $(this).attr('accountId');
+        platformId = $(this).attr('platformId');
+        if(accountId =='' || platformId == ''){
+            alert('异常');
+            return;
+        }
+        //alert(accountId);
+        $('div[dialogType="conditionCurrency'+accountId+'"]').dialog({
+            width : 950,
+            height : 650,
+            modal : true,
+            autoOpen : true,
+            show : 'drop',
+            //hide : 'explode',
+            buttons : {
+            	'保存' : function() {
+            	    currencyTransportPriority = $('#currencyTransportPriority'+accountId).val();
+                    if(currencyTransportPriority == ''){
+                        alert('优先级有误，请检查');
+                        return;
+                    }
+            	    trObject = $('#currencyTransportTable'+accountId+' tr[status="currency"]');
+                    //alert(trObject.html());return;
+                    tmpArr1 = [];
+                    $(trObject).each(function(index){
+                        currencyId = $(this).find('input:hidden').val();
+                        //alert(currencyId);
+                        tmpTransportIdArr = [];
+                        tmpArr2 = [];
+                        $(this).find('input[name="currencyTransportId'+accountId+'"]:checked').each(function(){
+                            tmpTransportIdArr.push($(this).val());
+                        });
+                        if(currencyId == '' || tmpTransportIdArr.length == 0){
+                            return;
+                        }else{
+                            tmpArr2['currencyId'] = currencyId;
+                            tmpArr2['currencyTransportIdArr'] = tmpTransportIdArr;
+                            tmpArr1.push(tmpArr2);
+                        }
+                    });
+                    if(tmpArr1.length < 1){
+                        alert('存在空的数据，请检查');
+                        return false;
+                    }
+                    tmpArr1 = Serialize(tmpArr1);
+                    //alert(tmpArr1);return;
+                    if(confirm('确定提交？如果存在多个约束条件，请确保各个条件的优先级不一样，否则系统只会选择一个进行运输方式策略计算')){
+                        $.ajax({
+            				type	: "POST",
+                    		dataType: "json",
+                    		url		: 'index.php?mod=transportStrategy&act=editConditionCurrency',
+            				data	: { accountId:accountId,platformId:platformId,currencyTransportPriority:currencyTransportPriority,tmpArr1:tmpArr1 },
+            				success	: function (msg){
+            				    alert(msg.errMsg);
+            					if(msg.errCode==200){
+            					    $('div[dialogType="conditionCurrency'+accountId+'"]').dialog('close');
+            						window.location.reload();
+            					}				
+            				}		
+            			});
+                    }
+            	},            
+            	'关闭' : function() {
+            		$(this).dialog('close');								
+            	}
+            }
+        });
+    });
+    
+    $(':button[status="delConditionCurrency"]').live('click',function(){
+        accountId = $(this).attr('accountId');
+        if(accountId == ''){
+            alert('异常！');
+            return;
+        }
+        $.ajax({
+			type	: "POST",
+    		dataType: "json",
+    		url		: 'index.php?mod=transportStrategy&act=editConditionCurrency',
+			data	: { accountId:accountId,platformId:platformId,currencyTransportPriority:currencyTransportPriority,tmpArr1:tmpArr1 },
+			success	: function (msg){
+			    alert(msg.errMsg);
+				if(msg.errCode==200){
+				    $('div[dialogType="conditionCurrency'+accountId+'"]').dialog('close');
+					window.location.reload();
+				}				
+			}		
+		});
+    });
+    
+    $('#searchAccount').click(function(){
+        searchAccountId = $('#searchAccountId').val();
+        location.href = 'index.php?mod=transportStrategy&act=index&rc=reset&accountId='+searchAccountId;
+    });
+    $("select[class*=flexselect]").flexselect();
+});
+{literal}
+function Serialize(obj){
+    switch(obj.constructor){
+        case Object:
+            var str = "{";
+            for(var o in obj){
+                str += "\""+o + "\":" + Serialize(obj[o]) +",";
+            }
+            if(str.substr(str.length-1) == ",")
+                str = str.substr(0,str.length -1);
+            return str + "}";
+            break;
+        case Array:            
+            var str = "[";
+            for(var o in obj){
+                str += Serialize(obj[o]) +",";
+            }
+            if(str.substr(str.length-1) == ",")
+                str = str.substr(0,str.length -1);
+            return str + "]";
+            break;
+        case Boolean:
+            return "\"" + obj.toString() + "\"";
+            break;
+        case Date:
+            return "\"" + obj.toString() + "\"";
+            break;
+        case Function:
+            break;
+        case Number:
+            return "\"" + obj.toString() + "\"";
+            break; 
+        case String:
+            return "\"" + obj.toString() + "\"";
+            break;    
+    }
+}
+
+function delCondition(typeStatus, accountId){
+    if(accountId == ''){
+        alert('异常');
+        return;
+    }
+    if(confirm('确定删除该条记录？')){
+        $.ajax({
+    		type	: "POST",
+    		dataType: "json",
+    		url		: 'index.php?mod=transportStrategy&act=delCondition',
+    		data	: { accountId:accountId,type:typeStatus },
+    		success	: function (msg){
+    		    alert(msg.errMsg);
+    			if(msg.errCode==200){
+    			    $('div[dialogType="'+typeStatus+accountId+'"]').dialog('close');
+    				window.location.reload();
+    			}				
+    		}		
+    	});
+    }    
+}
+{/literal}
+</script>

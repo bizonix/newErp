@@ -1,0 +1,109 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<div class="servar wh-servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button-normal" href="index.php?mod=whTransportPartition&act=add" >新增分区</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<style>
+.main table td { text-align:left; }	
+.main { padding-left:30px; }
+.main input.sinput { width:400px; }
+.main textarea.sinput { width:400px; }
+.main select.sinput { width:405px; }
+.main table { border:0px solid #ff0000; }
+</style>
+<div class="main">
+<form action='index.php?mod=whTransportPartition&act=add' method="post">
+    <table cellspacing="0">
+         <tr>
+         	<td width="100">分区名称</td>
+         	<td><input type="text" class="sinput" name="title" value=""></td>
+         </tr>
+         <tr>
+         	<td>分区名称简写</td>
+         	<td><input type="text" class="sinput" name="shortTitle" value=""></td>
+         </tr>
+         <tr>
+         	<td>运输方式</td>
+         	<td><select class="sinput" name="transportId" onchange="transportChange(this);">
+         		<option value="0">选择运输方式</option>
+         		{foreach from=$transportlist item=vo}
+         			<option value="{$vo.id}">{$vo.carrierNameCn}</option>	
+         		{/foreach}
+         		</select></td>
+         </tr>
+         <tr>
+         	<td>运输渠道</td>
+         	<td>
+         		<select class="sinput" name="channelId" id="channelId" onchange="selectChannelName(this);">
+         			<option value="0">请选择运输渠道</option>
+         		</select>
+         		<input type="hidden" name="channelName" id="channelName" value=''>
+         	</td>
+         </tr>
+         <tr>
+         	<td>分拣设备筒号</td>
+         	<td><select class="sinput" name="partition">
+         		<option value="0">选择筒号</option>
+         		{section name=loop loop=40}
+         			<option value="{$smarty.section.loop.index+1}">{$smarty.section.loop.index+1}号筒</option>	
+         		{/section}
+         		</select></td>
+         </tr>
+         <tr>
+         	<td>分区优先级</td>
+         	<td><input type="text" class="sinput" name="priority" value="0"></td>
+         </tr>
+         <tr style="border:2px solid blue;">
+         	<td>国家名单列表</td>
+         	<td>
+         		{foreach from=$countrylist item=vo}
+         			<label style="margin-right:20px;display:block;width:180px;float:left;overflow:hidden;"><input type="checkbox" style="float:left;" name="countryWhiteList[{$vo.id}]" value="{$vo.countryNameEn}"><div style="width:160px;float:left;">{$vo.countryNameEn}({$vo.countryNameCn})</div></label>	
+         		{/foreach}
+         		</td>
+         </tr>
+         <tr>
+         	<td>回邮地址</td>
+         	<td><input type="text" class="sinput" name="backAddress" value=""></td>
+         </tr>
+         <tr>
+         	<td>是否可用</td>
+         	<td><input type="checkbox" name="status" value="1"></td>
+         </tr>           
+    <!-- END list -->
+    </table>
+    <div>   		       
+            <button type="submit" name="submit" value="1" class="button-normal" />提交</button>
+            &nbsp;
+            <input type="button" onclick="location.href='index.php?mod=whTransportPartition&act=index'" value="取消" class="button-normal input_button" />
+     </div>
+ </form>
+</div>
+<div class="bottomvar">
+</div>
+{literal}
+<script>
+function transportChange(obj){
+	var transportId = obj.value;
+	$('#channelId').html('<option value="0">请选择运输渠道</option>');
+	$.post('json.php?mod=whTransportPartition&act=getChannel&jsonp=1',{'transportId':transportId},function(msg){
+		htmlstr = '';
+		if(msg.errCode == 200){
+			var channellist = msg.data;
+			for(key in channellist){
+				htmlstr += '<option value="'+channellist[key]['id']+'">'+channellist[key]['channelName']+'</option>';
+			}
+		}
+		$('#channelId').append(htmlstr);
+	},'json');
+}
+
+function selectChannelName(obj){
+	$('#channelName').val(obj.options[obj.selectedIndex].text);
+}
+</script>
+{/literal}
+{include file="footer.htm"}

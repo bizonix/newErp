@@ -1,0 +1,57 @@
+{header}
+<link rel="stylesheet" href="css/powermanage.css">
+<script language="javascript" src="js/powerusermanage.js"></script>
+{navbar}
+<div class="maincontentdiv" style="height: 405px;">
+    <div style="float: left; margin-right: 10px;">
+        {powerleftmenu}
+    </div>
+    <div class="leftcontainer">
+        <div class="topmenudiv">
+            <form action="index.php?mod=poweruser&act=usersearch" method="post" style="display: inline">
+                <label for="lf">搜索用户: </label>
+                <input class="lf" style="width: 200px;" value="{keywords}" name="username" type="text">
+                <input type="submit" value="搜索用户">
+            </form>
+            <input style="margin-left: 350px; cursor:pointer;" type="button" onclick="updateuserlist()" value="更新系统用户">
+        </div>
+        <div class='power_user_list_table'>
+            <table class="powerusertable">  	
+                    <thead>        	
+                        <tr class="alt">
+                            <th width="5%" scope="col">UID</th>
+                            <th width="15%" scope="col">用户名</th>
+                            <th scope="col" width="50%">权限类别</th>
+                            <th scope="col" width="15%">更新日期</th>
+                            <th scope="col" width="15%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- BEGIN userlist -->
+                        <tr>
+                            <td align="center">{uid}</td>
+                            <td align="center">{username}</td>
+                            <td align="center">
+                             {powertype}               
+                            </td>
+                            <td align="center">
+                                {updatetime}                            
+                            </td>
+                            <td align="center">
+                                <a href="index.php?mod=poweruser&act=editpower&uid={uid}">修改</a>&nbsp;
+                                <a href="#" onClick="deleteuser({uid})">删除</a>
+                            </td>
+                        </tr>
+                        <!-- END userlist -->
+                       </tbody>
+                        <tfoot>
+                            <tr class="nu">
+                            </tr>
+                        </tfoot> 
+               </table>
+
+        </div>
+    </div>
+    <div style="clear: both"></div>
+</div>
+{footer}

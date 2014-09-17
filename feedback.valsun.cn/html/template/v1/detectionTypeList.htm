@@ -1,0 +1,40 @@
+{include file="header.htm"}
+<div class="fourvar">
+	{include file="iqcnav.htm"}
+</div>
+<script type="text/javascript" src="./js/skuTypeQc.js"></script>	
+<div class="servar">
+    <span>
+        <button  id='detectionTypeAdd' value="" />添加检测方式</button>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="5%" align="right"><input type="checkbox" class="checkall" /></td>
+                <td width="20%">检测方式名称</td>
+                <td width="20%" align="center">操作</td>
+                <td width="55%"></td>
+            </tr>
+        </thead>
+        <!-- BEGIN list -->
+        <thead>
+        {foreach name=detectionTypeArr item=listArr from=$detectionTypeArrList}
+            <tr class="odd">	
+                 <td width="5%" align="right"><input type="checkbox" name="key_id" value="{$listArr['id']}"/></td>
+                 <td width="20%">{$listArr['typeName']}</td>                 
+                 <td width="20%" align="center">                 
+                	 <button  name='detectionTypeDel' value="" />删除</button>
+                 </td>
+                 <td width="55%"></td>                
+            </tr>
+        {/foreach}
+        </thead>
+    <!-- END list -->
+    </table>
+</div>
+<div class="bottomvar">
+    
+</div>
+{include file="footer.htm"}

@@ -1,0 +1,93 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelManage&act=index&id={$carrierId}">渠道管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='partitionCode'{if ($type=='partitionCode')} selected="selected"{/if}>分区代码</option>
+			<option value='partitionName'{if ($type=='partitionName')} selected="selected"{/if}>分区名称</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=partitionManage&act=add&chid={$chid}">添加</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>分区名称</th>
+			<th>分区简称</th>
+			<th>分区代码</th>
+			<th>分区国家</th>
+			<th>回邮地址</th>
+			<th>是否启用</th>
+			<th>添加时间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.partitionName}</td>
+			<td>{$list.partitionAli}</td>
+			<td>{$list.partitionCode}</td>
+			<td style="word-break:break-all;width:40%;">{$list.countries}</td>
+			<td>{$list.returnAddress}</td>
+			<td>{if empty($list.enable)}否{else}是{/if}</td>
+			<td>{if empty($list.createdTime)}no{else}{date('Y-m-d H:i:s',$list.createdTime)}{/if}</td>
+			<td><a href="index.php?mod=partitionManage&act=modify&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info({$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+
+<script type="text/javascript">
+//搜索入口
+$("#search").click(function(){
+	type  = $.trim($("#type").val());
+	key   = encodeURIComponent($.trim($("#key").val()));
+	if (type!='0' && key!=''){
+		window.location.href = "index.php?mod=partitionManage&act=index&chid={$chid}&type="+type+"&key="+key;
+	} else {
+		alertify.error("搜索条件没选或搜索关键词不能为空！");
+		return false;
+	}
+});
+{literal}
+//删除入口
+function del_info(id){
+	var url  = web_url + "json.php?mod=partitionManage&act=delPartitionManage";
+	var data = {"id":id};
+	alertify.confirm("真的要删除吗？", function (e) {
+		if (e) {
+			$.post(url,data,function(res){
+				if(res.errCode == 0){
+					alertify.alert("删除成功！",function(){
+						window.location.reload();
+					});
+				}else {
+					 alertify.error(res.errMsg);
+				   }
+			}, "jsonp");
+		}
+	});
+}
+{/literal}
+</script>
+{include file="footer.htm"}

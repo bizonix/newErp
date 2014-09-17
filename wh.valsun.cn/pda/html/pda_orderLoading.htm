@@ -1,0 +1,25 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_orderLoading.js"></script>
+		<div id="mstatus" class="floatright"></div>
+		<div id="scancontent" class="floatleft">
+            <span>编号 : </span><input name="group_id" type="text" id="group_id" onkeydown="checkGroupID()" class="textinput" />
+        </div>
+         <div id="order_show" class="floatleft;" style="display:none;">
+            	追踪号:<input type="text" id="ebay_id" onkeydown="checkOrder()"/>
+          </div>
+        <div class="floatleft" style="margin-top: 2px;">
+        	<input type="button" value="下一编号" class="buttonclass floatleft" onclick="javascript:window.location.reload();" />
+        </div>
+		<!--input type="button" value="test" id="next_sku" class="buttonclass floatleft" onclick="showWindow();" /-->
+	    <!--
+    	<div id="operationcontent" class="floatleft">
+    
+			<input type="hidden" id="now_group_id" value=""/>
+			<input type="hidden" id="now_sku" value=""/>
+			<input type="hidden" id="now_pname" value=""/>
+			<input type="hidden" id="now_sku_num" value=""/>
+			<input type="hidden" id="submit_orders" value=""/>
+			<input type="hidden" id="submit_nums" value=""/>
+            
+           </div>
+{include file="footer.htm"}

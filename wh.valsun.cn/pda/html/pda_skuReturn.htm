@@ -1,0 +1,40 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/pda_skuReturn.js"></script>
+
+	<div id="divcontent">
+		<div id="mstatus"></div>
+		
+		<div id="scancontent">
+          <span>sku</span>
+          <input name="sku" type="text" id="sku" onkeydown="checksku()" class="textinput1" />
+		  <span id="show_position" style="display:none;">
+		  <span>仓位</span>
+          <input name="now_position" type="text" id="now_position" onkeydown="checkposition()" class="textinput1" />
+          </span>
+		  <div >
+			<span id="now_position_list">
+			</span>
+			<span id="now_store_list">
+			</span>
+		  </div>
+		  <div id="show_location">
+			<span id="hope_position_list" style="display:none;">
+				<select name="select_hope_position" id="select_hope_position" width="100%">
+				<option value="0">选择仓位号</option>
+				</select>
+			</span>
+			
+			<span id="hope_store_list" style="display:none;">
+				<select name="select_hope_store" id="select_hope_store" width="100%">
+				<option value="0">选择存货位置</option>
+				</select>
+			</span>
+		  </div>
+		  <div style="margin:1px 0;" class="floatleft">
+			 <span>数量</span>
+			 <input name="nums" type="text" id="nums" onkeydown="checknums()" class="textinput1" />
+		  </div>
+        </div>
+		<!--input type="button" class='buttonclass' style="margin:0 50px;display:none;" onclick="submitform()"  id="submitform" value="提交"/-->
+	</div>
+{include file="footer.htm"}

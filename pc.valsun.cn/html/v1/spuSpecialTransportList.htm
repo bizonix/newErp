@@ -1,0 +1,79 @@
+{include file="header.htm"}
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+               <span>SPU：
+			   <input name="spu" type="text" id="spu" value="{$smarty.get.spu}"/>
+			   </span>
+               <span><button id='seachSpecialTM'>搜索</button></span>
+               &nbsp;
+               <span style="color: red;">{$status}</span>
+            </div>
+            {if isAccessAll('spuSpecialProperty','addSpecialTM') == true}
+            <div class="servar products-servar">
+                <span>                    
+                	<a href="index.php?mod=spuSpecialProperty&act=addSpecialTM" target="_blank">新增特殊料号-运输方式管理</a>                    
+                </span>
+            </div>
+            {/if}
+            <div class="main feedback-main">
+            	<table class="products-action firefox-table" cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td>特殊运输方式名称</td>                            
+                        <td>是否启用</td>
+                        <td>运输方式/渠道</td>
+                        <td>包含的SPU</td>
+                        <td>操作</td>
+                    </tr>
+                    {foreach $spuSpecialTMList as $value}
+                    <tr>
+                    	<td>{$value['specialTransportManagerName']}</td>
+                        <td>{if $value['isOn'] == 1}启用{else}禁用{/if}</td>                        
+                        <td>
+                            具体请点击详情
+                        </td>
+                        <td>
+                            具体请点击详情
+                        </td>
+                        <td>
+                            {if isAccessAll('spuSpecialProperty','specialTMDetail') == true}
+                            	<a style="color: #0000FF;" href="index.php?mod=spuSpecialProperty&act=specialTMDetail&id={$value['id']}" target="_blank">详情</a>
+                            {/if}
+                            {if isAccessAll('spuSpecialProperty','updateSpecialTMTC') == true}
+                            	<a style="color: #0000FF;" href="index.php?mod=spuSpecialProperty&act=updateSpecialTMTC&id={$value['id']}" target="_blank">编辑</a>
+                            {/if}
+                        </td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(function(){
+            $('#seachSpecialTM').click(function(){
+                spu = $('#spu').val();
+                location.href = "index.php?mod=spuSpecialProperty&act=getSpuSpecialTMList&spu="+spu;
+            });
+        });
+        
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachSpecialTM').click(); 
+			}        
+        });       
+</script>

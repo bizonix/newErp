@@ -1,0 +1,50 @@
+{include file='header.htm'}
+{include file='whNav.htm'}
+<script language="javascript" src="js/addGroup.js"></script>
+<div class="servar">
+    <span>
+    <button  id='addStatus' value="" />添加分组</button>
+    </span>
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td><input type="checkbox" class="checkall"/></td>
+			<td>分组名称</td>
+			<td>分组编号</td>
+			<td>创建人</td>
+			<td>创建时间</td>
+			<td>操作</td>
+		</tr>
+		{foreach from=$LibraryStatusGroupInfo item=list}
+		<tr class="odd">
+				<td><input type="checkbox" class="invselect" name="invselect" value="{$list.id}"/></td>
+				<td>{$list.groupName}</td>
+				<td>{$list.groupCode}</td>
+				<td>{$list.creatorId|getUserNameById}</td>
+				<td>{$list.createdTime|date_format:"%Y-%m-%d %H:%I:%S"}</td>
+				<td></td>
+		</tr>
+		{foreachelse}
+		<tr class="odd">
+				<td colspan="9">没有搜索值！</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination" id="spage">
+		{$show_page}
+	</div>
+</div>
+<div id="add_form" title="添加分组页面" style="display:none;">
+	<form id="add_form" method="POST" action="" enctype="multipart/form-data">
+		<table id="show_tab" width="100%" border="1" cellpadding="0" cellspacing="0">
+			<thead><tr><td width="50%">分组名</td><td width="50%">分组号</td></tr></thead>
+			<tbody><tr><td width="50%"><input type="text" id="group_name"></td><td width="50%"><input id="group_num"/></td></tr></tbody>
+		</table>
+	</form>
+</div>
+{include file='footer.htm'}

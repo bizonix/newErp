@@ -1,0 +1,16 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_makeAssignList.js"></script>
+		<div id="mstatus" class="floatright"></div>
+		<div id="scancontent" class="floatleft">
+            <span>SKU : </span><input type="text" class="textinput" name="sku" id="sku" onkeydown="checkSku()" value="" />
+            <button onclick="makeAssignList()">生成调拨单</button>
+        </div>
+		<div id="operationcontents" class="floatleft" style="margin:4px 0;">
+            <span style="font-size:15px; padding-top:2px;">调拨数量:</span>
+            <input type="text" class="textinput" name="sku_num" id="sku_num" onkeydown="checkSkuNum()" value="" />
+        </div>
+		<div id="operationcontent" class="floatleft">
+			<input type="hidden" id="now_sku" value=""/>
+			<input type="hidden" id="now_sku_num" value=""/>
+        </div>
+{include file="footer.htm"}

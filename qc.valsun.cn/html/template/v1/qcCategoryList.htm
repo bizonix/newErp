@@ -1,0 +1,71 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/treetable/jquery.treetable.js"></script>
+<script type="text/javascript" src="./js/qcCategoryList.js"></script>
+<div class="fourvar">
+ {include file="iqcnav.htm"}
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+<div class="servar products-servar">
+            	<!--<span>
+                	<a href="index.php?mod=category&act=addCategory">增加类别</a>
+                </span>
+     -->           <span style="color: red;" id="error">{$smarty.get.status}</span>
+				搜索：<select id="category1" style="" onchange="changeCategory1()">
+					<option value="">请选择</option>
+					{foreach $category1 as $key=>$value}
+					<option value="{$value.id}">{$value.name}</option>
+					{/foreach}
+					</select>
+				&nbsp;&nbsp;<select id="category2" style="display:none" onchange="changeCategory2()"></select>
+				&nbsp;&nbsp;<select id="category3" style="display:none" onchange="changeCategory3()"></select>
+				&nbsp;&nbsp;<select id="category4" style="display:none" ></select>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;批量修改为：<select id="categorymod" onchange="changeCategory()" style="">
+				<option value="">请选择</option>
+				{foreach $sampleTypeList as $key=>$value}
+				<option value="{$key}" >{$value}</option>
+				{/foreach}
+				</select>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <td>名称</td>
+                        <td>所属类级</td>
+						<td>操作</td>
+                    </tr>
+                    {foreach $categoryList as $value}
+                        <tr class="odd" id="{$value['id']}">
+                            <td>{$value['name']}</td>
+                            <td>{$value['file']}</td>
+                            <td align="center">
+                            {tep_selectHTML_show($sampleTypeList, "choiceSampleType_{$value['id']}", "choiceSampleType", {$value['sampleTypeId']})}
+                            <!--<input type="button" value="修改" tid="{$value['id']}" class="mod"/>-->
+                            <!-- <input type="button" value="删除" tid="{$value['id']}" class="del"/> -->
+                            </td>
+                        </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<link rel="stylesheet" href="./css/treetable/jquery.treeTable.css" />
+<script>
+	 $(document).ready(function() {
+	 $("#dnd-example").treetable({
+    	indent: 20
+    	});
+  });
+</script>

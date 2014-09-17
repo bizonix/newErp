@@ -1,0 +1,65 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelManage&act=index&id={$carrierId}">渠道管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<a href="index.php?mod=channelPrice&act=add&chname={$chname}&chid={$chid}">添加</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>区域名称</th>
+			<th>国家</th>
+			<th>每公斤价格</th>
+			<th>挂号费</th>
+			<th>折扣</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.pr_group}</td>
+			<td>{$list.pr_country}</td>
+			<td>{$list.pr_kilo}</td>
+			<td>{$list.pr_handlefee}</td>
+			<td>{$list.pr_discount}</td>
+			<td><a href="index.php?mod=channelPrice&act=modify&chid={$chid}&chname={$chname}&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info('{$chname}', {$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+
+<script type="text/javascript">
+{literal}
+//删除入口
+function del_info(chname,id){
+	var url  = web_url + "json.php?mod=channelPrice&act=delChannelPrice";
+	var data = {"id":id,"chname":chname};
+	alertify.confirm("真的要删除吗？不可恢复哦？", function (e) {
+		if (e) {
+			$.post(url,data,function(res){
+				if(res.errCode == 0){
+					alertify.alert("删除成功！",function(){
+						window.location.reload();
+					});
+				}else {
+					 alertify.error(res.errMsg);
+				   }
+			}, "jsonp");
+		}
+	});
+}
+{/literal}
+</script>
+{include file="footer.htm"}

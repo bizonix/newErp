@@ -1,0 +1,145 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=trackWarnNode&act=index">运输方式节点预警管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>修改运输方式节点</h1>
+    <form onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+                <td align="right" width="11%">运输方式：<span class="red">*</span></td>
+                <td width="27%" align="left">
+				<select name="ship_id" id="ship_id" onchange="show_channel_list(this.value)">
+				<option value="">=请选择=</option>
+				{foreach item=list from=$lists}
+				{if !$list.is_track }<option value="{$list.id}" {if $ship_id == $list.id}selected="selected"{/if}>{$list.carrierNameCn}</option>{/if}
+				{/foreach}
+				</select>
+				<span id="nodeList">
+				</span>
+				</td>
+			</tr>
+            <tr>
+                <td align="right" width="11%">节点名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="node_name" id="node_name" value="{$node_name}" maxlength="20"/>
+                </td>
+			</tr>
+            <tr>
+                <td align="right" width="11%">处理地点关键词：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="node_place" id="node_place" value="{$node_place}" maxlength="80"/> 如北京国际，多个关键词用空格隔开
+                </td>
+			</tr>
+            <tr>
+                <td align="right" width="11%">预警时间(单位小时)：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="node_days" id="node_days" value="{$node_days}" maxlength="10"  style="ime-mode:Disabled" onkeyup="check_int(this)" onafterpaste="check_int(this)"/>
+                </td>
+			</tr>
+            <tr>
+                <td align="right" width="11%">预警关键词：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="node_key" id="node_key" value="{$node_key}" maxlength="80"/> 如直封封发，多个关键词用空格隔开
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="left" style="padding-left:300px;">
+					<input type="hidden" id="act-id" value="{$id}"/>
+					<input type="hidden" id="carrierId" value="{$ship_id}"/>
+					<input type="hidden" id="chId" value="{$node_chid}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=trackWarnNode&act=index'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+{literal}
+<script type="text/javascript">
+function check(){
+	var node_name = node_days = node_key = node_place = node_chid = ship_id = id = "";
+	node_name 	 = $.trim($("#node_name").val());
+	node_key 	 = $.trim($("#node_key").val());
+	node_place 	 = $.trim($("#node_place").val());
+	node_chid 	 = $.trim($("#nodeListItem").val());
+	node_days	 = $.trim($("#node_days").val());
+	ship_id		 = $.trim($("#ship_id").val());
+	id		 	 = $.trim($("#act-id").val());
+	if (ship_id == "") {
+		alertify.error("运输方式不能不选");
+		$("#ship_id").focus();
+		return false;
+	}
+	if (node_name == "") {
+		alertify.error("节点名称不能为空！");
+		$("#node_name").focus();
+		return false;
+	}
+	if (node_days == "") {
+		alertify.error("节点预警时间不能为空！");
+		$("#node_days").focus();
+		return false;
+	}
+	if (node_key == "") {
+		alertify.error("节点关键词不能为空！");
+		$("#node_key").focus();
+		return false;
+	}
+	var url  = web_url + "json.php?mod=trackWarnNode&act=updateTrackWarnNode";
+	var data = {"id":id,"node_name":node_name,"node_days":node_days,"node_key":node_key,"ship_id":ship_id,"node_place":node_place,"node_chid":node_chid};
+	$.post(url,data,function(res){
+		if(res.errCode == 0){
+			alertify.alert("修改成功！",function(){
+				window.location.reload();
+			});
+		}else {
+			 alertify.error(res.errMsg);
+		   }
+	}, "jsonp");
+	return false;
+}
+//获取某个运输方式渠道信息
+function show_channel_list(carrierId){
+	if (carrierId==0) {
+		$("#nodeList").html("");
+		return false;
+	}
+	var url  = web_url + "json.php?mod=transOpenApi&act=getCarrierChannel";
+	var data = {"carrierId":carrierId}
+	var seled = chid = "";
+	chid 	 = $.trim($("#chId").val());
+	$.post(url,data,function(rtn){
+		if(rtn.errCode == 0){
+			if (rtn.data!="") {
+				var obj		= eval(rtn.data);
+				if (obj.length>0) {
+					var val		= $("#nodeList").html('<select id="nodeListItem"><option value="0">=选择渠道节点=</option></select>');
+					for (var i=0;i<obj.length;i++) {
+						if (chid==rtn.data[i]['id']) {
+							seled = "selected='selected'";
+						} else {
+							seled = "";
+						}
+						$('#nodeListItem').append("<option value="+rtn.data[i]['id']+" "+seled+">"+rtn.data[i]['channelName']+"</option>");
+					}
+				} else {
+					$("#nodeList").html("");
+				}
+			} else {
+				$("#nodeList").html("");
+			}
+		}else {
+				alertify.error(rtn.errMsg);
+		   }
+		},"jsonp");
+}
+var carrierId	= $.trim($("#carrierId").val());
+if	(carrierId!="") {
+	show_channel_list(carrierId);
+}
+</script>
+{/literal}
+{include file="footer.htm"}

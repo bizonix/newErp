@@ -1,0 +1,112 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='carrierNameCn'{if ($type=='carrierNameCn')} selected="selected"{/if}>运输方式中文名</option>
+			<option value='carrierNameEn'{if ($type=='carrierNameEn')} selected="selected"{/if}>运输方式英文名</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=carrierManage&act=add">添加</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>编号ID</th>
+			<th>中文名称</th>
+			<th>英文名称</th>
+			<th>简称</th>
+			<th>简码</th>
+			<th>字母索引</th>
+			<th>物流类型</th>
+			<th>重量最小值(KG)</th>
+			<th>重量最大值(KG)</th>
+			<th>递送时间(天)</th>
+			<th>备注</th>
+			<th>状态</th>
+			<th>添加时间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.id}</td>
+			<td>{$list.carrierNameCn}</td>
+			<td>{$list.carrierNameEn}</td>
+			<td>{$list.carrierAli}</td>
+			<td>{$list.carrierAbb}</td>
+			<td>{$list.carrierIndex}</td>
+			<td>{if empty($list.type) }非快递{else}快递{/if}</td>
+			<td>{$list.weightMin}</td>
+			<td>{$list.weightMax}</td>
+			<td>{$list.timecount}</td>
+			<td>{$list.note}</td>
+			<td>{if empty($list.is_delete)}启用{else}禁用{/if}</td>
+			<td>{if empty($list.createdTime)}no{else}{date('Y-m-d H:i:s',$list.createdTime)}{/if}</td>
+			<td><a href="index.php?mod=channelManage&act=index&id={$list.id}"><b>渠道</b></a> | <a href="index.php?mod=carrierManage&act=modify&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info({$list.id},{$list.is_delete})"><b>{if empty($list.is_delete)}禁用{else}启用{/if}</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+{literal}
+<script type="text/javascript">
+//搜索入口
+$("#search").click(function(){
+	type  = $.trim($("#type").val());
+	key   = encodeURIComponent($.trim($("#key").val()));
+	if (type!='0' && key!=''){
+		window.location.href = "index.php?mod=carrierManage&act=index&type="+type+"&key="+key;
+	} else {
+		alertify.error("搜索条件没选或搜索关键词不能为空！");
+		return false;
+	}
+});
+//删除入口
+function del_info(id,status){
+	var url  = web_url + "json.php?mod=carrierManage&act=delCarrierManage";
+	var tip_del = "";
+	if (status == 0){
+		tip_del = "禁用";
+		status = 1;
+	} else {
+		tip_del = "启用";
+		status = 0;
+	}
+	var data = {"id":id,"status":status};
+	alertify.confirm("真的要"+ tip_del +"此运输方式吗？", function (e) {
+		if (e) {
+			$.post(url,data,function(res){
+				if(res.errCode == 0){
+					alertify.alert("操作成功！",function(){
+						window.location.reload();
+					});
+				}else {
+					 alertify.error(res.errMsg);
+				   }
+			}, "jsonp");
+		}
+	});
+}
+</script>
+{/literal}
+{include file="footer.htm"}

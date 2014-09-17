@@ -1,0 +1,65 @@
+/* 
+    出库页面样式
+*/
+
+
+.queryformdiv{
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0;
+    padding: 3px 0;
+}
+
+.queryform{
+    display: inline;
+}
+.formtitle{
+    float: left;
+    height: 80px;
+    margin-left: 5px;
+    line-height: 80px;
+}
+.formcomponentdiv{
+    float:left;
+    margin-left: 20px;
+    height: 80px;
+}
+
+.div_line{
+    height: 40px;
+    line-height: 40px;
+}
+
+.inputinput{
+    height: 25px;
+	line-height:20px;
+    vertical-align: middle;
+}
+
+.queryformspan{
+    font-size: 13px;
+}
+
+.queryformselect{
+     height: 25px; 
+     font-size: 13px;
+}
+.formsubmitdiv{
+    float: left;
+    height: 80px;
+    line-height: 80px;
+    margin-left: 50px;
+}
+.queryformsubbutton{
+    display: inline;
+    margin-top: 22px;
+}
+.tableopa{
+    color: #333333;
+}
+
+.tableopa:hover{
+    color: red;
+    text-decoration: none;
+}

@@ -1,0 +1,48 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/publicDatePicker/WdatePicker.js"></script>
+<div class="main order-main" align="left">
+    <span></span>
+    <table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+	  <tr>
+		<td width="65%">
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				<tr>
+                    <td><span style="font-size: 25px;">PK产品导出：</span></td>
+                </tr>
+                <tr>
+					<td nowrap="nowrap" class='paginationActionButtons'>
+                    <form id="pkSpuByAuditTimeExcelOutPutForm" action="index.php?mod=excelOutPut&act=pkSpuByAuditTimeExcelOutPutOn" enctype="multipart/form-data" title="PK产品导出" method="post" target="_blank">
+						<div>
+            				开始时间:
+            				<input name="pkSpuAuditStartTime" onClick="WdatePicker()" type="text" class='validate[required]'/>
+            				结束时间:
+            				<input name="pkSpuAuditEndTime" onClick="WdatePicker()" type="text" class='validate[required]'/>
+            				&nbsp;
+            				<input type="submit" value="导出到xls"/>
+            			</div>
+                    </form>
+					  <p>
+                         <br />
+                         <br />
+                         <br />
+					  </p>
+                      
+                   </td>
+			    </tr>
+			</table>		
+         </td>
+	</tr>
+    <tr>
+        <td>
+        </td>
+    </tr>
+</table>
+</div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(function(){
+            jQuery("#pkSpuByAuditTimeExcelOutPutForm").validationEngine();
+        });       
+</script>
+
+

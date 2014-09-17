@@ -1,0 +1,50 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=shipfeeQuery&act=index">运费查询</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="servar">
+	<form name="form" action="index.php?mod=shipfeeQuery&act=query" method="post" onSubmit="return check()">
+	<span>
+		发货地址:
+		<select name="ship_add" id="ship_add" onchange="show_channel_list(this.value)">
+		<option value="">=请选择=</option>
+		{foreach item=list from=$addrlist}
+		<option value="{$list.id}">{$list.addressNameCn}</option>
+		{/foreach}
+		</select>
+	</span>
+	<span id="channelList">
+	</span>
+	<span id="countrys">
+		<select name="ship_country" id="ship_country" class="flexselect">
+		<option value="">=请选择发往国家=</option>
+		{foreach item=list from=$countrylist}
+		<option value="{$list.id}">{$list.countryNameEn}--{$list.countryNameCn}</option>
+		{/foreach}
+		</select>
+	</span>
+	<span>
+		重量:
+		<input type="text" name="ship_weight" id="ship_weight" value = "" style="width:50px;ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)" onblur="check_float(this)"/> KG
+	</span>
+	<span id="ship_tids">
+		<select name="ship_tid" id="ship_tid">
+		<option value="">=请选择转运中心=</option>
+		{foreach item=list from=$transitlist}
+		<option value="{$list.id}" {if $ship_tid == $list.id}selected="selected"{/if}>{$list.cn_title}-{$list.en_title}</option>
+		{/foreach}
+		</select>
+	</span>
+	<span id="postcodes">
+		邮编:
+		<input type="text" name="ship_postcode" id="ship_postcode" value = "{$ship_postcode}" style="width:50px;ime-mode:Disabled" onkeyup="check_int(this)" onafterpaste="check_int(this)" onblur="check_int(this)"/>
+	</span>
+	<span>
+        <button name="button" type="submit" id="submit-btn" value="submit" />查询运费</button>
+	</span>
+	</form>
+</div>
+<script type="text/javascript" src="./public/js/tran_shipfee_query.js"></script>
+{include file="footer.htm"}

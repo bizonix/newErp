@@ -1,0 +1,224 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+            </div>
+            <form action="index.php?mod=autoCreateSpu&act=editAutoCreateSpuOn" method="post" id="SpuArchiveValidation">
+            <div class="main products-main basic-main">
+            	<table cellspacing="0" width="100%" id="tableBas">
+                	<tr class="title">
+                    	<td align="left" colspan="5" style="font-size:16px; font-weight:bold; padding-left:15px;">基本信息</td>
+                    </tr>
+                    <tr>
+                    	<td width="38%" style="padding-left: 30px;" class="products-action" rowspan="100" style="width:450px;">
+                        <div class="slideBox" id="imgPlay">
+                          <ul id="ulHtml" class="items">
+                            <li>
+                                <a id="fancy" class="fancybox" href="javascript:void(0)" target="_blank">
+                                    <img src="css/images/Testera.jpg" width="400px" height="400px"/>
+                                </a>
+                    	    </li>
+                          </ul>
+                        </div>
+						</td>
+                        <td width="8%"><span style="color:#F00;">*</span>SPU</td>
+                        <td width="15%">
+                            <input value="{$spu}" disabled="disabled"/>
+							<input name="spu" id="spu" value="{$spu}" type="hidden"/>
+                        </td>
+                        <td style="width:90px;"><span style="color:#F00;">*</span>产品类别</td>
+                        <td>
+                            <input value="{getAllCateNameByPath($pid)}" disabled="disabled"/>
+							<input name="pid" id="pid" value="{$pid}" type="hidden"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;">*</span>描述</td>
+                        <td colspan="3"><textarea class="validate[required]" style="width: 475px;" rows="3" name="spuName">{$spuName}</textarea></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;">*</span>参考月销量</td>
+                        <td><input class="validate[required,custom[integer],min[1]]" name="referMonthSales" id="referMonthSales" value="{$referMonthSales}"/></td>
+                        <td><span style="color:#F00;">*</span>估算重量(KG)</td>
+                        <td><input class="validate[required,custom[number],min[0.001]]" name="spuCalWeight" id="spuCalWeight" value="{$spuCalWeight}"/></td>
+                    </tr>
+                    <tr>
+
+                        <td><span style="color:#F00;">*</span>采购价(RMB)</td>
+                        <td><input class="validate[required,custom[number],min[0.001]]" name="spuPurchasePrice" id="spuPurchasePrice" value="{$spuPurchasePrice}"/></td>
+                        <td><span style="color:#F00;">*</span>起订量</td>
+                        <td><input class="validate[required,custom[integer],min[1]]" name="minNum" id="minNum"/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;">*</span>对应平台</td>
+                        <td>
+                            <select class="validate[required]" name="platformId" id="platformId">
+                                <option value=""> </option>
+                                {foreach getAllPlatformInfo() as $value}
+                                    <option value="{$value['id']}">{$value['platform']}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        <td><span style="color:#F00;">&nbsp;</span>备注</td>
+                        <td><input name="spuNote" id="spuNote"/></td>                       
+                    </tr>
+                    <tr>                        
+                        <td><span style="color:#F00;">*</span>平台最低售价(USD)</td>
+                        <td><input class="validate[required,custom[number],min[0.001]]" name="spuLowestPrice" id="spuLowestPrice"/></td>
+                        <td><span style="color:#F00;">*</span>运费(USD)</td>
+                        <td><input class="validate[required,custom[number],min[0]]" name="freight" id="freight"/></td>
+                    </tr>
+                    <tr>                        
+                        <td><span style="color:#F00;">*</span>SPU特殊属性</td>
+                        <td colspan="3">
+                            <div style="float: left; width: 90%;">
+                            {foreach getAllSpecailPropertyList() as $value}
+                            <div style="float: left; width: 30%;">
+                                <input style="width: 10px;" type="checkbox" name="spId[]" id="spId{$value['id']}" value="{$value['id']}" class="validate[minCheckbox[1] checkbox"/>
+                                <label for="spId{$value['id']}">{$value['propertyName']}</label>
+                            </div>
+                            {/foreach}
+                            </div>
+                        </td>                       
+                    </tr>
+                    <tr>  
+                        <td><span style="color:#F00;">*</span>SPU状态</td>
+                        <td>
+                            <select class="validate[required]" name="spuStatus" id="spuStatus">
+                            	<option value=""> </option>
+                            	{foreach displayAllSpuStatus() as $value}
+                                    <option value="{$value['id']}">{$value['statusName']}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        <td><span style="color:#F00;" id="secretInfoSpan">&nbsp;</span>被PK的SPU</td>
+                        <td class="products-action">
+                            <input name="secretInfo" id="secretInfo"/>
+                            <input type="button" value="筛选SKU" id="selectPkSku"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" id="addPkSkuCheckbox" style="display: none;">
+                        </td>
+                    </tr>
+                    <tr><td colspan="4" class="products-action"><input type="button" id="addElement" value="添加网址"/></td></tr>
+                    <tr><td colspan="4"><span style="color: red;">*注意：请去掉网址头部的 http:// 再提交</span></td></tr>
+                    <tr><td><span style='color:#F00;'>*</span>参考网页：</td><td><input class="validate[required]" name='lowestUrl' id='lowestUrl' value="{$lowestUrl}"/></td> <td>说明：</td><td><input value="最低价" disabled="disabled"/></td></tr>
+                    <tr><td><span style='color:#F00;'>*</span>参考网页：</td><td><input class="validate[required]" name='bidUrl' id='bidUrl' value="{$bidUrl}"/></td> <td>说明：</td><td><input value="参考listing" disabled="disabled"/></td></tr>
+                    <tr><td><span style='color:#F00;'>*</span>参考网页：</td><td><input class="validate[required]" name='linkUrl[]' id='linkUrl' value=""/></td> <td>说明：</td><td><input name='linkNote[]' id='linkNote' value="供应商产品链接" readonly="readonly"/></td></tr>
+                </table>
+                <table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td align="left" colspan="8" style="font-size:16px; font-weight:bold; padding-left:15px;">档案信息</td>
+                    </tr>
+                    {foreach OmAvailableModel::getTNameList('pc_archive_property','*',"WHERE categoryPath IN ($pathImplodeStr)") as $valuePP}
+						<tr>
+                            <td style="width: 40px; padding-left:20px;">
+                            {$valuePP['propertyName']}
+                            </td>
+                            {if $valuePP['isRadio'] == 1}
+                                <td>
+                                <select name="pro{$valuePP['id']}" id="pro{$valuePP['id']}" {if $valuePP['isRequired'] == 1}class="validate[required]"{/if}>
+                                    <option value=""> </option>
+                                    {foreach OmAvailableModel::getTNameList('pc_archive_property_value','*',"WHERE propertyId='{$valuePP['id']}'") as $valuePPV1}
+                                    <option value="{$valuePPV1['id']}" {foreach $PPV as $ppv}{if $ppv['propertyId'] == $valuePP['id'] && $ppv['propertyValueId'] == $valuePPV1['id']}selected='selected'{/if}{/foreach}>{OmAvailableModel::getPropertyValueById($valuePPV1['id'])}</option>
+                                    {/foreach}
+                                </select>
+                                </td>
+                            {else}
+                                <td>
+                                {foreach OmAvailableModel::getTNameList('pc_archive_property_value','*',"WHERE propertyId='{$valuePP['id']}'") as $valuePPV2}
+                                    <input {if $valuePP['isRequired'] == 1}class="validate[minCheckbox[1] checkbox"{/if} style="width: 12px;" value="{$valuePPV2['id']}" name="pro{$valuePP['id']}[]" type="checkbox" id="pro{$valuePPV2['id']}" {foreach $PPV as $ppv}{if $ppv['propertyId'] == $valuePP['id'] && $ppv['propertyValueId'] == $valuePPV2['id']}checked='checked'{/if}{/foreach}/>
+
+                                    <label for="pro{$valuePPV2['id']}">{OmAvailableModel::getPropertyValueById($valuePPV2['id'])}</label>
+
+                                {/foreach}
+                                </td>
+                            {/if}
+
+						</tr>
+                    {/foreach}
+                </table>
+                <table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td align="left" colspan="2" style="font-size:16px; font-weight:bold; padding-left:15px;">主观描述</td>
+                    </tr>
+                    {foreach OmAvailableModel::getTNameList('pc_archive_input','*',"WHERE textStatus=2 and categoryPath IN ($pathImplodeStr)") as $valueIN}
+						<tr>
+                            <td valign="top" width="6%" style="padding-left:20px;">
+                                {$valueIN['inputName']}
+                            </td>
+                            <td>
+                                <textarea cols="120" rows="2" name="inp{$valueIN['id']}"></textarea>
+							</td>
+						</tr>
+                    {/foreach}
+
+                </table>
+                <div align="center" class="products-action">
+                	<input type="submit" value="保存"/>
+                    <input type="button" value="返回" id="back"/>
+                </div>
+            </div>
+            </form>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}
+
+<script type="text/javascript">
+
+    $(function(){
+         $("#spuStatus").change(function(){
+            if($(this).val() == 51){
+                $('#addPkSkuCheckbox').html('');
+                $("#secretInfoSpan").text('*');
+                $("#secretInfo").attr('class','validate[required]');
+                $("#secretInfo").prop('readonly',false);
+            }else{
+                $('#addPkSkuCheckbox').html('');
+                $("#secretInfoSpan").html('&nbsp;');
+                $("#secretInfo").attr('class','');
+                $("#secretInfo").val('');
+                $("#secretInfo").prop('readonly',true);
+            }
+         });
+         
+         $('#selectPkSku').click(function(){
+            pkSpu = $("#secretInfo").val();
+            $.ajax({
+				type	: "POST",
+				dataType: "jsonp",
+				url		: 'json.php?mod=goods&act=getSkuBySpu&jsonp=1',
+				data	: { spu:pkSpu },
+				success	: function (msg){
+					if(msg.errCode == 200){
+					    $('#addPkSkuCheckbox').show();
+                        $('#addPkSkuCheckbox').html('');
+					    addPkSkuCheckboxHtml = '';
+                        $(msg.data).each(function(index,element){
+                            pkSku = element['sku'];
+                            addPkSkuCheckboxHtml += "<input class='validate[minCheckbox[1] checkbox' style='width: 12px;' value='"+pkSku+"' id='pkSku"+pkSku+"' name='pkSku[]' type='checkbox' />";
+                            addPkSkuCheckboxHtml += "<label for='pkSku"+pkSku+"'>"+pkSku+"</label>";
+                        });
+					    $('#addPkSkuCheckbox').html(addPkSkuCheckboxHtml);					    
+					}else{
+					    alert(msg.errMsg);
+                        $('#addPkSkuCheckbox').html('');
+                        $('#addPkSkuCheckbox').hide();
+                        $("#secretInfo").val('');
+                        $("#secretInfo").focus();
+					}
+				}
+			});
+         });
+                
+    });
+    
+</script>

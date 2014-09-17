@@ -1,0 +1,84 @@
+{include file="header.htm"}
+<script language="javascript" type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+
+<script type="text/javascript" src="./js/packageCheck.js"></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+{include file='whNav.htm'}
+<div class="searchformdiv servar wh-servar">
+   <!--form style="margin-left:20px" class="navbar-form pull-left" action="./index.php?act=abnormal&mod=packageCheck" method="POST"-->
+		&nbsp;&nbsp;&nbsp;点货员：&nbsp;&nbsp;&nbsp;<select class="queryformselect" style="width: 130px;" id="checkUser" name="checkUser">
+			<option value="">请选择</option>
+			{foreach from=$Marking_user item=list}
+				<option value="{$list.global_user_id}" {if $list.global_user_id==$checkUser}selected{/if}>{$list.global_user_name}</option>
+			{/foreach}</select>
+		状态：&nbsp;&nbsp;&nbsp;<select class="queryformselect" style="width: 130px;" id="status" name="status">
+			<option value=1 {if $status==1}selected{/if}>异常未确认</option>
+			<option value=2 {if $status==2}selected{/if}>异常已确认</option>
+            <option value=3 {if $status==3}selected{/if}>异常已推送采购未通过</option>
+			</select>
+        SKU:&nbsp;&nbsp;&nbsp;<input type="text" name="sku" id="sku" value="{$sku}"/>
+		开始日期：&nbsp;&nbsp;&nbsp;<input name="start" type="text" id="start" value="{$start}" onclick="WdatePicker()"  />
+		结束日期：&nbsp;&nbsp;&nbsp;<input name="end" type="text" id="end" value="{$end}" onclick="WdatePicker()" />
+		<button  id='serch' value="" />搜 索</button>
+    <!--/form-->
+	<br/>
+	<span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button  id="sureab"  type="button"  value="" >异常确认</button>
+    </span>
+	<span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="adjustab" style="margin-left:20px;float:left;">点货调整</button>
+    </span>
+	<span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="delodd" >删除</button>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="10%"><input type="checkbox" id="allselect"/></td>
+                <td width="10%">sku</td>
+                <td width="10%">数量</td>
+                <td width="10%">良品数</td>
+                <td width="10%">上架数</td>
+                <td width="10%">点货员</td>
+				<td width="10%">录入员</td>
+				<td width="10%">采购员</td>
+                <td width="10%">点货日期</td>
+				<td width="10%">异常状态</td>
+            </tr>
+        </thead>
+        
+        <tbody>
+        {foreach key=key_id from=$lists item=list}
+            <tr class="odd">	
+                
+                 <td width="10%"><input type="checkbox" name="ckbs" value="{$list.id}#{$list.sku}" /></td>
+                 <td width="10%">{$list.sku}</td>
+                 <td width="10%">{$list.num}</td>
+                 <td width="10%">{$list.ichibanNums}</td>
+                 <td width="10%">{$list.shelvesNums}</td>
+                 <td width="10%">{$list.tallyUserId|getUserNameById}</td>
+				 <td width="10%">{$list.entryUserId|getUserNameById}</td>
+				 <td width="10%">{$list.purchaseId|getUserNameById}</td>
+                 <td width="10%">{$list.entryTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+				 <td width="10%">{if $list.entryStatus==1}未确认未进系统{elseif $list.entryStatus==2}已确认未进系统{elseif $list.entryStatus==3}已推送未通过{/if}</td>
+            </tr>
+         {/foreach}
+        </tbody>
+  
+    </table>
+	    <div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+            {$pagestr}
+        </div>
+</div>
+<div id="adjust_form" title="点货调整页面" style="display:none;">
+	<form id="adjust_form" method="POST" action="" enctype="multipart/form-data">
+		<table id="show_tab" width="100%" border="1" cellpadding="0" cellspacing="0">
+			<thead><tr><td width="50%">sku</td><td width="50%">调整数量</td></tr></thead>
+			<tbody></tbody>
+		</table>
+	</form>
+</div>
+{include file='footer.htm'}

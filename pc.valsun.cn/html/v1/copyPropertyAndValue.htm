@@ -1,0 +1,72 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/propertyCopy.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+            <div class="main feedback-main">
+					<table class="products-action" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                           	    <td align="right" style="width: 600px;">
+                                    <span style="color:#F00;">*复制属性:</span>
+                                </td>
+									<!--<select name="sku_category" id="pid_one" onchange="select_one();">
+										<option value="0">请选择</option>
+										{foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid=0") as $value}
+										<option value="{$value['id']}">{$value['name']}</option>
+										{/foreach}
+									</select>
+									<span align="left" id="div_two" style="width:auto; display:none"></span>
+									<span align="left" id="div_three" style="width:auto; display:none"></span>
+									<span align="left" id="div_four" style="width:auto; display:none"></span>-->
+                                <td align="left">    
+                                    <input value="{OmAvailableModel::getPropertyNameById($id)}" disabled="disabled"/>
+                                    <input name="id" id="id" value="{$id}" type="hidden"/>
+								</td>
+						</tr>
+                    
+						<tr>
+                           	    <td align="right">
+                                    <span style="color:#F00;">*</span>新建属性-类别:
+                                </td>
+                                <td align="left">
+									<select name="sku_category" id="pid_oneNew" onchange="select_oneNew();">
+										<option value="0">请选择</option>
+										{foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid=0") as $value}
+										<option value="{$value['id']}">{$value['name']}</option>
+										{/foreach}
+									</select>
+									<span align="left" id="div_twoNew" style="width:auto; display:none"></span>
+									<span align="left" id="div_threeNew" style="width:auto; display:none"></span>
+									<span align="left" id="div_fourNew" style="width:auto; display:none"></span>
+								</td>
+						</tr>
+                        
+						<tr>
+                            <td align="right"></td>
+                            <td align="left">
+                            <span style="color: red;" id="error"></span>
+                            <span style="color: green;" id="correct"></span>
+                            </td>
+						</tr>
+                        <tr>
+                            <td align="right"><input type="button" value="复制" id="copyPP"/></td>                            
+                            <td align="left">
+							<input type="button" value="返回" id="back"/>
+                            </td>
+						</tr>
+					</table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

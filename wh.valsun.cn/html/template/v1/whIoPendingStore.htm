@@ -1,0 +1,130 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script type="text/javascript" src="./js/whIoStore.js"></script>
+<script type="text/javascript" src="./js/fancybox.js"></script>
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+            <div class="servar wh-servar">
+    				<span>
+                        <input id="ioType" type="hidden" value="{$ioType}"/>
+                        <!-- TODO: <input id="userId" type="hidden" value="{$smarty.session.userId}"/> -->
+    					<label for="ordersn">单据编码:</label>
+    					<input name="ordersn" id="ordersn" value="{$g_ordersn}"/>
+						<button id="psearch">搜索</button>
+    				</span>
+                    &nbsp;&nbsp;
+                    <span style="color: red;">{$status}</span>
+            </div>
+            <div class="align-main main order-main products-main">
+            	{foreach item=InStoreList from=$InStoreLists}
+                <table cellspacing="0" width="100%" class="products-action">
+                    <tr class="title">
+                        <td colspan="5">
+                            <span>单号:{$InStoreList.ordersn}</span>
+                            <span>类型:{$InStoreList.invoiceName}</span>
+                            <span>申请人:{$InStoreList.userId|getUserNameById}</span>
+                            <span>状态:{if $InStoreList.ioStatus==1}待审核{/if}{if $InStoreList.ioStatus==2}审核通过{/if}{if $InStoreList.ioStatus==3}审核不通过{/if}</span>
+                            <span>提交时间:{$InStoreList.createdTime|date_format:"Y-m-d H:i"}</span>
+                            <span>付款方式:{$InStoreList.paymentMethods}</span>
+                            <span>仓库:{$InStoreList.whName}</span>
+                        </td>
+                    </tr>
+                    {foreach item=detailList from=$InStoreList['detail']}
+                    <tr>
+                        <td style="width:100px;" class="unpicurl">
+							<a href="javascript:void(0)" id="imga-{$detailList.sku}" class="fancybox">
+								<img src="./images/ajax-loader.gif" name="skuimg" width="50" height="50" id="imgs-{$detailList.sku}" spu="{$detailList.spu}">
+						   </a>
+						</td>
+                        <td width="30%">{$detailList.sku|getSKUName}</td>
+                        <td>{$detailList.sku}</td>
+                        <td>数量:{$detailList.amount}</td>
+                        <td>单价:{$detailList.cost} </td>
+                    </tr>
+                    {foreachelse}
+                    <tr>
+                        <td colspan="5" style="width:100px;" align="cen">
+                        	无SKU数据
+                        </td>
+                    </tr>
+                	{/foreach}
+                    <tr>
+                        <td colspan="5">
+                            <table>
+                                <tr>
+                                	{foreach item=auditlist from=$InStoreList['auditlist']}
+                                    {if $auditlist.auditinfo}
+                                    <td valign="middle" class="{if $auditlist.auditinfo.auditStatus==1}font-pass{/if}{if $auditlist.auditinfo.auditStatus==2}font-red{/if}">{$auditlist.auditinfo.auditUser|getUserNameById}</td>
+                                    <td class="pass" style="width:120px;padding-bottom:40px;" valign="middle" align="center">
+                                        {$auditlist.auditinfo.auditTime|date_format:"Y-m-d H:i"}
+                                    </td>
+                                    {if $auditlist.auditinfo.auditStatus==2}
+                                    <td valign="middle" class="unpassendding"></td>
+                                    {break}
+                                    {/if}
+                                    {else}
+                                    <td valign="middle">
+                                        <ul>
+                                        {foreach item=audituserlist from=$auditlist['audituserlist']}
+                                            <li class="font-unpass" >{$audituserlist.auditorId|getUserNameById}</li>
+                                        {/foreach}
+                                        </ul>
+                                    </td>
+                                    <td class="unpass" style="width:120px;padding-bottom:37px;" valign="middle" align="center">
+                                    {/if}
+                                    {/foreach}
+                                    </td>
+                                    {if $InStoreList.ioStatus==2}
+                                    <td valign="middle" class="passendding">
+									{/if}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="title">
+                        <td colspan="5">
+                            <input type="button" value="通过" class="yespass" iostoreid="{$InStoreList.id}" />
+                            <span>
+                                <input type="button" value="拒绝" class="nopass" iostoreid="{$InStoreList.id}" />
+                            </span>
+                            <span>备注:{$InStoreList.note}</span>
+                        </td>
+                    </tr>
+                </table>
+                {foreachelse}
+                	<div align="center">无数据</div>
+                {/foreach}
+</div>
+
+{include file="footer.htm"}
+<script type="text/javascript">
+//页面加载完成后加载图片
+{literal}
+$(document).ready(function() {
+	var url  = "json.php?mod=common&act=getSkuImg";
+	var skuArr	= $('img[name="skuimg"]'), imgurl="", spu="", sku="";
+	$.each(skuArr,function(i,item){
+		sku	= $(item).attr('id').substring(5);
+		spu	= $(item).attr('spu');
+		$.ajax({
+			url: url,
+			type: "POST",
+			async: true,
+			data	: {spu:spu,sku:sku},
+			dataType: "jsonp",
+			success: function(rtn){
+							sku	= $(item).attr('id').substring(5);
+							//console.log(rtn);
+							if ($.trim(rtn.data)) {
+								$("#imgs-"+sku).attr({"src":rtn.data,"width":"60px","height":"60px"});
+							    $("#imga-"+sku).attr("href",rtn.data);
+							} else {
+								$("#imgs-"+sku).attr({"src":"./images/no_image.gif","width":"60px","height":"60px"});
+							    $("#imga-"+sku).attr("href","./images/no_image.gif");
+							}
+				}	
+			});
+	});
+});
+{/literal}
+</script>

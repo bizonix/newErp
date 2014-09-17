@@ -1,0 +1,43 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/promptmsg.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=PromptMsg&act=update' method="post" id="promptMsglist">
+    	<div>
+            <input type="hidden" name="id" value="{$promptMsg.id}"/>
+        	<label for="type" style="font-size:20px;">错误分类：</label>
+            <input value="{$promptMsg.type}" id='type' class="validate[required] text-input" name="type" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="typeSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div>
+            <label for="status" style="font-size:20px;">  &nbsp status：</label>
+            <select id='status' id="status{$promptMsg.id}" class="active" name="status" style="width:200px;height:30px;font-size:20px">
+	            <option value="1" {if $promptMsg.status==1} selected="selected" {/if}>正常</option>
+	            <option value="2" {if $promptMsg.status==2} selected="selected" {/if}>异常</option>
+	        </select>
+            <span id="statusSpan" style="color: red;">*</span>
+		</div>
+		<br />
+		
+		
+        <div>
+            <label for="errormsg" style="font-size:20px;">错误信息：</label>
+             <input value="{$promptMsg.errormsg}" id='errormsg' class="validate[required] text-input" name="errormsg" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="errormsgSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        
+        
+        <div>
+            <input type="submit" value="提交"/>
+            &nbsp;
+            <input type="button" id="back" value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.htm"}

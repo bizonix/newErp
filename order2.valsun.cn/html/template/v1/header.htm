@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$toptitle}--订单系统</title>
+
+
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+
+<script src="http://api.notice.valsun.cn/js/swJsNotice.js" type="text/javascript"></script>
+<script src="http://misc.erp.valsun.cn/js/global.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="./js/jquery/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/jquery/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<link rel="stylesheet" href="./css/alertify/alertify.core.css" />
+<link rel="stylesheet" href="./css/alertify/alertify.default.css" />
+<link rel="stylesheet" href="./css/flexselect.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="./css/validationEngine/validationEngine.jquery.css" />
+
+<script type="text/javascript" src="./js/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery-ui.min.js"></script>
+<script src="./js/validationEngine/languages/jquery.validationEngine-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/validationEngine/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="./js/alertify/alertify.min.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery.ui.core.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery-ui-sliderAccess.js"></script>
+<script type="text/javascript" src="./js/datetimepicker.js"></script>
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+
+</head>
+<body id="toppage"  class="order-body">
+	<div class="container container_wh">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	订单系统
+                </div>
+                <div class="onevar">
+                	<ul>
+                        <li>
+                        	<a href="index.php?mod=Order&act=index" class="personal {if $toplevel === 1}cho{/if}">首页</a>
+                        </li>
+                    	<li>
+                        	<a href="index.php?mod=Order&act=list" class="cental {if $toplevel === 0}cho{/if}">订单中心</a>
+                        </li>
+                        <li>
+                        	<a href="index.php?mod=orderAdd&act=addOfflineOrder" class="writein {if $toplevel === 2}cho{/if}">订单录入</a>
+                        </li>
+                        <li>
+                            <a href="index.php?mod=exportExcelOutput&act=index" class="suppliermanage cental {if $toplevel === 5}cho{/if}">报表导出</a>
+                        </li>
+                        <li>
+                        	<a href="index.php?mod=Platform&act=index" class="setup {if $toplevel === 3}cho{/if}">系统设置</a>
+                        </li>
+						<li>
+                        	<a href="index.php?mod=user&act=index" class="usersetup {if in_array($mod,array('user','job','dept'))}cho{/if}">授权管理</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user">
+                	<a class="news-img" href="javascript:javascript:void(0)" onclick="swntc_call('{$_username}')">消息</a>
+                	<input id='swNoticeUrl' type='hidden'  value='index.php?mod=notice&act=sendMessage'/>
+					<a href="javascript:void(0)">{get_userid()|get_usernamebyid}</a>
+                    <a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;">退出</a>
+                </div>
+            </div>
+            <div class="twovar">
+            	<ul>
+					{if $toplevel == 0}
+                    {foreach $ostatus as $status}
+                    <li>
+                        <a href="index.php?mod=Order&act=list&ostatus={$status.id}" {if $g_ostatus == $status.id}class="cho"{/if}>{$status.statusName}<!--（<span>{$second_count[$list.statusCode]}</span>）--></a>
+                    </li>
+					{/foreach}
+                	
+					{elseif $toplevel == 1}
+					{elseif $toplevel == 2}
+					<li>
+                    	<a href="index.php?mod=orderAdd&act=addOfflineOrder" {if $secondlevel == '21'}class="cho"{/if}>订单添加</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=orderAdd&act=AddMissingOrder" {if $secondlevel == '280'}class="cho"{/if}>漏单添加</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=orderAdd&act=addDomesticOrder" {if $secondlevel == '22'}class="cho"{/if}>国内通用订单导入</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=orderAdd&act=addAliexpressOrder" {if $secondlevel == '24'}class="cho"{/if}>速卖通订单导入</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=orderAdd&act=addAliexpressOfflineOrder" {if $secondlevel == '25'}class="cho"{/if}>速卖通线下订单导入</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=orderAdd&act=addDhgateOrder" {if $secondlevel == '26'}class="cho"{/if}>敦煌订单导入</a>
+                    </li>
+                    <li>
+                        <a href="index.php?mod=orderAdd&act=addTrustOrder" {if $secondlevel == '29'}class="cho"{/if}>诚信通订单导入</a>
+                    </li>
+                    <li>
+                    	<a href="#" {if $secondlevel == '27'}class="cho"{/if}>同步异常订单导入</a>
+                    </li>
+					<li>
+                    	<a href="index.php?mod=orderTranUps&act=index" {if $secondlevel == '28'}class="cho"{/if}>UPS美国专线跟踪号导入</a>
+                    </li>
+					<li>
+                    	<a href="index.php?mod=orderAdd&act=addDresslinkOrder" {if $secondlevel == '210'}class="cho"{/if}>独立商城导入</a>
+                    </li>
+                    <li>
+                        <a href="index.php?mod=orderAdd&act=addDomesticSaleOrder" {if $secondlevel == '220'}class="cho"{/if}>国内销售部订单导入</a>
+                    </li>
+
+					{elseif $toplevel == 3}
+					<li>
+                    	<a href="index.php?mod=Platform&act=index" {if $secondlevel == '31'}class="cho"{/if}>平台管理</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=Account&act=index" {if $secondlevel == '32'}class="cho"{/if}>平台账号</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=paypalEmail&act=index" {if $secondlevel == '33'}class="cho"{/if}>Paypal付款邮箱</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=Blacklist&act=index" {if $secondlevel == '34'}class="cho"{/if}>平台黑名单</a>
+                    </li>
+					<!--li>
+                    	<a href="index.php?mod=orderSetting&act=property" {if $secondlevel == '36'}class="cho"{/if}>订单属性</a>
+                    </li-->
+					<li>
+                    	<a href="index.php?mod=currency&act=index" {if $secondlevel == '38'}class="cho"{/if}>汇率管理</a>
+                    </li>
+					<li>
+                    	<a href="index.php?mod=StatusMenu&act=index" {if $secondlevel == '39'}class="cho"{/if}>订单流程</a>
+                    </li>
+                     <li>
+                    	<a href="index.php?mod=orderOperationLog&act=orderOperationLogList" {if $secondlevel == '40'}class="cho"{/if}>订单操作日志查询</a>
+                    </li>
+					<li>
+                    	<a href="index.php?mod=orderWarehouseRecord&act=orderWarehouseRecordList" {if $secondlevel == '41'}class="cho"{/if}>订单配货记录查询</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=FromOpenConfig&act=index" {if $secondlevel == '42'}class="cho"{/if}>开发接口设置</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=promptMsg&act=index" {if $secondlevel == '43'}class="cho"{/if}>错误提示设置</a>
+                    </li>
+                    
+                    <li>
+                    	<a href="index.php?mod=topmenu&act=index" {if $secondlevel == '44'}class="cho"{/if}>导航管理</a>
+                    </li>
+                    {elseif $toplevel == 5}
+                    <li>
+                        <a href="index.php?mod=exportExcelOutput&act=index" class="cho">报表导出</a>
+                    </li>
+					{/if}
+					
+					{if in_array($mod,array('user','job','dept'))}
+                    <li><a href="index.php?mod=user&act=index" {if $act=='index' && $mod=='user'}class="cho"{/if}>用户管理</a></li>
+					<li><a href="index.php?mod=job&act=index" {if $act=='index' && $mod=='job'}class="cho"{/if}>岗位管理</a></li>
+					<li><a href="index.php?mod=dept&act=index" {if $act=='index' && $mod=='dept'}class="cho"{/if}>部门管理</a></li>
+					{/if}
+                </ul>
+            </div>
+
+		    <div class="threevar order-minwidth">
+            	<ul>
+                    {foreach $otype as $type}
+                    <li>
+                        <a href="index.php?mod=Order&act=list&ostatus={$g_ostatus}&otype={$type.id}" {if $type.id == $g_otype}class="cho"{/if}>{$type.statusName}<!--（<span>{$three_count[$list.statusCode]}</span>）--></a>
+                    </li>
+					{/foreach}
+                </ul>
+            </div>

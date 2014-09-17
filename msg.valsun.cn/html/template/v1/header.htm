@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$toptitle}--message系统</title>
+
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="./js/jquery/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="./js/alertify/lib/alertify.min.js"></script>
+<link rel="stylesheet" href="./js/alertify/themes/alertify.core.css" />
+<link rel="stylesheet" href="./js/alertify/themes/alertify.default.css" />
+<script src="http://api.notice.valsun.cn/js/swJsNotice.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/global.js"></script>
+<script type="text/javascript" src="./js/settimeout.js"></script>
+
+</head>
+<body id="toppage"  class="reply-body">
+	<div class="container container_wh">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	message系统
+                </div>
+                <div class="onevar message-onevar">
+                	<ul>
+                		<li>
+                        	<a href=
+                        	{if $smarty.session.dept == 16 || $smarty.session.dept == 95 }
+                        	"index.php?mod=msgCategory&act=categoryList"
+                        	{elseif $smarty.session.dept == 74}
+                        	"index.php?mod=msgCategoryAmazon&act=categoryListAmazon"
+                        	{/if} class="cental Recipient {if $toplevel === 1}cho{/if}">收件夹管理</a>
+                        </li>
+                    	<li>
+                        	<a href=
+                        	{if $smarty.session.dept == 16 || $smarty.session.dept == 95 }
+                        	"index.php?mod=messagefilter&act=getMessageListByConditions"
+                        	{elseif $smarty.session.dept == 74}
+                        	"index.php?mod=amazonMessagefilter&act=getAmazonMessageListByConditions"
+                        	{/if} class="cental Inbox {if $toplevel === 0}cho{/if}">收件箱</a>
+                        </li>
+						
+						<li>
+                        	<a href=
+                        	{if $smarty.session.dept == 16 || $smarty.session.dept == 95 }
+                        	"index.php?mod=messageTemplate&act=showTemplateList"
+                        	{elseif $smarty.session.dept == 74}
+                        	"index.php?mod=amazonMessageTemplate&act=showTemplateListAmazon"
+                        	 {/if}class="cental Template {if $toplevel === 2}cho{/if}">message模板</a>
+                        </li>
+						<li>
+                        	<a href=
+                        	{if $smarty.session.dept == 16 || $smarty.session.dept == 95 }
+                        	"index.php?mod=messageStatistics&act=messageStatistics"
+                        	{elseif $smarty.session.dept == 74}
+                        	"index.php?mod=amazonMessageStatistics&act=messageStatistics"
+                        	 {/if}class="cental Statistics {if $toplevel === 3}cho{/if}">统计报表</a>
+                        </li>
+						<li>
+                        	<a href=
+                        	{if $smarty.session.dept == 16 || $smarty.session.dept == 95 }
+                        	"index.php?mod=user&act=index"
+                        	{elseif $smarty.session.dept == 74}
+                        	"index.php?mod=localPowerAmazon&act=localUserList"
+                        	 {/if}class="systemsettings {if in_array($mod,array('user','job','dept'))}cho{/if} {if $toplevel === 5}cho{/if}">授权管理</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user">
+                	<a class="news-img" href="javascript:javascript:void(0)" onclick="swntc_call('{$_username}')">消息</a>
+                	<a href="javascript:void(0)">{$_username}</a>
+                    <a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;">退出</a>
+                </div>
+            </div>
+

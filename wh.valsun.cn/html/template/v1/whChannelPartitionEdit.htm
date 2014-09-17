@@ -1,0 +1,67 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whChannelPartition.js"></script>
+<div class="servar wh-servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button-normal" href="index.php?mod=whChannelPartition&act=add" >新增分渠道</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<style>
+.main table td { text-align:left; }	
+.main { padding-left:30px; }
+.main input.sinput { width:400px; }
+.main textarea.sinput { width:400px; }
+.main select.sinput { width:405px; }
+.main table { border:0px solid #ff0000; }
+</style>
+<div class="main">
+<form action='index.php?mod=whChannelPartition&act=edit' method="post">
+	<input type="hidden" name="id" value="{$data.id}">
+    <table cellspacing="0">
+         <tr>
+         	<td width="100">分区名称</td>
+         	<td><input type="text" class="sinput" name="title" value="{$data.title}"></td>
+         </tr>
+         <tr>
+         	<td>运输方式</td>
+         	<td><select class="sinput" name="transportId" onchange="transportChange(this);">
+         		<option value="0">选择运输方式</option>
+         		{foreach from=$transportlist item=vo}
+         			<option {if $data.transportId == $vo.id}selected{/if} value="{$vo.id}">{$vo.carrierNameCn}</option>	
+         		{/foreach}
+         		</select></td>
+         </tr>
+         <tr>
+         	<td>运输渠道</td>
+         	<td>
+         		<select class="sinput" name="channelId" id="channelId" onchange="selectChannelName(this);">
+         			<option value="0">请选择运输渠道</option>
+         			{foreach from=$channellist item=channel}
+         				<option {if $data.channelId == $channel.id}selected{/if} value="{$channel.id}">{$channel.channelName}</option>
+         			{/foreach}
+         		</select>
+         		<input type="hidden" name="channelName" id="channelName" value="{$data.channelName}">
+         	</td>
+         </tr>
+         <tr>
+         	<td>分拣设备筒号</td>
+         	<td><select class="sinput" name="partition">
+         		<option value="0">选择筒号</option>
+         		{section name=loop loop=40}
+         			<option {if $data.partition == $smarty.section.loop.index+1}selected{/if} value="{$smarty.section.loop.index+1}">{$smarty.section.loop.index+1}号筒</option>	
+         		{/section}
+         		</select></td>
+         </tr>
+    </table>
+    <div>   		       
+            <button type="submit" name="submit" value="1" class="button-normal" />提交</button>
+            &nbsp;
+            <input type="button" onclick="location.href='index.php?mod=whChannelPartition&act=index'" value="取消" class="button-normal input_button" />
+     </div>
+ </form>
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}

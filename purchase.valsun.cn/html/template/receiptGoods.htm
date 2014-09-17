@@ -1,0 +1,932 @@
+﻿{include file="header.htm"}
+	<div class="fourvar">
+    	<div class="pathvar">
+        	您的位置：<a href="index.php?mod=unusualOrder&act=index">异常到货处理</a>&nbsp;>>&nbsp;收货管理列表
+        </div>
+		<div class="pagination">
+            {$pageStr}
+        </div>
+    </div>
+	 <div class="servar products-servar">
+     	<span>
+			订单号<input type="text" id="ser_ordersn" value="{$smarty.get.ser_ordersn}"/>
+        </span>
+		<span>
+			料号<input type="text" id="ser_sku" value="{$smarty.get.ser_sku}"/>
+        </span>
+		<span>
+			采购员
+			<input type="text" id="ser_cguser" value="{$smarty.get.ser_cguser}"/>
+        </span>
+		<span>
+			订货起始<input id="ser_startTime" onclick="WdatePicker()" type="text" value="{$smarty.get.ser_startTime}" />
+			订货结束<input id="ser_endTime" onclick="WdatePicker()" type="text" value="{$smarty.get.ser_endTime}" />
+		</span>
+		<span>
+			审核状态
+			<select name="ser_status" id="ser_status">
+				<option value="-1">请选择</option>
+				<option value="1" {if $smarty.get.ser_status=="1"}selected="selected"{/if}>未审核</option>
+				<option value="2" {if $smarty.get.ser_status=="2"}selected="selected"{/if}>已审核</option>
+			</select>
+		</span>
+		<span>
+			订单状态
+			<select name="ser_orderstu" id="ser_orderstu">
+				<option value="-1">请选择</option>
+				<option value="1" {if $smarty.get.ser_orderstu=="1"}selected="selected"{/if}>正常订单</option>
+				<option value="2" {if $smarty.get.ser_orderstu=="2"}selected="selected"{/if}>已付款需取消</option>
+				<option value="3" {if $smarty.get.ser_orderstu=="3"}selected="selected"{/if}>未付款可删除</option>
+			</select>
+		</span>
+		<span><br/><br/>
+			供应商<input type="text" id="ser_parnter" value="{$smarty.get.ser_parnter}"/>
+		</span>
+		<span>
+			收货状态
+			<select name="ser_receiptstu" id="ser_receiptstu">
+				<option value="-1">请选择</option>
+				<option value="1" {if $smarty.get.ser_receiptstu=="1"}selected="selected"{/if}>OK</option>
+				<option value="2" {if $smarty.get.ser_receiptstu=="2"}selected="selected"{/if}>-</option>
+			</select>
+		</span>
+        <span>
+			<a href="javascript:void(0);" id="search">搜 索</a>
+		</span>
+		{if $smarty.session.userCnName=='王民伟' || $smarty.session.userCnName=='魏赫泽'}
+		<span>
+			<a href="javascript:void(0);" id="auit-btn">财务审核</a>
+		</span>
+		<span>
+			<a href="javascript:void(0);" id="search-moth">财务月度审核</a>
+		</span>
+		{/if}
+		<span>
+			<a href="javascript:void(0);" id="batchupd-btn">批量更新订单状态</a>
+		</span>
+		<span>
+			<a href="index.php?mod=purToWh&act=autoAdd" id="add-btn">采购员录入</a>
+		</span>
+		<span>
+			<a href="index.php?mod=purToWh&act=Add">线下订单录入</a>
+		</span>
+		{if $smarty.session.userCnName=='王民伟' || $smarty.session.userCnName=='何锦媚'}
+		<span>
+			<a href="index.php?mod=purToWh&act=importOrder" id="importorder-btn">线下订单导入</a>
+		</span>
+		{/if}
+		<span>
+			<a href="javascript:void(0);" id="del-btn">批量删除</a>
+			<input type="hidden" value="{$loginname}" id="loginname" />
+		</span>
+		<span>
+			<a href="javascript:void(0);" id="export-btn">报表导出</a>
+		</span>
+		<span>
+			<a href="javascript:void(0);" id="finexport-btn">财务报表导出</a>
+		</span>
+		<span>
+			<a href="index.php?mod=purToWh&act=receiptEveryDayExport";>每日报表导出</a>
+		</span>
+    </div>
+	<div class="main underline-main ">
+    	<table cellspacing="0" width="100%" class="products-action">
+        	<tr class="title purchase-title">
+		    	<td><input type="checkbox" id="checkAll"></td>
+                <td>订货日期</td>
+                <td>订单号</td>
+				<td>订单状态</td>
+				<td>操作状态</td>
+				<td>财务审核</td>
+				<td>审核人</td>
+				<td>审核时间</td>
+                <td>供应商</td>
+                <td>料号</td>
+                <td>订货数量</td>
+                <td>订货价格</td>
+                <td>订单金额</td>
+                <td>采购员</td>
+				<td>支付方式</td>
+				<td>订货备注</td>
+				<td>添加时间</td>
+				<td>实收数量</td>
+				<td>数量核对</td>
+				<td>收货状态</td>
+				<td>操作</td>
+				<td>收货详情</td>
+            </tr>
+			{section name=list loop=$list}
+			<tr>
+				<td><input type="checkbox" name="inverse" value="{$list[list]['id']}" class="idlist" data-status="{$list[list]['status']}" data-price="{$list[list]['purprice']}" data-count="{$list[list]['purcount']}" data-ordersn="{$list[list]['ordersn']}" data-sku="{$list[list]['sku']}" data-cguser="{$list[list]['cguser']}" /></td>
+                <td>{if ($list[list]['purtime']==0)}{else}{$list[list]['purtime']|date_format:'%Y-%m-%d'}{/if}</td>
+                <td>{$list[list]['ordersn']}</td>
+				<td>
+					{if ($list[list]['order_stu']==1)}
+					<font style="color:#009900">正常订单</font>
+					{elseif ($list[list]['order_stu']==2)}
+					<font style="color:#0000FF">已付款需取消</font>
+					{else}<font style="color:#FF0000">未付款可删除</font>
+					{/if}<br/>
+					<select class="secstatus{$list[list]['id']}" name="secstatus">
+						<option value="-1">选择修改状态</option>
+						{if ($list[list]['order_stu']==1)}
+							<option value="2">已付款需取消</option>
+							<option value="3">未付款可删除</option>
+						{elseif ($list[list]['order_stu']==2)}
+							<option value="1">正常订单</option>
+							<option value="3">未付款可删除</option>
+						{else}
+						 	<option value="1">正常订单</option>
+						 	<option value="2">已付款需取消</option>
+						{/if}
+					</select>
+				</td>
+				<td>
+					{if $smarty.session.userCnName==$list[list]['cguser'] || $smarty.session.userCnName=='王民伟'}
+					<input type="button" class="chageorderstatus" data-rid="{$list[list]['id']}" data-tracknum="{$list[list]['ordersn']}" data-cguser="{$list[list]['cguser']}"  data-sku="{$list[list]['sku']}" value="修改" />
+					{else}<font style="color:#FF0000">无权限</font>
+					{/if}
+				</td>
+                <td>
+					{if ($list[list]['status']==1)}未审核
+					{else}<font style="color:#FF0000">已审核</font>{/if}
+				</td>
+				<td>{$list[list]['auituser']}</td>
+				<td>
+					{if ($list[list]['auittime'] != 0)}
+						{$list[list]['auittime']|date_format:'%Y-%m-%d'}
+					{else}
+					{/if}
+				</td>
+				<td>{$list[list]['parnter']}</td>
+                <td>{$list[list]['sku']}</td>
+                <td style="color:#0000FF; font-size:24px; font-weight:bolder">{$list[list]['purcount']}</td>
+                <td>{$list[list]['purprice']}</td>
+				<td>
+					{if ($list[list]['order_stu']!=3)}
+						{$money = round($list[list]['purcount'] * $list[list]['purprice'], 2)}
+						{$money}
+					{else}0
+					{/if}
+				</td>
+                <td>{$list[list]['cguser']}</td>
+				<td>{$list[list]['paymethod']}</td>
+                <td>{$list[list]['purnote']}</td>
+				<td>{$list[list]['addtime']|date_format:'%Y-%m-%d'}</td>
+				<td style="color:#CC3300; font-size:24px; font-weight:bolder">{$list[list]['actualcount']}</td>
+				<td>
+					{$diffnum = $list[list]['actualcount'] - $list[list]['purcount']}
+					{if $diffnum >= 0}<span style="color:#009900; font-size:24px; font-weight:bolder">{$diffnum}</span>
+					{elseif $diffnum < 0}<span style="color:#FF0000; font-size:24px; font-weight:bolder">{$diffnum}</span>
+					{else}{$diffnum}
+					{/if}
+				</td>
+				<td>{if ($list[list]['actualcount'] >= $list[list]['purcount'])}OK{else}-{/if}</td>
+				<td>
+						{if $smarty.session.userCnName=='何锦媚'}
+							{if ($list[list]['order_stu']==1)}
+								{if $diffnum < 0}
+									<a href="index.php?mod=purToWh&act=edit&ser_id={$list[list]['id']}&ser_sku={$smarty.get.ser_sku}&ser_receiptstu={$smarty.get.ser_receiptstu}&ser_orderstu={$smarty.get.ser_orderstu}">仓库收货录入</a>{/if}
+							{/if}
+						{/if}
+					
+				</td>
+				<td>
+					<table cellspacing="0" width="100%" class="products-action">
+						<tr>
+							<td>到货数量</td>
+							<td>到货日期</td>
+							<td>录入员</td>
+							<td>收货备注</td>
+							<td>操作</td>
+						</tr>
+						{$id = $list[list]['id']}
+						{$orderList = $listDetail[$id]}
+						{foreach from=$orderList item=vv}
+						<tr>
+							<td>{$vv['incount']}</td>
+							<td>{$vv['intime']|date_format:'%Y-%m-%d'}</td>
+							<td>{$vv['adduser']}</td>
+							<td style="color:#FF0000">{$vv['innote']}</td>
+							<td>{if $smarty.session.userCnName=='何锦媚' || $smarty.session.userCnName=='王民伟'}<a href="#" class="editdetail-btn" data-mainid="{$list[list]['id']}" data-detailid="{$vv['id']}" data-incount="{$vv['incount']}" data-ordersn="{$list[list]['ordersn']}" data-sku="{$list[list]['sku']}">修改</a>{/if}</td>
+						</tr>
+						{/foreach}
+					</table>
+				</td>
+            </tr>
+			{/section}
+         </table>
+     </div>
+     <div class="bottomvar">
+     	<div class="pagination">
+        	{$pageStr}
+        </div>
+     </div>
+<!-- 修改到货记录弹出框 Start -->
+<div id="edit-layer" class="modal fade" tabindex="-1" data-width="550" data-height="150" data-backdrop="true" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title-edit" style="font-weight:bolder"></h4>
+  </div>
+  <div class="modal-body">
+	<div id="info">
+		<table class="table table-bordered">
+			<tr>
+				<td width="20%">原始到货数量</td>
+				<td>
+					<input type="text" id="beforecount" size="5" disabled="disabled" />
+					<input type="hidden" id="txt_mainid" />
+					<input type="hidden" id="txt_detailid" />
+				</td>
+			</tr>
+			<tr>
+				<td>调整到货数量</td>
+				<td><input type="text" id="aftercount" size="5"/></td>
+			</tr>
+		</table>
+	</div>
+  </div>
+  <div class="modal-footer">
+  	<button type="button" class="btn btn-primary" id="edit-save">提交</button>
+	<button type="button" data-dismiss="modal" class="btn btn-default" id="edit-close">取消</button>	
+  </div>
+</div>
+<!-- 修改到货记录弹出框 End -->
+{include file="footer.htm"}
+<!-- 财务审核确认 Start -->
+<div id="auit-layer" class="modal fade" tabindex="-1" data-width="1000" data-height="200" data-backdrop="true" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title-auit" style="font-weight:bolder"></h4>
+  </div>
+  <div class="modal-body">
+	<div id="auitinfo"></div>
+  </div>
+  <div class="modal-footer">
+  	<button type="button" class="btn btn-primary" id="auit-save">提交</button>
+	<button type="button" data-dismiss="modal" class="btn btn-default" id="auit-close">取消</button>	
+  </div>
+</div>
+<!-- 财务审核确认 End -->
+
+<!-- 批量更新收货管理表订单状态 Start -->
+<div id="batchupd-layer" class="modal fade" tabindex="-1"  data-backdrop="true" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title-batchupd" style="font-weight:bolder">批量更新状态</h4>
+  </div>
+  <div class="modal-body">
+	<div id="batchupdinfo">
+		订单状态选择:
+		<select name="batchstatus" id="batchstatus">
+			<option value="-1">选择修改状态</option>
+			<option value="1">正常订单</option>
+			<option value="2">已付款需取消</option>
+			<option value="3">未付款可删除</option>
+		</select>
+	</div>
+  </div>
+  <div class="modal-footer">
+  	<button type="button" class="btn btn-primary" id="batchupd-save">提交</button>
+	<button type="button" data-dismiss="modal" class="btn btn-default" id="batchupd-close">取消</button>	
+  </div>
+</div>
+<!-- 批量更新收货管理表订单状态 End -->
+
+<!-- 月度搜索供应商订单总额 Start -->
+<div id="mothmoney-layer" class="modal fade" tabindex="-1" data-width="1000" data-height="200"  data-backdrop="true" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title-mothmoney" style="font-weight:bolder"></h4>
+  </div>
+  <div class="modal-body">
+	<div id="mothmoneyinfo">
+		
+	</div>
+  </div>
+  <div class="modal-footer">
+  	<button type="button" class="btn btn-primary" id="mothmoney-save">提交</button>
+	<button type="button" data-dismiss="modal" class="btn btn-default" id="mothmoney-close">取消</button>	
+  </div>
+</div>
+<!-- 月度搜索供应商订单总额 End -->
+<script type="text/javascript">
+{literal}
+$('#ser_sku').focus();
+function search(){
+	var ordersn,sku,cguser,parnter,startTime,endTime,status,orderstu,receiptstu,condition="";
+	ordersn     = $.trim($('#ser_ordersn').val());
+	sku 		= $.trim($("#ser_sku").val());
+	cguser 		= $("#ser_cguser").val();
+	parnter 	= $.trim($("#ser_parnter").val());
+	timetype    = $('#ser_timetype').val();
+	startTime 	= $("#ser_startTime").val();
+	endTime 	= $("#ser_endTime").val();
+	status      = $('#ser_status').val();
+	orderstu    = $('#ser_orderstu').val();
+	receiptstu  = $('#ser_receiptstu').val();
+	if(ordersn != ""){
+		condition += "&ser_ordersn=" + ordersn;
+	}
+	if(sku != ""){
+		condition += "&ser_sku=" + sku;
+	}
+	if(cguser != -1){
+		condition += "&ser_cguser=" + cguser;
+	}
+	if(status != -1){
+		condition += "&ser_status=" + status ;
+	}
+	if(orderstu != -1){
+		condition += "&ser_orderstu=" + orderstu; 
+	}
+	if(receiptstu != -1){
+		condition += "&ser_receiptstu=" + receiptstu;
+	}
+	if(parnter != ""){
+		condition += "&ser_parnter=" + parnter;
+	}
+	if(startTime != ""){
+		condition += "&ser_startTime=" + startTime;
+	}
+	if(endTime != ""){
+		condition += "&ser_endTime=" + endTime;
+	}
+
+	window.location.href = "index.php?mod=purToWh&act=index" + condition;
+}
+
+$("#search").click(function(){
+		search();
+});
+
+$(document).keyup(function(e){
+		if(e.keyCode == 13){
+			search();
+		}
+});
+
+$("#search-moth").click(function(){
+	var cguser 		= $.trim($("#ser_cguser").val());
+	var parnter 	= $.trim($("#ser_parnter").val());
+	var startTime 	= $("#ser_startTime").val();
+	var endTime 	= $("#ser_endTime").val();
+	if(cguser == ""){
+		alertify.error('请填写采购员');
+		return false;
+	}
+	if(parnter == ""){
+		alertify.error('请填写供应商全称');
+		return false;
+	}
+	if(startTime == ""){
+		alertify.error('请填写供应商全称起始时间');
+		return false;
+	}
+	if(endTime == ""){
+		alertify.error('请填写供应商全称截止时间');
+		return false;
+	}
+	var url  = "json.php?mod=purToWh&act=mothIndex";
+	$.post(url, {"cguser":cguser, "parnter":parnter,"startTime":startTime,"endTime":endTime, } , function(rtn){
+		var code = rtn.code;
+		var msg  = rtn.msg;
+		if(code == 200){
+			var data 			= rtn.data;
+			var orderArr 		= data.orderArr;
+			var totalMoney 		= data.totalMoney;
+			var totalRecMoney 	= data.totalRecMoney;
+			var totalDiffMoney  = totalMoney - totalRecMoney;
+			var orderLen    	= orderArr.length;
+			var tip = '采购员['+cguser+']供应商[<font style="color:#00CC00">'+parnter+'</font>]<br/><br/>结款下单时间【'+startTime+'】-【'+endTime+'】供计'+orderLen+'单，货款总额【<font style="color:#FF0000">'+totalMoney+'</font>】元<br/><br/>到货总额【<font style="color:#00CC00">'+totalRecMoney+'</font>】元，未到货总额【<font style="color:#0000FF">'+totalDiffMoney+'</font>】元，<font style="font-size:10px; color:#FF0000">注:请跟进未到货订单</font>';
+			$('.modal-title-mothmoney').html(tip);
+			var html   = '<table class="table table-bordered"><thead><tr><th>采购订单</th><th>订货金额</th><th>到货金额</th><th>未到货金额</th><th colspan="4"></th></tr></thead><tbody>';			var len    = 0;
+			$.each(orderArr,function(i,item){
+				len  		= i;
+				html += '<tr><td>'+item.ordersn+'<input type="hidden" value="'+item.ordersn+'" id="ordersn-'+i+'" /></td><td>'+item.money+'</td><td>'+item.recmoney+'</td><td style="color:#FF0000">'+item.diffmoney+'</td><td colspan="4"></td></tr>';
+			})
+			html += '<tr><td>付款方式</td><td><select name="payaway" id="mothpayaway"><option value="-1">请选支付方式</option><option value="1">支付宝</option><option value="2">银行</option><option value="3">现金</option></select></td><td>付款金额</td><td><input type="text" id="mothpaymoney" size="5"/></td><td>运费</td><td><input type="text" id="mothfee" size="5" /></td><td>付款日期</td><td><input id="mothpaytime" onclick="WdatePicker()" type="text" size="10" /><input type="hidden" id="mothtotalmoney" value="'+totalMoney+'" /><input type="hidden" id="mothlen" value="'+len+'" /></td></tr>';
+			html += '</tbody></table>';
+			$('#mothmoneyinfo').html(html);
+			$('#mothmoney-layer').modal();
+		}else{
+			alertify.error(msg);
+		}
+	},'json')
+})
+
+$('#mothmoney-save').click(function(){
+	var dataArr             = [];
+	var mothpayaway     	= $('#mothpayaway').val();
+	var mothpaymoney 		= $.trim($('#mothpaymoney').val());//付款金额
+	var mothtotalmoney  	= $('#mothtotalmoney').val();
+	var mothfee         	= $.trim($('#mothfee').val());
+	var mothpaytime     	= $('#mothpaytime').val();
+	var mothlen 			= $('#mothlen').val();//付款金额
+	
+	
+	var cguser 		= $.trim($("#ser_cguser").val());
+	var parnter 	= $.trim($("#ser_parnter").val());
+	var startTime 	= $("#ser_startTime").val();
+	var endTime 	= $("#ser_endTime").val();
+	var regmoney    		= /^([0-9]+|[0-9]+\.[0-9]+)$/;
+	if(mothpayaway == -1){
+		alertify.error('请选择支付方式');
+		$('#payaway').focus();
+		return false;
+	}
+	if(mothpaymoney == ''){
+		alertify.error('请输入付款金额');
+		$('#mothpaymoney').focus();
+		return false;
+	}
+	if(!regmoney.test(mothpaymoney) || mothpaymoney == 0){
+		alertify.error('付款金额输入不合法');
+		$('#paytotalmoney').focus();
+		return false;
+	}
+	mothpaymoney 		= parseFloat(mothpaymoney);
+	mothtotalmoney 		= parseFloat(mothtotalmoney);
+	if(mothpaymoney != mothtotalmoney){
+		alertify.error('付款金额需与货款总额一致');
+		$('#mothpaymoney').focus();
+		return false;
+	}
+	if(mothfee == ''){
+		alertify.error('请输入运费');
+		$('#mothfee').focus();
+		return false;
+	}else{
+		if(!regmoney.test(mothfee) || mothfee == 0){
+			alertify.error('运费输入不合法');
+			$('#mothfee').focus();
+			return false;
+		}
+	}
+	if(mothpaytime == ''){
+		alertify.error('请输入付款日期');
+		$('#mothpaytime').focus();
+		return false;
+	}
+	for(var i=0; i<=mothlen; i++){
+		var objArr  		= {};
+		var ordersn     	= $('#ordersn-'+i).val();
+		objArr.ordersn   	= ordersn;
+		dataArr.push(objArr);
+	}
+	var url  = "json.php?mod=purToWh&act=batchAuit"; 
+	$.post(url, {"dataArr":dataArr, "paytime":mothpaytime, "paymethod":mothpayaway, "fee":mothfee} , function(rtn){
+		var code = rtn.code;
+		var msg  = rtn.msg;
+		if(code == 1){
+			alertify.success(msg);
+			window.setTimeout("",5000);
+			window.location.href="index.php?mod=purToWh&act=index&ser_parnter="+parnter+'&ser_startTime='+startTime+'&ser_endTime='+endTime+'&ser_cguser='+cguser;;
+		}else{
+			alertify.error(msg);
+		}
+	},'json')
+})
+
+$("#checkAll").click(function() {
+       var checkboxs = $('.idlist');
+		for(var i=0;i<checkboxs.length;i++){
+			if(checkboxs[i].checked == false){
+				checkboxs[i].checked = true;
+			}else{
+				checkboxs[i].checked = false;
+			}
+		}
+})
+$('#batchupd-btn').click(function(){
+	var dataArr 	= [];
+	var loginname   = $('#loginname').val();
+	var idArr 		= $('input[name="inverse"]');
+	$('#batchstatus').val('-1');
+	$.each(idArr,function(index,item){
+		if($(item).attr('checked') == 'checked'){
+			var id		= $(item).val();
+			var cguser  = $(this).data('cguser');
+			var obj     = {};
+			if(cguser == loginname){
+				obj.id  = id;
+				dataArr.push(obj);
+			}
+			
+		}
+	});
+	if(dataArr.length == 0){
+		alertify.error('请选择需批量更新的订单,需自己下的订单');
+		return false;
+	}
+	$('#batchupd-layer').modal();
+})
+$('#batchupd-save').click(function(){
+	var dataArr 	= [];
+	var loginname   = $('#loginname').val();
+	var idArr 		= $('input[name="inverse"]');
+	var status  	= $('#batchstatus').val();
+	$.each(idArr,function(index,item){
+		if($(item).attr('checked') == 'checked'){
+			var id		= $(item).val();
+			var cguser  = $(this).data('cguser');
+			var obj     = {};
+			if(cguser == loginname){
+				obj.id  = id;
+				dataArr.push(obj);
+			}
+		}
+	});
+	if(status == -1){
+		alertify.error('请选择订单状态');
+		return false;
+	}
+	var url  = "json.php?mod=purToWh&act=batchUpdate";
+	$.post(url, {"data":dataArr, "status":status } , function(rtn){
+		var code = rtn.code;
+		var msg  = rtn.msg;
+		if(code == 200){
+			window.setTimeout("window.location.reload()", 2000);
+			alertify.success('状态更新成功');
+		}else{
+			alertify.error(msg);
+		}
+	},'json')
+
+})
+
+
+
+$('#del-btn').click(function(){
+	alertify.error('当前未设置权限删除,请联系技术人员');
+	return false;
+	var dataArr 	= [];
+	var statusArr 	= [];
+	var cguserArr   = [];
+	var loginname   = $('#loginname').val();
+	var idArr 	= $('input[name="inverse"]');
+	$.each(idArr,function(index,item){
+		if($(item).attr('checked') == 'checked'){
+			var id		= $(item).val();
+			var status 	= $(this).data('status');
+			var cguser  = $(this).data('cguser');
+			dataArr.push(id);
+			statusArr.push(status);
+			cguserArr.push(cguser);
+		}
+	});
+	if(dataArr.length == 0){
+		alertify.error('请选择需删除的记录');
+		return false;
+	}
+	for(var k=0;k<statusArr.length;k++){
+		if(statusArr[k]==2){
+			alertify.error('已审核的记录不能删除');
+			return false;
+		}
+	}
+	for(var k=0;k<cguserArr.length;k++){
+		if(loginname != cguserArr[k]){
+			alertify.error('只能删除自己的订单号信息');
+			return false;
+		}
+	}
+	var tips = '确认删除记录？';
+	var url  = "json.php?mod=purToWh&act=delete"; 
+	alertify.confirm(tips, function (e) {
+		if(e){
+			$.post(url, {"data":dataArr} , function(rtn){
+				var code = rtn.code;
+				var msg  = rtn.msg;
+				if(code == 1){
+					alertify.alert(msg,function(){
+						window.location.reload(); 
+					}); 
+				}else{
+					alertify.alert(msg);
+				}
+			},'json')
+		}
+	})
+})
+$(".editdetail-btn").click(function(){
+	var mainid 			= $(this).data('mainid');
+	var detailid 		= $(this).data('detailid');
+	var ordersn  		= $(this).data('ordersn');
+	var sku      		= $(this).data('sku');
+	var beforecount 	= $(this).data('incount');
+	$('#beforecount').val(beforecount);
+	$('#txt_mainid').val(mainid);
+	$('#txt_detailid').val(detailid);
+	$('.modal-title-edit').html('订单号['+ordersn+']料号['+sku+']到货数量调整');
+	$('#edit-layer').modal();
+	$('#aftercount').focus();
+})
+$('#edit-save').click(function(){
+	var regnum      	= /^[0-9]+$/; 
+	var mainid 			= $('#txt_mainid').val();
+	var detailid 		= $('#txt_detailid').val();
+	var beforecount 	= $('#beforecount').val();
+	var aftercount 	    = $('#aftercount').val();
+	if(!regnum.test(aftercount)) {        
+		alertify.error('调整数量录入不合法');
+		$('#aftercount').focus();
+		return false;
+	}
+	beforecount = parseInt(beforecount);
+	aftercount 	= parseInt(aftercount);
+	if(aftercount == beforecount){
+		alertify.error('未调整到货数量');
+		$('#aftercount').focus();
+		return false;
+	}
+	if(aftercount > beforecount){
+		alertify.error('调整到货数量不能大于原始到货数量');
+		$('#aftercount').focus();
+		return false;
+	}
+	var url  = "json.php?mod=purToWh&act=editDetail"; 
+	$.post(url, {"mainid":mainid, "detailid":detailid, "beforecount":beforecount, "aftercount":aftercount} , function(rtn){
+		var code = rtn.code;
+		var msg  = rtn.msg;
+		if(code == 1){
+			window.location.reload(); 
+		}else{
+			alertify.alert(msg);
+		}
+	},'json');
+
+})
+
+$('#export-btn').click(function(){
+	var ordersn,sku,cguser,parnter,startTime,endTime,status,condition="";
+	ordersn     = $.trim($('#ser_ordersn').val());
+	sku 		= $.trim($("#ser_sku").val());
+	cguser 		= $("#ser_cguser").val();
+	parnter 	= $.trim($("#ser_parnter").val());
+	timetype    = $('#ser_timetype').val();
+	startTime 	= $("#ser_startTime").val();
+	endTime 	= $("#ser_endTime").val();
+	status      = $('#ser_status').val();
+	if(ordersn != ""){
+		condition += "&ser_ordersn=" + ordersn;
+	}
+	if(sku != ""){
+		condition += "&ser_sku=" + sku;
+	}
+	if(cguser != -1){
+		condition += "&ser_cguser=" + cguser 
+	}
+	if(status != -1){
+		condition += "&ser_status=" + status 
+	}
+	if(parnter != ""){
+		condition += "&ser_parnter=" + parnter;
+	}
+	if(startTime != ""){
+		condition += "&ser_startTime=" + startTime;
+	}
+	if(endTime != ""){
+		condition += "&ser_endTime=" + endTime;
+	}
+	var tips = '确认要导出收货管理报表？';
+	alertify.confirm(tips, function (e) {
+		if(e){
+			window.location.href = "index.php?mod=purToWh&act=exportOrder" + condition;
+		}
+	})
+})
+
+$('#finexport-btn').click(function(){
+	var ordersn,sku,cguser,parnter,startTime,endTime,status,condition="";
+	ordersn     = $.trim($('#ser_ordersn').val());
+	sku 		= $.trim($("#ser_sku").val());
+	cguser 		= $("#ser_cguser").val();
+	parnter 	= $.trim($("#ser_parnter").val());
+	timetype    = $('#ser_timetype').val();
+	startTime 	= $("#ser_startTime").val();
+	endTime 	= $("#ser_endTime").val();
+	status      = $('#ser_status').val();
+	if(ordersn != ""){
+		condition += "&ser_ordersn=" + ordersn;
+	}
+	if(sku != ""){
+		condition += "&ser_sku=" + sku;
+	}
+	if(cguser != -1){
+		condition += "&ser_cguser=" + cguser;
+	}
+	if(status != -1){
+		condition += "&ser_status=" + status;
+	}
+	if(parnter != ""){
+		condition += "&ser_parnter=" + parnter;
+	}
+	if(startTime != ""){
+		condition += "&ser_startTime=" + startTime;
+	}
+	if(endTime != ""){
+		condition += "&ser_endTime=" + endTime;
+	}
+	var tips = '确认要导出财务收货管理报表？';
+	alertify.confirm(tips, function (e) {
+		if(e){
+			window.location.href = "index.php?mod=purToWh&act=finExportOrder" + condition;
+		}
+	})
+})
+
+$("#auit-btn").click(function(){
+	var dataArr 	= [];
+	var statusArr  	= [];
+	var orderArr    = [];
+	var idArr 		= $('input[name="inverse"]');
+	$.each(idArr,function(index,item){
+		if($(item).attr('checked') == 'checked'){
+			var objArr  = {};
+			var id		= $(item).val();
+			var status 	= $(this).data('status');
+			var price   = $(this).data('price');
+			var count   = $(this).data('count');
+			var sku     = $(this).data('sku');
+			var ordersn = $(this).data('ordersn');
+			objArr.id 		= id;
+			objArr.ordersn  = ordersn;
+			objArr.sku      = sku;
+			objArr.price 	= price;
+			objArr.count 	= count;
+			dataArr.push(objArr);	
+			statusArr.push(status);
+			orderArr.push(ordersn);
+		}
+	});
+	if(dataArr.length == 0){
+		alertify.error('请选择需审核的记录');
+		return false;
+	}
+	
+	for(var k=0;k<statusArr.length;k++){
+		if(statusArr[k]==2){
+			alertify.error('记录已审核过');
+			return false;
+		}
+	}
+	var order = '';
+	for(var k=0;k<orderArr.length;k++){
+		var order = orderArr[0];
+		if(order != orderArr[k]){
+			alertify.error('请选择同一个订单号审核');
+			return false;
+		}
+	}
+	
+	var len    		= 0;
+	var totalmoney 	= 0;
+	$('.modal-title-auit').html('财务审核信息确认');
+	var html   	= '<table class="table table-bordered"><thead><tr><th>采购订单</th><th>料号</th><th>采购数量</th><th>采购单价</th><th>订货金额</th><th colspan="3">付款金额</th></tr></thead><tbody>';
+	$.each(dataArr,function(i,item){
+		len  		= i;
+		var money 	= item.count * item.price;
+		totalmoney += money;
+		html += '<tr><td>'+item.ordersn+'<input type="hidden" value="'+item.id+'" id="sid'+i+'" /><td>'+item.sku+'</td><td>'+item.count+'</td><td>'+item.price+'</td><td>'+money+'<input type="hidden" value="'+money+'" id="money'+i+'" /></td><td colspan="3"><input type="text" id="paymoney'+i+'" size="5" disabled="disabled" value="'+money+'" /></td></tr>';
+	})
+	html += '<tr><td>付款方式</td><td><select name="payaway" id="payaway"><option value="-1">请选支付方式</option><option value="1">支付宝</option><option value="2">银行</option><option value="3">现金</option></td><td>付款金额</td><td><input type="text" id="paytotalmoney" size="5" value="'+totalmoney+'" onblur="putInMoney();"/><td>运费</td><td><input type="text" id="fee" size="5" /></td><td>付款日期</td><td colspan="3"><input id="paytime" onclick="WdatePicker()" type="text" size="10" /><input type="hidden" id="paylen" value="'+len+'" /><input type="hidden" id="totalmoney" value="'+totalmoney+'" /></td></tr>';
+	html += '</tbody></table>';
+	$('#auitinfo').html(html);
+	$('#auit-layer').modal();	
+	
+})
+
+//按金额验证
+function putInMoney(){
+	var regmoney    = /^([0-9]+|[0-9]+\.[0-9]+)$/;
+	var paymoney 	= $.trim($('#paytotalmoney').val());//付款金额
+	var tmpmoney    = paymoney;
+	var len     	= $('#paylen').val();
+	var totalmoney  = $('#totalmoney').val();
+	var diffmoney   = 0;
+	
+	if(paymoney == ''){
+		alertify.error('请输入付款金额');
+		$('#paytotalmoney').focus();
+		return false;
+	}
+	if(!regmoney.test(paymoney) || paymoney == 0){
+		alertify.error('付款金额输入不合法');
+		$('#paytotalmoney').focus();
+		return false;
+	}
+	paymoney 		= parseFloat(paymoney);
+	totalmoney 		= parseFloat(totalmoney);
+	if(paymoney > totalmoney){
+		alertify.error('付款金额不能大于订单总金额');
+		$('#paytotalmoney').focus();
+		return false;
+	}
+	for(var i=0; i<=len; i++){
+		var money 		= $('#money'+i).val();
+		var diffmoney   = paymoney - money;
+		if(diffmoney > 0){
+			$('#paymoney'+i).val(money);
+		}
+		if(diffmoney < 0 && paymoney > 0){
+			$('#paymoney'+i).val(paymoney);
+		}
+		
+		if(diffmoney < 0 && paymoney < 0){
+			$('#paymoney'+i).val(0);
+		}
+		paymoney 		= diffmoney;
+	}
+}
+
+$('#auit-save').click(function(){
+	var dataArr 	= [];
+	var idArr 		= $('input[name="inverse"]');
+	var len     	= $('#paylen').val();
+	var payaway     = $('#payaway').val();
+	var paymoney 	= $.trim($('#paytotalmoney').val());//付款金额
+	var totalmoney  = $('#totalmoney').val();
+	var fee         = $.trim($('#fee').val());
+	var paytime     = $('#paytime').val();
+	var regmoney    = /^([0-9]+|[0-9]+\.[0-9]+)$/;
+	if(payaway == -1){
+		alertify.error('请选择支付方式');
+		$('#payaway').focus();
+		return false;
+	}
+	if(paymoney == ''){
+		alertify.error('请输入付款金额');
+		$('#paytotalmoney').focus();
+		return false;
+	}
+	if(!regmoney.test(paymoney) || paymoney == 0){
+		alertify.error('付款金额输入不合法');
+		$('#paytotalmoney').focus();
+		return false;
+	}
+	paymoney 		= parseFloat(paymoney);
+	totalmoney 		= parseFloat(totalmoney);
+	if(paymoney > totalmoney){
+		alertify.error('付款金额不能大于订单总金额');
+		$('#paytotalmoney').focus();
+		return false;
+	}
+	if(fee != ''){
+		if(!regmoney.test(fee) || fee == 0){
+			alertify.error('运费输入不合法');
+			$('#fee').focus();
+			return false;
+		}
+	}
+	if(paytime == ''){
+		alertify.error('请输入付款日期');
+		$('#paytime').focus();
+		return false;
+	}
+	for(var i=0; i<=len; i++){
+		var objArr  	= {};
+		var id          = $('#sid'+i).val();
+		var money 		= $('#money'+i).val();
+		objArr.id   	= id;
+		objArr.paymoney = money;
+		dataArr.push(objArr);
+	}
+	var url  = "json.php?mod=purToWh&act=auit"; 
+	$.post(url, {"data":dataArr, "paytime":paytime, "paymethod":payaway, "fee":fee} , function(rtn){
+		var code = rtn.code;
+		var msg  = rtn.msg;
+		if(code == 1){
+			alertify.success(msg);
+			window.setTimeout("window.location.reload()",2000);
+		}else{
+			alertify.error(msg);
+		}
+	},'json')
+})
+$('.chageorderstatus').click(function(){
+	var orderId 	= $(this).data('rid');
+	var tracknum 	= $('#ser_ordersn').val();
+	var sku         = $('#ser_sku').val();
+	var cguser      = $('#ser_cguser').val();
+	var status  	= $('.secstatus'+orderId).val();
+	if(status == -1){
+		alertify.error('请选择修改状态');
+		return false;
+	}
+	var url  = "json.php?mod=purToWh&act=updReceiptStatus"; 
+	$.post(url, {"orderId":orderId, "orderstu":status} , function(rtn){
+		var code = rtn.code;
+		var msg  = rtn.msg;
+		if(code == 200){
+			alertify.success(msg);
+			window.setTimeout("",5000);
+			window.location.href="index.php?mod=purToWh&act=index&ser_ordersn="+tracknum+'&ser_sku='+sku+'&ser_cguser='+cguser;
+		}else{
+			alertify.error(msg);
+		}
+	},'json')
+})
+
+{/literal}
+</script>

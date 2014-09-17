@@ -1,0 +1,81 @@
+{include file="header.html"}
+{include file="mailNavLocation.html"}
+<div class="main products-main align-main" style="border:1px solid #ccc;">
+  <div class="title font-18" style="font-weight:bold;padding:10px;"> 新增邮件 </div>
+  <div style="padding:10px;">
+  <form name="addMail" method="post" action="index.php?mod=MailManage&act=addMailList" onsubmit="return checkDatabasePower();">
+    <table style="border:none;margin:0 auto;">
+      <tbody>
+        <tr>
+          <td> 邮件名称： </td>
+          <td><input type="text" name="mail_name" id="mail_name" onblur="checkName(this);" /><span id="inform"></span>
+          </td>
+        </tr>
+        <tr>
+          <td> 邮件描述： </td>
+          <td><input type="text" name="mail_descript" id="mail_descript" onblur="checkDescript(this);" /><span id="descript"></span>
+          </td>
+        </tr>
+        <tr>
+          <td> 邮件英文ID： </td>
+          <td><input type="text" name="mail_english" id="mail_english" onblur="checkEnglish(this);" /><span id="english"></span>
+          </td>
+        </tr>
+        <tr>
+        	<td>所属系统：</td>
+        	<td>
+            	<select name="system" id="system">
+	          	  	<option value="default">-----请选择-----</option>
+	          		{foreach item=system from=$getSystem}
+	              	<option value="{$system.system_id}">--{$system.system_name}--</option>
+	          		{/foreach}
+	            </select>
+	        </td>
+        </tr>
+        <div id="showAll_0">
+        <tr>
+          <td style="vertical-align:top"> 邮件权限： </td>
+          <td>
+          <table style="border:0;" id="show">
+          <tr>
+	          <td>
+	          <select name="company[]" id="company_0" onChange="showDept(this);" class="company">
+	          	  <option value="default">-----请选择-----</option>
+	          {foreach item=company from=$showCompany}
+	              <option value="{$company.company_id}">{$company.company_name}</option>
+	          {/foreach}
+	            </select>
+	            <select name="dept[]" id="dept_0" onChange="showJob(this);checkPowerRepeat(this);" class="dept">
+	              <option value="default">-----请选择-----</option>
+	            </select>
+	            </td>
+            	<td></td>
+           </tr>
+        <tr id="showJob_0">
+          <td name="jobs[]" id="job_0">
+          </td>
+        </tr>
+          </table>
+          </td>
+        </div>
+        </table>
+        <table style="border:none;margin:0 auto;">
+        <tr>
+          <td></td>
+          <td><a href="#" onclick="addJobPower();">新增更多岗位</a> </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" name="submit" value="提交" />
+          </td>
+        </tr>
+        </table>
+        </form>
+      </tbody>
+  </div>
+</div>
+</div>
+{include file="footer.html"}
+</div>
+</body>
+</html>

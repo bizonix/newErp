@@ -1,0 +1,75 @@
+{header}
+<!-- 
+/*
+ * 平台管理HTML页面 platformManage.html
+ * ADD BY 陈伟 2013.7.26
+ */
+-->
+<link rel="stylesheet" href="css/transportlist.css">
+		<script type="text/javascript" src="./js/platformManage.js"></script>
+{navdiv}
+        
+     
+				<!-- Main Content -->
+				<div id="content">
+					<div id="main">
+					<div class="pad20">
+					<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+						 <tbody>
+                                <tr>
+                                   <td>操作区域：</td>
+                                   <td><input type="button" id='addNewPlatform' style="width:150px;height:45px;font-size:20px" value="添加新平台" /></td>
+                                   <td>&nbsp;</td>
+                                   <td>&nbsp;</td>
+                                   <td>&nbsp;</td>
+                                   <td>&nbsp;</td>
+                                   <td>&nbsp;</td>
+                                   <td>&nbsp;</td>
+                                </tr>
+					<!-- Big buttons -->
+						<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <td><input type="checkbox" class="checkall" /></td>
+                                    <td>平   台</td>
+                                    <td>英文缩写</td>
+                                    <td>添加时间</td>
+                                    <td>操   作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<!-- BEGIN list -->
+                                <tr class="odd">
+                                	<td><input type="checkbox" name="t_id" value="{t_id}"/></td>
+                                    <td>{platformNameCn}</td>
+                                    <td>{platformNameEn}</td>
+                                    <td>{createdTime}</td>
+                                    <td><a href="index.php?mod=platformManage&act=platformEditPage&platformId={t_id}"><input type="button" style="width:50px;height:30px;font-size:10px" value="编辑" /></a>
+                                    &nbsp;
+                                    	<input type="button" name='platform_delete' style="width:50px;height:30px;font-size:10px" value="删除" />
+                                    </td>
+                                </tr>
+                                <!-- END list -->
+                            </tbody>
+                            <tfoot>
+                                <tr class="odd">
+                                    <td colspan="5" align="right">
+                                    {show_page}
+                                    </td>
+                                </tr>
+                        	</tfoot>
+                        </table>
+					</div>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					</div>
+				</div>
+				<!-- End of Main Content -->
+
+
+			</div>
+			<!-- End of bgwrap -->
+		</div>
+{footer}
+
+

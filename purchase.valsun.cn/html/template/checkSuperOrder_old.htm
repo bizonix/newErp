@@ -1,0 +1,135 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=purchaseOrder&act=index">采购管理</a>>>超大订单审核
+	</div>
+</div>
+<div class="main underline-main products-main">
+	<table width="100%" cellspacing="0" class="products-action" id="super-table">
+		<thead>
+			<tr class="title">
+				<th>订单号</th>
+				<th>账号</th>
+				<th>sku</th>
+				<th>图片</th>
+				<th>描述</th>
+				<th>单价</th>
+				<th>数量</th>
+				<th>实际库存</th>
+				<th>待发货</th>
+				<th>已订购</th>
+				<th>每天均量</th>
+				<th>状态</th>
+				<th>备注</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		{foreach from=$orderList item=list}
+		<tr data-detailid="{$list.detailid}">
+				{if !empty($list.auditRecord)}
+					{$auditRecordInfo = $list.auditRecord}
+				{/if}
+				<td>{$list.ebay_id}</td>
+				<td>{$list.ebay_account}</td>
+				<td>{$list.goods_sn}</td>
+				<td>
+					<a href="javascript:void(0)" id="imgb-{$list.goods_sn}" class="fancybox" data-sku="imgb-{$list.goods_sn}">
+						<img src="" class="skuimg" id="imgs-{$list.goods_sn}"  width="60" height="60"  data-sku="{$list.goods_sn}">
+					</a>
+				</td>
+				<td>{$list.goods_name}</td>
+				<td>{$list.goods_cost}</td>
+				<td>{$list.ebay_amount}</td>
+				<td>{$list.goods_count}</td>
+				<td>{$list.salensend}</td>
+				<td>{$list.booknums}</td>
+				<td>{$list.everyday_sale}</td>
+				<td>
+					{if $list.check_status == null}未处理
+					{else}
+						{if $list.check_status == 1}
+							已审核
+						{else}
+							已拦截
+					    {/if}
+				    {/if}
+				</td>
+				<td>{$list.auditRecord.note}</td>
+				<td>
+				{if $list.check_status == null}
+				<input  type="button" data-orderid="{$list.ebay_id}" data-sku="{$list.goods_sn}" data-purid="{$purid}" data-detailid="{$list.detailid}" data-type="aduit"  value="审核通过" >
+				<input  type="button" data-orderid="{$list.ebay_id}" data-sku="{$list.goods_sn}" data-purid="{$purid}" data-detailid="{$list.detailid}" data-type="intercept" value="拦截" >
+				{else}
+					{if $list.check_status==1}
+						<input  type="button" data-orderid="{$list.ebay_id}" data-sku="{$list.goods_sn}" data-purid="{$purid}" data-detailid="{$list.detailid}" data-type="intercept" value="拦截" >
+					{else}
+						<input  type="button" data-orderid="{$list.ebay_id}" data-sku="{$list.goods_sn}" data-purid="{$purid}" data-detailid="{$list.detailid}" data-type="aduit"  value="审核通过" >
+					{/if}
+				{/if}
+				</td>
+			</tr>
+		{/foreach}
+		</tbody>
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">{$fpage}</div>
+</div>
+{include file="footer.htm"}
+
+{literal}
+<script>
+
+$("#super-table").on("click","input",function(){
+		var self = $(this),orderid,sku,status,purid,type,content,data = {},url,html;
+		data.orderid = self.data("orderid");
+		data.detailid = self.data("detailid");
+		data.sku = self.data("sku");
+		data.type = self.data("type");
+		if(data.type == "aduit"){
+			data.check_status = 1;//通过
+		}else{
+			data.check_status = 2; //拦截
+		}
+		data.purid = self.data("purid");
+		url  = "json.php?mod=common&act=dealBigOrder";
+
+		if(data.type == "intercept"){// 拦截
+			alertify.prompt("Message", function (e, str) {
+				// str is the input text
+				if (e) {
+					// user clicked "ok"
+					data.content = str;
+					$.post(url, {"data":data}, function(rtn){
+						alertify.success(rtn.data.msg);
+						/*
+						if(rtn.errCode == 200){
+							alertify.success('审核成功.........');
+						}else{
+							alertify.success('审核failure..........');
+						}
+						*/
+					},'json');
+				} else {
+					// user clicked "cancel"
+				}
+			}, "");
+		}else{
+			$.post(url, {"data":data}, function(rtn){
+					console.log(rtn);
+					alertify.success(rtn.data.msg);
+					/*
+					if(rtn.errCode == 200){
+						alertify.success('审核成功.........');
+					}else{
+						alertify.success('审核failure..........');
+					}
+					*/
+			},'json');
+		}
+
+});
+
+{/literal}
+</script>

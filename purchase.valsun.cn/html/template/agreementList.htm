@@ -1,0 +1,222 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=partner&act=index">供应商管理</a>>>协议管理
+	</div>
+</div>
+
+<div class="well well-lg" style="clear:both;margin-top:10px;margin-bottom:10px">
+	<div class="row">
+	
+		<div class="col-md-2">
+			<input id="content" type="text" value="{$smarty.get.content}" placeholder="请输入要搜索的内容" class="form-control" />
+		</div>
+	
+		<div class="col-md-2">
+				<select id="keyword" class="form-control">
+					<option value="-1">选择查询内容类型</option>
+					<option value="companyName" {if $smarty.get.keyword=="companyName"}selected {/if}>公司名称</option>
+					<option value="contactPerson" {if $smarty.get.keyword=="contactPerson"}selected {/if}>联系人</option>
+				</select>
+		</div>
+		
+		<div class="col-md-2">
+				<select id="companyType" class="form-control" >
+					<option value="-1">请选择公司类型</option> 
+					{foreach key=key item=value from=$companyTypeList}
+						<option value="{$key}" {if $smarty.get.companyType==$key} selected="selected"{/if}>{$value}</option>
+					{/foreach}
+				</select>
+		</div>
+		
+		<div class="col-md-2">
+				<select id="timeType" class="form-control">
+					<option value="-1">选择时间类型</option>
+					<option value="addTime" {if $smarty.get.timeType=="addTime"}selected {/if}>添加时间</option>
+					<option value="expiration" {if $smarty.get.timeType=="expiration"}selected {/if}>协议到期时间</option>
+				</select>
+		</div>
+		
+		<div class="col-md-2 ">
+			<input id="startTime" onclick="WdatePicker()" type="text" value="{$smarty.get.startTime}" class="form-control" />
+		</div>
+		
+		<div class="col-md-2 " >
+			<input id="endTime" onclick="WdatePicker()" type="text" value="{$smarty.get.endTime}"  class="form-control"/>
+		</div>
+		
+	</div>
+	
+	<div class="row" style="margin-top:10px">
+		<div class="col-md-2">
+			<select id="status" class="form-control" >
+				<option value="-1">请选择状态</option> 
+				{foreach key=key item=value from=$statusList}
+					<option value="{$key}" {if $smarty.get.status==$key} selected="selected"{/if}>{$value}</option>
+				{/foreach}
+			</select>
+		</div>
+		<div class="col-md-2">
+		</div>
+		<div class="col-xs-8" >
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary" id="search-btn">search</button>
+				<a href="index.php?mod=agreement&act=add" type="button" class="btn btn-success" id="button_add" >添加</a>
+				<button type="button" class="btn btn-danger" id="button_delete" >删除</button>
+				<button type="button" class="btn btn-primary" id="export-btn" >导出</button>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<div style="clear:both;" class="main underline-main">
+	<table  cellspacing="0" width="100%" class="products-action">
+			<tr class="title purchase-title">
+				<td><input type="checkbox" id="checkAll" value=""></td>
+				<td>操作</td>
+				<td>公司名称</td>
+				<td>公司类型</td>
+				<td>协议到期时间</td>
+				<td>添加时间</td>
+				<td>联系人</td>
+				<td>状态</td>
+			</tr>
+		{foreach from=$listData item=list}
+			<tr>
+				<td><input name="checkbox-list" type="checkbox" value="{$list.id}" /></td>
+				<td>
+					<button type="button" onclick="jumpUrl('index.php?mod=agreement&act=edit&id={$list.id}')" class="btn btn-info">修改</button>
+				</td>
+				<td>{$list['companyName']}</td>
+				<td>{$companyTypeList[$list['companyType']]}</td>
+				<td>{$list['expiration']|date_format:'%Y-%m-%d '}</td>
+				<td>{$list['addTime']|date_format:'%Y-%m-%d '}</td>
+				<td>{$list['contactPerson']}</td>
+				<td>{$statusList[$list['status']]}</td>
+			</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">{$pageStr}</div>
+</div>
+{include file="footer.htm"}
+
+
+{literal}
+<script>
+
+$('#checkAll').click(function(){
+	 select_all('checkAll','input[name="checkbox-list"]',0);
+});
+
+$(".servar").keyup(function(e) {
+	if(e.keyCode == 13) {
+		$("#search-btn").trigger("click");
+	}
+});
+
+$("#search-btn").click(
+	function() {
+		var para = '';
+		
+		var keyword = $.trim($("#keyword").val());
+		para += '&keyword='+keyword;
+		
+		var content = $.trim($("#content").val());
+		para += '&content='+content;
+		
+		var companyType = $.trim($("#companyType").val());
+		para += '&companyType='+companyType;
+		
+		var flag1 = false, flag2 = false, flag3 = false;
+		var timeType = $.trim($("#timeType").val());
+		para += '&timeType='+timeType;
+		if (timeType != -1) {
+			flag1 = true;
+		}
+		
+		var startTime = $.trim($("#startTime").val());
+		para += '&startTime=' + startTime;
+		if ( startTime != "") {
+			flag2 = true;
+		}
+		
+		var endTime = $.trim($("#endTime").val());
+		para += '&endTime=' + endTime;
+		if ($("#end-date").val() != "") {
+			flag3 = true;
+		}
+		
+		if (flag1 && flag2 && flag3) {
+			d = new Date(startTime);
+			startTime = d.getTime();
+			
+			d = new Date(endTime);
+			endTime = d.getTime();
+			
+			if (startTime > endTime) {
+				alertify.alert("开始时间不能大于结束时间");
+				return false;
+			}
+		}
+		
+		var status = $("#status").val();
+		para += '&status='+status;
+		
+		three_status = get_url_parameter("three_status");
+		window.location.href = "index.php?mod=agreement&act=index&three_status="+three_status + para;
+});
+
+$('#button_delete').click(function(e){
+	e.preventDefault();
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	if(checkBoxArr.length==0){
+	    alertify.alert('请选择要操作的项！');
+		return false;
+	}
+
+	idArr=[];
+	checkBoxArr.each(function(i){
+		idArr.push($(this).val());
+	});
+	
+    var url  = "json.php?mod=agreement&act=delAgreement";
+    $.post(url, {"idArr":idArr}, function(rtn) {
+        console.log(rtn);
+        if(rtn.code == 1) {
+            window.location.reload();
+        }else{
+            alertify.alert(rtn.msg);
+        }
+     },"json");
+});
+
+$('#export-btn').click(function(e){
+	e.preventDefault();
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	/*if(checkBoxArr.length==0) {
+        alertify.alert('如果您不选择供应商，将会导出所有数据！');
+	}*/
+	idArr=[];
+	checkBoxArr.each(function(i){
+		idArr.push($(this).val());
+	});
+   	url	 = "index.php?mod=agreement&act=export";
+	window.open(url);
+});
+
+function jumpUrl(url){
+    window.location.href = url;
+}
+
+function openUrl(url){
+	if(url == ''){
+		return false;
+	}
+    window.open(url);
+} 
+
+</script>
+{/literal}

@@ -1,0 +1,103 @@
+{include file="header.htm"}
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/global.js"></script>
+<script type="text/javascript" src="./js/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<link rel="stylesheet" type="text/css" href="./js/fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+<script type="text/javascript" src="./js/fancybox.js"></script>
+<div class="servar wh-servar" id="mes" style="display:none"></div>
+{include file='omNav.htm'}
+<div class="servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="successLog" style="color: #0F0">{$successLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="errorLog" style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+
+<div class="main products-main">
+	<table cellspacing="0" width="100%">
+		<tbody>
+        	<tr class="title purchase-title">
+				<td width="10%">图片</td>
+				<td align="left">sku</td>
+				<td>spu</td>
+				<td>仓位</td>
+				<td>实际库存</td>
+				<td>重量Kg</td>
+				<td>成本RMB</td>
+				<td>每日均量</td>
+				<td>存货位置</td>
+				<td>待发货</td>
+				<td>已订购</td>
+				<td>虚拟库存</td>
+				<td>缺货库存</td>
+				<td>产品类别</td>
+				<td>产品状态</td>
+				<td>新/老品</td>
+				<td>包材</td>
+				<td>是否带包装</td>
+				<td>仓库</td>
+			</tr>	
+			{foreach from=$skuStockList key=key item=value}
+			<tr {if $key%2==1}style="background-color: #f2f2f2;"{/if}>
+                <td  rowspan="{count($value['pinfo'])+3}"> 
+				   <a href="javascript:void(0)" id="imgb-{$value.sku}" class="fancybox">
+						<img src="./images/ajax-loader.gif" class="skuimg" id="imgs-{$value.sku}"  width="60" height="60" data-spu="{$value.spu}" data-sku="{$value.sku}">
+			   		</a>
+				</td>
+				<td align="left">{$value.sku}</td>
+				<td align="left">{$value.spu}</td>
+                <td name="api_goodsCategory" data-goodscategory="1"></td>
+                <td>{$value.nums}</td>
+				<td>{$value.goodsWeight}</td>
+                <td>{$value.goodsCost}</td>
+				<td>{$value.AverageDailyCount}</td>
+				<td></td>
+				<td>{$value.waitingSendCount}</td>
+				<td></td>
+				<td>{$value.xuniCount}</td>
+				<td></td>
+				<td>{$value.cateName}</td>
+				<td>{if $value.goodsStatus==1}在线{elseif $value.goodsStatus==2}停售{elseif $value.goodsStatus==3}暂时停售{elseif $value.goodsStatus==4}部分侵权-ebay{elseif $value.goodsStatus==5}部分侵权-B2B{elseif $value.goodsStatus==6}部分侵权-其他平台{/if}</td>
+				<td>{if $value.isNew == 0}老品{else}新品{/if}</td>
+				<td>{$value.pmName}</td>
+				<td>{if $value.isPacking==1}不带包装{elseif $value.isPacking==2}带包装{else}未设置{/if}</td>
+				<td>{$value.whName}</td>
+            </tr>
+			
+				{foreach from=$value['pinfo'] item=detailList}
+					<tr {if $key%2==1}style="background-color: #f2f2f2;"{/if}>
+					<td align="left"></td>
+					<td name="api_goodsCategory" data-goodscategory="1">{$detailList.pName}</td>
+					<td>{$detailList.nums}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					</tr>
+				{/foreach}
+            <tr {if $key%2==1}style="background-color: #f2f2f2;"{/if}>                    	     	              	
+                <td colspan="19" align="left">{$value.goodsName}</td>
+            </tr>
+            <tr {if $key%2==1}style="background-color: #f2f2f2;"{/if}>   	              	
+                <td colspan="7" align="left">采购员：{$value.pName}</td>
+  				<td colspan="12" align="left">供应商：{$value.PartnerName}</td>
+  			</tr>
+		{foreachelse}
+		<tr >
+				<td colspan="19">没有搜索值！</td>
+		</tr>
+		{/foreach}			
+  		</tbody>
+    </table>
+</div>  
+{include file='footer.htm'}

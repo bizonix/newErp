@@ -1,0 +1,8 @@
+/* CSS Document */
+@charset "utf-8";
+body {font-family: "微软雅黑";font-size: 12px; color:#333;border:0; padding:0; margin:0; line-height:24px;}
+.font_16{ font:24px bolder; font-weight:bold;}
+.font_17{ font:24px bolder;}
+.line td{ border-top:1px solid #333; }
+.line tr .left_line{ border-right:1px solid #333; }
+.red{ color:#CC0000;}

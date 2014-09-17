@@ -1,0 +1,197 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/global.js"></script>
+<script type="text/javascript" src="./js/skuStock.js"></script>
+<script type="text/javascript" src="./js/fancybox.js"></script>
+<div class="servar wh-servar" id="mes" style="display:none"></div>
+<div class="servar wh-servar">
+	<span>
+		<span>
+			<input name="searchContent" id="searchContent" value="{$searchContent}" size="50">
+			<input type="button" id="searchSku" value="搜索">
+            <label>
+				<input name="searchtype" type="radio" value="1" {if $type==1}checked="checked"{/if} {if empty($type)}checked="checked"{/if} />SKU
+			</label>
+			<label>
+				<input name="searchtype" type="radio" value="2" {if $type==2}checked="checked"{/if}/>仓位
+			</label>
+			<label>
+				<input name="searchtype" type="radio" value="3" {if $type==3}checked="checked"{/if}/>货品名称
+			</label>
+			<label>
+            	<input name="searchtype" type="radio" value="5" {if $type==5}checked="checked"{/if}/>供应商
+            </label>
+			<label>
+				<input name="searchtype" type="radio" value="4" {if $type==4}checked="checked"{/if}/>采购负责人
+			</label>
+		</span>
+            &nbsp;&nbsp;
+    <span style="color: red;"></span>
+    </span>
+	<div style="margin-top:10px;">
+					<span style="width:60px;">产品状态：</span>
+					<select  name="online" id="online" style="width:100px">
+						<option value="">请选择</option>
+						<option value="1" {if $online==1}selected{/if}>零库存</option>
+						<option value="2" {if $online==2}selected{/if}>下线</option>
+						<option value="3" {if $online==3}selected{/if}>在线</option>
+					</select>
+					<span style="width:60px;">仓库：</span>
+					<select  name="warehouse" id="warehouse" style="width:100px">
+						<option value="">请选择</option>
+						{foreach from=$whName item=list}
+							<option value="{$list.id}" {if $warehouse==$list.id}selected{/if}>{$list.whName}</option>
+						{/foreach}
+					</select>
+					<span style="width:60px;">新/老品：</span>
+					<select  name="isnew" id="isnew" style="width:100px">
+						<option value="">请选择</option>
+						<option value="1" {if $isnew==1}selected{/if}>新品</option>
+						<option value="0" {if $isnew=="0"}selected{/if}>老品</option>
+					</select>
+					<span style="width:60px;">类别：</span>
+					<select id="pid_one" style="width:100px" onchange="change_one();">
+						<option value="">请选择</option>
+						{foreach from=$cate_f item=list}
+							<option value="{$list.id}" {if $pid_one==$list.id}selected{/if}>{$list.name}</option>
+						{/foreach}
+					</select>
+					<span id="div_two">
+						{if isset($pid_two)}
+						<select name='pid_two' id='pid_two' style='width:100px' onchange='change_two();'>
+							<option value="">请选择</option>
+							{foreach from=$cate_two item=list}
+								<option value="{$list.id}" {if $pid_two==$list.id}selected{/if}>{$list.name}</option>
+							{/foreach}
+						</select>
+						{/if}
+					</span>
+					<span id="div_three">
+						{if isset($pid_three)}
+							<select name='pid_three' id='pid_three' style='width:100px' onchange='change_three();'>
+							<option value="">请选择</option>
+							{foreach from=$cate_three item=list}
+								<option value="{$list.id}" {if $pid_three==$list.id}selected{/if}>{$list.name}</option>
+							{/foreach}
+							</select>
+						{/if}
+					</span>
+					<span id="div_four">
+						{if isset($pid_four)}
+							<select name='pid_four' id='pid_four' style='width:100px'>
+							<option value="">请选择</option>
+							{foreach from=$cate_four item=list}
+								<option value="{$list.id}" {if $pid_four==$list.id}selected{/if}>{$list.name}</option>
+							{/foreach}
+							</select>
+						{/if}
+					</span>
+				</div>
+</div>
+	
+<div class="main products-main">
+	<table cellspacing="0" width="100%">
+		<tbody>
+        	<tr class="title purchase-title">
+				<td width="10%">图片</td>
+				<td align="left">sku</td>
+				<td>仓位</td>
+				<td>实际库存</td>
+                <td>配货库存</td>
+				<td>重量Kg</td>
+				<td>成本RMB</td>
+				<td>到货库存</td>
+				<td>产品类别</td>
+				<td>产品状态</td>
+				<td>新/老品</td>
+				<td>仓库</td>
+			</tr>	
+			{foreach from=$skuStockList key=key item=value}
+			<tr {if $key%2==1}style="background-color: #f2f2f2;"{/if}>
+                <td  rowspan="{count($value['pinfo'])+3}"> 
+				   <a href="javascript:void(0)" id="imgb-{$value.sku}" class="fancybox">
+						<img src="./images/ajax-loader.gif" class="skuimg" id="imgs-{$value.sku}"  width="60" height="60" data-spu="{$value.spu}" data-sku="{$value.sku}">
+			   		</a>
+				</td>
+				<td align="left">{$value.sku}</td>
+                <td name="api_goodsCategory" data-goodscategory="1">{SkuStockModel::getPNameByPositionId($value.positionId)}</td>
+                <td>{$value.nums}</td>
+                <td>{$value.scanNums}</td>
+				<td>{$value.goodsWeight}</td>
+                <td>{$value.goodsCost}</td>
+                <td>{SkuStockModel::getSkuLocationArrivalInventory($value.sku,$value.storeId)}</td>
+				<td>{$value.cateName}</td>
+				<td>{if $value.goodsStatus==1}零库存{elseif $value.goodsStatus==2}下线{elseif $value.goodsStatus==3}在线{else}未知{/if}</td>
+				<td>{if $value.isNew == 0}老品{else}新品{/if}</td>
+				<td>{$value.whName}</td>
+            </tr>
+			
+				{foreach from=$value['pinfo'] item=detailList}
+					<tr {if $key%2==1}style="background-color: #f2f2f2;"{/if}>
+					<td align="left"></td>
+					<td name="api_goodsCategory" data-goodscategory="1">{$detailList.pName}</td>
+					<td>{$detailList.nums}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					</tr>
+				{/foreach}
+            <tr {if $key%2==1}style="background-color: #f2f2f2;"{/if}>                    	     	              	
+                <td colspan="13" align="left">{$value.goodsName}</td>
+            </tr>
+            <tr {if $key%2==1}style="background-color: #f2f2f2;"{/if}>   	              	
+                <td colspan="4" align="left">采购员：{$value.pName}</td>
+  				<td colspan="9" align="left">供应商：{$value.PartnerName}</td>
+  			</tr>
+		{foreachelse}
+		<tr >
+				<td colspan="13">没有搜索值！</td>
+		</tr>
+		{/foreach}			
+  		</tbody>
+    </table>
+</div>  
+<div class="bottomvar">          
+	<div class="pagination" >
+		{$show_page}
+	</div>
+</div>
+<!--p id="back-top">
+    <a href="#toppage"><span></span>Back to Top</a>
+</p-->
+{include file="footer.htm"}
+<!--script type="text/javascript">
+//页面加载完成后加载图片
+{literal}
+$(document).ready(function() {
+	var url  = "json.php?mod=common&act=getSkuImg";
+	var skuArr	= $('img[name="skuimg"]'), imgurl="", spu="", sku="";
+	$.each(skuArr,function(i,item){
+		sku	= $(item).attr('id').substring(5);
+		spu	= $(item).attr('spu');
+		$.ajax({
+			url: url,
+			type: "POST",
+			async: true,
+			data	: {spu:spu,sku:sku},
+			dataType: "jsonp",
+			success: function(rtn){
+							sku	= $(item).attr('id').substring(5);
+							//console.log(rtn);
+							if ($.trim(rtn.data)) {
+								$("#imgs-"+sku).attr({"src":rtn.data,"width":"60px","height":"60px"});
+							    $("#imga-"+sku).attr("href",rtn.data);
+							} else {
+								$("#imgs-"+sku).attr({"src":"./images/no_image.gif","width":"60px","height":"60px"});
+							    $("#imga-"+sku).attr("href","./images/no_image.gif");
+							}
+				}	
+			});
+	});
+});
+{/literal}
+</script-->

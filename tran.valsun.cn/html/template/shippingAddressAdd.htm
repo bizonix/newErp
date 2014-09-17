@@ -1,0 +1,83 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=shippingAddress&act=index">发货地址管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>添加发货地址</h1>
+    <form onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+                <td align="right" width="11%">发货地址中文名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="cn_name" id="cn_name" value="" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">发货地址英文名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="en_name" id="en_name" value="" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">发货地址代码：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="addres_code" id="addres_code" value="" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">大卖家：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="seller" id="seller" value="" maxlength="10"/>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=shippingAddress&act=index'"/>返 回</button>
+                </td>
+            </tr>
+			
+		</table>
+	</form>
+</div>
+{literal}
+<script type="text/javascript">
+function check(){
+	var cn_name = en_name = addres_code = seller =  "";
+	cn_name 	= $.trim($("#cn_name").val());
+	en_name		= $.trim($("#en_name").val());
+	addres_code	= $.trim($("#addres_code").val());
+	seller		= $.trim($("#seller").val());
+	if (cn_name == "") {
+		alertify.error("中文名称不能为空！");
+		$("#cn_name").focus();
+		return false;
+	}
+	if (en_name == "") {
+		alertify.error("英文名称不能为空！");
+		$("#en_name").focus();
+		return false;
+	}
+	if (seller == "") {
+		alertify.error("大卖家不能为空！");
+		$("#seller").focus();
+		return false;
+	}	
+	var url  = web_url + "json.php?mod=shippingAddress&act=addShippingAddress";
+	var data = {"cn_name":cn_name,"en_name":en_name,"addres_code":addres_code,"seller":seller};
+	$.post(url,data,function(res){
+		if(res.errCode == 0){
+			alertify.alert("添加成功！",function(){
+				window.location.reload();
+			});
+		}else {
+			 alertify.error(res.errMsg);
+		   }
+	}, "jsonp");
+	return false;
+}
+</script>
+{/literal}
+{include file="footer.htm"}

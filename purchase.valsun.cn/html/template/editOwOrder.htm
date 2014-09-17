@@ -1,0 +1,403 @@
+{include file="header.htm"}
+<ol class="breadcrumb">
+  <li><a href="index.php?mod=productStockalarm&act=index">采购系统</a></li>
+  <li><a href="index.php?index.php?mod=purchaseOrder&act=editPurchaseOrde">预警管理</a></li>
+  <li class="active">编辑订单</li>
+</ol>
+
+<div class="well well-lg" style="clear:both">
+	<div class="row">
+		<a href="javascript:void(0);" class="btn btn-primary"  onclick="save()" style="display:none">保存单据</a>
+		<a href="javascript:void(0);" class="btn btn-info" {if $mainOrderInfo['status']==1} style="display:inline;" {else} style="display:none;" {/if}  name="audit1" onclick="audit(2,this)">审核单据</a>
+	    <a 	href="javascript:void(0);" class="btn btn-warning" {if $mainOrderInfo['status']==2} style="display:inline;"{else} style="display:none;" {/if} name="audit2" onclick="audit(1,this)">反审核单据</a>
+
+		<a	href="javascript:void(0);"  class="btn btn-info"  {if $mainOrderInfo['status']==3} style="display:none;"{else} style="display:none;" {/if}   name="audit4"  onclick="audit(2,this)">反审核在途订单</a>
+
+		<a href="javascript:void(0);" class="btn btn-success" style="display:none" id="pl-edit" >新品批量修改数量</a>
+		<a href="javascript:void(0);"  class="btn btn-danger" id="pl-del" {if $mainOrderInfo['status']==1 } style="display:;"{else} style="display:;" {/if} >批量删除sku</a>
+
+		{if $smarty.get.status lte 3}
+	    <a 	href="javascript:void(0);" class="btn btn-warning" id="pl-change" >批量修改订单</a>
+		{else}
+	    <a 	href="javascript:void(0);" class="btn btn-warning" id="sigle-b-change" >修改已经推送B仓订单数量</a>
+		{/if}
+	</div>
+</div>
+
+<div class="container">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<td colspan="19"><h4>2.产品资料</h4></td>
+			</tr>
+		</thead>
+
+		<tbody id="order-table" data-id="{$mainOrderInfo['id']}">
+			<tr>
+				<td><input name="inverse" type="checkbox" id="inverse"></td>
+				<td>sku</td>
+				<td>图片</td>
+				<td>产品名称</td>
+				<td>30天销量</td>
+				<td>15天销量</td>
+				<td>7天销量</td>
+				<td>每天均量</td>
+				<td>实际库存</td>
+				<td>虚拟库存</td>
+				<td>可用库存</td>
+				<td>已订购</td>
+				<td>待发货</td>
+				<td>已拦截</td>
+				<td>待审核</td>
+				<td>产品进货成本</td>
+				<td>数量(单位个)</td>
+				<td>到货数量(单位个)</td>
+			</tr>
+			 <script>var SKUArr = [];</script>
+			{$detailOrderInfo = PurchaseOrderAct::getDetailOwOrderInfo($mainOrderInfo['recordnumber'])}
+			{foreach from=$detailOrderInfo item=itemdetail}
+
+			{$warnInfo = PurchaseOrderAct::getWarnInfoBySku($itemdetail['sku'])}
+			<tr>
+				<td><input name="sku_info" type="checkbox" data-id="{$itemdetail['id']}" data-sku="{$itemdetail['sku']}" data-recordnumber="{$itemdetail['recordnumber']}"></td>
+				<td id="sku{$itemdetail['id']}">{$itemdetail['sku']}</td>
+				<td class="unbottoncolor">
+					<a href="javascript:void(0)" id="imgb-{$itemdetail['sku']}" class="fancybox">
+						<img src="" class="skuimg img-circle" id="imgs-{$itemdetail['sku']}"  width="40" height="40" data-spu="{$spu}" data-sku="{$itemdetail['sku']}">
+					</a>
+				</td>
+				{$skuInfo  = CommonModel::getSkuInfo($itemdetail['sku'])}
+				<td>{$skuInfo["goodsName"]}</td>
+				<td>{$warnInfo["thirtydays"]}</td>
+				<td>{$warnInfo["fifteendays"]}</td>
+				<td>{$warnInfo["sevendays"]}</td>
+				<td style="color:red">{$warnInfo["everyday_sale"]}</td>
+				<td>{$warnInfo["stock_qty"]}</td>
+				<td>{$warnInfo["stock_qty"] - $warnInfo["salensend"]}</td>
+				<td>{$warnInfo["stock_qty"] + $warnInfo["newBookNum"] - $warnInfo["salensend"]}</td>
+				<td>{$warnInfo["newBookNum"]}</td>
+				<td>{$warnInfo["salensend"]}</td>
+				<td>{$warnInfo["interceptnums"]}</td>
+				<td>{$warnInfo["auditingnums"]}</td>
+				<td><textarea class="price" rows="1" cols="5" id="price{$itemdetail['id']}" data-price="{$itemdetail['price']}" name="">{$itemdetail["price"]}</textarea></td>
+				<td><textarea class="count" rows="1" cols="5" id="count{$itemdetail['id']}" data-rec="{$itemdetail['goods_recommend_count']}" data-count="{$itemdetail['count']}" data-new="{$itemdetail["is_new"]}">{$itemdetail["count"]}</textarea></td>
+				<td>{$itemdetail["stockqty"]}</td>
+				<script>SKUArr.push({$itemdetail['id']});</script>
+			</tr>
+			{/foreach}
+			<tr>
+				<td><input type="hidden"  value="{$mainOrderInfo['id']}"  id="orderId"/></td>
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+{include file="footer.htm"}
+
+{literal}
+<script type="text/javascript">
+var regcount  = /^[0-9]+$/
+var regprice  = /^([0-9]+|[0-9]+\.[0-9]+)$/
+
+
+$("#pl-edit").click(function(){
+	alertify.prompt("批量修改采购数量。。。。。", function (e, data) {
+			// str is the input text
+			if (e) {
+				if(data == "" || data<=0){
+					alert("请填入有效数据。。。");
+				}else{
+					var url,orderId;
+					orderId = $("#order-table").data("id");
+					url="json.php?mod=purchaseOrder&act=updateCount";
+					$.post(url,{"id":orderId,"count":data},function(rtn){
+						if(rtn == 1){
+							window.location.reload();
+						}
+					});
+				}
+			} else {
+				// user clicked "cancel"
+			}
+		}, "");
+});
+
+function save(){
+	var data={},recordnumber;
+	data.partner_id = $("#partner_id").val();
+	if(data.partner_id == -1){
+		alertify.error("请选择供应商..........");
+		return;
+	}
+	data.warehouse_id = $("#warehouse_id").val();
+	data.paymethod = $("#paymethod").val();
+	data.recordnumber = $("#recordnumber").val();
+	$.post("json.php?mod=purchaseOrder&act=save_all",{"data":data},function(rtn){
+			console.log(rtn);
+			if(rtn == 1){
+				alertify.error("更新成功。。。");
+			}else{
+				alertify.error("更新失败。。。");
+			}
+	});
+}
+
+	//单个修改 
+	$('.aloneMod').click(function(){
+		var id 		  = $(this).data('id');
+		var sku       = $(this).data('sku');
+		var initcount = $.trim($(this).data('initcount'));
+		var initprice = $.trim($(this).data('initprice'));
+		var newcount  = $.trim($('#count'+id).val());
+	    var newprice  = $.trim($('#price'+id).val());
+		var markprice = false;
+		var markcount = false;
+		if(initcount == newcount && initprice == newprice){
+			alertify.error("料号["+sku+"]未做任何修改");
+		 	return false;
+		}
+		if(newprice == '' || newprice == 0 || !regprice.test(newprice)){
+			$('#price'+id).css({ "border":"red solid 1px" });
+			alertify.error("料号["+sku+"]价格有误,请确认");
+		 	markprice = true;
+		}else{
+			$('#price'+id).css({ "border":"" });
+		}
+		if(newcount == '' || newcount == 0 || !regcount.test(newcount)){
+			$('#count'+id).css({ "border":"red solid 1px" });
+			alertify.error("料号["+sku+"]数量有误,请确认");
+		 	markcount = true;
+		}else{
+			$('#count'+id).css({ "border":"" });
+		}
+		if(markcount||markprice){
+			return false;
+		}
+		var data   = {};
+		data.count = newcount;
+		data.price = newprice;
+		$.get("json.php?mod=purchaseOrder&act=modOrderDetail",{ "data":data,"id":id },function(rtn){
+			if(rtn.errCode=="0138"){
+				alertify.success(rtn.errMsg);
+				//setTimeout("window.location.reload();",2000);
+			}else{
+				alertify.error(rtn.errMsg);
+			}
+	 	},"jsonp");
+	})
+	//批量修改
+
+$("#pl-change").click(function(){
+		var skuObjArr = [],markprice,markcount,skuObj,status,userCnName,powerUser,item,is_new;
+		status = get_url_parameter("status");
+		userCnName = Browser.getCookie("userCnName");
+
+		for(var i = 0 ; i < SKUArr.length; i++){
+			markprice = false;
+		    markcount = false;
+			skuObj    = {};
+			item = SKUArr[i];
+			newprice  = $.trim($('#price'+item).val());
+		    initprice = $.trim($('#price'+item).data('price'));
+			newcount  = $.trim($('#count'+item).val());
+			recCount  = $.trim($('#count'+item).data("rec")); //建议的数量
+			initcount = $.trim($('#count'+item).data('count'));
+			is_new = $('#count'+item).data('new');
+			sku       = $('#sku'+item).html();
+			newcount = parseInt(newcount);
+			initcount = parseInt(initcount);
+			recCount = parseInt(recCount);
+
+			if(newcount <= 0){ // 数量不对的跳过
+				$('#count'+item).css({ "border":"red solid 1px" });
+				alertify.error("料号["+sku+"]数量有误,请确认");
+				continue;
+			}
+
+			if(initcount != newcount ){ //没有特殊权限 的人员 且数量有修改的
+				skuObj.id     = item;
+				skuObj.sku = 
+				skuObj.count  = newcount;
+				skuObj.price  = newprice;
+				skuObjArr.push(skuObj);
+			}
+
+		}
+
+		if(skuObjArr.length == 0) {
+			alertify.error("没有修改的内容");
+		 	return false;
+		}
+
+		alertify.confirm( '确定批量修改吗？', function(e){
+			if(e){
+				$.post("json.php?mod=purchaseOrder&act=modOwAll",{"obj":skuObjArr,"status":status},function(rtn){
+					if(rtn.code == 1){
+						alertify.success(rtn.msg);
+						//window.location.reload();
+						//setTimeout("window.location.reload();",2000);
+					}else{
+						alertify.error(rtn.msg);
+					}
+				},"json");
+			}
+		});
+});
+
+$('#sigle-b-change').click(function(){
+	var checkbox = $('input[name="sku_info"]:checked');
+	if(checkbox.length == 0){
+		alertify.error("请选需要的料号");
+		return false;
+	}else if(checkbox.length > 1){
+		alertify.error("一次只能选择单个料号");
+		return false;
+	}
+	var ordersn,id,sku,amount,skuObj={};				
+	id = checkbox.data('id');
+	if($("#count"+id).val() == $("#count"+id).data("count")){
+		alertify.error("并没有任何修改，请查看。。。。");
+		return false;
+	}else{
+		skuObj.ordersn = checkbox.data('recordnumber');
+		skuObj.sku = checkbox.data('sku');
+		skuObj.amount = $.trim($("#count"+id).val()); 
+	}
+
+	console.log(skuObj);
+	$.post("json.php?mod=purchaseOrder&act=edit_push_order",{"skuObj":skuObj},function(rtn){
+		console.log(rtn);
+		if(rtn.data.code == "success"){
+			alertify.success("修改成功。。。");
+			//window.location.reload();
+			//setTimeout("window.location.reload();",2000);
+		}else{
+			alertify.error(rtn.msg);
+		}
+	},"json");
+});
+
+	$('#allMod').click(function(){
+		if(skuObjArr.length == 0) {
+			alertify.error("没有修改的内容");
+		 	return false;
+		}
+		if(sign){
+			return false;
+		}
+		alertify.confirm( '确定批量修改吗？', function(e){
+			if(e){
+				$.get("json.php?mod=purchaseOrder&act=modAll",{ "obj":skuObjArr},function(rtn){
+					if(rtn.errCode=="0046"){
+						alertify.success(rtn.errMsg);
+						//setTimeout("window.location.reload();",2000);
+					}else{
+						alertify.error(rtn.errMsg);
+					}
+				},"jsonp");
+			}
+		});
+	});
+	
+	$('#addDetail').click(function(){
+		var sku 		= $.trim($("#add_sku").val());
+		var price 		= $.trim($('#add_price').val());
+		var count 		= $.trim($('#add_count').val());
+		var poid    	= $.trim($("#orderId").val());
+		var markprice 	= false;
+		var markcount   = false;
+		var marksku     = false;
+		var regsku      = /^[A-Z0-9_]+$/;
+		if(sku == '' || !regsku.test(sku)){
+			$('#add_sku').css({ "border":"red solid 1px" });
+			alertify.error("料号有误,请确认");
+			marksku = true;
+		}else{
+			$('#add_sku').css({ "border":"" });
+		}
+		if(price == '' || price == 0 || !regprice.test(price)){
+			$('#add_price').css({ "border":"red solid 1px" });
+			alertify.error("价格有误,请确认");
+			markprice = true;
+		}else{
+			$('#add_price').css({ "border":"" });
+		}
+
+		if(marksku || markprice || markcount){
+			return false;
+		}
+		var data = {};
+	 	data.price = price;
+	 	data.count = count;
+	 	data.sku   = sku;
+	 	data.po_id = poid;
+		$.post("json.php?mod=purchaseOrder&act=insertOrderDetailInfo",{ "data":data },function(rtn){
+				if(rtn == 1){
+					alertify.success('添加成功');
+				}else{
+					alertify.success('haoxiang failure...............');
+				}
+	 	},"json");
+	
+	})
+
+ function audit(status,dom){
+	var id = $("#orderId").val();
+	var all = $("a[name='audit1'],a[name='audit2']");
+	var selfDom=$(dom);
+	$.get("json.php?mod=purchaseOrder&act=audit",{ "id":id,"stauts":status },function(rtn){
+		if(rtn.errCode="0135"){
+			var all = $("a[name='audit1'],a[name='audit2'],a[name='audit3'],a[name='audit4']");
+			all.hide();
+			if(status==2){
+				alertify.success("订单审核成功！");
+				$("a[name='audit2'],a[name='audit3']").show();
+			}else if(status==1){
+				alertify.success("订单反审核成功！");
+				$("a[name='audit1']").show();
+			}else{
+				alertify.success("反审核在途订单成功！");
+				$("a[name='audit4']").show();
+			}
+		}else{
+			alertify.error(rtn.errMsg);
+		}
+	},"jsonp");
+ }
+
+
+$("#inverse").click(function(){
+	select_all("inverse","input[name='sku_info']",0);
+});
+
+$("#pl-del").click(function(){
+	var skuArr , url,idArr = [];
+	var skuArr 	= $('input[name="sku_info"]:checked');
+	if(skuArr.length == 0){
+		alertify.alert('请选择需删除的料号');
+		return false;
+	}else{
+		$.each(skuArr,function(i,item){
+			idArr.push($(item).data("id"));
+		});
+	}
+	console.log(idArr);
+	alertify.confirm("确实要批量删除吗？",function(e){
+		  if(e){
+			$.post("json.php?mod=purchaseOrder&act=delPhOrderDetail",{ "idArr":idArr },function(rtn){
+					//window.location.reload();
+					console.log(rtn);
+					if(rtn.errCode == 0){
+						window.location.reload();
+					}else{
+						alertify.alert(rtn.msg);
+					}
+			},"json");	
+		  }
+	});
+
+});
+</script>
+
+
+{/literal}

@@ -1,0 +1,101 @@
+{include file='header.htm'}
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script type="text/javascript" src="./js/ui/jquery-ui.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+{include file='whNav.htm'}
+<script language="javascript" src="js/inventory.js"></script>
+<script language="javascript" src="js/invOperate.js"></script>
+ <div class="servar">
+<span>
+	<button  id='waitinv' value="" />盘点申请列表</button>
+</span>
+<span>
+	<button  id='inv' value="" />盘点</button>
+</span>
+<span>
+	<button  id='invlist' value="" />盘点列表</button>
+</span>
+<span>
+	<button  id='invreason' value="" />盘点原因</button>
+</span>
+<span>
+	<button  id='invcond' value="" />盘点条件</button>
+</span>
+</div>
+<br/>
+<div class="servar">
+	<span>
+		盘点申请员：<input type="text" id="applicant" value="{$applicant}" />
+	</span>
+	&nbsp;&nbsp;
+	<span>
+		盘点员：
+		<select style="" id="invPeople" name="invPeople">
+			<option value="">请选择</option>
+			{foreach from=$iqc_user item=list}
+				<option value="{$list.global_user_id}" {if $list.global_user_id==$invPeople}selected{/if}>{$list.global_user_name}</option>
+			{/foreach}
+		</select>
+	</span>
+	&nbsp;&nbsp;
+	<span>
+		sku：<input type="text" id="sku" value="{$sku}" />
+	</span>
+	&nbsp;&nbsp;
+	<span>
+		日期：<input type="text" id="startdate" value="{$startdate}" />
+	</span>
+	<span>
+		<input type="text" id="enddate" value="{$enddate}" />
+	</span>
+	<span>
+		<button  id='waitserch' value="" />搜索</button>
+	</span>
+	<br/>
+	<span>
+		<button  id='appinv' value="" />申请盘点</button>
+   </span>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td><input type="checkbox" class="checkall"/></td>
+			<td>SKU</td>
+			<td>申请人</td>
+			<td>申请原因</td>
+			<td>申请时间</td>
+			<td>操作状态</td>
+			<td>仓库数量</td>
+			<td>盘点数量</td>
+			<td>盘点员</td>
+			<td>盘点日期</td>
+		</tr>
+		{foreach from=$inventory_info item=list}
+		<tr class="odd">
+				<td><input type="checkbox" class="invselect" name="invselect" value="{$list.id}"/></td>
+				<td>{$list.sku}</td>
+				<td>{$list.applicantId|getUserNameById}</td>
+				<td>{$reason[$list.id]}</td>
+				<td>{$list.applicantionTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+				<td>{if $list.invStatus==0}未盘点{elseif $list.invStatus==1}已盘点{/if}</td>
+				<td>{$list.systemNums}</td>
+				<td>{$list.invNums}</td>
+				<td>{if !empty($list.invPeopleId)}{$list.invPeopleId|getUserNameById}{/if}</td>
+				<td>{$list.invTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+		</tr>
+		{foreachelse}
+		<tr class="odd">
+				<td colspan="10">没有搜索值！</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination" id="spage">
+		{$show_page}
+	</div>
+</div>
+ 
+{include file='footer.htm'}

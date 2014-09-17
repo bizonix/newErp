@@ -1,0 +1,72 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/promptmsg.js"></script>
+<!-- <style>
+.active{
+display:none;
+}
+</style> -->
+<div class="servar">
+    <span>
+        <form action="index.php?mod=PromptMsg&act=insert" method="post" id="omAddPlatformList">
+            <label for="MsgType">错误分类：</label>
+            <input value="" id='MsgType' class="validate[required] text-input" name="MsgType" type="text"/>
+            <label for="MsgStatus">异常类型：</label>
+            <select id='MsgStatus' class="validate[required] text-input" name="MsgStatus">
+            <option value="1">正常</option>
+            <option value="2">异常</option>
+            </select>
+            <label for="errprMsg">错误信息：</label>
+            <input value="" id='errprMsg' class="validate[required] text-input" name="errprMsg" type="text"/>
+            <input type="submit" value="添加"/>
+            <!-- <span><a href="index.php?mod=Platform&act=search">搜索</a></span> -->
+        </form>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+            <td>编号</td>
+            <td>错误分类</td>
+            <td>status</td>
+            <td>错误信息</td>
+            <td>添加人</td>
+            <td>添加时间</td>
+            <td>操作</td>
+        </tr>
+        {foreach $PromptMsgList as $PromptMsg}
+        <tr id="{$PromptMsg.id}">
+            <td>{$PromptMsg.id}</td>
+            <td>
+	            <span>{$PromptMsg.type}</span>
+	            
+            </td>
+            <td>
+	            <span>{if $PromptMsg.status==1}正常{else}异常{/if}</span> 
+            </td>
+            <td>
+	            <span>{$PromptMsg.errormsg}</span>
+	           
+            </td>
+            <td>{$PromptMsg.creatorId|get_usernamebyid}</td>
+            <td>{if $PromptMsg.createTime!=0} {$PromptMsg.createTime|date_format:"Y-m-d H:i"}{/if}</td>
+            <td>
+            	<!-- <button class='doactive'  pid='{$PromptMsg.id}'>激活</button> -->
+                <button class='update'  pid='{$PromptMsg.id}'>修改</button>
+                <button class='delete'  pid='{$PromptMsg.id}'>删除</button>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+<div class="bottomvar">
+	<span id="showSelectNum"></span>
+    {if $status == ''}
+    <div class="pagination">
+        {$show_page}
+    </div>
+    {/if}
+</div>
+{include file="footer.htm"}
+{literal}
+{/literal}

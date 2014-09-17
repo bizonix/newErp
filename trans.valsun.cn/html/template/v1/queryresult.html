@@ -1,0 +1,66 @@
+{header}
+<link rel="stylesheet" href="css/transportlist.css">
+<script language="javascript" src="js/trans_query.js"></script>
+{navdiv}
+<div class="miancontainer" style="height: 410px;">
+    <div class="t_query_form">
+        <form action="index.php?mod=query&act=getquerylist" method="post" onsubmit="return datavalidate();" >
+            <p>
+                <span style="font-weight: bold">运费查询: </span>
+                <span>发货地: &nbsp;</span>
+                <select name="shaddr">
+                    <!-- BEGIN addr -->
+                    <option value="{id}">{name}</option>
+                    <!-- END addr -->
+                </select>
+                <span>发货方式: &nbsp;</span>
+                <select name="carrier">
+                    <option  value="0">选择运输方式</option>
+                    <!-- BEGIN carrier -->
+                    <option {carselected} value="{cid}">{carriername}</option>
+                    <!-- END carrier -->
+                </select>
+                <span>国家: &nbsp;</span>
+                <select name="stdcountry">
+                    <!-- BEGIN countrylist -->
+                    <option {selected} value="{cid}">{countryname}【{cncountryname}】</option>
+                    <!-- END countrylist -->
+                </select>
+                <span>邮编: &nbsp;</span>
+                <input value="{postcode}"  name="postcode" style="width: 80px;" type="text">
+                <span>重量: &nbsp;</span>
+                <input id="weightinput" name="weight" style="width: 50px;" value="{weight}" name="lf" type="text">KG
+                &nbsp;&nbsp;&nbsp;<input onclick="" type="submit" value="提交">
+            </p>
+        </form>
+    </div>
+    <div>
+        
+    </div>
+    <div>
+        <table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                        <tr>
+                                <td>物流/快递名称</td>
+                                <td>渠道</td>
+                                <td>分区</td>
+                                <td>费用(RMB)</td>
+                                <td>折扣率</td>
+                        </tr>
+                </thead>
+                
+                <tbody>
+                    <!-- BEGIN rowlist -->
+                        <tr class="odd">
+                                <td>{carrier}</td>
+                                <td>{channel}</td>
+                                <td>{area}</td>
+                                <td>{fee}</td>
+                                <td>{discount}</td>
+                        </tr>
+                     <!-- END rowlist -->
+                </tbody>
+        </table>
+    </div>
+</div>
+{footer}

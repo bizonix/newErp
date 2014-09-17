@@ -1,0 +1,33 @@
+{include file="header.htm"}
+{include file="secendNav_tpl.htm"}
+{include file="thirdNav_alitpl.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./css/page.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/tpllist.js"></script>
+
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tbody>
+            <tr class="title">
+                <td>账号ID</td>
+                <td>账号名</td>
+                <td>操作</td>
+            </tr>
+			{foreach $accountlist as $key=>$tplval }
+            <tr class="odd">
+                <td>{$key}</td>
+                <td>{$tplval}</td>
+                <td>
+					<select name="select_{$key}" style="width:150px;" onchange="setTpl('{$key}', this)" >
+					   <option value='0'>无</option>
+					   {foreach $ac_tpllist.$key as $val}
+					   <option {if $acsettpl.$key == $val.id}selected="selected"{/if} value='{$val.id}'>{$val.name}</option>
+					   {/foreach}
+					</select>
+				</td>
+            </tr>
+			{/foreach}
+        </tbody>
+    </table>
+</div>
+{include file="footer.htm"}

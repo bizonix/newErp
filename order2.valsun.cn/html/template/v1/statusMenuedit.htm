@@ -1,0 +1,48 @@
+{include file='header2.htm'}
+{include file='omNav.htm'}
+<script language="javascript" src="js/statusMenu.js"></script>
+
+<div class="servar" align="center">
+	<form action='index.php?mod=StatusMenu&act=update' method="post" id="orderMenuAddForm"> 
+		<input type="hidden" name="menuId" id="menuId" value="{$menu[0].id}" /> 	
+		<p>
+			<label for="statusName" style="font-size:20px;">状态名称: &nbsp;</label>
+			<input value="{$menu[0].statusName}" class="mf validate[required] text-input" id="statusName"  name="statusName" type="text" style="width:200px;height:30px;font-size:20px">
+			<span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<label for="statusCode" style="font-size:20px;">入库状态码:</label>
+			<input value="{$menu[0].statusCode}" {if $menu[0].statusCode == ''}class="mf validate[required] text-input"{/if} id="statusCode"  name="statusCode" type="text" style="width:200px;height:30px;font-size:20px" {if $menu[0].statusCode != ''}disabled{/if}>
+			<span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<label for="groupId" style="font-size:20px;">流程分组： </label>
+			<select style="width:200px;height:30px;font-size:20px" name="groupId">
+				<option value="">请选择</option>
+				{foreach from=$group item=list}
+				 <option value="{$list.id}" {if $list.id==$menu[0].groupId}selected{/if} >{$list.statusName}</option>
+				{/foreach}
+			</select>
+			<span style="color:#F00;"></span>
+		</p>
+		<br/>
+		<p>
+			<label for="sort" style="font-size:20px;">排序:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<input value="{$menu[0].sort}" class="mf validate[required,custom[number],min[0]] text-input" id="sort"  name="sort" type="text" style="width:200px;height:30px;font-size:20px" >
+			<span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<label for="note" style="font-size:20px;">备注:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<input value="{$menu[0].note}" class="text-input" id="note"  name="note" type="text" style="width:200px;height:30px;font-size:20px">
+			<span id="showCnMsg" style="color: red;"></span>
+		</p>
+		<p>
+			<input type="submit" id="countriesAddFormSumit" class="input_button" value="提交">
+			<input type="button" class="input_button" id='back' value="返回" />
+		</p>
+	</form>
+</div>
+{include file="footer.htm"}

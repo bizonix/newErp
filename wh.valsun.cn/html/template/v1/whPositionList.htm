@@ -1,0 +1,54 @@
+{include file='header.htm'}
+<link href="css/Popup.css" rel="stylesheet" type="text/css" />
+{include file='whNav.htm'}
+<script language="javascript" src="js/whPositionList.js"></script>
+<script language="javascript" src="js/alixixi.js"></script>
+<script language="javascript" src="js/jquery.min.js"></script>
+<div class="servar">
+<button id="positionIndex" value="">更新仓库索引</button>
+<button onclick="update_position_route()">初始化分区与仓位对应关系</button>
+<input id="areaId" type="hidden" value="{$areaId}" />
+<span id="mess" style="color:green;font-size:20px;"><span>
+</div>
+<div class="servar">
+	<div style="text-align:center;width:auto;"><h4>区域{$areaId}</h4></div>
+</div>
+<div class="main">
+	<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+		<tr>
+            {section name="loop1" loop=$second_north_row}
+            <td>
+                <table style="width: 95%;">
+                    {section name="loop2" loop=$hang}
+                        {if ($smarty.section.loop2.index+1)%3==0}
+                        	<tr><td colspan="{$smarty.section.loop3.index}"><div style="height:10px; text-align:center;">横通道</div></td></tr>
+                        {else}
+                            <tr>
+                                {section name="loop3" loop=$row_position_nums}
+                                    {$x = $start_x_alixs + $smarty.section.loop3.index+($smarty.section.loop1.index*$distance_row)}
+                                    {$y = $start_y_alixs + $smarty.section.loop2.index}
+                                    {$coordinate = "$x,$y,0,0"}
+                                    {$position = "($x,$y,0,0)"}
+                                <td>
+                                    <div style="width:56px" axis_x="{$x}"  axis_y="{$y}" axis_z="0" floor="0">
+                                    <span id="{$x}_{$y}_0_0">{$position_arr[$position]['first_position']}</span><br/>									           
+                                    <button class="position" style="display:block" id="{$x}_{$y}_0" store="{$storeId}" areaId="{$areaId}" storey="{$storey}">货架</button>
+                                    </div>
+                                    <div style="width:104px;display:none">
+                                    <input type="text" size="11" value="{$position_arr[$position]['first_position']}" coordinate="{$coordinate}"/><br/>
+                                    <button class="save">保存</button>
+                                    <button class="cancel">取消</button>
+                                    </div>
+                                </td>
+                                {/section}
+                            </tr>
+                        {/if}
+                    {/section}
+                </table>
+            </td>
+            <!--<td><div style="width:10px; text-align:center;">竖通道</div></td>-->
+            {/section}
+        </tr>
+    </table>
+</div>
+{include file='footer.htm'}

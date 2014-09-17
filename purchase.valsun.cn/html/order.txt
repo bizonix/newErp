@@ -1,0 +1,6168 @@
+[--2014-02-16 14:16:03--] === unfinish:0,onwayNum:40
+ 
+
+[--2014-02-16 14:18:24--] === unfinish:40,onwayNum:40
+ 
+
+[--2014-02-16 14:23:03--] === unfinish:30,onwayNum:30
+ 
+
+[--2014-02-16 14:26:49--] === unfinish:0,onwayNum:0
+ 
+
+[--2014-02-16 14:30:15--] === unfinish:0,onwayNum:0
+ 
+
+[--2014-02-16 14:34:33--] === unfinish:0,onwayNum:0
+ 
+
+[--2014-02-16 14:37:04--] === unfinish:10,onwayNum:10
+ 
+
+[--2014-02-16 14:38:38--] === unfinish:10,onwayNum:10
+ 
+
+[--2014-02-16 14:39:51--] === unfinish:144,onwayNum:144
+ 
+
+[--2014-02-16 14:51:57--] === unfinish:30,onwayNum:30
+ 
+
+[--2014-02-16 14:51:57--] === unfinish:30,onwayNum:30
+ 
+
+[--2014-02-16 16:01:28--] === sku:19867_B_L,unfinish:45,onwayNum:45
+ 
+
+[--2014-02-16 16:03:14--] === sku:19867_B_L,unfinish:35,onwayNum:45,amount:10
+ 
+
+[--2014-02-16 16:04:38--] === sku:19867_B_M,unfinish:50,onwayNum:50,amount:10
+ 
+
+[--2014-02-16 16:09:42--] === sku:SV000464_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:09:42--] === sku:19676_M,unfinish:250,onwayNum:250,amount:50
+ 
+
+[--2014-02-16 16:09:42--] === sku:19840_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-16 16:09:42--] === sku:19759_R_L,unfinish:40,onwayNum:40,amount:20
+ 
+
+[--2014-02-16 16:09:42--] === sku:13864_L,unfinish:200,onwayNum:200,amount:150
+ 
+
+[--2014-02-16 16:09:42--] === sku:19592_W_S,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-16 16:09:42--] === sku:19592_W_M,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-16 16:09:42--] === sku:16303_S,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-16 16:09:42--] === sku:16730_R_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-16 16:09:42--] === sku:7531_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-16 16:09:42--] === sku:18814_L,unfinish:150,onwayNum:150,amount:150
+ 
+
+[--2014-02-16 16:09:43--] === sku:18814_S,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-16 16:09:43--] === sku:19698_BL_M,unfinish:45,onwayNum:45,amount:30
+ 
+
+[--2014-02-16 16:09:43--] === sku:19698_R_M,unfinish:70,onwayNum:70,amount:30
+ 
+
+[--2014-02-16 16:09:43--] === sku:19698_R_L,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-16 16:09:43--] === sku:19739_GO,unfinish:400,onwayNum:400,amount:400
+ 
+
+[--2014-02-16 16:09:43--] === sku:19724_BL,unfinish:60,onwayNum:60,amount:20
+ 
+
+[--2014-02-16 16:09:43--] === sku:19724_G,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-16 16:09:43--] === sku:19724_R,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-16 16:09:43--] === sku:SV000223_S,unfinish:30,onwayNum:30,amount:100
+ 
+
+[--2014-02-16 16:09:43--] === sku:19867_B_S,unfinish:40,onwayNum:40,amount:30
+ 
+
+[--2014-02-16 16:09:43--] === sku:19867_B_L,unfinish:35,onwayNum:45,amount:40
+ 
+
+[--2014-02-16 16:09:43--] === sku:20156_W_S,unfinish:35,onwayNum:35,amount:30
+ 
+
+[--2014-02-16 16:09:43--] === sku:SV000464_S,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:09:43--] === sku:SV000464_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:09:43--] === sku:7531_M,unfinish:15,onwayNum:15,amount:20
+ 
+
+[--2014-02-16 16:13:20--] === sku:4951,unfinish:350,onwayNum:350,amount:360
+ 
+
+[--2014-02-16 16:13:20--] === sku:TK0829,unfinish:50,onwayNum:50,amount:100
+ 
+
+[--2014-02-16 16:13:20--] === sku:18396,unfinish:10,onwayNum:10,amount:100
+ 
+
+[--2014-02-16 16:17:12--] === sku:19960_L,unfinish:50,onwayNum:50,amount:30
+ 
+
+[--2014-02-16 16:17:12--] === sku:20156_W_L,unfinish:30,onwayNum:30,amount:20
+ 
+
+[--2014-02-16 16:17:12--] === sku:19960_M,unfinish:144,onwayNum:144,amount:50
+ 
+
+[--2014-02-16 16:17:12--] === sku:20156_W_M,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-16 16:17:12--] === sku:20156_B_L,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-16 16:17:12--] === sku:19805_M,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-16 16:17:12--] === sku:20156_B_M,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-16 16:17:12--] === sku:18438_W_L,unfinish:90,onwayNum:90,amount:90
+ 
+
+[--2014-02-16 16:17:12--] === sku:20156_B_S,unfinish:30,onwayNum:30,amount:28
+ 
+
+[--2014-02-16 16:17:12--] === sku:13125_L,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-16 16:17:13--] === sku:9741,unfinish:200,onwayNum:200,amount:200
+ 
+
+[--2014-02-16 16:17:13--] === sku:10244_Y,unfinish:45,onwayNum:45,amount:45
+ 
+
+[--2014-02-16 16:17:13--] === sku:10734,unfinish:35,onwayNum:35,amount:35
+ 
+
+[--2014-02-16 16:17:13--] === sku:10234_DBL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:17:13--] === sku:13419_G,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-16 16:17:13--] === sku:5105_Y,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:17:13--] === sku:11900,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:17:13--] === sku:16903_BL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:17:13--] === sku:15776_B,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:17:13--] === sku:15282,unfinish:0,onwayNum:0,amount:100
+ 
+
+[--2014-02-16 16:17:47--] === sku:13266_W,unfinish:10,onwayNum:10,amount:15
+ 
+
+[--2014-02-16 16:19:13--] === sku:20074_13,unfinish:25,onwayNum:25,amount:30
+ 
+
+[--2014-02-16 16:19:13--] === sku:18942_W,unfinish:0,onwayNum:0,amount:50
+ 
+
+[--2014-02-16 16:19:13--] === sku:19284_R,unfinish:20,onwayNum:20,amount:22
+ 
+
+[--2014-02-16 16:19:13--] === sku:19688_B,unfinish:20,onwayNum:50,amount:30
+ 
+
+[--2014-02-16 16:26:04--] === sku:7873_BL_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-16 16:26:04--] === sku:7873_BW_L,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-16 16:26:04--] === sku:7873_BL_L,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-16 16:26:04--] === sku:11529_BL_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-16 16:26:04--] === sku:16973_W_M,unfinish:15,onwayNum:15,amount:5
+ 
+
+[--2014-02-16 16:26:04--] === sku:3149_W_M,unfinish:11,onwayNum:11,amount:10
+ 
+
+[--2014-02-16 16:26:04--] === sku:3149_GR_XL,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-16 16:26:04--] === sku:16973_W_M,unfinish:10,onwayNum:15,amount:10
+ 
+
+[--2014-02-16 16:26:04--] === sku:18464_WRE_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-16 16:26:04--] === sku:16973_BL_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:26:04--] === sku:18191_W_XXL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:26:04--] === sku:17764_GR_M,unfinish:10,onwayNum:10,amount:5
+ 
+
+[--2014-02-16 16:26:04--] === sku:9051_B,unfinish:164,onwayNum:164,amount:160
+ 
+
+[--2014-02-16 16:26:04--] === sku:18312_B,unfinish:24,onwayNum:24,amount:24
+ 
+
+[--2014-02-16 16:26:04--] === sku:18312_P,unfinish:24,onwayNum:24,amount:24
+ 
+
+[--2014-02-16 16:26:04--] === sku:9046_PU,unfinish:24,onwayNum:24,amount:24
+ 
+
+[--2014-02-16 16:26:04--] === sku:11329_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-16 16:26:04--] === sku:17621_B,unfinish:96,onwayNum:96,amount:96
+ 
+
+[--2014-02-16 16:26:04--] === sku:9045_P,unfinish:96,onwayNum:96,amount:96
+ 
+
+[--2014-02-16 16:26:04--] === sku:8360,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-16 16:26:04--] === sku:5593_G_L,unfinish:0,onwayNum:0,amount:210
+ 
+
+[--2014-02-16 16:26:04--] === sku:5162_WR,unfinish:0,onwayNum:0,amount:70
+ 
+
+[--2014-02-16 16:26:52--] === sku:16719_B_M,unfinish:30,onwayNum:30,amount:40
+ 
+
+[--2014-02-16 16:26:52--] === sku:19759_R_L,unfinish:20,onwayNum:40,amount:20
+ 
+
+[--2014-02-16 16:26:52--] === sku:16719_B_M,unfinish:30,onwayNum:30,amount:40
+ 
+
+[--2014-02-16 16:26:52--] === sku:5162_WR,unfinish:0,onwayNum:0,amount:70
+ 
+
+[--2014-02-16 16:26:52--] === sku:5162_WR,unfinish:0,onwayNum:0,amount:70
+ 
+
+[--2014-02-17 10:57:56--] === sku:7531_M,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 10:58:16--] === sku:4951,unfinish:350,onwayNum:350,amount:350
+ 
+
+[--2014-02-17 10:58:32--] === sku:18396,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 11:48:10--] === sku:19506_1,unfinish:150,onwayNum:150,amount:50
+ 
+
+[--2014-02-17 11:48:10--] === sku:19960_XL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 11:48:10--] === sku:19960_L,unfinish:20,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 11:48:10--] === sku:19960_M,unfinish:94,onwayNum:144,amount:80
+ 
+
+[--2014-02-17 11:48:10--] === sku:3871_BL,unfinish:25,onwayNum:25,amount:3
+ 
+
+[--2014-02-17 12:18:20--] === sku:5593_G_L,unfinish:0,onwayNum:0,amount:210
+ 
+
+[--2014-02-17 12:18:21--] === sku:5162_WR,unfinish:0,onwayNum:0,amount:70
+ 
+
+[--2014-02-17 12:22:22--] === sku:18263_RR,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 12:22:22--] === sku:4346,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:22:22--] === sku:18983_BL,unfinish:102,onwayNum:102,amount:108
+ 
+
+[--2014-02-17 12:22:22--] === sku:19382,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:22:22--] === sku:11924,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:22:22--] === sku:19351_RR,unfinish:334,onwayNum:334,amount:150
+ 
+
+[--2014-02-17 12:22:22--] === sku:19314_PU,unfinish:230,onwayNum:230,amount:200
+ 
+
+[--2014-02-17 12:22:22--] === sku:11923,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:22:22--] === sku:1514,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:22:22--] === sku:SV000487_CE,unfinish:11,onwayNum:11,amount:11
+ 
+
+[--2014-02-17 12:22:22--] === sku:SV000487_PP,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:22:22--] === sku:SV000487_G,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:22:22--] === sku:SV000487_WH,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:22:22--] === sku:SV000487_B,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:22:22--] === sku:SV000487_BW,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:22:23--] === sku:SV000487_R,unfinish:9,onwayNum:9,amount:9
+ 
+
+[--2014-02-17 12:22:23--] === sku:SV000487_Y,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:22:23--] === sku:14989,unfinish:250,onwayNum:250,amount:250
+ 
+
+[--2014-02-17 12:22:23--] === sku:284,unfinish:240,onwayNum:300,amount:240
+ 
+
+[--2014-02-17 12:22:23--] === sku:8390,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:22:23--] === sku:8837,unfinish:144,onwayNum:144,amount:72
+ 
+
+[--2014-02-17 12:22:23--] === sku:10086,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:22:23--] === sku:20140_W_S,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 12:22:23--] === sku:20140_B_S,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 12:22:23--] === sku:15234,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-17 12:22:23--] === sku:15233,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 12:26:36--] === sku:14203_K_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:26:36--] === sku:14203_K_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:26:36--] === sku:16751_B_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:26:36--] === sku:SV000207_W,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 12:30:59--] === sku:14203_B_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:30:59--] === sku:16751_B_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:30:59--] === sku:SV000392_B_S,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:30:59--] === sku:SV000392_B_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:30:59--] === sku:13097_BE,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 12:30:59--] === sku:13098_W,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:30:59--] === sku:11656,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:30:59--] === sku:13098_P,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:30:59--] === sku:13099_BE,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:30:59--] === sku:13812_W,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:30:59--] === sku:13812_B,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:31:00--] === sku:SV000243,unfinish:450,onwayNum:450,amount:150
+ 
+
+[--2014-02-17 12:31:00--] === sku:17784,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-17 12:31:00--] === sku:17713,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:31:00--] === sku:13102_W,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 12:31:00--] === sku:13099_W,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:31:00--] === sku:13101_W,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:31:00--] === sku:18497,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:31:00--] === sku:18009,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:31:00--] === sku:14203_K_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:31:00--] === sku:14203_K_S,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:34:05--] === sku:19149,unfinish:200,onwayNum:200,amount:200
+ 
+
+[--2014-02-17 12:34:05--] === sku:19150,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:34:05--] === sku:19151,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:34:05--] === sku:18433,unfinish:200,onwayNum:200,amount:200
+ 
+
+[--2014-02-17 12:34:05--] === sku:19664_BR,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 12:34:05--] === sku:10184_B,unfinish:50,onwayNum:50,amount:10
+ 
+
+[--2014-02-17 12:34:06--] === sku:SV000133_L,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:34:06--] === sku:8455,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:34:06--] === sku:20141_Y,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:34:06--] === sku:20141_RR,unfinish:10,onwayNum:10,amount:5
+ 
+
+[--2014-02-17 12:34:06--] === sku:20141_P,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 12:34:06--] === sku:20141_G,unfinish:35,onwayNum:35,amount:40
+ 
+
+[--2014-02-17 12:34:06--] === sku:20141_B,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 12:34:06--] === sku:17273_1,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-17 12:34:06--] === sku:19296_B,unfinish:52,onwayNum:52,amount:50
+ 
+
+[--2014-02-17 12:34:06--] === sku:2442,unfinish:11,onwayNum:11,amount:10
+ 
+
+[--2014-02-17 12:34:06--] === sku:14903,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 12:34:06--] === sku:12741,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-17 12:34:06--] === sku:19148_80,unfinish:0,onwayNum:0,amount:30
+ 
+
+[--2014-02-17 12:34:06--] === sku:19489,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:34:06--] === sku:17837_K,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:29--] === sku:18434,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:35:29--] === sku:18941_4,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:35:29--] === sku:18941_1,unfinish:54,onwayNum:54,amount:50
+ 
+
+[--2014-02-17 12:35:29--] === sku:19848_P,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:29--] === sku:19848_PU,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:29--] === sku:19848_R,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:29--] === sku:19848_B,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:35:29--] === sku:19848_W,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:29--] === sku:18435,unfinish:60,onwayNum:60,amount:150
+ 
+
+[--2014-02-17 12:35:29--] === sku:18789,unfinish:16,onwayNum:16,amount:30
+ 
+
+[--2014-02-17 12:35:29--] === sku:19528_BR,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 12:35:29--] === sku:TK1050,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:35:41--] === sku:18434,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:35:41--] === sku:18941_4,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:35:41--] === sku:18941_1,unfinish:4,onwayNum:54,amount:50
+ 
+
+[--2014-02-17 12:35:41--] === sku:19848_P,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:41--] === sku:19848_PU,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:41--] === sku:19848_R,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:41--] === sku:19848_B,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:35:41--] === sku:19848_W,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:41--] === sku:18435,unfinish:60,onwayNum:60,amount:150
+ 
+
+[--2014-02-17 12:35:41--] === sku:18789,unfinish:16,onwayNum:16,amount:30
+ 
+
+[--2014-02-17 12:35:41--] === sku:19528_BR,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 12:35:41--] === sku:TK1050,unfinish:0,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:35:58--] === sku:18434,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:35:58--] === sku:18941_4,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:35:58--] === sku:18941_1,unfinish:4,onwayNum:54,amount:50
+ 
+
+[--2014-02-17 12:35:58--] === sku:19848_P,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:58--] === sku:19848_PU,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:58--] === sku:19848_R,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:58--] === sku:19848_B,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:35:58--] === sku:19848_W,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:35:58--] === sku:18435,unfinish:60,onwayNum:60,amount:150
+ 
+
+[--2014-02-17 12:35:58--] === sku:18789,unfinish:16,onwayNum:16,amount:30
+ 
+
+[--2014-02-17 12:35:58--] === sku:19528_BR,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 12:35:58--] === sku:TK1050,unfinish:0,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:35:58--] === sku:7691_P_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:35:58--] === sku:7691_P_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:35:58--] === sku:7691_P_XL,unfinish:25,onwayNum:25,amount:5
+ 
+
+[--2014-02-17 12:35:58--] === sku:17991,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 12:35:58--] === sku:18263_C,unfinish:65,onwayNum:65,amount:65
+ 
+
+[--2014-02-17 12:35:58--] === sku:18263_B,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-17 12:35:58--] === sku:18263_R,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:35:58--] === sku:18263_BE,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:39:03--] === sku:17167_P,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:39:03--] === sku:17167_BL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:39:03--] === sku:17167_R,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:39:03--] === sku:17167_Y,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:39:03--] === sku:18368_B,unfinish:120,onwayNum:120,amount:25
+ 
+
+[--2014-02-17 12:39:03--] === sku:18368_Y,unfinish:0,onwayNum:0,amount:25
+ 
+
+[--2014-02-17 12:39:04--] === sku:19305_3,unfinish:2,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 12:39:04--] === sku:20175,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:39:04--] === sku:11826,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:39:04--] === sku:11546,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 12:39:04--] === sku:12144,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:39:04--] === sku:11552,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:39:04--] === sku:11540,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:39:04--] === sku:2987,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:39:04--] === sku:16884_WRE_XXL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:39:04--] === sku:16884_WRE_XXXL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:39:04--] === sku:16884_LBL_XXXL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:39:04--] === sku:18344_BRR_M,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:39:04--] === sku:18345_BL_S,unfinish:100,onwayNum:100,amount:40
+ 
+
+[--2014-02-17 12:39:04--] === sku:16884_NBL_XXL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:39:04--] === sku:16884_NBL_XXXL,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:41:20--] === sku:16884_NBL_XL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:41:20--] === sku:18344_RBL_M,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:41:20--] === sku:18345_BL_XL,unfinish:100,onwayNum:100,amount:50
+ 
+
+[--2014-02-17 12:41:20--] === sku:18344_BRR_XL,unfinish:30,onwayNum:30,amount:10
+ 
+
+[--2014-02-17 12:41:20--] === sku:18345_BL_S,unfinish:60,onwayNum:100,amount:10
+ 
+
+[--2014-02-17 12:41:20--] === sku:18345_P_M,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:41:30--] === sku:16884_NBL_XL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 12:41:30--] === sku:18344_RBL_M,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:41:30--] === sku:18345_BL_XL,unfinish:50,onwayNum:100,amount:50
+ 
+
+[--2014-02-17 12:41:30--] === sku:18344_BRR_XL,unfinish:20,onwayNum:30,amount:10
+ 
+
+[--2014-02-17 12:41:30--] === sku:18345_BL_S,unfinish:50,onwayNum:100,amount:10
+ 
+
+[--2014-02-17 12:41:30--] === sku:18345_P_M,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:41:30--] === sku:18345_P_XL,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:41:30--] === sku:18345_P_S,unfinish:60,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 12:41:31--] === sku:18345_P_L,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:41:31--] === sku:4353,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 12:41:31--] === sku:2866,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 12:41:31--] === sku:9496_RR,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 12:41:31--] === sku:7023_K,unfinish:20,onwayNum:20,amount:5
+ 
+
+[--2014-02-17 12:41:31--] === sku:3408_DBL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:41:31--] === sku:1920,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 12:41:31--] === sku:18282_BL,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 12:41:31--] === sku:18282_PU,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-17 12:41:31--] === sku:18282_P,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 13:34:37--] === sku:5593_G_L,unfinish:0,onwayNum:0,amount:0
+ 
+
+[--2014-02-17 13:34:37--] === sku:5162_WR,unfinish:0,onwayNum:0,amount:0
+ 
+
+[--2014-02-17 13:37:05--] === sku:7315_GR,unfinish:20,onwayNum:20,amount:15
+ 
+
+[--2014-02-17 13:37:05--] === sku:7315_P,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:05--] === sku:16550_B_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:05--] === sku:7272_R,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:05--] === sku:7416_W_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:05--] === sku:8995,unfinish:180,onwayNum:180,amount:30
+ 
+
+[--2014-02-17 13:37:05--] === sku:11881,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:05--] === sku:8995,unfinish:150,onwayNum:180,amount:20
+ 
+
+[--2014-02-17 13:37:05--] === sku:13266_W,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:14--] === sku:7315_GR,unfinish:5,onwayNum:20,amount:15
+ 
+
+[--2014-02-17 13:37:14--] === sku:7315_P,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:14--] === sku:16550_B_M,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:14--] === sku:7272_R,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:14--] === sku:7416_W_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:14--] === sku:8995,unfinish:130,onwayNum:180,amount:30
+ 
+
+[--2014-02-17 13:37:14--] === sku:11881,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:14--] === sku:8995,unfinish:100,onwayNum:180,amount:20
+ 
+
+[--2014-02-17 13:37:14--] === sku:13266_W,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:14--] === sku:13368_P,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:14--] === sku:7416_B_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:14--] === sku:17972_B_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:14--] === sku:4850,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:37:14--] === sku:13205_B,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:14--] === sku:2350,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 13:37:14--] === sku:17566_B_L,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:37:14--] === sku:19692_B,unfinish:70,onwayNum:70,amount:35
+ 
+
+[--2014-02-17 13:37:14--] === sku:9014_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:14--] === sku:16630_M,unfinish:100,onwayNum:100,amount:25
+ 
+
+[--2014-02-17 13:37:14--] === sku:SV000100_PU,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:28--] === sku:7315_GR,unfinish:5,onwayNum:20,amount:15
+ 
+
+[--2014-02-17 13:37:28--] === sku:7315_P,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:28--] === sku:16550_B_M,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:28--] === sku:7272_R,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:28--] === sku:7416_W_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:28--] === sku:8995,unfinish:80,onwayNum:180,amount:30
+ 
+
+[--2014-02-17 13:37:28--] === sku:11881,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:28--] === sku:8995,unfinish:50,onwayNum:180,amount:20
+ 
+
+[--2014-02-17 13:37:28--] === sku:13266_W,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:28--] === sku:13368_P,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:37:28--] === sku:7416_B_XL,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:28--] === sku:17972_B_L,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:28--] === sku:4850,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:37:28--] === sku:13205_B,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:28--] === sku:2350,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 13:37:28--] === sku:17566_B_L,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:37:28--] === sku:19692_B,unfinish:35,onwayNum:70,amount:35
+ 
+
+[--2014-02-17 13:37:28--] === sku:9014_XL,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:37:28--] === sku:16630_M,unfinish:75,onwayNum:100,amount:25
+ 
+
+[--2014-02-17 13:37:28--] === sku:SV000100_PU,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:38:07--] === sku:2350,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 13:38:47--] === sku:17566_B_L,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:38:47--] === sku:19692_B,unfinish:0,onwayNum:70,amount:35
+ 
+
+[--2014-02-17 13:38:47--] === sku:9014_XL,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:38:47--] === sku:16630_M,unfinish:50,onwayNum:100,amount:25
+ 
+
+[--2014-02-17 13:38:47--] === sku:SV000100_PU,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:40:20--] === sku:9014_L,unfinish:25,onwayNum:25,amount:20
+ 
+
+[--2014-02-17 13:40:20--] === sku:19692_B,unfinish:0,onwayNum:70,amount:35
+ 
+
+[--2014-02-17 13:40:20--] === sku:16630_L,unfinish:90,onwayNum:90,amount:40
+ 
+
+[--2014-02-17 13:40:20--] === sku:18882_W_M,unfinish:180,onwayNum:180,amount:180
+ 
+
+[--2014-02-17 13:40:20--] === sku:19431_B,unfinish:90,onwayNum:90,amount:90
+ 
+
+[--2014-02-17 13:40:20--] === sku:18882_W_L,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-17 13:40:20--] === sku:7643_R,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:40:20--] === sku:17313_B_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:40:21--] === sku:17313_BR_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:40:21--] === sku:17312_B,unfinish:40,onwayNum:40,amount:30
+ 
+
+[--2014-02-17 13:40:21--] === sku:7522_B,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 13:40:21--] === sku:7526_PU,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:40:21--] === sku:10260_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:40:21--] === sku:7499_B,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:40:21--] === sku:7522_W,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:40:21--] === sku:18354_DGR,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:40:21--] === sku:6738,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-17 13:40:21--] === sku:11469_B,unfinish:35,onwayNum:35,amount:35
+ 
+
+[--2014-02-17 13:40:21--] === sku:6161,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:40:21--] === sku:3592_W,unfinish:10,onwayNum:10,amount:7
+ 
+
+[--2014-02-17 13:40:21--] === sku:5169_BL_L,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 13:42:09--] === sku:SV000100_BL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:44:18--] === sku:5169_B_XL,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 13:44:18--] === sku:13498_R_XL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:44:18--] === sku:3592_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:44:18--] === sku:16988_W,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:44:18--] === sku:13498_R_M,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:44:18--] === sku:3592_DGR,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:44:18--] === sku:17566_B_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:44:18--] === sku:11615,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:44:18--] === sku:17566_B_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:44:18--] === sku:9015_W,unfinish:334,onwayNum:334,amount:140
+ 
+
+[--2014-02-17 13:44:19--] === sku:SV000379_A_L,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-17 13:44:19--] === sku:15730_RR,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:44:19--] === sku:15730_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:44:19--] === sku:SV000379_A_M,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-17 13:44:19--] === sku:15730_LB,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:44:19--] === sku:9015_B,unfinish:289,onwayNum:289,amount:43
+ 
+
+[--2014-02-17 13:44:19--] === sku:8629_BL,unfinish:312,onwayNum:312,amount:15
+ 
+
+[--2014-02-17 13:44:19--] === sku:18501_DGR,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:44:19--] === sku:10104_GO,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:44:19--] === sku:16008_G,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:44:19--] === sku:16008_O,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:04--] === sku:16621_PU,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:04--] === sku:16008_Y,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:04--] === sku:14507_Y,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:04--] === sku:16008_W,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:04--] === sku:16008_SBL,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:04--] === sku:16008_B,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:47:04--] === sku:16008_P,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:04--] === sku:16008_PU,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:04--] === sku:14507_SBL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:04--] === sku:16654_DGR_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:47:05--] === sku:16654_WH_XL,unfinish:5,onwayNum:5,amount:3
+ 
+
+[--2014-02-17 13:47:05--] === sku:16654_DGR_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:47:05--] === sku:18241_BL_L,unfinish:35,onwayNum:35,amount:19
+ 
+
+[--2014-02-17 13:47:05--] === sku:18241_W_L,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:05--] === sku:13633_29,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 13:47:05--] === sku:18218_L,unfinish:20,onwayNum:20,amount:19
+ 
+
+[--2014-02-17 13:47:05--] === sku:18241_BL_XL,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 13:47:05--] === sku:13633_26,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:05--] === sku:13633_27,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:05--] === sku:13633_30,unfinish:30,onwayNum:30,amount:10
+ 
+
+[--2014-02-17 13:47:15--] === sku:16621_PU,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:15--] === sku:16008_Y,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:15--] === sku:14507_Y,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:15--] === sku:16008_W,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:15--] === sku:16008_SBL,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:15--] === sku:16008_B,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:47:15--] === sku:16008_P,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:15--] === sku:16008_PU,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:15--] === sku:14507_SBL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:15--] === sku:16654_DGR_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:47:15--] === sku:16654_WH_XL,unfinish:2,onwayNum:5,amount:3
+ 
+
+[--2014-02-17 13:47:15--] === sku:16654_DGR_XL,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:47:15--] === sku:18241_BL_L,unfinish:16,onwayNum:35,amount:19
+ 
+
+[--2014-02-17 13:47:15--] === sku:18241_W_L,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:15--] === sku:13633_29,unfinish:10,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 13:47:15--] === sku:18218_L,unfinish:1,onwayNum:20,amount:19
+ 
+
+[--2014-02-17 13:47:15--] === sku:18241_BL_XL,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 13:47:15--] === sku:13633_26,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:15--] === sku:13633_27,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:15--] === sku:13633_30,unfinish:20,onwayNum:30,amount:10
+ 
+
+[--2014-02-17 13:47:17--] === sku:,unfinish:0,onwayNum:0,amount:
+ 
+
+[--2014-02-17 13:47:24--] === sku:16621_PU,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:24--] === sku:16008_Y,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:24--] === sku:14507_Y,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:24--] === sku:16008_W,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:24--] === sku:16008_SBL,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:24--] === sku:16008_B,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:47:24--] === sku:16008_P,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:24--] === sku:16008_PU,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:24--] === sku:14507_SBL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:24--] === sku:16654_DGR_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:47:24--] === sku:16654_WH_XL,unfinish:2,onwayNum:5,amount:3
+ 
+
+[--2014-02-17 13:47:24--] === sku:16654_DGR_XL,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:47:24--] === sku:18241_BL_L,unfinish:16,onwayNum:35,amount:19
+ 
+
+[--2014-02-17 13:47:24--] === sku:18241_W_L,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:24--] === sku:13633_29,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 13:47:24--] === sku:18218_L,unfinish:1,onwayNum:20,amount:19
+ 
+
+[--2014-02-17 13:47:24--] === sku:18241_BL_XL,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 13:47:24--] === sku:13633_26,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:24--] === sku:13633_27,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:24--] === sku:13633_30,unfinish:10,onwayNum:30,amount:10
+ 
+
+[--2014-02-17 13:47:50--] === sku:16621_PU,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:51--] === sku:16008_Y,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:51--] === sku:14507_Y,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:51--] === sku:16008_W,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:51--] === sku:16008_SBL,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:51--] === sku:16008_B,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:47:51--] === sku:16008_P,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:51--] === sku:16008_PU,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:47:51--] === sku:14507_SBL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:51--] === sku:16654_DGR_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:47:51--] === sku:16654_WH_XL,unfinish:2,onwayNum:5,amount:3
+ 
+
+[--2014-02-17 13:47:51--] === sku:16654_DGR_XL,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 13:47:51--] === sku:18241_BL_L,unfinish:16,onwayNum:35,amount:19
+ 
+
+[--2014-02-17 13:47:51--] === sku:18241_W_L,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:51--] === sku:13633_29,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 13:47:51--] === sku:18218_L,unfinish:1,onwayNum:20,amount:19
+ 
+
+[--2014-02-17 13:47:52--] === sku:18241_BL_XL,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 13:47:52--] === sku:13633_26,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:47:52--] === sku:13633_27,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:47:52--] === sku:13633_30,unfinish:0,onwayNum:30,amount:10
+ 
+
+[--2014-02-17 13:48:07--] === sku:19960_L,unfinish:20,onwayNum:50,amount:30
+ 
+
+[--2014-02-17 13:49:44--] === sku:18241_W_L,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:49:44--] === sku:13633_29,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 13:49:44--] === sku:18218_L,unfinish:1,onwayNum:20,amount:19
+ 
+
+[--2014-02-17 13:49:44--] === sku:18241_BL_XL,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 13:49:44--] === sku:13633_26,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:49:44--] === sku:13633_27,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:49:44--] === sku:13633_30,unfinish:0,onwayNum:30,amount:10
+ 
+
+[--2014-02-17 13:51:03--] === sku:19536,unfinish:200,onwayNum:200,amount:200
+ 
+
+[--2014-02-17 13:51:03--] === sku:15549,unfinish:65,onwayNum:65,amount:20
+ 
+
+[--2014-02-17 13:51:03--] === sku:19537,unfinish:420,onwayNum:420,amount:150
+ 
+
+[--2014-02-17 13:51:03--] === sku:15551,unfinish:55,onwayNum:55,amount:15
+ 
+
+[--2014-02-17 13:51:03--] === sku:11598,unfinish:66,onwayNum:66,amount:50
+ 
+
+[--2014-02-17 13:51:03--] === sku:943,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-17 13:51:03--] === sku:11599,unfinish:35,onwayNum:35,amount:35
+ 
+
+[--2014-02-17 13:51:03--] === sku:14831,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 13:51:50--] === sku:19960_L,unfinish:50,onwayNum:50,amount:10
+ 
+
+[--2014-02-17 13:54:03--] === sku:19759_B_L,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 13:54:03--] === sku:17393_BE,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 13:54:04--] === sku:18241_BL_S,unfinish:15,onwayNum:15,amount:10
+ 
+
+[--2014-02-17 13:54:04--] === sku:19759_R_L,unfinish:0,onwayNum:40,amount:20
+ 
+
+[--2014-02-17 13:54:04--] === sku:19759_B_S,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:54:04--] === sku:19759_R_S,unfinish:40,onwayNum:40,amount:30
+ 
+
+[--2014-02-17 13:54:04--] === sku:19675_O_M,unfinish:80,onwayNum:80,amount:20
+ 
+
+[--2014-02-17 13:54:04--] === sku:19675_O_S,unfinish:50,onwayNum:50,amount:70
+ 
+
+[--2014-02-17 13:54:04--] === sku:19675_B_L,unfinish:360,onwayNum:360,amount:10
+ 
+
+[--2014-02-17 13:54:04--] === sku:19760_M,unfinish:200,onwayNum:200,amount:10
+ 
+
+[--2014-02-17 13:54:04--] === sku:19675_B_M,unfinish:230,onwayNum:230,amount:10
+ 
+
+[--2014-02-17 13:54:04--] === sku:19760_S,unfinish:150,onwayNum:150,amount:10
+ 
+
+[--2014-02-17 13:54:04--] === sku:5358_S,unfinish:0,onwayNum:0,amount:5
+ 
+
+[--2014-02-17 13:54:04--] === sku:19760_M,unfinish:190,onwayNum:200,amount:10
+ 
+
+[--2014-02-17 13:54:04--] === sku:19675_GR_L,unfinish:101,onwayNum:101,amount:20
+ 
+
+[--2014-02-17 13:54:04--] === sku:16021_BL,unfinish:30,onwayNum:30,amount:6
+ 
+
+[--2014-02-17 13:54:05--] === sku:16024_S,unfinish:0,onwayNum:0,amount:10
+ 
+
+[--2014-02-17 13:54:05--] === sku:18602,unfinish:178,onwayNum:178,amount:150
+ 
+
+[--2014-02-17 13:54:05--] === sku:19136_S,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 13:54:05--] === sku:18598_S,unfinish:7,onwayNum:7,amount:7
+ 
+
+[--2014-02-17 13:54:05--] === sku:18603_1,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:56:38--] === sku:18600_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:56:38--] === sku:19412_PU,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:56:38--] === sku:19412_P,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:56:38--] === sku:19412_B,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 13:56:38--] === sku:19412_W,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 13:56:38--] === sku:19263_2,unfinish:90,onwayNum:90,amount:90
+ 
+
+[--2014-02-17 13:56:38--] === sku:18793_B,unfinish:110,onwayNum:110,amount:45
+ 
+
+[--2014-02-17 13:56:38--] === sku:18793_GO,unfinish:150,onwayNum:150,amount:50
+ 
+
+[--2014-02-17 13:56:38--] === sku:10101_GO,unfinish:150,onwayNum:150,amount:150
+ 
+
+[--2014-02-17 13:56:38--] === sku:6799,unfinish:160,onwayNum:160,amount:100
+ 
+
+[--2014-02-17 13:56:38--] === sku:SV000468_R,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:56:38--] === sku:SV000468_P,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:56:39--] === sku:SV000468_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:56:39--] === sku:SV000468_BR,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:56:39--] === sku:SV000468_W,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 13:56:39--] === sku:7344_RGO,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:56:39--] === sku:9266_PS,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 13:56:39--] === sku:6357,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 13:56:39--] === sku:5894,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 13:56:39--] === sku:7798_BR,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-17 13:56:39--] === sku:10912,unfinish:2324,onwayNum:2324,amount:156
+ 
+
+[--2014-02-17 14:00:04--] === sku:19563,unfinish:100,onwayNum:100,amount:9
+ 
+
+[--2014-02-17 14:00:04--] === sku:19865_GR,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 14:00:04--] === sku:5198_B_M,unfinish:72,onwayNum:72,amount:72
+ 
+
+[--2014-02-17 14:00:04--] === sku:19865_B,unfinish:254,onwayNum:254,amount:250
+ 
+
+[--2014-02-17 14:00:04--] === sku:5198_BE_L,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-17 14:00:05--] === sku:19263_7,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 14:00:05--] === sku:19263_4,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 14:00:05--] === sku:19263_6,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:00:05--] === sku:5198_BE_M,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 14:00:05--] === sku:5198_BE_L,unfinish:0,onwayNum:120,amount:60
+ 
+
+[--2014-02-17 14:00:05--] === sku:SV000486_R,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:00:05--] === sku:SV000486_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:00:05--] === sku:SV000486_W,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:00:05--] === sku:SV000486_RR,unfinish:0,onwayNum:0,amount:20
+ 
+
+[--2014-02-17 14:00:05--] === sku:SV000486_BL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:00:06--] === sku:SV000486_PU,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:00:06--] === sku:11676,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:00:06--] === sku:19910_DBL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 14:00:06--] === sku:19910_LBL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 14:00:06--] === sku:19910_R,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:00:06--] === sku:12268,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 14:00:06--] === sku:12161,unfinish:25,onwayNum:25,amount:20
+ 
+
+[--2014-02-17 14:00:06--] === sku:18523,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:00:06--] === sku:3142_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:00:06--] === sku:6191,unfinish:700,onwayNum:700,amount:100
+ 
+
+[--2014-02-17 14:00:06--] === sku:10098_S,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 14:00:06--] === sku:17145,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 14:00:07--] === sku:15126,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-17 14:10:13--] === sku:SV000052_W,unfinish:50,onwayNum:50,amount:15
+ 
+
+[--2014-02-17 14:10:13--] === sku:SV000052_C,unfinish:50,onwayNum:50,amount:15
+ 
+
+[--2014-02-17 14:10:13--] === sku:SV000051_W,unfinish:50,onwayNum:50,amount:15
+ 
+
+[--2014-02-17 14:10:13--] === sku:SV000051_C,unfinish:50,onwayNum:50,amount:15
+ 
+
+[--2014-02-17 14:10:13--] === sku:TK0440,unfinish:250,onwayNum:250,amount:250
+ 
+
+[--2014-02-17 14:10:13--] === sku:19299,unfinish:48,onwayNum:48,amount:48
+ 
+
+[--2014-02-17 14:10:13--] === sku:19300,unfinish:204,onwayNum:204,amount:84
+ 
+
+[--2014-02-17 14:10:13--] === sku:14097,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:10:13--] === sku:SV000241,unfinish:120,onwayNum:120,amount:60
+ 
+
+[--2014-02-17 14:10:13--] === sku:8402,unfinish:96,onwayNum:96,amount:96
+ 
+
+[--2014-02-17 14:10:13--] === sku:8680,unfinish:48,onwayNum:48,amount:48
+ 
+
+[--2014-02-17 14:10:13--] === sku:19298,unfinish:24,onwayNum:24,amount:24
+ 
+
+[--2014-02-17 14:10:13--] === sku:8936,unfinish:12,onwayNum:12,amount:12
+ 
+
+[--2014-02-17 14:10:14--] === sku:3128_GR,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:10:14--] === sku:3128_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:10:14--] === sku:14617,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 14:10:14--] === sku:8298,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:10:14--] === sku:1084,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 14:10:14--] === sku:1231,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 14:10:14--] === sku:054,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-17 14:10:14--] === sku:4730,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 14:10:14--] === sku:TK1416,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 14:10:14--] === sku:19021,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 14:10:14--] === sku:19461,unfinish:300,onwayNum:300,amount:100
+ 
+
+[--2014-02-17 14:10:14--] === sku:18532,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:10:14--] === sku:18444,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:10:14--] === sku:18533,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 14:10:14--] === sku:18689,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:10:15--] === sku:18688,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 14:10:15--] === sku:TK0050,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:10:15--] === sku:2569,unfinish:0,onwayNum:0,amount:300
+ 
+
+[--2014-02-17 14:10:15--] === sku:8697,unfinish:100,onwayNum:200,amount:100
+ 
+
+[--2014-02-17 14:10:15--] === sku:1275,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 14:16:42--] === sku:17965_GR_M,unfinish:20,onwayNum:20,amount:25
+ 
+
+[--2014-02-17 14:16:42--] === sku:17965_GR_XL,unfinish:5,onwayNum:5,amount:25
+ 
+
+[--2014-02-17 14:16:42--] === sku:18408_GR_XL,unfinish:25,onwayNum:25,amount:5
+ 
+
+[--2014-02-17 14:16:42--] === sku:17964_L,unfinish:10,onwayNum:10,amount:5
+ 
+
+[--2014-02-17 14:16:42--] === sku:17187_B_M,unfinish:60,onwayNum:60,amount:35
+ 
+
+[--2014-02-17 14:16:42--] === sku:17616_L,unfinish:45,onwayNum:45,amount:45
+ 
+
+[--2014-02-17 14:16:42--] === sku:17187_B_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:16:42--] === sku:17457_L,unfinish:40,onwayNum:40,amount:25
+ 
+
+[--2014-02-17 14:16:42--] === sku:17965_B_M,unfinish:15,onwayNum:15,amount:10
+ 
+
+[--2014-02-17 14:16:43--] === sku:5387_W_XL,unfinish:20,onwayNum:25,amount:20
+ 
+
+[--2014-02-17 14:16:43--] === sku:5569_K_M,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-17 14:16:43--] === sku:3330_W_XL,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 14:16:43--] === sku:5569_B_L,unfinish:40,onwayNum:80,amount:40
+ 
+
+[--2014-02-17 14:16:43--] === sku:5261_B_L,unfinish:40,onwayNum:40,amount:10
+ 
+
+[--2014-02-17 14:16:43--] === sku:5569_B_XL,unfinish:30,onwayNum:40,amount:30
+ 
+
+[--2014-02-17 14:16:43--] === sku:5387_B_XL,unfinish:55,onwayNum:55,amount:25
+ 
+
+[--2014-02-17 14:16:43--] === sku:2011_XL,unfinish:410,onwayNum:490,amount:170
+ 
+
+[--2014-02-17 14:16:43--] === sku:16397_RR,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:16:43--] === sku:16397_PU,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 14:16:43--] === sku:16397_W,unfinish:80,onwayNum:80,amount:40
+ 
+
+[--2014-02-17 14:16:43--] === sku:20017_DGR,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:19:39--] === sku:20017_GR,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:19:39--] === sku:5590_PU_XXL,unfinish:2,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:19:39--] === sku:5590_PU_XXXL,unfinish:3,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:19:39--] === sku:5590_BL_M,unfinish:3,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:19:39--] === sku:5316_R_XXXL,unfinish:4,onwayNum:4,amount:2
+ 
+
+[--2014-02-17 14:19:39--] === sku:20004_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:19:39--] === sku:20004_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:19:39--] === sku:20004_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:19:40--] === sku:SV000463_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:19:40--] === sku:20017_B,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 14:19:40--] === sku:SV000463_L,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:19:40--] === sku:SV000463_S,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:19:40--] === sku:16898_DG_M,unfinish:4,onwayNum:4,amount:4
+ 
+
+[--2014-02-17 14:19:40--] === sku:SV000463_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:19:40--] === sku:16898_LBL_L,unfinish:2,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:19:40--] === sku:16898_DG_L,unfinish:2,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:10--] === sku:20017_GR,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:20:10--] === sku:5590_PU_XXL,unfinish:0,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:11--] === sku:5590_PU_XXXL,unfinish:0,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:20:11--] === sku:5590_BL_M,unfinish:0,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:20:11--] === sku:5316_R_XXXL,unfinish:2,onwayNum:4,amount:2
+ 
+
+[--2014-02-17 14:20:11--] === sku:20004_S,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:20:11--] === sku:20004_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:20:11--] === sku:20004_M,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:20:11--] === sku:SV000463_XL,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:11--] === sku:20017_B,unfinish:0,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 14:20:11--] === sku:SV000463_L,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:11--] === sku:SV000463_S,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:11--] === sku:16898_DG_M,unfinish:0,onwayNum:4,amount:4
+ 
+
+[--2014-02-17 14:20:12--] === sku:SV000463_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:12--] === sku:16898_LBL_L,unfinish:0,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:12--] === sku:16898_DG_L,unfinish:0,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:22--] === sku:20017_GR,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:20:22--] === sku:5590_PU_XXL,unfinish:0,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:22--] === sku:5590_PU_XXXL,unfinish:0,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:20:22--] === sku:5590_BL_M,unfinish:0,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:20:22--] === sku:5316_R_XXXL,unfinish:0,onwayNum:4,amount:2
+ 
+
+[--2014-02-17 14:20:23--] === sku:20004_S,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:20:23--] === sku:20004_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:20:23--] === sku:20004_M,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:20:23--] === sku:SV000463_XL,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:23--] === sku:20017_B,unfinish:0,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 14:20:23--] === sku:SV000463_L,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:23--] === sku:SV000463_S,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:23--] === sku:16898_DG_M,unfinish:0,onwayNum:4,amount:4
+ 
+
+[--2014-02-17 14:20:23--] === sku:SV000463_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:23--] === sku:16898_LBL_L,unfinish:0,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:24--] === sku:16898_DG_L,unfinish:0,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:37--] === sku:20017_GR,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:20:37--] === sku:5590_PU_XXL,unfinish:0,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:37--] === sku:5590_PU_XXXL,unfinish:0,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:20:37--] === sku:5590_BL_M,unfinish:0,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:20:37--] === sku:5316_R_XXXL,unfinish:0,onwayNum:4,amount:2
+ 
+
+[--2014-02-17 14:20:37--] === sku:20004_S,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:20:37--] === sku:20004_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:20:37--] === sku:20004_M,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:20:37--] === sku:SV000463_XL,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:37--] === sku:20017_B,unfinish:0,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 14:20:38--] === sku:SV000463_L,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:38--] === sku:SV000463_S,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:38--] === sku:16898_DG_M,unfinish:0,onwayNum:4,amount:4
+ 
+
+[--2014-02-17 14:20:38--] === sku:SV000463_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:20:38--] === sku:16898_LBL_L,unfinish:0,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:38--] === sku:16898_DG_L,unfinish:0,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:38--] === sku:16898_B_L,unfinish:2,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:20:38--] === sku:17716_B_XL,unfinish:50,onwayNum:50,amount:30
+ 
+
+[--2014-02-17 14:20:39--] === sku:17719_B_XL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 14:30:16--] === sku:2350,unfinish:0,onwayNum:40,amount:0
+ 
+
+[--2014-02-17 14:30:16--] === sku:17566_B_L,unfinish:0,onwayNum:5,amount:0
+ 
+
+[--2014-02-17 14:30:16--] === sku:19692_B,unfinish:0,onwayNum:70,amount:0
+ 
+
+[--2014-02-17 14:30:16--] === sku:9014_XL,unfinish:0,onwayNum:10,amount:0
+ 
+
+[--2014-02-17 14:30:16--] === sku:SV000100_PU,unfinish:0,onwayNum:20,amount:0
+ 
+
+[--2014-02-17 14:30:16--] === sku:19692_B,unfinish:0,onwayNum:70,amount:0
+ 
+
+[--2014-02-17 14:30:44--] === sku:5198_BR_L,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 14:33:49--] === sku:17719_Y_L,unfinish:25,onwayNum:25,amount:20
+ 
+
+[--2014-02-17 14:33:50--] === sku:17719_W_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 14:33:50--] === sku:17719_W_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 14:33:50--] === sku:17716_PU_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 14:33:50--] === sku:17719_GR_M,unfinish:15,onwayNum:15,amount:10
+ 
+
+[--2014-02-17 14:33:50--] === sku:18757_L,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-17 14:33:50--] === sku:19698_R_M,unfinish:40,onwayNum:70,amount:20
+ 
+
+[--2014-02-17 14:33:50--] === sku:13137_B,unfinish:150,onwayNum:150,amount:150
+ 
+
+[--2014-02-17 14:33:50--] === sku:19698_R_XL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:33:51--] === sku:19698_R_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:33:51--] === sku:19698_BL_M,unfinish:15,onwayNum:45,amount:15
+ 
+
+[--2014-02-17 14:33:51--] === sku:5590_BL_XXL,unfinish:3,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:33:51--] === sku:5589_B_M,unfinish:2,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:33:51--] === sku:5589_B_XXXL,unfinish:2,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 14:33:51--] === sku:5316_B_XXXL,unfinish:4,onwayNum:4,amount:4
+ 
+
+[--2014-02-17 14:33:52--] === sku:5316_R_XXXL,unfinish:0,onwayNum:4,amount:2
+ 
+
+[--2014-02-17 14:33:52--] === sku:5316_R_XXL,unfinish:3,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:33:52--] === sku:5316_G_XL,unfinish:3,onwayNum:3,amount:3
+ 
+
+[--2014-02-17 14:33:52--] === sku:5587_PU_XXXL,unfinish:4,onwayNum:4,amount:4
+ 
+
+[--2014-02-17 14:33:52--] === sku:15730_SBL,unfinish:15,onwayNum:15,amount:5
+ 
+
+[--2014-02-17 14:33:52--] === sku:13757_L,unfinish:100,onwayNum:100,amount:30
+ 
+
+[--2014-02-17 14:36:13--] === sku:13420_BL,unfinish:100,onwayNum:100,amount:90
+ 
+
+[--2014-02-17 14:36:13--] === sku:13420_P,unfinish:80,onwayNum:80,amount:90
+ 
+
+[--2014-02-17 14:36:13--] === sku:13811_W,unfinish:180,onwayNum:180,amount:180
+ 
+
+[--2014-02-17 14:36:13--] === sku:18574_GR,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 14:36:14--] === sku:18008,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-17 14:36:14--] === sku:18498_GR,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:36:14--] === sku:18575_B,unfinish:40,onwayNum:40,amount:20
+ 
+
+[--2014-02-17 14:36:14--] === sku:19808_B_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:36:14--] === sku:19808_Y_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 14:36:14--] === sku:19808_B_L,unfinish:45,onwayNum:45,amount:45
+ 
+
+[--2014-02-17 14:36:14--] === sku:19808_R_L,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:36:14--] === sku:19808_R_XL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 14:36:14--] === sku:19833_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:36:14--] === sku:19833_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:36:14--] === sku:19833_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:36:14--] === sku:17719_B_M,unfinish:0,onwayNum:0,amount:25
+ 
+
+[--2014-02-17 14:36:15--] === sku:17716_BL_XL,unfinish:0,onwayNum:0,amount:15
+ 
+
+[--2014-02-17 14:36:15--] === sku:17716_B_M,unfinish:0,onwayNum:0,amount:10
+ 
+
+[--2014-02-17 14:36:15--] === sku:17717_GR_M,unfinish:0,onwayNum:0,amount:5
+ 
+
+[--2014-02-17 14:36:15--] === sku:17716_PU_M,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 14:36:15--] === sku:19097_LBL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:36:15--] === sku:18142_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:36:15--] === sku:19097_W,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:36:15--] === sku:SV000282_L,unfinish:45,onwayNum:45,amount:45
+ 
+
+[--2014-02-17 14:36:15--] === sku:SV000282_M,unfinish:45,onwayNum:45,amount:45
+ 
+
+[--2014-02-17 14:36:15--] === sku:19141_W_L,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 14:53:09--] === sku:1289,unfinish:300,onwayNum:300,amount:300
+ 
+
+[--2014-02-17 14:53:09--] === sku:2659,unfinish:300,onwayNum:300,amount:300
+ 
+
+[--2014-02-17 14:53:09--] === sku:2334,unfinish:115,onwayNum:115,amount:20
+ 
+
+[--2014-02-17 14:53:09--] === sku:1045,unfinish:14,onwayNum:14,amount:50
+ 
+
+[--2014-02-17 14:53:09--] === sku:14703,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:53:09--] === sku:19354,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 14:53:10--] === sku:1502,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-17 14:53:10--] === sku:085,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 14:53:10--] === sku:387,unfinish:10,onwayNum:10,amount:100
+ 
+
+[--2014-02-17 14:53:10--] === sku:8827,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 14:56:11--] === sku:8838,unfinish:89,onwayNum:89,amount:100
+ 
+
+[--2014-02-17 14:56:11--] === sku:12773,unfinish:100,onwayNum:100,amount:60
+ 
+
+[--2014-02-17 14:56:11--] === sku:1064,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 14:56:11--] === sku:1019,unfinish:600,onwayNum:600,amount:700
+ 
+
+[--2014-02-17 14:56:11--] === sku:047,unfinish:400,onwayNum:400,amount:400
+ 
+
+[--2014-02-17 14:56:11--] === sku:8387,unfinish:200,onwayNum:200,amount:200
+ 
+
+[--2014-02-17 14:56:11--] === sku:TK0463,unfinish:350,onwayNum:350,amount:100
+ 
+
+[--2014-02-17 14:58:03--] === sku:11709,unfinish:1100,onwayNum:1100,amount:1000
+ 
+
+[--2014-02-17 14:58:03--] === sku:2585,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 14:58:03--] === sku:2341,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 14:58:03--] === sku:TK1389,unfinish:4,onwayNum:4,amount:2
+ 
+
+[--2014-02-17 14:58:03--] === sku:SV000096,unfinish:300,onwayNum:300,amount:150
+ 
+
+[--2014-02-17 14:58:03--] === sku:19815,unfinish:1220,onwayNum:1220,amount:100
+ 
+
+[--2014-02-17 14:58:03--] === sku:19091,unfinish:1200,onwayNum:1200,amount:300
+ 
+
+[--2014-02-17 14:58:03--] === sku:8868,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 14:58:03--] === sku:9690,unfinish:103,onwayNum:103,amount:100
+ 
+
+[--2014-02-17 14:58:03--] === sku:9699,unfinish:300,onwayNum:300,amount:200
+ 
+
+[--2014-02-17 14:58:03--] === sku:TK1033,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 15:06:30--] === sku:TK0643,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 15:06:30--] === sku:TK0829,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 15:16:18--] === sku:TK0894,unfinish:10,onwayNum:60,amount:10
+ 
+
+[--2014-02-17 15:18:55--] === sku:1395,unfinish:200,onwayNum:200,amount:200
+ 
+
+[--2014-02-17 15:18:56--] === sku:10617,unfinish:35,onwayNum:35,amount:35
+ 
+
+[--2014-02-17 15:18:56--] === sku:20125_B,unfinish:120,onwayNum:120,amount:55
+ 
+
+[--2014-02-17 15:18:56--] === sku:20125_P,unfinish:80,onwayNum:80,amount:41
+ 
+
+[--2014-02-17 15:18:56--] === sku:20125_PU,unfinish:80,onwayNum:80,amount:50
+ 
+
+[--2014-02-17 15:18:56--] === sku:20125_R,unfinish:120,onwayNum:120,amount:80
+ 
+
+[--2014-02-17 15:18:56--] === sku:20025_BL,unfinish:30,onwayNum:30,amount:15
+ 
+
+[--2014-02-17 15:18:56--] === sku:20025_RR,unfinish:32,onwayNum:32,amount:15
+ 
+
+[--2014-02-17 15:18:56--] === sku:20025_B,unfinish:28,onwayNum:28,amount:15
+ 
+
+[--2014-02-17 15:18:56--] === sku:18344_BRR_L,unfinish:50,onwayNum:50,amount:45
+ 
+
+[--2014-02-17 15:18:56--] === sku:2918,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 15:18:57--] === sku:2919,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 15:18:57--] === sku:19690,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 15:36:21--] === sku:19878_3,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:36:21--] === sku:19323,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 15:36:21--] === sku:18824,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 15:36:21--] === sku:19878_4,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 15:36:21--] === sku:18964,unfinish:250,onwayNum:250,amount:20
+ 
+
+[--2014-02-17 15:36:21--] === sku:19879_5,unfinish:0,onwayNum:0,amount:120
+ 
+
+[--2014-02-17 15:36:21--] === sku:3362_RR,unfinish:250,onwayNum:250,amount:30
+ 
+
+[--2014-02-17 15:36:21--] === sku:3362_C,unfinish:230,onwayNum:230,amount:60
+ 
+
+[--2014-02-17 15:36:21--] === sku:3362_W,unfinish:800,onwayNum:800,amount:180
+ 
+
+[--2014-02-17 15:36:21--] === sku:3362_PU,unfinish:220,onwayNum:220,amount:50
+ 
+
+[--2014-02-17 15:36:22--] === sku:3362_BL,unfinish:300,onwayNum:300,amount:70
+ 
+
+[--2014-02-17 15:36:22--] === sku:4768,unfinish:300,onwayNum:300,amount:300
+ 
+
+[--2014-02-17 15:36:22--] === sku:19253_B,unfinish:140,onwayNum:140,amount:140
+ 
+
+[--2014-02-17 15:36:22--] === sku:19253_R,unfinish:150,onwayNum:150,amount:150
+ 
+
+[--2014-02-17 15:36:22--] === sku:19253_C,unfinish:130,onwayNum:130,amount:130
+ 
+
+[--2014-02-17 15:36:22--] === sku:19253_O,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-17 15:36:22--] === sku:19253_G,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 15:36:22--] === sku:19253_BL,unfinish:90,onwayNum:90,amount:90
+ 
+
+[--2014-02-17 15:36:22--] === sku:19256_R,unfinish:140,onwayNum:140,amount:40
+ 
+
+[--2014-02-17 15:36:22--] === sku:19255_O,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-17 15:36:22--] === sku:19798,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 15:43:11--] === sku:19861,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 15:43:11--] === sku:19800,unfinish:200,onwayNum:200,amount:150
+ 
+
+[--2014-02-17 15:43:11--] === sku:9162_BE,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:43:11--] === sku:19799,unfinish:150,onwayNum:150,amount:100
+ 
+
+[--2014-02-17 15:43:11--] === sku:19803,unfinish:150,onwayNum:150,amount:120
+ 
+
+[--2014-02-17 15:43:12--] === sku:19801,unfinish:39,onwayNum:39,amount:20
+ 
+
+[--2014-02-17 15:43:12--] === sku:9162_P,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 15:43:12--] === sku:9162_C,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:43:12--] === sku:19860,unfinish:50,onwayNum:50,amount:25
+ 
+
+[--2014-02-17 15:43:12--] === sku:18963,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 15:43:12--] === sku:19337,unfinish:150,onwayNum:150,amount:100
+ 
+
+[--2014-02-17 15:43:12--] === sku:18928_BL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:43:12--] === sku:12161,unfinish:5,onwayNum:25,amount:5
+ 
+
+[--2014-02-17 15:43:12--] === sku:19801,unfinish:19,onwayNum:39,amount:19
+ 
+
+[--2014-02-17 15:43:12--] === sku:18928_GR,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 15:43:12--] === sku:5876,unfinish:48,onwayNum:48,amount:48
+ 
+
+[--2014-02-17 15:43:12--] === sku:6585,unfinish:24,onwayNum:24,amount:24
+ 
+
+[--2014-02-17 15:43:12--] === sku:3362_B,unfinish:852,onwayNum:852,amount:240
+ 
+
+[--2014-02-17 15:43:27--] === sku:19861,unfinish:0,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 15:43:27--] === sku:19800,unfinish:50,onwayNum:200,amount:150
+ 
+
+[--2014-02-17 15:43:27--] === sku:9162_BE,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:43:27--] === sku:19799,unfinish:50,onwayNum:150,amount:100
+ 
+
+[--2014-02-17 15:43:27--] === sku:19803,unfinish:30,onwayNum:150,amount:120
+ 
+
+[--2014-02-17 15:43:28--] === sku:19801,unfinish:0,onwayNum:39,amount:20
+ 
+
+[--2014-02-17 15:43:28--] === sku:9162_P,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 15:43:28--] === sku:9162_C,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:43:28--] === sku:19860,unfinish:25,onwayNum:50,amount:25
+ 
+
+[--2014-02-17 15:43:28--] === sku:18963,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 15:43:28--] === sku:19337,unfinish:50,onwayNum:150,amount:100
+ 
+
+[--2014-02-17 15:43:28--] === sku:18928_BL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:43:28--] === sku:12161,unfinish:0,onwayNum:25,amount:5
+ 
+
+[--2014-02-17 15:43:28--] === sku:19801,unfinish:0,onwayNum:39,amount:19
+ 
+
+[--2014-02-17 15:43:28--] === sku:18928_GR,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 15:43:28--] === sku:5876,unfinish:0,onwayNum:48,amount:48
+ 
+
+[--2014-02-17 15:43:28--] === sku:6585,unfinish:0,onwayNum:24,amount:24
+ 
+
+[--2014-02-17 15:43:28--] === sku:3362_B,unfinish:612,onwayNum:852,amount:240
+ 
+
+[--2014-02-17 15:43:38--] === sku:19861,unfinish:0,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 15:43:38--] === sku:19800,unfinish:50,onwayNum:200,amount:150
+ 
+
+[--2014-02-17 15:43:38--] === sku:9162_BE,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:43:38--] === sku:19799,unfinish:50,onwayNum:150,amount:100
+ 
+
+[--2014-02-17 15:43:38--] === sku:19803,unfinish:30,onwayNum:150,amount:120
+ 
+
+[--2014-02-17 15:43:38--] === sku:19801,unfinish:0,onwayNum:39,amount:20
+ 
+
+[--2014-02-17 15:43:38--] === sku:9162_P,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 15:43:38--] === sku:9162_C,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:43:38--] === sku:19860,unfinish:0,onwayNum:50,amount:25
+ 
+
+[--2014-02-17 15:43:38--] === sku:18963,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 15:43:38--] === sku:19337,unfinish:50,onwayNum:150,amount:100
+ 
+
+[--2014-02-17 15:43:38--] === sku:18928_BL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:43:38--] === sku:12161,unfinish:0,onwayNum:25,amount:5
+ 
+
+[--2014-02-17 15:43:38--] === sku:19801,unfinish:0,onwayNum:39,amount:19
+ 
+
+[--2014-02-17 15:43:39--] === sku:18928_GR,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 15:43:39--] === sku:5876,unfinish:0,onwayNum:48,amount:48
+ 
+
+[--2014-02-17 15:43:39--] === sku:6585,unfinish:0,onwayNum:24,amount:24
+ 
+
+[--2014-02-17 15:43:39--] === sku:3362_B,unfinish:372,onwayNum:852,amount:240
+ 
+
+[--2014-02-17 15:43:39--] === sku:7052_B,unfinish:300,onwayNum:300,amount:300
+ 
+
+[--2014-02-17 15:43:39--] === sku:4543,unfinish:48,onwayNum:48,amount:48
+ 
+
+[--2014-02-17 15:43:39--] === sku:5840,unfinish:48,onwayNum:48,amount:48
+ 
+
+[--2014-02-17 15:45:29--] === sku:5839,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 15:45:29--] === sku:5841,unfinish:48,onwayNum:48,amount:48
+ 
+
+[--2014-02-17 15:45:29--] === sku:18769_B_36,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 15:45:30--] === sku:18769_W_39,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 15:45:30--] === sku:18769_W_38,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 15:45:30--] === sku:18769_B_39,unfinish:50,onwayNum:50,amount:30
+ 
+
+[--2014-02-17 15:45:30--] === sku:18769_PU_39,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 15:45:30--] === sku:18769_B_38,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 15:45:30--] === sku:18769_B_37,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 15:49:51--] === sku:2240,unfinish:400,onwayNum:400,amount:400
+ 
+
+[--2014-02-17 15:49:51--] === sku:6383,unfinish:120,onwayNum:120,amount:20
+ 
+
+[--2014-02-17 15:49:51--] === sku:SV000268,unfinish:50,onwayNum:50,amount:100
+ 
+
+[--2014-02-17 16:08:31--] === sku:4094,unfinish:300,onwayNum:300,amount:100
+ 
+
+[--2014-02-17 16:08:31--] === sku:19031,unfinish:25,onwayNum:25,amount:5
+ 
+
+[--2014-02-17 16:08:31--] === sku:8861,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 16:08:31--] === sku:9991,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 16:08:31--] === sku:19239,unfinish:300,onwayNum:300,amount:300
+ 
+
+[--2014-02-17 16:08:31--] === sku:17157,unfinish:202,onwayNum:202,amount:200
+ 
+
+[--2014-02-17 16:08:31--] === sku:19404,unfinish:360,onwayNum:360,amount:360
+ 
+
+[--2014-02-17 16:08:31--] === sku:1422,unfinish:330,onwayNum:330,amount:330
+ 
+
+[--2014-02-17 16:08:31--] === sku:5884,unfinish:240,onwayNum:240,amount:240
+ 
+
+[--2014-02-17 16:08:31--] === sku:1330,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 16:08:31--] === sku:18230,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 16:08:31--] === sku:19282,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 16:08:31--] === sku:18231,unfinish:60,onwayNum:60,amount:23
+ 
+
+[--2014-02-17 16:39:16--] === sku:18983_BL,unfinish:102,onwayNum:102,amount:0
+ 
+
+[--2014-02-17 16:39:16--] === sku:20141_G,unfinish:35,onwayNum:35,amount:0
+ 
+
+[--2014-02-17 16:39:16--] === sku:19148_80,unfinish:0,onwayNum:0,amount:0
+ 
+
+[--2014-02-17 16:39:16--] === sku:18434,unfinish:50,onwayNum:100,amount:0
+ 
+
+[--2014-02-17 16:39:16--] === sku:18941_4,unfinish:0,onwayNum:50,amount:0
+ 
+
+[--2014-02-17 16:39:16--] === sku:18941_1,unfinish:4,onwayNum:54,amount:0
+ 
+
+[--2014-02-17 16:39:16--] === sku:19848_P,unfinish:0,onwayNum:10,amount:0
+ 
+
+[--2014-02-17 16:39:16--] === sku:19848_PU,unfinish:0,onwayNum:10,amount:0
+ 
+
+[--2014-02-17 16:39:16--] === sku:19848_R,unfinish:0,onwayNum:10,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:19848_B,unfinish:0,onwayNum:30,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:7315_GR,unfinish:5,onwayNum:20,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:7315_P,unfinish:0,onwayNum:10,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:16550_B_M,unfinish:0,onwayNum:20,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:7272_R,unfinish:0,onwayNum:20,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:7416_W_L,unfinish:0,onwayNum:20,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:11881,unfinish:0,onwayNum:10,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:13266_W,unfinish:0,onwayNum:10,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:13368_P,unfinish:0,onwayNum:20,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:7416_B_XL,unfinish:0,onwayNum:10,amount:0
+ 
+
+[--2014-02-17 16:39:17--] === sku:17972_B_L,unfinish:0,onwayNum:10,amount:0
+ 
+
+[--2014-02-17 16:50:59--] === sku:FC00266_A_S,unfinish:19,onwayNum:19,amount:5
+ 
+
+[--2014-02-17 16:50:59--] === sku:FC00266_A_M,unfinish:5,onwayNum:5,amount:3
+ 
+
+[--2014-02-17 16:50:59--] === sku:FC00266_A_L,unfinish:8,onwayNum:8,amount:8
+ 
+
+[--2014-02-17 16:50:59--] === sku:FC00266_A_XL,unfinish:7,onwayNum:7,amount:4
+ 
+
+[--2014-02-17 16:50:59--] === sku:FC00266_WR_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 16:50:59--] === sku:FK00108_G_L,unfinish:15,onwayNum:15,amount:4
+ 
+
+[--2014-02-17 16:50:59--] === sku:FW00200_B_L,unfinish:20,onwayNum:20,amount:14
+ 
+
+[--2014-02-17 16:50:59--] === sku:FW00200_B_M,unfinish:20,onwayNum:20,amount:4
+ 
+
+[--2014-02-17 16:50:59--] === sku:FW00200_B_XL,unfinish:39,onwayNum:39,amount:23
+ 
+
+[--2014-02-17 16:50:59--] === sku:FQ00602_RR_S,unfinish:0,onwayNum:0,amount:1
+ 
+
+[--2014-02-17 16:51:00--] === sku:FC00266_WR_XXL,unfinish:12,onwayNum:12,amount:12
+ 
+
+[--2014-02-17 16:51:00--] === sku:FC00266_WR_XXL,unfinish:0,onwayNum:12,amount:7
+ 
+
+[--2014-02-17 16:51:00--] === sku:FC00266_A_XXL,unfinish:1,onwayNum:1,amount:1
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_PU_S,unfinish:10,onwayNum:10,amount:5
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_PU_XL,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_PU_M,unfinish:10,onwayNum:10,amount:5
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_PU_L,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_Y_XL,unfinish:70,onwayNum:70,amount:25
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_Y_L,unfinish:64,onwayNum:64,amount:20
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_Y_M,unfinish:66,onwayNum:66,amount:20
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_Y_S,unfinish:50,onwayNum:50,amount:3
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_RR_XL,unfinish:50,onwayNum:50,amount:4
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_RR_L,unfinish:50,onwayNum:50,amount:5
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_RR_M,unfinish:50,onwayNum:50,amount:1
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_BL_S,unfinish:20,onwayNum:20,amount:6
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_G_XL,unfinish:34,onwayNum:34,amount:8
+ 
+
+[--2014-02-17 16:51:00--] === sku:FW00200_G_M,unfinish:30,onwayNum:30,amount:1
+ 
+
+[--2014-02-17 16:51:01--] === sku:FW00200_G_S,unfinish:30,onwayNum:30,amount:1
+ 
+
+[--2014-02-17 16:51:01--] === sku:FW00200_G_L,unfinish:30,onwayNum:30,amount:5
+ 
+
+[--2014-02-17 16:51:01--] === sku:ZQ000502_BL_S,unfinish:2,onwayNum:2,amount:2
+ 
+
+[--2014-02-17 16:51:01--] === sku:ZQ000502_BL_L,unfinish:3,onwayNum:3,amount:2
+ 
+
+[--2014-02-17 17:35:41--] === sku:SV000269,unfinish:300,onwayNum:300,amount:200
+ 
+
+[--2014-02-17 18:02:30--] === sku:001,unfinish:0,onwayNum:0,amount:10
+ 
+
+[--2014-02-17 18:07:05--] === sku:18574_B,unfinish:30,onwayNum:30,amount:2
+ 
+
+[--2014-02-17 18:07:05--] === sku:16854_BL,unfinish:10,onwayNum:10,amount:1
+ 
+
+[--2014-02-17 18:07:05--] === sku:16231_NB,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:07:06--] === sku:13254_B,unfinish:60,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 18:07:06--] === sku:16854_B,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:07:06--] === sku:3149_GR_XL,unfinish:10,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:07:13--] === sku:18574_B,unfinish:28,onwayNum:30,amount:2
+ 
+
+[--2014-02-17 18:07:13--] === sku:16854_BL,unfinish:9,onwayNum:10,amount:1
+ 
+
+[--2014-02-17 18:07:13--] === sku:16231_NB,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:07:13--] === sku:13254_B,unfinish:30,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 18:07:13--] === sku:16854_B,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:07:13--] === sku:3149_GR_XL,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:07:48--] === sku:18574_B,unfinish:26,onwayNum:30,amount:2
+ 
+
+[--2014-02-17 18:07:48--] === sku:16854_BL,unfinish:8,onwayNum:10,amount:1
+ 
+
+[--2014-02-17 18:07:48--] === sku:16231_NB,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:07:48--] === sku:13254_B,unfinish:0,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 18:07:48--] === sku:16854_B,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:07:48--] === sku:3149_GR_XL,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:07:48--] === sku:SV000376_AB,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:07:48--] === sku:18726_BL_M,unfinish:15,onwayNum:15,amount:25
+ 
+
+[--2014-02-17 18:08:00--] === sku:18574_B,unfinish:24,onwayNum:30,amount:2
+ 
+
+[--2014-02-17 18:08:00--] === sku:16854_BL,unfinish:7,onwayNum:10,amount:1
+ 
+
+[--2014-02-17 18:08:00--] === sku:16231_NB,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:08:00--] === sku:13254_B,unfinish:0,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 18:08:00--] === sku:16854_B,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:08:00--] === sku:3149_GR_XL,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:08:00--] === sku:SV000376_AB,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:08:00--] === sku:18726_BL_M,unfinish:15,onwayNum:15,amount:25
+ 
+
+[--2014-02-17 18:08:56--] === sku:18574_B,unfinish:22,onwayNum:30,amount:2
+ 
+
+[--2014-02-17 18:08:56--] === sku:16854_BL,unfinish:6,onwayNum:10,amount:1
+ 
+
+[--2014-02-17 18:08:56--] === sku:16231_NB,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:08:56--] === sku:13254_B,unfinish:0,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 18:08:56--] === sku:16854_B,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:08:56--] === sku:3149_GR_XL,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:08:56--] === sku:SV000376_AB,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:08:56--] === sku:18726_BL_M,unfinish:15,onwayNum:15,amount:25
+ 
+
+[--2014-02-17 18:08:56--] === sku:SV000376_SBLW,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:08:56--] === sku:18726_W_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:08:56--] === sku:17610_34,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:08:56--] === sku:17610_32,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:08:56--] === sku:17610_33,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:08:56--] === sku:18408_GR_XL,unfinish:15,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:08:56--] === sku:3623_K_XXL,unfinish:30,onwayNum:30,amount:20
+ 
+
+[--2014-02-17 18:08:56--] === sku:3623_B_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:09:05--] === sku:18574_B,unfinish:20,onwayNum:30,amount:2
+ 
+
+[--2014-02-17 18:09:05--] === sku:16854_BL,unfinish:5,onwayNum:10,amount:1
+ 
+
+[--2014-02-17 18:09:05--] === sku:16231_NB,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:09:05--] === sku:13254_B,unfinish:0,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 18:09:05--] === sku:16854_B,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:09:05--] === sku:3149_GR_XL,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:09:05--] === sku:SV000376_AB,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:05--] === sku:18726_BL_M,unfinish:15,onwayNum:15,amount:25
+ 
+
+[--2014-02-17 18:09:05--] === sku:SV000376_SBLW,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:05--] === sku:18726_W_M,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:05--] === sku:17610_34,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:05--] === sku:17610_32,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:05--] === sku:17610_33,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:05--] === sku:18408_GR_XL,unfinish:15,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:05--] === sku:3623_K_XXL,unfinish:10,onwayNum:30,amount:20
+ 
+
+[--2014-02-17 18:09:05--] === sku:3623_B_XL,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:09:12--] === sku:18574_B,unfinish:18,onwayNum:30,amount:2
+ 
+
+[--2014-02-17 18:09:12--] === sku:16854_BL,unfinish:4,onwayNum:10,amount:1
+ 
+
+[--2014-02-17 18:09:12--] === sku:16231_NB,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:09:12--] === sku:13254_B,unfinish:0,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 18:09:12--] === sku:16854_B,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:09:12--] === sku:3149_GR_XL,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:09:12--] === sku:SV000376_AB,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:12--] === sku:18726_BL_M,unfinish:15,onwayNum:15,amount:25
+ 
+
+[--2014-02-17 18:09:12--] === sku:SV000376_SBLW,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:12--] === sku:18726_W_M,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:12--] === sku:17610_34,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:12--] === sku:17610_32,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:12--] === sku:17610_33,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:12--] === sku:18408_GR_XL,unfinish:15,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:12--] === sku:3623_K_XXL,unfinish:10,onwayNum:30,amount:20
+ 
+
+[--2014-02-17 18:09:12--] === sku:3623_B_XL,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:09:19--] === sku:18574_B,unfinish:16,onwayNum:30,amount:2
+ 
+
+[--2014-02-17 18:09:19--] === sku:16854_BL,unfinish:3,onwayNum:10,amount:1
+ 
+
+[--2014-02-17 18:09:19--] === sku:16231_NB,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:09:19--] === sku:13254_B,unfinish:0,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 18:09:19--] === sku:16854_B,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:09:19--] === sku:3149_GR_XL,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:09:20--] === sku:SV000376_AB,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:20--] === sku:18726_BL_M,unfinish:15,onwayNum:15,amount:25
+ 
+
+[--2014-02-17 18:09:20--] === sku:SV000376_SBLW,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:20--] === sku:18726_W_M,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:20--] === sku:17610_34,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:20--] === sku:17610_32,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:20--] === sku:17610_33,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:20--] === sku:18408_GR_XL,unfinish:15,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:09:20--] === sku:3623_K_XXL,unfinish:10,onwayNum:30,amount:20
+ 
+
+[--2014-02-17 18:09:20--] === sku:3623_B_XL,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:09:20--] === sku:16397_W,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 18:09:20--] === sku:SV000376_BW,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:37:53--] === sku:SV000390_W_L,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:37:53--] === sku:SV000390_W_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:37:53--] === sku:SV000390_W_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:37:53--] === sku:17599_O_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:37:53--] === sku:15673_O_S,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:37:53--] === sku:18218_XL,unfinish:5,onwayNum:5,amount:6
+ 
+
+[--2014-02-17 18:37:53--] === sku:18921_PU,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 18:39:12--] === sku:19840_XL,unfinish:50,onwayNum:50,amount:20
+ 
+
+[--2014-02-17 18:39:12--] === sku:19368_BLW_M,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:39:13--] === sku:19959_WR,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:39:13--] === sku:18818_B,unfinish:55,onwayNum:55,amount:45
+ 
+
+[--2014-02-17 18:39:13--] === sku:18818_W,unfinish:60,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 18:39:13--] === sku:19709_P_M,unfinish:70,onwayNum:70,amount:10
+ 
+
+[--2014-02-17 18:39:13--] === sku:19709_P_L,unfinish:150,onwayNum:150,amount:20
+ 
+
+[--2014-02-17 18:39:13--] === sku:19709_B_L,unfinish:355,onwayNum:355,amount:20
+ 
+
+[--2014-02-17 18:39:13--] === sku:18466_B_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:39:13--] === sku:19334_R,unfinish:130,onwayNum:130,amount:130
+ 
+
+[--2014-02-17 18:39:13--] === sku:14273_P,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-17 18:39:13--] === sku:9429_W_M,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-17 18:39:13--] === sku:16615_BL,unfinish:8,onwayNum:8,amount:8
+ 
+
+[--2014-02-17 18:39:13--] === sku:3824_P,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:39:13--] === sku:5192_W,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:40:49--] === sku:14273_WR,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-17 18:40:49--] === sku:9578_O,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 18:40:49--] === sku:5031_G,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:40:49--] === sku:3870_R,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:40:49--] === sku:3802_R,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:40:49--] === sku:8777,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 18:40:49--] === sku:3803_DBL,unfinish:35,onwayNum:35,amount:35
+ 
+
+[--2014-02-17 18:40:49--] === sku:16821_B_M,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:40:49--] === sku:19709_B_M,unfinish:350,onwayNum:350,amount:30
+ 
+
+[--2014-02-17 18:41:10--] === sku:14273_WR,unfinish:0,onwayNum:25,amount:25
+ 
+
+[--2014-02-17 18:41:10--] === sku:9578_O,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 18:41:10--] === sku:5031_G,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:41:10--] === sku:3870_R,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:41:10--] === sku:3802_R,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:41:10--] === sku:8777,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 18:41:10--] === sku:3803_DBL,unfinish:0,onwayNum:35,amount:35
+ 
+
+[--2014-02-17 18:41:10--] === sku:16821_B_M,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:41:10--] === sku:19709_B_M,unfinish:320,onwayNum:350,amount:30
+ 
+
+[--2014-02-17 18:41:10--] === sku:19959_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:41:10--] === sku:18818_G,unfinish:30,onwayNum:30,amount:5
+ 
+
+[--2014-02-17 18:41:10--] === sku:18843_7,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 18:41:10--] === sku:18843_2,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-17 18:41:10--] === sku:18843_3,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 18:41:10--] === sku:18843_1,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 18:41:10--] === sku:16129_B,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:41:10--] === sku:16129_W,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 18:41:10--] === sku:19834_W_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:41:10--] === sku:19834_W_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:41:10--] === sku:20105_L,unfinish:110,onwayNum:110,amount:110
+ 
+
+[--2014-02-17 18:42:31--] === sku:9030_DBL_XXL,unfinish:-65,onwayNum:0,amount:65
+ 
+
+[--2014-02-17 18:42:50--] === sku:19834_WR_L,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:42:50--] === sku:19834_RR_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:42:50--] === sku:19834_WR_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:42:50--] === sku:20104_L,unfinish:240,onwayNum:240,amount:100
+ 
+
+[--2014-02-17 18:42:50--] === sku:20104_M,unfinish:150,onwayNum:150,amount:80
+ 
+
+[--2014-02-17 18:42:50--] === sku:19369_L,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:42:50--] === sku:19369_XL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:42:50--] === sku:19369_XXXL,unfinish:40,onwayNum:40,amount:20
+ 
+
+[--2014-02-17 18:42:50--] === sku:19369_XXL,unfinish:40,onwayNum:40,amount:20
+ 
+
+[--2014-02-17 18:42:50--] === sku:20105_M,unfinish:120,onwayNum:120,amount:20
+ 
+
+[--2014-02-17 18:42:50--] === sku:19834_RR_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:42:50--] === sku:16513_K,unfinish:80,onwayNum:80,amount:40
+ 
+
+[--2014-02-17 18:42:50--] === sku:9575_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:42:51--] === sku:19142_B_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:42:51--] === sku:8243,unfinish:22,onwayNum:22,amount:20
+ 
+
+[--2014-02-17 18:42:51--] === sku:15844_P,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:42:51--] === sku:18663_L,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-17 18:42:51--] === sku:19672_B_XXL,unfinish:30,onwayNum:30,amount:10
+ 
+
+[--2014-02-17 18:42:51--] === sku:19835_S,unfinish:25,onwayNum:25,amount:20
+ 
+
+[--2014-02-17 18:42:51--] === sku:19672_B_XL,unfinish:30,onwayNum:30,amount:10
+ 
+
+[--2014-02-17 18:42:51--] === sku:19672_NB_XXL,unfinish:30,onwayNum:30,amount:20
+ 
+
+[--2014-02-17 18:44:34--] === sku:19835_XL,unfinish:80,onwayNum:80,amount:10
+ 
+
+[--2014-02-17 18:44:34--] === sku:2902,unfinish:25,onwayNum:25,amount:20
+ 
+
+[--2014-02-17 18:44:34--] === sku:16786_B,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:44:34--] === sku:16786_L,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 18:44:34--] === sku:7970_BL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 18:44:34--] === sku:19698_R_M,unfinish:-30,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:44:34--] === sku:19957_CA_S,unfinish:15,onwayNum:15,amount:10
+ 
+
+[--2014-02-17 18:44:34--] === sku:19957_CA_L,unfinish:15,onwayNum:15,amount:10
+ 
+
+[--2014-02-17 18:44:34--] === sku:19957_CA_M,unfinish:15,onwayNum:15,amount:5
+ 
+
+[--2014-02-17 18:44:34--] === sku:19957_NB_XL,unfinish:25,onwayNum:25,amount:3
+ 
+
+[--2014-02-17 18:44:34--] === sku:19957_NB_L,unfinish:25,onwayNum:25,amount:2
+ 
+
+[--2014-02-17 18:44:34--] === sku:19957_NB_S,unfinish:25,onwayNum:25,amount:2
+ 
+
+[--2014-02-17 18:44:34--] === sku:13633_28,unfinish:21,onwayNum:21,amount:21
+ 
+
+[--2014-02-17 18:44:35--] === sku:13633_30,unfinish:0,onwayNum:30,amount:20
+ 
+
+[--2014-02-17 18:44:35--] === sku:13633_29,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:44:35--] === sku:18218_S,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 18:44:35--] === sku:16654_WH_XL,unfinish:2,onwayNum:5,amount:2
+ 
+
+[--2014-02-17 18:44:35--] === sku:18218_L,unfinish:1,onwayNum:20,amount:1
+ 
+
+[--2014-02-17 18:44:35--] === sku:15673_O_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:44:35--] === sku:15673_P_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:44:35--] === sku:3682_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:46:16--] === sku:19409_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:46:16--] === sku:19409_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:46:16--] === sku:SV000390_Y_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:46:16--] === sku:SV000390_Y_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:46:16--] === sku:19840_M,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:46:16--] === sku:19835_XXL,unfinish:102,onwayNum:102,amount:21
+ 
+
+[--2014-02-17 18:46:17--] === sku:19672_NB_XL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:46:17--] === sku:19835_M,unfinish:60,onwayNum:60,amount:10
+ 
+
+[--2014-02-17 18:46:17--] === sku:19835_L,unfinish:50,onwayNum:50,amount:20
+ 
+
+[--2014-02-17 18:46:17--] === sku:13941_B,unfinish:0,onwayNum:0,amount:5
+ 
+
+[--2014-02-17 18:46:17--] === sku:8220_W,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:46:17--] === sku:8220_R,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 18:46:17--] === sku:16855_BL_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:46:17--] === sku:16855_BL_M,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 18:46:17--] === sku:16855_WR_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:46:17--] === sku:13876_L,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-17 18:46:17--] === sku:13876_M,unfinish:50,onwayNum:50,amount:35
+ 
+
+[--2014-02-17 18:46:17--] === sku:17589_SBL_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 18:46:17--] === sku:17589_RR_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 18:46:17--] === sku:17589_RR_L,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 18:46:17--] === sku:SV000390_Y_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 18:47:40--] === sku:TK1352,unfinish:700,onwayNum:700,amount:300
+ 
+
+[--2014-02-17 18:47:40--] === sku:TK1015,unfinish:200,onwayNum:200,amount:100
+ 
+
+[--2014-02-17 18:47:41--] === sku:TK0715,unfinish:400,onwayNum:400,amount:400
+ 
+
+[--2014-02-17 18:47:41--] === sku:TK1030,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 18:47:41--] === sku:TK1067,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 18:47:41--] === sku:TK1165,unfinish:180,onwayNum:180,amount:180
+ 
+
+[--2014-02-17 18:47:41--] === sku:TK1039,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 18:47:41--] === sku:TK1076,unfinish:150,onwayNum:150,amount:100
+ 
+
+[--2014-02-17 18:47:41--] === sku:TK1015,unfinish:100,onwayNum:200,amount:100
+ 
+
+[--2014-02-17 18:47:41--] === sku:TK1351,unfinish:200,onwayNum:200,amount:200
+ 
+
+[--2014-02-17 18:47:41--] === sku:TK0633,unfinish:144,onwayNum:144,amount:144
+ 
+
+[--2014-02-17 19:08:49--] === sku:17965_GR_M,unfinish:20,onwayNum:20,amount:15
+ 
+
+[--2014-02-17 19:08:49--] === sku:17965_GR_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 19:10:39--] === sku:387,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 19:20:30--] === sku:14502_RR,unfinish:45,onwayNum:50,amount:45
+ 
+
+[--2014-02-17 19:23:17--] === sku:18218_L,unfinish:0,onwayNum:20,amount:0
+ 
+
+[--2014-02-17 19:23:17--] === sku:18241_BL_XL,unfinish:0,onwayNum:40,amount:0
+ 
+
+[--2014-02-17 19:23:17--] === sku:5198_BE_L,unfinish:-120,onwayNum:0,amount:0
+ 
+
+[--2014-02-17 19:23:17--] === sku:2569,unfinish:0,onwayNum:0,amount:0
+ 
+
+[--2014-02-17 19:23:17--] === sku:8838,unfinish:89,onwayNum:89,amount:0
+ 
+
+[--2014-02-17 19:33:22--] === sku:632,unfinish:480,onwayNum:480,amount:480
+ 
+
+[--2014-02-17 19:33:22--] === sku:634,unfinish:120,onwayNum:120,amount:12
+ 
+
+[--2014-02-17 19:33:22--] === sku:2728,unfinish:223,onwayNum:223,amount:200
+ 
+
+[--2014-02-17 19:33:22--] === sku:1336,unfinish:300,onwayNum:300,amount:300
+ 
+
+[--2014-02-17 19:33:22--] === sku:14725,unfinish:200,onwayNum:200,amount:99
+ 
+
+[--2014-02-17 19:33:22--] === sku:10456,unfinish:150,onwayNum:150,amount:150
+ 
+
+[--2014-02-17 19:33:22--] === sku:TK0023,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:33:22--] === sku:14726,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 19:33:22--] === sku:18774,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:33:22--] === sku:10755,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:34:37--] === sku:17544,unfinish:200,onwayNum:200,amount:200
+ 
+
+[--2014-02-17 19:34:47--] === sku:17544,unfinish:0,onwayNum:200,amount:200
+ 
+
+[--2014-02-17 19:34:47--] === sku:10416,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 19:34:47--] === sku:10985,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 19:34:47--] === sku:TK1046,unfinish:50,onwayNum:50,amount:25
+ 
+
+[--2014-02-17 19:34:47--] === sku:19031,unfinish:20,onwayNum:25,amount:20
+ 
+
+[--2014-02-17 19:34:47--] === sku:18332,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 19:34:47--] === sku:TK0336,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 19:34:47--] === sku:18716,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 19:34:47--] === sku:15536,unfinish:50,onwayNum:50,amount:20
+ 
+
+[--2014-02-17 19:34:47--] === sku:18872,unfinish:60,onwayNum:60,amount:30
+ 
+
+[--2014-02-17 19:34:47--] === sku:2549,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 19:34:47--] === sku:6057,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:34:48--] === sku:2149,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 19:34:48--] === sku:11991,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:34:48--] === sku:1263,unfinish:203,onwayNum:203,amount:200
+ 
+
+[--2014-02-17 19:34:48--] === sku:1528,unfinish:790,onwayNum:790,amount:30
+ 
+
+[--2014-02-17 19:34:48--] === sku:20142,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 19:34:48--] === sku:TK1369,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 19:34:48--] === sku:TK1360,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 19:34:48--] === sku:TK1370,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 19:34:48--] === sku:TK1372,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:36:02--] === sku:TK1377,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:36:02--] === sku:TK1373,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 19:36:02--] === sku:TK1375,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 19:36:02--] === sku:TK1367,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 19:36:02--] === sku:TK0833,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 19:36:02--] === sku:8279,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:36:02--] === sku:635,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:36:02--] === sku:14742,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:36:03--] === sku:1690,unfinish:200,onwayNum:200,amount:200
+ 
+
+[--2014-02-17 19:36:03--] === sku:1845,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:36:03--] === sku:19025,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:36:03--] === sku:TK1415,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 19:36:03--] === sku:TK1399,unfinish:50,onwayNum:50,amount:24
+ 
+
+[--2014-02-17 19:36:03--] === sku:TK0215,unfinish:100,onwayNum:200,amount:200
+ 
+
+[--2014-02-17 19:36:03--] === sku:TK0987,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 19:36:03--] === sku:TK0939,unfinish:36,onwayNum:36,amount:36
+ 
+
+[--2014-02-17 19:36:03--] === sku:11709,unfinish:100,onwayNum:1100,amount:100
+ 
+
+[--2014-02-17 19:36:03--] === sku:TK1158,unfinish:160,onwayNum:160,amount:160
+ 
+
+[--2014-02-17 20:11:04--] === sku:19538,unfinish:400,onwayNum:400,amount:150
+ 
+
+[--2014-02-17 20:11:04--] === sku:19539,unfinish:350,onwayNum:350,amount:150
+ 
+
+[--2014-02-17 20:11:04--] === sku:19540,unfinish:500,onwayNum:500,amount:250
+ 
+
+[--2014-02-17 20:11:04--] === sku:19541,unfinish:700,onwayNum:700,amount:250
+ 
+
+[--2014-02-17 20:11:04--] === sku:19542,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-17 20:11:05--] === sku:19543,unfinish:250,onwayNum:250,amount:100
+ 
+
+[--2014-02-17 20:11:05--] === sku:19546,unfinish:150,onwayNum:150,amount:150
+ 
+
+[--2014-02-17 20:11:05--] === sku:19547,unfinish:350,onwayNum:350,amount:150
+ 
+
+[--2014-02-17 20:11:05--] === sku:19548,unfinish:150,onwayNum:150,amount:50
+ 
+
+[--2014-02-17 20:11:05--] === sku:19549,unfinish:300,onwayNum:300,amount:100
+ 
+
+[--2014-02-17 20:11:05--] === sku:19550,unfinish:150,onwayNum:150,amount:50
+ 
+
+[--2014-02-17 20:11:05--] === sku:19551,unfinish:260,onwayNum:260,amount:100
+ 
+
+[--2014-02-17 20:11:05--] === sku:19552,unfinish:330,onwayNum:330,amount:150
+ 
+
+[--2014-02-17 20:11:05--] === sku:19553,unfinish:450,onwayNum:450,amount:150
+ 
+
+[--2014-02-17 20:20:18--] === sku:19239,unfinish:-300,onwayNum:0,amount:300
+ 
+
+[--2014-02-17 20:20:18--] === sku:19239,unfinish:0,onwayNum:0,amount:299
+ 
+
+[--2014-02-17 20:54:54--] === sku:20017_B,unfinish:0,onwayNum:100,amount:2
+ 
+
+[--2014-02-17 20:54:54--] === sku:18142_W,unfinish:0,onwayNum:0,amount:2
+ 
+
+[--2014-02-17 20:54:55--] === sku:11100_BL,unfinish:70,onwayNum:70,amount:40
+ 
+
+[--2014-02-17 20:54:55--] === sku:10443,unfinish:50,onwayNum:50,amount:10
+ 
+
+[--2014-02-17 20:54:55--] === sku:11673,unfinish:35,onwayNum:35,amount:10
+ 
+
+[--2014-02-17 20:54:55--] === sku:7558_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:54:55--] === sku:16973_NB_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:54:55--] === sku:7444_W_S,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:54:55--] === sku:5532_DBL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:54:55--] === sku:7113_W_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:54:55--] === sku:20122_XL,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 20:54:55--] === sku:20122_L,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 20:54:55--] === sku:6746,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:54:55--] === sku:7484_B,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:25--] === sku:7113_B_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:26--] === sku:16658_W_L,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 20:56:26--] === sku:11052_GR,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:26--] === sku:7116_PU,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 20:56:26--] === sku:9074_Y,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:26--] === sku:3638_B,unfinish:32,onwayNum:32,amount:25
+ 
+
+[--2014-02-17 20:56:26--] === sku:13337_BL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:56:26--] === sku:8185_Y_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:36--] === sku:7113_B_M,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:36--] === sku:16658_W_L,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 20:56:36--] === sku:11052_GR,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:36--] === sku:7116_PU,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 20:56:36--] === sku:9074_Y,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:36--] === sku:3638_B,unfinish:7,onwayNum:32,amount:25
+ 
+
+[--2014-02-17 20:56:36--] === sku:13337_BL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:56:36--] === sku:8185_Y_M,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:51--] === sku:7113_B_M,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:51--] === sku:16658_W_L,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 20:56:51--] === sku:11052_GR,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:51--] === sku:7116_PU,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-17 20:56:51--] === sku:9074_Y,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:51--] === sku:3638_B,unfinish:7,onwayNum:32,amount:25
+ 
+
+[--2014-02-17 20:56:51--] === sku:13337_BL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:56:51--] === sku:8185_Y_M,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:51--] === sku:16450_LG_L,unfinish:40,onwayNum:40,amount:30
+ 
+
+[--2014-02-17 20:56:51--] === sku:9143_R,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:51--] === sku:5388_B,unfinish:15,onwayNum:15,amount:5
+ 
+
+[--2014-02-17 20:56:51--] === sku:16450_W_L,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-17 20:56:51--] === sku:15753_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:51--] === sku:3346_W,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:56:52--] === sku:11478_W,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:52--] === sku:18776_GR_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:56:52--] === sku:20041,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-17 20:56:52--] === sku:11478_DC,unfinish:40,onwayNum:40,amount:20
+ 
+
+[--2014-02-17 20:56:52--] === sku:7552_B_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:56:52--] === sku:2861,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-17 20:58:21--] === sku:17028_P_M,unfinish:50,onwayNum:50,amount:30
+ 
+
+[--2014-02-17 20:58:21--] === sku:19909_A_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:58:21--] === sku:17028_P_XL,unfinish:30,onwayNum:30,amount:20
+ 
+
+[--2014-02-17 20:58:21--] === sku:8185_P_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-17 20:58:21--] === sku:9150_5,unfinish:20,onwayNum:20,amount:1
+ 
+
+[--2014-02-17 20:58:22--] === sku:8183_O,unfinish:10,onwayNum:10,amount:1
+ 
+
+[--2014-02-17 20:58:22--] === sku:13617_BL_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13617_R_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13617_BL_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13617_R_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13617_BL_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13617_R_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13620_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13620_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13620_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13850_W_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13850_W_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:22--] === sku:13850_B_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:23--] === sku:13850_W_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:23--] === sku:13850_B_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:49--] === sku:13850_B_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:49--] === sku:7669_B,unfinish:121,onwayNum:121,amount:120
+ 
+
+[--2014-02-17 20:58:59--] === sku:13850_B_M,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-17 20:58:59--] === sku:7669_B,unfinish:1,onwayNum:121,amount:120
+ 
+
+[--2014-02-17 20:58:59--] === sku:9306_XL,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-17 20:58:59--] === sku:9306_L,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:13:58--] === sku:7760_WRE_37,unfinish:25,onwayNum:25,amount:35
+ 
+
+[--2014-02-18 09:13:58--] === sku:7760_LG_37,unfinish:30,onwayNum:30,amount:10
+ 
+
+[--2014-02-18 09:13:58--] === sku:13215_B_36,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:13:58--] === sku:13215_BE_39,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:13:58--] === sku:16033_R_40,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 09:13:58--] === sku:14462_B_36,unfinish:10,onwayNum:10,amount:5
+ 
+
+[--2014-02-18 09:13:58--] === sku:14462_B_39,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 09:13:58--] === sku:16564_39,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:13:58--] === sku:9508_B_36,unfinish:15,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 09:13:58--] === sku:16033_R_37,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 09:13:58--] === sku:15762_S_37,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:13:58--] === sku:18551_B_37,unfinish:25,onwayNum:25,amount:12
+ 
+
+[--2014-02-18 09:15:52--] === sku:7760_BL_38,unfinish:30,onwayNum:30,amount:10
+ 
+
+[--2014-02-18 09:15:52--] === sku:7760_LG_39,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 09:15:52--] === sku:9508_B_36,unfinish:5,onwayNum:15,amount:5
+ 
+
+[--2014-02-18 09:15:52--] === sku:14462_B_36,unfinish:5,onwayNum:10,amount:5
+ 
+
+[--2014-02-18 09:15:52--] === sku:14462_R_36,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 09:15:52--] === sku:14462_R_39,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:15:52--] === sku:14462_B_38,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:15:53--] === sku:7936_38,unfinish:80,onwayNum:80,amount:70
+ 
+
+[--2014-02-18 09:15:53--] === sku:18551_B_38,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:15:53--] === sku:7936_37,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-18 09:15:53--] === sku:9508_B_39,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:15:53--] === sku:18551_B_39,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:15:53--] === sku:14462_A_38,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 09:15:53--] === sku:14462_A_36,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:15:53--] === sku:18769_PU_37,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 09:15:53--] === sku:18769_PU_36,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 09:15:53--] === sku:18769_B_39,unfinish:-10,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 09:16:03--] === sku:7760_BL_38,unfinish:20,onwayNum:30,amount:10
+ 
+
+[--2014-02-18 09:16:03--] === sku:7760_LG_39,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 09:16:03--] === sku:9508_B_36,unfinish:0,onwayNum:15,amount:5
+ 
+
+[--2014-02-18 09:16:03--] === sku:14462_B_36,unfinish:0,onwayNum:10,amount:5
+ 
+
+[--2014-02-18 09:16:03--] === sku:14462_R_36,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 09:16:03--] === sku:14462_R_39,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:16:03--] === sku:14462_B_38,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:16:03--] === sku:7936_38,unfinish:10,onwayNum:80,amount:70
+ 
+
+[--2014-02-18 09:16:03--] === sku:18551_B_38,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:16:03--] === sku:7936_37,unfinish:0,onwayNum:60,amount:60
+ 
+
+[--2014-02-18 09:16:03--] === sku:9508_B_39,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:16:03--] === sku:18551_B_39,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:16:03--] === sku:14462_A_38,unfinish:0,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 09:16:03--] === sku:14462_A_36,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:16:03--] === sku:18769_PU_37,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 09:16:03--] === sku:18769_PU_36,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 09:16:03--] === sku:18769_B_39,unfinish:-10,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 09:16:03--] === sku:13214_B_39,unfinish:60,onwayNum:60,amount:5
+ 
+
+[--2014-02-18 09:16:03--] === sku:13214_B_38,unfinish:60,onwayNum:60,amount:20
+ 
+
+[--2014-02-18 09:16:03--] === sku:9508_B_37,unfinish:20,onwayNum:20,amount:5
+ 
+
+[--2014-02-18 09:16:03--] === sku:13214_W_37,unfinish:30,onwayNum:30,amount:10
+ 
+
+[--2014-02-18 09:23:35--] === sku:5448_10,unfinish:1000,onwayNum:1000,amount:776
+ 
+
+[--2014-02-18 09:23:35--] === sku:9125_CA_39,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 09:23:35--] === sku:9125_CA_38,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 09:23:35--] === sku:17921_B_37,unfinish:21,onwayNum:21,amount:20
+ 
+
+[--2014-02-18 09:23:35--] === sku:17921_RBL_38,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 09:23:36--] === sku:17921_B_40,unfinish:11,onwayNum:11,amount:10
+ 
+
+[--2014-02-18 09:23:36--] === sku:17921_B_39,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 09:23:36--] === sku:16310_G_42,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:23:36--] === sku:16310_BR_42,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 09:23:36--] === sku:16860_R_39,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 09:23:36--] === sku:16860_B_32,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 09:23:36--] === sku:16860_P_40,unfinish:15,onwayNum:15,amount:5
+ 
+
+[--2014-02-18 09:23:36--] === sku:16860_B_27,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 09:23:36--] === sku:16859_GO_40,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 09:23:36--] === sku:16859_GO_38,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 09:23:36--] === sku:16859_S_39,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:23:37--] === sku:16859_S_38,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:23:37--] === sku:16859_S_37,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 09:23:37--] === sku:5779,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:23:37--] === sku:1468,unfinish:400,onwayNum:400,amount:400
+ 
+
+[--2014-02-18 09:23:37--] === sku:19099_BL,unfinish:288,onwayNum:288,amount:150
+ 
+
+[--2014-02-18 09:26:40--] === sku:19099_PU,unfinish:188,onwayNum:188,amount:100
+ 
+
+[--2014-02-18 09:26:40--] === sku:19099_BR,unfinish:250,onwayNum:250,amount:100
+ 
+
+[--2014-02-18 09:26:40--] === sku:19100_B,unfinish:198,onwayNum:198,amount:200
+ 
+
+[--2014-02-18 09:26:41--] === sku:19099_W,unfinish:426,onwayNum:426,amount:250
+ 
+
+[--2014-02-18 09:26:41--] === sku:19100_L,unfinish:140,onwayNum:140,amount:150
+ 
+
+[--2014-02-18 09:26:41--] === sku:19099_B,unfinish:434,onwayNum:434,amount:250
+ 
+
+[--2014-02-18 09:26:41--] === sku:19100_O,unfinish:38,onwayNum:38,amount:50
+ 
+
+[--2014-02-18 09:26:41--] === sku:19497,unfinish:450,onwayNum:450,amount:450
+ 
+
+[--2014-02-18 09:26:41--] === sku:3713_BR,unfinish:550,onwayNum:550,amount:550
+ 
+
+[--2014-02-18 09:26:41--] === sku:19865_GR,unfinish:-100,onwayNum:0,amount:10
+ 
+
+[--2014-02-18 09:26:41--] === sku:18943_R,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 09:28:09--] === sku:19099_PU,unfinish:88,onwayNum:188,amount:100
+ 
+
+[--2014-02-18 09:28:09--] === sku:19099_BR,unfinish:150,onwayNum:250,amount:100
+ 
+
+[--2014-02-18 09:28:09--] === sku:19100_B,unfinish:198,onwayNum:198,amount:200
+ 
+
+[--2014-02-18 09:28:09--] === sku:19099_W,unfinish:176,onwayNum:426,amount:250
+ 
+
+[--2014-02-18 09:28:09--] === sku:19100_L,unfinish:140,onwayNum:140,amount:150
+ 
+
+[--2014-02-18 09:28:10--] === sku:19099_B,unfinish:184,onwayNum:434,amount:250
+ 
+
+[--2014-02-18 09:28:10--] === sku:19100_O,unfinish:38,onwayNum:38,amount:50
+ 
+
+[--2014-02-18 09:28:10--] === sku:19497,unfinish:0,onwayNum:450,amount:450
+ 
+
+[--2014-02-18 09:28:10--] === sku:3713_BR,unfinish:0,onwayNum:550,amount:550
+ 
+
+[--2014-02-18 09:28:10--] === sku:19865_GR,unfinish:-100,onwayNum:0,amount:10
+ 
+
+[--2014-02-18 09:28:10--] === sku:18943_R,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 09:28:22--] === sku:19099_PU,unfinish:88,onwayNum:188,amount:100
+ 
+
+[--2014-02-18 09:28:22--] === sku:19099_BR,unfinish:50,onwayNum:250,amount:100
+ 
+
+[--2014-02-18 09:28:22--] === sku:19100_B,unfinish:198,onwayNum:198,amount:200
+ 
+
+[--2014-02-18 09:28:22--] === sku:19099_W,unfinish:176,onwayNum:426,amount:250
+ 
+
+[--2014-02-18 09:28:22--] === sku:19100_L,unfinish:140,onwayNum:140,amount:150
+ 
+
+[--2014-02-18 09:28:22--] === sku:19099_B,unfinish:184,onwayNum:434,amount:250
+ 
+
+[--2014-02-18 09:28:22--] === sku:19100_O,unfinish:38,onwayNum:38,amount:50
+ 
+
+[--2014-02-18 09:28:22--] === sku:19497,unfinish:0,onwayNum:450,amount:450
+ 
+
+[--2014-02-18 09:28:22--] === sku:3713_BR,unfinish:0,onwayNum:550,amount:550
+ 
+
+[--2014-02-18 09:28:22--] === sku:19865_GR,unfinish:-100,onwayNum:0,amount:10
+ 
+
+[--2014-02-18 09:28:22--] === sku:18943_R,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 09:28:22--] === sku:18540_L,unfinish:200,onwayNum:200,amount:100
+ 
+
+[--2014-02-18 09:28:22--] === sku:18450_W,unfinish:150,onwayNum:150,amount:150
+ 
+
+[--2014-02-18 09:28:22--] === sku:18540_B,unfinish:310,onwayNum:310,amount:190
+ 
+
+[--2014-02-18 09:28:23--] === sku:18943_W,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 09:28:23--] === sku:19708_3,unfinish:600,onwayNum:600,amount:170
+ 
+
+[--2014-02-18 09:28:23--] === sku:18943_B,unfinish:150,onwayNum:150,amount:150
+ 
+
+[--2014-02-18 09:28:23--] === sku:18450_B,unfinish:163,onwayNum:163,amount:150
+ 
+
+[--2014-02-18 09:28:23--] === sku:6237,unfinish:0,onwayNum:0,amount:50
+ 
+
+[--2014-02-18 09:28:23--] === sku:6236,unfinish:0,onwayNum:0,amount:60
+ 
+
+[--2014-02-18 09:28:23--] === sku:5968,unfinish:150,onwayNum:150,amount:50
+ 
+
+[--2014-02-18 09:28:46--] === sku:SV000390_W_L,unfinish:10,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 09:33:37--] === sku:634,unfinish:108,onwayNum:120,amount:120
+ 
+
+[--2014-02-18 09:34:28--] === sku:634,unfinish:108,onwayNum:120,amount:108
+ 
+
+[--2014-02-18 09:38:55--] === sku:3713_R,unfinish:108,onwayNum:108,amount:108
+ 
+
+[--2014-02-18 09:38:55--] === sku:3713_B,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-18 09:38:55--] === sku:3978,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-18 09:38:55--] === sku:6068,unfinish:36,onwayNum:36,amount:36
+ 
+
+[--2014-02-18 09:38:56--] === sku:5964,unfinish:66,onwayNum:66,amount:20
+ 
+
+[--2014-02-18 09:38:56--] === sku:8435,unfinish:61,onwayNum:61,amount:60
+ 
+
+[--2014-02-18 09:38:56--] === sku:4921,unfinish:36,onwayNum:36,amount:36
+ 
+
+[--2014-02-18 09:38:56--] === sku:4283,unfinish:120,onwayNum:120,amount:60
+ 
+
+[--2014-02-18 09:38:56--] === sku:6071,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-18 09:38:56--] === sku:4450,unfinish:48,onwayNum:48,amount:48
+ 
+
+[--2014-02-18 09:38:56--] === sku:5181_BRO,unfinish:240,onwayNum:240,amount:120
+ 
+
+[--2014-02-18 09:38:56--] === sku:4444,unfinish:240,onwayNum:240,amount:96
+ 
+
+[--2014-02-18 09:38:56--] === sku:5279_S,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-18 09:38:56--] === sku:4282,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-18 09:38:56--] === sku:5181_S,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-18 09:38:56--] === sku:4985,unfinish:456,onwayNum:456,amount:36
+ 
+
+[--2014-02-18 09:38:56--] === sku:4610,unfinish:144,onwayNum:144,amount:120
+ 
+
+[--2014-02-18 09:38:56--] === sku:4435,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-18 09:38:56--] === sku:4293,unfinish:36,onwayNum:36,amount:36
+ 
+
+[--2014-02-18 09:38:57--] === sku:4195,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-18 09:38:57--] === sku:6067,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-18 09:41:15--] === sku:6063,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-18 09:41:15--] === sku:4929,unfinish:324,onwayNum:324,amount:240
+ 
+
+[--2014-02-18 09:41:15--] === sku:5585_FR,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:41:15--] === sku:2893,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:41:15--] === sku:5585_FL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:41:15--] === sku:5551_R,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 09:41:16--] === sku:5551_PU,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 09:41:16--] === sku:2942,unfinish:50,onwayNum:50,amount:33
+ 
+
+[--2014-02-18 09:41:16--] === sku:4431,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 09:41:16--] === sku:11777,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 09:41:16--] === sku:5702_S,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-18 09:41:16--] === sku:5702_GO,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-18 09:41:16--] === sku:1775,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-18 09:41:16--] === sku:4424,unfinish:80,onwayNum:80,amount:30
+ 
+
+[--2014-02-18 09:41:16--] === sku:2848,unfinish:0,onwayNum:0,amount:50
+ 
+
+[--2014-02-18 09:41:16--] === sku:3952,unfinish:300,onwayNum:300,amount:300
+ 
+
+[--2014-02-18 09:41:16--] === sku:606,unfinish:80,onwayNum:80,amount:30
+ 
+
+[--2014-02-18 09:41:16--] === sku:5433_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 09:41:17--] === sku:5551_W,unfinish:150,onwayNum:150,amount:150
+ 
+
+[--2014-02-18 09:41:17--] === sku:2892,unfinish:60,onwayNum:60,amount:30
+ 
+
+[--2014-02-18 09:41:17--] === sku:5274_LB,unfinish:50,onwayNum:50,amount:30
+ 
+
+[--2014-02-18 09:42:32--] === sku:2850,unfinish:350,onwayNum:350,amount:250
+ 
+
+[--2014-02-18 09:42:32--] === sku:5551_P,unfinish:100,onwayNum:100,amount:50
+ 
+
+[--2014-02-18 09:42:32--] === sku:5551_RR,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 09:42:32--] === sku:5551_Y,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 09:42:32--] === sku:5274_R,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:42:33--] === sku:6799,unfinish:-40,onwayNum:60,amount:60
+ 
+
+[--2014-02-18 09:42:33--] === sku:5343_BL,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-18 09:42:33--] === sku:5551_B,unfinish:100,onwayNum:100,amount:51
+ 
+
+[--2014-02-18 09:42:33--] === sku:7131_LPU,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 09:42:33--] === sku:5433_GO,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 09:57:23--] === sku:16719_DGR_XL,unfinish:-30,onwayNum:20,amount:50
+ 
+
+[--2014-02-18 09:57:23--] === sku:16719_DGR_XL,unfinish:20,onwayNum:20,amount:49
+ 
+
+[--2014-02-18 09:58:06--] === sku:18574_GR,unfinish:-40,onwayNum:0,amount:40
+ 
+
+[--2014-02-18 09:58:06--] === sku:18574_GR,unfinish:0,onwayNum:0,amount:38
+ 
+
+[--2014-02-18 09:58:57--] === sku:19865_B,unfinish:-215,onwayNum:35,amount:250
+ 
+
+[--2014-02-18 09:58:57--] === sku:19865_B,unfinish:35,onwayNum:35,amount:219
+ 
+
+[--2014-02-18 10:08:07--] === sku:17459_GR_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 10:08:08--] === sku:18318_GR_M,unfinish:200,onwayNum:200,amount:95
+ 
+
+[--2014-02-18 10:08:08--] === sku:SV000171,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 10:08:08--] === sku:SV000460_M,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 10:08:08--] === sku:19930_5,unfinish:3,onwayNum:3,amount:3
+ 
+
+[--2014-02-18 10:08:08--] === sku:7690_P,unfinish:25,onwayNum:25,amount:10
+ 
+
+[--2014-02-18 10:08:08--] === sku:14516_Y_L,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:08:08--] === sku:14516_W_L,unfinish:10,onwayNum:10,amount:5
+ 
+
+[--2014-02-18 10:08:13--] === sku:17459_GR_M,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 10:08:13--] === sku:18318_GR_M,unfinish:105,onwayNum:200,amount:95
+ 
+
+[--2014-02-18 10:08:13--] === sku:SV000171,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 10:08:13--] === sku:SV000460_M,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 10:08:13--] === sku:19930_5,unfinish:0,onwayNum:3,amount:3
+ 
+
+[--2014-02-18 10:08:13--] === sku:7690_P,unfinish:15,onwayNum:25,amount:10
+ 
+
+[--2014-02-18 10:08:13--] === sku:14516_Y_L,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:08:13--] === sku:14516_W_L,unfinish:5,onwayNum:10,amount:5
+ 
+
+[--2014-02-18 10:08:13--] === sku:14527_BL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:08:13--] === sku:11164_BE,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 10:08:13--] === sku:10445,unfinish:25,onwayNum:25,amount:24
+ 
+
+[--2014-02-18 10:08:13--] === sku:11152_Y,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 10:08:13--] === sku:13181_B_M,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-18 10:08:13--] === sku:13181_B_L,unfinish:50,onwayNum:50,amount:30
+ 
+
+[--2014-02-18 10:08:14--] === sku:14516_B_L,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:08:14--] === sku:15909_S,unfinish:26,onwayNum:26,amount:25
+ 
+
+[--2014-02-18 10:08:14--] === sku:15909_M,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 10:15:05--] === sku:14040_Y,unfinish:70,onwayNum:70,amount:45
+ 
+
+[--2014-02-18 10:15:05--] === sku:11216_BL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 10:15:05--] === sku:13562_B,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 10:15:06--] === sku:13559_Y,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 10:15:06--] === sku:11212_B,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:06--] === sku:14040_B,unfinish:54,onwayNum:54,amount:5
+ 
+
+[--2014-02-18 10:15:06--] === sku:11213_B,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:06--] === sku:13562_W,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:06--] === sku:13223_R,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:06--] === sku:15899_W,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:06--] === sku:14040_G,unfinish:15,onwayNum:15,amount:6
+ 
+
+[--2014-02-18 10:15:06--] === sku:13251_BL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 10:15:06--] === sku:15896_R,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:06--] === sku:20197_S,unfinish:70,onwayNum:70,amount:10
+ 
+
+[--2014-02-18 10:15:06--] === sku:11671,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 10:15:07--] === sku:15909_L,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 10:15:07--] === sku:15909_XL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 10:15:07--] === sku:13227_W,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 10:15:07--] === sku:20197_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 10:15:07--] === sku:20197_M,unfinish:90,onwayNum:90,amount:30
+ 
+
+[--2014-02-18 10:15:07--] === sku:20196_WR,unfinish:21,onwayNum:21,amount:20
+ 
+
+[--2014-02-18 10:15:14--] === sku:14040_Y,unfinish:25,onwayNum:70,amount:45
+ 
+
+[--2014-02-18 10:15:14--] === sku:11216_BL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 10:15:14--] === sku:13562_B,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 10:15:14--] === sku:13559_Y,unfinish:10,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 10:15:14--] === sku:11212_B,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:14--] === sku:14040_B,unfinish:49,onwayNum:54,amount:5
+ 
+
+[--2014-02-18 10:15:14--] === sku:11213_B,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:14--] === sku:13562_W,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:14--] === sku:13223_R,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:14--] === sku:15899_W,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:14--] === sku:14040_G,unfinish:9,onwayNum:15,amount:6
+ 
+
+[--2014-02-18 10:15:14--] === sku:13251_BL,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 10:15:14--] === sku:15896_R,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 10:15:14--] === sku:20197_S,unfinish:60,onwayNum:70,amount:10
+ 
+
+[--2014-02-18 10:15:14--] === sku:11671,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 10:15:14--] === sku:15909_L,unfinish:0,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 10:15:14--] === sku:15909_XL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 10:15:14--] === sku:13227_W,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 10:15:14--] === sku:20197_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 10:15:14--] === sku:20197_M,unfinish:60,onwayNum:90,amount:30
+ 
+
+[--2014-02-18 10:15:14--] === sku:20196_WR,unfinish:1,onwayNum:21,amount:20
+ 
+
+[--2014-02-18 10:15:14--] === sku:20196_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 10:15:15--] === sku:13224_B,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 10:15:15--] === sku:5388_B,unfinish:10,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 10:33:27--] === sku:19313,unfinish:4000,onwayNum:4000,amount:4000
+ 
+
+[--2014-02-18 10:35:29--] === sku:19369_XL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 10:37:14--] === sku:19369_XXXL,unfinish:20,onwayNum:40,amount:20
+ 
+
+[--2014-02-18 10:52:07--] === sku:3623_K_XXL,unfinish:10,onwayNum:30,amount:8
+ 
+
+[--2014-02-18 10:54:06--] === sku:7760_WRE_37,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 10:59:22--] === sku:FQ00602_RR_S,unfinish:1,onwayNum:1,amount:0
+ 
+
+[--2014-02-18 10:59:22--] === sku:FC00266_WR_XXL,unfinish:0,onwayNum:12,amount:0
+ 
+
+[--2014-02-18 11:00:36--] === sku:19614,unfinish:330,onwayNum:330,amount:300
+ 
+
+[--2014-02-18 11:00:37--] === sku:4408,unfinish:1550,onwayNum:1550,amount:500
+ 
+
+[--2014-02-18 11:00:37--] === sku:19615,unfinish:1782,onwayNum:1782,amount:100
+ 
+
+[--2014-02-18 11:00:37--] === sku:15473,unfinish:980,onwayNum:980,amount:100
+ 
+
+[--2014-02-18 11:00:38--] === sku:15478,unfinish:700,onwayNum:700,amount:85
+ 
+
+[--2014-02-18 11:00:38--] === sku:2548,unfinish:500,onwayNum:500,amount:300
+ 
+
+[--2014-02-18 11:19:57--] === sku:5551_O,unfinish:0,onwayNum:0,amount:20
+ 
+
+[--2014-02-18 11:24:23--] === sku:5551_R,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:25:31--] === sku:SV000268,unfinish:100,onwayNum:100,amount:0
+ 
+
+[--2014-02-18 11:26:14--] === sku:19313,unfinish:0,onwayNum:4000,amount:4000
+ 
+
+[--2014-02-18 11:26:31--] === sku:19313,unfinish:4000,onwayNum:4000,amount:2000
+ 
+
+[--2014-02-18 11:26:43--] === sku:19313,unfinish:2000,onwayNum:4000,amount:2000
+ 
+
+[--2014-02-18 11:35:57--] === sku:18377_W,unfinish:2300,onwayNum:2300,amount:2000
+ 
+
+[--2014-02-18 11:42:02--] === sku:15477,unfinish:100,onwayNum:100,amount:40
+ 
+
+[--2014-02-18 11:42:02--] === sku:15471,unfinish:380,onwayNum:380,amount:100
+ 
+
+[--2014-02-18 11:42:02--] === sku:TK1381,unfinish:280,onwayNum:390,amount:280
+ 
+
+[--2014-02-18 11:42:02--] === sku:14652,unfinish:615,onwayNum:615,amount:285
+ 
+
+[--2014-02-18 11:42:02--] === sku:14671,unfinish:115,onwayNum:115,amount:65
+ 
+
+[--2014-02-18 11:42:02--] === sku:19603,unfinish:880,onwayNum:880,amount:40
+ 
+
+[--2014-02-18 11:42:03--] === sku:2841,unfinish:100,onwayNum:100,amount:50
+ 
+
+[--2014-02-18 11:42:03--] === sku:19598,unfinish:1265,onwayNum:1265,amount:50
+ 
+
+[--2014-02-18 11:42:03--] === sku:19864_W,unfinish:500,onwayNum:500,amount:40
+ 
+
+[--2014-02-18 11:42:03--] === sku:19604,unfinish:1300,onwayNum:1300,amount:60
+ 
+
+[--2014-02-18 11:42:03--] === sku:19864_C,unfinish:220,onwayNum:220,amount:30
+ 
+
+[--2014-02-18 11:42:03--] === sku:19716_W,unfinish:15,onwayNum:15,amount:50
+ 
+
+[--2014-02-18 11:42:03--] === sku:2858,unfinish:350,onwayNum:350,amount:270
+ 
+
+[--2014-02-18 11:44:17--] === sku:TK1377,unfinish:0,onwayNum:100,amount:100
+ 
+
+[--2014-02-18 11:44:17--] === sku:TK1377,unfinish:100,onwayNum:100,amount:99
+ 
+
+[--2014-02-18 11:44:48--] === sku:TK1375,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:44:48--] === sku:TK1375,unfinish:50,onwayNum:50,amount:49
+ 
+
+[--2014-02-18 11:46:23--] === sku:19075_C,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:46:23--] === sku:2703,unfinish:130,onwayNum:130,amount:50
+ 
+
+[--2014-02-18 11:46:23--] === sku:19076_C,unfinish:600,onwayNum:600,amount:220
+ 
+
+[--2014-02-18 11:46:23--] === sku:2791,unfinish:100,onwayNum:100,amount:20
+ 
+
+[--2014-02-18 11:46:23--] === sku:19073_W,unfinish:400,onwayNum:400,amount:100
+ 
+
+[--2014-02-18 11:46:24--] === sku:14670,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:46:24--] === sku:19076_W,unfinish:350,onwayNum:350,amount:100
+ 
+
+[--2014-02-18 11:46:24--] === sku:2823,unfinish:40,onwayNum:40,amount:30
+ 
+
+[--2014-02-18 11:46:24--] === sku:2895,unfinish:500,onwayNum:500,amount:200
+ 
+
+[--2014-02-18 11:46:24--] === sku:11999,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-18 11:46:24--] === sku:12002,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 11:46:24--] === sku:14635,unfinish:70,onwayNum:70,amount:20
+ 
+
+[--2014-02-18 11:46:24--] === sku:19728,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-18 11:46:24--] === sku:2786,unfinish:440,onwayNum:440,amount:100
+ 
+
+[--2014-02-18 11:46:24--] === sku:19725,unfinish:250,onwayNum:250,amount:100
+ 
+
+[--2014-02-18 11:46:24--] === sku:19727,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-18 11:46:24--] === sku:14634,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 11:46:24--] === sku:2192,unfinish:400,onwayNum:400,amount:100
+ 
+
+[--2014-02-18 11:46:24--] === sku:19864_W,unfinish:460,onwayNum:500,amount:150
+ 
+
+[--2014-02-18 11:46:25--] === sku:19864_C,unfinish:190,onwayNum:220,amount:120
+ 
+
+[--2014-02-18 11:46:25--] === sku:4408,unfinish:1050,onwayNum:1550,amount:150
+ 
+
+[--2014-02-18 11:57:47--] === sku:4083,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:57:48--] === sku:15478,unfinish:615,onwayNum:700,amount:15
+ 
+
+[--2014-02-18 11:57:48--] === sku:15475,unfinish:140,onwayNum:140,amount:40
+ 
+
+[--2014-02-18 11:57:48--] === sku:4860,unfinish:200,onwayNum:200,amount:100
+ 
+
+[--2014-02-18 11:57:48--] === sku:15474,unfinish:150,onwayNum:150,amount:90
+ 
+
+[--2014-02-18 11:57:48--] === sku:4861,unfinish:200,onwayNum:200,amount:100
+ 
+
+[--2014-02-18 11:57:48--] === sku:2746,unfinish:1100,onwayNum:1100,amount:500
+ 
+
+[--2014-02-18 11:57:48--] === sku:19937_C,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:57:48--] === sku:19937_W,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:57:48--] === sku:19938_C,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:57:48--] === sku:19938_W,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:57:48--] === sku:19936_C,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:57:48--] === sku:19936_W,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:57:49--] === sku:12712,unfinish:0,onwayNum:0,amount:200
+ 
+
+[--2014-02-18 11:57:49--] === sku:19373,unfinish:1050,onwayNum:1050,amount:150
+ 
+
+[--2014-02-18 11:57:49--] === sku:9994,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 11:57:49--] === sku:17896,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:57:49--] === sku:19607,unfinish:830,onwayNum:830,amount:250
+ 
+
+[--2014-02-18 11:57:49--] === sku:9656,unfinish:400,onwayNum:400,amount:400
+ 
+
+[--2014-02-18 11:57:49--] === sku:10506,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:57:49--] === sku:10650,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 11:57:49--] === sku:15298,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 11:57:49--] === sku:TK0608,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-18 11:58:35--] === sku:18593,unfinish:344,onwayNum:344,amount:144
+ 
+
+[--2014-02-18 11:58:35--] === sku:10639,unfinish:200,onwayNum:200,amount:200
+ 
+
+[--2014-02-18 11:58:35--] === sku:19023,unfinish:1200,onwayNum:1200,amount:250
+ 
+
+[--2014-02-18 11:58:35--] === sku:19566,unfinish:50,onwayNum:50,amount:35
+ 
+
+[--2014-02-18 11:58:35--] === sku:TK1384,unfinish:400,onwayNum:400,amount:400
+ 
+
+[--2014-02-18 11:58:35--] === sku:TK1423,unfinish:200,onwayNum:200,amount:100
+ 
+
+[--2014-02-18 11:58:35--] === sku:TK1426,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-18 11:58:35--] === sku:TK1398,unfinish:0,onwayNum:0,amount:200
+ 
+
+[--2014-02-18 11:58:35--] === sku:19902_W,unfinish:250,onwayNum:250,amount:50
+ 
+
+[--2014-02-18 11:58:50--] === sku:17599_O_XXL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:31:43--] === sku:19094_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:31:43--] === sku:19094_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:31:44--] === sku:3670_B_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:31:44--] === sku:3465_DBL_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:31:44--] === sku:3465_CA_S,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:31:44--] === sku:5674_W_XL,unfinish:150,onwayNum:150,amount:70
+ 
+
+[--2014-02-18 12:31:44--] === sku:19578,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-18 12:31:44--] === sku:19576_BL,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 12:31:44--] === sku:19576_R,unfinish:150,onwayNum:150,amount:150
+ 
+
+[--2014-02-18 12:31:45--] === sku:11898_M,unfinish:400,onwayNum:400,amount:100
+ 
+
+[--2014-02-18 12:31:45--] === sku:19766_B_M,unfinish:0,onwayNum:0,amount:10
+ 
+
+[--2014-02-18 12:31:45--] === sku:19766_B_L,unfinish:0,onwayNum:0,amount:15
+ 
+
+[--2014-02-18 12:31:45--] === sku:19766_GR_L,unfinish:0,onwayNum:0,amount:5
+ 
+
+[--2014-02-18 12:31:45--] === sku:5393_BL,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-18 12:31:46--] === sku:5393_G,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:31:46--] === sku:20095_9,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:31:46--] === sku:20095_8,unfinish:0,onwayNum:0,amount:20
+ 
+
+[--2014-02-18 12:31:46--] === sku:20128_BR_M,unfinish:80,onwayNum:80,amount:100
+ 
+
+[--2014-02-18 12:31:46--] === sku:20128_BR_L,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 12:31:46--] === sku:20128_BR_XL,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 12:31:46--] === sku:11624_M,unfinish:100,onwayNum:100,amount:65
+ 
+
+[--2014-02-18 12:35:04--] === sku:5629_L,unfinish:20,onwayNum:20,amount:1
+ 
+
+[--2014-02-18 12:35:04--] === sku:20128_Y_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:35:04--] === sku:3689_P,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:35:16--] === sku:5629_L,unfinish:19,onwayNum:20,amount:1
+ 
+
+[--2014-02-18 12:35:16--] === sku:20128_Y_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:35:16--] === sku:3689_P,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:35:16--] === sku:3689_PU,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:35:16--] === sku:5393_R,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:35:16--] === sku:5393_P,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:35:16--] === sku:16016_PU,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:35:16--] === sku:13559_Y,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 12:35:16--] === sku:13559_GR,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:35:16--] === sku:13876_M,unfinish:15,onwayNum:50,amount:15
+ 
+
+[--2014-02-18 12:35:16--] === sku:13783_BL_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:35:17--] === sku:18714_B,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:35:17--] === sku:18663_M,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:35:17--] === sku:13783_R_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:35:17--] === sku:13783_B_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:35:17--] === sku:13783_B_S,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:35:17--] === sku:13783_W_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:35:17--] === sku:13783_W_S,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:35:17--] === sku:13366_BL_XL,unfinish:40,onwayNum:40,amount:25
+ 
+
+[--2014-02-18 12:35:17--] === sku:13854_B,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:35:17--] === sku:13876_L,unfinish:10,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 12:38:52--] === sku:12743,unfinish:150,onwayNum:150,amount:50
+ 
+
+[--2014-02-18 12:38:52--] === sku:18066_30,unfinish:3,onwayNum:3,amount:3
+ 
+
+[--2014-02-18 12:38:52--] === sku:18066_28,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:38:52--] === sku:3689_W,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:38:52--] === sku:3590_B,unfinish:30,onwayNum:30,amount:20
+ 
+
+[--2014-02-18 12:38:52--] === sku:18466_G_L,unfinish:40,onwayNum:40,amount:10
+ 
+
+[--2014-02-18 12:38:52--] === sku:8777,unfinish:0,onwayNum:50,amount:4
+ 
+
+[--2014-02-18 12:38:52--] === sku:9429_B_M,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 12:38:52--] === sku:9429_B_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:38:52--] === sku:18466_B_M,unfinish:55,onwayNum:55,amount:10
+ 
+
+[--2014-02-18 12:38:52--] === sku:10741,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:38:53--] === sku:8778,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:38:53--] === sku:11407_B,unfinish:50,onwayNum:50,amount:15
+ 
+
+[--2014-02-18 12:38:53--] === sku:18477_K_XL,unfinish:45,onwayNum:45,amount:28
+ 
+
+[--2014-02-18 12:38:53--] === sku:18466_CR_L,unfinish:40,onwayNum:40,amount:20
+ 
+
+[--2014-02-18 12:38:53--] === sku:18466_CR_M,unfinish:45,onwayNum:45,amount:10
+ 
+
+[--2014-02-18 12:38:53--] === sku:12309,unfinish:500,onwayNum:500,amount:200
+ 
+
+[--2014-02-18 12:38:53--] === sku:19029,unfinish:300,onwayNum:300,amount:200
+ 
+
+[--2014-02-18 12:38:53--] === sku:19020,unfinish:360,onwayNum:360,amount:120
+ 
+
+[--2014-02-18 12:40:35--] === sku:18819_BL,unfinish:34,onwayNum:34,amount:6
+ 
+
+[--2014-02-18 12:40:35--] === sku:18819_A,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:40:35--] === sku:19494_RR_XL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:40:36--] === sku:19494_B_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:40:36--] === sku:19494_G_M,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 12:40:36--] === sku:19494_W_S,unfinish:10,onwayNum:10,amount:20
+ 
+
+[--2014-02-18 12:40:36--] === sku:13900_W_XXL,unfinish:30,onwayNum:30,amount:10
+ 
+
+[--2014-02-18 12:40:36--] === sku:13900_BL_XXL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:40:36--] === sku:5355_B_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:40:36--] === sku:14052_M,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 12:40:36--] === sku:11674,unfinish:15,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 12:40:36--] === sku:14052_XL,unfinish:15,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 12:40:36--] === sku:5355_W_S,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:40:36--] === sku:13871_30,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:40:36--] === sku:12338,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:40:36--] === sku:5214_A,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:40:37--] === sku:13871_31,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:40:37--] === sku:5355_W_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:40:37--] === sku:17115,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:40:37--] === sku:9399_K,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:18--] === sku:18819_BL,unfinish:28,onwayNum:34,amount:6
+ 
+
+[--2014-02-18 12:41:18--] === sku:18819_A,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:41:18--] === sku:19494_RR_XL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:41:18--] === sku:19494_B_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:41:18--] === sku:19494_G_M,unfinish:10,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 12:41:18--] === sku:19494_W_S,unfinish:10,onwayNum:10,amount:20
+ 
+
+[--2014-02-18 12:41:18--] === sku:13900_W_XXL,unfinish:20,onwayNum:30,amount:10
+ 
+
+[--2014-02-18 12:41:18--] === sku:13900_BL_XXL,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:41:18--] === sku:5355_B_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:18--] === sku:14052_M,unfinish:10,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 12:41:18--] === sku:11674,unfinish:5,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 12:41:18--] === sku:14052_XL,unfinish:5,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 12:41:18--] === sku:5355_W_S,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:18--] === sku:13871_30,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:18--] === sku:12338,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:41:18--] === sku:5214_A,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:18--] === sku:13871_31,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:18--] === sku:5355_W_XL,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:18--] === sku:17115,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:41:18--] === sku:9399_K,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:35--] === sku:18819_BL,unfinish:22,onwayNum:34,amount:6
+ 
+
+[--2014-02-18 12:41:35--] === sku:18819_A,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:41:35--] === sku:19494_RR_XL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:41:35--] === sku:19494_B_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:41:35--] === sku:19494_G_M,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 12:41:35--] === sku:19494_W_S,unfinish:10,onwayNum:10,amount:20
+ 
+
+[--2014-02-18 12:41:35--] === sku:13900_W_XXL,unfinish:10,onwayNum:30,amount:10
+ 
+
+[--2014-02-18 12:41:35--] === sku:13900_BL_XXL,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:41:35--] === sku:5355_B_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:35--] === sku:14052_M,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 12:41:35--] === sku:11674,unfinish:5,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 12:41:35--] === sku:14052_XL,unfinish:5,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 12:41:35--] === sku:5355_W_S,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:35--] === sku:13871_30,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:35--] === sku:12338,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:41:36--] === sku:5214_A,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:36--] === sku:13871_31,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:36--] === sku:5355_W_XL,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:41:36--] === sku:17115,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:41:36--] === sku:9399_K,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:44:50--] === sku:5355_W_L,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:44:50--] === sku:11647,unfinish:0,onwayNum:0,amount:5
+ 
+
+[--2014-02-18 12:44:59--] === sku:5355_W_L,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:44:59--] === sku:11647,unfinish:0,onwayNum:0,amount:5
+ 
+
+[--2014-02-18 12:45:13--] === sku:5355_W_L,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:45:13--] === sku:11647,unfinish:0,onwayNum:0,amount:5
+ 
+
+[--2014-02-18 12:45:13--] === sku:19509_M,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:45:13--] === sku:3670_W_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:45:13--] === sku:19509_L,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:45:13--] === sku:16368_B,unfinish:120,onwayNum:120,amount:120
+ 
+
+[--2014-02-18 12:45:13--] === sku:7383_B,unfinish:100,onwayNum:100,amount:60
+ 
+
+[--2014-02-18 12:45:13--] === sku:8028_AG,unfinish:20,onwayNum:20,amount:15
+ 
+
+[--2014-02-18 12:45:13--] === sku:10179_P_S,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-18 12:45:13--] === sku:7442_B_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:45:13--] === sku:7442_W_XL,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:45:13--] === sku:18583_B,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 12:45:13--] === sku:18583_W,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-18 12:45:14--] === sku:18583_BL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:45:14--] === sku:18583_LGR,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 12:45:14--] === sku:18583_GR,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:45:14--] === sku:7748_BL_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:45:14--] === sku:11478_DC,unfinish:0,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 12:45:14--] === sku:800,unfinish:200,onwayNum:200,amount:110
+ 
+
+[--2014-02-18 12:45:14--] === sku:8028_R,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:29--] === sku:TK0776,unfinish:400,onwayNum:400,amount:200
+ 
+
+[--2014-02-18 12:48:29--] === sku:19368_BLW_S,unfinish:51,onwayNum:51,amount:50
+ 
+
+[--2014-02-18 12:48:29--] === sku:18077_BE,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:48:29--] === sku:18077_P,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:48:29--] === sku:7764_G,unfinish:35,onwayNum:35,amount:5
+ 
+
+[--2014-02-18 12:48:29--] === sku:15691_P_4,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:29--] === sku:15693_3,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:48:29--] === sku:13667_2T,unfinish:25,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 12:48:29--] === sku:15693_6,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:30--] === sku:13666_130,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:30--] === sku:11113_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:48:30--] === sku:13851_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:48:30--] === sku:11897,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:48:30--] === sku:10170_L,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:48:30--] === sku:15135,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:48:30--] === sku:12690,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-18 12:48:30--] === sku:19577_R,unfinish:110,onwayNum:110,amount:100
+ 
+
+[--2014-02-18 12:48:30--] === sku:19577_BL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:48:30--] === sku:5355_B_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:30--] === sku:5355_B_S,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:37--] === sku:TK0776,unfinish:200,onwayNum:400,amount:200
+ 
+
+[--2014-02-18 12:48:37--] === sku:19368_BLW_S,unfinish:1,onwayNum:51,amount:50
+ 
+
+[--2014-02-18 12:48:37--] === sku:18077_BE,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:48:37--] === sku:18077_P,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:48:37--] === sku:7764_G,unfinish:30,onwayNum:35,amount:5
+ 
+
+[--2014-02-18 12:48:37--] === sku:15691_P_4,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:37--] === sku:15693_3,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:48:37--] === sku:13667_2T,unfinish:0,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 12:48:37--] === sku:15693_6,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:37--] === sku:13666_130,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:37--] === sku:11113_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:48:37--] === sku:13851_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:48:37--] === sku:11897,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:48:37--] === sku:10170_L,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:48:37--] === sku:15135,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:48:37--] === sku:12690,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-18 12:48:37--] === sku:19577_R,unfinish:10,onwayNum:110,amount:100
+ 
+
+[--2014-02-18 12:48:37--] === sku:19577_BL,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:48:37--] === sku:5355_B_L,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:37--] === sku:5355_B_S,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:45--] === sku:TK0776,unfinish:0,onwayNum:400,amount:200
+ 
+
+[--2014-02-18 12:48:45--] === sku:19368_BLW_S,unfinish:1,onwayNum:51,amount:50
+ 
+
+[--2014-02-18 12:48:45--] === sku:18077_BE,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:48:45--] === sku:18077_P,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:48:45--] === sku:7764_G,unfinish:25,onwayNum:35,amount:5
+ 
+
+[--2014-02-18 12:48:45--] === sku:15691_P_4,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:45--] === sku:15693_3,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:48:45--] === sku:13667_2T,unfinish:0,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 12:48:45--] === sku:15693_6,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:45--] === sku:13666_130,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:45--] === sku:11113_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:48:45--] === sku:13851_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:48:45--] === sku:11897,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:48:45--] === sku:10170_L,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:48:45--] === sku:15135,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:48:45--] === sku:12690,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-18 12:48:45--] === sku:19577_R,unfinish:10,onwayNum:110,amount:100
+ 
+
+[--2014-02-18 12:48:45--] === sku:19577_BL,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:48:45--] === sku:5355_B_L,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:45--] === sku:5355_B_S,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:50--] === sku:TK0776,unfinish:0,onwayNum:400,amount:200
+ 
+
+[--2014-02-18 12:48:50--] === sku:19368_BLW_S,unfinish:1,onwayNum:51,amount:50
+ 
+
+[--2014-02-18 12:48:50--] === sku:18077_BE,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:48:50--] === sku:18077_P,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 12:48:50--] === sku:7764_G,unfinish:20,onwayNum:35,amount:5
+ 
+
+[--2014-02-18 12:48:50--] === sku:15691_P_4,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:50--] === sku:15693_3,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:48:50--] === sku:13667_2T,unfinish:0,onwayNum:25,amount:25
+ 
+
+[--2014-02-18 12:48:50--] === sku:15693_6,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:50--] === sku:13666_130,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:50--] === sku:11113_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:48:50--] === sku:13851_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 12:48:50--] === sku:11897,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 12:48:50--] === sku:10170_L,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:48:50--] === sku:15135,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 12:48:50--] === sku:12690,unfinish:0,onwayNum:40,amount:40
+ 
+
+[--2014-02-18 12:48:50--] === sku:19577_R,unfinish:10,onwayNum:110,amount:100
+ 
+
+[--2014-02-18 12:48:50--] === sku:19577_BL,unfinish:0,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 12:48:50--] === sku:5355_B_L,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 12:48:50--] === sku:5355_B_S,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:02:04--] === sku:5553_R,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 13:02:04--] === sku:1587,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-18 13:02:04--] === sku:17865_P_13,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 13:02:04--] === sku:13108_BL_S,unfinish:90,onwayNum:90,amount:40
+ 
+
+[--2014-02-18 13:02:04--] === sku:17939_P,unfinish:10,onwayNum:10,amount:5
+ 
+
+[--2014-02-18 13:02:04--] === sku:19688_B,unfinish:-10,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:02:04--] === sku:19422_B,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 13:02:04--] === sku:19422_W,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 13:02:04--] === sku:SV000037_C,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 13:02:04--] === sku:19284_W,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 13:02:05--] === sku:SV000037_B,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 13:05:26--] === sku:18450_B,unfinish:-137,onwayNum:13,amount:10
+ 
+
+[--2014-02-18 13:05:26--] === sku:18876_W,unfinish:200,onwayNum:200,amount:190
+ 
+
+[--2014-02-18 13:05:26--] === sku:18876_R,unfinish:100,onwayNum:100,amount:90
+ 
+
+[--2014-02-18 13:05:26--] === sku:18942_B,unfinish:-30,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:05:26--] === sku:18876_B,unfinish:100,onwayNum:100,amount:90
+ 
+
+[--2014-02-18 13:05:26--] === sku:18876_C,unfinish:100,onwayNum:100,amount:80
+ 
+
+[--2014-02-18 13:05:26--] === sku:19216_P,unfinish:300,onwayNum:300,amount:36
+ 
+
+[--2014-02-18 13:05:26--] === sku:5553_BL,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 13:05:26--] === sku:19339_O,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-18 13:05:26--] === sku:4767,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:05:26--] === sku:6130,unfinish:50,onwayNum:50,amount:16
+ 
+
+[--2014-02-18 13:05:26--] === sku:19342_B,unfinish:300,onwayNum:300,amount:10
+ 
+
+[--2014-02-18 13:05:26--] === sku:19339_B,unfinish:70,onwayNum:70,amount:72
+ 
+
+[--2014-02-18 13:05:27--] === sku:19339_G,unfinish:60,onwayNum:60,amount:60
+ 
+
+[--2014-02-18 13:05:27--] === sku:19339_BL,unfinish:130,onwayNum:130,amount:79
+ 
+
+[--2014-02-18 13:05:27--] === sku:SV000469_PU,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:05:27--] === sku:SV000470_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:05:27--] === sku:SV000470_BR,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:05:27--] === sku:SV000469_W,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:05:27--] === sku:SV000469_BR,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:05:27--] === sku:SV000469_B,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:06:57--] === sku:19342_BL,unfinish:150,onwayNum:150,amount:110
+ 
+
+[--2014-02-18 13:06:57--] === sku:19342_W,unfinish:300,onwayNum:300,amount:35
+ 
+
+[--2014-02-18 13:06:57--] === sku:SV000469_R,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:06:57--] === sku:SV000470_W,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:06:57--] === sku:19378_BL_S,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:06:57--] === sku:19378_BL_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:06:57--] === sku:20131_R_L,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 13:06:57--] === sku:19377_PU_S,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 13:06:57--] === sku:19379_B_XL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:06:57--] === sku:20131_BL_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:06:58--] === sku:19378_BL_L,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 13:06:58--] === sku:19375_BL_M,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 13:06:58--] === sku:19379_R_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:06:58--] === sku:19837_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:06:58--] === sku:20131_B_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:06:58--] === sku:20131_BL_M,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:06:58--] === sku:19377_G_XL,unfinish:40,onwayNum:40,amount:30
+ 
+
+[--2014-02-18 13:06:58--] === sku:19377_G_S,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 13:06:58--] === sku:20131_BL_XXL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:13:28--] === sku:20103_W,unfinish:25,onwayNum:25,amount:26
+ 
+
+[--2014-02-18 13:13:44--] === sku:20103_W,unfinish:25,onwayNum:25,amount:26
+ 
+
+[--2014-02-18 13:13:56--] === sku:20103_W,unfinish:25,onwayNum:25,amount:26
+ 
+
+[--2014-02-18 13:14:07--] === sku:20103_W,unfinish:25,onwayNum:25,amount:26
+ 
+
+[--2014-02-18 13:14:07--] === sku:18822_DGR_M,unfinish:169,onwayNum:169,amount:1
+ 
+
+[--2014-02-18 13:14:07--] === sku:18822_DGR_L,unfinish:150,onwayNum:150,amount:1
+ 
+
+[--2014-02-18 13:14:07--] === sku:18822_B_M,unfinish:323,onwayNum:323,amount:2
+ 
+
+[--2014-02-18 13:14:19--] === sku:20103_W,unfinish:25,onwayNum:25,amount:26
+ 
+
+[--2014-02-18 13:14:19--] === sku:18822_DGR_M,unfinish:168,onwayNum:169,amount:1
+ 
+
+[--2014-02-18 13:14:19--] === sku:18822_DGR_L,unfinish:149,onwayNum:150,amount:1
+ 
+
+[--2014-02-18 13:14:19--] === sku:18822_B_M,unfinish:321,onwayNum:323,amount:2
+ 
+
+[--2014-02-18 13:14:31--] === sku:20103_W,unfinish:25,onwayNum:25,amount:26
+ 
+
+[--2014-02-18 13:14:31--] === sku:18822_DGR_M,unfinish:167,onwayNum:169,amount:1
+ 
+
+[--2014-02-18 13:14:31--] === sku:18822_DGR_L,unfinish:148,onwayNum:150,amount:1
+ 
+
+[--2014-02-18 13:14:31--] === sku:18822_B_M,unfinish:319,onwayNum:323,amount:2
+ 
+
+[--2014-02-18 13:14:31--] === sku:18241_BL_S,unfinish:-5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:14:31--] === sku:18241_BL_M,unfinish:0,onwayNum:0,amount:1
+ 
+
+[--2014-02-18 13:14:31--] === sku:3375_B_XL,unfinish:121,onwayNum:121,amount:57
+ 
+
+[--2014-02-18 13:14:31--] === sku:9580_B_M,unfinish:97,onwayNum:97,amount:16
+ 
+
+[--2014-02-18 13:14:31--] === sku:9580_B_S,unfinish:5,onwayNum:5,amount:1
+ 
+
+[--2014-02-18 13:14:32--] === sku:3300_GR_L,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 13:14:32--] === sku:3324_B_S,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:14:32--] === sku:3386_BE_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:14:32--] === sku:3386_B_XL,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:14:32--] === sku:3300_GR_M,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 13:14:32--] === sku:9580_B_L,unfinish:91,onwayNum:91,amount:15
+ 
+
+[--2014-02-18 13:18:45--] === sku:18903_B,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 13:18:45--] === sku:7339_P,unfinish:161,onwayNum:161,amount:143
+ 
+
+[--2014-02-18 13:18:45--] === sku:7339_BE,unfinish:45,onwayNum:45,amount:19
+ 
+
+[--2014-02-18 13:18:45--] === sku:8021_M,unfinish:0,onwayNum:0,amount:38
+ 
+
+[--2014-02-18 13:18:45--] === sku:8021_L,unfinish:0,onwayNum:0,amount:70
+ 
+
+[--2014-02-18 13:18:52--] === sku:18903_B,unfinish:0,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 13:18:52--] === sku:7339_P,unfinish:18,onwayNum:161,amount:143
+ 
+
+[--2014-02-18 13:18:52--] === sku:7339_BE,unfinish:26,onwayNum:45,amount:19
+ 
+
+[--2014-02-18 13:18:52--] === sku:8021_M,unfinish:0,onwayNum:0,amount:38
+ 
+
+[--2014-02-18 13:18:52--] === sku:8021_L,unfinish:0,onwayNum:0,amount:70
+ 
+
+[--2014-02-18 13:19:02--] === sku:18903_B,unfinish:0,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 13:19:02--] === sku:7339_P,unfinish:18,onwayNum:161,amount:143
+ 
+
+[--2014-02-18 13:19:02--] === sku:7339_BE,unfinish:7,onwayNum:45,amount:19
+ 
+
+[--2014-02-18 13:19:02--] === sku:8021_M,unfinish:0,onwayNum:0,amount:38
+ 
+
+[--2014-02-18 13:19:02--] === sku:8021_L,unfinish:0,onwayNum:0,amount:70
+ 
+
+[--2014-02-18 13:19:02--] === sku:3076,unfinish:254,onwayNum:254,amount:84
+ 
+
+[--2014-02-18 13:19:02--] === sku:3278_R_XXL,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 13:19:02--] === sku:3406_BL_XXL,unfinish:10,onwayNum:10,amount:5
+ 
+
+[--2014-02-18 13:19:02--] === sku:3393_DGR_L,unfinish:15,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 13:19:02--] === sku:3393_B_XXL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:19:10--] === sku:18903_B,unfinish:0,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 13:19:10--] === sku:7339_P,unfinish:18,onwayNum:161,amount:143
+ 
+
+[--2014-02-18 13:19:10--] === sku:7339_BE,unfinish:7,onwayNum:45,amount:19
+ 
+
+[--2014-02-18 13:19:10--] === sku:8021_M,unfinish:0,onwayNum:0,amount:38
+ 
+
+[--2014-02-18 13:19:10--] === sku:8021_L,unfinish:0,onwayNum:0,amount:70
+ 
+
+[--2014-02-18 13:19:10--] === sku:3076,unfinish:170,onwayNum:254,amount:84
+ 
+
+[--2014-02-18 13:19:10--] === sku:3278_R_XXL,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 13:19:10--] === sku:3406_BL_XXL,unfinish:5,onwayNum:10,amount:5
+ 
+
+[--2014-02-18 13:19:10--] === sku:3393_DGR_L,unfinish:5,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 13:19:10--] === sku:3393_B_XXL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:19:21--] === sku:18903_B,unfinish:0,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 13:19:21--] === sku:7339_P,unfinish:18,onwayNum:161,amount:143
+ 
+
+[--2014-02-18 13:19:21--] === sku:7339_BE,unfinish:7,onwayNum:45,amount:19
+ 
+
+[--2014-02-18 13:19:21--] === sku:8021_M,unfinish:0,onwayNum:0,amount:38
+ 
+
+[--2014-02-18 13:19:21--] === sku:8021_L,unfinish:0,onwayNum:0,amount:70
+ 
+
+[--2014-02-18 13:19:21--] === sku:3076,unfinish:86,onwayNum:254,amount:84
+ 
+
+[--2014-02-18 13:19:21--] === sku:3278_R_XXL,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 13:19:21--] === sku:3406_BL_XXL,unfinish:0,onwayNum:10,amount:5
+ 
+
+[--2014-02-18 13:19:21--] === sku:3393_DGR_L,unfinish:5,onwayNum:15,amount:10
+ 
+
+[--2014-02-18 13:19:21--] === sku:3393_B_XXL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:19:21--] === sku:3406_BL_XXL,unfinish:0,onwayNum:10,amount:5
+ 
+
+[--2014-02-18 13:19:21--] === sku:3406_B_M,unfinish:20,onwayNum:20,amount:10
+ 
+
+[--2014-02-18 13:19:21--] === sku:9580_W_M,unfinish:185,onwayNum:185,amount:124
+ 
+
+[--2014-02-18 13:19:22--] === sku:3276_B_XL,unfinish:58,onwayNum:58,amount:58
+ 
+
+[--2014-02-18 13:19:22--] === sku:3276_B_L,unfinish:160,onwayNum:160,amount:103
+ 
+
+[--2014-02-18 13:19:22--] === sku:3406_B_L,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:19:22--] === sku:3406_LGR_XXL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:19:22--] === sku:3406_LGR_XL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:22:35--] === sku:17978_DBL_XL,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:22:36--] === sku:18822_B_XL,unfinish:244,onwayNum:244,amount:5
+ 
+
+[--2014-02-18 13:22:36--] === sku:13402_B,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:22:36--] === sku:9406_A,unfinish:70,onwayNum:70,amount:25
+ 
+
+[--2014-02-18 13:22:36--] === sku:10302_R,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:22:36--] === sku:11150_W,unfinish:50,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 13:22:36--] === sku:10284_B_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:22:36--] === sku:11150_B,unfinish:50,onwayNum:50,amount:20
+ 
+
+[--2014-02-18 13:22:36--] === sku:11440_B_M,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:22:36--] === sku:11377_BL,unfinish:230,onwayNum:230,amount:130
+ 
+
+[--2014-02-18 13:22:36--] === sku:11377_W,unfinish:250,onwayNum:250,amount:150
+ 
+
+[--2014-02-18 13:22:36--] === sku:10443,unfinish:30,onwayNum:40,amount:30
+ 
+
+[--2014-02-18 13:22:36--] === sku:13181_RR_L,unfinish:15,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 13:22:37--] === sku:13406_W_L,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:22:37--] === sku:13181_BL_L,unfinish:30,onwayNum:30,amount:40
+ 
+
+[--2014-02-18 13:22:43--] === sku:17978_DBL_XL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:22:43--] === sku:18822_B_XL,unfinish:239,onwayNum:244,amount:5
+ 
+
+[--2014-02-18 13:22:43--] === sku:13402_B,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:22:43--] === sku:9406_A,unfinish:45,onwayNum:70,amount:25
+ 
+
+[--2014-02-18 13:22:43--] === sku:10302_R,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:22:43--] === sku:11150_W,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 13:22:43--] === sku:10284_B_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:22:43--] === sku:11150_B,unfinish:30,onwayNum:50,amount:20
+ 
+
+[--2014-02-18 13:22:43--] === sku:11440_B_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:22:43--] === sku:11377_BL,unfinish:100,onwayNum:230,amount:130
+ 
+
+[--2014-02-18 13:22:43--] === sku:11377_W,unfinish:100,onwayNum:250,amount:150
+ 
+
+[--2014-02-18 13:22:43--] === sku:10443,unfinish:0,onwayNum:40,amount:30
+ 
+
+[--2014-02-18 13:22:43--] === sku:13181_RR_L,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 13:22:43--] === sku:13406_W_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:22:43--] === sku:13181_BL_L,unfinish:30,onwayNum:30,amount:40
+ 
+
+[--2014-02-18 13:22:50--] === sku:17978_DBL_XL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:22:50--] === sku:18822_B_XL,unfinish:234,onwayNum:244,amount:5
+ 
+
+[--2014-02-18 13:22:50--] === sku:13402_B,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:22:50--] === sku:9406_A,unfinish:20,onwayNum:70,amount:25
+ 
+
+[--2014-02-18 13:22:50--] === sku:10302_R,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:22:50--] === sku:11150_W,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 13:22:50--] === sku:10284_B_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:22:50--] === sku:11150_B,unfinish:10,onwayNum:50,amount:20
+ 
+
+[--2014-02-18 13:22:50--] === sku:11440_B_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:22:50--] === sku:11377_BL,unfinish:100,onwayNum:230,amount:130
+ 
+
+[--2014-02-18 13:22:50--] === sku:11377_W,unfinish:100,onwayNum:250,amount:150
+ 
+
+[--2014-02-18 13:22:50--] === sku:10443,unfinish:0,onwayNum:40,amount:30
+ 
+
+[--2014-02-18 13:22:50--] === sku:13181_RR_L,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 13:22:50--] === sku:13406_W_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:22:50--] === sku:13181_BL_L,unfinish:30,onwayNum:30,amount:40
+ 
+
+[--2014-02-18 13:22:56--] === sku:17978_DBL_XL,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:22:56--] === sku:18822_B_XL,unfinish:229,onwayNum:244,amount:5
+ 
+
+[--2014-02-18 13:22:56--] === sku:13402_B,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:22:56--] === sku:9406_A,unfinish:20,onwayNum:70,amount:25
+ 
+
+[--2014-02-18 13:22:56--] === sku:10302_R,unfinish:0,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:22:56--] === sku:11150_W,unfinish:0,onwayNum:50,amount:50
+ 
+
+[--2014-02-18 13:22:56--] === sku:10284_B_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:22:56--] === sku:11150_B,unfinish:10,onwayNum:50,amount:20
+ 
+
+[--2014-02-18 13:22:56--] === sku:11440_B_M,unfinish:0,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:22:56--] === sku:11377_BL,unfinish:100,onwayNum:230,amount:130
+ 
+
+[--2014-02-18 13:22:56--] === sku:11377_W,unfinish:100,onwayNum:250,amount:150
+ 
+
+[--2014-02-18 13:22:56--] === sku:10443,unfinish:0,onwayNum:40,amount:30
+ 
+
+[--2014-02-18 13:22:56--] === sku:13181_RR_L,unfinish:0,onwayNum:15,amount:15
+ 
+
+[--2014-02-18 13:22:56--] === sku:13406_W_L,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:22:56--] === sku:13181_BL_L,unfinish:30,onwayNum:30,amount:40
+ 
+
+[--2014-02-18 13:22:56--] === sku:13181_SB_M,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 13:22:56--] === sku:11099_R,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:22:56--] === sku:13181_RR_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:24:33--] === sku:11902,unfinish:5,onwayNum:5,amount:5
+ 
+
+[--2014-02-18 13:24:33--] === sku:13601_O,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:24:33--] === sku:3359_C,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:24:33--] === sku:16368_R,unfinish:100,onwayNum:100,amount:70
+ 
+
+[--2014-02-18 13:24:33--] === sku:19343_M,unfinish:40,onwayNum:40,amount:40
+ 
+
+[--2014-02-18 13:24:33--] === sku:5674_B_L,unfinish:230,onwayNum:230,amount:130
+ 
+
+[--2014-02-18 13:24:33--] === sku:18636_B_M,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:24:33--] === sku:5674_B_M,unfinish:150,onwayNum:150,amount:50
+ 
+
+[--2014-02-18 13:24:33--] === sku:5674_W_XL,unfinish:80,onwayNum:150,amount:30
+ 
+
+[--2014-02-18 13:24:33--] === sku:10179_P_M,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-18 13:24:33--] === sku:10179_P_L,unfinish:80,onwayNum:80,amount:80
+ 
+
+[--2014-02-18 13:24:33--] === sku:10179_P_XL,unfinish:55,onwayNum:55,amount:50
+ 
+
+[--2014-02-18 13:24:34--] === sku:20209_XXL,unfinish:76,onwayNum:76,amount:70
+ 
+
+[--2014-02-18 13:24:34--] === sku:20209_XL,unfinish:70,onwayNum:70,amount:80
+ 
+
+[--2014-02-18 13:24:34--] === sku:20209_L,unfinish:70,onwayNum:70,amount:70
+ 
+
+[--2014-02-18 13:24:34--] === sku:20209_M,unfinish:47,onwayNum:47,amount:50
+ 
+
+[--2014-02-18 13:24:34--] === sku:9069_P,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:24:34--] === sku:9069_G,unfinish:10,onwayNum:10,amount:10
+ 
+
+[--2014-02-18 13:24:34--] === sku:9069_W,unfinish:30,onwayNum:30,amount:30
+ 
+
+[--2014-02-18 13:24:34--] === sku:8183_O,unfinish:9,onwayNum:10,amount:9
+ 
+
+[--2014-02-18 13:24:58--] === sku:8183_PU,unfinish:20,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:24:58--] === sku:7820_M,unfinish:100,onwayNum:100,amount:100
+ 
+
+[--2014-02-18 13:25:11--] === sku:8183_PU,unfinish:0,onwayNum:20,amount:20
+ 
+
+[--2014-02-18 13:25:11--] === sku:7820_M,unfinish:0,onwayNum:100,amount:100
+ 
+

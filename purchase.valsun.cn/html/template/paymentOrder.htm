@@ -1,0 +1,311 @@
+{include file="header.htm" title="采购请款单列表"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=paymentOrder&act=index&paystatus=2">采购管理</a>>>采购请款单列表
+	</div>
+	<div class="pagination">{$fpage}</div>
+</div>
+<div class="servar products-servar">
+	<span> 搜索类型：<select id="search-type">
+			<option value="-1">请选择类型</option>
+			<option value="recordnumber" {if $type=="recordnumber"}selected {/if}>订单号</option>
+			<option value="sku" {if $type=="sku"}selected {/if}>SKU</option>
+			<option value="note" {if $type=="note"}selected {/if}>备注</option>
+	</select>
+	</span>
+	<span>
+		关键字：<input id="search-keyWord" type="text" value="{$keyWord}" />
+	</span>
+	<span>
+		时间类型：<select id="time-type">
+					<option value="-1">选择时间类型</option>
+					<option value="addtime" {if $status=="addtime"}selected {/if}>添加时间</option>
+					<option value="aduittime" {if $status=="aduittime"}selected {/if}>审核时间</option>
+				</select>
+	</span>
+	<span>
+		开始时间：<input id="start-date" onclick="WdatePicker()" type="text" value="{$starTime}" />
+	</span>
+	<span>
+		结束时间：<input id="end-date" onclick="WdatePicker()" type="text" value="{$endTime}" />
+	</span>
+	<span>
+		<select id="search-pur">
+			<option value="-1">选择采购员</option> 
+			{foreach item=pur from=$purchaseList}
+				<option value="{$pur['userId']}" {if $search_pur==$pur['userId']} selected="selected"{/if}>{$pur["userName"]}</option>
+			{/foreach}
+		</select>
+	</span>
+	<span>
+		<a href="javascript:void(0)" id="search-btn">搜 索</a>
+	</span>
+</div>
+<div class="main paymentOrder underline-main ">
+	<table cellspacing="0" width="100%" class="products-action">
+		<tr class="title purchase-title">
+			<th><input type="checkbox" id="inverse-check" /></th>
+			<th>编号</th>
+			<th>订单号</th>
+			<th>订货日期</th>
+			<th>订单类型</th>
+			<th>单据状态</th>
+			<th>支付状态</th>
+			<th>供应商</th>
+			<th>添加用户</th>
+			<th>审核用户</th>
+			<th>总成本</th>
+			<th>备注</th>
+			<th>付款信息截图</th>
+			{if $paystatus == 3}
+				<th>操作</th>
+			{/if}
+		</tr>
+    
+	{if empty($orderList)}
+	<tr>
+		<td cospan="12">搜索结果为空</td>
+	</tr>
+	{/if} 
+    {foreach from=$orderList item=purOrderList}
+   	
+	<tr>
+		<td><input name="inverse" type="checkbox" value="{$purOrderList['id']}" /></td>
+		<td>{$purOrderList['id']}</td>
+		<td>{$purOrderList["recordnumber"]}</td>
+		<td>{date("Y-m-d",$purOrderList["addtime"])}</td>
+		<td>{if $purOrderList["order_type"]==1}正常订单{elseif
+			$purOrderList["order_type"]==2} 不良品退货 {elseif
+			$purOrderList["order_type"]==3} 供应商退货 {else}采购补单{/if}</td>
+		<td>{if $purOrderList["status"]==1}待审核 {elseif
+			$purOrderList["status"]==2}已审核{elseif
+			$purOrderList["status"]==3}在途订单{else}已入库{/if}</td>
+		<td>{if $purOrderList["paystatus"] ==2 }等待付款{else}已付款{/if}</td>
+		<td>{getPartnerById($purOrderList["partner_id"])}</td>
+		<td>{purchaseuserNameById($purOrderList["purchaseuser_id"])}</td>
+		<td>{purchaseuserNameById($purOrderList["aduituser_id"])}</td>
+		<td>{round_num(clacTotalCost($purOrderList['id']),2)}</td>
+		<td>{$purOrderList["note"]}</td>
+		<td>
+			{if $purOrderList["img"] == ''}
+				<div id="showimg{$purOrderList['id']}"></div>
+			{else}<div id="showimg{$purOrderList['id']}" style="width:300px; height:120px; display:none"></div>
+				<a href="./upload/{$purOrderList['img']}" class="fancybox">
+						  <img id="img{$purOrderList['id']}" src="./upload/{$purOrderList['img']}" style="width:300px; height:120px;" />
+	            </a>
+			{/if}
+		</td>
+		<td>
+		{if $paystatus == 2}
+        <!--a href="javascript:void(0);" id="pay-btn" onclick="payment_order('{$purOrderList['recordnumber']}','{$purOrderList['purchaseuser_id']}','{$purOrderList['company_id']}','{$purOrderList['id']}')">财务付款</a-->
+     
+        <input type="button" value="财务付款" id="pay-btn" onclick="payment_order('{$purOrderList['recordnumber']}','{$purOrderList['purchaseuser_id']}','{$purOrderList['company_id']}','{$purOrderList['id']}')" />
+        	<!-- 上传图片 Start -->
+			<div id="uploadbtn" class="uploadbtn">
+				<span id="{$purOrderList['id']}">上传图片</span>
+				<form id="myform{$purOrderList['id']}" action="json.php?mod=paymentOrder&act=uploadImage&numid={$purOrderList['id']}&recordnumber={$purOrderList['recordnumber']}" method='post' enctype='multipart/form-data' target="iframe" >
+					<input type="file" name="mypic" onchange="Upload('{$purOrderList['id']}')"/>
+				</form>
+			</div>
+			<!-- 上传图片 End -->
+			{/if}
+		</td>
+	</tr>
+	<tr>
+		<td colspan='7' style="border-bottom: 1px #ccc solid;"></td>
+		<td style="border-bottom: 1px #ccc solid;">订单详情</td>
+		<td colspan="6" style="border-bottom: 1px #ccc solid;">
+			<table cellspacing="0" width="100%">
+				<tr class="title purchase-title">
+					<th>料号</th>
+					<th>订货数量</th>
+					<th>订货价格</th>
+					<th>订单货金额</th>
+					<th>已到货</th>
+				</tr>
+				{$orderDetailList = PurchaseOrderAct::getDetailOrderInfo($purOrderList['id'])}
+				{section name=key loop=$orderDetailList}
+				<tr>
+					<td>{$orderDetailList[key]["sku"]}</td>
+					<td>{$orderDetailList[key]["count"]}</td>
+					<td>{$orderDetailList[key]["price"]}</td>
+					<td>{$orderDetailList[key]["price"]*$orderDetailList[key]["count"]}</td>
+					<td>{$orderDetailList[key]['stockqty']}</td>
+				</tr>
+				{/section}
+			</table>
+		</td>
+	</tr>
+ 
+	{/foreach}
+   </table>
+</div>
+<iframe id="iframe" name="iframe" style="display:none"></iframe>
+<div class="bottomvar">
+	<div class="pagination">{$fpage}</div>
+</div>
+<input type="hidden" value="{$WEB_URL}" id="WEB_URL" />
+<input type="hidden" value="{$WEB_API}" id="WEB_API" />
+
+{include file="footer.htm"}
+<style>
+.alertify {
+	position: fixed; z-index: 99999;
+	top: 150px; left: 50%;
+	width: 550px;
+	margin-left: -275px;
+}
+</style>
+<!-- 图片上传样式 -->
+<style type="text/css">
+.uploadbtn {
+	position: relative;
+	overflow: hidden;
+	margin-left:14px;
+	display:inline-block;
+	*display:inline;
+	padding:4px 10px 4px;
+	font-size:14px;
+	line-height:18px;
+	*line-height:20px;
+	color:#fff;
+	text-align:center;
+	vertical-align:middle;
+	cursor:pointer;
+	background-color:#5bb75b;
+	border:1px solid #cccccc;
+	border-color:#e6e6e6 #e6e6e6 #bfbfbf;
+	border-bottom-color:#b3b3b3;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+}
+.uploadbtn input {
+	position: absolute;
+	top: 0; 
+	right: 0;
+	margin: 0;
+	border: solid transparent;
+	opacity: 0;
+	filter:alpha(opacity=0);
+	cursor: pointer;
+}
+</style>
+<!-- 图片上传样式 End-->
+
+<script type="text/javascript" src="./public/js/jquery.form.js"></script>
+<script type="text/javascript">
+var web_api = "{$smarty.const.WEB_API}";
+{literal}
+//财务付款
+function payment_order(ordersn,purchaseid,companyid,orderid){
+    var url  = web_api + "json.php?mod=paymentOrder&act=addPayment";
+    var tips = "<table style='font-size:14px;width:96%;text-align:left;'><tr><td colspan='2' style='padding:5px;font-weight:5px;'>亲,请仔细阅读并认真填写以下付款信息？</td></tr>";
+		tips	 += "<tr><td>采购单号：</td><td>"+ ordersn +"</td></tr>";
+		tips	 += "<tr><td>支付方式：<font color=red>*</font></td><td><select id='paysel'><option value='支付宝'>支付宝</option><option value='财付通'>财付通</option><option value='网银'>网银</option><option value='线下付款'>线下付款</option></select></td></tr>";
+		tips     += "<tr><td>付款交易号：<font color=red>*</font></td><td><input type='text' id='payrecordnum' /></td></tr>";
+		//tips     += "<tr><td>上传付款凭据：<font color=red>*</font></td><td></td></tr>";
+		tips     += "<tr><td>备注：</td><td><textarea id='paynote' rows=5 style='width:180px;height:34px;'></textarea></td></tr>";
+		tips	 += "</table>";
+	alertify.confirm(tips, function (e) {
+		if (e) {
+			var paysel	= encodeURIComponent($.trim($("#paysel").val()));
+			var payrecordnum	= $.trim($("#payrecordnum").val()); 
+			var paynote	= encodeURIComponent($.trim($("#paynote").val()));
+			if(paysel==""){
+				alertify.error('亲,您没有填写支付方式呢?');
+				return false;
+			}
+			if(payrecordnum==""){
+				alertify.error('亲,您没有填写交易号呢?');
+				return false;
+			}
+			var data = {"orderid":orderid,"purchaseid":purchaseid,"companyid":companyid,"paysel":paysel,"payrecordnum":payrecordnum,"paynote":paynote};
+			$.post(url,data,function(rtn){
+				if(rtn.errCode == 0){              
+					alertify.success("亲,采购单号为:"+ordersn+"付款成功!");
+					window.location.reload();
+				}else {
+					 alertify.error(rtn.errMsg);
+			    }
+			},"jsonp");
+		}
+	});
+}
+{/literal}
+
+
+
+	$("#inverse-check").click(function() {
+		select_all("inverse-check", "input[name='inverse']", 0);
+	});
+	function getVarById(id) {
+		return $("#" + id).val();
+	}
+	$("#search-btn").click(
+			function() {
+				var flag1 = false, flag2 = false, flag3 = false;
+				para = '';
+				if ($("#search-type").val() != "-1") {
+					type = $("#search-type").val();
+					para += '&type=' + type;
+				}
+				if ($("#time-type").val() != "-1") {
+					status = $("#time-type").val();
+					para += '&status=' + status;
+					flag1 = true;
+				}
+				if ($("#start-date").val() != "") {
+					starTime = $.trim($("#start-date").val());
+					para += '&starTime=' + starTime;
+					flag2 = true;
+				}
+				if ($("#end-date").val() != "") {
+					endTime = $.trim($("#end-date").val());
+					para += '&endTime=' + endTime;
+					flag3 = true;
+				}
+				if ($("#search-keyWord").val() != "") {
+					keyWord = $.trim($("#search-keyWord").val());
+					para += '&keyWord=' + encodeURIComponent(keyWord);
+				}
+				if ($("#search-pur").val() != "-1") {
+					search_pur = $("#search-pur").val();
+					para += '&search-pur=' + encodeURIComponent(search_pur);
+				}
+				if (flag1 && flag2 && flag3) {
+					d = new Date(starTime);
+					starTime = d.getTime();
+					d = new Date(endTime);
+					endTime = d.getTime();
+					if (starTime > endTime) {
+						alertify.alert("开始时间不能大于结束时间");
+						return false;
+					}
+				}
+				window.location.href = getVarById("WEB_URL")
+						+ "index.php?mod=paymentOrder&act=index"+ para;
+			});
+		/*** 上传图片 Start ***/
+		function Upload(id){
+			var bar 		= $('#bar'+id);
+			var showimg 	= $('#showimg'+id);
+			var files 		= $("#uploadfile"+id);
+			var btn 		= $("#uploadbtn span"+id);
+			$("#myform"+id).submit();
+		}
+		function uploadCallback(type,id,name,info){
+  			var showimg = $('#showimg'+id);
+			var img     = $('#img'+id);
+			img.hide();
+			showimg.show();
+			if(type == 3){
+				var img = "./upload/"+name;
+				showimg.html("<a href='"+img+"' class='fancybox'><img src='"+img+"' style='width:300px; height:120px;'></a>");
+			}else{
+				showimg.html('<span style="color:#FF0000;font-size:12px;">'+info+'</span>');
+			}		
+		}
+		/*** 上传图片 End ***/
+		
+</script>

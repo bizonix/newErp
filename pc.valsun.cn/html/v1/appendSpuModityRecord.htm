@@ -1,0 +1,131 @@
+{include file="header.htm"}
+<link rel="stylesheet" href="./js/kindeditor-4.1.10/themes/simple/simple.css" />
+<link rel="stylesheet" href="./js/kindeditor-4.1.10/plugins/code/prettify.css" />
+<script charset="utf-8" src="./js/kindeditor-4.1.10/kindeditor-min.js"></script>
+<script charset="utf-8" src="./js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script charset="utf-8" src="./js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+            <div class="main products-main">
+                <form name="appendSpuModityRecordForm" method="post" action="json.php?mod=goods&act=appendSpuModityRecordOn&jsonp=1" onsubmit="return confirm('保存后请通知对应产品工程师，是否确定？')">                    
+					<table class="products-action" width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="width: 200px;" align="right"><span style="color:#F00;">&nbsp;</span>状态：</td>
+							<td align="left">
+                            <input disabled="disabled" value="{if $spuModifyRecord['status'] == 1}待处理{elseif $spuModifyRecord['status'] == 2}处理中{elseif $spuModifyRecord['status'] == 3}已处理{/if}"/>
+							</td>
+						</tr>
+						<tr>
+                            <td style="width: 200px;" align="right"><span style="color:#F00;">&nbsp;</span>SPU：</td>
+							<td align="left">
+                            <input disabled="disabled" value="{$spuModifyRecord['spu']}"/>
+                            <input type="hidden" name="id" value="{$spuModifyRecord['id']}"/>
+							</td>
+						</tr>                        
+                        <tr>
+                       	    <td align="right" style="width: 200px;">
+                                <span style="color:#F00;">&nbsp;</span>所关联的虚拟SPU：
+                            </td>
+                            <td align="left">
+								<textarea disabled="disabled" cols="60" rows="3">{$spuModifyRecord['combineSpuRelativeContent']}</textarea>
+							</td>
+						</tr>
+                        <tr>
+                            <td align="right" width="200px"><span style="color:#F00;">&nbsp;</span>修改/优化：</td>
+                            <td align="left">
+                                 <select disabled="disabled">
+                                    <option value=""></option>
+                                    <option value="1" {if $spuModifyRecord['recordType'] == 1}selected="selected"{/if}>修改</option>
+                                    <option value="2" {if $spuModifyRecord['recordType'] == 2}selected="selected"{/if}>优化</option>
+                                 </select>
+							</td>
+						</tr>
+                        <tr>
+                            <td style="width: 200px;" align="right"><span style="color:#F00;">&nbsp;</span>产品工程师：</td>
+							<td align="left">
+                            <input disabled="disabled" value="{getPersonNameById($spuModifyRecord['PEId'])}"/>
+							</td>
+						</tr>        
+                        <tr>
+                            <td align="right" style="width: 200px;"><span style="color:#F00;">&nbsp;</span>修改类型：</td>
+                            <td align="left">
+                                 <textarea disabled="disabled" cols="60" rows="3">{$spuModifyRecord['modifyTypeName']}</textarea>
+							</td>
+						</tr>
+                        <tr>
+                            <td align="right" style="width: 200px;"><span style="color:#F00;">&nbsp;</span>修改内容：</td>
+                            <td align="left">
+                                {if !empty($spuModifyRecord['modityContent'])}
+                                <div style="background-color: #EBEBE4;width: 80%;">
+                                    {base64_decode($spuModifyRecord['modityContent'])}
+                                </div>
+                                {else}
+                                <textarea disabled="disabled" cols="60" rows="3"></textarea>
+                                {/if}                                
+							</td>
+						</tr>
+                        <tr>
+                            <td align="right" style="width: 200px;"><span style="color:#F00;">&nbsp;</span>备注：</td>
+                            <td align="left">
+                                 <textarea disabled="disabled" cols="60" rows="3">{$spuModifyRecord['note']}</textarea>
+							</td>
+						</tr>
+                        <tr>
+                            <td align="right" style="width: 200px;"><span style="color:#F00;">*</span>修订内容：</td>
+                            <td align="left">
+                                 <textarea id="appendContent1" name="appendContent1" style="width:700px;height:200px;visibility:hidden;"></textarea>
+							</td>
+						</tr>
+                        <tr>                            
+							<td colspan="2">
+                            <input type="submit" value="提交"/>
+                            </td>
+						</tr>
+					</table>
+                </form>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        KindEditor.ready(function(K) {
+        	var editor1 = K.create('textarea[name="appendContent1"]', {
+        		width : '70%',
+        		items :[
+        		        'source', '|',
+        		        'undo', 'redo', '|',
+        		        'preview', 'cut', 'copy', 'paste', 'plainpaste', 'wordpaste', '|',
+        		        'emoticons' , 'image', 'table', 'hr' , '|',
+        		        'selectall' , 'quickformat' , 'fullscreen'
+        		        ],
+        		cssPath : './js/kindeditor-4.1.10/plugins/code/prettify.css',
+        		uploadJson : './js/kindeditor-4.1.10/php/upload_json.php',
+        		fileManagerJson : './js/kindeditor-4.1.10/php/file_manager_json.php',
+        		allowFileManager : true,
+        		afterCreate : function() {
+        			var self = this;
+        			K.ctrl(document, 13, function() {
+        				self.sync();
+        				K('form[name=appendSpuModityRecordForm]')[0].submit();
+        			});
+        			K.ctrl(self.edit.doc, 13, function() {
+        				self.sync();
+        				K('form[name=appendSpuModityRecordForm]')[0].submit();
+        			});
+        		}
+        	});
+        	prettyPrint();
+        });
+</script>

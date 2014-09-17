@@ -1,0 +1,60 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/packageCheck.js"></script>
+
+{include file='whNav.htm'}
+
+
+
+<div class="servar wh-servar">
+	<span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button   type="button" onclick="javascript:window.location.href='./index.php?act=abnormal&mod=packageCheck&storeId={$storeId}';" value="" >查看录入异常</button>
+    </span>
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button   type="button" onclick="javascript:window.location.href='./index.php?act=packageCheckList&mod=packageCheck&storeId={$storeId}';" value="" >点货清单</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="succeedLog" style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="errorLog" style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+
+<div class="main">
+ <form id="check_form" class="navbar-form pull-left" method="POST">    
+	<input type="hidden" id="hidden" name="userName" value="{$curusername}"/>
+    <input type='hidden' name="storeId" value="{$storeId}"/>
+	<div style="float:left;width:500px;margin-left:20px">
+	<table id="checkinfo" cellspacing="0" width="85%">
+        <thead>
+            <tr class="title">
+            	<td width='5%'>序号</td>
+                <td width="50%">sku</td>
+                <td width="50%">数量</td>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="odd">
+                <td width='5%'>1</td>
+                <td width="50%"><input name="sku" id="r1" type="text" class="mf validate[required] text-input" value=""></td>
+                <td width="50%"><input name="amount" id="n1" type="text" class="validate[required,,custom[integer],min[0]]" value="">&nbsp;&nbsp;&nbsp;</td>
+                
+                
+                
+            </tr>
+        </tbody>
+
+
+    
+    </table>
+	<br/>&nbsp;<span style="width:margin:0 50px;">点货人：</span>
+	<select class="validate[required]" style="width: 130px;" id="checkUser" name="checkUser">
+	<option value="">请选择</option>
+	{foreach from=$tally_user item=list}
+		<option value="{$list.global_user_id}" {if $list.global_user_id==$checkUser}selected{/if}>{$list.global_user_name}</option>
+	{/foreach}
+	</select>
+	</div>
+	<div style="float:left;" id="message">{$data}</div>
+	<div style="clear:both;">&nbsp;</div>
+	<button style="margin:0 20px;" id="addone" type="button" value="新增一行" >新增一行</button>&nbsp;&nbsp;&nbsp;<button style="margin:0 20px;" id="delone" type="button" value="减去一行" >减去一行</button>&nbsp;&nbsp;&nbsp;<button style="margin:0 50px;" type="button"  id="submitform" class="btn btn-default" value=""/>提交</button>
+ </form>
+</div>
+{include file='footer.htm'}

@@ -1,0 +1,17 @@
+.searchformdiv{
+    border-top: #e6e6e6 solid 1px;
+    margin-top: 15px;
+    text-align: center;
+    padding-top: 25px;
+}
+
+.searchformdiv form{
+    float: none!important;
+}
+.se_radiolist{
+    margin-top: 10px;
+}
+
+.se_radiolist span{
+    margin-right: 25px;
+}

@@ -1,0 +1,88 @@
+{include file="header.html"}
+{include file="mailNavLocation.html"}
+<div class="main products-main" style="border:1px solid #ccc;" id="content">
+<br />
+    <form name="searchMail" id="searchMail" method="post" action="index.php?mod=MailManage&act=getMailPowerByConditions">
+          所属系统：
+    <select name="system" id="system">
+	   <option value="default">-----请选择-----</option>
+	   {foreach item=system from=$getSystem}
+	   <option name="systemId" value="{$system.system_id}">--{$system.system_name}--</option>
+	   {/foreach}
+	</select>
+	        邮件名称：<input type="text" name="mailName" id="mailName" />
+	   <input type="submit" name="search" id="search" value="搜索" />
+	</form>
+<br />
+</div>
+<div class="fourvar order-fourvar">
+  <input type="button" value="新增邮件" id="addBt" onClick="addMailList()">
+</div>
+<div class="main products-main">
+  <table width="100%" cellspacing="0" border="0" cellpadding="0">
+    <tbody align="left">
+      <tr class="title">
+        <td style="padding-left:30px;font-weight:bold;" width="15%" align="left"> 全部邮件 </td>
+        <td style="font-weight:bold;" width="15%"> 所属系统 </td>
+        <td style="font-weight:bold;"  width="25%" align="left"> 订阅权限 </td>
+        <td width="12%"></td>
+        <td width="13%"></td>
+        <td style="font-weight:bold;"  width="7%"> 操作 </td>
+        <td width="7%"></td>
+        <td width="6%"></td>
+      </tr>
+      {if $resultInfo and $status eq 1}
+      	{section name=list loop=$resultInfo}
+	      <tr>
+	        <td>{$resultInfo[list].list_name}</td>
+	        <td>{$resultInfo[list].system_name}</td>
+	        <td>{$resultInfo[list].company_name}</td>
+	        <td>{$resultInfo[list].dept_name}</td>
+	        <td>{$resultInfo[list].job_name}</td>
+	        {if $resultInfo[list].status eq 1}
+	        <td><input type="button" value="编辑" onClick="modifyPower({$resultInfo[list].list_id});" /></td>
+	        {else}
+	        <td></td>
+	        {/if}
+	        {if $resultInfo[list].status eq 1}
+	        <td><a href="index.php?mod=MailManage&act=checkPower&list_id={$resultInfo[list].list_id}">查看详情</td>
+	        <td><a href="#" onclick="deleteMail({$resultInfo[list].list_id})">删除</td>
+	        {else}
+	        <td></td>
+	        {/if}
+	      </tr>
+   		{/section}
+      {else if $status eq 0}
+      	<tr align="center"><td colspan="6">结果为空！</td></tr>
+      {else}
+      {section name=list loop=$powerInfo}
+	      <tr>
+	        <td>{$powerInfo[list].list_name}</td>
+	        <td>{$powerInfo[list].system_name}</td>
+	        <td>{$powerInfo[list].company_name}</td>
+	        <td>{$powerInfo[list].dept_name}</td>
+	        <td>{$powerInfo[list].job_name}</td>
+	        {if $powerInfo[list].status eq 1}
+	        <td><input type="button" value="编辑" onClick="modifyPower({$powerInfo[list].list_id});" /></td>
+	        {else}
+	        <td></td>
+	        {/if}
+	        {if $powerInfo[list].status eq 1}
+	        <td><a href="index.php?mod=MailManage&act=checkPower&list_id={$powerInfo[list].list_id}">查看详情</td>
+	        <td><a href="#" onclick="deleteMail({$powerInfo[list].list_id})">删除</td>
+	        {else}
+	        <td></td>
+	        {/if}
+	      </tr>
+      {/section}
+    {/if}
+    </tbody>
+  </table>
+  <div align="center">{$page_str}</div>
+</div>
+
+</div>
+{include file="footer.html"}
+</div>
+</body>
+</html>

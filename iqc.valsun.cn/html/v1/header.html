@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$module}--iqc管理系统</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<!--link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"-->
+<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="js/easyTooltip.js"></script>
+<script type="text/javascript" src="js/hoverIntent.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+<script type="text/javascript" src="js/jquery.wysiwyg.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+<!--script src="bootstrap/js/bootstrap.min.js"></script-->
+<link rel="stylesheet" href="./css/validationEngine/validationEngine.jquery.css" type="text/css"/>
+<script src="./js/languages/jquery.validationEngine-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/general.js" type="text/javascript" charset="utf-8"></script>
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="css/iqc.css">
+</head>
+
+<body>
+	<div class="container">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	IQC管理系统
+                </div>
+                <div class="onevar">
+                	<ul>
+                    	<li>
+                        	<a href="index.php?mod=iqc&act=iqcList">IQC检测领取</a>
+                        </li>
+                        <li>
+                        	<a href="index.php?mod=iqcDetect&act=iqcScan">IQC检测</a>
+                        </li>
+						<li>
+                        	<a href="index.php?mod=iqcInfo&act=iqcScanList">IQC检测信息</a>
+                        </li>
+                        <li>
+                        	<a href="index.php?mod=nowSampleStandard&act=nowSampleType">IQC检测标准</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user">
+					<a href="index.php?mod=login&act=logout">{$username} 退出</a>
+                </div>
+            </div>
+            <div class="twovar">
+
+            	<ul>
+					{if $secnev == 1}
+                	<li>
+                    	<a href="index.php?mod=iqc&act=iqcList">等待领取SKU</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=iqc&act=iqcWaitCheck">等待检测SKU</a>
+                    </li>
+					{elseif $secnev == 2}
+                    <li>
+                    	<a href="index.php?mod=iqcDetect&act=iqcScan">IQC检测</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=iqcDetect&act=backScan">IQC退件处理</a>
+                    </li>
+					<li>
+                    	<a href="index.php?mod=iqcDetect&act=stockScan">库存不良品处理</a>
+                    </li>
+					{elseif $secnev == 3}
+                    <li>
+                    	<a href="index.php?mod=iqcInfo&act=iqcScanList">IQC检测信息</a>
+                    </li>
+					<li>
+                    	<a href="">采购审核</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=defectiveProducts&act=getDefectiveProductsList">IQC不良品信息</a>
+                    </li>
+					<li>
+                    	<a href="index.php?mod=pendingProducts&act=getPendingProductsList">IQC待定商品信息</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=scrappedProducts&act=getScrappedProductsList">IQC报废/内部处理信息</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=returnProducts&act=getReturnProductsList">IQC待退回信息</a>
+                    </li>
+					{elseif $secnev == 4}
+
+                    <li>
+                    	<a href="index.php?mod=nowSampleStandard&act=nowSampleType">当前检测标准</a>
+                    </li>
+					<li>
+						<a href="index.php?mod=nowSampleStandard&act=sampleStandardList">检测样本标准</a>
+					</li>
+
+                    <li>
+                    	<a href="index.php?mod=sampleStandard&act=skuTypeQcList">产品分类检测列表</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=sampleStandard&act=detectionTypeList">检测方式列表</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=sampleStandard&act=sampleSizeList">检测标准样本大小列表</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=sampleCoefficient&act=getSampleCoefficientList">样本系数列表</a>
+                    </li>
+					{/if}
+                </ul>
+
+            </div>

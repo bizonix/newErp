@@ -1,0 +1,2 @@
+function fuc_onload(){
+}

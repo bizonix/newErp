@@ -1,0 +1,73 @@
+{include file="header.htm"}
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+            </div>
+            <div class="main products-main basic-main">
+            	<table cellspacing="0" width="100%" id="tableBas">
+                    <tr class="title">
+                    	<td align="left" colspan="2" style="font-size:16px; font-weight:bold; padding-left:15px;">特殊料号-运输方式（浏览）</td>
+                    </tr>
+                    <tr>
+                        <td width="10%"><span style="color:#F00;"></span>特殊运输方式名称：</td>
+                        <td align="left"><input value="{$specialTransportManagerName}" disabled="disabled"/></td>
+                    </tr>
+                    <tr>
+                        <td width="10%"><span style="color:#F00;"></span>是否启用：</td>
+                        <td align="left">
+                            <input name="isOn" id="isOn" value="{if $isOn == 1}启用{else}禁用{/if}" disabled="disabled"/>
+                        </td>                    
+                    </tr>                                       
+                </table>
+                <div id="transInfoDetail">
+                <table cellspacing="0" width="100%">
+                    <tr class="title">
+                    	<th width="20%" align="left" style="font-size:16px; font-weight:bold; padding-left:15px;">运输方式</th>
+                        <th align="left" style="font-size:16px; font-weight:bold; padding-left:15px;">渠道方式</th>
+                    </tr>
+                </table>
+                <div style="height: 800px;width: 700px; overflow-y:auto;">
+                <table cellspacing="0" width="100%">
+                    {assign var=channelArr value=getAllChannelInfo()}                	                    
+                    {foreach getAllTransportInfo() as $value}
+						<tr>
+                            <td>
+                                <input disabled="disabled" {if in_array($value['id'], $tranportIdArr)}checked="checked"{/if} style="width: 12px;" type="checkbox"/>
+                                <label for="transportId{$value['id']}" {if in_array($value['id'], $tranportIdArr)}style="color: red;"{/if}>{$value['carrierNameCn']}</label>
+                            </td>
+                            <td>
+                                {foreach $channelArr[$value['id']] as $v}
+                                    <input disabled="disabled" {if in_array($v['id'], $channelIdArr)}checked="checked"{/if} style="width: 12px;" type="checkbox"/>
+                                    <label for="channelId{$v['id']}" {if in_array($v['id'], $channelIdArr)}style="color: red;"{/if}>{$v['channelName']}</label>
+                                {/foreach}                                
+                            </td>
+						</tr>
+                    {/foreach}
+                </table>
+                </div>
+                <hr />
+                <table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td align="left" colspan="2" style="font-size:16px; font-weight:bold; padding-left:15px;">包含的SPU</td>
+                    </tr>
+						<tr>
+                            <td valign="top" width="6%" style="padding-left:20px;">
+                                SPU：
+                            </td>
+                            <td>
+                                <textarea cols="90" rows="10" readonly="readonly">{$spuStr}</textarea>
+							</td>
+						</tr>
+                </table>
+                </div>
+                <div align="center" class="products-action">
+                </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--link rel="stylesheet" type="text/css" href="css/label50x100.css"/-->
+<title>Print</title>
+<style>
+    td{ padding:4px 0px;}
+    body{ padding: 0; margin: 0;}
+</style>
+</head>
+<body>
+{foreach $ordersinfo as $key=>$orderval}
+	<table style="border: 1px #000 dashed;width:373px; height:100; padding: 0; margin:0 10px; height:46mm;">
+    	<tbody>
+        	<tr>
+            	<td valign="top" style=" width:185px;font-size:10px;height: 10px;">
+                {$orderval.partionFromAddress[1]}               
+                <br/>
+                <span style="font-weight:bold; display: block;border-bottom: 1px #000 dashed;width:100%; margin-bottom: 1px;">
+                <strong>{$key+1}/{$totalCount} total:{$orderval.totalStr}</strong>
+                </span>                    
+                {foreach $orderval.finalposition as $pinfo}
+                <div>
+                    <span style="font-size: 10px;  font-weight: bold; ">   
+					{if $pinfo['iscombine']==1}
+						<div style="border:1px #000 solid; margin:1px;word-break:break-all;">
+						{foreach $pinfo['info'] as $val}
+							{$val}<br>
+						{/foreach}
+						</div>
+					{else}
+						{foreach $pinfo['info'] as $val}
+							{$val}<br>
+						{/foreach}
+					{/if}
+                    </span>
+                </div>
+
+                {/foreach}
+                    
+                </td>
+                <td valign="top" style="border-left:1px #000000 dashed; font-size:11px; width:150px; line-height:13px; padding: 0 4px;">
+                    <div style="text-align: center; display: block;width:100%;">
+                    	<span>
+                        	<strong>{$orderval.id}</strong>
+                        </span>
+                        <span>                 
+                        	<strong>{$orderval.abbrshipname}</strong>
+                        </span>
+                        <span><strong>                    	
+							{$orderval.partionFromAddress[0]}
+                        </strong></span>
+                    </div>
+                    <div>                        
+               	   		 <img src="barcode128.class.php?data={$orderval.id}" width="170" height="37" />                                               
+                    </div>
+                    <strong>Send To:{$orderval.username}<br>
+	                  {if $orderval.street != ''}{$orderval.street}</br>{/if}
+					  {if $orderval.address2 != ''}{$orderval.address2}</br>{/if}
+					  {if $orderval.city != ''}{$orderval.city}, {/if}
+					  {if $orderval.state != ''}{$orderval.state}</br>{/if}
+					  {if $orderval.zipCode != ''}{$orderval.zipCode}</br>{/if}
+					  {if $orderval.countryName != ''}{$orderval.countryName}({$orderval.countryZh})</br>{/if}
+					  Tel:{if $orderval.phone != ''}{$orderval.phone}</br>{/if}
+					  {if $orderval.phone == '' && $orderval.landline != ''}{$orderval.landline}</br>{/if}
+					  </strong>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+	<div style="page-break-after:always;">&nbsp;</div>
+{/foreach}
+</body>
+</html>

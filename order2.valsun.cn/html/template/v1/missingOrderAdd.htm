@@ -1,0 +1,52 @@
+{include file='header.htm'}
+<link type="text/css" rel="stylesheet" href="css/orderindex.css">
+<script src="js/missingOrderAdd.js"></script>
+<div class="main order-main" align="left">
+    <div id="content">  
+		<div class='moduleTitle'>
+        <h2>&nbsp;</h2>
+        </div>
+			<form name="addOrderForm" id="addOrderForm" action="index.php?mod=missingOrderAdd&act=addMissingOrder" enctype="multipart/form-data" method="POST">
+				<div id="accordion">
+				
+				<h3>ebay漏单添加:</h3>
+					<div>
+						eBay帐号:
+						<select name="ebay_account"  id="ebay_account">
+							{foreach from=$ebayAccountList item=list}
+							 <option value="{$list.id}">{$list.account}</option>
+							{/foreach}					
+						</select>
+						eBay订单:
+						<!--<textarea id="ebay_id" name="ebay_id" style="height:180px;width:350px;margin-bottom:0px"></textarea>-->
+						<input name="ebay_id" type="file" >
+						<button type="submit" value="ebay" name="addOrder">添加</button><a href="upload/tep/ebay.csv">模板下载</a>
+						<br><font color="red"><b>订单号之间请以英文逗号隔开,订单添加进队列到抓进系统需要一段时间，请耐心等待！</b></font>
+                        <p id="showmessage">{$message}</p>
+					</div>
+				<h3>亚马逊漏单添加：</h3>
+					<div>
+						amazon帐号:
+						<select name="amazon_account"  id="amazon_account">
+							{foreach from=$amazonAccountList key=key_id item=list}
+							 <option value="{$key_id}">{$list}</option>
+							{/foreach}					
+						</select>
+						站点：
+						<select name="site">
+							<option value=''>请选择</option>
+							<option value='US'>US</option>
+							<option value='UK'>UK</option>
+                            <option value='DE'>DE</option>
+						</select>
+						Amazon订单:
+						<textarea id="amazon_id" name="amazon_id" style="height:180px;width:350px;margin-bottom:0px"></textarea>
+						<button type="submit" value="amazon" name="addOrder">添加</button>
+						<br><font color="red"><b>订单号之间请以英文逗号隔开</b></font>
+                        <p id="showaliexpressmessage">{$aliexpressmessage}</p>
+					</div>
+				</div>
+			</form>
+	</div>	
+</div>
+{include file='footer.htm'}

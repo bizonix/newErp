@@ -1,0 +1,88 @@
+{include file='header.htm'}
+<link type="text/css" rel="stylesheet" href="css/orderindex.css">
+<script language="javascript" src="js/orderindex.js"></script>
+<script language="javascript" src="js/orderRefund.js"></script>
+<script src="js/jquery/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script type="text/javascript" src="./js/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<link rel="stylesheet" type="text/css" href="./js/fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+
+<div class="fourvar order-fourvar" align="center">
+    <form action="" method="get" id="getOrderList">
+    <table>
+        <tr>
+            <td style="padding-left:17px;">
+                平台：
+            </td>
+            <td>
+                <select name="platformId" id="platformId" style="width:157px" onchange="changePlatform()">
+                <option value="">全部</option>
+                {foreach key=pid item=accounts from=$plataccount}
+                <option value="{$pid}" {if $g_platformId == $pid}selected="selected"{/if}>{$pid|get_platnamebyid}</option>
+                {/foreach}
+                </select>
+            </td>
+            <td style="padding-left:17px;">
+                账号：
+            </td>
+            <td>
+                <span id="selectAccountList">
+                <select name="accountId" id="accountId" style="width:157px">
+                <option value="">全部账号</option>
+                {if $g_platformId}
+                {foreach item=accountid from=$plataccount[$g_platformId]}
+                <option value="{$accountid}" {if $g_accountId == $accountid}selected="selected"{/if}>{$accountid|get_accountnamebyid}</option>
+                {/foreach}
+                {/if}
+                </select>
+                </span>
+            </td>
+ 			 <td>
+                <select name="searchTimeType" id="searchTimeType">
+                    <option value="1" {if $searchTimeType == 1}selected="selected"{/if}>付款时间</option>
+                    <option value="2" {if $searchTimeType == 2}selected="selected"{/if}>扫描时间</option>
+                    <option value="3" {if $searchTimeType == 3}selected="selected"{/if}>同步时间</option>
+                </select>
+            </td>
+            <td>
+                <!--input name="OrderTime1" type="text" value="{$searchOrderTime1}" onclick="WdatePicker()"/>-<input name="OrderTime2" type="text" value="{$searchOrderTime12}" onclick="WdatePicker()"/-->
+                <input name="OrderTime1" id="OrderTime1" type="text" value="{$g_OrderTime1}" />
+                -<input name="OrderTime2" id="OrderTime2" type="text" value="{$g_OrderTime2}" />
+                -<input id="SYNC" type="button" value="同步计数" class="order-search"/>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<div style="width:100%" align="center">
+{if $countData}
+<table width="60%" border="1" style="border-collapse:collapse;" cellspacing="0" cellpadding="0">
+<tr>
+<td width="15%"><h3>平台</h3></td>
+<td width="15%"><h3>账号</h3></td>
+<td width="25%"><h3>状态</h3></td>
+<td width="25%"><h3>类别</h3></td>
+<td width="15%"><h3>数量</h3></td>
+</tr>
+
+{foreach from=$countData item=accountArr key=accountId}
+{foreach from=$accountArr item=statusArr key=statusId}
+{foreach from=$statusArr item=typeArr key=typeId}
+<tr>
+<td>{$platformNa}</td>
+<td>{$accountId|get_accountnamebyid}</td>
+<td>{$statusId|get_orderStatusName}</td>
+<td>{$typeId|get_orderTypeName}</td>
+<td>{$typeArr}</td>
+</tr>
+{/foreach}
+{/foreach}
+{/foreach}
+</table>
+{else}
+<font color='red'>没数据</font>
+{/if}
+</div>
+
+
+{include file='footer.htm'}

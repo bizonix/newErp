@@ -1,0 +1,135 @@
+<!--
+ * 内部使用申请单  internalBuyList.htm
+ * ADD BY chenwei 2013.8.26
+-->
+{include file='header.htm'}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/internalIoSell.js"></script>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<br />
+<br />
+<div class="main" align="center">
+<form action='index.php?mod=internalIoSell&act=internalBuySubmit' method="post" id="internalBuyForm" onsubmit="return check();">
+	<div class="servar" style="width:95%" align="center">
+    	<div align="left">
+        	<span style="font-size:15px;">
+            
+   			出入库单类型：
+             <select name="ioTypeinvoiceChoose" id="ioTypeinvoiceChoose" style="width:150px;height:20px;font-size:15px" class="mf validate[required]" onchange="changeCategoriesSkip()">
+             	<option value="" selected="selected" >请选择</option>
+                {foreach key = key_id from=$invoiceTypeArr item=list}
+                <option value="{$list.id}" >{$list.invoiceName}</option>
+                {/foreach}
+			 </select>         
+    		</span>
+            &nbsp;
+            <span id = "paymentMethodsSkip" style="font-size:15px;">
+            </span>
+        </div>
+        <hr  />
+        <div align="center">
+        	<span style="font-size:20px;">
+   			申请清单
+    		</span>
+        </div>
+        <div align="left">
+        	<span style="font-size:10px;">
+   				<!--button  id='skuAdd' />新增料号</button-->
+                <input id="skuAdd" name="skuAdd" type="button" onclick="skuLineAdd()" style="width:90px;height:32px;font-size:15px;" value="+新增料号"> 
+    		</span>
+        </div>
+    	<div style="font-size:15px; border:#F00">
+        	
+                  <table width="100%" border="1" cellspacing="3" cellpadding="0">
+                  		<tr>
+                          <td align="left" colspan="6">
+                          <span style="font-size:20px;">
+                          单号：&nbsp;&nbsp;<input id = "ordersn" name= "ordersn" type="text" value="{$ordersn}" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none; BACKGROUND: none transparent scroll repeat 0% 0%; width:300px; color:#F00" readonly />
+                          </span>
+                          </td>
+                        </tr>
+                        <tr>
+                        	<td colspan="6">
+                            	<table id="skuTable" width="100%">
+                                 <tr id = "line0">
+                                      <td width="20%" align="left">
+                                      <span style="font-size:20px;">
+                                        料号：&nbsp;&nbsp;<input value="" id='sku0' name="sku[]" onchange='changetoprices(this);' class="mf validate[required] text-input"  type="text" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none;width:150px;">
+                                      </span>                         
+                                      </td>
+                                      <td width="20%" align="left">
+                                      <span style="font-size:20px;">
+                                        数量：&nbsp;&nbsp;<input value="1" onchange='changeToNum(this);' id='num0' name="num[]" class="mf validate[required] text-input"  type="text" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none;width:50px;">
+                                        &nbsp;
+                                        <input id="numAdd0" type="button" onclick="numAdd(this);" style="width:25px;height:22px;font-size:10px" value="+">
+                                        <input id="reduce0" type="button" onclick="reduce(this);" style="width:25px;height:22px;font-size:10px" value="-">
+                                      </span>                         
+                                      </td>
+                                      <td width="15%" align="left">
+                                      <span style="font-size:20px;">
+                                        单价：&nbsp;&nbsp;<input id="price0" name="price[]" type="text" value="" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none; BACKGROUND: none transparent scroll repeat 0% 0%; width:80px; color:#33CC33" readonly /> 
+                                      </span>                         
+                                      </td>
+                                       <td width="15%" align="left">
+                                      <span style="font-size:20px;">
+                                      <input type="hidden" value="" id="shippingId0" name="shippingId[]" />
+                                        仓位：&nbsp;&nbsp;<input id="shipping0" name="shipping[]" type="text" value="" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none; BACKGROUND: none transparent scroll repeat 0% 0%; width:120px; color:#33CC33" readonly /> 
+                                      </span>                         
+                                      </td>
+                                      <td width="15%" align="left">
+                                      <span style="font-size:20px;">
+                                      <input type="hidden" value="" id="purchaseId0" name="purchaseId[]" />
+                                        采购：&nbsp;&nbsp;<input id="purchase0" name="purchase[]" type="text" value="" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none; BACKGROUND: none transparent scroll repeat 0% 0%; width:80px; color:#33CC33" readonly /> 
+                                      </span>                         
+                                      </td>
+                                      <td width="5%" align="center">                                                                        
+                                      </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td width="15%" align="left">
+                          <span style="font-size:20px;">
+                          备注：&nbsp;&nbsp;<textarea id='noteInput' name="noteInput" style="width:200px; height:60px; font-size:10px;border-bottom :none; border-left :none; border-right :none; border-top :none;"></textarea>
+                          </span>
+                          </td>
+                          <td align="center" colspan="5">
+                          <span id="msgDisplay" name="msgDisplay" style="font-size:20px; color:#F00"></span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="6" align="left">
+                                    申请人：
+                                      <input id="userId" name="userId" type="text" value="{$curusername}" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none; BACKGROUND: none transparent scroll repeat 0% 0%; width:100px;color:#F00;" readonly />
+                                      申请时间：
+                                      <input type="text" value="{$applyTime}" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none; BACKGROUND: none transparent scroll repeat 0% 0%; " readonly /> 
+                                   
+                                    
+                                      合计数量：
+                                                <input id="totalNum" name= "totalNum" type="text" value="1" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none; BACKGROUND: none transparent scroll repeat 0% 0%; width:150px; color:#F00" readonly />  
+                <!--
+                					 所属部门：
+                                      <input type="text" value="" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none; BACKGROUND: none transparent scroll repeat 0% 0%; width:100px;color:#F00;" readonly />
+                
+                                      实际付款：
+                                                <input id="totalMoney" name= "totalMoney" type="text" value="0" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none; BACKGROUND: none transparent scroll repeat 0% 0%; width:150px; color:#F00" readonly />
+                                      
+                                      指向审核人：
+                                      <input type="text" value="" style="border-bottom :1 solid black; border-left :none; border-right :none; border-top :none; BACKGROUND: none transparent scroll repeat 0% 0%;width:50px;color:#F00;" readonly /> 
+                 -->
+                                                                  
+                          </td>
+                        </tr>
+                </table>
+                <br />
+                <div align="center">   		       
+                    <button  id='internalBuySubmit' value="" style="width:110px;height:33px;font-size:15px"/>提交申请单</button>
+                     &nbsp;&nbsp;
+                    <button  id='internalBuyReset' value="" type="reset" style="width:100px;height:33px;font-size:15px" />重  置</button>
+        		</div> 
+        </div>          
+    </div>   
+    </form> 
+</div>
+{include file='footer.htm'}

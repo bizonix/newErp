@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <div>成功列表:</div>
+    <table width="100%">
+        <tr>
+            <td width="10%">订单编号</td>
+            <td width="20%">rcord Number</td>
+            <td width="10%">重量</td>
+            <td width="10%">跟踪号</td>
+            <td>处理消息</td>
+        </tr>
+        {foreach $success as $val}
+        <tr>
+            <td>{$val.oderid}</td>
+            <td>{$val.recordNumber}</td>
+            <td>{$val.calcWeight}</td>
+            <td>{$val.trackNumber}</td>
+            <td>{$val.errMsg}</td>
+        </tr>
+        {/foreach}
+    </table>
+    
+    <div>失败列表:</div>
+    <table width="100%">
+        <tr>
+            <td width="10%">订单编号</td>
+            <td width="20%">rcord Number</td>
+            <td width="10%">重量</td>
+            <td width="10%">跟踪号</td>
+            <td>处理消息</td>
+        </tr>
+        {foreach $failure as $fval}
+        <tr>
+            <td>{$fval.oderid}</td>
+            <td>{$fval.recordNumber}</td>
+            <td>{$fval.calcWeight}</td>
+            <td>{$fval.trackNumber}</td>
+            <td>{$fval.errMsg}</td>
+        </tr>
+        {/foreach}
+    </table>
+    
+</body>
+</html>

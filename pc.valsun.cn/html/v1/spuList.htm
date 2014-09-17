@@ -1,0 +1,321 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/jquery.flexselect.js"></script>
+<script type="text/javascript" src="./js/liquidmetal.js"></script>
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+            <span style="font-weight: bold;">基础条件搜索&nbsp;&nbsp;</span>
+            <span>SPU：
+			   <input name="spu" type="text" id="spu" value="{$smarty.get.spu}" style="width: 100px;"/>
+			   </span>
+			   <span>|&nbsp;是否已使用：
+			   <select name="autoStatus" id="autoStatus" >
+			    <option value="0" > </option>
+				<option value="1" {if $smarty.get.status == 1}selected='selected'{/if}>No</option>
+				<option value="2" {if $smarty.get.status == 2}selected='selected'{/if}>Yes</option>
+			  </select>
+			   </span>
+			   <span>|&nbsp;单/虚拟料号：
+			   <select name="isSingSpu" id="isSingSpu" >
+			    <option value="0" > </option>
+				<option value="1" {if $smarty.get.isSingSpu == 1}selected='selected'{/if}>单料号</option>
+				<option value="2" {if $smarty.get.isSingSpu == 2}selected='selected'{/if}>虚拟料号</option>
+			  </select>
+			   </span>
+			   <span>|&nbsp;申请人：
+			   <select name="purchaseId" id="purchaseId" class="flexselect" style="width: 80px;">
+			    <option value="0" > </option>
+			    {foreach OmAvailableModel::getTNameList('power_global_user','global_user_id,global_user_name','WHERE global_user_company<=4 order by global_user_login_name') as $value}
+				<option value="{$value['global_user_id']}" {if $smarty.get.purchaseId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+				{/foreach}
+			  </select>
+			   </span>
+            <!-- TODO: {if isAccessAll('spu','addAutoSpuForOld') == true}
+			<span style="float: right;padding-right: 30px;"><a href="index.php?mod=spu&act=addAutoSpuForOld">添加旧数据进自动生成列表</a></span>
+            {/if} -->
+            &nbsp;
+			<span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="servar products-servar">
+                <span style="font-weight: bold;">分配销售条件搜索&nbsp;&nbsp;</span>
+                <span>是否分配销售：
+				   <select name="hasToSaler" id="hasToSaler" >
+				    <option value="0" > </option>
+					<option value="1" {if $smarty.get.hasToSaler == 1}selected='selected'{/if}>已分配</option>
+					<option value="2" {if $smarty.get.hasToSaler == 2}selected='selected'{/if}>未分配</option>
+				  </select>
+				</span>
+                <span>|&nbsp;对应平台：
+				   <select name="platformId" id="platformId" style="width: 80px;">
+				    <option value="0" > </option>
+                    {foreach getAllPlatformInfo() as $value}
+					<option value="{$value['id']}" {if $smarty.get.platformId == $value['id']}selected='selected'{/if}>{$value['platform']}</option>
+				    {/foreach}
+                  </select>
+				</span>
+                <span>|&nbsp;销售人：
+				   <select name="salerId" id="salerId" class="flexselect" style="width: 70px;">
+				    <option value="0" > </option>
+				    {foreach OmAvailableModel::getTNameList('power_global_user','global_user_id,global_user_name','WHERE global_user_company<=4 order by global_user_login_name') as $value}
+					<option value="{$value['global_user_id']}" {if $smarty.get.salerId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+					{/foreach}
+				  </select>
+				</span>
+                <span>|&nbsp;是否同意：
+				   <select name="isAgree" id="isAgree" style="width: 60px;">
+                    <option value="0"> </option>
+				    <option value="1" {if $smarty.get.isAgree == 1}selected='selected'{/if}>待定</option>
+				    <option value="2" {if $smarty.get.isAgree == 2}selected='selected'{/if}>同意</option>
+                    <option value="3" {if $smarty.get.isAgree == 3}selected='selected'{/if}>拒绝</option>
+				  </select>
+				</span>
+            </div>
+            <div class="servar products-servar">
+                <span style="font-weight: bold;">指派产品制作人条件搜索&nbsp;&nbsp;</span>
+                <span>有无产品制作人：
+				   <select name="isExsitWebMaker" id="isExsitWebMaker" style="width: 40px;">
+				    <option value="0" ></option>
+				    <option value="1" {if $smarty.get.isExsitWebMaker == 1}selected='selected'{/if}>有</option>
+                    <option value="2" {if $smarty.get.isExsitWebMaker == 2}selected='selected'{/if}>无</option>
+				  </select>
+				</span>
+                <span>|&nbsp;产品制作人：
+				   <select name="webMakerId" id="webMakerId" style="width: 70px;">
+				    <option value="0" ></option>
+				    {foreach getAllPEInfo() as $value}
+					<option value="{$value['global_user_id']}" {if $smarty.get.webMakerId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+					{/foreach}
+				  </select>
+				</span>
+                <span>|&nbsp;是否同意：
+				   <select name="webMakeIsAgree" id="webMakeIsAgree" style="width: 60px;">
+                    <option value="0"> </option>
+				    <option value="1" {if $smarty.get.webMakeIsAgree == 1}selected='selected'{/if}>待定</option>
+				    <option value="2" {if $smarty.get.webMakeIsAgree == 2}selected='selected'{/if}>同意</option>
+                    <option value="3" {if $smarty.get.webMakeIsAgree == 3}selected='selected'{/if}>拒绝</option>
+				  </select>
+				</span>
+                <span>|&nbsp;新品制作筛选：
+				   <select name="productsNewSpu" id="productsNewSpu" style="width: 80px;">
+				    <option value="0" ></option>
+				    <option value="1" {if $smarty.get.productsNewSpu == 1}selected='selected'{/if}>新品制作</option>
+				  </select>
+				</span>
+                <span><button id='seachAutoSpuList'>搜索</button></span>
+            </div>
+            <div class="main feedback-main firefox-table">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <td>SPU</td>
+    					<td>申请人</td>
+                        <td>单/虚拟料号</td>
+    					<td>是否已使用</td>
+    					<td>添加时间</td>
+    					<td>Ebay销售</td>
+                        <td>Aliexpress销售</td>
+                        <td>Amazon销售</td>
+                        <td>海外仓销售</td>
+                        <td>产品制作人</td>
+    					<td>操作</td>
+                    </tr>
+                    {foreach $spuList as $value}
+                                <tr>
+                                    <td><a href="{if $value['isSingSpu'] == 1}index.php?mod=goods&act=getGoodsList&seachdata={$value['spu']}&searchs=1{else}index.php?mod=goods&act=getCombineList&searchComField=1&fieldValue={$value['spu']}{/if}" target="_blank">{$value['spu']}</a></td>
+                                    <td><a href="index.php?mod=autoCreateSpu&act=getAutoCreateSpuList&purchaseId={$value['purchaseId']}">{getPersonNameById($value['purchaseId'])}</a></td>
+									<td>{if $value['isSingSpu'] == 1}单料号{else}虚拟料号{/if}</td>
+                                    <td>{if $value['status'] == 1}<img title="No" alt="No" src="http://misc.erp.valsun.cn/img/wrong.png"/>{else}<img title="Yes" alt="Yes" src="http://misc.erp.valsun.cn/img/right.png"/>{/if}</td>
+                                    <td>{if !empty($value['createdTime'])}{$value['createdTime']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                                    <td>{if !empty($value['ebaySaler'])}{$value['ebaySaler']}{if $value['ebayIsAgree'] == 1}<span id="ebay{$value['spu']}Span">(待定)</span>{elseif $value['ebayIsAgree'] == 2}<span id="ebay{$value['spu']}Span" style="color: green;">(同意)</span>{elseif $value['ebayIsAgree'] == 3}<span id="ebay{$value['spu']}Span" style="color: red;">(拒绝)</span>{/if}{if $value['ebayIsAgree'] == 1 && $smarty.session.userId == $value['ebaySalerId']}<input type="radio" name="ebay{$value['spu']}" platformId="1" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="2"/><img title="同意" alt="同意" src="http://misc.erp.valsun.cn/img/right.png"/><input name="ebay{$value['spu']}" type="radio" platformId="1" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="3"/><img title="拒绝" alt="拒绝" src="http://misc.erp.valsun.cn/img/wrong.png"/>{/if}{else}--{/if}</td>
+                                    <td>{if !empty($value['aliexpressSaler'])}{$value['aliexpressSaler']}{if $value['aliexpressIsAgree'] == 1}<span id="aliexpress{$value['spu']}Span">(待定)</span>{elseif $value['aliexpressIsAgree'] == 2}<span id="aliexpress{$value['spu']}Span" style="color: green;">(同意)</span>{elseif $value['aliexpressIsAgree'] == 3}<span id="aliexpress{$value['spu']}Span" style="color: red;">(拒绝)</span>{/if}{if $value['aliexpressIsAgree'] == 1 && $smarty.session.userId == $value['aliexpressSalerId']}<input name="aliexpress{$value['spu']}" type="radio" platformId="2" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="2"/><img title="同意" alt="同意" src="http://misc.erp.valsun.cn/img/right.png"/><input name="aliexpress{$value['spu']}" type="radio" platformId="2" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="3"/><img title="拒绝" alt="拒绝" src="http://misc.erp.valsun.cn/img/wrong.png"/>{/if}{else}--{/if}</td>
+                                    <td>{if !empty($value['amazonSaler'])}{$value['amazonSaler']}{if $value['amazonIsAgree'] == 1}<span id="amazon{$value['spu']}Span">(待定)</span>{elseif $value['amazonIsAgree'] == 2}<span id="amazon{$value['spu']}Span" style="color: green;">(同意)</span>{elseif $value['amazonIsAgree'] == 3}<span id="amazon{$value['spu']}Span" style="color: red;">(拒绝)</span>{/if}{if $value['amazonIsAgree'] == 1 && $smarty.session.userId == $value['amazonSalerId']}<input name="amazon{$value['spu']}" type="radio" platformId="11" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="2"/><img title="同意" alt="同意" src="http://misc.erp.valsun.cn/img/right.png"/><input name="amazon{$value['spu']}" type="radio" platformId="11" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="3"/><img title="拒绝" alt="拒绝" src="http://misc.erp.valsun.cn/img/wrong.png"/>{/if}{else}--{/if}</td>
+                                    <td>{if !empty($value['overseaSaler'])}{$value['overseaSaler']}{if $value['overseaIsAgree'] == 1}<span id="oversea{$value['spu']}Span">(待定)</span>{elseif $value['overseaIsAgree'] == 2}<span id="oversea{$value['spu']}Span" style="color: green;">(同意)</span>{elseif $value['overseaIsAgree'] == 3}<span id="oversea{$value['spu']}Span" style="color: red;">(拒绝)</span>{/if}{if $value['overseaIsAgree'] == 1 && $smarty.session.userId == $value['overseaSalerId']}<input name="oversea{$value['spu']}" type="radio" platformId="14" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="2"/><img title="同意" alt="同意" src="http://misc.erp.valsun.cn/img/right.png"/><input name="oversea{$value['spu']}" type="radio" platformId="14" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="3"/><img title="拒绝" alt="拒绝" src="http://misc.erp.valsun.cn/img/wrong.png"/>{/if}{else}--{/if}</td>
+                                    <td>
+                                    {if !empty($value['webMaker'])}
+                                        {$value['webMaker']}
+                                        {if $value['webMakerIsAgree'] == 1}
+                                        <span id="webMake{$value['spu']}Span">(待定)</span>
+                                        {elseif $value['webMakerIsAgree'] == 2}
+                                            <!-- <span id="webMake{$value['spu']}Span" style="color: green;">(同意)</span> -->
+                                            {if $value['webMakerIsTake'] == 0}
+                                            <span style="color: orange;">(未领取)</span>
+                                            {elseif $value['webMakerIsTake'] == 1 && $value['webMakerIsComplete'] == 0}
+                                            <span style="color: orange;">(已领取)</span>
+                                            {elseif $value['webMakerIsComplete'] == 1}
+                                            <span style="color: green;">(已完成)</span>
+                                            {/if}
+                                        {elseif $value['webMakerIsAgree'] == 3}
+                                        <span id="webMake{$value['spu']}Span" style="color: red;">(拒绝)</span>
+                                        {/if}
+                                        {if $value['webMakerIsAgree'] == 1 && $smarty.session.userId == $value['webMakerId']}
+                                        <input name="webMake{$value['spu']}" type="radio" platformId="999" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="2"/>
+                                        <img title="同意" alt="同意" src="http://misc.erp.valsun.cn/img/right.png"/>
+                                        <input name="webMake{$value['spu']}" type="radio" platformId="999" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="3"/>
+                                        <img title="拒绝" alt="拒绝" src="http://misc.erp.valsun.cn/img/wrong.png"/>
+                                        {/if}
+                                    {else}
+                                        --
+                                    {/if}
+                                    </td>
+                                    <td>
+                                    	{if $value['status'] == 1 && $value['isSingSpu'] == 1 && getIsAccess($value['purchaseId'])}
+                                        <input type="button" onclick="window.location.href = 'index.php?mod=autoCreateSpu&act=editAutoCreateSpuCate&spu={$value['spu']}'" value="添加档案"/>
+                                        {/if}
+
+                                        {if ($value['isSingSpu'] == 1 && OmAvailableModel::isSpuAudit($value['spu']) && (getIsAccess($value['purchaseId']) || isSpuExistBySpuAndPurchaseId($value['spu'], $smarty.session.userId)))  || ($value['isSingSpu'] == 2 && (in_array($smarty.session.userId, getisAgreeCombineSalerIdArrBySpu($value['spu'])) || getIsAccess($value['purchaseId'])))}
+                                        <input type="button" class="addSku" spu="{$value['spu']}" isSingSpu="{$value['isSingSpu']}" value="{if $value['isSingSpu'] == 1}添加子料号{else}添加虚拟子料号{/if}"/>
+                                        {if $value['isSingSpu'] == 2}
+                                        <input id="amount{$value['spu']}" name="amount" value="1" style="width: 20px;" type="hidden"/>
+                                        {/if}
+                                        {/if}
+
+                                        {if getIsAccess($value['purchaseId']) || isSpuExistBySpuAndPurchaseId($value['spu'], $smarty.session.userId) || isAccessAll('autoCreateSpu','isAccessIntoUpdatePersonPower')}
+                                            <input type="button" onclick="window.open('index.php?mod=autoCreateSpu&act=updateSpuPerson&spu={$value['spu']}')" value="更新SPU相关人"/>
+                                        {/if}
+                                    </td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachAutoSpuList').click();
+			}
+        });
+
+        $(document).ready(function(){
+            $(".addSku").click(function(){
+                var spu = $(this).attr('spu');
+                var isSingSpu = $(this).attr('isSingSpu');
+                if(isSingSpu == 1){
+                    location.href = 'index.php?mod=autoCreateSpu&act=addSku&spu='+spu;
+                    return;
+                }
+                if(!$.trim(spu)){
+                    $("#error").html('SPU为空');
+                }
+                var amount = $("#amount"+spu).val();
+                if(isNaN(amount) || amount <= 0 || amount > 100){
+                    $("#error").html('数量必须在1-100之间');
+                }
+                location.href = 'index.php?mod=autoCreateSpu&act=addSku&spu='+spu+'&amount='+amount;
+            });
+
+            $("select[class*=flexselect]").flexselect();
+        });
+</script>
+<script type="text/javascript">
+        $(document).ready(function(){
+            $("input[type='radio']").change(function(){
+                var spu = $(this).attr('spu');
+                var platformId = $(this).attr('platformId');
+                var isSingSpu = $(this).attr('isSingSpu');
+                var value = $(this).val();
+                if(!$.trim(spu)){
+                    alert('spu为空');
+                    return;
+                }
+                if(value !=2 && value != 3){
+                    alert('状态有误');
+                    return;
+                }
+                if(isSingSpu !=1 && isSingSpu != 2){
+                    alert('单/虚拟料号有误');
+                    return;
+                }
+                var confirmStr = '';
+                if(value == 2){
+                    confirmStr = '确定同意？';
+                }else if(value == 3){
+                    confirmStr = '确定拒绝？';
+                }else{
+                    return;
+                }
+                if(platformId != 1 && platformId != 2 && platformId != 11 && platformId != 14 && platformId != 999){
+                    alert('平台有误');
+                    return;
+                }
+                if(platformId != 999){ //如果平台id不为999的话，则表示是对销售人员的操作
+                    if(confirm(confirmStr)){
+                        $.ajax({
+                    		type:"POST",
+                    		url:"json.php?mod=goods&act=updateIsAgreeStatusForSaler&jsonp=1",
+                    		dataType:"json",
+                    		data:{ spu:spu,platformId:platformId,isSingSpu:isSingSpu,value:value },
+                    		success:function(msg){
+                    			if(msg.errCode == 200){
+                    				if(platformId == 1){
+                                        if(value == 2){
+                                            $("#ebay"+spu+"Span").text("(同意)");
+                                        }else if(value == 3){
+                                            $("#ebay"+spu+"Span").text("(拒绝)");
+                                        }
+                                    }
+                                    if(platformId == 2){
+                                        if(value == 2){
+                                            $("#aliexpress"+spu+"Span").text("(同意)");
+                                        }else if(value == 3){
+                                            $("#aliexpress"+spu+"Span").text("(拒绝)");
+                                        }
+                                    }
+                                    if(platformId == 11){
+                                        if(value == 2){
+                                            $("#amazon"+spu+"Span").text("(同意)");
+                                        }else if(value == 3){
+                                            $("#amazon"+spu+"Span").text("(拒绝)");
+                                        }
+                                    }
+                                    if(platformId == 14){
+                                        if(value == 2){
+                                            $("#oversea"+spu+"Span").text("(同意)");
+                                        }else if(value == 3){
+                                            $("#oversea"+spu+"Span").text("(拒绝)");
+                                        }
+                                    }
+                    			}else{
+                    				alert(msg.errMsg);
+                    			}
+                    		}
+                    	});
+                    }
+                }else{ //如果是platformId=999,则表示是对产品制作人的操作
+                    if(confirm(confirmStr)){
+                        $.ajax({
+                    		type:"POST",
+                    		url:"json.php?mod=goods&act=updateIsAgreeStatusForWebMaker&jsonp=1",
+                    		dataType:"json",
+                    		data:{ spu:spu,platformId:platformId,isSingSpu:isSingSpu,value:value },
+                    		success:function(msg){
+                    			if(msg.errCode == 200){
+                                    if(value == 2){
+                                        $("#webMake"+spu+"Span").text("(同意)");
+                                    }else if(value == 3){
+                                        $("#webMake"+spu+"Span").text("(拒绝)");
+                                    }
+                    			}else{
+                    				alert(msg.errMsg);
+                    			}
+                    		}
+                    	});
+                    }
+                }
+            });
+        });
+</script>

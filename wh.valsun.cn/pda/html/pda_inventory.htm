@@ -1,0 +1,65 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/pda_inventory.js"></script>
+
+	<div id="divcontent" style="text-align:center; height:200px;">
+		<div id="mstatus"></div>
+		<div id="scancontent">
+			<table style="text-align:left;font-size:14px" id="checkinfo" cellspacing="2" cellpadding="0" width="100%">
+				<thead>
+					<tr>
+						<td  >sku(料号): </td>
+						<td>
+						<input value="" id='sku' onkeydown="checksku()" name="sku" type="text" style="width:90px;height:18px;">
+						<input type="button" value="查询" id="inquire_sku" class="buttonclass" onclick="showWindow();" />
+						</td>
+					</tr>
+					<tr id="nowlocation" style="display:none">
+						<td  >仓位: </td>
+						<td>
+						<input value="" id="location" onkeydown="checklocation()"  name="location" type="text" style="width:90px;height:18px;">
+						
+						</td>
+					</tr>
+				</thead>
+				<tbody id="tbody" style="display:none">
+					<tr>
+						<td  >库存数量: </td>
+						<td>
+						<input value="" id="nums" name="nums" type="text" style="width:90px;height:18px;" readonly>
+						
+						</td>
+					</tr>
+					<tr>
+						<td  >盘点数量： </td>
+						<td>
+							<input value="" id="invNums"  name="invNums" type="text" style="width:90px;height:18px;">
+							
+						</td>
+					</tr>
+					<tr>
+						<td  >盘点原因： </td>
+						<td>
+							<select style="width:90px;height:20px;"  id="reasonId"  name="reasonId">
+								<option value="0">请选择</option>
+								{foreach from=$reason item=list}
+									{if $list.id==$reasonId}
+									<option selected="selected" value="{$list.id}" >{$list.reasonName}</option>
+									{else}
+									 <option value="{$list.id}" >{$list.reasonName}</option>
+									{/if}
+								{/foreach}
+							</select>
+							
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="2" >
+							<input type="submit" onclick="subdata();" id="data_submit" class='buttonclass' value="提交"/>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+{include file="footer.htm"}

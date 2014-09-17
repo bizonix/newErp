@@ -1,0 +1,49 @@
+{include file="header.htm"}
+{include file="secendNav_tpl.htm"}
+<link rel="stylesheet" href="./css/msg_tplform.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/tpleditAmazon.js"></script>
+<div class="maincontainer">
+	<div class="titlediv">
+		{$act}分类信息
+	</div>
+<form  action="{$submiturl}" method="post">
+	<div class="inputline firstline">
+		<div class="line-left">标题：</div>
+		<div class="line-right">
+			<input value="{$tplinfo.name}" id="title" name="title">
+		</div>
+	</div>
+	<div class="inputline firstline">
+		<div class="line-left">主题：</div>
+		<div class="line-right">
+			<input value="{$tplinfo.subject}" id="subject" name="topic">
+		</div>
+	</div>
+	<div class="inputline secondeline ">
+		<div class="line-left">模板内容：</div>
+		<div class="line-right">
+			<textarea style="width:600px; height:200px;" id="content" name="content">{$tplinfo.content}</textarea>
+		</div>
+	</div>
+	<div class="inputline firstline">
+		<div class="line-left">显示序号：</div>
+		<div class="line-right">
+			<input value="{$tplinfo.ordersn}" name="ordersn">
+		</div>
+	</div>
+	<div class="inputline firstline">
+		<div class="line-left">其他属性：</div>
+		<div class="line-right checkline">
+			<input type="checkbox" {if $tplinfo.ispublic == 1} checked="checked" {/if} value="1" name="iscommon"><span>是否为常用模板</span>
+			<input type="checkbox" {if $tplinfo.iscommon == 1} checked="checked" {/if} value="1" name="ispublic"> <span>是否为公用模板  </span>
+			<span style="color:gray;">(未选择，则默认为私有模板)</span>
+		</div>
+	</div>
+	{if $tid}
+	<input type="hidden" name="tid" value="{$tid}">
+	{/if}
+	<button onclick="return submitdata();"  class="submitbutton" ">提交</button>
+	<button type="button" onclick="window.location='{$gobackurl}'" class="submitbutton">取消</button>
+</form>
+</div>
+{include file="footer.htm"}

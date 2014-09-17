@@ -1,0 +1,38 @@
+﻿{header}
+<link rel="stylesheet" href="css/transportlist.css">
+{navdiv}
+<script type="text/javascript" src="./js/partitionManage.js"></script>	
+<div class="miancontainer ">
+    <table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                    <tr>
+                            <td><input type="checkbox" class="checkall" /></td>
+                            <td>分区名称</td>
+                            <td>渠道名称</td>
+                            <td>国家列表</td>
+                            <td>回邮地址</td>
+                            <td>是否启用</td>
+							<td>编辑</td>
+                    </tr>
+            </thead>
+            <tbody>
+            	<!-- BEGIN list -->
+                    <tr class="odd">
+                            <td><input type="checkbox" name="ckbs" value="{id}"/></td>
+                            <td>{partitionName}</td>
+                            <td>{channelName}</td>
+                            <td>{countries}</td>
+                            <td>{returnAddress}</td>
+                            <td>{enable}</td>
+                            <td><a href="http://trans.valsun.cn/index.php?mod=partitionManage&act=partitionModify&id={id}&channelId={channelId}&channelName={channelName}&carrierId={carrierId}&carrierName={carrierName}">编辑</a></td>
+                    </tr>
+                <!-- END list -->
+            </tbody>
+			<tfoot>
+			    <tr><td>
+			    <a href="http://trans.valsun.cn/index.php?mod=partitionManage&act=addNewPartition&channelId={channelId}&channelName={channelName}&carrierId={carrierId}&carrierName={carrierName}" id="addNewPartition">添加新分区</a>
+				</td></tr>
+			</tfoot>
+    </table> 
+</div>
+{footer}

@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>哲果天天快递单打印页面</title>
+<style type="text/css">
+#body{
+	padding:0;
+	margin:0;}
+#main{
+	font-family:黑体;
+	font-weight:bolder;
+	height:409px;
+	width:742px;
+	position:relative;
+	left:135px;
+	top:33px;
+	}
+	#From{
+		height:30px;
+		width:92px;
+		position:absolute;
+		top:80px;
+		left:60px;}
+		#Departure{
+			  font-size:22px;
+		      height:40px;
+		      width:180px;
+		      position:absolute;
+		      top:80px;
+		      left:200px;}
+			  #Add{
+				  		height:60px;
+		                width:305px;
+		                position:absolute;
+		                top:120px;
+		                left:35px;}
+						#Company{
+		height:27px;
+		width:250px;
+		position:absolute;
+		top:223px;
+		left:35px;}
+						#Name{
+		height:20px;
+		width:240px;
+		position:absolute;
+		top:223px;
+		left:200px;}
+		#Sender{
+		height:60px;
+		width:200px;
+		position:absolute;
+		top:260px;
+		left:25px;}
+		#Picked{
+		font-size:25px;
+		height:60px;
+		width:150px;
+		position:absolute;
+		top:345px;
+		left:200px;}
+		#To{
+		font-size:20px;
+		height:30px;
+		width:120px;
+		position:absolute;
+		top:80px;
+		left:435px;}
+		#City{
+		font-size:20px;
+		height:30px;
+		width:120px;
+		position:absolute;
+		top:80px;
+		left:586px;}
+		#Address{
+		font-size:20px;
+		height:65px;
+		width:260px;
+		position:absolute;
+		top:120px;
+		left:395px;}
+		#Mobile{
+		font-size:20px;
+		height:20px;
+		width:220px;
+		position:absolute;
+		top:224px;
+		left:435px;}
+	#Other{
+		font-size:35px;
+		height:100px;
+		width:320px;
+		position:absolute;
+		top:260px;
+		left:390px;}
+#BarCode{
+		text-align:right;
+		height:72px;
+		width:200px;
+		position:absolute;
+		top:145px;
+		left:0px;}
+</style>
+</head>
+<body>
+{foreach $orderInfo as $value}
+<div id="main">
+<div id="From">
+哲果({$value.appname})
+</div>
+<div id="Departure">
+{$value.platformUsername}
+</div>
+<div id="Add">
+{if strlen($value.goodsInfo)> 100}
+<span style='font-size:12px'>{$value.goodsInfo}</span>
+{else}
+{$value.goodsInfo}
+{/if}
+</div>
+<div id="Company">
+{$value.recordNumber}
+</div>
+<div id="Name">
+0755-89619926
+</div>
+<div id="Sender">
+{$smarty.now|date_format:"Y-m-d"}
+<br />
+{$smarty.now|date_format:"h:i:s"}
+</div>
+<div id="Picked">
+雷001
+</div>
+<div id="To">
+{$value.username}
+</div>
+<div id="City">{$value.city}
+</div>
+<div id="Address">
+{if strlen($value.address)> 120}
+<span style='font-size:16px'>{$value.address}</span>
+{else}
+{$value.address}
+{/if}
+</div>
+<div id="Mobile">
+{if $value.phone != ''}{$value.phone}{else}{$value.landline}{/if}
+</div>
+<div id="Other">
+</div>
+<div id='BarCode'>
+<font size='3'>{$value.id}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {$value@iteration}/{$value@total}</font>
+<img src="barcode128.class.php?data={$value.id}" alt="" width="260" height="45"/>
+<font size='3'>{$value.platformUsername}</font>
+</div>
+</div>
+{if $value@total > 1 && $value@iteration != $value@total}
+<div style="page-break-after:always;">&nbsp;</div>
+{/if}
+{/foreach}
+</body>
+</html>

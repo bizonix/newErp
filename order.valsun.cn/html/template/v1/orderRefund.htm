@@ -1,0 +1,248 @@
+{include file='header.htm'}
+<link type="text/css" rel="stylesheet" href="css/orderindex.css">
+<script language="javascript" src="js/orderRefund.js"></script>
+<div class="fourvar order-fourvar">
+    <form action="index.php?mod=orderindex&act=getOrderList&search=1" method="get" id="getOrderList">
+    <table>
+        <tr>
+            <td style="padding-left:17px;">
+                平台：
+            </td>
+            <td>
+                <select id="platformId" style="width:157px">
+                <option value="">全部</option>
+                {foreach $platform as $va}
+                <option value="{$va.id}" {if $searchPlatformId == $va.id}selected="selected"{/if}>{$va.platform}</option>
+                {/foreach}
+                </select>
+            </td>
+                <input type="hidden" id="refund_status" name="refund_status" value="{$refund_status}" />
+            <td style="padding-left:17px;">
+                退款类型：
+            </td>
+            <td>
+                <select id="refundType" style="width:157px">
+                    <option value="">所有类型</option>
+                    <option value="1" {if $searchRefundType == 1}selected="selected"{/if}>全额退款</option>
+                    <option value="0" {if $searchRefundType == 0}selected="selected"{/if}>部分退款</option>
+                </select>
+            </td>
+            <td style="padding-left:18px;">
+                Record No.：
+            </td>
+            <td style="padding-left:3px;">
+                <input id="omOrderId" type="text" value="{$searchOmOrderId}" />
+            </td>
+            <td style="padding-left:17px;">
+                paypal交易ID：
+            </td>
+            <td>
+                <input id="transId" type="text" value="{$searchTransId}" />
+            </td> 
+        </tr>
+    </table>
+    <table>
+        <div id="accordion">
+        <tr>     
+            <tr>
+                <td style="padding-left:18px;">
+                    申请时间：
+                </td>
+                <td>
+                    <input id="applyTime1" type="text" value="{$searchApplyTime1}" />-<input id="applyTime2" type="text" value="{$searchApplyTime2}" />
+                </td>
+            </tr>
+        </tr>
+        </div>
+    </table>
+    <div style="padding-left:17px;">
+        <input type="button"  id="refund-search" value="搜索" class="order-search" />
+    </div>
+    </form>
+</div>
+{if $orderRefundList}
+<div class="servar order-servar">
+    <table>
+    <tr>
+    <td width="5%">
+    <span>
+        <label>
+            <input name="allselect" id="allselect" type="checkbox" value="" onclick="allselect_func()" />全选
+        </label>
+    </span>
+    </td>
+    <td>
+    <!--a href="javascript:void(0);" onClick="applyRefund()">申请退款</a-->
+    <a href="javascript:void(0);" id="cancelRefund-btn">取消退款\CASE</a>
+    <a href="javascript:void(0);" id="refund-btn">&nbsp;退款&nbsp;</a>
+    </td>
+    </tr>
+    </table>
+</div>
+{/if}
+<div class="main order-main" align="center">
+	{foreach $orderRefundList as $value}
+        <table cellspacing="0" width="100%">
+            <tr class="title">
+                <td valign="middle" style="border-right:1px #999 solid;" width="10%">
+                    <input class="checkclass" name="ckb" type="checkbox" value="{$value.id}" />选择
+                </td>
+                <td colspan="3">
+                    <span style="width:20%">平台：{$value.platform}</span>
+                    <span style="width:18%">交易ID：{$value.transId}</span>
+                    <span style="width:18%">平台订单号：{$value.recordNumber}</span> 
+                    <!--span style="width:18%">订单编号：{$value.omOrderId}</span>                                
+                    <span style="width:18%">下单时间：{$value.addTime}</span>
+                    <span style="width:18%">付款时间：{$value.paymentTime}</span-->
+                    <span style="width:18%">申请时间：{$value.addTime}</span>
+                    <span style="width:20%">买家：{$value.platformUsername}</span>                               
+                    <span style="width:18%">退款类型：{if $value.refundType == 1}全部退款{else}部分退款{/if}</span>
+                    <!--span style="width:18%">退款类型：{$value.refundType}</span-->
+                    <span style="width:18%">订单金额：{$value.totalSum}</span>
+                    <span style="width:18%">退款金额：{$value.refundSum}</span>
+                    <span style="width:20%">卖家账号：{$value.paypalAccount}</span>
+                    <span style="width:18%">币种：{$value.currency}</span>                               
+                    <span style="width:18%">订单id:{$value.omOrderId}</span>                                 
+                    <span style="width:18%">退款原因：{$value.reason}</span>
+                    <span style="width:18%">备注：{$value.note}</span>                                
+                    <!--span style="width:18%">跟踪号</span>
+                    <span style="width:18%">运费：{$value.calcShipping}</span>								
+                    <span style="width:18%">订单状态:</span-->
+                    
+                    <table cellspacing="0" width="80%">                             
+                        <tr>
+                            <!--td>title</td-->
+                            <td>sku</td>
+                            <td>数量</td>
+                            <td>单价</td>
+                        </tr>
+                        {if $orderRefundDetailList}    
+                        {foreach $orderRefundDetailList as $vb}
+                        {if $vb.orderRefundId == $value.id}                               
+                            <tr>
+                                <!--td><input type="text" disabled="disabled" value="{$vb.title}" /></td-->
+                                <td><input type="text" disabled="disabled" value="{$vb.sku}" /></td>
+                                <td><input type="text" disabled="disabled" value="{$vb.amount}" /></td>
+                                <td><input type="text" disabled="disabled" value="{$vb.actualPrice}" /></td>
+                            </tr>											
+                        {/if}
+                        {/foreach}
+                        {/if}
+                    </table>
+                </td>
+            </tr>
+        </table>
+	{foreachelse}
+        <table cellspacing="0" cellpadding="0" width="100%">
+            <tr class="title">
+            <td>获取数据为空！</td>
+            </tr>
+        </table>
+	{/foreach}
+</div>
+<div class="bottomvar">
+    <div class="pagination">
+        {$show_page}
+    </div>
+</div>
+{include file='footer.htm'}
+{include file='cancelCombine.htm'}
+
+
+<div id="refund-form" class="fancybox-skin" style="z-index:9999;position:absolute;display:none">
+<form method="POST" action="paypal_refund.php?type=refund" >
+        <table class="api">
+            <tbody><tr>
+                <td >
+					交易号:
+				</td>
+                <td>
+					<input type="text" name="transactionID" readOnly="true" id="transactionID" value="">
+				</td>
+            </tr>
+			<tr></tr>
+			<tr><td></td><td style="color:red"><input type="checkbox" name="all" id="sku-all">sku全选&nbsp&nbsp&nbsp<input type="checkbox" name="Inverse" id="sku-inverse">sku反选</td></tr>
+			<tr>
+				<td id="refund-sku" style="list-style:none;width:50px" colspan="3"></td>
+			</tr>
+			<tr  style="color:red"><td>退款备注</td><td id="refund-note"></td></tr>
+            <tr>
+                <td class="thinfield">
+                    退款类型:</td>
+                <td>
+                    <select name="refundType" id="refundType">
+                    <option value="-1">请选择退款类型</option>
+                    <option value="Full">全额</option>
+                    <option value="Partial">部分</option>
+                    </select>
+                </td>
+            </tr>
+			<tr><td></td><td id="copy-order-tip" style="color:green"></td></tr>
+			<br>
+			<br>
+			<tr>
+				<td>全额退款是否需要再次确认？</td>
+				<td>
+				<label class="radio">
+				  <input type="radio" name="comfirmRadios" id="comfirmRadios1" value="option1" checked>
+					是
+				</label>
+				<label class="radio">
+				  <input type="radio" name="comfirmRadios" id="comfirmRadios2" value="option2">
+					否
+				</label>
+				<span id="totalmoney-tip" style="color:green"></span>
+				</td>
+			</tr>
+            <tr>
+                <td class="thinfield">
+                    退款金额:</td>
+                <td>
+                    <input type="text" name="amount" id="ebay_refundamount" value="0.00" >
+					<span id="money-tip" style="color:red"></span>
+<!--
+                    <select name="currency">
+						<option>USD</option>
+						<option>GBP</option>
+						<option>EUR</option>
+						<option>JPY</option>
+						<option>CAD</option>
+						<option>AUD</option>
+                    </select>
+-->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td><td>
+                    <b>(如果选择部分退款，需要填金额)</b>
+                </td>
+            </tr>
+			<tr>
+			<td>退款原因</td>
+			<td>
+                    <select name="refund-reson" id="refund-reson">
+					</select>
+			</td>
+			</tr>
+			<tr>
+				<td>请选择paypal帐号</td>
+				<td><select id="paypal-account"></select></td>
+			</tr>
+            <tr>
+                <td class="thinfield">
+                    Memo:</td>
+                <td colspan="3">
+                    <textarea name="memo" cols="60" rows="5" id="memo"></textarea></td>
+            </tr>
+            <tr>
+                <td class="thinfield">
+                </td>
+                <td>
+                    <input type="button" id="form-submit" value="提交"></td>
+            </tr>
+        </tbody></table>
+    </form>
+<a title="Close" id="form-close" href="javascript:;"></a>
+</div>';
+

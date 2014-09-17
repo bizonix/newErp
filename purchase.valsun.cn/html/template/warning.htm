@@ -1,0 +1,286 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+    	您的位置：<a href="javascript:void(0);">预警管理</a>&nbsp;>>&nbsp;{$title}
+     </div>
+	<div class="pagination">
+    	{$pageStr}
+	</div>
+</div>
+    <div class="servar">
+	<span>
+		<select id="type">
+        	<option value='0'>请选择搜索条件</option>
+			<option value='sku'{if ($type=='sku')} selected="selected"{/if}>sku子料号</option>
+			<option value='spu'{if ($type=='spu')} selected="selected"{/if}>spu主料号</option>
+        </select>
+    </span>
+	<span>
+    	<input type="text" id="key" value = "{$key}"/>
+    </span>
+    <span>
+		<select id="times">
+			<option value='0'>请选择时间节点</option>
+			<option value='goodsCreatedTime'{if ($timeNode == 'goodsCreatedTime')} selected="selected"{/if}>添加时间</option>
+		</select>
+    </span>
+    <span>
+    	开始时间：<input type="text" id="start-date" onclick="WdatePicker()"  value = "{$startTimeValue}"/>
+    </span>
+	<span>
+    	结束时间：<input type="text" id="end-date" onclick="WdatePicker()"  value = "{$endTimeValue}"/>
+    </span>
+    <span>
+    	<a href="javascript:void(0);" id="search">搜 索</a>
+    </span>
+	{if $act == 'speed'}
+    <span>
+    	<a href="javascript:void(0);" id="createPur">生成采购订单</a>
+    </span>
+	{/if}
+	{if $act == 'oversea'}
+    <span>
+    	<a href="javascript:void(0);" id="add-btn">生成海外备货清单</a>
+    </span>
+	{/if}
+</div>
+<!--div class="main underline-main">
+	<table cellspacing="0" width="100%">
+    	<tr class="title purchase-title">
+			<th><input  type="checkbox" id="inverse-check"/></th>
+			<th>产<br/>品<br/>编<br/>号</th>
+			<th>预<br/>警</th>
+			<th>产<br/>品<br/>名<br/>称</th>
+			<th>产<br/>品<br/>成<br/>本</th>
+			<th>供<br/>应<br/>商</th>
+			<th>产<br/>品<br/>货<br/>位</th>
+			<th>实<br/>际<br/>库<br/>存</th>
+			<th>盘<br/>点<br/>调<br/>整</th>
+			<th>待<br/>发<br/>货</th>
+			<th>被<br/>拦<br/>截</th>
+			<th>自<br/>动<br/>拦<br/>截</th>
+			<th>待<br/>审<br/>核</th>
+			<th>虚<br/>拟<br/>库<br/>存</th>
+			<th>缺<br/>货<br/>库<br/>存</th>
+			<th>可<br/>用<br/>天<br/>数</th>
+			<th>每<br/>天<br/>均<br/>量</th>
+			<th>预<br/>警<br/>天<br/>数</th>
+			<th>采<br/>购<br/>天<br/>数</th>
+			<th>采<br/>购<br/>数<br/>量</th>
+			<th>已<br/>订<br/>购</th>
+			<th>在<br/>途<br/>数<br/>量</th>
+			<th>下<br/>月<br/>预<br/>测</th>
+			<th>重<br/>量</th>
+			<th>备<br/>注</th>
+			<th>产<br/>品<br/>状<br/>态</th>
+			<th>操<br/>作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td><input name="checkbox" type="checkbox" value="{$list.id}" /></td>
+			<td>{$list.sku}</td>
+			<td>{if $list.is_warning == "1"}<font color="red">是</font>{else} 否 {/if}</td>
+			<td>{$list.goodsName}</td>
+			<td>{$list.goodsCost}</td>
+			<td>{$list.company_name}</td>
+			<td>{$list.warehouseid}</td>
+			<td>{$list.stock_qty}</td>
+			<td>{$list.adjust_num}</td>
+			<td>{$list.waiting_send}</td>
+			<td>{$list.interceptnums}</td>
+			<td>{$list.autointerceptnums}</td>
+			<td>{$list.aduit_num}</td>
+			<td>{if $list.stock_qty-$list.waiting_send>0 } {$list.stock_qty-$list.waiting_send} {else}<font color='red'>{$list.stock_qty-$list.waiting_send}</font> {/if}</td>
+			<td>{if $list.stock_qty-$list.waiting_send-$list.autointerceptnums>0 } {$list.stock_qty-$list.waiting_send-$list.autointerceptnums} {else}<font color='red'>{$list.stock_qty-$list.waiting_send-$list.autointerceptnums}</font> {/if}</td>
+			<td>{if $list.first_sale == 0 } 从未卖{elseif $list.last_sale < time()-3600*24*30 } 月未卖 {elseif $list.stock_qty == $list.waiting_send} 0 {else} {str_replace(".00",'',round_num((($list.stock_qty - $list.waiting_send )/$list.everyday_sale),2))} {/if}</td>
+			<td>{$list.everyday_sale}</td>
+			<td>{$list.alert_days}</td>
+			<td>{$list.purchase_days}</td>
+			<td style="color:blue">{if ceil($list.everyday_sale*$list.purchase_days+$list.interceptnums + $list.autointerceptnums - $list.booknums) <= 0} 0 {else} {ceil($list.everyday_sale*$list.purchase_days+$list.interceptnums + $list.autointerceptnums - $list.booknums)} {/if}</td>
+			<td>{$list.booknums}</td>
+			<td>无</td>
+			<td>{$list.everyday_sale*30}</td>
+			<td>{$list.goodsWeight}</td>
+			<td>{$list.goodsNote}</td>
+			<td>{if $list.isNew==0} 在线 {elseif $list.isNew==1} 下线 {elseif $list.isNew==3}暂时下线 {/if}</td>
+			<td><a href="index.php?mod=editProStockAlarm&act=index&id={$list.id}"><b>编辑</b></a></td>
+		</tr>
+		{/foreach}
+    </table>
+</div-->
+<div class="main feedback-main reply-main warning-main">
+    {foreach from=$lists  item=listAlarm}
+    <table cellspacing="0" width="100%">    
+    	<tr class="title">
+        	<td align="center"><input name="inverse" type="checkbox" value="{$listAlarm['id']}" /></td>
+            <td colspan="3">
+                <span style="margin-left:0;">{$listAlarm['sku']}</span>
+                <span style="margin-left:20;">{$listAlarm['goodsName']}</span>
+                <span style="margin-left:20;">供应商：{$listAlarm['company_name']}</span>
+                <span style="margin-left:20;">备注：{$listAlarm['goodsNote']}</span>
+                <span><a href="#" class="unwarning"></a></span>
+            </td>				
+        </tr>
+        <tr>
+		   <td  rowspan="8"> 
+			   <a href="{$src}" class="fancybox">
+					<img src="{$src}" width="60" height="60">
+			   </a>
+			 </td>
+        </tr>
+        <tr>
+        	<td>采购：朱七七</td>
+            <td>可用天数：{if $listAlarm['first_sale'] == 0 } 从未卖过{elseif $listAlarm['last_sale'] < time()-3600*24*30 } 最近一个月未卖 {elseif $listAlarm['stock_qty'] == $listAlarm['waiting_send']} 0 {else} {str_replace(".00",'',round_num((($listAlarm['stock_qty'] - $listAlarm['waiting_send'] )/$listAlarm['everyday_sale']),2))} {/if}</td>
+            <td>实际库存：{$listAlarm['stock_qty']}</td>
+        </tr>
+        <tr>
+        	<td>产品成本：{$listAlarm['goodsCost']}</td>
+            <td>预警天数：{$listAlarm['alert_days']}天</td>
+            <td>待发货：{$listAlarm['waiting_send']}</td>
+        </tr>
+        <tr>
+        	<td>产品状态：{if $listAlarm['isNew']==0} 在线 {elseif $listAlarm['isNew']==1} 下线 {elseif $listAlarm['isNew']==3}暂时下线 {/if}</td>
+            <td>采购天数：{$listAlarm['purchase_days']}</td>
+            <td>被拦截：{$listAlarm['interceptnums']}</td>
+        </tr>
+        <tr>
+            <td>下月预测：{$listAlarm['everyday_sale']*30}</td>
+            <td>采购数量：{if ceil($listAlarm['everyday_sale']*$listAlarm['purchase_days']+$listAlarm['interceptnums'] + $listAlarm['autointerceptnums'] - $listAlarm['booknums']) <= 0} 0 {else} {ceil($listAlarm['everyday_sale']*$listAlarm['purchase_days']+$listAlarm['interceptnums'] + $listAlarm['autointerceptnums'] - $listAlarm['booknums'])} {/if}</td>
+            <td>自动拦截：{$listAlarm['autointerceptnums']}</td>
+        </tr>
+        <tr>
+            <td>重量：{$listAlarm['goodsWeight']}</td>
+            <td>已订购：{$listAlarm['booknums']}</td>
+            <td>待审核：{$listAlarm['aduit_num']}</td>
+        </tr>
+        <tr>
+            <td>每天均量：{$listAlarm['everyday_sale']}</td>
+            <td>在途数量：暂无数据</td>
+            <td>虚拟库存：{if $listAlarm['stock_qty']-$listAlarm['waiting_send']>0 } {$listAlarm['stock_qty']-$listAlarm['waiting_send']} {else}<font color='red'>{$listAlarm['stock_qty']-$listAlarm['waiting_send']}</font> {/if}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>缺货库存：{if $listAlarm['stock_qty']-$listAlarm['waiting_send']-$listAlarm['autointerceptnums']>0 } {$listAlarm['stock_qty']-$listAlarm['waiting_send']-$listAlarm['autointerceptnums']} {else}<font color='red'>{$listAlarm['stock_qty']-$listAlarm['waiting_send']-$listAlarm['autointerceptnums']}</font> {/if}</td>
+        </tr>   	
+    </table>
+    {/foreach}
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+    	{$pageStr}
+	</div>
+</div>
+{include file="footer.htm"}
+<script type="text/javascript">
+var web_api = "{$smarty.const.WEB_API}";
+var purchase = encodeURIComponent("{$smarty.session.userName}");
+{literal}
+//添加备货单
+$('#add-btn').click(function(){
+    var skuArr = $('input[name="checkbox"]:checked'),idArr=[];
+	if(skuArr.length == 0){
+		alertify.alert( '亲,您没有选择要生成的料号呢!', function (){
+		return false;
+	});
+	}else {
+		$.each(skuArr,function(i,item){
+			idArr.push($(item).val());
+		});
+		var ids	 = idArr.join(',');
+        var url  = web_api + "json.php?mod=warning&act=addStock";
+        var data = {"ids":ids,"purchase":purchase};
+		$.post(url,data,function(rtn){
+			if(rtn.errCode == 0){              
+				alertify.alert("亲,生成海外备货单成功！", function(){
+				window.location.href = 'index.php?mod=stockInvoice&act=index';
+				});
+				//window.location.reload();
+            }else {
+				alertify.alert(rtn.errMsg);
+           }
+		},"jsonp");
+	}
+});
+//生成采购订单
+$("#createPur").click(function(){
+	var skuArr = $('input[name="checkbox"]:checked'),idArr=[];
+	if(skuArr.length == 0){
+		alertify.alert( '亲,您没有选择要生成的料号呢!', function (){
+		return false;
+	});
+	}else {
+		$.each(skuArr,function(i,item){
+			idArr.push($(item).val());
+		});
+		//var idArr	 = idArr.join(',');
+		//alert(idArr);
+		var url  = web_api+"json.php?mod=purchaseOrder&act=createOrder";
+		$.post(url, {"purid":"1","skuidlist":idArr}, function(rtn){
+			var data = rtn.data;
+			if(data.msg=='success'){
+				alertify.alert('生成采购订单成功',function(){
+					window.location.reload();
+				});
+			}else{
+				alertify.alert('生成采购订单失败');
+			}
+		},'jsonp');
+	}
+});
+{/literal}
+//搜索入口
+$("#search").click(function(){
+	nowtime	= {time()*1000};
+	type  = $.trim($("#type").val());
+	key   = encodeURIComponent($.trim($("#key").val()));
+	stat  = $.trim($("#status").val());
+	times = $.trim($("#times").val());
+	start_time = $.trim($("#start-date").val());
+	end_time   = $.trim($("#end-date").val());
+	timestr	   = "";
+	if($("#key").val()!='' && $("#type").val()!='0'){
+			if(times!='0'){
+				if(start_time=="" || end_time==""){
+				alertify.alert('开始日期或截至日期不能为空');
+				return false;
+				}
+				var starttime = new Date(start_time);
+				var endtime	  = new Date(end_time);
+				//alertify.alert(nowtime+'---'+starttime.getTime()+'---'+endtime.getTime());
+				if(starttime.getTime()>endtime.getTime() || starttime.getTime()>nowtime || endtime.getTime()>nowtime){
+					alertify.alert('开始日期不能大于截至日期,且开始日期或截至日期不能大于今天');
+					return false;
+				}
+				if(start_time!='' && end_time !=''){
+					timestr = "&timenode="+times+"&starttime="+start_time+"&endtime="+end_time;
+				}
+			}
+			window.location.href = "index.php?mod=warning&act={$act}&type="+type+"&key="+key+"&status="+stat+timestr;
+		}else if(times!='0'){
+			if(start_time=="" || end_time==""){
+				alertify.alert('开始日期或截至日期不能为空');
+				return false;
+			}
+			var starttime = new Date(start_time);
+			var endtime	  = new Date(end_time);
+			//alertify.alert(nowtime+'---'+starttime.getTime()+'---'+endtime.getTime());
+			if(starttime.getTime()>endtime.getTime() || starttime.getTime()>nowtime || endtime.getTime()>nowtime){
+				alertify.alert('开始日期不能大于截至日期,且开始日期或截至日期不能大于今天');
+				return false;
+			}
+				
+			if(start_time!='' && end_time !=''){
+				timestr = "&timenode="+times+"&starttime="+start_time+"&endtime="+end_time;
+			}
+			window.location.href = "index.php?mod=warning&act={$act}&status="+stat+timestr;
+		}else{
+			window.location.href = "index.php?mod=warning&act={$act}";
+		}
+});
+
+//全选反选入口
+$('#inverse-check').click(function(){
+  select_all('inverse-check','input[name="checkbox"]',0);
+});
+</script>

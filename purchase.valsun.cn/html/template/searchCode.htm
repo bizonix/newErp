@@ -1,0 +1,67 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=purchaseOrder&act=index&three_status=1">采购管理</a>&nbsp;>>&nbsp;料号查询
+	</div>
+	<div class="pagination">{$pageStr}</div>
+</div>
+<div class="servar">
+	<span>sku号: <input type="text" id="sku" value="{$key}" />
+	</span> <span> <select id="status">
+			<option value="0">请选择查询的订单状态</option>
+			<option selected="selected" value="1">待发货</option>
+			<option value="2">拦截</option>
+			<option value="3">待审核</option>
+			<option value="4">已发货</option>
+			<option value="5">已经退款</option>
+	</select>
+	</span> <span> 开始时间：<input type="text" id="start-date"
+		onclick="WdatePicker()" value="{$startTimeValue}" />
+	</span> <span> 结束时间：<input type="text" id="end-date"
+		onclick="WdatePicker()" value="{$endTimeValue}" />
+	</span> <span> <a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+</div>
+<div class="main underline-main">
+	<table cellspacing="0" width="100%">
+		<tr class="title">
+			<td><input type="checkbox" id="inverse-check" /></td>
+			<td>订单编号</td>
+			<td>recordnumber</td>
+			<td>SKU</td>
+			<td>日期</td>
+			<td>订单信息</td>
+			<td>物品个数</td>
+			<td>订单状态</td>
+		</tr>
+
+		<tr>
+			<td><input type="checkbox" name="inverse" /></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">{$pageStr}</div>
+</div>
+{include file="footer.htm"}
+<script type="text/javascript">
+$("#inverse-check").click(function(){
+	select_all("inverse-check","input[name='inverse']",0);
+});
+var web_api = "{$smarty.const.WEB_API}";
+window.onkeydown = function(e) {
+	if(e.keyCode == 13) searchorder();
+}
+function searchorder(){
+	
+}
+
+</script>

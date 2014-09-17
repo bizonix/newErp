@@ -1,0 +1,52 @@
+{include file='header.htm'}
+<link href="css/Popup.css" rel="stylesheet" type="text/css" />
+{include file='whNav.htm'}
+<script language="javascript" src="js/position_manage.js"></script>
+<script language="javascript" src="js/alixixi.js"></script>
+<script language="javascript" src="js/jquery.min.js"></script>
+
+ <div class="main">
+	<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						{section name="loop1" loop=$second_north_row}
+						<td>
+							<table>
+								{section name="loop2" loop=$hang}
+								<tr>
+									{section name="loop3" loop=$row_position_nums}
+										{$x = $smarty.section.loop3.index+($smarty.section.loop1.index*$distance_row)}
+										{$y = $smarty.section.loop2.index}
+										{$coordinate = "$x,$y,0,0"}
+										{$position = "($x,$y,0,0)"}
+									<td>
+										<div style="width:56px" axis_x="{$x}"  axis_y="{$y}" axis_z="0" floor="0">
+										<span id="{$x}_{$y}_0_0">{$position_arr[$position]}</span><br/>									           
+										<button class="position" style="display:block" id="{$x}_{$y}_0" store="2">编辑</button>
+										</div>
+										<div style="width:104px;display:none">
+										<input type="text" size="11" value="{$position_arr[$position]}" coordinate="{$coordinate}"/><br/>
+										<button class="save">保存</button>
+										<button class="cancel">取消</button>
+										</div>
+									</td>
+									{/section}
+								</tr>
+								{if $smarty.section.loop2.index%2!=0}
+								<tr><td><div style="height:10px"></div></td></tr>
+								{/if}
+								{/section}
+							</table>
+						</td>
+						<td><div style="width:10px"></div></td>
+						{/section}
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+ </div>
+
+{include file='footer.htm'}

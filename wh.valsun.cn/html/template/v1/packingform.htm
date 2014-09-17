@@ -1,0 +1,43 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/packingOrder.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<div>
+
+    <div class="gd_divrow_packing">
+        <div class="gd_labeldiv" style="margin-left:65px;font-size:36px">
+           	 发货单号:
+        </div>
+        <div calss="gd_input" style="float:left;margin-right:200px">
+            <input id="orderid"  class="orderidinput" style="width:200px; height:35px;font-size:20px;"/>
+        </div>
+		<div style="font-size:20px">包装人员：<input readonly="readonly" id="packingUser" name="packingUser" value="{$curusername}" style="border-top:#FFF; border-left:#FFF;border-right:#FFF; border-bottom: 1px solid #999; color:green"/></div>
+		<div style="margin-left:90px;font-size:24px;margin-top:30px;" >
+			<span id="partion" style="color:red;"></span>
+			<div id="mstatus" ></div>
+		</div>
+		<div class="clear:both;">
+			<div id="in_tracknumber" style="font-size:36px;margin-left:90px;margin-top:10px;display:none">录入挂号条码：
+               <input name="tracknumber" type="text" id="tracknumber" style="width:200px; height:30px;font-size:20px;"  />                  
+            </div>
+        </div>
+    </div>
+</div>
+<hr/>
+<div class="main" style="display:none" id="showmes">
+    <table cellspacing="0" width="90%" align="center" id="record">
+        <thead>
+            <tr class="title">
+                <td align="left">发货单号</td>
+				<!--td align="left">备注</td-->
+                <td align="left">运输方式</td>
+                <td align="left">挂号条码</td>
+            </tr>
+        </thead>
+        <tbody >
+
+        </tbody>
+    </table>
+</div>
+{include file='footer.htm'}

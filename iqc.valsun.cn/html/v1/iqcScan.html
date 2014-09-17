@@ -1,0 +1,124 @@
+{include file="header.html"}
+<script type="text/javascript" src="./js/iqcDetect.js"></script>
+<div class="fourvar">
+            {include file="iqcnav.html"}               
+            </div>
+            <div class="servar">
+				<div id="mess" style="font-size:24px;"></div>
+            	<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				<tr>
+				  <td nowrap="nowrap" class='paginationActionButtons' width="27%">
+				    <table width="50%" border="0" align="left">
+                          <tr>
+                            <td width="50%">
+                              <div style="font-size:24px">检测料号:
+                                <input name="sku" type="text" id="sku" onkeydown="check_sku()" style="width:150px;height:30px;" class="textinput" />
+								全部待定:
+								<input type="checkbox" name="determined" id="determined" onclick="determined()" />
+
+								<input type="hidden" id="infoid" value="">
+								<input type="hidden" id="nownum" value="">
+								<input type="hidden" id="cnum" value="">
+								<input type="hidden" id="renum" value="">
+								<input type="hidden" id="acnum" value="">
+								<input type="hidden" id="alnum" value="">
+							  </div>
+                              <div id="mstatus" style="font-size:24px"></div>
+                            </td> 
+                          </tr>
+						<tr style="display:none" id="trdet">
+							<td width="49%" valign="top">
+                              <div style="font-size:24px">待定原因:
+                                <textarea name="wait_reason" class="textinput" id="wait_reason" style="width:350px;height:100px;" onkeydown="check_wait_reason()"></textarea>
+                              </div>
+                            </td>
+						</tr>
+                        <tr class='normal'>
+                            <td width="26%">
+                              <div style="font-size:24px">检测类别:
+                               <select id="category" name="category" onkeydown="check_category()" style="width:150px;height:30px;font-size:24px">
+                               <option value="0">==请选择==</option>
+                               <option value="1">功能检测</option>
+                               <option value="2">量尺寸</option>
+                               <option value="3">对图片</option>
+                               </select>
+                              </div>
+                              <div id="mstatus1" style="font-size:24px"></div>
+                            </td>
+                        </tr>
+                        <tr class='normal'>
+                        	<td width="26%">
+                              <div style="font-size:24px">抽样数目:
+                                <input name="check_num" type="text" id="check_num" onkeydown="checknum()" style="width:150px;height:30px;" class="textinput" />
+							  </div>  
+                              <div id="mstatus2" style="font-size:24px"></div>
+							</td>
+                        </tr>
+                        <tr class='normal'>
+                            <td width="26%">
+                              <div style="font-size:24px">不良品数:
+                                <input name="rejects_num" type="text" id="rejects_num" onkeydown="check_rejects_num()" style="width:150px;height:30px;" class="textinput" />
+                              </div>
+                             <div id="mstatus3" style="font-size:24px"></div>
+                            </td>
+                        </tr>
+                      <tr class='normal'>
+                            <td width="49%" valign="top">
+                              <div style="font-size:24px">不良原因:
+                                <textarea name="bad_reason" class="textinput" id="bad_reason" style="width:350px;height:100px;" onkeydown="check_bad_reason()"></textarea>
+                              </div>
+                            </td>
+                      </tr>
+					</table>
+				 </td>
+                 <td nowrap="nowrap" class='paginationActionButtons' width="27%">
+                 	<table width="50%" border="0" align="left">
+                    	<tr>
+              				 <td>
+                  				  <div id="sampling_display" style="display:none;"></div>
+               				</td>
+            			</tr>
+						<tr>
+              				 <td>
+                  				  <div id="show_product_image" style="display:none;" align="center"></div>
+               				</td>
+            			</tr>
+                          <!--tr>
+                            	<td width="50%"><span style="font-size:24px; color:#F00">是否修改图:
+                            <input type="checkbox" name="is_rewrite" id="is_rewrite" value="1" onclick="" onkeydown="" checked="checked"/>
+                        							</span>
+                            	</td>
+                          </tr>
+                          <tr>
+				        
+                            <td width="27%" id="rewrite_typetd" style="display:block;"><span style="font-size:24px">修改类型:
+                              <select name="rewrite_type" id="rewrite_type" onkeydown="check_rewrite_type()">
+                                <option value="0">请选择</option>
+                                <option value="1">修改图片</option>
+                                <option value="2">修改尺寸</option>
+                                <option value="3">修改描述与其他</option>
+                              </select>
+                            </span>
+                            </td>
+					  </tr>
+                      
+                        <tr>
+                        	<td width="51%" valign="top" id="rewrite_notetd" style="display:block;"><span style="font-size:24px">修改备注:
+                            <textarea name="rewrite_note" class="textinput" id="rewrite_note" style="width:350px;height:100px;" onkeydown="check_rewrite_note()"></textarea>
+                        </span><input name="goods_reachid" id="goods_reachid" type="hidden" value="" />
+                        	</td>
+                        </tr-->
+                        
+                        
+                      
+					</table>
+                 
+                 </td>
+
+			   </tr>
+			</table>
+            </div>
+            <div class="main">
+            	
+            </div>
+{include file="footer.html"}

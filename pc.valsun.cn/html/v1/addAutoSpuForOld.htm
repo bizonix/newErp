@@ -1,0 +1,43 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+<div class="servar products-servar">
+<span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+						<tr>
+                            <td><span style="color:#F00;">*</span>SPU：
+							<input name="spu" id="spu"/>
+							</td>
+						</tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>单/虚拟料号：
+									<select name="isSingSpu" id="isSingSpu">
+										<option value="1">单料号</option>
+										<option value="2">虚拟料号</option>
+									</select>
+							</td>
+						</tr>
+                        <tr>
+                            <td><input type="button" value="提交" id="addAutoSpuForOld"/>
+							<input type="button" value="返回" id="back"/></td>
+						</tr>
+					</table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

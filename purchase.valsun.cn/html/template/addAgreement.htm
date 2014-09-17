@@ -1,0 +1,110 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">                
+    	您的位置：<a href="index.php?mod=agreement&act=index">协议管理</a>>>添加协议
+    </div>     
+</div>            
+<div class="main underline-main">
+<table width="75%" border="0" cellpadding="0" cellspacing="0" style=" text-align:inherit; padding-left:40px;" >
+    <tr>
+        <td width="10%">公司名称
+        <td width="40%" valign="left"><input name="companyName" type="text" id="companyName" value="" size="60"></td> 
+        
+		<td width="10%">公司类型</td>
+		<td width="40%" valign="left">
+			<select name="companyType" id="companyType">
+				<option value="-1">请选择公司类型</option> 
+				{foreach key=key item=value from=$companyTypeList}
+				<option value="{$key}">{$value}</option>
+				{/foreach}				
+			</select>
+		</td>        
+    </tr>
+    
+    <tr>
+        <td>协议到期时间</td>
+        <td><input id="expiration" name="expiration" onclick="WdatePicker()" type="text" value="" /></td> 
+        
+        <td>联系人</td>
+        <td><input name=contactPerson type="text" id="contactPerson" value=""></td>            
+	</tr>
+	<tr>
+        <td><input name="addAgreement" type="button" value="提交" id="button_submit"></td>
+        <td colspan="3">&nbsp;</td>
+    </tr>
+    
+</table>                      
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}
+
+<script>
+{literal} 
+
+$('#button_submit').click(function(e){
+    e.preventDefault();    
+	var companyName   = $.trim($('#companyName').val());
+	var companyType   = $.trim($('#companyType').val());
+    var expiration    = $.trim($('#expiration').val());   
+    var contactPerson = $.trim($('#contactPerson').val());
+    
+    if(companyName.length < 2 || companyName.length > 50) {        
+        alertify.error('公司名称的长度必须介于2-50个字符之间');
+		$('#companyName').focus();
+        return false;
+    }
+    
+    if(contactPerson.length < 2 || contactPerson.length > 50) {        
+        alertify.error('联系人的长度必须介于2-50个字符之间');
+		$('#contactPerson').focus();
+        return false;
+    }    
+
+    if(expiration == '' ) {
+        alertify.error('协议过期时间不能为空！');
+		$('#expiration').focus();
+        return false;
+    }    
+    
+    var reg = /^\d{4}(\-|\/|\.)\d{1,2}\1\d{1,2}$/;
+    if (! reg.test(expiration)) {
+        alertify.error('协议过期时间格式不对！');
+		$('#expiration').focus();
+        return false;
+    }
+
+    var url  = "json.php?mod=agreement&act=addAgreement";    
+    var data = { "companyName":companyName,"companyType":companyType,"expiration":expiration,"contactPerson":contactPerson};        
+    $.post(url, data, function(rtn){        
+		if(rtn.code == 1){
+			alertify.alert("添加成功，thanks....",function(){
+               window.location.href = "index.php?mod=agreement&act=index";  
+			}); 
+		} else if(rtn.code == 2) {
+			alertify.alert("该公司名称已经存在！"); 
+		} else{
+            alertify.alert("maybe something wrong ,call IT help...."); 
+		}
+     },"json");
+});
+
+$(function(){
+	var check_companyname_url = 'json.php?mod=agreement&act=checkCompanyExist';
+	$('#companyName').change(function(){
+		var companyName = $.trim($(this).val());
+		if (companyName == '') return;
+		$.post(check_companyname_url,{"companyName":companyName},function(rtn){
+			if(rtn.code == 1){
+				alertify.alert("该公司名称已经存在！"); 
+				$('#button_submit').attr('disabled','disabled').css('background-color','#333');
+			} else {
+				$('#button_submit').removeAttr('disabled').css('background-color','');
+			}
+		},'json');
+	});
+});
+
+
+{/literal}
+</script>

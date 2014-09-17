@@ -1,0 +1,78 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/newGoodsList.js"></script>
+<div class="fourvar">
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar products-main">
+                                  <span class="products-action">
+                                    <form style="display: -webkit-inline-flex;" action="index.php?mod=products&act=createBill" method="post" onsubmit="return createBill()">
+                                        <input type="hidden" id="bill" name="id" value="" />
+                                        <input type="hidden" id="wh" name="wh" value="" />
+                                        {if isAccessAll('products','createBill') == true}
+                                        <input type="submit" value="生成领料单" />
+                                        {/if}
+                                   </form>
+                                  </span>
+            					  <span>|&nbsp;SKU：
+								   <input name="sku" type="text" id="sku" value="{$smarty.get.sku}"/>
+								   </span>
+								   <span>|&nbsp;仓库：
+								   <select id="whId" >
+                                   {foreach getWhInfo() as $value}
+									<option value="{$value['id']}" {if $smarty.get.whId == $value['id']}selected='selected'{/if}>{$value['whName']}</option>
+                                   {/foreach}
+								  </select>
+                                  <span>|&nbsp;采购员：
+								   <select name="purchaseId" id="purchaseId" >
+								    <option value="0" > </option>
+								    {foreach getAllPurchaser() as $value}
+									<option value="{$value['userId']}" {if $smarty.get.purchaseId == $value['userId']}selected='selected'{/if}>{$value['userName']}</option>
+									{/foreach}
+								  </select>
+								   </span>
+								   </span>
+                                   <span><button id='seachNewGoods'>搜索</button></span>
+            &nbsp;
+			<span id="error" style="color: red;">{$smarty.get.status}</span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                            <td><input type="checkbox" id="selectAll" /></td>
+                            <td>SPU</td>
+							<td>SKU</td>
+                            <td>描述</td>
+                            <td>数量</td>			
+                            <td>采购员</td>				
+							<td>录入时间</td>
+                            <td>仓位</td>
+                            <td>所在仓库</td>
+                            <td>入库时间</td>
+                    </tr>
+                    {foreach $newGoodsList as $value}
+                                <tr>
+                                    <td><input type="checkbox" name="selectSing" value="{$value['sku']}"/></td>
+                                    <td>{if $newGoodsList[$value@index]['spu'] == $newGoodsList[$value@index-1]['spu']}{else}{$newGoodsList[$value@index]['spu']}{/if}</td>
+                                    <td>{$value['sku']}</td>
+                                    <td>{$value['goodsName']}</td>
+									<td><input id="goodsCount{$value['sku']}" value="1" readonly="readonly"/></td>
+                                    <td>{getPersonNameById($value['purchaseId'])}</td>
+                                    <td>{if !empty($value['goodsCreatedTime'])}{$value['goodsCreatedTime']|date_format:"Y-m-d H:i"}{/if}</td>
+                                    <td>{$value['location']}</td>
+                                    <td>{$value['wh']}</td>
+                                    <td>{if !empty($value['storageTime'])}{$value['storageTime']|date_format:"Y-m-d H:i"}{/if}</td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

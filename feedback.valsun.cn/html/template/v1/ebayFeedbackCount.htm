@@ -1,0 +1,117 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=feedbackManage&act=ebayFeedbackManage">卖家评价</a>&nbsp;&gt;&gt;&nbsp;Feedback统计
+    </div>
+    <div class="pagination" id="fpage">
+        {$show_page}
+    </div>
+</div>
+<div class="servar wh-servar">
+	         
+	        时间:
+	         <input name="start" id="start" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$start}" />
+	        -<input name="end" id="end" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"   value="{$end}"/>        
+			ebay账号：
+	        <select name="account" id="account">
+	            <option value="" {if $account == ''} selected="selected"{/if} >无</option>
+	            {foreach from=$accountList item=templist}
+	            <option {if $account == $templist.account} selected="selected"{/if} value="{$templist.account}" >{$templist.account}</option>
+	            {/foreach}
+	        </select> 
+	        <span><input name="serachcount" type="button" value="统计" onclick="searchorders()"/></span>
+			<input name="outxls" type="button" value="导出报表" onclick="outxls()"/>
+	        <input name="outxls" type="button" value="评价修改报表导出" onclick="outupxls()"/>
+	
+</div>
+<div align='center'>
+<table cellpadding='0' cellspacing='0' width='90%' border='0' class='list view'>
+	<tr class='pagination'>
+	  <td colspan='4'>&nbsp;</td>
+	</tr>
+	<tr height='20'>
+		<th scope='col' width='26%' nowrap="nowrap">
+		<div style='white-space: nowrap;'width='100%' align='left'>评价统计：	</div></th>
+	</tr>
+    <tr height='20' class='oddListRowS1'>
+		<td height="206" colspan="4" align='center' valign="top" scope='row' >
+		<table width="100%"  border="1" style="border-collapse:collapse;" cellspacing="0" cellpadding="0">
+		    <tr  style="border-style:solid none">
+		       <td>eBay帐号</td>
+		       <td>好评数</td>
+		       <td>中评数</td>
+			   <td>差评数</td>
+			   <td>差评修改数</td>
+			   <td>中评修改数</td>
+			   <td>总评数</td>
+			   <td>好评率</td>
+		    </tr>
+		     {foreach $resAccount as $key=>$value}
+		  <tr >
+			<td width='150'>{$key}</td>
+	        <td>
+				<span style="white-space:nowrap;">
+				<font color="#FF0000"> {$value.PositiveRes} </font>
+				</span>		
+			</td>
+        	<td>
+	        	<span style="white-space:nowrap;">
+		        
+		        	<font color="#FF0000"> {$value.NeutralRes} </font>
+		    
+	        	</span>
+        	</td>
+			<td>
+				<span style="white-space:nowrap;">
+					
+					<font color="#FF0000"> {$value.NegativeRes} </font>
+					
+				</span>		
+			</td>
+			<td>
+					<font color="#FF0000"> {$value.upNeutralRes} </font>
+			</td>
+			<td>
+					<font color="#FF0000"> {$value.upNegetiveRes} </font>
+			</td>
+			<td>
+				<font color="#006600" style="font-weight:bolder">{$value.total}</font>
+			</td>	
+			<td>
+				<font color="#333333" style="font-weight:bolder">{$value.per_positive}</font>
+			</td>
+        </tr>
+        {/foreach}
+        </table>
+        </div>
+    <div class="clear"></div>
+{include file="footer.htm"}
+<script language="javascript">
+function searchorders(){	
+		var start		= document.getElementById('start').value;
+		var end			= document.getElementById('end').value;
+		var account		= document.getElementById('account').value;	
+		location.href	= "index.php?mod=feedbackManage&act=ebayFeedbackCount&start="+start+"&end="+end+"&account="+account;
+		
+}
+function outxls(){	
+		var start      = document.getElementById('start').value;
+		var end        = document.getElementById('end').value;
+		var	account    = document.getElementById('account').value;			
+		var url        = "index.php?mod=exportXls&act=ebayAccountExport&start="+start+"&end="+end+"&account="+account;
+		window.open(url,"_blank");
+}
+function outupxls(){	
+	var start      = document.getElementById('start').value;
+	var end        = document.getElementById('end').value;
+	var	account    = document.getElementById('account').value;	
+	if(account=="" || start=="" || end ==""){
+		if(confirm("请选择适当的时间范围,否则报表导出会卡\r重新选择按取消,继续按确认！")){
+			var url        = "index.php?mod=exportXls&act=ebayUpdateExport&start="+start+"&end="+end+"&account="+account;
+			window.open(url,"_blank");
+		}
+	}
+	
+}
+</script>

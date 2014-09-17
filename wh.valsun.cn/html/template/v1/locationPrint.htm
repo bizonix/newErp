@@ -1,0 +1,45 @@
+{include file='header.htm'}
+{include file='whNav.htm'}
+<script language="javascript" src="js/foorRule.js"></script>
+<div class="servar wh-servar">
+<button id="floors">楼层规则设置</button>
+</div>
+<br/>
+<div class="servar wh-servar">
+	<br/>
+	<h1>
+	(提示：货架个数填数字便可，系统会自动补全三位位数，比如001只要填1便可)<br/>
+	(提示：货架层数填数字便可，系统会自动补全两位位数，比如01只要填1便可)<br/>
+	(提示：货位号填数字便可，系统会自动补全两位位数，比如01只要填1便可)
+	</h1>
+	<br/><br/>
+	<span>
+		仓库:
+		<select style="width:80px" name="store" id="store">
+			{foreach from=$info.storeLists item=list}
+			 <option value="{$list.whLocation}" >{$list.whName}</option>
+			{/foreach}
+		</select>
+		楼层:
+		<select style="width:80px" name="floor" id="floor">
+			{foreach from=$info.floorLists item=list}
+			 <option value="{$list.whCode}" >{$list.whFloor}</option>
+			{/foreach}
+		</select>
+		区域:
+		<select style="width:80px" name="area" id="area">
+			{foreach from=$info.areaLists item=list}
+			 <option value="{$list.areaName}" >{$list.areaName}</option>
+			{/foreach}
+		</select>
+        <button id="area_print">区域打印</button>
+		&nbsp;&nbsp;货架个数:<input style="width:80px" id="Shelf1" value="1"/>到<input style="width:80px" id="Shelf2" value="1"/>
+		&nbsp;&nbsp;货架层数:<input style="width:80px" id="layer1" value="1"/>到<input style="width:80px" id="layer2" value="1"/>
+		&nbsp;&nbsp;货位号:<input style="width:80px" id="location1" value="1"/>到<input style="width:80px" id="location2" value="1"/>
+		&nbsp;&nbsp;&nbsp;
+		<button id="print">仓位打印</button>
+	</span>
+	<br/>
+</div>
+
+{include file='footer.htm'}

@@ -1,0 +1,57 @@
+{include file='header.htm'}
+{include file='whNav.htm'}
+<script language="javascript" src="js/invOperate.js"></script>
+ <div class="servar wh-servar">
+ <span>
+	<button  id='waitinv' value="" />盘点申请列表</button>
+</span>
+<span>
+	<button  id='inv' value="" />盘点</button>
+</span>
+<span>
+	<button  id='invlist' value="" />盘点列表</button>
+</span>
+<span>
+	<button  id='invreason' value="" />盘点原因</button>
+</span>
+<span>
+	<button  id='invcond' value="" />盘点条件</button>
+</span>
+</div>
+<br/>
+<div class="servar wh-servar">
+   <span>
+		<button  id='addreason' value="" />新增原因</button>
+   </span>
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td>id</td>
+			<td>盘点原因</td>
+			<td>操作</td>
+		</tr>
+		{if !empty($inv_reason)}
+		{foreach from=$inv_reason item=list}
+		<tr class="odd">
+				<td>{$list.id}</td>
+				<td>{$list.reasonName}</td>
+				<td><button  class="rea_mod" tid="{$list.id}"/>编辑</button></td>
+		</tr>
+		{foreachelse}
+		<tr class="odd">
+				<td colspan="9">没有搜索值！</td>
+		</tr>
+		{/foreach}
+		{/if}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination" id="spage">
+		{$show_page}
+	</div>
+</div>
+ 
+{include file='footer.htm'}

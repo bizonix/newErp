@@ -1,0 +1,46 @@
+{include file="header.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/omPlatform.js"></script>
+
+            <div class="servar">
+                <span>
+                    <form action="index.php?mod=omPlatform&act=addPlatformList" method="post" id="omAddPlatformList">
+                        <label for="platform">平台名称：</label>
+                		<input value="" id='platform' class="validate[required] text-input" name="platform" type="text"/>
+                    	   <input type="submit" value="添加平台"/>
+                           <span style="color: red;">{$status}</span>
+                    </form>
+                </span>
+
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+						<td>编号</td>
+                        <td>平台名称</td>
+                        <td>添加人</td>
+                        <td>添加时间</td>
+                        <td>操作</td>
+                    </tr>
+                    {foreach $omPlatformList as $value}
+                    <tr class="odd">
+                        <td>{$value.id}</td>
+						<td><input value="{$value.platform}" id='{$value.id}' class="input1" disabled="disabled"/></td>
+                        <td>{$value.addUser}</td>
+                        <td>{$value.addTime|date_format:"Y-m-d H:i"}</td>
+                        <td>
+                            <!--button class='update' pid='{$value.id}'>修改</button>
+                            <button class='delete' pid='{$value.id}'>删除</button-->
+                        </td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

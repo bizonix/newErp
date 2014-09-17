@@ -1,0 +1,89 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/getgoods-css.css" rel="stylesheet" type="text/css" />
+	<div class="servar wh-servar">
+        <a class="gdhref" href="index.php?mod=recheck&act=recheckForm">复核扫描(快递)</a>
+		<a class="gdhref" href="index.php?mod=orderReview&act=orderReview">复核扫描(非快递)</a>
+    </div>
+    <div class="main">
+        <table  cellspacing="0" width="100%">
+            <tbody><tr class="title">
+                    <td>
+                        <input onclick="chooseornot(this)" type="checkbox"/>
+                    </td>
+                    <td>
+                        I D
+                    </td>
+                    <td>
+                        订单编号
+                    </td>
+                    <td>
+                        运输方式
+                    </td>
+                    
+                    <td>
+                        收件人
+                    </td>
+                    <td>
+                        收件地址
+                    </td>
+                    <td>
+                        销售账号
+                    </td>
+                    <td>
+                        生成时间
+                    </td>
+                    <td>
+                        发货时间
+                    </td>
+                    <td>
+                        订单状态
+                    </td>
+                </tr>
+               {foreach $billlist as $billvalue }
+                <tr>
+                    <td>
+                        <input class="checkclass" name="" type="checkbox" value="{$billvalue.id}">
+                    </td>
+                    <td>
+                        {$billvalue.id}
+                    </td>
+                    <td>
+                        {$billvalue.originOrderId}
+                    </td>
+                    <td>
+                        {$billvalue.shipingname}
+                    </td>
+                   
+                    <td>
+                        {$billvalue.username}
+                    </td>
+                    <td>
+                        {$billvalue.street}&nbsp;
+                        {$billvalue.city}&nbsp;
+                        {$billvalue.state}&nbsp;
+                        {$billvalue.countryName}&nbsp;
+                    </td>
+                    <td>
+                        {if isset($salesaccountinfo[$billvalue.accountId])}{$salesaccountinfo[$billvalue.accountId]['account']}{/if}
+                    </td>
+                    <td>
+                        {$billvalue.createdTime}
+                    </td>
+                    <td>
+                        {$billvalue.weightTime}
+                    </td>
+                    <td>
+                        {$billvalue.statusname}
+                    </td>
+                </tr>
+                {/foreach}
+            </tbody>
+        </table>
+        <div class="bottomvar">
+			<div class="pagination">
+				{$pagestr}
+			</div>
+		</div>
+    </div>
+{include file='footer.htm'}

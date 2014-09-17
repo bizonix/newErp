@@ -1,0 +1,229 @@
+{include file="header.htm"}
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+            </div>
+            <form action="json.php?mod=spuSpecialProperty&act=updateSpecialTMTCOn" method="post" id="updateSpecialTMValidation" target="a" onsubmit="return confirm('请仔细检查后提交，确认提交？');">
+            <div class="main products-main basic-main">
+            	<table cellspacing="0" width="100%" id="tableBas">
+                    <tr class="title">
+                    	<td align="left" colspan="2" style="font-size:16px; font-weight:bold; padding-left:15px;">特殊属性-运输方式（编辑）</td>
+                    </tr>
+                    <tr>
+                        <td width="10%"><span style="color:#F00;">*</span>特殊运输方式名称：</td>
+                        <td align="left">
+                        <input value="{$id}" name="id" type="hidden"/>
+                        <input class="validate[required,maxSize[60]]" name="specialTransportManagerName" id="specialTransportManagerName" value="{$specialTransportManagerName}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="10%"><span style="color:#F00;">*</span>是否启用：</td>
+                        <td align="left">
+                            <select class="validate[required]" name="isOn" id="isOn">
+                                <option value=""></option>
+                                <option value="1" {if $isOn == 1}selected="selected"{/if}>启用</option>
+                                <option value="2" {if $isOn == 2}selected="selected"{/if}>禁用</option>
+                            </select>
+                        </td>                    
+                    </tr>                                      
+                </table>
+                <div id="transInfoDetail">
+                <table cellspacing="0" width="100%">
+                    <tr class="title">
+                    	<th width="20%" align="left" style="font-size:16px; font-weight:bold; padding-left:15px;">运输方式</th>
+                        <th align="left" style="font-size:16px; font-weight:bold; padding-left:15px;">渠道方式</th>
+                    </tr>
+                </table>
+                <div style="height: 300px;width: 700px; overflow-y:auto;">
+                <table cellspacing="0" width="100%">
+                    {assign var=channelArr value=getAllChannelInfo()}                	                    
+                    {foreach getAllTransportInfo() as $value}
+						<tr>
+                            <td>
+                                <input {if in_array($value['id'], $tranportIdArr)}checked="checked"{/if} style="width: 12px;" value="{$value['id']}" name="transportId[]" type="checkbox" id="transportId{$value['id']}" transport='transport'/>
+                                <label {if in_array($value['id'], $tranportIdArr)}style="color: red;"{/if} for="transportId{$value['id']}">{$value['carrierNameCn']}</label>
+                            </td>
+                            <td>
+                                {foreach $channelArr[$value['id']] as $v}
+                                    <input {if in_array($v['id'], $channelIdArr)}checked="checked"{/if} style="width: 12px;" value="{$v['id']}" name="tc{$value['id']}[]" type="checkbox" id="channelId{$v['id']}" channel="channel" tid="{$value['id']}"/>
+                                    <label {if in_array($v['id'], $channelIdArr)}style="color: red;"{/if} for="channelId{$v['id']}">{$v['channelName']}</label>
+                                {/foreach}                                
+                            </td>
+						</tr>
+                    {/foreach}
+                </table>
+                </div>
+                <hr />
+                </div>
+                <div class="products-action" style="padding-left: 200px;">
+                    {if isAccessAll('spuSpecialProperty','updateSpecialTMTCOn') == true}
+                	<input type="submit" value="保存"/>
+                    <span style="color: green;">（只保存上部分数据信息）</span>
+                    {else}
+                    <span style="color: red;">（无修改权限）</span>
+                    {/if}
+                </div>
+                </form>
+                <hr />
+                <table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td class="products-action" align="left" colspan="2" style="font-size:16px; font-weight:bold; padding-left:15px;">
+                        包含的SPU
+                        {if isAccessAll('spuSpecialProperty','batchDelSpecialTMSpuOn') == true}
+                        <input type="button" id="batchDelSpu" value="批量删除"/>
+                        {else}
+                        <span style="color: red;">(无该权限)</span>
+                        {/if}
+                        </td>
+                    </tr>
+                 </table>                
+                <div style="height:200px; width: 700px; overflow-y:auto;">
+                <table width="100%" cellspacing="0">
+						<tr>
+                            <td valign="center" width="8%" style="padding-left:20px;">
+                            <input value="{$id}" name="id" id="id" type="hidden"/>
+                                <span>SPU：</span>
+                            </td>
+                            <td id="spuArrTd">
+                                {foreach $spuList as $value}
+                                    <span id="span{$value['id']}">
+                                    <input style="width: 12px;" value="{$value['id']}" name="spuId[]" type="checkbox" id="spuId{$value['id']}"/>
+                                    <label for="spuId{$value['id']}">{$value['spu']}</label>
+                                    </span>
+                                {/foreach}
+							</td>
+						</tr>
+                </table>
+                </div>
+                 <table cellspacing="0" width="100%" id="spuTable">
+                	<tr>
+                        <td valign="center" width="8%" style="padding-left:20px;" colspan="4" class="products-action">
+                        <input value="{$id}" name="stmnId" id="stmnId" type="hidden"/>
+                        <input type="button" id="addBatch" value="添加行"/>
+                        <span style="color: green;">（每行可添加4个SPU，多余留空即可）</span>
+                        </td>
+					</tr>
+                    <tr>
+                    <td><input name='spu[]' style='width:120px;'/></td>&nbsp;
+                    <td><input name='spu[]' style='width:120px;'/></td>&nbsp;
+                    <td><input name='spu[]' style='width:120px;'/></td>&nbsp;
+                    <td><input name='spu[]' style='width:120px;'/></td>&nbsp;
+                    <td><a href='javascript:void(0)' class='delTr'>删除行</a></td>
+                    </tr>
+                 </table>
+                 <div class="products-action" style="padding-left: 200px;">
+                    {if isAccessAll('spuSpecialProperty','batchAddSpecialTMSpuOn') == true}
+                	<input type="button" id="batchAddSpu" value="提交"/>
+                    {else}
+                    <span style="color: red;">（无添加权限）</span>
+                    {/if}
+                </div>
+                <span id="spanStatus"></span>
+            <iframe style="display: none;" name="a"></iframe>
+            <div class="bottomvar" id="down">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}
+
+<script type="text/javascript">
+    $(function(){
+         $("input[transport='transport']").click(function(){
+            var flag = $(this).prop('checked');
+            $("input[name='tc"+$(this).val()+"[]'").prop('checked', flag);
+         });
+         
+         $("input[channel='channel']").click(function(){
+            tid = $(this).attr('tid');
+            flag = false;
+            $("input[tid='"+tid+"']").each(function(){
+                if($(this).prop('checked') == true){
+                    flag = true;
+                }             
+            });
+            $("#transportId"+tid).prop('checked', flag);
+         });
+         
+         $("#addBatch").click(function(){ //alert('111');
+            $("#spuTable").append("<tr class='batchAddzqt'><td><input name='spu[]' style='width:120px;'/></td>&nbsp;<td><input name='spu[]' style='width:120px;' /></td>&nbsp;<td><input name='spu[]' style='width:120px;' /></td>&nbsp;<td><input name='spu[]' style='width:120px;' /></td>&nbsp;<td><a href='javascript:void(0)' class='delTr'>删除行</a></td></tr>");
+            document.getElementById("down").scrollIntoView(false);
+         });
+        
+         $(".delTr").live('click',function(){
+            $(this).parent().parent().remove();
+            document.getElementById("down").scrollIntoView(false);
+         });
+         
+         $("#batchDelSpu").click(function(){
+            var spuIdArr = [];
+            $("input:checkbox[name='spuId[]']:checked").each(function(i){
+                spuIdArr.push($(this).val());
+            });
+            if(spuIdArr.length == 0){
+                alert('请选择要删除的SPU');
+                return;
+            }
+            if(confirm('确认删除选中的SPU？')){
+                $.ajax({
+    				type	: "POST",
+    				dataType: "jsonp",
+    				url		: 'json.php?mod=spuSpecialProperty&act=batchDelSpecialTMSpuOn&jsonp=1',
+    				data	:  { spuIdArr:spuIdArr } ,
+    				success	: function (msg){
+    				    alert(msg.errMsg);
+    					if(msg.errCode == 200){
+    					    for(key in spuIdArr){
+                                $("#span"+spuIdArr[key]).remove();
+                            }
+    					}
+    				}
+    			});
+            }           
+         });
+         
+         $("#batchAddSpu").click(function(){
+            var stmnId = $("#stmnId").val();
+            if(stmnId == ''){
+                alert('异常，请刷新重试');
+                return;
+            }
+            var spuArr = [];
+            $("input[name='spu[]']").each(function(i){
+                if($.trim($(this).val())){
+                    spuArr.push($(this).val());
+                }               
+            });
+            if(spuArr.length == 0){
+                alert('请填写要添加的SPU');
+                return;
+            }
+            if(confirm('确认批量添加？')){
+                $.ajax({
+    				type	: "POST",
+    				dataType: "jsonp",
+    				url		: 'json.php?mod=spuSpecialProperty&act=batchAddSpecialTMSpuOn&jsonp=1',
+    				data	:  { stmnId:stmnId,spuArr:spuArr } ,
+    				success	: function (msg){
+    				    alert(msg.errMsg);
+    					if(msg.errCode == 200){
+    					    $("#spanStatus").html(msg.data.spanStatus);
+                            $("input[name='spu[]']").val('');
+                            $(".batchAddzqt").remove();
+                            insertSpuArr = msg.data.insertSpuArr;
+                            for(key in insertSpuArr){
+                                $("#spuArrTd").append("<span id='span"+key+"'><input style='width: 12px;' value='"+key+"' name='spuId[]' type='checkbox' id='spuId"+key+"'/><label for='spuId"+key+"'>"+insertSpuArr[key]+"&nbsp;</label>");
+                            }
+    					}
+    				}
+    			});
+            }           
+         });
+         
+         jQuery("#updateSpecialTMValidation").validationEngine();   
+    });
+    
+</script>

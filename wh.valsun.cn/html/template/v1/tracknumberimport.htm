@@ -1,0 +1,40 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/tracknumberimport.js"></script>
+<script language="javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+<link href="css/trackimport-css.css" rel="stylesheet" type="text/css" />
+	<div class="methodechoose">
+        请选择导入方式
+    </div>
+    <div class="formdiv">
+        <div ><input type="radio" name="choose" onclick="showforms(1)">导入联邦快递</div>
+        <div class="form1" id="formdiv1">
+            <form method="post" action="index.php?mod=expressRecheck&act=fileDataImport" enctype="multipart/form-data" >
+                选择excel文件：<input style="width:300px; display:inline;" type="file" name="excelsheet"> 
+                <input name="date" type="text" value="{$currenttime}" style="height:19px;line-height: 18px;" onclick="WdatePicker()"/>
+                <input type="hidden" value="1" name="type">
+                <input type="submit" value="提交">
+            </form>
+        </div>
+    </div>
+    <div class="formdiv">
+        <div><input type="radio" name="choose" onclick="showforms(2)">手动导入</div>
+        <div class="form1" id="formdiv2">
+            <form method="post" action="index.php?mod=expressRecheck&act=formDataImport" id="submitform" >
+                请输入订单号和快递跟踪号:</br>
+                <table class="formtable" id="inputtable">
+                   <tr><td style="width:20px;">操作</td><td class="title">订单号</td><td class="title">快递跟踪号</td></tr>
+                   <tr id="x_1">
+                        <td class="deltd" onclick="delrow(this,1)">×</td>
+                        <td class="tbcontent"><input id="1" onchange="checknum(this)" onkeypress="goNextInput(this, event)" type="text" name="order[1]"></td>
+                        <td class="tbcontent"><input row-id="1" type="text" onkeypress="goNextRow(this, event)" name="express[1]"></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="type" value="0">
+                <div style="padding-left: 450px; padding-top: 20px;"><span class="submitbtn" onclick="dosubmit()" >提&nbsp;交</span></div>
+            </form>
+        </div>
+    </div>
+
+{include file='footer.htm'}

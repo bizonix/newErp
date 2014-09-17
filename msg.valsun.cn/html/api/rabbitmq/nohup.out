@@ -1,0 +1,85 @@
+ [*] Waiting for logs. To exit press CTRL+C
+PHP Notice:  Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+
+Notice: Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+[2] mysql_query(): MySQL server has gone away mysql.php 第 58 行.<br><br>PHP Notice:  Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+
+Notice: Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+[2] mysql_query(): Error reading result set's header mysql.php 第 58 行.<br><br>PHP Notice:  Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+
+Notice: Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+[2] require(DISCUZ_ROOT./config.inc.php): failed to open stream: No such file or directory mysql.php 第 61 行.<br><br>PHP Fatal error:  require(): Failed opening required 'DISCUZ_ROOT./config.inc.php' (include_path='.:') in /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php on line 61
+
+Fatal error: require(): Failed opening required 'DISCUZ_ROOT./config.inc.php' (include_path='.:') in /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php on line 61
+ [*] Waiting for logs. To exit press CTRL+C
+PHP Notice:  Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+
+Notice: Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+[2] mysql_query(): MySQL server has gone away mysql.php 第 58 行.<br><br>PHP Notice:  Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+
+Notice: Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+[2] mysql_query(): Error reading result set's header mysql.php 第 58 行.<br><br>PHP Notice:  Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+
+Notice: Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+[2] require(DISCUZ_ROOT./config.inc.php): failed to open stream: No such file or directory mysql.php 第 61 行.<br><br>PHP Fatal error:  require(): Failed opening required 'DISCUZ_ROOT./config.inc.php' (include_path='.:') in /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php on line 61
+
+Fatal error: require(): Failed opening required 'DISCUZ_ROOT./config.inc.php' (include_path='.:') in /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php on line 61
+ [*] Waiting for logs. To exit press CTRL+C
+PHP Notice:  Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+
+Notice: Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+[2] mysql_query(): MySQL server has gone away mysql.php 第 58 行.<br><br>PHP Notice:  Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+
+Notice: Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+[2] mysql_query(): Error reading result set's header mysql.php 第 58 行.<br><br>PHP Notice:  Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+
+Notice: Undefined index: REQUEST_URI in /data/web/erpNew/wh.valsun.cn/lib/log.php on line 97
+[2] require(DISCUZ_ROOT./config.inc.php): failed to open stream: No such file or directory mysql.php 第 61 行.<br><br>PHP Fatal error:  require(): Failed opening required 'DISCUZ_ROOT./config.inc.php' (include_path='.:') in /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php on line 61
+
+Fatal error: require(): Failed opening required 'DISCUZ_ROOT./config.inc.php' (include_path='.:') in /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php on line 61
+ [*] Waiting for logs. To exit press CTRL+C
+ [x] [{"id":["3242"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"40","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"2","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+success: 3242
+ [x] [{"id":["3243"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"40","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"2","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+success: 3243
+ [x] [{"id":["1881"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"4","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"0","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+duplicate massage! [x] [{"id":["1881"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"4","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"0","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+duplicate massage! [x] [{"id":["1881"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"4","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"0","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+duplicate massage! [x] [{"id":["1881"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"4","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"0","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+duplicate massage! [x] [{"id":["1882"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"4","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"2","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+duplicate massage! [x] [{"id":["2772"],"username":"Vitaliy  Evgenievich  Polubelov","platformUsername":"Vitaliy Polubelov","email":"92450017@mail.ru","countryName":"Russia","countrySn":"","currency":null,"state":"Moskovskay oblast.","city":"Ramenskiy rayon. Kratovo","street":". Kratovo. ul. Pobedi d.24.k2","address2":"","address3":"","landline":"9037587808","phone":"","zipCode":"0","account":"caracc","tracknumber":null,"transportId":"2","pmId":"2","recordNumber":"15024052881328","isFixed":"2","actualTotal":"7.50","channelId":"0","calcWeight":"0.048","calcShipping":"12.622","combinePackage":"2","flag":1,"data":[{"sku":"2689","amount":"1"},{"sku":"2913","amount":"1"}]}]
+success: 2772
+ [x] [{"id":["2778"],"username":"Smokvina Olga Ivanovna","platformUsername":"Polina Filipchenko","email":"_ocharovanie_@mail.ru","countryName":"Russia","countrySn":"","currency":null,"state":"Moscow","city":"Moskva","street":"ul.Mikluho-Maklaja d.30 kv.330","address2":"","address3":"","landline":"--","phone":"79265225491","zipCode":"0","account":"beauty365","tracknumber":null,"transportId":"2","pmId":"2","recordNumber":"60006661120685","isFixed":"2","actualTotal":"6.53","channelId":"0","calcWeight":"0.186","calcShipping":"25.912","combinePackage":"2","flag":1,"data":[{"sku":"3070","amount":"1"}]}]
+success: 2778
+ [x] [{"id":["2137"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"4","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"2","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+duplicate massage! [x] [{"id":["2136"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"4","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"2","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+duplicate massage! [x] [{"id":["3246"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"40","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"2","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+success: 3246
+ [x] [{"id":["3248"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"40","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"2","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+success: 3248
+ [x] [{"id":["3247"],"username":"Nikolay Ivanovich Fedoseev","platformUsername":"Nikolay Ivanovich Fedoseev","email":"fuu.1985@mail.ru","countryName":"Russia","countrySn":"","currency":"","state":"Tula region","city":"Efremov","street":"Tulskoe shosse 111-49","address2":"","address3":"","landline":"79105555655","phone":"","zipCode":"0","account":null,"tracknumber":null,"transportId":"40","pmId":"51","recordNumber":"777778888899wxb","isFixed":"1","actualTotal":"0.39","channelId":"0","calcWeight":"1.668","calcShipping":"0.000","combinePackage":"2","flag":1,"data":[{"sku":"3069","amount":"12"}]}]
+success: 3247
+[2] mysql_query(): MySQL server has gone away mysql.php 第 58 行.<br><br>[2] mysql_query(): Error reading result set's header mysql.php 第 58 行.<br><br>exception 'Exception' with message 'MySQL Query Error' in /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php:134
+Stack trace:
+#0 /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php(65): mysql->halt('MySQL Query Err...', 'UPDATE `power_u...')
+#1 /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php(63): mysql->query('UPDATE `power_u...', 'RETRY')
+#2 /data/web/erpNew/wh.valsun.cn/html/api/rabbitmq/wh_subscribe.php(34): mysql->query('UPDATE `power_u...')
+#3 [internal function]: {closure}(Object(PhpAmqpLib\Message\AMQPMessage))
+#4 /data/web/erpNew/wh.valsun.cn/html/api/rabbitmq/vendor/videlalvaro/php-amqplib/PhpAmqpLib/Channel/AMQPChannel.php(570): call_user_func(Object(Closure), Object(PhpAmqpLib\Message\AMQPMessage))
+#5 [internal function]: PhpAmqpLib\Channel\AMQPChannel->basic_deliver(Object(PhpAmqpLib\Wire\AMQPReader), Object(PhpAmqpLib\Message\AMQPMessage))
+#6 /data/web/erpNew/wh.valsun.cn/html/api/rabbitmq/vendor/videlalvaro/php-amqplib/PhpAmqpLib/Channel/AbstractChannel.php(98): call_user_func(Array, Object(PhpAmqpLib\Wire\AMQPReader), Object(PhpAmqpLib\Message\AMQPMessage))
+#7 /data/web/erpNew/wh.valsun.cn/html/api/rabbitmq/vendor/videlalvaro/php-amqplib/PhpAmqpLib/Channel/AbstractChannel.php(238): PhpAmqpLib\Channel\AbstractChannel->dispatch('60,60', Object(PhpAmqpLib\Wire\AMQPReader), Object(PhpAmqpLib\Message\AMQPMessage))
+#8 /data/web/erpNew/wh.valsun.cn/html/api/rabbitmq/wh_subscribe.php(47): PhpAmqpLib\Channel\AbstractChannel->wait()
+#9 {main} [*] Waiting for logs. To exit press CTRL+C
+[2] mysql_query(): MySQL server has gone away mysql.php 第 58 行.<br><br>[2] mysql_query(): Error reading result set's header mysql.php 第 58 行.<br><br>exception 'Exception' with message 'MySQL Query Error' in /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php:134
+Stack trace:
+#0 /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php(65): mysql->halt('MySQL Query Err...', 'UPDATE `power_j...')
+#1 /data/web/erpNew/wh.valsun.cn/lib/db/mysql.php(63): mysql->query('UPDATE `power_j...', 'RETRY')
+#2 /data/web/erpNew/wh.valsun.cn/html/api/rabbitmq/wh_subscribe.php(34): mysql->query('UPDATE `power_j...')
+#3 [internal function]: {closure}(Object(PhpAmqpLib\Message\AMQPMessage))
+#4 /data/web/erpNew/wh.valsun.cn/html/api/rabbitmq/vendor/videlalvaro/php-amqplib/PhpAmqpLib/Channel/AMQPChannel.php(570): call_user_func(Object(Closure), Object(PhpAmqpLib\Message\AMQPMessage))
+#5 [internal function]: PhpAmqpLib\Channel\AMQPChannel->basic_deliver(Object(PhpAmqpLib\Wire\AMQPReader), Object(PhpAmqpLib\Message\AMQPMessage))
+#6 /data/web/erpNew/wh.valsun.cn/html/api/rabbitmq/vendor/videlalvaro/php-amqplib/PhpAmqpLib/Channel/AbstractChannel.php(98): call_user_func(Array, Object(PhpAmqpLib\Wire\AMQPReader), Object(PhpAmqpLib\Message\AMQPMessage))
+#7 /data/web/erpNew/wh.valsun.cn/html/api/rabbitmq/vendor/videlalvaro/php-amqplib/PhpAmqpLib/Channel/AbstractChannel.php(238): PhpAmqpLib\Channel\AbstractChannel->dispatch('60,60', Object(PhpAmqpLib\Wire\AMQPReader), Object(PhpAmqpLib\Message\AMQPMessage))
+#8 /data/web/erpNew/wh.valsun.cn/html/api/rabbitmq/wh_subscribe.php(47): PhpAmqpLib\Channel\AbstractChannel->wait()
+#9 {main} [*] Waiting for logs. To exit press CTRL+C

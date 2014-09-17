@@ -1,0 +1,178 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<script type="text/javascript" src="./js/publicDatePicker/WdatePicker.js"></script>
+<div class="fourvar">
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+            					  <span>SPU：
+								   <input name="spu" type="text" id="spu" value="{$smarty.get.spu}" style="width: 110px;"/>
+								   </span>
+								   <span>|&nbsp;审核状态：
+								    <select name="auditStatus" id="auditStatus" >
+								    <option value="0" > </option>
+									<option value="1" {if $smarty.get.auditStatus == 1}selected='selected'{/if}>待审核</option>
+									<option value="2" {if $smarty.get.auditStatus == 2}selected='selected'{/if}>审核通过</option>
+                                    </select>
+                                    </span>
+                                    <span>|&nbsp;SPU状态：
+								    <select name="spuStatus" id="spuStatus" >
+								    <option value="" > </option>
+                                        {foreach displayAllSpuStatus() as $value}
+									       <option value="{$value['id']}" {if $smarty.get.spuStatus == $value['id']}selected='selected'{/if}>{$value['statusName']}</option>
+                                        {/foreach}
+                                    </select>
+                                    </span>
+                                  <span>|&nbsp;采购员：
+								   <select name="purchaseId" id="purchaseId" >
+								    <option value="0" > </option>
+								    {foreach getAllPurchaser() as $value}
+									<option value="{$value['userId']}" {if $smarty.get.purchaseId == $value['userId']}selected='selected'{/if}>{$value['userName']}</option>
+									{/foreach}
+								  </select>
+								   </span>
+								   
+                                   <span>|&nbsp;有无属性记录：
+								   <select name="isPPVRecord" id="isPPVRecord" >
+								    <option value="0" > </option>
+									<option value="1" {if $smarty.get.isPPVRecord == 1}selected='selected'{/if}>无记录</option>
+									<option value="2" {if $smarty.get.isPPVRecord == 2}selected='selected'{/if}>有记录</option>
+								  </select>
+                                  </span>
+                                  <span>|&nbsp;部门：
+								   <select name="dept" id="dept" style="width: 100px;">
+								    <option value="0" > </option>
+                                    {foreach getSpuArchiveDetArr() as $value}
+									<option value="{$value['id']}" {if $smarty.get.dept == $value['id']}selected='selected'{/if}>{$value['depName']}</option>
+                                    {/foreach}
+								  </select>
+                                  </span>
+								   <span>|&nbsp;类别：
+									<select name="sku_category" id="pid_one" onchange="select_one();">
+										<option value="0">请选择</option>
+										{foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid=0") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[0]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+									</select>
+									<span align="left" id="div_two" {if empty($pidArr[1])}style="width:auto; display:none"{/if}>
+                                        {if !empty($pidArr[1])}
+                                        <select name='pid_two' id='pid_two' onchange='select_two()'>
+                                        <option value='0'>请选择</option>
+                                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[0]}") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[1]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+                                        </select>
+                                        {/if}
+                                    </span>    
+									<span align="left" id="div_three" {if empty($pidArr[2])}style="width:auto; display:none"{/if}>
+                                        {if !empty($pidArr[2])}
+                                        <select name='pid_three' id='pid_three' onchange='select_three()' >
+                                        <option value='0'>请选择</option>
+                                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[1]}") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[2]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+                                        </select>
+                                        {/if}
+                                    </span>
+									<span align="left" id="div_four" {if empty($pidArr[3])}style="width:auto; display:none"{/if}>
+                                        {if !empty($pidArr[3])}
+                                        <select name='pid_four' id='pid_four'>
+                                        <option value='0'>请选择</option>
+                                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[2]}") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[3]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+                                        </select>
+                                        {/if}
+                                    </span>    
+								    </span>                                   
+            </div>
+            <div class="servar products-servar">
+            <span>有无尺寸关联记录：
+    		   <select name="haveSizePPV" id="haveSizePPV" >
+    		    <option value="0" > </option>
+    			<option value="1" {if $smarty.get.haveSizePPV == 1}selected='selected'{/if}>无记录</option>
+    			<option value="2" {if $smarty.get.haveSizePPV == 2}selected='selected'{/if}>有记录</option>
+    		  </select>
+            </span>
+            <span>|&nbsp;有无尺寸测量记录：
+    		   <select name="isMeasureRecord" id="isMeasureRecord" >
+    		    <option value="0" > </option>
+    			<option value="1" {if $smarty.get.isMeasureRecord == 1}selected='selected'{/if}>无记录</option>
+    			<option value="2" {if $smarty.get.isMeasureRecord == 2}selected='selected'{/if}>有记录</option>
+    		  </select>
+            </span>
+            <span>
+                |&nbsp;开始时间：
+	           <input name="startdate" type="text" id="startdate" onClick="WdatePicker()" value="{$smarty.get.startdate}"/>	  
+        	    结束时间：
+        	   <input name="enddate" type="text" id="enddate" onClick="WdatePicker()" value="{$smarty.get.enddate}" />
+            </span>
+            <span><button id='seachSpuArchive'>搜索</button></span>
+            &nbsp;
+			<span style="color: red;">{$status}</span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <tr>
+                            <td>SPU</td>
+							<td>采购员</td>
+							<td>类型</td>
+                            <td>添加时间</td>
+                            <td>属性记录</td>
+                            <td>尺寸测量记录</td>
+							<td>SPU状态</td>
+							<td>审核状态</td>
+							<td>审核人</td>
+                            <td>审核时间</td>
+							<td>操作</td>
+                        </tr>
+                    </tr>
+                    {foreach $spuArchiveList as $value}
+                                <tr>
+                                    <td>{$value['spu']}</td>
+                                    <td>{getPersonNameById($value['purchaseId'])}</td>
+									<td>{getAllCateNameByPath($value['categoryPath'])}</td>
+                                    <td>{$value['spuCreatedTime']|date_format:"Y-m-d H:i"}</td>
+                                    <td>{if isExistSpuPPVrelation($value['spu']) == true}<span style="color: green;">有</span>{else}无{/if}</td>
+                                    <td>{if isExistSpuInputSizeMeasure($value['spu']) == true}<span style="color: green;">有</span>{else}无{/if}</td>
+                                    <td>
+                                        {$value['spuStatusName']}
+                                    </td>
+                                    <td>
+                                    {if $value['auditStatus'] == 1}待审核{/if}
+                                    {if $value['auditStatus'] == 2}<img alt="审核通过" src="http://misc.erp.valsun.cn/img/right.png"/>{/if}
+                                    {if $value['auditStatus'] == 3}<img alt="审核不通过" src="http://misc.erp.valsun.cn/img/wrong.png"/>{/if}
+                                    </td>
+                                    <td>{getPersonNameById($value['auditorId'])}</td>
+                                    <td>{$value['auditTime']|date_format:"Y-m-d H:i"}</td>
+                                    <td>
+                                        {if isAccessAll('autoCreateSpu','scanSpuArchive') == true}
+										<input type="button" onclick="window.location.href = 'index.php?mod=autoCreateSpu&act=scanSpuArchive&spu={$value['spu']}&seach_spu={$smarty.get.spu}&seach_spuStatus={$smarty.get.spuStatus}&seach_auditStatus={$smarty.get.auditStatus}&seach_purchaseId={$smarty.get.purchaseId}&seach_pid={$smarty.get.pid}&seach_isPPVRecord={$smarty.get.isPPVRecord}&seach_haveSizePPV={$smarty.get.haveSizePPV}&seach_isMeasureRecord={$smarty.get.isMeasureRecord}&seach_dept={$smarty.get.dept}&seach_page={$smarty.get.page}&seach_startdate={$smarty.get.startdate}&seach_enddate={$smarty.get.enddate}'" value="查看"/>
+                                        {/if}
+                                        {if isAccessAll('autoCreateSpu','updateSpuArchive') == true && (getIsAccess($value['purchaseId']) || isAccessAll('autoCreateSpu','updateSpuArchiveMeasure') || isSpuExistBySpuAndPurchaseId($value['spu'], $smarty.session.userId))}
+                                        <input type="button" onclick="window.location.href = 'index.php?mod=autoCreateSpu&act=updateSpuArchive&spu={$value['spu']}&seach_spu={$smarty.get.spu}&seach_spuStatus={$smarty.get.spuStatus}&seach_auditStatus={$smarty.get.auditStatus}&seach_purchaseId={$smarty.get.purchaseId}&seach_pid={$smarty.get.pid}&seach_isPPVRecord={$smarty.get.isPPVRecord}&seach_haveSizePPV={$smarty.get.haveSizePPV}&seach_isMeasureRecord={$smarty.get.isMeasureRecord}&seach_dept={$smarty.get.dept}&seach_page={$smarty.get.page}&seach_startdate={$smarty.get.startdate}&seach_enddate={$smarty.get.enddate}'" value="编辑"/>
+                                        {/if}
+                                    </td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachSpuArchive').click(); 
+			}        
+        });       
+</script>

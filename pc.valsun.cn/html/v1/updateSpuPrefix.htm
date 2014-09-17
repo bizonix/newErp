@@ -1,0 +1,61 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+               {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+<div class="servar products-servar">
+<span style="color:#F00;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="main products-main">
+					<table width="100%" border="0" cellpadding="0" cellspacing="0">
+						<input id="id" value="{$id}" type="hidden"/>
+						<tr>
+                            <td><span style="color:#F00;">*</span>前缀：
+							<input name="prefix" id="prefix" value='{$prefix}'/>
+							</td>
+						</tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>单/虚拟料号：
+									<select name="isSingSpu" id="isSingSpu">
+										<option value="1" {if $isSingSpu == 1}selected='selected'{/if}>单料号</option>
+										<option value="2" {if $isSingSpu == 2}selected='selected'{/if}>虚拟料号</option>
+									</select>
+							</td>
+						</tr>
+                        <tr>
+                            <td><span style="color:#F00;">*</span>对应公司：
+									<select name="companyId" id="companyId">
+                                    {foreach getAllCompanyInfo() as $value}
+                                        <option value="{$value['company_id']}" {if $companyId == $value['company_id']}selected='selected'{/if}>{$value['company_name']}</option>
+                                    {/foreach}
+                                    </select>
+							</td>
+						</tr>
+						<tr>
+                            <td><span style="color:#F00;">*</span>是否启用：
+									<select name="isUse" id="isUse">
+										<option value="1" {if $isUse == 1}selected='selected'{/if}>启用</option>
+										<option value="2" {if $isUse == 2}selected='selected'{/if}>禁用</option>
+									</select>
+							</td>
+						</tr>
+                        <tr>
+                            <td class="products-action"><input type="button" value="提交" id="updateSpuPrefix"/>
+							<input type="button" value="返回" id="back"/></td>
+						</tr>
+					</table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

@@ -1,0 +1,304 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<!--script type="text/javascript" src="http://misc.erp.valsun.cn/js/global.js"--></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript" src="js/dispatchbillquery.js"></script>
+<script type="text/javascript" src="./js/fancybox.js"></script>
+	{if $secondlevel==23}
+	<div class="servar wh-servar" style="padding:14px;">
+        <a class="gdhref" href="index.php?mod=GetGoods&act=GetGoodsScanPageEX">配货扫描(快递)</a>
+		<a class="gdhref" href="index.php?mod=GetGoods&act=GetGoodsScanPageInland">配货扫描(国内)</a>
+    </div>
+	<br/>
+	{else if $secondlevel==24}
+	<div class="servar wh-servar" style="padding:14px;">
+        <a class="gdhref" href="index.php?mod=recheck&act=recheckForm">复核扫描(快递)</a>
+		<a class="gdhref" href="index.php?mod=orderReview&act=orderReview">复核扫描(小包)</a>
+    </div>
+	<br/>
+	{else if $secondlevel==25}
+	<div class="servar wh-servar" style="padding:14px;">
+        <a class="gdhref" href="index.php?mod=waitpacking&act=packingform">包装扫描</a>
+    </div>
+	<br/>
+	{else if $secondlevel==26}
+	<div class="servar wh-servar" style="padding:14px;">
+		<a class="gdhref" href="index.php?mod=waitWeighing&act=weighingForm">称重扫描<快递></a>
+		<a class="gdhref" href="index.php?mod=waitWeighing&act=weighingFormInland">称重扫描<国内></a>
+		<a class="gdhref" href="index.php?mod=orderWeighing&act=orderWeighing">称重扫描<小包></a>
+    </div>
+	<br/>
+	{else if $secondlevel==28}
+	<div class="servar wh-servar" style="padding:14px;">
+        <a class="gdhref" href="index.php?mod=expressRecheck&act=recheckScan">快递复核扫描(单跟踪号)</a>
+		<a class="gdhref" href="index.php?mod=expressRecheck&act=recheckScanMul">快递复核扫描(多跟踪号)</a>
+		<a class="gdhref" href="index.php?mod=expressRecheck&act=trackNumberInput">跟踪号数据导入</a>
+    </div>
+	<br/>
+	{/if}
+	
+	<div class="fourvar order-fourvar feedback-fourvar products-servar wh-fourvar">
+	 <form id="queryform" method="get" class="queryform">
+			<input type="hidden" name="mod" value="dispatchBillQuery" />
+            <input type="hidden" name="act" value="showForm" />
+			<input type="hidden" name="secondlevel" value="{$secondlevel}" />
+		<table>
+			<tr>
+				<td style="padding-left:17px;">
+					发货单查询：
+				</td>
+				<td>
+					<input type="text" value="{$keywords}" name='keywords'/>
+				</td>
+				<td style="padding-left:17px;">
+					类型：
+				</td>
+				<td>
+					<select name="keytype" >
+						<option {if $keytype == 2}selected="selected"{/if} value="2">配货单号</option>
+                        <option {if $keytype == 1}selected="selected"{/if} value="1">订单号</option> 
+						<option {if $keytype == 3}selected="selected"{/if} value="3">sku</option> 
+                    </select>
+				</td>
+				<td style="padding-left:17px;">
+					状态：
+				</td>
+				<td>
+					<select name="status" id="status">
+                        <option value="0">请选择状态</option>
+                        {foreach $outstatuslist as $itemvar}
+                            <option  {if $status == $itemvar.statusCode}selected="selected"{/if} value="{$itemvar.statusCode}">{$itemvar.statusName}</option>
+                        {/foreach}
+                    </select>
+				</td>
+				<td style="padding-left:17px;">
+					进入系统日期：
+				</td>
+				<td>
+					<input value="{$ordertimestart}" type="text" id='ordertimestart' name='ordertimestart' onclick="WdatePicker()" /> -
+				</td>
+				<td>
+					<input type="text" value="{$ordertimeend}" id="ordertimeend" name="ordertimeend" onclick="WdatePicker()" />
+					留言：
+					<select name="isNote" id="isNote">
+						<option value="">全部</option>
+						<option value="1" {if $isNote == '1'}selected="selected"{/if}>有留言</option>
+						<option value="2" {if $isNote == '2'}selected="selected"{/if}>无留言</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left:17px;">
+					运输方式：
+				</td>
+				<td>
+					<select name='shiptype' id='shiptype'>
+                        <option value="">选择运输方式</option>
+                        {foreach $shipingtypelist as $shitemval}
+                            <option {if $shiptype == $shitemval.id}selected="selected"{/if} value="{$shitemval.id}">{$shitemval.carrierNameCn}</option>
+                        {/foreach}
+                    </select>
+				</td>
+				<td style="padding-left:17px;">
+					客户购买账号：
+				</td>
+				<td>
+					<input type="text" value="{$clientname}" name='clientname' id='clientname'/>
+				</td>
+				<td style="padding-left:17px;">
+					销售账号：
+				</td>
+				<td>
+					<select name="salesaccount" id="acc" >
+							<option value="">请选择账号</option>
+							{foreach $salesaccountlist as $account}
+								<option {if $salesaccount == $account.id}selected="selected"{/if} value="{$account.id}">{$account.account}</option>
+							{/foreach}
+						</select>
+				</td>
+				<td style="padding-left:17px;">
+					混合订单：
+				</td>
+				<td>
+					<select name="hunhe" id="hunhe">
+						<option {if $hunhe==0}selected="selected"{/if} value="0">请选择类型:</option>
+						<option {if $hunhe==1}selected="selected"{/if} value="1">两件或两件以上的订单</option>
+						<option {if $hunhe==2}selected="selected"{/if} value="2">一件物品的订单(一个或多个数量)</option>
+						<!--option {if $hunhe==3}selected="selected"{/if} value="3">组合订单</option-->
+					</select>
+				</td>
+				<td>
+					平台：
+					<select name="platformName" id="platformName" >
+							<option value="">请选择账号</option>
+							{foreach $platformList as $platform}
+								<option {if $platformName == $platform.id}selected="selected"{/if} value="{$platform.id}">{$platform.platform}</option>
+							{/foreach}
+						</select>
+					<button type="button" onclick="dosearch()" >查 询</button>
+				</td>
+			</tr>
+		</table>
+		</form>
+		<div style="padding-top:5px; padding-left:18px;">
+			<label>
+				全选:<input style="width:20px;padding-top:15px;" onclick="chooseornot(this)" type="checkbox" />
+			</label>
+			<button class="btn" id="application_print">申请打印</button>
+			<select style="margin-left:23px;" name="printid" id="printid" onchange="goprintById()">
+				<option value="">打印预览</option>
+				<option value="200">标签打印50*100</option>
+				<option value="205">带留言标签打印50*100</option>
+				<option value="201">快递A4</option>
+				<!--option value="202">国际EUB热敏打印</option>
+				<option value="203">德国GlobalMail</option>
+				<option value="204">非德国GlbalMail</option>
+				<option value="206">新加坡热敏打印</option-->
+				<option value="207">新加坡/EUB/GlobalMail混合打印</option>
+				<option value="50">DHL快递单打印</option>
+				<option value="51">EMS国际特快</option>
+				<option value="52">DHLfp</option>
+				<option value="53">UPS快递单打印</option>
+				<option value="54">EMS新加坡</option>
+				<option value="1">芬哲圆通快递打印</option>
+				<option value="2">芬哲申通快递打印</option>
+				<option value="3">芬哲韵达快递打印</option>
+				<option value="4">哲果圆通快递打印</option>
+				<option value="5">哲果申通快递打印</option>
+				<option value="6">哲果韵达快递打印</option>
+				<option value="7">哲果顺丰快递打印</option>
+				<option value="8">EB0001申通快递打印</option>
+				<option value="9">EB0001速尔快递打印</option>
+				<option value="10">EB0001顺丰快递打印</option>
+			</select>	
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" value="" name='appnum' id='appnum'/><button class="btn" id="more_application">批量申请打印</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="btn" id="markUnusual">标记为异常发货单</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<select style="margin-left:23px;" name="filesid" id="filesid" onchange="exportstofiles()">
+				<option value="">运单导出</option>
+				<option value="1">Fedex批量处理运单</option>
+				<option value="2">DHL批量处理运单</option>
+			</select>
+		</div>
+	</div>
+    <div class="main order-main wh-main">
+		{foreach $billlist as $billvalue }
+		<table cellspacing="0" width="100%" style="text-align:left;">
+			<tr class="title">
+				<td style="width:40px;" align="center" valign="middle">
+					<input class="checkclass" id="orderids" name="orderids" type="checkbox" value="{$billvalue.id}">
+				</td>
+				<td colspan="20">
+					<span style="width:190px;overflow:hidden;">发货单号：{$billvalue.id}</span>
+					<span style="width:190px;overflow:hidden;">平台：{$billvalue.platformName}</span>
+					<span style="width:190px;overflow:hidden;">客户账号：<input style="width:118px;border:none; background-color: #f2f2f2; outline:none;" value="{$billvalue.platformUsername}" readonly/></span>
+					<span style="width:190px;overflow:hidden;">销售账号：{if is_array($billvalue.salesaccountinfo)}{$billvalue.salesaccountinfo['account']}{/if}</span>
+					<span style="width:190px;overflow:hidden;">生成时间：{$billvalue.createdTime}</span>
+					<span style="width:190px;overflow:hidden;">运输：{$billvalue.shipingname}</span>
+					<span style="width:190px;overflow:hidden;">发往国家：{$billvalue.countryName}</span>
+					<span style="width:190px;overflow:hidden;">跟踪号：{$billvalue.tracknumber}</span>
+					<span style="width:190px;overflow:hidden;">发货单状态：{$billvalue.statusname}</span>
+					<span style="width:190px;overflow:hidden;">包材：{$billvalue.materName}</span>
+					<span style="width:190px;overflow:hidden;">重量：{$billvalue.calcWeight}</span>
+					<span style="width:190px;overflow:hidden;">系统订单编号：<input value="{$billvalue.originOrder}" style="border:none; background-color:#f2f2f2; outline:none; width:100px;" readonly=""></span>
+				</td>
+			</tr>
+			{foreach $billvalue.skulistar as $skuval}
+			<tr>
+				<td class="unpicurl">
+					<!--a href="javascript:void(0)" id="imga-{$skuval.sku}" class="fancybox">
+						<img src="./images/ajax-loader.gif" name="skuimg" id="imgs-{$skuval.sku}" spu="{$skuval.spu}">
+				   </a-->
+				   <a href="javascript:void(0)" id="imgb-{$skuval.sku}" class="fancybox">
+						<img src="./images/no_image.gif" class="skuimg" id="imgs-{$skuval.sku}"  width="60" height="60" data-spu="{$skuval.spu}" data-sku="{$skuval.sku}">
+			   		</a>
+				</td>
+				<td align="left">
+					<span style="margin-right:100px;width:240px;overflow:hidden;white-space:nowrap;">
+						标题：{$skuval.goodsName}
+					</span>
+					<span style="margin-right:100px;width:130px;overflow:hidden;white-space:nowrap;">
+						sku:{$skuval.sku}
+					</span>
+					<span style="margin-right:100px;width:50px;overflow:hidden;white-space:nowrap;">
+						数量:{$skuval.amount}
+					</span>
+					<span style="margin-right:100px;width:100px;overflow:hidden;white-space:nowrap;">
+						可用库存:{$skuval.actualStock}
+					</span>
+				</td>
+			</tr>	
+			{foreachelse}
+				<tr><td></td><td align="center">该订单无料号明细！</td></tr>
+			{/foreach}
+			<tr>
+				<td colspan="2" align="left" style="background-color:#f2f2f2; padding-left:35px;">
+					<span width="40%">
+						地址：{$billvalue.street}&nbsp;
+	                        {$billvalue.city}&nbsp;
+	                        {$billvalue.state}&nbsp;
+	                        {$billvalue.countryName}&nbsp;
+	                </span>
+	                <span width="60%" style="margin-left:70px;">
+	                	{if $billvalue.content!=''}
+							留言：{$billvalue.content}
+						{/if}
+	                </span>
+				</td>
+			</tr>
+		</table>
+		{foreachelse}
+		<table cellspacing="0" width="100%">
+			<tr><td align="center">没有搜索值！</td></tr>
+		</table>
+		{/foreach}
+    </div>
+	<div class="bottomvar">
+		<div class="pagination">
+			{$pagestr}
+		</div>
+	</div>
+</div>
+<!--p id="back-top">
+    <a href="#toppage"><span></span>Back to Top</a>
+</p-->
+<form target="_blank" action="" method="post" id="hiddenpost" style="display:none;">
+	<input type="hidden" id="idsinput" name="ids" value="">
+	<input type="hidden" name="express" id="expressinput" value="">
+</form>
+{include file='footer.htm'}
+<!--script type="text/javascript">
+//页面加载完成后加载图片
+{literal}
+$(document).ready(function() {
+	var url  = "json.php?mod=common&act=getSkuImg";
+	var skuArr	= $('img[name="skuimg"]'), imgurl="", spu="", sku="";
+	$.each(skuArr,function(i,item){
+		sku	= $(item).attr('id').substring(5);
+		spu	= $(item).attr('spu');
+		$.ajax({
+			url: url,
+			type: "POST",
+			async: true,
+			data	: {spu:spu,sku:sku},
+			dataType: "jsonp",
+			success: function(rtn){
+							sku	= $(item).attr('id').substring(5);
+							//console.log(rtn.errMsg);
+							if ($.trim(rtn.data)) {
+								$("#imgs-"+sku).attr({"src":rtn.data,"width":"60px","height":"60px"});
+							    $("#imga-"+sku).attr("href",rtn.data);
+							} else {
+								$("#imgs-"+sku).attr({"src":"./images/no_image.gif","width":"60px","height":"60px"});
+							    $("#imga-"+sku).attr("href","./images/no_image.gif");
+							}
+				}	
+			});
+	});
+});
+{/literal}   
+</script-->

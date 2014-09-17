@@ -1,0 +1,58 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/onBlackList.js"></script>
+{include file='omNav.htm'}
+<div class="fourvar">
+
+
+            <div class="main">
+				<form action="index.php?mod=omBlackList&act=updateBlackList" method="post" id="updateBlackList">
+					<table align="center">
+						<tr>
+							<td>平台名称</td><td><input name="platformUsername" value="{$omBlackList.platformUsername}" /></td>
+						</tr>
+						<tr>
+							<td>用户名</td><td><input name="username" value="{$omBlackList.username}" /></td>
+						</tr>
+						<tr>
+							<td>用户邮箱</td><td><input name="usermail" value="{$omBlackList.usermail}" /></td>
+						</tr>
+						<tr>
+							<td>街道地址</td><td><input name="street" value="{$omBlackList.street}" /></td>
+						</tr>
+						<tr>
+							<td>电话</td><td><input name="phone" value="{$omBlackList.phone}" /></td>
+						</tr>	
+						<tr>
+							<td>平台</td><td>
+							<select name="platformId" id="platformId" onchange="onchangModify()">
+							{foreach $platform as $value}
+							<option value="{$value.id}" {if $platformselected == $value.id}selected="selected"{/if}>{$value.platform}</option>
+							{/foreach}
+							</select>
+							</td>
+						</tr>
+						<tr>
+							<td>帐号</td><td>
+							<select name="account" id="account">
+							{foreach $account as $value}
+							<option value="{$value.id}" {if $omBlackList.account == $value.id}selected="selected"{/if}>{$value.account}</option>
+							{/foreach}
+							</select>
+							</td>
+						</tr>					<tr><td></td><td>
+					<input type="hidden" id="id" name="id" value="{$omBlackList.id}" />
+					<input type="submit" id="changgeBlackList" name="changgeBlackList" value="确定"/>
+					<input type="button" id="back" name="back" value="返回"/>
+					</td>
+					</tr>
+					</table>
+					 <input name="status" id="status" type="hidden" value=""/>
+				</form>
+			</div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

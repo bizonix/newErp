@@ -1,0 +1,49 @@
+/* 
+订单待打印列表
+*/
+.searchformdiv{
+    border-top: #e6e6e6 solid 1px;
+    margin-top: 15px;
+    text-align: center;
+    padding-top: 25px;
+}
+
+
+.se_radiolist{
+    margin-top: 10px;
+}
+
+.se_radiolist span{
+    margin-right: 25px;
+}
+
+.printhover{
+    margin-right: 10px;
+}
+
+.printhover:hover{
+    cursor: pointer;
+    background-color: #d9534f;
+}
+
+.op_operationstitle{
+    height: 20px;
+    line-height: 20px;
+    float: left;
+    margin-left: 20px;
+}
+
+.op_operations{
+    height: 20px;
+    line-height: 20px;
+    float: left;
+    margin-left: 20px;
+}
+.list_op{
+    width: 180px;
+    font-size: 13px;
+}
+
+.list_select{
+    height: 25px;
+}

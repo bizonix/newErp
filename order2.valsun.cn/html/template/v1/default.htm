@@ -1,0 +1,189 @@
+{if $pagination||$toplevel != 1}
+<div class="servar order-servar">
+    <table>
+    <tr>
+    <td width="10%">
+    <span>
+        <label>
+            <input name="allselect" id="allselect" type="checkbox" orderids="" orderStatus="" orderType="" value="" />全选
+        </label>
+    </span>
+    </td>
+    <td>
+
+        {foreach item=menu1 key=mId from=$editMenu1}
+        {if in_array($mId,$competence)}
+            {if $mId == 100}<a href="javascript:void(0)" onclick="setOperated()">标识为已处理</a>{/if}
+            {if $mId == 101}<a href="javascript:void(0)" onclick="applyRefund()">Paypal退款</a>{/if}
+            {if $mId == 102}<a href="javascript:void(0)" onclick="handRefund()">手工退款</a>{/if}
+            {if $mId == 104}<a href="javascript:void(0)" onclick="doShipping()">启动发货</a>{/if}
+            {if $mId == 105}<a href="javascript:void(0)" onclick="splitorder()">拆分(快递缺货)</a>{/if}
+        {/if}
+        {/foreach}
+
+    {if $smarty.get.ostatus == '100' && $smarty.get.otype == '101'}
+    <!--a href="#" onclick="combinePackage()">包裹合并</a-->
+    {/if}
+    {if $smarty.get.ostatus == '100' && $smarty.get.otype == '106'}
+    <!--a href="#" onclick="cancelCombine()">取消包裹合并</a-->
+    {/if}
+    {if $smarty.get.ostatus == '100' && $smarty.get.otype == '103'}
+    <!--a href="#" onclick="splitOverWeight()">超重拆分</a><!--  ADD BY zqt 2013.9.17 -->
+    {/if}
+    {if $smarty.get.ostatus != '2'}
+    <!--a href="#" onclick="combineOrder()">订单合并</a--> <!-- 合并订单 ADD BY chenwei 2013.9.11 -->
+    {/if}
+    <!--<a href="#">发站内信</a>-->
+    <!--<a href="#">取消交易</a>-->
+    <!--a href="javascript:void(0);" onClick="splitorder()">订单拆分</a>
+    {if $smarty.get.ostatus == '2' || $smarty.get.otype == '601'}
+        <!--a href="javascript:void(0);" style="display:none" onClick="applyRefund()">PAYPAL退款</a>
+    {/if}
+        <!--a href="javascript:void(0);" onClick="applyRefund()">PAYPAL退款</a>
+    {if $ostatus == '770'}
+        <!--a href="javascript:void(0);" onClick="abnormalStockSplit()">缺货拆分</a>
+    {/if}
+    <!--a href="javascript:void(0);" onClick="handRefund()">手工退款</a>
+    <!--a href="javascript:void(0);" onClick="handCaseRefund()">申请CASE单据</a>
+    {if $smarty.get.ostatus == '200' && $smarty.get.otype == '201'}
+        <!--a href="javascript:void(0);" onClick="superOrder();">确认超大</a>
+    {/if}
+    {if $smarty.get.ostatus == '900'}
+        <!--a href="javascript:void(0);" onclick="temporarilySend()" >暂时不寄</a><!-- 暂不寄操作 ADD BY chenwei 2013.9.12 -->
+    {/if}
+    <!--a href="javascript:void(0);" onClick="unLockOrder();">解锁订单</a><!-- 解锁订单 ADD BY zyp 2013.9.14 -->
+    {if $smarty.get.ostatus != 2}
+   	<!--a href="javascript:void(0);" onclick="batchMove();">批量修改</a-->
+    {/if}
+    <!--a href="javascript:void(0);" onclick="onlineeubtracknumber();" >线上EUB申请</a-->
+    <!--a href="javascript:void(0);" onclick="thelineeubtracknumber();" >线下EUB申请</a-->
+
+    {if $smarty.get.ostatus == '911' && $smarty.get.otype == '115'}
+        <!--a href="#" onclick="reCulShippingWay()">海外仓运费计算</a-->   <!-- 海外仓批量处理运输方式 <海外仓订单待处理> -->
+    {/if}
+
+    {if $smarty.get.ostatus == '911' && $smarty.get.otype == '916'}
+        <!--a href="#" onclick="owPrintLabel()">海外仓标签打印</a-->   <!-- 海外仓订单打印 <海外仓订单待打> -->
+    {/if}
+
+	{if $smarty.get.ostatus == '100' && $smarty.get.otype == '700'}
+	<!--a href="#" onclick="taoBaoRemoveOrder()">标记刷单</a--><!-- 淘宝标记订单为刷单 ADD BY chenwei 2013.9.17 -->
+	{/if}
+    {*if $smarty.get.ostatus == 200 && $smarty.get.otype == 203*}
+        <!--a href="javascript:void(0);" onClick="partPackage();">申请配货</a-->
+    {*/if*}
+	{*if $smarty.get.ostatus == 100 || ($smarty.get.ostatus == 200 && $smarty.get.otype == 204) || $smarty.get.otype == 552 || $smarty.get.otype == 802 || ($smarty.get.ostatus == 100 && $smarty.get.otype == 109)*}
+	<!--a href="javascript:void(0)" onclick="print_order(1)">申请打印</a-->
+	{*/if*}
+	{*if $smarty.get.ostatus == 200 && $smarty.get.otype == 203*}
+	<!--a href="javascript:void(0)" onclick="print_order(0)">申请打印</a-->
+	{*/if*}
+	<!--a href="javascript:void(0);" onClick="old_shenqingdayin();">申请打印</a-->
+	{if $smarty.get.ostatus == '100' && $smarty.get.otype == '731'}
+    <!--a href="#" onclick="export_ups_us_xml()">UPS美国专线订单导出</a-->
+    {/if}
+	<!--select id="exportstoxls" name="exportstoxls" onchange="exportstoxls()">
+		<option value="0" style="width:157px;">将订单导出到</option>
+		<option value="1">常规列表导出xls</option>
+		<option value="2">EUB导入格式导出</option>
+		<option value="3">EUB导入料号导出</option>
+	</select-->
+   <!-- <a href="#" >手动申请发货(需求不明)</a> -->
+    </td>
+    </tr>
+    </table>
+</div>
+
+<div class="bottomvar">
+    <span id="showSelectNum"></span>
+    {if $pagination}
+    <div class="pagination">
+        {$show_page}
+    </div>
+    {/if}
+</div>
+
+<div class="main order-main" align="center">
+    {foreach key=omOrderId item=orderlist from=$omOrderList}
+    {assign var=orderData value= $orderlist.order}
+    {assign var=orderExtenData value= $orderlist.orderExtension}
+    {assign var=orderUserInfoData value= $orderlist.orderUserInfo}
+    {assign var=orderNote value= $orderlist.orderNote}
+    {assign var=orderTracknumber value= $orderlist.orderTracknumber}
+    {assign var=orderAudit value= $orderlist.orderAudit}
+    {assign var=orderWarehouse value= $orderlist.orderWarehouse}
+    {assign var=combinePackage value= $orderlist.combinePackage}
+    {assign var=orderCalculation value = $orderData.id|getOrderCalcListById}
+    <input type="hidden" id="orderStatus_{$orderData.id}" name="orderStatus_{$orderData.id}" value="{$orderData.orderStatus}" />
+    <input type="hidden" id="orderType_{$orderData.id}" name="orderType_{$orderData.id}" value="{$orderData.orderType}" />
+    {assign var=platformId value= $orderData.platformId}
+    <!--平台ID 1 ebay 2 aliexpress 3 出口通 4 DHgate 6 B2B外单 8 cndirect.com 9 线下结算客户 10 dresslink.com 11 Amazon  12 天猫芬哲 13 天猫哲果 14 海外仓 15 Newegg 16 国内销售部 46 华成平台-->
+    {if $orderData.platformId}
+    <!-- include file="default_$platformId.htm"   先默认11等上线后再分开,避免一直重重复修改 -->
+    {include file="default_11.htm"}
+    {else}
+    {include file="default_other.htm"}
+    {/if}
+    {foreachelse}
+    <span>还没有相应的订单信息哦！</span>
+    {/foreach}
+</div>
+<div class="bottomvar">
+	<span id="showSelectNum1"></span>
+    {if $pagination}
+    <div class="pagination">
+        {$show_page}
+    </div>
+    {/if}
+</div>
+{include file='orderBatchMove.htm'}
+{/if}
+
+
+<script>
+     $('.channel-txt').each(function(){
+         var channel = $(this).attr('id');
+         var channelLen  = $('#'+channel).html().length;
+         var channelStr  = $('#'+channel).html();
+         var dataHtml    = $('#'+channel).attr('data-html');
+         var n           = 40;
+         if(channelLen > n){
+             var newChannel = '<span class="channelMouse">'+channelStr.substr(0,n)+'...'+'<span class="channelHide">'+dataHtml+'</span></span>';
+             $('#'+channel).html(newChannel);
+         }
+     });
+
+     $('.channelMouse').each(function(){
+         $(this).mouseover(function(){
+             $(this).children('.channelHide').show();
+         }).mouseout(function(){
+             $(this).children('.channelHide').hide();
+         }).click(function(){
+             var dataText = $(this).parent().attr('data-text');
+             $('#fullChannel').html(dataText);
+             var diaologOpt = {
+                 width : 400,
+                 height : 550,
+                 modal : true,
+                 autoOpen : true,
+                 show : 'drop',
+                 hide : 'drop',
+                 buttons : {
+                     '返回' : function() {
+                         $(this).dialog('close');
+                     }
+                 }
+             }
+             $('#fullChannel').dialog(diaologOpt);
+         })
+     });
+
+
+//    $(this).children('.channelHide').mouseover(function(){
+//        $(this).show();
+//    }).mouseout(function(){
+//        $(this).hide();
+//    })
+
+</script>
+<div id="fullChannel"></div>

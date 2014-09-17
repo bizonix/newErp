@@ -1,0 +1,41 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/orderpage-css.css" rel="stylesheet" type="text/css" />
+<div class="maincenterdiv">
+	<div class="divrow">
+		<div class="leftpartdiv">
+		<span class="title">发货单号：</span>	 {$orderid}
+		</div>
+		<div class="rightpartdiv">
+			<span class="title">订单号:</span> {$sellorderid}
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	<div class="divrow">
+		<div class="leftpartdiv">
+			<span class="title">发货单类型：</span>{$type}
+		</div>
+		<div class="rightpartdiv">
+			<span class="title">平台账号:</span>{$sellaccount}
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	<div>
+		<ul class="skulistul">
+			<li class="listtitle">发货单/配货单 sku列表</li>
+			{foreach $skulist as $listval}
+				<li>
+					<span class="span_A">sku:</span><span class="span_B">{$listval.sku}</span> 
+					<span class="span_A">数量:</span> <span class="span_B">{$listval.amount}</span>
+					<span class="span_A">配货数量:</span> <span class="span_B">{$listval.picknum}</span>
+				</li>
+			{/foreach}
+			
+		</ul>
+	</div>
+	<div style="text-align:center; margin-top:10px;">
+		<input type=button onclick="window.location = 'index.php?mod=unusualOrder&act=rollBackStock&orderid=1'" value="回滚库存">
+	</div>
+</div>
+{include file='footer.htm'}

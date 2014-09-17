@@ -1,0 +1,53 @@
+{include file="header.html"}
+<script type="text/javascript" src="./js/standard.js"></script>
+<div class="fourvar">
+            {include file="iqcnav.html"}  
+            </div>
+            <div class="servar" align="center">
+            	<form action='index.php?mod=nowSampleStandard&act=sureAdd' method="post" id="addstandard"> 
+					<input type="hidden" name="standardId" id="standardId" value="{$SampleStandard[0].id}" /> 
+					<input type="hidden" name="isopen" id="isopen" value="{$SampleStandard[0].is_open}" /> 
+					<p>
+						<label for="typeId" style="font-size:20px;">检测类型 </label>
+						<select style="width:200px;height:25px;font-size:20px;margin-left:35px" class="mf validate[required]" name="typeId">
+							<option value="">请选择</option>
+							{foreach from=$sampleType key=listkey item=list}
+							 <option value="{$list.id}" {if $list.id==$SampleStandard[0].sampleTypeId}selected{/if}>{$list.typeName}</option>
+							{/foreach}
+						</select>
+						<span id="showSnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+						
+					</p>
+					<p>
+						<label for="sName" style="font-size:20px;">检测标准名称 </label>
+						<input value="{$SampleStandard[0].sName}" id='sName' class="mf validate[required] text-input" name="sName" type="text" style="width:200px;height:20px;font-size:20px">
+						<span id="showEnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+					</p>
+					<p>
+						<label for="minimumLimit" style="font-size:20px;">数量最小限制 </label>
+						<input value="{$SampleStandard[0].minimumLimit}" class="mf validate[required,custom[integer],min[0]] text-input" id="minimumLimit"  name="minimumLimit" type="text" style="width:200px;height:20px;font-size:20px">
+						<span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+					</p>
+					<p>
+						<label for="maximumLimit" style="font-size:20px;">数量最大限制 </label>
+						<input value="{$SampleStandard[0].maximumLimit}" class="mf validate[required,custom[integer],min[0]] text-input" id="maximumLimit" name="maximumLimit"  type="text" style="width:200px;height:20px;font-size:20px">
+						<span id="showSnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+					</p>
+					<p>
+						<label for="codeId" style="font-size:20px;">抽样样本大小 </label>
+						<select style="width:200px;height:25px;font-size:20px" class="mf validate[required]" name="codeId">
+							<option value="">请选择</option>
+							{foreach from=$getSampleSizeCode key=listkey item=list}
+							 <option value="{$list.id}" {if $list.id==$SampleStandard[0].sizeCodeId}selected{/if}>{$list.sampleNum}</option>
+							{/foreach}
+						</select>
+						<span id="showSnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+						
+					</p>
+					<p>
+						<input type="submit" id="countriesAddFormSumit" class="input_button" value="提交">
+						<input type="button" class="input_button" id='back' value="返回" />
+					</p>
+				</form>
+            </div>
+{include file="footer.html"}

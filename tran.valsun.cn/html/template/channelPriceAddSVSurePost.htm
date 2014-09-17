@@ -1,0 +1,165 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelManage&act=index&id={$carrierId}">渠道管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelPrice&act=index&chid={$chid}&chname={$chname}">渠道运费管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>添加运费价目表</h1>
+    <form onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+                <td align="right" width="11%">分区名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select id="pr_group">
+						<option value=''>选择美国邮政分区</option>
+						{foreach item=list from=$zoneList}
+						<option value='{$list.zone}'>{$list.zone}</option>
+						{/foreach}
+					</select>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">重量区间：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" id="weight_from" value = "" style="ime-mode:Disabled;width:60px;" onkeyup="check_float(this)" onafterpaste="check_float(this)"/>&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" id="weight_to" value = "" style="ime-mode:Disabled;width:60px;" onkeyup="check_float(this)" onafterpaste="check_float(this)"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">美国本土派送费(USD/个)：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_kilo" id="pr_kilo" value="" maxlength="20" style="ime-mode:Disabled" onblur="check_float(this)" onkeyup="check_float(this)" onafterpaste="check_float(this)" /> 没有请用0代替
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">住宅运送费(USD/个)：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_handlefee" id="pr_handlefee" value="2.8" maxlength="20" style="ime-mode:Disabled" onblur="check_float(this)" onkeyup="check_float(this)" onafterpaste="check_float(this)" /> 没有请用0代替
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">燃油附加费：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_other" id="pr_other" value="0.07" maxlength="20" style="ime-mode:Disabled" onblur="check_float(this)" onkeyup="check_float(this)" onafterpaste="check_float(this)" /> 没有请用0代替
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">中港运输费(RMB/KG)：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_isfile" id="pr_isfile" value="1" maxlength="20" style="ime-mode:Disabled" onblur="check_float(this)" onkeyup="check_float(this)" onafterpaste="check_float(this)" /> 没有请用0代替
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">空运费(HKD/KG)：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_air" id="pr_air" value="29.7" maxlength="20" style="ime-mode:Disabled" onblur="check_float(this)" onkeyup="check_float(this)" onafterpaste="check_float(this)" /> 没有请用0代替
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">目的地清关费(USD/个)：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_file" id="pr_file" value="0.14" maxlength="20" style="ime-mode:Disabled" onblur="check_float(this)" onkeyup="check_float(this)" onafterpaste="check_float(this)" /> 没有请用0代替
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">折扣：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_discount" id="pr_discount" value="0" maxlength="20" style="ime-mode:Disabled" onblur="check_float(this)" onkeyup="check_float(this)" onafterpaste="check_float(this)" /> 没有请用0代替
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+					<input type="hidden" id="chname" value="{$chname}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=channelPrice&act=index&chname={$chname}&chid={$chid}'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+{literal}
+<script type="text/javascript">
+function check(){
+	var pr_group 	= pr_kilo = pr_kilo_next = weight_from = weight_to = pr_handlefee = pr_other = pr_isfile = pr_air = pr_file = pr_discount = chname = "";
+	chname 	 		= $.trim($("#chname").val());
+	pr_group 		= $.trim($("#pr_group").val());
+	pr_kilo	 		= $.trim($("#pr_kilo").val());
+	weight_from		= $.trim($("#weight_from").val());
+	weight_to		= $.trim($("#weight_to").val());
+	pr_handlefee	= $.trim($("#pr_handlefee").val());
+	pr_other		= $.trim($("#pr_other").val());
+	pr_isfile		= $.trim($("#pr_isfile").val());
+	pr_file			= $.trim($("#pr_file").val());
+	pr_air			= $.trim($("#pr_air").val());
+	pr_discount		= $.trim($("#pr_discount").val());
+	if(chname == "" || chname == 0) {
+		alertify.error("渠道非法！");
+		return false;
+	}
+	if(pr_group == "") {
+		alertify.error("分区不能不选！");
+		$("#pr_group").focus();
+		return false;
+	}
+	if(weight_from == "" || weight_from >= weight_to) {
+		alertify.error("重量区间不能为空且不能大于等于结束重量！");
+		$("#weight_from").focus();
+		return false;
+	}
+	if(weight_to == "" || weight_to <= weight_from) {
+		alertify.error("重量区间不能为空且不能小于登录起始重量！");
+		$("#weight_to").focus();
+		return false;
+	}
+	pr_kilo_next	= weight_from + "-" + weight_to;
+	if(pr_kilo == "") {
+		alertify.error("运费不能为空！");
+		$("#pr_kilo").focus();
+		return false;
+	}
+	if(pr_handlefee == "") {
+		alertify.error("住宅运送费不能为空！");
+		$("#pr_handlefee").focus();
+		return false;
+	}
+	if(pr_other == "") {
+		alertify.error("燃油附加费不能为空！");
+		$("#pr_other").focus();
+		return false;
+	}
+	if(pr_isfile == "") {
+		alertify.error("中港运输费不能为空！");
+		$("#pr_isfile").focus();
+		return false;
+	}
+	if(pr_air == "") {
+		alertify.error("空运费不能为空！");
+		$("#pr_air").focus();
+		return false;
+	}
+	if(pr_file == "") {
+		alertify.error("目的地清关费不能为空！");
+		$("#pr_file").focus();
+		return false;
+	}
+	if(pr_discount == "") {
+		alertify.error("折扣不能为空！");
+		$("#pr_discount").focus();
+		return false;
+	}
+	var url  = web_url + "json.php?mod=channelPrice&act=addChannelPrice";
+	var data = {"chname":chname,"pr_group":pr_group,"pr_kilo":pr_kilo,"pr_kilo_next":pr_kilo_next,"pr_handlefee":pr_handlefee,"pr_other":pr_other,"pr_isfile":pr_isfile,"pr_file":pr_file,"pr_discount":pr_discount,"pr_air":pr_air};
+	$.post(url,data,function(res) {
+		if(res.errCode == 0) {
+			alertify.alert("添加成功！",function() {
+				window.location.reload();
+			});
+		} else {
+			alertify.error(res.errMsg);
+		   }
+	}, "jsonp");
+	return false;
+}
+</script>
+{/literal}
+{include file="footer.htm"}

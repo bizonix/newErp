@@ -1,0 +1,47 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+            <div class="servar products-servar">
+                <span>
+                    {if isAccessAll('spu','addSpuPrefix') == true}
+                	<a href="index.php?mod=spu&act=addSpuPrefix">新增前缀</a>
+                    {/if}
+                </span>
+                &nbsp;
+                <span style="color: red;">{$status}</span>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td>前缀</td>
+                        <td>单/虚拟料号</td>
+                        <td>对应公司</td>
+                        <td>是否启用</td>
+                    </tr>
+                    {foreach $spuPrefixList as $value}
+                    <tr>
+                    	<td><a href="index.php?mod=spu&act=updateSpuPrefix&id={$value['id']}">{$value['prefix']}</a></td>
+                        <td>{if $value['isSingSpu'] == 1}单料号{else}虚拟料号{/if}</td>
+                        <td>{getCompanyNameById($value['companyId'])}</td>
+                        <td>{if $value['isUse'] == 1}<img alt="启用" src="http://misc.erp.valsun.cn/img/right.png"/>{else}<img alt="禁用" src="http://misc.erp.valsun.cn/img/wrong.png"/>{/if}</td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

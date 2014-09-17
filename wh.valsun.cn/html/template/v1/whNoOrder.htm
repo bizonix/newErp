@@ -1,0 +1,89 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/whNoOrder.js"></script>
+{include file='whNav.htm'}
+<div class="servar wh-servar">
+	<span>
+		<form style="margin-left:25px" class="navbar-form pull-left" action="./index.php?act=whNoOrder&mod=whNoOrder" method="POST">
+			SKU:&nbsp;&nbsp;&nbsp;<input type="text" name="sku" value="{$sku}" id="sku" />
+			状态：
+			<select style="" id="isConfirm" name="isConfirm">
+				<option value="">请选择</option>
+				<option value="1" {if $isConfirm==1}selected{/if}>已确认待处理</option>
+				<option value="2" {if $isConfirm==2}selected{/if}>待点货确认</option>
+			</select>
+			开始日期：&nbsp;&nbsp;&nbsp;<input name="start" type="text" value="{$start}" id="start" onclick="WdatePicker()" />
+			结束日期：&nbsp;&nbsp;&nbsp;<input name="end" type="text" id="end" value="{$end}" onclick="WdatePicker()" />
+			<button type="submit" class="btn btn-default">搜 索</button>
+		</form>
+	</span>
+	<br/>
+	<span>
+		<button  id='allsure' value="" />确认订单</button>
+   </span>
+    <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="5%"><input type="checkbox" class="checkall"/></td>
+                <td width="5%">sku</td>
+                <td width="5%">数量</td>
+                <td width="5%">料号总数量</td>
+                <td width="5%">入库人</td>
+                <td width="8%">入库时间</td>
+                <td width="8%">处理结果</td>
+                <td width="5%">采购</td>
+                <td width="10%">供应商</td>
+                <td width="8%">状态</td>
+                <td width="5%">确认人</td>
+                <td width="25%">备注</td>
+            </tr>
+        </thead>
+        
+        <tbody>
+        {foreach key=key_id from=$lists item=list}
+            <tr class="odd">	
+                 <td width="5%"><input type="checkbox" class="invselect" name="invselect" value="{$list.id}"/></td>
+                 <td width="5%">{$list.sku}</td>
+                 <td width="5%">{$list.nums}</td>
+                 <td width="5%">{$list.totalNums}</td>
+                 <td width="10%">{$list.creator}</td>
+                 <td width="10%">{$list.createdTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                 <td width="10%">
+					{if $list.abStatus==1}
+						采购已补单
+					{elseif $list.abStatus==2}
+						采购取消订单
+					{elseif $list.abStatus==3}
+						已对该料号进行二次录入操作
+					{elseif $list.abStatus==4}
+						料号调整为零
+					{elseif empty($list.abStatus)}
+						{if $list.isConfirm==1}
+							已确认待处理
+						{else}
+							待点货确认
+						{/if}
+					{/if}
+				 </td>
+                 <td width="10%">{$list.purchase}</td>
+                 <td width="10%">{$list.company}</td>
+                 <td width="10%">{if $list.isConfirm==1} <font color="green">√</font>{else}<font size="+1" color="red">×</font>{/if}</td>
+                 <td width="10%">{$list.confirmUser}</td>
+                 <td width="25%">{$list.note}</td>
+   
+            </tr>
+         {/foreach}
+        </tbody>
+  
+    </table>
+	<div class="bottomvar">          
+		<div class="pagination" >
+			{$pagestr}
+		</div>
+	</div>
+	
+</div>
+{include file='footer.htm'}

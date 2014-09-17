@@ -1,0 +1,160 @@
+{include file="header.htm"}
+<!-- <script type="text/javascript" src="js/ui/jquery-ui-timepicker-addon.js"></script> -->
+<script type="text/javascript" src="./js/ebayFeedbackManage.js"></script>
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<style>
+.astyle{
+	background-color: #0092DC;
+	color: #FFF;
+	border: 1px solid #00689D;
+	padding: 4px 12px;
+	cursor: pointer;
+	font-color:#FFF;
+}
+</style>
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=feedbackManage&act=ebayFeedbackRequestChange">卖家评价</a>&nbsp;&gt;&gt;&nbsp;请求修改Feedback管理
+    </div>
+    <div class="pagination" id="fpage">
+        {$show_page}
+    </div>
+</div>
+<div class="servar">  
+
+    <span>
+        账号：
+        <select name="account" id="account">
+            <option value="" {if $account == ''} selected="selected"{/if} >所有账号</option>
+            {foreach from=$accountList item=list2}
+            <option {if $account == $list2.account} selected="selected"{/if} value="{$list2.account}" >{$list2.account}</option>
+            {/foreach}
+        </select> 
+    </span>  
+    <span>
+        UserID: <input name="ebayUserId" id="ebayUserId" type="text"  value="{$ebayUserId}" />
+    </span>
+    <span>
+        状态:
+        <select name="modify_status" id="modify_status">
+             <option value="">请选择</option>
+             <option value="0" {if $modify_status == '0'} selected="selected"{/if}>未修改</option>
+             <option value="1" {if $modify_status == '1'} selected="selected"{/if}>已修改</option>
+        </select> 
+    </span>
+    <span>         
+        &nbsp;&nbsp;添加时间:
+        <input name="start_time" id="start_time" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.add_start_time}" />
+        -<input name="end_time" id="end_time" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"   value="{$smarty.get.add_end_time}"/>        
+    </span>
+
+    <span>
+        <button  id='ebayChange_serch_btn' value="" onclick="ebayRequestChangeSerch()"/>搜索</button>
+    </span>
+    <span>
+        <button  id='ebayChange_addItem_btn' value="" />添加修改请求</button>
+    </span>    
+    <span>
+        <button  id='ebayChange_mutilMessage_btn' value="" onclick="ebayRequestChangeMutilMessage()"/>批量Message</button>
+    </span>
+    <span>
+    	{if isAccessMod('ebayFeedback','requestChangeMutilDel')}
+        <button  id='ebayChange_mutildel_btn' value="" />批量删除</button>
+        {/if}
+    </span>
+    <br/> 
+
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+<input type="hidden" id="havesku" value="">  
+    <table cellspacing="0" width="100%" id="nowtable" style="color:#000">
+        <tr class="title" style="font-weight:bold;">
+            <td><input type="checkbox" class="checkall" /></td>
+            <td>编号</td>
+            <td>帐号</td>
+            <td>UserID</td>
+            <td>修改情况</td>            
+            <td>操作人员</td>
+            <td>添加时间</td>   
+            <td>操作</td>            
+        </tr>
+        {foreach from=$fbkList item=list}
+        <tr class="odd">
+            <td><input type="checkbox" class="iqcselect" name="fbkselect" value="{$list.id}" account="{$list.account}" recordnumber="{$list.recordNumber}"/></td>
+            <td>{$list.id}</td>
+            <td>{$list.account}
+            <input type="hidden" id="hd_account{$list.id}"  value="{$list.account}" />
+            </td>
+            <td>{$list.ebayUserId}
+            <input type="hidden" id="hd_ebayUserId{$list.id}"  value="{$list.ebayUserId}" /></td>
+            <td>{if $list.modifyStatus == 0}未修改评价{else}<font color="red">已修改评价</font>{/if}</td>
+            <td>{$list.addUser}</td> 
+            <td>{$list.addTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>             
+            <td>
+            	{if isAccessMod('ebayFeedback','requestChangeDel')}
+            	<button   id="del{$list.id}" onClick="ebayRequestDel({$list.id})">删除</button>
+            	{/if}
+            	{if isAccessMod('ebayFeedback','ebayRequestUpdate')}
+            	<button   id="ipdata{$list.id}" onClick="ebayRequestChangeUpdate('{$list.ebayUserId}','{$list.account}')">执行自动修改</button>
+            	{/if}
+            </td>
+        </tr>
+        {foreachelse}
+        <tr class="odd">
+            <td colspan="8">没有搜索到任何记录！</td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination" id="spage">
+        {$show_page}
+    </div>
+</div>
+
+<!-- 添加条目按钮弹框 START-->
+<div id="ebayRquestChange_addItem_pop_form" title="添加修改请求" style="display:none;">
+	<form action="" method="POST" enctype="multipart/form-data" id="ebayRquestChange_addItem_pop_form">
+	<table id="tab_ebayRquestChange_addItem" width="100%" border="0" cellpadding="0" cellspacing="0">
+		<span>
+	       	选择 账号：
+	        <select name="request_add_account" id="request_add_account">
+	            <option value="" {if $account == ''} selected="selected"{/if} >所有账号</option>
+	            {foreach from=$accountList item=list3}
+	            <option value="{$list3.account}" >{$list3.account}</option>
+	            {/foreach}
+	        </select> 
+    	</span>
+    	<span>
+	        UserID: <input name="request_add_userId" id="request_add_userId" type="text"  value="" />
+	    </span>
+	    <br/>
+	    <div id="add_status">
+		    <span style="color:red;font-size:20px"><span>	    
+	    </div>
+	</table>
+	<table id="show_tab" width="100%" border="0" cellpadding="0" cellspacing="0">			
+	</table>
+	</form>
+</div>
+<!-- 添加条目按钮弹框 END-->
+
+<!-- 批量message弹框 START-->
+<div id="RQMutilMessage_pop_form" title="批量Message" style="display:none;">
+	<form action="" method="POST" enctype="multipart/form-data" id="RQMutilMessage_pop_form">
+	<table id="tab_RQMutilMessage_pop_form" width="100%" border="0" cellpadding="0" cellspacing="0">		
+	    <span>
+	    	内容: <br><textarea name="RQMutilMessage_content" id="RQMutilMessage_content" cols="50" rows="2"></textarea>
+	    </span>	    
+	    <div id="add_status2">
+		    <span style="color:red;font-size:20px"><span>	    
+	    </div>
+	</table>	
+	</form>
+</div>
+<!--弹框 END-->
+		
+{include file="footer.htm"}
+

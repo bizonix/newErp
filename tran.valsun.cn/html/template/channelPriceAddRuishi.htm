@@ -1,0 +1,136 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelManage&act=index&id={$carrierId}">渠道管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelPrice&act=index&chid={$chid}&chname={$chname}">渠道运费管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>添加运费价目表</h1>
+    <form onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+                <td align="right" width="11%">分组名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_group" id="pr_group" value="" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">每公斤价格(HKD)：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_kilo" id="pr_kilo" value="" maxlength="20" style="ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)" />
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">挂号费(HKD)：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_handlefee" id="pr_handlefee" value="0" maxlength="20" style="ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)" />
+					&nbsp;&nbsp;没有请输入0代替
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">中港运输费(HKD)：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_kilo_next" id="pr_kilo_next" value="" maxlength="20" style="ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)" />
+					&nbsp;&nbsp;没有请输入0代替
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">优先级：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select name="pr_other" id="pr_other">
+						<option value="Economy">Economy(经济型)</option>
+						<option value="Priority">Priority(优先型)</option>
+					</select>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">折扣：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pr_discount" id="pr_discount" value="0" maxlength="20" style="ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)" />
+					&nbsp;&nbsp;没有折扣请输入0代替
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">国家列表：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<textarea name="pr_country" id="pr_country" rows="10" style="width:460px"></textarea>
+					<br/>多个国家请用英文逗号隔开
+				</td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+					<input type="hidden" id="chname" value="{$chname}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=channelPrice&act=index&chname={$chname}&chid={$chid}'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+{literal}
+<script type="text/javascript">
+function check(){
+	var pr_group = pr_kilo = pr_kilo_next = pr_other = pr_discount = pr_country = pr_handlefee = chname = "";
+	chname 	 	= $.trim($("#chname").val());
+	pr_group 	= $.trim($("#pr_group").val());
+	pr_kilo	 	= $.trim($("#pr_kilo").val());
+	pr_kilo_next= $.trim($("#pr_kilo_next").val());
+	pr_discount	= $.trim($("#pr_discount").val());
+	pr_country	= $.trim($("#pr_country").val());
+	pr_handlefee= $.trim($("#pr_handlefee").val());
+	pr_other	= $.trim($("#pr_other").val());
+	if(chname == "" || chname == 0) {
+		alertify.error("渠道非法！");
+		return false;
+	}
+	if(pr_group == "") {
+		alertify.error("分组名称不能为空！");
+		$("#pr_group").focus();
+		return false;
+	}	
+	if(pr_kilo == "") {
+		alertify.error("每公斤运费不能为空！");
+		$("#pr_kilo").focus();
+		return false;
+	}
+	if(pr_handlefee == "") {
+		alertify.error("挂号费不能为空！");
+		$("#pr_handlefee").focus();
+		return false;
+	}
+	if(pr_kilo_next == "") {
+		alertify.error("中港运输费不能为空！");
+		$("#pr_kilo_next").focus();
+		return false;
+	}
+	if(pr_other == "") {
+		alertify.error("优先级不能为空！");
+		$("#pr_other").focus();
+		return false;
+	}	
+	if(pr_discount == "") {
+		alertify.error("折扣不能为空！");
+		$("#pr_discount").focus();
+		return false;
+	}
+	if(pr_country == "") {
+		alertify.error("国家列表不能为空！");
+		$("#pr_country").focus();
+		return false;
+	}
+	var url  = web_url + "json.php?mod=channelPrice&act=addChannelPrice";
+	var data = {"chname":chname,"pr_group":pr_group,"pr_kilo":pr_kilo,"pr_kilo_next":pr_kilo_next,"pr_discount":pr_discount,"pr_country":pr_country,"pr_handlefee":pr_handlefee,"pr_other":pr_other};
+	$.post(url,data,function(res) {
+		if(res.errCode == 0) {
+			alertify.alert("添加成功！",function(){
+				window.location.reload();
+			});
+		} else {
+			alertify.error(res.errMsg);
+		}
+	},"jsonp");
+	return false;
+}
+</script>
+{/literal}
+{include file="footer.htm"}

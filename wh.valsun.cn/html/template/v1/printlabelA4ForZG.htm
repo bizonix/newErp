@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript" src="js/jquery-1.8.3.js"></script>
+<link rel="stylesheet" href="./css/printlabelA4ForZG.css" type="text/css"/>
+<title>哲果快递-A4发货清单</title>
+</head>
+<body>
+{foreach $ordersinfo as $value}
+<table width="750"  class="table"   data-orderid="{$value.id}"  border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="40" align="center" class="font_17">发货清单</td>
+  </tr>
+  <tr>
+    <td>
+    <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="3">
+      <tr>
+      	<td height="20" width="12%" align="left"><div style="font-size:13px;">买家姓名:</div></td>
+        <td height="25" width="15%"><div style="font-size:13px;">{$value.username}</div></td>
+        <td width="10%" height="25" align="left"><div style="font-size:13px;">买家ID:</div></td>
+        <td width="20%" height="25"><div style="font-size:13px;">{$value.platformUsername}</div></td>
+        <td width="10%" height="25" align="right"><div style="font-size:13px;">手机号码:</div></td>
+        <td width="15%" height="25"><div style="font-size:13px;">{$value.phone}</div></td>
+        <td width="10%" height="25" align="right"><div style="font-size:13px;">订单编号:</div></td>
+        <td width="15%" align="center" align="right"><div style="font-size:13px;">{$value.recordNumber}</div></td>
+      </tr>
+      <tr>
+        <td height="25" align="left"><div style="font-size:13px;">收货地址:</div></td>
+        <td colspan="7" height="25"><div style="font-size:13px;">{$value.street}, {$value.username}, {$value.phone}</div></td>
+      </tr>
+    </table>
+    <!--</td>-->
+  </tr>
+  <tr>
+     <td valign="top">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>
+      <table width="100%" border="0" cellpadding="3" cellspacing="0" bgcolor="#CCCCCC" class="line" style="border:1px solid #333; ">
+      <tr>
+      	<td align="center" bgcolor="#FFFFFF" class="left_line black"><div style="font-size:13px;">序号</div></td>
+        <td align="center" bgcolor="#FFFFFF" class="left_line black"><div style="font-size:13px;">SKU-DM</div></td>
+        <td align="center" bgcolor="#FFFFFF" class="left_line black"><div style="font-size:13px;">商品名称</div></td>
+        <td align="center" bgcolor="#FFFFFF" class="left_line black"><div style="font-size:13px;">数量</div></td>
+        <td align="center" bgcolor="#FFFFFF" class="left_line black"><div style="font-size:13px;">单价</div></td>
+        <td align="center" bgcolor="#FFFFFF" class="black"><div style="font-size:13px;">仓位号</div></td>
+      </tr>
+	  {foreach $value.finalposition as $k=>$skuinfo}
+      <tr>
+		   <td align='center' bgcolor='#FFFFFF' class='left_line'>{$k}</td>
+		   <td align='center' bgcolor='#FFFFFF' class='left_line'><div style="font-size:13px; font-weight:bold">{$skuinfo.sku}</div></td>
+		   <td align='center' bgcolor='#FFFFFF' class='left_line'><div style="font-size:13px; font-weight:bold">{$skuinfo.itemTitle}</div></td>
+		   <td align='center' bgcolor='#FFFFFF' class='left_line'>{$skuinfo.amount}</td>
+		   <td align='center' bgcolor='#FFFFFF' class='left_line'>{$skuinfo.price}</td>
+		   <td align='center' bgcolor='#FFFFFF'>{$skuinfo.location}</td>
+	   </tr>
+	   {/foreach}
+      <tr>
+        <td colspan="6" align="right" bgcolor="#FFFFFF" style="padding-right:15px;">
+        <div style="font-size:13px;">
+        合计:总数量{$value.totalnum}&nbsp;&nbsp;&nbsp;&nbsp;
+        优惠:{$value.totalPrice-$value.total-$value.calcShipping}&nbsp;&nbsp;&nbsp;&nbsp;
+        邮资:{$value.calcShipping}元&nbsp;&nbsp;&nbsp;&nbsp;
+        实收款:<span class="red font_16">{$value.total}</span></div></td>
+        </tr>
+    </table>
+   	</td>
+  </tr>
+  <tr>
+    <td valign="top">
+    <table width="100%" border="0" cellspacing="0" cellpadding="3">
+    <tr>
+   		<td align="left" bgcolor="#FFFFFF" class="left_line" colspan="8"><div style="font-size:13px;">买家备注:{$value.notes}</div></td>
+    </tr>
+    <tr>
+        <td align="left" bgcolor="#FFFFFF" class="left_line" colspan="8"><div style="font-size:13px;">卖家备注:{$value.notes}</div></td>
+    </tr>
+    <tr>
+        <td width="12%" align="left"><div style="font-size:13px;">卖家店铺名:</div></td>
+        <td width="15%"><div style="font-size:13px;">哲果服饰旗舰店</div></td>
+        <td width="10%" align="left"><div style="font-size:13px;">卖家电话:</div></td>
+        <td width="15%"><div style="font-size:13px;">0755-89619926</div></td>
+        <td width="10%" align="left"><div style="font-size:13px;"></div></td>
+        <td width="14%" align="left"><div style="font-size:13px;"></div></td>
+     </tr>
+     <tr>
+     	<td align="left" colspan="8"><div style="font-size:13px;">如果您满意,请转告您的朋友,如果您不满意,请悄悄的告诉我,谢谢您的惠顾!</div></td>
+     </tr>
+     </table>
+     </td>
+  </tr>
+  <tr><td height="200px;"></td></tr>
+  <tr>
+    <td align="left" class="red">
+    	<img src="barcode128.class.php?data={$value.id}" alt="" width="180" height="40"/>
+        &nbsp;&nbsp;
+        <span style="font-size:15px; color:#000">
+    	买家ID:&nbsp;&nbsp;{$value.platformUsername}     
+        </span> 
+    </td>
+  </tr>
+  <tr>
+    <td align="left" class="red">
+    	<div style="font-size:13px; font-weight:bold">
+			{$value.id}
+        </div>
+    </td>
+  </tr>
+  <tr>
+    <td height="8px"></td>
+  </tr>
+  <tr>
+    <td valign="top">
+    <table width="100%" border="0" cellspacing="0" cellpadding="3">
+      <tr>
+        <td align="left"><div style="font-size:13px;">交易单号:</div></td>
+        <td align="left" class="red">
+            <div style="font-size:13px; font-weight:bold">
+				{$value.recordNumber}
+            </div>
+        </td>
+        <td align="right" colspan="4" class="red"><img src="barcode128.class.php?data={$value.recordNumber}" alt="" width="300" height="50"/></td>
+      </tr>
+      
+      <tr>
+        <td align="left"><div style="font-size:13px;">付款时间：</div></td>
+        <td align="left">
+            <div style="font-size:13px; font-weight:bold">
+				{$value.createdTime|date_format:'%Y-%m-%d %H:%M:%S'}
+            </div>
+        </td> 
+        <td align="left"><div style="font-size:13px;">发货日期:</div></td>
+        <td align="left"><div style="font-size:13px;">{$smarty.now|date_format:'%Y-%m-%d'} </div></td>
+        <td align="right">
+            <div style="font-size:13px; font-weight:bold">
+				页码：{$value@iteration}/{$value@total}
+            </div>
+        </td>     
+      </tr>
+
+      </tr>
+		<tr><td>&nbsp</td></tr>
+	  <tr>
+		<td align="left">
+			<div style="font-size:50px;">哲果</div>
+        </td>
+		<td align="left" >
+			<div style="font-size:50px;" id="num-{$value.id}"></div>
+        </td>
+        <td align="left" >
+			<div style="font-size:20px;">打印日期：</div>
+        </td>
+        <td align="left" >
+			<div style="font-size:20px;">{$smarty.now|date_format:'%Y-%m-%d %H:%M:%S'}</div>
+        </td>
+	  </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+
+{if $value@total > 1 && $value@iteration != $value@total}
+	<div style="page-break-after:always;">&nbsp;</div>
+{/if}
+{/foreach}
+</body>
+</html>
+<script type="text/javascript">
+{literal}
+
+function getCookie(name){
+	var value=(document.cookie.match(new RegExp('(^' + name + '| ' + name + ')=([^;]*)')) == null)?'':RegExp.$2;
+	if(value!=''){
+		return decodeURIComponent(value);
+	}
+	return '';
+}
+function setCookie(name,value,hours){
+	var expire = "; path=/";
+	if(hours != null) {
+		expire = new Date((new Date()).getTime() + hours * 3600000);
+		expire = "; expires=" + expire.toGMTString() + "; path=/";
+	}
+	//document.cookie = name + "=" + escape(value)+';domain=192.168.200.188;'+expire;
+	document.cookie = name + "=" + escape(value)+';domain=;'+expire;
+}
+
+$.each($('.table'),function(i,item){
+		var bigNumber = getCookie('bigNumber-cat');
+		var nowDate = new Date().getDate();
+		var cookieDate = getCookie('nowDate');
+		var numberObj = {};
+		var order_id = $(item).data('orderid');
+		if(bigNumber == '' ) bigNumber = 1;
+		if(cookieDate == '' || cookieDate != nowDate){
+			setCookie('nowDate',nowDate);
+			bigNumber = 1;
+		}
+		//console.log(bigNumber);
+		$("#num-"+order_id).html(bigNumber);
+		//console.log(item);
+	//	numberObj.number = bigNumber;
+	//	numberObj.order_id = order_id;
+	//	data.push(numberObj);
+		bigNumber++;
+		setCookie('bigNumber-cat',bigNumber);
+});
+document.onkeypress = function printPage(event){
+                            if( window.event.keyCode == 112 ) {
+                                window.print(); //打印A4页面
+								var table_obj = $('.table');
+                                //var cclist = document.getElementsByTagName ('center');
+                                var head = '<html><body style="margin:0; padding-top:0;">';
+                                var foot = '<body></html>';
+								var table_length = table_obj.length; 
+                                var print_arr = [];
+								$.each(table_obj,function(i,item){
+									var order_id = $(item).data("orderid");
+									var number = $("#num-"+order_id).html(); 
+                                    print_arr.push('<div style="margin:0;padding:0; width:377px; height:188px; text-align:center;"></br><div style="margin-top:0px;font-size:30px;">' +order_id + '</div><img style="margin-top:10px;" width="200" height="50" src="http://192.168.200.188/barcode128.class.php?data='+order_id+'"></img>\n\
+                                        <div style="margin-top:5px;font-size:40px; font-weight:bold;">[ 哲果'+number+' ]</div></div>');
+								});
+								var printstr = print_arr.join("");
+                               var newwindow = window.open("","_blank");
+                                newwindow.document.write(head+printstr+foot);
+                                newwindow.print();
+                            }
+                        };
+
+{/literal}  
+</script>

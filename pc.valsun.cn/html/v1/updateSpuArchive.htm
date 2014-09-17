@@ -1,0 +1,440 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<script type="text/javascript" src="./js/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<link rel="stylesheet" type="text/css" href="./js/fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+<link href="./js/slideBox/jquery.slideBox.css" rel="stylesheet" type="text/css" />
+<script src="./js/slideBox/jquery.slideBox.js" type="text/javascript"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+			<div class="servar products-servar">
+			<span style="color: red;" id="error"></span>
+            </div>
+            <form action="index.php?mod=autoCreateSpu&act=updateSpuArchiveOn" method="post" id="SpuArchiveValidation">
+            <div class="main products-main basic-main">
+            	<table cellspacing="0" width="100%" id="tableBas">
+                	<tr class="title">
+                    	<td align="left" colspan="5" style="font-size:16px; font-weight:bold; padding-left:15px;">基本信息</td>
+                    </tr>
+                    <tr>
+                    	<td width="38%" style="padding-left: 30px;" class="products-action" rowspan="100" style="width:450px;">
+                        {if !empty($spuPicList)}
+                        <div class="slideBox" id="imgPlay">
+                          <ul class="items">
+                          {foreach $spuPicList as $value}
+                            <li>
+                                <a id="fancy" class="fancybox" href="{$value[0]}" title="{$value@key}" target="_blank">
+                                    <img src="{$value[0]}" width="400px" height="400px"/>
+                                </a>
+                    	    </li>
+                          {/foreach}
+                          </ul>
+                        </div>
+                        {else}
+                        <div>
+                          <ul>
+                            <li>
+                                <a id="fancy" class="fancybox" href="javascript:void(0)" target="_blank">
+                                    <img src="css/images/Testera.jpg" width="400px" height="400px"/>
+                                </a>
+                    	    </li>
+                          </ul>
+                        </div>
+                        {/if}
+						</td>
+                        <td width="8%"><span style="color:#F00;">*</span>SPU</td>
+                        <td width="15%">
+                            <input value="{$spu}" disabled="disabled"/>
+							<input name="spu" id="spu" value="{$spu}" type="hidden"/>
+                        </td>
+                        <td style="width:90px;"><span style="color:#F00;">*</span>产品类别</td>
+                        <td class="products-action">
+                            <input id="disabledPid" value="{getAllCateNameByPath($pid)}" disabled="disabled"/>
+							<input name="pid" id="pid" value="{$pid}" type="hidden"/>
+                            {if OmAvailableModel::isSpuAudit($spu) == false || isAccessAll('autoCreateSpu', 'auditSpuArchive')}
+                            <input type="button" value="修改类别" id="updatePid"/>
+                            {/if}
+                            <input name="seach_auditStatus" id="seach_auditStatus" value="{$smarty.get.seach_auditStatus}" type="hidden"/>
+                            <input name="seach_spuStatus" id="seach_spuStatus" value="{$smarty.get.seach_spuStatus}" type="hidden"/>
+                            <input name="seach_spu" id="seach_spu" value="{$smarty.get.seach_spu}" type="hidden"/>
+                            <input name="seach_purchaseId" id="seach_purchaseId" value="{$smarty.get.seach_purchaseId}" type="hidden"/>
+                            <input name="seach_pid" id="seach_pid" value="{$smarty.get.seach_pid}" type="hidden"/>
+                            <input name="seach_isPPVRecord" id="seach_isPPVRecord" value="{$smarty.get.seach_isPPVRecord}" type="hidden"/>
+                            <input name="seach_haveSizePPV" id="seach_haveSizePPV" value="{$smarty.get.seach_haveSizePPV}" type="hidden"/>
+                            <input name="seach_isMeasureRecord" id="seach_isMeasureRecord" value="{$smarty.get.seach_isMeasureRecord}" type="hidden"/>
+                            <input name="seach_dept" id="seach_dept" value="{$smarty.get.seach_dept}" type="hidden"/>
+                            <input name="seach_page" id="seach_page" value="{$smarty.get.seach_page}" type="hidden"/>
+                            <input name="seach_startdate" id="seach_startdate" value="{$smarty.get.seach_startdate}" type="hidden"/>
+                            <input name="seach_enddate" id="seach_enddate" value="{$smarty.get.seach_enddate}" type="hidden"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;">*</span>描述</td>
+                        <td colspan="3"><textarea class="validate[required]" style="width: 475px;" rows="3" name="spuName" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if}>{$spuName}</textarea></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;">*</span>参考月销量</td>
+                        <td><input class="validate[required,custom[integer],min[1]] text-input" name="referMonthSales" id="referMonthSales" value="{$referMonthSales}" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if}/></td>
+                        <td><span style="color:#F00;">*</span>估算重量(KG)</td>
+                        <td><input class="validate[required,custom[number],min[0.001]] text-input" name="spuCalWeight" id="spuCalWeight" value="{$spuCalWeight}" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if}/></td>
+                    </tr>
+                    <tr>
+
+                        <td><span style="color:#F00;">*</span>采购价(RMB)</td>
+                        <td><input class="validate[required,custom[number],min[0.001]]" name="spuPurchasePrice" id="spuPurchasePrice" value="{$spuPurchasePrice}" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if}/></td>
+                        <td><span style="color:#F00;">*</span>起订量</td>
+                        <td><input class="validate[required,custom[integer],min[1]]" name="minNum" id="minNum" value="{$minNum}" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if}/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;">*</span>对应平台</td>
+                        <td>
+                            <select class="validate[required]" name="platformId" id="platformId" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;"{/if}>
+                                <option value=""> </option>
+                                {foreach getAllPlatformInfo() as $value}
+                                    <option value="{$value['id']}" {if $value['id'] == $platformId}selected="selected"{/if}>{$value['platform']}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        <td><span style="color:#F00;">&nbsp;</span>备注</td>
+                        <td><input name="spuNote" id="spuNote" value="{$spuNote}" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if}/></td>                       
+                    </tr>
+                    <tr>                        
+                        <td><span style="color:#F00;">*</span>平台最低售价(USD)</td>
+                        <td><input class="validate[required,custom[number],min[0.001]]" name="spuLowestPrice" id="spuLowestPrice" value="{$spuLowestPrice}" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if}/></td>
+                        <td><span style="color:#F00;">*</span>运费(USD)</td>
+                        <td><input class="validate[required,custom[number],min[0]]" name="freight" id="freight" value="{$freight}" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if}/></td>
+                    </tr>
+                    <tr>                        
+                        <td><span style="color:#F00;">*</span>SPU特殊属性</td>
+                        <td colspan="3">
+                            <div style="float: left; width: 90%;">
+                            {foreach getAllSpecailPropertyList() as $value}
+                            <div style="float: left; width: 30%;">
+                                <input style="width: 10px;" type="checkbox" name="spId[]" id="spId{$value['id']}" value="{$value['id']}" {if in_array($value['id'], $spId)}checked="checked"{/if} {if isAccessAll('autoCreateSpu','isNotQuiredSpuArchive') == false}class="validate[minCheckbox[1] checkbox"{/if}/>
+                                <label for="spId{$value['id']}" {if in_array($value['id'], $spId)}style="color: red;"{/if}>{$value['propertyName']}</label>
+                            </div>
+                            {/foreach}
+                            </div>
+                        </td>                       
+                    </tr>
+                    <tr>  
+                        <td><span style="color:#F00;">*</span>SPU状态</td>
+                        <td>
+                            <select class="validate[required]" name="spuStatus" id="spuStatus" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;"{/if}>
+                            	<option value=""> </option>
+                            	{foreach displayAllSpuStatus() as $value}
+                                    <option value="{$value['id']}" {if $value['id'] == $spuStatus}selected="selected"{/if}>{$value['statusName']}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        <td><span style="color:#F00;" id="secretInfoSpan">{if $spuStatus == 51}*{else}&nbsp;{/if}</span>被PK料号信息(选填)</td>
+                        <td class="products-action">
+                        <input name="secretInfo" {if $spuStatus == 51}class="validate[required]"{/if} id="secretInfo" value="{$secretInfo}" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive') || $spuStatus != 51}readonly="readonly"{/if}/>
+                            {if OmAvailableModel::isSpuAudit($spu) == false || isAccessAll('autoCreateSpu', 'auditSpuArchive')}
+                            <input type="button" value="筛选SKU" id="selectPkSku"/>
+                            {/if}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" id="addPkSkuCheckbox">
+                        {if !empty($spuPkSkuList)}
+                            {foreach $skuList as $value}
+                                <input class='validate[minCheckbox[1] checkbox' style='width: 12px;' {if in_array($value['sku'], $spuPkSkuList)}checked="checked"{/if} value='{$value['sku']}' id='pkSku{$value['sku']}' name='pkSku[]' type='checkbox' {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}onClick="return false;"{/if}/>
+                                <label {if in_array($value['sku'], $spuPkSkuList)}style="color: red;"{/if} for='pkSku{$value['sku']}'>{$value['sku']}</label>
+                            {/foreach}
+                        {/if}
+                        </td>
+                    </tr>
+                    <tr><td class="products-action" colspan="4"><input type="button" id="addElement" value="添加网址" {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}disabled="disabled"{/if}/></td></tr>
+                    <tr><td><span style='color:#F00;'>*</span>参考网页：</td><td><input {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if} class="validate[required]" name='lowestUrl' id='lowestUrl' value="{$lowestUrl}"/></td> <td>说明：</td><td><input value="最低价" disabled="disabled"/></td></tr>
+                    <tr><td><span style='color:#F00;'>*</span>参考网页：</td><td><input {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if} class="validate[required]" name='bidUrl' id='bidUrl' value="{$bidUrl}"/></td> <td>说明：</td><td><input value="参考listing" disabled="disabled"/></td></tr>
+                    {foreach $Link as $link}
+                    <tr><td><span style='color:#F00;'>&nbsp;</span>参考网页：</td><td><input {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if} class="validate[required]" name='linkUrl[]' id='linkUrl' value="{$link['linkUrl']}"/></td> <td>说明：</td><td><input {if OmAvailableModel::isSpuAudit($spu) && !isAccessAll('autoCreateSpu', 'auditSpuArchive')}readonly="readonly"{/if} name='linkNote[]' id='linkNote' value="{$link['linkNote']}"/></td></tr>
+                    {/foreach}
+                </table>
+                <table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td align="left" colspan="8" style="font-size:16px; font-weight:bold; padding-left:15px;">档案信息</td>
+                    </tr>
+                    {foreach OmAvailableModel::getTNameList('pc_archive_property','*',"WHERE categoryPath IN ($pathImplodeStr)") as $valuePP}
+						<tr>
+                            <td style="width: 40px; padding-left:20px;">
+                            {$valuePP['propertyName']}
+                            </td>
+                            {if $valuePP['isRadio'] == 1}
+                                <td>
+                                <select name="pro{$valuePP['id']}" id="pro{$valuePP['id']}" {if $valuePP['isRequired'] == 1}class="validate[required]"{/if}>
+                                    <option value=""> </option>
+                                    {foreach OmAvailableModel::getTNameList('pc_archive_property_value','*',"WHERE propertyId='{$valuePP['id']}'") as $valuePPV1}
+                                    <option value="{$valuePPV1['id']}" {foreach $PPV as $ppv}{if $ppv['propertyId'] == $valuePP['id'] && $ppv['propertyValueId'] == $valuePPV1['id']}selected='selected'{/if}{/foreach}>{OmAvailableModel::getPropertyValueById($valuePPV1['id'])}</option>
+                                    {/foreach}
+                                </select>
+                                </td>
+                            {else}
+                                <td>
+                                {foreach OmAvailableModel::getTNameList('pc_archive_property_value','*',"WHERE propertyId='{$valuePP['id']}'") as $valuePPV2}
+                                    <input {if $valuePP['isRequired'] == 1 && isAccessAll('autoCreateSpu','isNotQuiredSpuArchive') == false}class="validate[minCheckbox[1] checkbox"{/if} style="width: 12px;" value="{$valuePPV2['id']}" name="pro{$valuePP['id']}[]" type="checkbox" id="pro{$valuePPV2['id']}" {foreach $PPV as $ppv}{if $ppv['propertyId'] == $valuePP['id'] && $ppv['propertyValueId'] == $valuePPV2['id']}checked='checked'{/if}{/foreach}/>
+
+                                    <label for="pro{$valuePPV2['id']}" {foreach $PPV as $ppv}{if $ppv['propertyId'] == $valuePP['id'] && $ppv['propertyValueId'] == $valuePPV2['id']}style="color: red;"{/if}{/foreach}>{OmAvailableModel::getPropertyValueById($valuePPV2['id'])}</label>
+
+                                {/foreach}
+                                </td>
+                            {/if}
+
+						</tr>
+                    {/foreach}
+                </table>
+                {if isAccessAll('autoCreateSpu','updateSpuArchiveMeasure')}
+                {if isExistForSpuPPV($spu,'尺码') != false && OmAvailableModel::getTNameList('pc_archive_input','*',"WHERE textStatus=1 AND categoryPath IN ($pathImplodeStr)")}
+                <div class="underline-main feedback-main">
+                    <table cellspacing="0" width="100%" >
+                    	<tr class="title">
+                        	<td align="left" colspan="{count(OmAvailableModel::getTNameList('pc_archive_input','*',"WHERE textStatus=1 AND categoryPath IN ($pathImplodeStr)")) + 1}" style="font-size:16px; font-weight:bold; padding-left:15px;">尺寸测量</td>
+                        </tr>
+
+    						<tr>
+                                <td valign="top" style="padding-left:20px;">
+                                    尺码
+                                </td>
+                                {foreach OmAvailableModel::getTNameList('pc_archive_input','*',"WHERE textStatus=1 AND categoryPath IN ($pathImplodeStr)") as $valueIN}
+                                <td valign="top">
+                                    {$valueIN['inputName']}(cm)
+                                </td>
+                                {/foreach}
+    						</tr>
+
+                            {foreach isExistForSpuPPV($spu,'尺码') as $valuePPV}
+                            <tr>
+                                <td valign="top" style="padding-left:20px;">
+                                    {getPPVForPPVId($valuePPV['propertyValueId'])}
+                                </td>
+                                {foreach OmAvailableModel::getTNameList('pc_archive_input','*',"WHERE textStatus=1 AND categoryPath IN ($pathImplodeStr)") as $valueIN}
+                                <td valign="top">
+                                    <input id="{$valueIN['inputName']}{getPPVForPPVId($valuePPV['propertyValueId'])}" name="{$valueIN['inputName']}{getPPVForPPVId($valuePPV['propertyValueId'])}" style="width: 60px;" class="validate[option,custom[number],min[0.1]] text-input" value="{getSpuSizeInputMeasureValue($spu, getPPVForPPVId($valuePPV['propertyValueId']), $valueIN['inputName'])}"/>
+                                </td>
+                                {/foreach}
+    						</tr>
+                            {/foreach}
+                    </table>
+                </div>
+                {/if}
+                {/if}
+                <table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td align="left" colspan="2" style="font-size:16px; font-weight:bold; padding-left:15px;">主观描述</td>
+                    </tr>
+                    {foreach OmAvailableModel::getTNameList('pc_archive_input','*',"WHERE textStatus=2 AND categoryPath IN ($pathImplodeStr)") as $valueIN}
+						<tr>
+                            <td valign="top" width="6%" style="padding-left:20px;">
+                                {$valueIN['inputName']}
+                            </td>
+                            <td>
+                                <textarea cols="120" rows="2" name="inp{$valueIN['id']}">{foreach $INV as $inv}{if $inv['inputId'] == $valueIN['id']}{$inv['inputValue']}{/if}{/foreach}</textarea>
+							</td>
+						</tr>
+                    {/foreach}
+
+                </table>
+                <div align="center" class="products-action">
+                	<input type="submit" value="保存"/>
+                    <input type="button" value="返回" id="back"/>
+                </div>
+            </div>
+            </form>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+            <div id="updatePidDialog" title="修改类别" style="display:none;">
+                    <span>
+                          &nbsp;SPU：
+                          <input value="{$spu}" disabled="disabled"/>
+                    </span>
+                    <br />
+                    <br />
+            	    <span>类别：
+					<select name="sku_category" id="pid_one" onchange="select_one();">
+						<option value="0">请选择</option>
+						{foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid=0") as $value}
+						<option value="{$value['id']}" {if $value['id'] == $pidArr[0]}selected='selected'{/if}>{$value['name']}</option>
+						{/foreach}
+					</select>
+					<span align="left" id="div_two" {if empty($pidArr[1])}style="width:auto; display:none"{/if}>
+                        {if !empty($pidArr[1])}
+                        <select name='pid_two' id='pid_two' onchange='select_two()'>
+                        <option value='0'>请选择</option>
+                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[0]}") as $value}
+						<option value="{$value['id']}" {if $value['id'] == $pidArr[1]}selected='selected'{/if}>{$value['name']}</option>
+						{/foreach}
+                        </select>
+                        {/if}
+                    </span>    
+					<span align="left" id="div_three" {if empty($pidArr[2])}style="width:auto; display:none"{/if}>
+                        {if !empty($pidArr[2])}
+                        <select name='pid_three' id='pid_three' onchange='select_three()' >
+                        <option value='0'>请选择</option>
+                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[1]}") as $value}
+						<option value="{$value['id']}" {if $value['id'] == $pidArr[2]}selected='selected'{/if}>{$value['name']}</option>
+						{/foreach}
+                        </select>
+                        {/if}
+                    </span>
+					<span align="left" id="div_four" {if empty($pidArr[3])}style="width:auto; display:none"{/if}>
+                        {if !empty($pidArr[3])}
+                        <select name='pid_four' id='pid_four'>
+                        <option value='0'>请选择</option>
+                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[2]}") as $value}
+						<option value="{$value['id']}" {if $value['id'] == $pidArr[3]}selected='selected'{/if}>{$value['name']}</option>
+						{/foreach}
+                        </select>
+                        {/if}
+                    </span>    
+				    </span>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+		$(document).ready(function() {
+            $(".fancybox").fancybox({
+				helpers: {
+					title : {
+						type : 'outside'
+					},
+					overlay : {
+						speedOut : 0
+					}
+				}
+			});
+            
+            $('#updatePid').click(function(){
+                    $('#updatePidDialog').dialog({
+            		width : 600,
+            		height : 300,
+            		modal : true,
+            		autoOpen : true,
+            		show : 'drop',
+            		hide : 'explode',
+            		buttons : {
+            			'确认修改' : function() {
+            			    var spu = $('#spu').val();
+            				var pid_one = $("#pid_one").val();
+                            var pid = 0;
+                    		if(pid_one!=0){
+                    			var pid_two  = $('#pid_two').val();
+                    			if(typeof(pid_two) != "undefined" && pid_two!=0){
+                    				var pid_three   = $('#pid_three').val();
+                    				if(typeof(pid_three) != "undefined" && pid_three!=0){
+                    					var pid_four = $('#pid_four').val();
+                    					if(typeof(pid_four) != "undefined" && pid_four!=0){
+                    						pid = pid_one+'-'+pid_two+'-'+pid_three+'-'+pid_four;
+                    					}else{
+                    						pid = pid_one+'-'+pid_two+'-'+pid_three;
+                    					}
+                    				}else{
+                    					pid = pid_one+'-'+pid_two;
+                    				}
+                    			}else{
+                    				pid = pid_one;
+                    			}
+                    		}
+                            if(!$.trim(spu) || pid == 0){
+                                alert("异常，错误!");
+                                return;
+                            }
+            				//alert(spu + '   '+ pid);return;
+                            if(confirm('是否要修改对应SPU的类别？（注意，修改类别后该SPU对应选择属性及文本属性将清空，同时该SPU下对应的所有SKU类别也将更新）')){
+                                $.ajax({
+                					type	: "POST",
+                					dataType: "jsonp",
+                					url		: 'json.php?mod=goods&act=updateSpuArchivePid&jsonp=1',
+                					data	: { spu:spu,pid:pid },
+                					success	: function (msg){
+                					    alert(msg.errMsg);
+                						if(msg.errCode==200){
+                						    $('#updatePidDialog').dialog('close');
+                							window.location.reload();
+                						}				
+                					}		
+                				});
+                            }
+            			},            
+            			'关闭' : function() {
+            				$(this).dialog('close');								
+            			}
+            		}
+            	});
+            });
+            	
+
+            setInterval(function(){
+                $.ajax({
+    				type	: "POST",
+    				dataType: "jsonp",
+    				url		: 'json.php?mod=goods&act=sessionStart&jsonp=1',
+    				success	: function (msg){
+    				}
+    			});//重新sessionStart一下
+            },300000);
+
+            $('#imgPlay').slideBox({
+                duration : 0.3,//滚动持续时间，单位：秒
+                easing : 'linear',//swing,linear//滚动特效
+                delay : 5,//滚动延迟时间，单位：秒
+                hideClickBar : false,//不自动隐藏点选按键
+                clickBarRadius : 10
+            });
+                
+            $("#spuStatus").change(function(){
+                if($(this).val() == 51){
+                    $('#addPkSkuCheckbox').html('');
+                    $("#secretInfoSpan").text('*');
+                    $("#secretInfo").attr('class','validate[required]');
+                    $("#secretInfo").prop('readonly',false);
+                }else{
+                    $('#addPkSkuCheckbox').html('');
+                    $("#secretInfoSpan").html('&nbsp;');
+                    $("#secretInfo").attr('class','');
+                    $("#secretInfo").val('');
+                    $("#secretInfo").prop('readonly',true);
+                }
+             });
+                 
+             $('#selectPkSku').click(function(){
+                pkSpu = $("#secretInfo").val();
+                $.ajax({
+    				type	: "POST",
+    				dataType: "jsonp",
+    				url		: 'json.php?mod=goods&act=getSkuBySpu&jsonp=1',
+    				data	: { spu:pkSpu },
+    				success	: function (msg){
+    					if(msg.errCode == 200){
+    					    $('#addPkSkuCheckbox').show();
+                            $('#addPkSkuCheckbox').html('');
+    					    addPkSkuCheckboxHtml = '';
+                            $(msg.data).each(function(index,element){
+                                pkSku = element['sku'];
+                                addPkSkuCheckboxHtml += "<input class='validate[minCheckbox[1] checkbox' style='width: 12px;' value='"+pkSku+"' id='pkSku"+pkSku+"' name='pkSku[]' type='checkbox' />";
+                                addPkSkuCheckboxHtml += "<label for='pkSku"+pkSku+"'>"+pkSku+"</label>";
+                            });
+    					    $('#addPkSkuCheckbox').html(addPkSkuCheckboxHtml);					    
+    					}else{
+    					    alert(msg.errMsg);
+                            $('#addPkSkuCheckbox').html('');
+                            $('#addPkSkuCheckbox').hide();
+                            $("#secretInfo").val('');
+                            $("#secretInfo").focus();
+    					}
+    				}
+    			});
+             });
+        });
+
+</script>

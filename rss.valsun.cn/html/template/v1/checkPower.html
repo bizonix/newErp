@@ -1,0 +1,40 @@
+{include file="header.html"}
+{include file="mailNavLocation.html"}
+<div class="fourvar order-fourvar">
+  <input type="button" value="新增邮件" id="addBt" onClick="addMailList()">
+  <input type="button" value="新增订阅用户" id="addUser" onClick="addMailUser({$list_id})">
+</div>
+<div class="main products-main">
+  <table width="100%" cellspacing="0" border="0" cellpadding="0">
+    <tbody align="left">
+      <tr class="title">
+        <td style="padding-left:30px;font-weight:bold;" width="20%" align="left"> 全部邮件 </td>
+        <td style="font-weight:bold;" width="20%">所属系统</td>
+        <td style="font-weight:bold;"  width="20%" align="left"> 订阅人员 </td>
+        <td width="15%"></td>
+        <td width="15%"></td>
+        <td style="font-weight:bold;" width="20%">操作</td>
+      </tr>
+      {if $checkPower}
+      {section name=list loop=$checkPower}
+      <tr>
+        <td>{$checkPower[list].list_name}</td>
+        <td>{$checkPower[list].system_name}</td>
+        <td>{$checkPower[list].company_name}</td>
+        <td>{$checkPower[list].dept_name}</td>
+        <td>{$checkPower[list].global_user_name}</td>
+        <td><a href="#" onclick="deleteUser({$checkPower[list].power_list_id},{$checkPower[list].global_user_id})">删除</a></td>
+      </tr>
+    {/section}
+    {else}
+    <tr><td>暂时还没有人订阅该邮件哦！</td></tr>
+    {/if}
+    </tbody>
+  </table>
+  <div align="center">{$page_str}</div>
+</div>
+</div>
+{include file="footer.html"}
+</div>
+</body>
+</html>

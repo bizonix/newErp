@@ -1,0 +1,286 @@
+{include file="header.htm"}
+
+{include file="secendNav.htm"}
+<link rel="stylesheet" href="./css/replylist.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./js/jquery/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/replylist.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery-ui.min.js"></script>
+<script language="javascript">
+var messagelist = [
+        {foreach $msglist as $msgval}
+            {$msgval.id}{if !$msgval@last},{/if}
+        {/foreach}
+        ];
+var flag    = 0;
+var itemlist = [
+                   {foreach $msglist as $msgval}
+                       [{$msgval@index},0]{if !$msgval@last},{/if}
+                   {/foreach}
+                   ];
+window.onload=startSync_order;
+</script>
+<div class="main products-main reply-main nospan-main">
+	{foreach $msglist as $msgval}
+	<div class="message-unfold" id="ordermark{$msgval@index}"> 
+	<div id="topline_{$msgval.id}" style="display:inline;">
+	   <span style="font-weight:bold; color:red;">NO:{$msgval@iteration}</span>
+	   <span>发件人：{$msgval.sendername}</span>
+	   <span>收件人：{$msgval.recievername}</span>
+	   <span>发件时间:{$msgval.createtime}</span>
+	</div>
+	<a href="javascript:hidetable({$msgval.id})"></a>
+	<span onclick="ShowHandleResult()" style="float:right;cursor:pointer; font-weight:bold;margin-right:15px;color:red">查看</span>
+  </div>
+    <table id="replaytb_{$msgval.id}" class="products-action" cellspacing="0" width="100%">
+		<tr>
+			<td style="width:700px;">
+			    <table width="100%" style="text-align:center;">
+                    <tr class="title">
+                        <td>
+                            产品总额
+                        </td>
+                        <td>
+                            运费总金额
+                        </td>
+                        <td style="width:60px;">
+                            订单总额
+                        </td>
+                        <td>
+                            交易手续费
+                        </td>
+                        <td style="width:60px;">
+                            预计可得
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="productmoney_{$msgval.id}">
+                        </td>
+                        <td id="logisticsMoney_{$msgval.id}">
+                        </td >
+                        <td id="ordermoney_{$msgval.id}">
+                        </td>
+                        <td id="commission_{$msgval.id}">
+                        </td>
+                        <td id="profit_{$msgval.id}">
+                        </td>
+                    </tr>
+
+                </table>
+                <table width="100%" style="text-align:center;" id="skulist_{$msgval.id}">
+                    
+                </table>
+				<table width="100%" cellspacing="0" border="1" style="border-collapse:collapse; border-color:#ccc;">
+					<tr>
+						<td>
+							订单号：
+							<span style="color:#257109;font-weight:bold;">{$msgval.orderid}</span> 
+						</td>
+						<td>
+							买家：
+							<span style="color:#257109;font-weight:bold;">{$msgval.sendername}</span>
+						</td>
+						<td>
+							订单金额：
+							<span style="color:#257109;font-weight:bold;" id="amount_{$msgval.id}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							下单时间：
+							<span style="color:#257109;font-weight:bold;" id="createtime_{$msgval.id}"></span> 
+						</td>
+						<td>
+							订单状态：
+							<span style="color:#06F;" id="orderstatus_{$msgval.id}"></span>
+						</td>
+						<td>
+							订单状态提醒：
+							<span style="color:#06F;" id="alarm_{$msgval.id}" need="0"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							付款时间：
+							<span style="color:#06F;" id="paytime_{$msgval.id}"></span> 
+						</td>
+						<td>
+							付款方式：
+							<span style="color:#06F;" id="paytype_{$msgval.id}"></span>
+						</td>
+						<td>
+							资金状态：
+							<span style="color:#06F;"  id="fundStatus_{$msgval.id}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							发货时间：
+							<span style="color:#06F;" id="sysshiptime_{$msgval.id}"></span> 
+						</td>
+						<td>
+							物流状态：
+							<span style="color:#06F;"  id="logisticsStatus_{$msgval.id}"></span>
+						</td>
+						<td>
+							物流信息：
+							<span style="color:#06F;" id="logisticsInfo_{$msgval.id}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							放款状态：
+							<span style="color:#06F;" id="loanStatus_{$msgval.id}">-----</span> 
+						</td>
+						<td>
+							退款时间：
+							<span style="color:#06F;">-----</span>
+						</td>
+						<td>
+							退款金额：
+							<span style="color:#06F;">-----</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							纠纷状态：
+							<span style="font-weight:bold;"  id="issueStatus_{$msgval.id}"></span> 
+						</td>
+						<td>
+							纠纷信息：
+							<span style="color:#06F;">-----</span>
+						</td>
+						<td>
+							
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							收件人：
+							<span style="color:#06F;" id="buyerSignerFullname_{$msgval.id}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							地址：
+							<span style="color:#06F;" id="address_{$msgval.id}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							邮编：
+							<span style="color:#06F;" id="zipcode_{$msgval.id}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							邮箱：
+							<span style="color:#06F;" id="mail_{$msgval.id}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							手机：
+							<span style="color:#06F;"  id="mobileNo_{$msgval.id}"></span> 
+						</td>
+						<td>
+							电话：
+							<span style="color:#06F;"  id="phoneNumber_{$msgval.id}"></span>
+						</td>
+						<td>
+							传真：
+							<span style="color:#06F;">-----</span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							留言：
+							<span style="color:#06F;" id="sysnote_{$msgval.id}"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							系统订单编号：
+							<span style="color:#06F;" id="sysnum_{$msgval.id}"></span> 
+						</td>
+						<td>
+							系统订单状态：
+							<span style="color:#06F;" id="sysstatus_{$msgval.id}"></span>
+						</td>
+						<td>
+                        </td>
+					</tr>
+					<tr>
+						<td>
+							运输方式：
+							<span style="color:#06F;" id="syscarrier_{$msgval.id}"></span> 
+						</td>
+						<td>
+							跟踪号：
+							<span style="color:#06F;" id="systracknum_{$msgval.id}"></span>
+						</td>
+						<td>
+
+						</td>
+					</tr>
+				</table>
+				
+			</td>
+			<td style="width:560px;font-size:14px;line-height:20px;" valign="top">
+				<div style="border-bottom:1px #ccc solid; padding:6px 0; margin-bottom:6px;">
+					<span>
+						发件人：{$msgval.sendername}
+					</span>
+					<span style="margin-left:20px;">
+						收件人：{$msgval.recievername}
+					</span>
+					<span style="margin-left:20px;">
+                                                                订单号：<a target="_blank" href="{$msgval.orderurl}">{$msgval.orderid}</a>
+                    </span>
+					<input type="hidden" id="fetchtime_{$msgval.id}" value="0">
+				</div>
+				<input type="hidden" id="bigestid_{$msgval@index}" value="{$msgval.bigestid}">
+				<div id="commni_{$msgval.orderid}">
+				    {foreach $msgval.communi as $commn}
+                    <div style="{if $commn.role==1}background-color:#D9EEEC;{/if} padding:2px; margin-top:3px;margin-bottom:3px;">
+                        <div><span style=" width:100px;font-family:Arial,Verdana,Helvetica,sans-serif; font-size:13px;">{$commn.sendername}</span>&nbsp;:{$commn.createtimestamp}</div>
+                        <div style="padding-left:113px;color:#525252;font-family:Arial,Verdana,Helvetica,sans-serif;font-size:13px;">{$commn.content}</div>
+                    </div>
+                    {/foreach}
+				</div>
+				<textarea onfocus="trigger({$msgval@index})" id="remsgtext_{$msgval@index}" name="" cols="" rows="" style="font-family:Arial,Verdana,Helvetica,sans-serif; width:550px; height:300px;"></textarea>
+                <div>
+                    {foreach $tpllist as $tplval}
+                        {if $tplval.iscommon==1 and $tplval.incommonuse==1}
+                        <label>
+                            <input onclick="getremessage({$tplval.id}, {$msgval@index})" name="1" type="radio" value="{$tplval.id}" />{$tplval.name}
+                        </label>
+                        {/if}
+                    {/foreach}
+                    <select onchange="selectTpl(this, {$msgval@index})">
+                        <option>一般模板</option>
+                        {foreach  $tpllist as $tplval}
+                            {if $tplval.incommonuse !=1}
+                                <option value="{$tplval.id}">{$tplval.name}</option>
+                            {/if}
+                        {/foreach}
+                    </select>
+                    <input type="button" onclick="SubmitReplyAliOrder({$msgval.orderid}, this, '{$msgval.receiverid}', {$msgval@index},  '{$msgval.idregion_h}', '{$msgval.idregion_e}')" type="button" 
+                        value="回复"/>
+                    <input  type="button" onclick="createTemplate({$msgval@index})" value="生成模板">
+                    <input  type="button" onclick="markhandle({$msgval@index})" value="标记已处理">
+                </div>
+			</td>
+		</tr>
+    </table>
+    {/foreach}
+</div>
+
+{foreach  $tpllist as $tplval}
+      <div id="tpldiv_{$tplval.id}" style="display:none;">{$tplval.content}</div>
+{/foreach}
+<div style="" id="showprocess">
+</div>
+<div id="trackInfo">
+</div>
+
+{include file="footer.htm"}

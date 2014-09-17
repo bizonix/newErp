@@ -1,0 +1,114 @@
+{include file="header.htm"}
+			<div class="fourvar">
+            	<div class="pathvar">
+                	您的位置：<a href="#">采购管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=stockInvoice&act=index">海外备货清单</a>&nbsp;>>&nbsp;查看修改
+                </div>
+            </div>
+            <div class="servar">
+            	{if $status == '1'}
+				<span>
+                	<a href="javascript:void(0);" id="stock-btn">修改备注信息</a>
+                </span>
+				<span>
+                	<a href="javascript:void(0);" id="detail-btn">批量修改单据信息</a>
+                </span>
+				{/if}
+            </div>
+			<div class="main underline-main">
+            	<table cellspacing="0" width="68%">
+                	<tr class="title">
+						<td colspan ="8">备货单摘要信息修改</td>
+                    </tr>
+					{foreach item=list from=$stock}
+					<tr><td>备货单号</td><td colspan="7" id="ordersn">{$list.ordersn}</td></tr>
+					<tr><td>备注</td><td colspan="7"><textarea rows=5 id="note">{$list.note}</textarea></td></tr>
+					
+					<tr class="title">
+						<td colspan ="8">备货单sku单据信息修改</td>
+                    </tr>
+						 <script>
+						 var pilianSKUArr = [];
+						 </script>
+						{$stockdetail=StockInvoiceAct::actDetailList("ordersn='{$list.ordersn}'")}
+						{foreach item=detail from=$stockdetail}
+						<tr>
+							<td>编号</td><td id="id">{$detail.id}</td>
+							<td>SKU料号</td><td>{$detail.sku}</td>
+							<td>订货数量</td><td><input name="count" id="count{$detail.id}" value= "{$detail.count}" data-val="{$detail.count}"/></td>
+							<td>订货价格</td><td><input name="cost" id="cost{$detail.id}" value= "{$detail.cost}" data-val="{$detail.cost}"/></td>
+						</tr>
+						<script>
+                          	pilianSKUArr.push({$detail.id});
+                        </script>
+						{/foreach}
+                    
+					{/foreach}
+                </table>
+            </div>
+
+{include file="footer.htm"}
+<script type="text/javascript">
+var web_api = "{$smarty.const.WEB_API}";
+{literal}
+//修改备注信息
+$('#stock-btn').click(function(){
+        var url  = web_api + "json.php?mod=stockInvoice&act=updateStock";
+        var note = $.trim($("#note").val());
+		var ordersn = $("#ordersn").text();
+		var data = {"ordersn":ordersn,"note":note};
+		//return false;
+		if(note==""){
+			alertify.alert("亲,备注信息不能为空哦！");
+			return false;
+		}
+		alertify.confirm("亲,真的要修改备注信息吗？", function (e) {
+        if (e) {
+			$.post(url,data,function(rtn){
+				if(rtn.errCode == 0){              
+					alertify.success("亲,修改备注信息成功!");
+					window.location.reload();
+				}else {
+					 alertify.error(rtn.errMsg);
+			   }
+			},"jsonp");
+		}});
+});
+//批量修改单据信息
+$('#detail-btn').click(function(){
+	var originalCost ,originalCount , changeCost,changeCount,skuObjArr = [];
+	$.each(pilianSKUArr,function(index,item){
+		var skuObj    = {};
+		changeCost    = $.trim($('#cost'+item).val());
+		originalCost  = $.trim($('#cost'+item).data('val'));
+		changeCount   = $.trim($('#count'+item).val());
+		originalCount = $.trim($('#count'+item).data('val'));
+		skuObj.id     = item;
+		originalCost != changeCost ? skuObj.cost = changeCost : skuObj.cost = null;
+		originalCount != changeCount ? skuObj.count = changeCount : skuObj.count = null;
+		if(!(skuObj.cost == null && skuObj.count == null)) {
+			skuObjArr.push(skuObj);
+		}
+	});
+	
+	if(skuObjArr.length == 0 ) {
+		alertify.alert( '亲,您没有修改单据内容哦!', function () {
+		});
+		return false;
+	}else {
+		alertify.confirm( '亲,确定要批量修改吗?', function (e) {
+			if (e) {
+				var url  = web_api + "json.php?mod=stockInvoice&act=updateStockDetail";
+				$.post(url,{"data":skuObjArr},function(rtn){
+					if(rtn.errCode == 0){              
+						alertify.success("亲,批量修改单据信息成功!");
+						window.location.reload();
+					}else {
+						 alertify.error(rtn.errMsg);
+					}
+			   },"jsonp");
+			}
+		});
+	}
+});
+{/literal}
+</script>

@@ -1,0 +1,52 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/whIoType.js"></script>
+{include file='warehouseSubnav.htm'}
+<div class="servar wh-servar">
+	<span>
+		<button  id='whIoTypeAdd' />新增出入库类型</button>
+	</span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="10%">编号</td>
+                <td width="20%">类型编码</td>
+                <td width="20%">类型名称</td>
+                <td width="15%">出入类型</td>
+                <td width="15%">所属仓库</td>
+                <td width="20%" align="center">操作</td>
+                <!--td width="40%"></td-->
+            </tr>
+        </thead>
+        <!-- BEGIN list -->
+        <thead>
+        {foreach key=key_id from=$whIoTypeListArr item=list}
+            <tr class="odd">	
+                 <input type="hidden" name="key_id" value="{$list.id}" />
+                 <td  width="10%">{$list.id}</td>
+                 <td  width="20%">{$list.typeCode}</td>
+                 <td  width="20%">{$list.typeName}</td>
+                 <td  width="15%">{if $list.ioType == 0}出库类型{elseif $list.ioType == 1}入库类型{/if}</td>
+                 <td  width="15%">{$whNameArr[$list.storeId]}</td>
+                 <td width="20%" align="center">
+	                 <a href="index.php?mod=warehouseManagement&act=whIoTypeEdit&editId={$list['id']}">
+                	 <button  id='warehouseEdit' value="" />修改</button>
+                 	 </a> 
+                     &nbsp;
+                     &nbsp;
+             		 <button  name='whIoTypeDel' value="" />删除</button>
+                 </td>
+                 <!--td width="40%"></td-->                
+            </tr>
+         {/foreach}
+        </thead>
+    <!-- END list -->
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination">
+       {$show_page}
+    </div>
+</div>
+{include file="footer.htm"}

@@ -1,0 +1,113 @@
+{include file="header.html"}
+<div class="fourvar">
+            	{include file="iqcnav.html"}   
+                <div class="texvar">
+                    <input name="" type="text" size="3" />
+                    <a href="#" class="enter">GO</a>
+                </div>
+                <div class="pagination">
+                	<ul>
+                    	<li>
+                        	<a href="#">上一页</a>
+                        </li>
+                        <li>
+                        	<a href="#">1</a>
+                        </li>
+                        <li>
+                        	<a href="#">2</a>
+                        </li>
+                        <li>
+                        	<a href="#">3</a>
+                        </li>
+                        <li>
+                        	<a href="#">下一页</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="servar">
+            	<span>
+                	查找：SKU:<input type="text" value="" style="" />
+                </span>
+                <span>
+					状态：<select name="rejects_status" id="rejects_status" onkeydown="check_rejects_status()">
+						    <option value="0" >请选择</option>
+						    <option value="1" >待退回</option>
+						    <option value="2" >待定</option>
+						    </select>               	
+                </span>
+				<span>
+					修改类型：<select name="edit_category" id="edit_category">
+						    <option value="">请选择</option>
+						    <option value="1" >修改图片</option>
+						    <option value="2" >修改尺寸</option>
+							<option value="3" >修改描述与其它</option>
+							<option value="4" >所有修改信息</option>
+						    </select>              	
+                </span>
+                <span>
+                	 检测开始时间：<input type="text" value="" style="" />
+					 结束时间： <input type="text" value="" style="" />
+                </span>
+				<br><br>
+				<span>
+					条件：A.是否合并：<input name="is_combine" id="is_combine" type="checkbox" value="1" />&nbsp;&nbsp;
+						  B.不良品：<input name="is_bad" id="is_bad" type="checkbox" value="1" />             	
+                </span>
+				<br><br>
+                <span>
+                	<button  id='' value="" />搜索</button>
+					<button  id='' value="" />导出到ELS</button>
+				</span>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td>SKU</td>
+                        <td>名称</td>
+						<td>抽检数</td>
+						<td>检测类别</td>
+						<td>状态</td>
+						<td>不良数</td>
+						<td>到货数</td>
+						<td>不良原因</td>
+						<td>修改信息</td>
+						<td>检测人</td>
+						<td>检测时间</td>
+						<td>采购审核状态</td>
+						<td>采购已审核动作</td>
+						<td>iqc审核状态</td>
+						<td>iqc已审核动作</td>
+                    </tr>
+                    <tr class="odd">
+                            <td></td>
+                           
+                    </tr>
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+                	<input name="" type="text" size="3" />
+                	<a href="#" class="enter">GO</a>
+            	</div>
+            	<div class="pagination">
+                	<ul>
+                    	<li>
+                        	<a href="#">上一页</a>
+                    	</li>
+                    	<li>
+                        	<a href="#">1</a>
+                    	</li>
+                    	<li>
+                        	<a href="#">2</a>
+                    	</li>
+                    	<li>
+                        	<a href="#">3</a>
+                    	</li>
+                    	<li>
+                        	<a href="#">下一页</a>
+                    	</li>
+                	</ul>
+            	</div>
+            </div>
+{include file="footer.html"}

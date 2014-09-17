@@ -1,0 +1,61 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/iqcsku.js"></script>
+<div class="fourvar">
+            	{include file="iqcnav.htm"}
+                <div class="pagination">
+					{$show_page}
+                </div>
+            </div>
+            <div class="servar">
+            	<span>
+                	领错退回：<button  id='skureturn' value="" />退回</button>
+                </span>
+				{if $hasDelete}
+				<span>
+                	异常删除：<button  id='delsku' value="" />删除</button>
+                </span>
+                {/if}
+				<br>
+				<div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%" style="color:#000">
+                	<tr class="title">
+                    	<td><input type="checkbox" class="checkall" /></td>
+                        <td>批次</td>
+                        <td>料号</td>
+						<td>到货数</td>
+						<td>打印时间</td>
+						<td>打印人员</td>
+						<td>描 述</td>
+						<td>采 购</td>
+						<td>仓 位</td>
+						<td>QC领货人</td>
+                        <td>领货时间</td>
+                    </tr>
+                    {foreach from=$iqcList item=list}
+                    <tr class="odd">
+                            <td><input type="checkbox" class="iqcselect" name="iqcselect" value="{$list.id}"/></td>
+                            <td>{$list.printBatch}</td>
+                            <td>{$list.sku}</td>
+                            <td>{$list.num}</td>
+                            <td>{$list.printTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                            {$cache_username = UserModel::getUsernameById($list.printerId)}
+                			<td>{if !empty($cache_username)} {$cache_username} {else} {$list.printerId} {/if}</td>
+                            <td align="left">{$list.goodsName}</td>
+                            {$cache_purchase_username = UserModel::getUsernameById($list.purchaseId)}
+                			<td>{if !empty($cache_purchase_username)} {$cache_purchase_username} {else} {$list.purchaseId} {/if}</td>
+                            <td>{$list.location}</td>
+                            {$get_username = UserModel::getUsernameById($list.getUserId)}
+                            <td>{if !empty($get_username)} {$get_username} {else} {$list.getUserId} {/if}</td>
+                            <td>{$list.getTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                    </tr>
+					{/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

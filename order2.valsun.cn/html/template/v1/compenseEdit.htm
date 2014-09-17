@@ -1,0 +1,162 @@
+{include file="header2.htm"}
+<script type="text/javascript" src="./js/usercompense.js"></script>
+{include file='omNav.htm'}
+<div class="main">
+    <div id="accordion">
+    	<h3>平台账号权限控制-{$g_uid|get_usernamebyid}</h3>
+        <div>
+        <form name="powerFrom" id="powerFrom" action="index.php?mod=UserCompetence&act=replace" method="post">
+            <input type="hidden" id="uid" name="uid" value="{$g_uid}" />
+            {foreach key=myplatid item=myaccountlist from=$myplatform_account}
+            <div style="width:80% margin:50px">
+                <input type="checkbox" id="checkboxes_platform_{$myplatid}" name="checkboxes_platform[]" {if $platform_account[$myplatid]}checked='checked'{/if} value="{$myplatid}" onclick="platformCheckBox({$myplatid});" />
+                <label for="checkboxes_platform_{$myplatid}">&nbsp;<b>{$myplatid|get_platnamebyid}</b><br>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                {foreach item=myaccountid from=$myaccountlist}
+                <div style="width:12%;float:left">
+                &nbsp;&nbsp;&nbsp;&nbsp;&emsp;<input type="checkbox" id="checkboxes_account_{$myaccountid}" name="checkboxes_account_{$myplatid}[]" {if in_array($myaccountid, $platform_account[$myplatid])}checked='checked'{/if} value="{$myaccountid}" />
+                <label for="checkboxes_account_{$myaccountid}">&nbsp;{$myaccountid|get_accountnamebyid}&nbsp;&nbsp;</label>
+                </div>
+                {/foreach}
+                <div style="clear:both"></div>
+               
+              </div>
+               <br/>
+			{/foreach}
+			
+        	<input type="submit" value="提交" />
+        </form>
+        </div>
+        <h3>文件夹移动权限设置</h3>
+        <form id="moveFrom" action="index.php?mod=UserCompetence&act=saveMovefolder" method="post">
+         <input type="hidden"  name="uid" value="{$g_uid}" />
+        <div>
+           <div style="float:left;width: 300px;text-align:center;">移出</div>
+           <div style="float:left;width: 1200px;text-align:center;">移入
+           <input type="checkbox" id="move_cka"><label for="move_cka">(选项/反选)</label>
+           </div>
+           <div style="clear:both"></div>
+        	<div id="out" style="height: 500px;width: 300px; overflow-y:auto; float:left">
+        	<table cellspacing="0" width="100%"><tbody style="text-align: left;">
+        		{foreach  name=outlist key=sid item=status from=$statusLists }
+        		<tr height="20px"><td style="padding:0px" height="20px">
+        		
+        		<input type="radio" id="out{$status.id}" name="moveout[]" value="{$status.id}" onclick='movecka({$status.id},{$movefolder})'/>
+        		<label for="out{$status.id}">{$status.statusName}</label>
+        		</td></tr>
+        		{/foreach}
+           </tbody>
+           </table>
+        	</div>
+        	<div id="in" style="height: 500px;width: 1200px; overflow-y:auto;float:left">
+        		<table cellspacing="0" width="100%"><tbody style="text-align: left;">
+        		{foreach  name=inlist key=sid item=status from=$statusLists }
+        		{if $sid % 7 ==0}
+        		</td></tr><tr height="20px"><td width="10%" height="20px" style="padding:0px">
+        		{else}
+        		<td width="10%" height="20px" style="padding:0px">
+        		{/if}
+        		<input type="checkbox" id="in{$status.id}" name="movein[]" value="{$status.id}"/>
+        		<label for="in{$status.id}">{$status.statusName}</label>
+        		{if $sid % 7==0 }
+        		
+        		{else}
+        		</td>
+        		{/if}
+        		{/foreach}
+           </tbody>
+           </table>
+        	</div>
+        </div>
+        <input type="submit" name="savemove" value="提交"/>
+        </form>
+        <h3>文件夹显示权限设置</h3>
+        <div> 
+        <form name="showfolderFrom" id="showfolderFrom" action="index.php?mod=UserCompetence&act=saveShowfolder" method="post">
+		    <input type="hidden"  name="uid" value="{$g_uid}" />
+		   <p>
+		      
+		      {foreach name=groups key=gid item=groupname from=$groupLists} 	
+		      	{if in_array($groupname.id,$myshowfolder)}
+		      	<input type="checkbox" id="checkboxes_showfolder{$groupname.id}"  checked='checked' name="checkboxes_showfolder0[]" value="{$groupname.id}"  />&nbsp;<b>{$groupname.statusName}</b>
+		     	<input type="checkbox" id="showfolder_cka{{$groupname.id}}" onclick="showfolderCheckedAll({$groupname.id})"><label for="showfolder_cka{$groupname.id}">(全选/反选)</label><br>&nbsp;&nbsp;&nbsp;&nbsp;
+		        <div style="width:80% text-align:center">
+		      {foreach name=grouplist key=sid item=status from=$statusLists}
+		      		{if $status.groupId==$groupname.id}
+		      			 <div style="width:12%;float:left">
+		      			 <input type="checkbox"  gid="{$status.groupId}" id="checkboxes_showfolder{$status.id}"  name="checkboxes_showfolder[]" value="{$status.id}" {if in_array($status.id,$showfolder)}checked='checked'{/if}/>
+		      				<label for="checkboxes_showfolder{$status.id}">&nbsp;{$status.statusName}&nbsp;&nbsp;&nbsp;</label>
+		      			</div>
+		      		{/if}	
+		      	{/foreach}
+		      	</div>
+		      	<div style="clear:both"></div>
+		      	 <br/>
+		      	 {/if} 
+		       {/foreach}
+		   </p>
+            <input type="submit" value="提交"/> <!-- onclick="updateShowFolders();" -->
+        </form>
+        </div>
+        <h3>订单编辑权限设置</h3>
+        <form name="showfolderFrom" id="vsbEditorFrom" action="index.php?mod=UserCompetence&act=saveEditorder" method="post">
+       <input type="hidden"  name="uid" value="{$g_uid}" />
+        <div>
+        	<div >
+            <p>
+            <div style="width:80%">
+            <input type="checkbox" id="eidtorder_cka" /><label for="eidtorder_cka">(全选/反选)</label><br/><br/>
+            {foreach item=optionvalue from=$editorderOptions}
+                {foreach key=oid item=ovalue from=$optionvalue}
+                {if in_array($oid,$myVisibleEditorder)}
+                    <div style="float:left;width:12%">
+                    <input type="checkbox" id="checkboxes_orderoptions{$oid}" name="checkboxes_orderoptions[]" value="{$oid}" {if in_array($oid,$visibleEditorder)}checked='checked'{/if} />
+                    <label for="checkboxes_orderoptions{$oid}">&nbsp;{$ovalue}&nbsp;&nbsp;</label>
+                    </div>
+                {/if}
+                {/foreach}
+            {/foreach}
+            </div>
+            <div style="clear:both"></div>
+            </p>
+            <input type="submit" value="提交" /><!-- onclick="updateOrderOptions()"; -->
+        </div>
+        </div>
+        </form>
+        <h3>可见运输方式权限</h3>
+        <div>
+        <form name="showcarrier" id="showcarrierFrom" action="index.php?mod=UserCompetence&act=saveCarrier" method="post">
+        	<input type="hidden"  name="uid" value="{$g_uid}" />
+        	<p>
+        		<div style="width:80%">
+        		<div style="float:left;width:15%">
+        		快递：<input type="checkbox" name="k_cka" id="k_cka"/><label for="k_cka">(全选/反选)</label>
+        		</div>
+        		<div style="float:left;width:80%">
+        		{foreach key=carrierid0 item=carrier from=$carrierListk}
+        		<div style="float:left;width:20%">
+        			<input type="checkbox" name="carrierListk[]" id="carrierListk{$carrierid0}" value="{$carrier.id}" {if in_array($carrier.id,$visibleCarrier0)}checked="checked"{/if}/>
+        			<label for="carrierListk{$carrierid0}">{$carrier.carrierNameCn}</label>
+        		</div>
+        		{/foreach}
+        		</div>
+        		<div style="clear:both"></div>
+        		<br/><br/>
+        		<div style="float:left;width:15%">
+        		非快递：<input type="checkbox" name="nk_cka" id="nk_cka"/><label for="nk_cka">(全选/反选)</label>
+        		</div>
+        		<div style="float:left;width:80%">
+        		{foreach key=carrierid1 item=carrier from=$carrierListnk}
+        		<div style="float:left;width:20%">
+        			<input type="checkbox" name="carrierListnk[]" id="carrierListnk{$carrierid1}" value="{$carrier.id}" {if in_array($carrier.id,$visibleCarrier1)}checked="checked"{/if}/>
+        			<label for="carrierListnk{$carrierid1}">{$carrier.carrierNameCn}</label>
+        		</div>
+        		{/foreach}
+        		</div>
+        		</div>
+        	</p>
+        	<input type="submit" value="提交"/>
+        	</form>
+        </div>
+    </div>
+</div>
+{include file="footer.htm"}

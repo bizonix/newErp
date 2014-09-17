@@ -1,0 +1,40 @@
+{include file='header.htm'}
+<script language="javascript" src="js/skuWeighing.js"></script>
+<div class="main" style="min-height:500px">
+	<div style="font-size:30px;margin:20px auto auto 60px">条形码：<input type="text" id="sku" style="width:200px; height:35px;font-size:30px;"/></div>
+	<div style="height:60px;font-size:24px;margin-left:60px" id="mstatus" >
+	</div>
+	<div style="width:450px;min-height:200px;float:left;margin-left:40px" >
+		<Applet id="app" code="a.class" height=387 width=400>
+			<PARAM NAME = ARCHIVE VALUE = "comm.jar" >
+			<param name=myName value="kaka"> 
+			<param name=mySex value="mail">
+			<param name=myNum value=200630170> 
+			<param name=myAge value=22>
+		</Applet>
+	</div>
+
+	<div style="width:800px;min-height:200px;float:right;" >
+		<div id="flat_order" style=" padding: 10px 10px;font-size:24px;">					
+			<fieldset id="flat_fieldset1" style=" float:left; margin-top:5px; padding:3px 0;"><legend>料号重量扫描(单位:g)</legend>			
+				<div style="margin-top:10px">
+				同步重量(单位为g):				
+				<input name="curweight_flat" type="text" id="curweight_flat" style="width:120px; height:35px;font-size:30px;"/>
+                &nbsp;
+				{if isAccessAll('goods','skuWeightByHand')}<input type="button" class="input_button" value="手动确认重量" onclick="inputWeightByHand()"/>{/if}
+				</div>
+			</fieldset>
+		</div>
+		
+	</div>
+</div>
+
+{include file='footer.htm'}
+<script type="text/javascript">
+        //$(document).keydown(function(e) {
+//			if(e.keyCode==13){
+//			  inputWeightByHand();
+//			}
+//        });
+        
+</script>

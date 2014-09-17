@@ -1,0 +1,35 @@
+{include file="header.htm"}
+{include file="secendNav_localpower.htm"}
+<link rel="stylesheet" href="./css/msg_tplform.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/poweredit.js"></script>
+<div >
+	<div class="titlediv" >
+		文件夹分配
+	</div>
+<form id="categoryform" action="{$submiturl}" method="post">
+	<div class="inputline firstline">
+		<div class="line-left">用户：</div>
+		<div class="line-right">
+			<input value="{$userinfo.user_name}" disabled="true" name="title">
+		</div>
+	</div>
+	<div class="inputline secondeline " style="padding-left:100px; font-size:20px;">
+	模板内容：
+	<a href="javascript:choseall(this)">全选</a><a href="javascript:rechose()">反选</a>
+	</div>
+	<div class="ebayUser">
+			{foreach $catlist as $val}
+			<label >
+				<input name="catids[]" {if in_array($val.id, $userpower) }checked="checked"{/if} class="checkclass" value="{$val.id}" type="checkbox">{$val.category_name}
+			</label>
+			{/foreach}
+	</div>
+	<input type="hidden" name="userid" value="{$userinfo.user_id}">
+	<div style="clear:left; padding-left:300px;">
+		<button onclick="submitdata()" >提交</button>
+		<button type="button" onclick="window.location='{$gobackurl}'" class="submitbutton">取消</button>
+	</div>
+	
+</form>
+</div>
+{include file="footer.htm"}

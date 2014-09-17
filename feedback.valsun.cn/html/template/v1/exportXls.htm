@@ -1,0 +1,150 @@
+{include file='header.htm'}
+<!-- <script type="text/javascript" src="js/ui/jquery-ui-timepicker-addon.js"></script> -->
+<!--script type="text/javascript" src="./js/fbkList.js"></script-->
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="./js/ebayFeedbackManage.js"></script>
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=feedbackManage&act=ebayFeedbackManage">卖家评价</a>&nbsp;&gt;&gt;&nbsp;报表导出
+    </div>
+</div>
+<div class="main order-main" align="left">
+    <div id="content" >
+        <div class='moduleTitle'>
+        <h2>&nbsp;</h2>
+        </div>
+
+		<div id="accordion">
+		{if AccessPerson(array("姚晓东"))}
+			<div>
+		            <h3>产品部数据导出:</h3>
+		                <div>                
+		                    开始时间:
+		                    <input name="product_start_time" id="product_start_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.product_start_time}"/>
+		                    结束时间:
+		                    <input name="product_end_time" id="product_end_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"   value="{$smarty.get.product_end_time}" />
+		                    <input type="button" value="导出到xls" onclick="ebayFeedbackDataExport('product')" />
+		                </div>  			
+				
+		            <h3>ebay销售数据导出:</h3>
+		                <div>
+		                    开始时间:
+		                    <input name="ebaySale_start_time" id="ebaySale_start_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.ebaySale_start_time}" />
+		                    结束时间:
+		                    <input name="ebaySale_end_time" id="ebaySale_end_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.ebaySale_end_time}" />
+		                    <input type="button" value="导出到xls" onclick="ebayFeedbackDataExport('ebaySale')" />
+		                </div> 			
+		</div>
+	{/if}
+    		<h3>中评数据导出:</h3>
+                <div>        			
+                    开始时间:
+                    <input name="neutral_start_time" id="neutral_start_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.neutral_start_time}" />
+                    结束时间:
+                    <input name="neutral_end_time" id="neutral_end_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.neutral_end_time}" />
+                    <input type="button" value="导出到xls" onclick="ebayFeedbackDataExport('neutral')" />
+                </div> 
+  
+            <h3>差评数据导出:</h3>
+                <div>    				
+    				开始时间:
+    				<input name="negative_start_time" id="negative_start_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.negative_start_time}" />
+    				结束时间:
+    				<input name="negative_end_time" id="negative_end_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.negative_end_time}" />
+    				<input type="button" value="导出到xls" onclick="ebayFeedbackDataExport('negative')" />
+    				<div>
+    				</div>
+                </div>
+
+            <h3>客服部数据导出:</h3>
+                <div>
+                     账号：
+                    <select name="service_account" id="service_account">
+                        <option value="" {if $account == ''} selected="selected"{/if} >所有账号</option>
+                        {foreach from=$accountList item=templist}
+                        <option {if $account == $templist.account} selected="selected"{/if} value="{$templist.account}" >{$templist.account}</option>
+                        {/foreach}
+                    </select> 
+                    开始时间:
+                    <input name="service_start_time" id="service_start_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.service_start_time}" />
+                    结束时间:
+                    <input name="service_end_time" id="service_end_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.service_end_time}" />
+                    <input type="button" value="导出到xls" onclick="ebayFeedbackDataExport_EX('service')" />
+                    <div>
+                    </div>
+                </div>
+                
+            <h3>Feedback统计数据导出:</h3>
+                <div>
+					开始时间:
+                    <input name="ebayStatistics_start_time" id="ebayStatistics_start_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.ebayStatistics_start_time}" />
+                   	结束时间:
+                    <input name="ebayStatistics_end_time" id="ebayStatistics_end_time" class="datetime" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  value="{$smarty.get.ebayStatistics_end_time}" />
+                    <input type="button" value="导出到xls" onclick="ebayFeedbackDataExport('ebayStatistics')" />
+                    <div>
+                    </div>
+                </div>                 
+
+    	<div class="clear"></div>
+    </div>
+</div>
+{include file="footer.htm"}
+
+<script>
+function ebayFeedbackDataExport(pre){
+    var start       = document.getElementById(pre+'_start_time').value;
+    var end         = document.getElementById(pre+'_end_time').value;
+    var url = '';
+    switch(pre) {
+        case 'product':   
+            url = "index.php?mod=exportXls&act=productExport&start="+start+"&end="+end;    
+            break;        
+        case 'ebaySale':
+        url = "index.php?mod=exportXls&act=ebaySaleExport&start="+start+"&end="+end;    
+            break;      
+        case 'neutral':
+            url = "index.php?mod=exportXls&act=neutralExport&type=neutral&start="+start+"&end="+end;    
+            break;
+        case 'negative':
+            url = "index.php?mod=exportXls&act=neutralExport&type=negative&start="+start+"&end="+end;    
+            break;            
+        case 'ebayStatistics':
+            url = "index.php?mod=exportXls&act=ebayStatisticsExport&start="+start+"&end="+end;    
+            break;
+            
+        default: 
+            url = '';ebayStatistics
+    }
+    window.open(url,"_blank");
+}
+
+function ebayFeedbackDataExport_EX(pre){
+    var start       = document.getElementById(pre+'_start_time').value;
+    var end         = document.getElementById(pre+'_end_time').value;
+    var account     = '';
+    var bill        = new Array();
+    var len         = document.getElementById(pre+'_account').options.length;
+    for(var i = 0; i < len; i++){
+        if( document.getElementById(pre+'_account').options[i].selected){
+            var e =  document.getElementById(pre+'_account').options[i];
+            bill.push(e.value);            
+        }
+    }
+    if(bill.length == 0){
+        alertify.error('未选ebay账号');
+        return false;
+    }
+    account = bill.join('#');
+
+    var url = '';
+    switch(pre) {
+        case 'service':   
+            url = "index.php?mod=exportXls&act=serviceExport&start="+start+"&end="+end+"&account="+encodeURIComponent(account);
+            break;        
+        default: 
+            url = '';
+    }    
+    window.open(url,"_blank");
+}
+
+</script>

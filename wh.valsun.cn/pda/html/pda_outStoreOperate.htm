@@ -1,0 +1,15 @@
+{include file="header.htm"}
+	<script language="JavaScript" src="./js/pda_com.js"></script>
+	<div id="divcontent" style="text-align:center; height:200px;">
+		<div id="indexcontent1" style="text-align:center;">
+    		<input type="button" value="调拨清单配货" id="bchuku" class="buttonclass3" onclick="javascript:window.location.href='index.php?mod=pda_whGoodsAssign&act=pda_whSkuOut'"/>
+    		&nbsp;
+    		<input type="button" value="调拨出库复核" id="bfuhe" class="buttonclass3" onclick="javascript:window.location.href='index.php?mod=pda_whGoodsAssign&act=pda_skuOutCheck'"/>
+		</div>
+		<div id="indexcontent" style="text-align:center;">
+            <input type="button" value="调拨清单出库" id="bfuhe" class="buttonclass3" onclick="javascript:window.location.href='index.php?mod=pda_whGoodsAssign&act=pda_SkuOut'"/>
+    		&nbsp;
+            <input type="button" value="待开发" id="bchuku" class="buttonclass3"/>
+		</div>
+	 </div>
+{include file="footer.htm"}

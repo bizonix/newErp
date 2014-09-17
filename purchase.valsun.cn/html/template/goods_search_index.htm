@@ -1,0 +1,285 @@
+{include file="header.htm"}
+			<div  class="fourvar">
+            	<div class="pathvar">
+                	您的位置：<a href="index.php?mod=goods&act=goods_search_index">货品资料管理</a>&nbsp;>>&nbsp;货品清单搜索
+                </div>
+				<div class="pagination">
+                	{$pageStr}
+            	</div>
+	            </div>
+			<div class="servar wh-servar">
+				<div class="servar wh-servar" id="mes" style="display: none"></div>
+				<span>库存总金额:{$total_cost}</span>
+			</div>
+<div class="servar ser-ware feedback-main wh-servar">
+                <span>
+                	<input name="" id="searchContent" type="text" style="width:300px;" />
+                <span>
+                <span class="products-action">
+                	<a href="javascript:void(0);" id="search">搜 索</a>
+                </span>
+                <div style="margin-top:10px; margin-left:-26px;">
+                	  <label>
+				<input name="searchtype" type="radio" value="1" {if $smarty.get.searchtype==1}checked="checked"{/if} {if empty($type)}checked="checked"{/if} />SKU
+			</label>
+			<label>
+				<input name="searchtype" type="radio" value="2" {if $smarty.get.searchtype==2}checked="checked"{/if}/>仓位
+			</label>
+			<label>
+				<input name="searchtype" type="radio" value="3" {if $smarty.get.searchtype==3}checked="checked"{/if}/>货品名称
+			</label>
+			<label>
+            	<input name="searchtype" type="radio" value="5" {if $smarty.get.searchtype==5}checked="checked"{/if}/>供应商
+            </label>
+			<label>
+				<input name="searchtype" type="radio" value="4" {if $smarty.get.searchtype ==4}checked="checked"{/if}/>采购负责人
+			</label>
+                </div>
+				<div style="margin-top:10px; margin-left:-45px;">
+					<span style="width:60px;">产品状态：</span>
+					<select  name="online" id="online" style="width:100px">
+						<option value="">请选择</option>
+						<option value="0" {if $smarty.get.online ==="0"}selected{/if}>在线</option>
+						<option value="1" {if $smarty.get.online==1}selected{/if}>下线</option>
+						<option value="2" {if $smarty.get.online==2}selected{/if}>零库存</option>
+						<option value="3" {if $smarty.get.online==2}selected{/if}>停售</option>
+						<option value="4" {if $smarty.get.online==2}selected{/if}>部分停售</option>
+						<option value="5" {if $smarty.get.online==2}selected{/if}>部分下线</option>
+						<option value="6" {if $smarty.get.online==2}selected{/if}>缺货</option>
+						<option value="7" {if $smarty.get.online==2}selected{/if}>无采购人</option>
+					</select>
+					<span style="width:60px;">仓库：</span>
+					<select  name="warehouse" id="warehouse" style="width:100px">
+						<option value="">请选择</option>
+						{foreach from=$warehousList item=list}
+							<option value="{$list.id}" {if $smarty.get.warehouse==$list.id}selected{/if}>{$list.whName}</option>
+						{/foreach}
+					</select>
+				</div>
+				<div style="margin-top:10px; margin-left:-45px;">
+					<span style="width:60px;">新/老品：</span>
+					<select  name="isnew" id="isnew" style="width:100px">
+						<option value="">请选择</option>
+						<option value="1" {if $smarty.get.isnew==1}selected{/if}>新品</option>
+						<option value="0" {if $smarty.get.isnew==="0"}selected{/if}>老品</option>
+					</select>
+					<span style="width:60px;">类别：</span>
+					<select id="pid_one" style="width:100px" onChange = "select_one1();">
+						<option value="">请选择</option>
+						{foreach from=$categoryList item=list}
+							<option value="{$list.id}" {if $smarty.get.pid_one==$list.id}selected{/if}>{$list.name}</option>
+						{/foreach}
+					</select>
+					<span id="div_two">
+					</span>
+					<span id="div_three">
+					</span>
+					<span id="div_four">
+					</span>
+				</div>
+            </div>
+            
+{include file="footer.htm"}
+<script type="text/javascript">
+var web_api = "{$smarty.const.WEB_API}";
+var purchaser = "{$purchasers}";
+//回车搜索
+$(".servar.ser-ware").keydown(function(event){
+	if(event.keyCode==13){
+		$("#search").trigger("click");
+	}
+});
+//搜索货品资料入口
+$("#search").click(function(){
+	var searchContent,searchtype,online,warehouse,isnew,pid_one;
+	searchContent = $.trim($("#searchContent").val());
+	searchtype = $.trim($("input[name='searchtype']:checked").val());
+	
+	online = $.trim($("#online").val());
+	warehouse = $.trim($("#warehouse").val());
+	isnew = $.trim($("#isnew").val());
+	pid_one =  $.trim($("#pid_one").val());
+	pid_one2 =  $.trim($("#pid_one2").val());
+	pid_one3 =  $.trim($("#pid_one3").val());
+	pid_one4 =  $.trim($("#pid_one4").val());
+	
+	var selFlag = true;
+	if(online=='' && warehouse ==''  && isnew==''  && pid_one =='' ){
+		selFlag = false;
+	}
+	var textFlag = true;
+	if(searchContent==''){
+		textFlag = false;
+	}
+	if(textFlag==false && selFlag==false){
+		alertify.error('请选择搜索内容');
+		return;
+	}
+	var url = "index.php?mod=goods&act=index";
+	var param = "&pid_one2="+pid_one2+"&pid_one3="+pid_one3+"&pid_one4="+pid_one4;
+	window.location.href = url+param+"&searchContent="+searchContent+"&searchtype="+searchtype+"&online="+online+"&warehouse="+warehouse+"&isnew="+isnew+"&pid_one="+pid_one;
+});
+
+
+//全选反选入口
+$('#inverse-check').click(function(){
+  select_all('inverse-check','input[name="checkbox"]',0);
+});
+
+{literal}
+function select_one1(){     //拉取二级目录  
+	   
+	var pid         = document.getElementById('pid_one').value;
+	var div_two     = document.getElementById('div_two');
+	var div_three   = document.getElementById('div_three');
+	var div_four    = document.getElementById('div_four');
+	if(pid=="")
+	{
+		div_two.style.display = "none";
+		div_three.style.display = "none";
+		div_four.style.display  = "none";
+		$('#pid_one2').remove();
+		$('#pid_one3').remove();
+		$('#pid_one4').remove();    
+		return false;
+	}
+    var url  = web_api + "json.php?mod=command&act=getCategoryInfo";
+    var data = { "pid":pid  };	
+//     console.log(data);
+	$.post(url,data,function(rtn){
+	   //console.log(rtn);
+		if(rtn.errCode == 200){              
+			show_second_cate(rtn.data);
+		}else {
+			 console.log(rtn.errMsg);
+	    }
+	},"jsonp");
+}
+                        
+function show_second_cate(data) //展示二级目录  
+{   
+	var datas = data;
+	var showdetail = document.getElementById("div_two");
+	showdetail.innerHTML = "";
+	if(datas.length!=0)
+	{
+		showdetail.style.display = "";
+	}
+	else
+	{
+		showdetail.style.display = "none";
+	}
+	var newtab = '';  
+	newtab +="<select name='pid_one2' id='pid_one2' onchange='select_one2()'>";
+	newtab +="<option value=''>请选择子类别</option>";   
+	for(var i=0; i<datas.length; i++)
+	{
+		newtab +="<option value='"+datas[i].id+"'>"+datas[i].name+"</option>";
+	}
+	newtab +="</select>";
+	showdetail.innerHTML = newtab;
+}
+
+function select_one2(){     //拉取三级目录  
+
+	var path        = document.getElementById('pid_one2').value;    
+    var pathArr;
+    pathArr = path.split('-');
+    pid =  pathArr[pathArr.length - 1];         
+	var div_three  = document.getElementById('div_three');
+	var div_four   = document.getElementById('div_four');
+	if(pid=="")
+	{
+		div_three.style.display = 'none';
+		$('#pid_one3').remove();
+		$('#pid_one4').remove();
+		return false;
+	}
+    var url  = web_api + "json.php?mod=command&act=getCategoryInfo";
+    var data = {"pid":pid};	
+//     console.log(data);
+	$.post(url,data,function(rtn){
+		if(rtn.errCode == 200){              
+			show_third_cate(rtn.data);
+		}else {
+			 console.log(rtn.errMsg);
+	    }
+	},"jsonp");  
+}
+
+function show_third_cate(data) //展示二级目录  
+{
+	var datas = data;
+	var showdetail = document.getElementById("div_three");
+	showdetail.innerHTML = "";
+	if(datas.length!=0)
+	{
+		showdetail.style.display = "";
+	}
+	else
+	{
+		showdetail.style.display = "none";
+	}
+	var newtab = '';
+	newtab +="<select name='pid_one3' id='pid_one3' onchange='select_one3()'>";
+	newtab +="<option value=''>请选择子类别</option>";
+	for(var i=0; i<datas.length; i++)
+	{
+		newtab +="<option value='"+datas[i].id+"'>"+datas[i].name+"</option>";	
+	}
+	newtab +="</select>";
+	showdetail.innerHTML = newtab;
+}
+
+
+function select_one3(){  //拉取四级目录  
+	var path = document.getElementById('pid_one3').value;    
+    var pathArr;
+    pathArr = path.split('-');   
+    pid =  pathArr[pathArr.length - 1];
+	var div_four   = document.getElementById('div_four');
+	if(pid=="")
+	{
+		div_four.style.display = 'none';
+		$('#pid_one4').remove();
+		return false;
+	}
+    var url  = web_api + "json.php?mod=command&act=getCategoryInfo";
+    //var url  = web_api + "json.php?mod=goods&act=getCategoryPidMap";
+    var data = {"pid":pid};	
+	$.post(url,data,function(rtn){
+	   //console.log(rtn);
+		if(rtn.errCode == 200){              
+			show_fourth_cate(rtn.data);
+		}else {
+			 console.log(rtn.errMsg);
+	    }
+	},"jsonp");
+}
+
+function show_fourth_cate(data)  //展示级目录  
+{
+	var datas = data;
+	var showdetail = document.getElementById("div_four");
+	showdetail.innerHTML = "";
+	if(datas.length!=0)
+	{
+		showdetail.style.display = "";
+	}
+	else
+	{
+		showdetail.style.display = "none";
+	}
+	var newtab = '';
+	newtab +="<select name='pid_one4' id='pid_one4'>";
+	newtab +="<option value=''>请选择子类别</option>";  
+	for(var i=0; i<datas.length; i++)
+	{
+		newtab +="<option value='"+datas[i].id+"'>"+datas[i].name+"</option>";		  
+	}
+	newtab +="</select>";
+	showdetail.innerHTML = newtab;
+}
+{/literal}
+
+</script>

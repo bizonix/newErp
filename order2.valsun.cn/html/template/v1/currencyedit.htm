@@ -1,0 +1,25 @@
+{include file='header2.htm'}
+{include file='omNav.htm'}
+<script language="javascript" src="js/currency.js"></script>
+
+<div class="servar" align="center">
+	<form action='index.php?mod=currency&act=update' method="post" id="currAddForm"> 
+		<input type="hidden" name="currId" id="currId" value="{$currency[0].id}" /> 	
+		<p>
+			<label for="currency" style="font-size:20px;">币种名称: </label>
+			<input value="{$currency[0].currency}" class="mf validate[required] text-input" id="currency"  name="currency" type="text" style="width:200px;height:30px;font-size:20px">
+			<span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<label for="rates" style="font-size:20px;">汇率:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			<input value="{$currency[0].rates}" class="mf validate[required,custom[number],min[0]] text-input" id="rates"  name="rates" type="text" style="width:200px;height:30px;font-size:20px">
+			<span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<p>
+			<input type="submit" id="countriesAddFormSumit" class="input_button" value="提交">
+			<input type="button" class="input_button" id='back' value="返回" />
+		</p>
+	</form>
+</div>
+{include file="footer.htm"}

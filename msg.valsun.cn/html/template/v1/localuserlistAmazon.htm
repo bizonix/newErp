@@ -1,0 +1,46 @@
+{include file="header.htm"} 
+{include file="secendNav_localpower.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css"
+	media="screen" />
+<script type="text/javascript" src="./js/localpower.js"></script>
+<script type="text/javascript" src="./js/Amazonaccount.js"></script>
+<div class="main">
+
+	<div class="servar" style="text-align:right;">
+	
+		<form name="form" id="sform" action="" enctype="text/plain"	method="get">
+		<a href="javascript:void(0)" id="amazonaccount">Amazon账户管理</a>
+			<span style="margin-right:50px;"> 所属部门： 
+				<select name="userdept" onchange="skipToPage('{$skipurl}')" id="userdept">
+					{foreach $deptlist as $depval}
+					<option {if $currentDep == $depval.dept_name}selected="selected"{/if} value="{$depval.dept_name}">{$depval.dept_name}</option>
+					{/foreach}
+				</select>
+			</span> 
+		</form>
+	</div>
+	<table cellspacing="0" width="100%">
+		<tbody>
+			<tr class="title">
+				<td width="5%">登陆名</td>
+				<td width="5%">用户名</td>
+				<td width="10%">岗位</td>
+				<td>拥有文件夹</td>
+				<td width="12%">操作</td>
+			</tr>
+			{foreach $userlist as $uval}
+			<tr class="odd">
+				<td>{$uval.user_name}</td>
+				<td>{$uval.realname}</td>
+				<td>{$uval.job_name}</td>
+				<td>{$uval.localpower}</td>
+				<td>
+					<button	onclick="window.location='{$editUrl}{$uval.user_id}'" class="update" pid="1">修改</button>
+				</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>
+
+{include file="footer.htm"}

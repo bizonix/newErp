@@ -1,0 +1,92 @@
+{include file="header.htm"}
+<link href="./public/css/sortblue/style.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="./public/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+<div class="index-main">
+            <div class="result-search">
+                <form onsubmit="return track_ship_fee();">
+                    <div>
+                        <span class="col1">Departure：</span>
+                        <span class="col2">
+							<input readonly="readonly" class="text-width-long" value="CHINA" type="text" name="addStr" id="addStr"/>
+							<input type="hidden" readonly="readonly" maxlength="1" value="1" name="addId" id="addId"/>
+						</span>
+                        <span class="col3">Destination：</span>
+						<span class="col4">
+							<select class="flexselect" name="country" id="country">
+							{foreach item=list from=$countrys}
+							<option value="{$list.countryNameEn}">{$list.countryNameEn}</option>
+							{/foreach}
+							</select>
+                        </span>
+                    </div>
+                    <div class="col-margin">
+                        <span class="col1">Bulk：</span>
+                        <span class="col2">
+                            <input class="text-width-short" type="text" id="longs" name="longs" maxlength="8" style="ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)"/>
+                            <input class="text-width-short" type="text" id="widths" name="widths" maxlength="8" style="ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)"/>
+                            <input class="text-width-short" type="text" id="heights" name="heights" maxlength="8" style="ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)"/>
+                            <select class="text-width-short" name="unit" id="unit">
+								<option>IN</option>
+								<option>CM</option>
+								<option>M</option>
+							</select>
+                         </span>
+                        <span class="col3">Weight：</span>
+                        <span class="col4">
+                            <input class="text-width-mid" type="text" id="weights" name="weights" value="1" maxlength="8" style="ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)"/>
+							<select class="select-width-mid" name="unitW" id="unitW">
+								<option>LB</option>
+								<option>KG</option>
+							</select>
+                            <input class="search-sub search-sub-f float-right search-sub-fox" type="submit" value="">
+                            <div style="clear:both;"></div>
+                        </span>
+                    </div>
+                </form>
+            </div>
+			<div id="trackLoadTip"></div>
+			<div class="calus-main dis_none" id="shipFees">
+                <table id="sortTable" class="tablesorter">
+                    <thead>
+                        <tr>
+                            <th width="15%">
+                            </th>
+                            <th width="15%">
+                                Express Type
+                            </th>
+                            <th width="10%">
+                                Price(US$)
+                            </th>
+                            <th width="25%">
+                                Efficiency
+                            </th>
+                            <th width="35%">
+                                memo
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="shipFeeList"><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody> 
+                </table>
+				<div class="load-more" id="loadMore">
+                    <a class="load-bt" href="javascript:void(0)" onclick="show_ship_fee_more()"></a>
+                </div>
+                <div>
+                    <img src="./public/img/table_footer.gif" />
+                </div>
+            </div>
+            <h1 class="recom-title">
+                Our Recommendation
+            </h1>
+            <div class="recom-main li-float">
+                <ul id="shipFeeAd1">
+                </ul>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="recom-main fare-main li-float">
+                <ul id="shipFeeAd3"></ul>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="fare-main" id="shipFeeAd2"></div>
+        </div>
+<script type="text/javascript" src="./public/js/track_ship_fee.js"></script>
+{include file="footer.htm"}

@@ -1,0 +1,68 @@
+{include file="header.htm"}
+<div class="index-main">
+            <p class="path-nav">
+                <a class="home" href="index.php?mod=trackInquiry&act=index"></a><img class="float-left" src="./public/img/home_right.png"><a class="sec-nav" href="#">Check Result</a>
+                <div style="clear:both;"></div>
+            </p>
+            <div class="result-search col-margin">
+                <form onsubmit="return track_open()" id="trackForm">
+                    <input class="search-select orange-border" id="carrier" type="text" readonly="readonly" value="{$carrierEn}" onclick="showCarrier()"/><a class="search-bt search-bt-f" href="#" onclick="showCarrier()"></a>
+                    <input class="search-select" id="carrierEn" type="hidden" readonly="readonly" value="{$carrier}"/>
+					<input class="search-text {if !empty($tracknum)}orange-border{/if}" type="text" id="tracknum" value="{$tracknum}" data="Please enter the tracking number !" onfocus="setDefault('tracknum')" onblur="setDefault('tracknum')"/>
+                    <input class="search-sub search-sub-f" type="submit" value="" />
+                    <div class="search-box" style="display:none" id="carrierList">
+                        <div>
+                            <img class="poiner" src="./public/img/upway.png" />
+                        </div>
+                        <div class="select-text-box" id="carrierLists">
+							{foreach key=key item=list from=$carriers}
+							<a href="javascript:void(0);" data="{$list.trackNameEN}|{$list.trackName}" id="cid_{$key}" onclick="selCarrier({$key})" {if $carrierEn==$list.trackName}class="radio-selected"{/if}>{$list.trackName}</a>
+							{/foreach}
+                        </div>
+                    </div>
+                </form>
+            </div>
+			<div id="trackLoadTip"></div>
+            <div class="take-msg" id="track_orders" style="display:none">
+                <div class="take-msg-left">
+                    <p>{$carrierEn}</p>
+                    <p id="consTime"></p>
+                </div>
+                <div class="take-msg-right" id="track_order">
+                </div>
+                <div style="clear:both">
+                </div>
+            </div>
+			
+            <div class="base-infor" id="trackInfoLists" style="display:none">
+                <table class="base-infor-table" id="trackInfoList">
+                </table>
+                <div class="base-infor-img">
+                    <div class="base-img-first" id="track_pic1" style="display:none">
+                        <div class="base-img-border">
+                            <img id="pic1" class="base-img-bt" onclick="show_wedo_pic(this.src)" onerror="del_wedo_pic('track_pic1')" class="hand" src="./public/img/img_tester.gif" width="212" height="152" /><a class="base-open-img" href="javascript://void(0)" onclick="show_wedo_pics('pic1')" class="hand"></a>
+                        </div>
+                        <img src="./public/img/img_footer_bg.gif" />
+                    </div>
+                    <div class="base-img-sec" id="track_pic2" style="display:none">
+                        <div class="base-img-border">
+                            <img class="base-img-bt" id="pic2" onclick="show_wedo_pic(this.src)" onerror="del_wedo_pic('track_pic2')" class="hand" src="./public/img/img_tester.gif" width="212" height="152" /><a class="base-open-img" href="javascript://void(0)" onclick="show_wedo_pics('pic2')" class="hand"></a>
+                        </div>
+                        <img src="./public/img/img_footer_bg.gif" />
+                    </div>
+                </div>
+                <div style="clear:both">
+                </div>
+            </div>
+            <div class="advertisement" id="advertisement">
+                <div style="clear:both;"></div>
+            </div>
+        </div>
+<script type="text/javascript" src="./public/js/track_info.js"></script>
+<script>
+$(function(){
+	getWebAd(2);
+	track_wedo();
+});
+</script>
+{include file="footer.htm"}

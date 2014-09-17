@@ -1,0 +1,40 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<br/>
+<script type="text/javascript" src="./js/skuStock.js"></script>
+<div class="fourvar">
+</div>
+            <div class="main" style="margin: 20px;">
+                    <div>
+                    上传文件：
+                    <hr />
+                        <form action="index.php?mod=skuStock&act=updateBatchPosition" enctype="multipart/form-data" method="post" target="_blank">
+                        <input name="upfile" type="file"/>&nbsp;
+                    </div>
+                    <div>
+	               <input name="提交" type="submit" value="更新" />&nbsp;
+                   </div>
+                        </form>
+                        <hr />
+                    <div>
+						<a href="./upload/whBatchUpdate.xlsx">导入模板下载</a>
+				    </div>
+                    <br />
+                    <hr />
+                    导入格式：
+					<br />
+					A2:sku<br />
+					B2:所在仓库<br />
+					C2:旧仓位<br />
+					D2:新仓位<br />
+					<br />
+					<strong>以上列中，如有一列不符合要求则该列不会更新。</strong><br />
+                
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

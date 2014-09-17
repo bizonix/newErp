@@ -1,0 +1,181 @@
+{include file='header2.htm'}
+<link type="text/css" rel="stylesheet" href="css/orderindex.css">
+<script language="javascript" src="js/orderindex.js"></script>
+<script language="javascript" src="js/orderRefund.js"></script>
+<script src="js/jquery/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script type="text/javascript" src="./js/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<link rel="stylesheet" type="text/css" href="./js/fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+
+<div class="fourvar order-fourvar">
+    <form action="" method="get" id="getOrderList">
+    <table>
+        <tr>
+            <td style="padding-left:17px;">
+                平台：
+            </td>
+            <td>
+                <select name="platformId" id="platformId" style="width:157px" onchange="changePlatform()">
+                <option value="">全部</option>
+                {foreach key=pid item=accounts from=$plataccount}
+                <option value="{$pid}" {if $g_platformId == $pid}selected="selected"{/if}>{$pid|get_platnamebyid}</option>
+                {/foreach}
+                </select>
+            </td>
+            <td style="padding-left:17px;">
+                账号：
+            </td>
+            <td>
+                <span id="selectAccountList">
+                <select name="accountId" id="accountId" style="width:157px">
+                <option value="">全部账号</option>
+                {if $g_platformId}
+                {foreach item=accountid from=$plataccount[$g_platformId]}
+                <option value="{$accountid}" {if $g_accountId == $accountid}selected="selected"{/if}>{$accountid|get_accountnamebyid}</option>
+                {/foreach}
+                {/if}
+                </select>
+                </span>
+            </td>
+
+            <td style="padding-left:13px;">
+                运输类型：
+            </td>
+            <td id="selecttransporttype">
+                <select name="isexpressdelivery" id="isExpressDelivery" style="width:157px">
+                    <option value="">--ALL--</option>
+                    <option value="0" {if $g_isexpressdelivery == 0}selected="selected"{/if}>非快递</option>
+                    <option value="1" {if $g_isexpressdelivery == 1}selected="selected"{/if}>快递</option>
+                </select>
+            </td>
+
+            <td style="padding-left:13px;">
+                运输方式：
+            </td>
+            <td id="selectTransportation">
+                <select name="transportation" id="transportation" style="width:157px">
+                    <option value="">未设置运输方式</option>
+                    {foreach $transportation as $vf}
+                    <option value="{$vf.id}" {if $g_transportation == {$vf.id}}selected="selected"{/if}>{$vf.carrierNameCn}</option>
+                    {/foreach}
+                </select>
+            </td>
+            <td style="padding-left:17px;">
+                状态：
+            </td>
+            <td>
+                <select name="ostatus" id="ostatus" style="width:157px" onchange="uo(this)">
+                    <option value="">--ALL--</option>
+                    {foreach item=status from=$ostatus}
+                    <option value="{$status.id}" {if $status.id == $g_ostatus}selected="selected"{/if}>{$status.statusName}</option>
+                    {/foreach}
+                </select>
+            </td>
+
+        </tr>
+        <tr>
+
+            <td style="padding-left:17px;">
+                类别：
+            </td>
+            <td>
+                <select name="otype" id="otype">
+                    <option value="">--ALL--</option>
+                    {foreach $otype as $type}
+                    <option value="{$type.id}" {if $g_otype == $type.id}selected{/if}>{$type.statusName} </option>
+                    {/foreach}
+                </select>
+            </td>
+            <td style="padding-left:17px;">
+                关键字:
+            </td>
+            <td>
+                <input name="Keywords" value="{$g_Keywords}" />
+            </td>
+
+            <td colspan="2">
+                <select name="KeywordsType">
+                    <option value="*" style="width:157px;">请选择关键字类型</option>
+                    <option value="platformUsername" {if $g_KeywordsType == 'platformUsername'}selected="selected"{/if}>买家ID</option>
+                    <option value="email" {if $g_KeywordsType == 'email'}selected="selected"{/if}>买家邮箱</option>
+                    <option value="recordNumber" {if $g_KeywordsType == 'recordNumber'}selected="selected"{/if}>RecordNo.</option>
+                    <option value="PayPalPaymentId" {if $g_KeywordsType == 'PayPalPaymentId'}selected="selected"{/if}>paypal交易ID</option>
+                    <option value="tracknumber" {if $g_KeywordsType == 'tracknumber'}selected="selected"{/if}>跟踪号</option>
+                    <option value="id" {if $g_KeywordsType == 'id'}selected="selected"{/if}>系统编号</option>
+                </select>
+            </td>
+
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+
+
+
+        </tr>
+    </table>
+    <table id="AdvancedSearch" class="advanced-search" style="{if ($searchOrderType != '')||($searchSku != '')||($searchOrderTime1 != '')}display:block{/if}{if ($searchOrderType == '')&&($searchSku == '')&&($searchOrderTime1 == '')}display:none{/if}">
+        <tr>
+            <td style="padding-left:17px;">
+                订单种类：
+            </td>
+            <td>
+                <select name="selectOrderType">
+                    <option value="">全部</option>
+                    <option value="1" {if $searchOrderType == 1}selected="selected"{/if}>单料号单件</option>
+                    <option value="2" {if $searchOrderType == 2}selected="selected"{/if}>单料号多件</option>
+                    <option value="3" {if $searchOrderType == 3}selected="selected"{/if}>多料号</option>
+                </select>
+            </td>
+            <td style="padding-left:17px;">
+                SKU：
+            </td>
+            <td>
+                <input name="sku" type="text" value="{$searchSku}"/>
+            </td>
+
+			<td style="padding-left:17px;">
+                国家:
+            </td>
+            <td>
+                <input name="country" value="{$searchCountry}" />
+            </td>
+			<td style="padding-left:17px;">
+                邮编:
+            </td>
+            <td style="padding-left:19px;">
+                <input name="zipCode" value="{$searchZipCode}" />
+            </td>
+		</tr>
+        <tr>
+            <td style="padding-left:17px;">
+                <select name="searchTimeType" id="searchTimeType">
+                    <option value="1" {if $searchTimeType == 1}selected="selected"{/if}>付款时间</option>
+                    <option value="2" {if $searchTimeType == 2}selected="selected"{/if}>扫描时间</option>
+                    <option value="3" {if $searchTimeType == 3}selected="selected"{/if}>同步时间</option>
+                </select>
+            </td>
+            <td colspan="3">
+                <!--input name="OrderTime1" type="text" value="{$searchOrderTime1}" onclick="WdatePicker()"/>-<input name="OrderTime2" type="text" value="{$searchOrderTime12}" onclick="WdatePicker()"/-->
+                <input name="OrderTime1" id="OrderTime1" type="text" value="{$g_searchOrderTime1}" />
+                -<input name="OrderTime2" id="OrderTime2" type="text" value="{$g_searchOrderTime2}" />
+                -<input id="showSYNC" type="button" value="同步计数" class="order-search"/>
+            </td>
+        </tr>
+    </table>
+
+    <div style="padding-left:17px;">
+        <input type="hidden" name="mod" value="Order" />
+        <input type="hidden" name="act" value="list" />
+        <input type="hidden" name="search" value="1" />
+        <input type="hidden" name="page" value="{$g_page}" />
+        <input type="submit" value="搜索" class="order-search" />
+        <a href="#" id="AdvancedSearch1" onclick="AdvancedSearch()" class="unfold">高级搜索</a>
+        <span style="color: green;" id="countForSYNC"></span>
+</div>
+</form>
+</div>
+{include file='default.htm'}
+{include file='footer.htm'}
+{include file='cancelCombine.htm'}

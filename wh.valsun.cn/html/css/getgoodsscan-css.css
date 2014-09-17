@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+/*配货扫描样式*/
+
+.gd_divrow_packing{
+	line-height:25px;
+	margin-top:20px;
+}
+
+.gd_divrow{
+	height:50px;
+	line-height:25px;
+	margin-top:20px;
+}
+
+.gd_labeldiv{
+	float:left;
+	width:180px;
+	text-align:right;
+}
+
+.gd_input{
+	float:right;
+	height:15px;
+	line-height:15px;
+}
+.orderidinput{
+	height:25px;
+	margin-left:10px;
+	width:180px;
+}
+
+.skulist{
+	margin-left:10px;
+}
+
+.appletclass{
+	float:left;
+	height:400px;
+}

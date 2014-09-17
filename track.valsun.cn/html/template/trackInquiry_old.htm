@@ -1,0 +1,53 @@
+{include file="header.htm"}
+<div class="container">
+	<div style="padding-bottom:70px;">
+	<div class="top-header">
+    	<div class="top-menu">
+        	<div class="logo">
+            	
+            </div>
+            <div style="padding-top:22px;">
+	            <div class="top-title">
+	            </div>
+	        </div>
+        </div>
+    </div>	
+    <div style="width:990px;margin:0 auto;">
+	<div class="col-main">
+		<div class="search-title orange-color">
+			② Query results
+		</div>
+		<div class="search">
+            <div style="margin-top:10px;">
+                <select style="color:#878787;" class="inp-sel" id="trackNameSel" onchange="selCarrier(this.value)"></select>
+				<input type="text" class="inp-metro" id="tracknum" data="Please enter the tracking number !" onfocus="setDefault('tracknum')" onblur="setDefault('tracknum')"/>
+                <input type="hidden" id="carrier" value='运德物流'/>
+                <input type="hidden" id="carrierEN" value='WeDo'/>
+                <a href="javascript:void(0)" class="btn" id="search" onclick="track_open()"></a>
+            </div>
+        </div>
+		<div style="padding:10px 30px;">
+			<table width="100%">
+				<tbody id="trackInfoList">					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div style="width:210px;">
+		<div class="col-sub">
+			<div class="col-title orange-color" style="width:100%">
+				① Select Express
+			</div>
+			<div style="width:100%" id="trackNameList"></div>
+		</div>
+	</div>
+	<div style="clear:both;">
+	</div>
+	</div>
+		{include file="footer.htm"}
+	</div>
+	</div>
+<script type="text/javascript" src="./public/js/track_info.js"></script>
+
+
+

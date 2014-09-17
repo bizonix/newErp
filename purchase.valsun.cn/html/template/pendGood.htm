@@ -1,0 +1,224 @@
+{include file="header.htm"}
+	<div class="fourvar">
+    	<div class="pathvar">
+        	您的位置：<a href="index.php?mod=unusualOrder&act=index">异常到货处理</a>&nbsp;>>&nbsp;待定列表
+        </div>
+		<div class="pagination">
+            {$pageStr}
+        </div>
+    </div>
+	 <div class="servar products-servar">
+	 	<span>
+			料号:<input type="text" class="ser_sku" value="{$ser_sku}"/>
+        </span>
+		<span>处理状态:
+			<select class="ser_status">
+				<option value=''>请选择</option>
+				<option value='0' {if ($ser_status=='0')} selected="selected"{/if}>待处理</option>
+				<option value='1' {if ($ser_status=='1')} selected="selected"{/if}>正在修改图片</option>
+				<option value='2' {if ($ser_status=='2')} selected="selected"{/if}>完成图片修改</option>
+				<option value='3' {if ($ser_status=='3')} selected="selected"{/if}>已处理</option>
+			</select>
+        </span>
+		 <span>时间类型:
+			<select class="ser_timetype">
+				<option value='0'>请选择</option>
+				<option value='1' {if ($ser_timetype=='1')} selected="selected"{/if}>首次处理时间</option>
+				<option value='2' {if ($ser_timetype=='2')} selected="selected"{/if}>最后处理时间</option>
+			</select>
+			开始时间：<input type="text" class="startTime" onclick="WdatePicker()"  value = "{$ser_startTime}"/>
+		</span>
+		<span>
+			结束时间：<input type="text" class="endTime" onclick="WdatePicker()"  value = "{$ser_endTime}"/>
+		</span>
+		 <span>
+			<a href="javascript:void(0);" class="search">搜 索</a>
+		</span>
+    </div>
+	<div class="main feedback-main underline-main ">
+    	<table cellspacing="0" width="100%" class="products-action">
+        	<tr class="title purchase-title">
+		    	<td>编号</td>
+				<td>检测样品记录编号</td>
+				<td>spu</td>
+				<td>sku</td>
+				<td>待定数量</td>
+				<td>已处理数量</td>
+				<td>处理状态</td>
+				<td>备注</td>
+				<td>首次处理时间</td>
+				<td>最后处理时间</td>
+				<td>操作</td>
+            </tr>
+			{section name=v loop=$list}
+			<tr>
+		    	<td>{$list[v]['id']}</td>
+				<td>{$list[v]['infoId']}</td>
+				<td>{$list[v]['spu']}</td>
+				<td>{$list[v]['sku']}</td>
+				<td>{$list[v]['pendingNum']}</td>
+				<td>{$list[v]['processedNum']}</td>
+				<td>
+				{if $list[v]['pendingStatus'] == 0}待处理
+				{elseif $list[v]['pendingStatus'] == 1}正在修改图片
+				{elseif $list[v]['pendingStatus'] == 2}完成图片修改
+				{elseif $list[v]['pendingStatus'] == 3}已处理{/if}</td>
+				<td>{$list[v]['note']}</td>
+				<td>{$list[v]['startTime']|date_format:"Y-m-d H:i"}</td>
+				<td>{$list[v]['lastModified']|date_format:"Y-m-d H:i"}</td>
+				<td>
+                  <!--{if $list[v]['pendingStatus'] == 0}
+                    	<input type="button" class="updatePic" data-id="{$list[v]['id']}" value="修改图片"/>
+					{/if} --> 
+                    <input type="button" class="back" data-id="{$list[v]['id']}" value="正常回测"/>
+                   <!--{if $list[v]['pendingStatus'] == 0}
+                        <input type="button" class="return" data-id="{$list[v]['id']}" value="待退回"/>
+	                {/if} -->
+                </td>
+            </tr>
+		   {/section}
+         </table>
+     </div>
+     <!-- 正常回测弹框 START-->
+		<div id="detectBack" title="回测信息备注" style="display:none;">
+			<form action="" method="post" enctype="multipart/form-data" id="detectBack-form">
+			<table id="tab_show_ebayId" width="100%" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>备注：</td>
+					<td>
+						<textarea rows="5" cols="30" name="detectBack-reason" id="detectBack-reason"></textarea>						
+					</td>					
+				</tr>
+			</table>
+			</form>
+		</div>
+		<!-- 正常回测弹框 END-->
+     <div class="bottomvar">
+     	<div class="pagination">
+			{$pageStr}
+        </div>
+     </div>
+	 <input type="hidden" value="{$web_api}" class="wep_api" />
+{include file="footer.htm"}
+<script type="text/javascript">
+{literal}
+$(".servar.products-servar").keydown(function(e){
+	if(e.keyCode !== 13){
+		return;
+	}
+	$(".search").trigger("click")
+});
+
+$(".search").click(function(){
+	var sku 			= $('.ser_sku').val();
+	var timetype		= $('.ser_timetype').val();
+	var starttime 		= $('.startTime').val();
+	var endtime 		= $('.endTime').val();
+	var status 			= $('.ser_status').val();
+	var purid       	= $('#userid').val();
+	var contFlag   = false ;  
+	if(timetype!=0&&(starttime==''||endtime=='')){
+		alertify.error('请选择时间');
+		if(starttime==''){
+			$('.startTime').focus();
+		}else if(endtime==''){
+			$('.endTime').focus();
+		}
+		return false;
+		return false;
+	}
+	if(timetype==0&&(starttime!=''||endtime!='')){
+		alertify.error('请选择搜索时间类型');
+		return false;
+	}
+	if(starttime>endtime){
+		alertify.error('时间范围有误,请确认');
+		return false;
+	}
+	if(timetype !==0 && starttime!=''  && endtime!=''){
+		contFlag = true;
+	}
+	if(sku !== '' || status !=='' ){
+		contFlag = true;
+	}
+	if(	contFlag == false){
+		alertify.error('请选择搜索内容');
+		$('.ser_sku').focus();
+		return;
+	}
+	window.location.href = "index.php?mod=pendGood&act=index&sku="+sku+'&startTime='+starttime+'&endTime='+endtime+'&status='+status+'&timetype='+timetype+'&purid='+purid;
+})
+
+//修改图片
+$('.updatePic').click(function(){
+	var id 	= $(this).data('id');
+	var url  = $('.wep_api').val()+"json.php?mod=rtnQcData&act=updateQcPendGoodData";
+	$.post(url, { "numid":id, "type":"1" }, function(rtn){
+		if(rtn.data == '1'){
+			alertify.alert('处理成功',function(){
+				window.location.reload();
+			});
+		}else{
+			alertify.alert('处理失败');
+			return false;
+		}
+	},'jsonp');
+})
+//正常回测
+$('.back').click(function(){
+	var id 	= $(this).data('id');
+	var url  = "json.php?mod=rtnQcData&act=updateQcPendGoodData&jsonp=1";
+	$('#detectBack').dialog({
+		width : 400,
+		height : 280,
+		modal : true,
+		autoOpen : true,
+		show : 'drop',
+		hide : 'drop',
+		buttons : {
+			'确定' : function(){
+				var dialog = $(this);
+				var backReason = $('#detectBack-reason').val();
+				if(backReason == ''){
+					alert('请输入回测的备注信息');
+					return false;
+				}
+				alertify.confirm('确认回测？',function(e){
+					if(e){
+						dialog.dialog('close');
+						$.post(url, { "numid":id, "type":"2","backReason":backReason}, function(rtn){
+							if(rtn == '1'){
+								alertify.alert('处理成功',function(){
+									window.location.reload();
+								});
+							}else{
+								alertify.alert('处理失败');
+								return false;
+							}
+						},'json');
+					}
+				});			
+			},
+			'取消' : function() {
+				$(this).dialog('close');
+			}
+		}
+	});			
+})
+//退回
+$('.return').click(function(){
+	var id 	= $(this).data('id');
+	var url  = $('.wep_api').val()+"json.php?mod=rtnQcData&act=updateQcPendGoodData";
+	$.post(url, { "numid":id, "type":"3" }, function(rtn){
+		if($.trim(rtn.data) == '1'){
+			alertify.alert('处理成功',function(){
+				window.location.reload();
+			});
+		}else{
+			alertify.alert('处理失败');
+			return false;
+		}	
+	},'jsonp');
+})
+{/literal}
+</script>

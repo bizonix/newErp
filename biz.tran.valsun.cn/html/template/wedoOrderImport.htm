@@ -1,0 +1,30 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=wedoApi&act=index">开放业务管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="servar">
+    <form onsubmit = "return file_upload()" action="index.php?mod=wedoApi&act=saveOrderImport" enctype="multipart/form-data" method="post">
+	<span>
+		上传EXCELL文件:&nbsp;&nbsp;<input name="upfile" id="upfile" type="file"/>
+	</span>
+	<span>
+		<input name="submit" type="submit" value="上传"/>&nbsp;&nbsp;<a href="temp/template/wedoOrderImport.xls"><font color="blue">运德物流订单导入模版下载</font></a>
+	</span>
+	</form>
+</div>
+<div class="main">
+{if empty($errMsg) && $act == "saveOrderImport"}
+<p style="line-height:180%;padding-left:10px;">
+<font color=green>恭喜您，订单信息导入成功！</font>
+</p>
+{elseif $act == "saveOrderImport"}
+<p style="line-height:180%;padding-left:10px;">
+<font color=red>温馨提示，以下订单信息未导入成功！</font><br/>
+{$errMsg}
+</p>
+{/if}
+</div>
+<script type="text/javascript" src="./public/js/tran_user_competence.js"></script>
+{include file="footer.htm"}

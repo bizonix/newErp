@@ -1,0 +1,40 @@
+{header}
+<script type="text/javascript" src="./js/tmpReturnPros.js"></script>
+			<div id="bgwrap">
+				<div id="content">
+					<div id="main">
+					<h1>扫描退还  {status}</h1>
+		<div class="pad20" style="font-size:20px">
+			<div >
+                <span>sku : </span>
+                <span><input id="returnSku"/></span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span><button style="width:100px;height:30px;font-size:18px" id="createReturnBill">生成退料单</button></span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span><button style="width:100px;height:30px;font-size:18px" id="clear">清除</button></span>
+            </div>
+            <br/>
+            <div id="show" >
+			             <table class="fullwidth" cellpadding="0" cellspacing="0" border="0" style="font-size:15px">
+                            <thead>
+                                <tr>
+                                    <td>sku</td>
+                                    <td>数量</td>
+                                    <td>扫描时间</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<!-- BEGIN list -->
+                                <tr class="odd">
+                                    <td>{t_sku}</td>
+                                    <td>{t_count}</td>
+                                    <td>{t_createdTime}</td>
+                                </tr>
+                                <!-- END list -->
+                            </tbody>
+                        </table>
+            </div>
+		</div>
+{footer}
+
+

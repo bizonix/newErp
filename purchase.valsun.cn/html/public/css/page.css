@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+.page a
+{
+	border:1px #878787 solid;
+	padding:2px 5px 2px 5px;
+	margin-right:10px;
+
+}
+.page a:link,.page a:visited
+{
+
+}
+
+.page a:hover
+{
+    background-color:#0092dc;
+    color:#fff;
+
+}
+
+.goPage>input
+{
+	width:50px;
+	text-align:center;
+	margin-right:5px;
+}
+.page .thispage
+{
+    background-color:#0092dc;
+    color:#fff;
+	padding:2px 5px 2px 5px;
+	border:1px solid #878787;
+	margin:0 10px 0 0;
+	
+}
+.goPage .int
+{
+    background-color:#0092dc;
+     color:#FFF; 
+     border:1px #00689d solid;  
+    cursor: pointer;
+}
+.goPage .int:hover
+{
+    background-color:#007fbf;
+}

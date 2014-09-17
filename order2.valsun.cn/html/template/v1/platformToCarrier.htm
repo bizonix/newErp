@@ -1,0 +1,55 @@
+{include file='header2.htm'}
+{include file='omNav.htm'}
+{literal}
+<style>
+.cul .cli {width:20%;float:left;list-style-type:none}
+label {float:left}
+</style>
+{/literal}
+<script language="javascript" src="js/platformToCarrier.js"></script>
+
+<div class="servar">
+   <span>
+   <form action="index.php?mod=platformToCarrier&act=index" method="post" id="carrierForm">
+   		平台名称：<select id="platformName" name="platformName">
+   		<option value="">全部</option>
+   				{foreach from=$platfromList item=list}
+			    <option value="{$list.id}">{$list.platform}</option>
+			    {/foreach}
+   		       </select>
+   		       <input type="submit" name="sub" value="搜索"/>
+		<button  id='addCarrier'/>添加</button>
+	</form>
+   </span>
+   <br>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td>id</td>
+			<td>对应平台</td>
+			<td>平台显示名称</td>
+			<td>api返回名称</td>
+			<td>可以发的运输方式/渠道</td>
+			<td>操作</td>
+		</tr>
+		{if !empty($platformToCarrier)}
+		{foreach from=$platformToCarrier item=list}
+		<tr class="odd">
+				<td>{$list.id}</td>
+				<td>{$list.platformId|get_platnamebyid}</td>
+				<td>{$list.platformCarrierName}</td>
+				<td>{$list.platformReturnCarrierName}</td>
+				<td width="40%" align="left">{$list.channelIds|get_carriernamebyid}</td>
+				<td>
+				<button  class="edite" tid="{$list.id}"/>修改</button>
+				<button  class="delete" tid="{$list.id}"/>删除</button>
+				</td>
+		</tr>
+		{/foreach}
+		{/if}
+	</table>
+</div>
+
+ 
+{include file='footer.htm'}

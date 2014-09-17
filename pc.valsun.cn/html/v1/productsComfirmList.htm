@@ -1,0 +1,152 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/products.js"></script>
+
+<div class="fourvar">
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+                                  <span>
+                                        {if isAccessAll('products','productsTake') == true}
+                                    	<a href="javascript:void(0)" id="productsTake">领取料号</a>
+                                        {/if}
+                                  </span>  
+            					   <span>&nbsp;|&nbsp;SKU：
+								   <textarea id="sku" style="width: 250px;margin-bottom: -13px;margin-top: -15px;" rows="2" name="sku">{$smarty.get.sku}</textarea>
+                                   </span>
+                                   <span>|&nbsp;有无指派：
+   				                   <select name="isExsitWebMaker" id="isExsitWebMaker" style="width: 40px;">
+       				                   <option value="0" ></option>
+       				                   <option value="1" {if $smarty.get.isExsitWebMaker == 1}selected='selected'{/if}>有</option>
+                                       <option value="2" {if $smarty.get.isExsitWebMaker == 2}selected='selected'{/if}>无</option>
+   				                   </select>
+                    				</span>
+                                    <span>|&nbsp;产品制作人：
+                    				   <select name="webMakerId" id="webMakerId" style="width: 70px;">
+                    				    <option value="0" ></option>
+                    				    {foreach getAllPEInfo() as $value}
+                    					<option value="{$value['global_user_id']}" {if $smarty.get.webMakerId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+                    					{/foreach}
+                    				  </select>
+                    				</span>
+                                   
+                                   <span><button id='seachProductsComfirmList'>搜索</button></span>                               
+                                   &nbsp;
+                                   {if isAccessAll('products','updateComfirmCache')}
+                                   <span style="float: right;margin-right: 20px;"><button id="syncCache">更新缓存</button></span>
+                                   {/if}
+                                   {if isAccessAll('products','illSkuToComplete')}
+                                   <span style="float: right"><button id="illSku">无效料号</button></span>
+                                   {/if}
+			<span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <td align="left"><input type="checkbox" id="selectAll" /></td>
+                        <td align="left">SPU（<span style="color: red;">{$spuCount}</span>）</td>
+						<td align="left">SKU</td>
+                        <td align="left">采购</td>
+                        <td align="left">指派人</td>
+                        <td align="left">指派时间</td>
+						<td align="left">描述</td>                        
+                        <td align="left">类别</td>
+						<td>仓位</td>
+						<td>数量</td>
+						<td>录入时间</td>
+                        <td>签收人</td>
+						<td>签收时间</td>
+                    </tr>
+                    {foreach $productsComfirmList as $value}
+                                <tr>
+                                    <td align="left">{if $smarty.session.userId == $value['webMakerId'] || isAccessAll('products','productsCanCheckAllSku')}<input type="checkbox" name="selectSing" value="{$value['id']}"/>{/if}</td>
+                                    <td align="left" width="5%">{$value['visibleSpu']}</td>
+                                    <td align="left" width="7%">{$value['sku']}</td>
+                                    <td align="left" align="left" >{getPersonNameById($value['purchaseId'])}</td>
+                                    <td align="left" align="left" >{getPersonNameById($value['webMakerId'])}</td>
+                                    <td align="left" align="left" >{$value['webMakeTime']|date_format:"Y-m-d H:i"}</td>
+                                    <td align="left" align="left" width="28%">{$value['goodsName']}</td>                     
+									<td align="left" align="left" width="15%">{getAllCateNameByPath($value['goodsCategory'])}</td>
+                                    <td><span id="location{$value['sku']}" name='ajaxLocation' sku="{$value['sku']}"></span></td>
+                                    <td>{$value['productsCount']}</td>
+                                    <td>{$value['goodsCreatedTime']|date_format:"Y-m-d H:i"}</td>
+                                    <td>{getPersonNameById($value['productsComfirmerId'])}</td>
+                                    <td>{$value['productsComfirmTime']|date_format:"Y-m-d H:i"}</td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+
+<script type="text/javascript">
+		$(document).ready(function() {
+
+            var skuArr = new Array();
+        	$("span[name='ajaxLocation']").each(function(index){
+  	            var sku = $(this).attr('sku');
+                if(sku == ''){
+                    return true;
+                }
+                if($.inArray(sku, skuArr) == -1){
+                    skuArr.push(sku);
+                }
+        	});
+            //alert(spuArr);
+
+            $.ajax({
+				type	: "POST",
+				dataType: "jsonp",
+				url		: 'json.php?mod=goods&act=getLocationByArrFromERP&jsonp=1',
+				data	:  { skuArr:skuArr } ,
+				success	: function (msg){
+					if(msg.data != false){
+					   $("span[name='ajaxLocation']").each(function(index){
+              	            var sku = $(this).attr('sku');
+                            if(sku == ''){
+                                return true;
+                            }
+                            //alert(msg.data[spu]);
+                            if(msg.data[sku] == null || msg.data[sku] == ''){
+                            }else{
+                                $("#location"+sku).html(msg.data[sku]);
+                            }
+                            
+                    	});
+					}
+				}
+			});
+        });
+
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachProductsComfirmList').click();
+			}  
+        });
+        
+</script>
+<script type="text/javascript">
+$("#syncCache").click(function(){
+      $.ajax({
+				type	: "POST",
+				dataType: "jsonp",
+				url		: 'json.php?mod=SyncCache&act=getProducts2pc&jsonp=1',
+				success	: function (msg){
+					if(msg.errCode == 200){
+					  alert('更新缓存成功，请刷新页面');;
+					}else{
+					   alert(msg.errMsg);
+					}
+				}
+			});
+});
+
+</script>
+{include file="footer.htm"}

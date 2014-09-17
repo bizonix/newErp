@@ -1,0 +1,201 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/jquery.flexselect.js"></script>
+<script type="text/javascript" src="./js/liquidmetal.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+{if $smarty.get.status != ''}
+<div class="servar products-servar">
+<span style="color: red;">{$smarty.get.status}</span>
+            </div>
+{/if}
+            <div class="main products-main">
+                    <form action='index.php?mod=autoCreateSpu&act=updateSpuPersonOn' method='post' id='updateSpuPersonValidation' target="a">
+					<table class="products-action" width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+                            <td style="width: 600px;" align="right"><span style="color:#F00;">*</span>SPU：</td>
+							<td align="left">
+                            <input value="{$spu}" disabled="disabled"/>
+                            <input name="spu" id="spu" value="{$spu}" type="hidden"/>
+                            <input name="isSingSpu" id="isSingSpu" value="{$isSingSpu}" type="hidden"/>
+							</td>
+						</tr>
+                        <tr>
+                   	        <td align="right">
+                            <span style="color:#F00;">*</span>申请人：
+                            </td>
+                            <td align="left">
+                            <input value="{getPersonNameById($purchaseId)}" disabled="disabled"/>
+                            <input name="purchaseId" id="purchaseId" value="{$purchaseId}" type="hidden"/>
+                            </td>
+						</tr>
+                        <tr>
+                   	        <td align="right">
+                                <span style="color:#F00;"></span>产品制作人：
+                            </td>
+                            <td align="left">
+    							<select name="webMakerId" id="webMakerId" {if empty($webMakerId) || $webMakerIsAgree != 2 || isAccessAll('autoCreateSpu','isCanUpdateWebMakerPower')}class="flexselect"{/if} style="width: 120px;" {if !empty($webMakerId) && $webMakerIsAgree == 2 && !isAccessAll('autoCreateSpu','isCanUpdateWebMakerPower')}onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;"{/if}>
+                                    <option value="0"> </option>
+                                    {if $isSingSpu == 1}
+                                    {if empty($webMakerId) || $webMakerIsAgree != 2}
+                                    	{if !isAccessAll('autoCreateSpu','isCanUpdateWebMakerPower')}
+	                                        {foreach getAppointPersonInfoBySpu($spu) as $value}
+	                                           {if in_array($spu, getNotAuditAndNotTakeSpuList()) && (getAppointSpuCountByWebMakerId($value['global_user_id']) < getPECountByPEId($value['global_user_id']))}
+	                    					   <option value="{$value['global_user_id']}" {if $value['global_user_id'] == $webMakerId}selected="selected"{/if}>{$value['global_user_name']}</option>
+	                    					   {/if}
+	                                        {/foreach}
+                                        {else}
+                                        	{foreach getAllPEInfo() as $value}
+	                    					   {if $value['global_user_id'] != $webMakerId}
+	                                           	{if $webMakerId != $value['global_user_id']}<option value="{$value['global_user_id']}">{$value['global_user_name']}</option>{/if}
+	                    					   {/if}
+	                                        {/foreach}
+                                        {/if}
+                                    {elseif !isAccessAll('autoCreateSpu','isCanUpdateWebMakerPower')}
+                                        <option value="{$webMakerId}" selected="selected">{getPersonNameById($webMakerId)}</option>
+                                    {else}
+                                        {if !empty($webMakerId)}<option value="{$webMakerId}" selected="selected">{getPersonNameById($webMakerId)}</option>{/if}
+                                        {foreach getAllPEInfo() as $value}
+                    					   {if $value['global_user_id'] != $webMakerId}
+                                           {if $webMakerId != $value['global_user_id']}<option value="{$value['global_user_id']}">{$value['global_user_name']}</option>{/if}
+                    					   {/if}
+                                        {/foreach}
+                                        {/if}
+                                    {elseif $isSingSpu == 2}
+                                        {if !empty($webMakerId)}<option value="{$webMakerId}" selected="selected">{getPersonNameById($webMakerId)}</option>{/if}
+                                        {foreach getAllPEInfo() as $value}
+                    					   {if $value['global_user_id'] != $webMakerId}
+                                           {if $webMakerId != $value['global_user_id']}<option value="{$value['global_user_id']}">{$value['global_user_name']}</option>{/if}
+                    					   {/if}
+                                        {/foreach}
+                                    {/if}
+    							</select>
+							</td>
+						</tr>
+                        <tr>
+                   	        <td align="right">
+                                <span style="color:#F00;"></span>ebay销售：
+                            </td>
+                            <td align="left">
+    							<select name="ebaySalerId" id="ebaySalerId" {if $ebayIsAgree != 2}class="flexselect"{/if} style="width: 120px;" {if $ebayIsAgree == 2}onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;"{/if}>
+    								<option value="0"> </option>
+                                    {if !empty($ebaySalerId)}<option value="{$ebaySalerId}" selected="selected">{getPersonNameById($ebaySalerId)}</option>{/if}
+                                    {if $ebayIsAgree != 2}
+                                    {foreach getAllEbaySalerInfo() as $value}
+                					   {if $ebaySalerId != $value['global_user_id']}<option value="{$value['global_user_id']}" {if $ebaySalerId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>{/if}
+                					{/foreach}
+                                    {/if}
+    							</select>
+							</td>
+						</tr>
+                        <tr>
+                   	        <td align="right">
+                                <span style="color:#F00;"></span>aliexpress销售：
+                            </td>
+                            <td align="left">
+    							<select name="aliexpressSalerId" id="aliexpressSalerId" {if $aliexpressIsAgree != 2}class="flexselect"{/if} style="width: 120px;" {if $aliexpressIsAgree == 2}onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;"{/if}>
+    								<option value="0"> </option>
+                                    {if !empty($aliexpressSalerId)}<option value="{$aliexpressSalerId}" selected="selected">{getPersonNameById($aliexpressSalerId)}</option>{/if}
+                                    {if $aliexpressIsAgree != 2}
+                                    {foreach getAllSMTSalerInfo() as $value}
+                					   {if $aliexpressSalerId != $value['global_user_id']}<option value="{$value['global_user_id']}" {if $aliexpressSalerId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>{/if}
+                					{/foreach}
+                                    {/if}
+    							</select>
+							</td>
+						</tr>
+                        <tr>
+                   	        <td align="right">
+                                <span style="color:#F00;"></span>amazon销售：
+                            </td>
+                            <td align="left">
+    							<select name="amazonSalerId" id="amazonSalerId" {if $amazonIsAgree != 2}class="flexselect"{/if} style="width: 120px;" {if $amazonIsAgree == 2}onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;"{/if}>
+    								<option value="0"> </option>
+                                    {if !empty($amazonSalerId)}<option value="{$amazonSalerId}" selected="selected">{getPersonNameById($amazonSalerId)}</option>{/if}
+                                    {if $amazonIsAgree != 2}
+                                    {foreach getAllAmazonSalerInfo() as $value}
+                					   {if $amazonSalerId != $value['global_user_id']}<option value="{$value['global_user_id']}" {if $amazonSalerId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>{/if}
+                					{/foreach}
+                                    {/if}
+    							</select>
+							</td>
+						</tr>
+                        <tr>
+                   	        <td align="right">
+                                <span style="color:#F00;"></span>海外仓销售：
+                            </td>
+                            <td align="left">
+    							<select name="overseaSalerId" id="overseaSalerId" {if $overseaIsAgree != 2}class="flexselect"{/if} style="width: 120px;" {if $overseaIsAgree == 2}onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;"{/if}>
+    								<option value="0"> </option>
+                                    {if !empty($overseaSalerId)}<option value="{$overseaSalerId}" selected="selected">{getPersonNameById($overseaSalerId)}</option>{/if}
+                                    {if $overseaIsAgree != 2}
+                                    {foreach getAllOverseaSalerInfo() as $value}
+                					   {if $overseaSalerId != $value['global_user_id']}<option value="{$value['global_user_id']}" {if $overseaSalerId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>{/if}
+                					{/foreach}
+                                    {/if}
+    							</select>
+							</td>
+						</tr>
+                        <tr>
+                            <td align="right"><input type="button" value="提交" id="updateSpuPersonButton"/></td>
+							<td align="left"><input type="button" value="返回" id="back"/></td>
+						</tr>
+					</table>
+                    </form>
+                    <iframe style="display: none;" name="a"></iframe>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('#updateSpuPersonButton').click(function(){
+                spu = $('#spu').val();
+                webMakerId = $('#webMakerId').val();
+                isSingSpu = $('#isSingSpu').val();
+                if(spu == ''){
+                    alert('SPU信息异常!');
+                    return false;
+                }
+                if(webMakerId == 0 || isSingSpu == 2){
+                    $('#updateSpuPersonValidation').submit();
+                    //return true;
+                }else{
+                    $.ajax({
+        				type	: "POST",
+        				dataType: "jsonp",
+        				url		: 'json.php?mod=goods&act=checkSubmitWebMaker&jsonp=1',
+        				data	: { spu:spu,webMakerId:webMakerId,isSingSpu:isSingSpu },
+        				success	: function (msg){
+        					if(msg.errCode == '200'){
+        					    $('#updateSpuPersonValidation').submit();
+                                //return true;
+        					}else{
+        					   alert(msg.errMsg);
+                               return false;
+        					}
+        				}
+        			});
+                }
+            });
+            $("#back").click(function(){
+                window.parent.history.go(-1);
+            });
+            $("select[class*=flexselect]").flexselect();
+        });
+
+ //       function checkWebMaker(){
+//
+//        }
+</script>
+{include file="footer.htm"}

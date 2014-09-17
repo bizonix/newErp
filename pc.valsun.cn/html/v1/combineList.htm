@@ -1,0 +1,254 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<style type="text/css">
+/* common styling */
+/* set up the overall width of the menu div, the font and the margins */
+.menu {
+width:80px; 
+margin:0 0 50px 0; 
+
+}
+/* remove the bullets and set the margin and padding to zero for the unordered list */
+.menu ul {
+padding:0; 
+margin:0;
+list-style-type: none;
+}
+/* float the list sowidth="8%"width="8%" that the items are in a line and their position relative so that the drop down list will appear in the right place underneath each list item */
+.menu ul li {
+position: relative;
+}
+/* style the links to be 104px wide by 30px high with a top and right border 1px solid white. Set the background color and the font size. */
+.menu ul li a, .menu ul li a:visited {
+display:block; 
+text-align:center; 
+text-decoration:none; 
+width:80px; 
+height:30px; 
+color:#000; 
+border:1px solid #fff;
+border-width:1px 1px 0 0;
+background:#c9c9a7; 
+line-height:30px; 
+font-size:11px;
+}
+/* make the dropdown ul invisible */
+.menu ul li ul {
+display: none;
+}
+/* specific to non IE browsers */
+/* set the background and foreground color of the main menu li on hover */
+.menu ul li:hover a {
+color:#fff; 
+background:#b3ab79;
+}
+/* make the sub menu ul visible and position it beneath the main menu list item */
+.menu ul li:hover ul {
+display:block; 
+position:absolute; 
+top:31px; 
+left:0; 
+width:80px;
+}
+/* style the background and foreground color of the submenu links */
+.menu ul li:hover ul li a {
+display:block; 
+background:#faeec7; 
+color:#000;
+}
+/* style the background and forground colors of the links on hover */
+.menu ul li:hover ul li a:hover {
+background:#dfc184; 
+color:#000;
+}
+</style>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+                                   <span>SPU：
+								   <select name="searchComField" id="searchComField">
+                                   <option value="1" {if $smarty.get.searchComField == 1}selected='selected'{/if}>虚拟主料号(CB)</option>
+                                   <option value="2" {if $smarty.get.searchComField == 2}selected='selected'{/if}>真实主料号</option>
+                                   </select>
+								   </span>
+								   <span>
+								   <input name="fieldValue" id="fieldValue" value="{$smarty.get.fieldValue}"/>
+								   </span>
+                                   <span><button id='searchCombineList'>搜索</button></span>
+                                   &nbsp;
+                                   <span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            
+            <div class="main products-main">
+                <table class="products-action" cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td width="8%" ></td>
+                        <td width="5%" align="left">SPU</td>
+                        <td>SKU</td>
+                        <td>成本(RMB)</td>
+						<td>重量(KG)</td>
+						<td>长</td>
+						<td>宽</td>
+						<td>高</td>
+						<td>备注</td>
+						<td>组合人</td>
+						<td>添加时间</td>				
+                    </tr>
+                    {foreach $combineList as $value}
+                    {if $value@iteration is odd by 1}
+                    <tr class="deleteTr{$value['combineSku']}">
+                        <td rowspan="{1 + $value['trueSkuListCount']}" style="padding-top: 0">
+                        {if isAccessAll('goods','updateCombine') && isAccessAll('goods','modOrDelComRightFlag')}
+                            <div class="menu">
+                                <ul>
+                                    <li><a class="hide" href="javascript:void(0)">操作</a>
+                                        <ul>
+                                        <li><a href="index.php?mod=goods&act=updateCombine&id={$value['id']}">修改</a></li>
+                                        <li><a href="javascript:void(0)" onclick="delCombineSku('{$value['combineSku']}')">删除</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="clear"> </div>
+                            </div>
+                        {/if}					
+                        </td>
+                		<td align="left">{$value['visibleSpu']}</td>
+                		<td>{$value['combineSku']}</td>
+                        <td>{$value['totalCost']}</td>
+						<td>{$value['totalWeight']}</td>
+                        <td>{$value['combineLength']}</td>
+						<td>{$value['combineWidth']}</td>
+						<td>{$value['combineHeight']}</td>
+						<td>{$value['combineNote']}</td>
+						<td>{getPersonNameById($value['combineUserId'])}</td>
+                        <td>{$value['addTime']|date_format:"Y-m-d H:i"}</td>
+            		</tr>
+                    {if $value['trueSkuListCount'] > 0}
+                    {foreach $value['trueSkuList'] as $vv}
+                    <tr class="deleteTr{$value['combineSku']}">
+                        <td></td>
+                        <td></td>                	     	              	
+                		<td align="center" colspan="1">料号：<a href="index.php?mod=goods&act=getGoodsList&seachdata={$vv['sku']}&searchs=2" target="_blank">{$vv['sku']}</a>{' * '|cat:$vv['count']}</td>
+                        <td colspan="9" align="left">描述：{$vv['goodsName']}</td>
+            		</tr>                                      
+                    {/foreach }
+                    {/if}
+            		
+                    {else}
+                    <tr style="background-color: #F2F2F2;" class="deleteTr{$value['combineSku']}">
+                       <td rowspan="{1 + $value['trueSkuListCount']}" style="padding-top: 0;">
+                        {if isAccessAll('goods','updateCombine') && isAccessAll('goods','modOrDelComRightFlag')}
+                            <div class="menu">
+                                <ul>
+                                    <li><a class="hide" href="javascript:void(0)">操作</a>
+                                        <ul>
+                                        <li><a href="index.php?mod=goods&act=updateCombine&id={$value['id']}">修改</a></li>
+                                        <li><a href="javascript:void(0)" onclick="delCombineSku('{$value['combineSku']}')">删除</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="clear"> </div>
+                            </div>
+                        {/if}					
+                        </td>
+                		<td align="left">{$value['visibleSpu']}</td>
+                		<td>{$value['combineSku']}</td>
+                        <td>{$value['totalCost']}</td>
+						<td>{$value['totalWeight']}</td>
+                        <td>{$value['combineLength']}</td>
+						<td>{$value['combineWidth']}</td>
+						<td>{$value['combineHeight']}</td>
+						<td>{$value['combineNote']}</td>
+						<td>{getPersonNameById($value['combineUserId'])}</td>
+                        <td>{$value['addTime']|date_format:"Y-m-d H:i"}</td>
+            		</tr>
+                    {if $value['trueSkuListCount'] > 0}
+                    {foreach $value['trueSkuList'] as $vv}
+                    <tr style="background-color: #F2F2F2;" class="deleteTr{$value['combineSku']}">
+                        <td></td>
+                        <td></td>               	     	              	
+                		<td align="center" colspan="1">料号：<a href="index.php?mod=goods&act=getGoodsList&seachdata={$vv['sku']}&searchs=2" target="_blank">{$vv['sku']}</a>{' * '|cat:$vv['count']}</td>
+                        <td colspan="9" align="left">描述：{$vv['goodsName']}</td>
+            		</tr>                                      
+                    {/foreach }
+                    {/if}
+                    {/if}
+                    {/foreach}
+                </table>
+            </div>
+            
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#searchCombineList').click(); 
+			}
+            
+            //$('.delCombine').click(function(){
+//                alert('1111');
+//        		if(confirm("确定要删除该记录吗？")){
+//        			comSku = $(this).attr('comSku');
+//                    if(!$.trim(comSku)){
+//                        $("#error").html('料号为空！');
+//                        return;
+//                    }
+//        			$.ajax({
+//        				type	: "POST",
+//        				dataType: "jsonp",
+//        				url		: 'json.php?mod=goods&act=deleteComSku&jsonp=1',
+//        				data	:  { comSku : comSku } ,
+//        				success	: function (msg){
+//        				        $("#error").html(msg.errMsg);
+//        					if(msg.errCode == '200'){
+//        						$(".deleteTr"+comSku).hide();
+//        					}
+//        				}
+//        			});
+//        
+//        		}
+//        	});
+                    
+        });
+        
+        function delCombineSku(comSku){
+            if(confirm("确定要删除该记录吗？")){
+    			//comSku = $(this).attr('comSku');
+                if(!$.trim(comSku)){
+                    $("#error").html('料号为空！');
+                    return;
+                }
+    			$.ajax({
+    				type	: "POST",
+    				dataType: "jsonp",
+    				url		: 'json.php?mod=goods&act=deleteComSku&jsonp=1',
+    				data	:  { comSku : comSku } ,
+    				success	: function (msg){
+    				        $("#error").html(msg.errMsg);
+                            $(".menu").show();
+    					if(msg.errCode == '200'){
+    						$(".deleteTr"+comSku).hide();
+    					}
+    				},
+                    beforeSend:function() {
+	              		$(".menu").hide();
+	              	}
+    			});
+    
+    		}
+        }      
+</script>

@@ -1,0 +1,62 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierProNode&act=index">运输方式处理节点管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select name="carrierId" id="carrierId">
+			<option value=0>==全部运输方式==</option>
+			{foreach item=list from=$carrierList}
+			{if !$list.is_track }<option value="{$list.id}" {if $carrierId == $list.id}selected="selected"{/if}>{$list.carrierNameCn}</option>{/if}
+			{/foreach}
+		</select>
+	</span>
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='nodeTitle'{if ($type=='nodeTitle')} selected="selected"{/if}>节点名称</option>
+			<option value='nodeKey'{if ($type=='nodeKey')} selected="selected"{/if}>处理关键词</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=carrierProNode&act=add">添加</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>运输方式名</th>
+			<th>节点名称</th>
+			<th>处理关键词</th>
+			<th>创建时间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.carrierNameCn}</td>
+			<td>{$list.nodeName}</td>
+			<td>{$list.nodeKey}</td>
+			<td>{if empty($list.addTime)}暂无{else}{date('Y-m-d H:i:s',$list.addTime)}{/if}</td>
+			<td><a href="index.php?mod=carrierProNode&act=modify&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info({$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<script type="text/javascript" src="./public/js/carrier_process_node.js"></script>
+{include file="footer.htm"}

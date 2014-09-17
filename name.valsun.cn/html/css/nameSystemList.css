@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+.menuitem{
+	border-left:#808080 solid 1px;
+	border-right:#808080 solid 1px;
+	font-size:12px;
+	text-align:center;
+	display:none;
+}
+.title td span:hover .menuitem{
+	visibility:visible;
+	display:block;
+	position:absolute;
+	background-color:#fff;
+}
+.title td span:hover  .menuitem div:hover{
+	background-color:#0092dc;
+}
+.ax_cell{
+	border-bottom:solid 1px #808080;
+	cursor:pointer;
+}
+.itemtontainer{
+	text-align:center;
+}
+.ax_cell span{
+	margin:0 auto;
+}
+.copyorder input{
+	width:160px;
+}

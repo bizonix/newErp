@@ -1,0 +1,20 @@
+{include file = "header.htm"}	
+<script language="JavaScript" src="./js/pda_orderReceipt.js"></script>
+	<div onload="loaded()" id="divcontent" style="height:200px;width:225px">		
+		<div id="" class="floatleft" style="margin-bottom:10px;">
+            <span>收货区域  </span>
+          <input name="pickZone" type="text" id="pickZone" onkeydown="checkPickZone()" class="textinput" />
+        </div>
+		<div id="" class="floatleft">
+            <span>配货单号 </span>
+          <input name="pickInvoice" type="text" id="pickInvoice" onkeydown="orderPick()" class="textinput" />
+        </div>
+        <div class="clear"></div>
+        <div class="floatleft">
+        	<div id="mstatus" class="floatright" style="height:20px;"></div>
+        </div>
+        <div style="margin-top:20px;" class="floatright">
+        	<input type="button" value="查看配货路由"  class="buttonclass3" onclick="javascript:window.location.href='index.php?mod=pda_orderReceipt&act=pda_orderPickRoute'"  />
+        </div>
+	</div>	
+{include file = "footer.htm"}	

@@ -1,0 +1,1370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+			<OpenShipments xmlns="x-schema:OpenShipments.xdr">
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Chris Erickson</CompanyName>					
+									<ContactPerson>Chris Erickson</ContactPerson>					
+									<AddressLine1>3175 Vermillion St.</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Hastings</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>55033</PostalCode>					
+									<StateOrProvince>MN</StateOrProvince>								
+									<Phone>651 983 2241</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.4</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>460524</Reference1>					
+									<Reference2>7BJ59811XM9222102</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>240-LED Strobe Amber Emergency Warning Mini Strobe Light Bar Magnetic Base</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Diane Shattuck</CompanyName>					
+									<ContactPerson>Diane Shattuck</ContactPerson>					
+									<AddressLine1>4885 E Ogara Rd</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Harrison</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>83833-7660</PostalCode>					
+									<StateOrProvince>ID</StateOrProvince>								
+									<Phone>208 689 3658</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.4</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>460522</Reference1>					
+									<Reference2>5MK65459DN489220H</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>240-LED Strobe Amber Emergency Warning Mini Strobe Light Bar Magnetic Base</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Vanessa Ramos</CompanyName>					
+									<ContactPerson>Vanessa Ramos</ContactPerson>					
+									<AddressLine1>3909 W. Airport Frwy.</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Grand Prairie</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>75062</PostalCode>					
+									<StateOrProvince>TX</StateOrProvince>								
+									<Phone>214 460 8056</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.5</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>458402</Reference1>					
+									<Reference2>1AE22182L6359222B</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>ESY1 Fiber Black Eyelash Brush Eye Long Grower Magic Leopard Lashes Mascara New</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>10</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Donald Parenteau</CompanyName>					
+									<ContactPerson>Donald Parenteau</ContactPerson>					
+									<AddressLine1>421 Varney St</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Manchester</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>03102-4109</PostalCode>					
+									<StateOrProvince>NH</StateOrProvince>								
+									<Phone>603 315 3903</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.7</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>457260</Reference1>					
+									<Reference2>34U527524E405140E</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>3-LED Solar Powered Fence Gutter Light Outdoor Garden Yard Wall Pathway Lamp New</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>10</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>india Lyons Sparks</CompanyName>					
+									<ContactPerson>india Lyons Sparks</ContactPerson>					
+									<AddressLine1>2501 4th st w</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>dickinson</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>58601</PostalCode>					
+									<StateOrProvince>ND</StateOrProvince>								
+									<Phone>701 290 7418</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>2</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>455369</Reference1>					
+									<Reference2>4VM59153HM9050800</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>Paris Eiffel Tower Bathroom EVA Bath Shower Curtain Waterproof 71&quot;x71&quot;Long 	GT56</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Kim Ozee</CompanyName>					
+									<ContactPerson>Kim Ozee</ContactPerson>					
+									<AddressLine1>PO Box 523</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Pecatonica</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>61063-0523</PostalCode>					
+									<StateOrProvince>IL</StateOrProvince>								
+									<Phone>815 540 7154</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>2.1</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>450749</Reference1>					
+									<Reference2>2E1990464P639210L</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>ESY1 Women&acute;s Chiffon Round Neck Lotus Leaf Summer Dress Midi Full Skirt Dress[Khaki]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Chanda McBay</CompanyName>					
+									<ContactPerson>Chanda McBay</ContactPerson>					
+									<AddressLine1>60 Sanlun Lakes Dr</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Hampton</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>23666-5526</PostalCode>					
+									<StateOrProvince>VA</StateOrProvince>								
+									<Phone>757 719 0187</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.3</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>449957</Reference1>					
+									<Reference2>65U48127M93416220</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>Womens Fashion 3/4 Sleeve Chiffon Ruffle Bowknot Mini Dress Demitoilet Clubwear[Asian L US M8-10.UK 10. AU 12]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>CARIBE CALLING CENTER</CompanyName>					
+									<ContactPerson>CARIBE CALLING CENTER</ContactPerson>					
+									<AddressLine1>105 JACKSON ST</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>LAWRENCE</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>01841-3822</PostalCode>					
+									<StateOrProvince>MA</StateOrProvince>								
+									<Phone>978 327 5593</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>2</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>449774</Reference1>					
+									<Reference2>2BK71229Y32829349</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>Electric Drop Bolt Door Lock DC 12V Deadbolt Strike Fail-Safe NC Timer Mode VE4A</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>3</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>MARK KARNUTH</CompanyName>					
+									<ContactPerson>MARK KARNUTH</ContactPerson>					
+									<AddressLine1>1243 Vista Dr</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>GURNEE</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>60031-5171</PostalCode>					
+									<StateOrProvince>IL</StateOrProvince>								
+									<Phone>847 710 0005</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.4</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>449726</Reference1>					
+									<Reference2>1L015547K69439848</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>240-LED Strobe Amber Emergency Warning Mini Strobe Light Bar Magnetic Base</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Norma Cortez</CompanyName>					
+									<ContactPerson>Norma Cortez</ContactPerson>					
+									<AddressLine1>112 Oliver st</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Pelham</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>35124</PostalCode>					
+									<StateOrProvince>AL</StateOrProvince>								
+									<Phone>205 807 9680</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>3.9</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>449499</Reference1>					
+									<Reference2>33L80848KM7275528</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>New Fashion Women Classic Grid Clutch Shoulder Bag Quilting Chain Cross 2012[White]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Raquel Rivera</CompanyName>					
+									<ContactPerson>Raquel Rivera</ContactPerson>					
+									<AddressLine1>US Legal Support 425 Park Ave, 5th </AddressLine1>					
+									<AddressLine2>floor</AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>New York</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>10022</PostalCode>					
+									<StateOrProvince>NY</StateOrProvince>								
+									<Phone>914 267 7851</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.7</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>447092</Reference1>					
+									<Reference2>7EN056461U616925G</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>New Hot Women Chiffon Pleated Retro Long Maxi Dress Elastic Waist Skirt HD23L[Yellow]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Heather Hoffman</CompanyName>					
+									<ContactPerson>Heather Hoffman</ContactPerson>					
+									<AddressLine1>PO Box 174</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Plainfield</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>54966-0174</PostalCode>					
+									<StateOrProvince>WI</StateOrProvince>								
+									<Phone>715 335 6417</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.8</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>445668</Reference1>					
+									<Reference2>7L196417H8467350S</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>Winter Women&acute;s Princess Fringed Fur Warm Mid-Calf Flat Snow Boots 5 Size Outdoor[Black,EU 40  US 9. AU 9 . UK 7]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>2</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Protek Trading Company</CompanyName>					
+									<ContactPerson>Protek Trading Company</ContactPerson>					
+									<AddressLine1>1542 W Gaylord St</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Long Beach</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>90813-1233</PostalCode>					
+									<StateOrProvince>CA</StateOrProvince>								
+									<Phone>562 437 2307</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.4</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>441055</Reference1>					
+									<Reference2>0J216864KR391972C</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>HD23L New Mens Casual Military Army Cargo Camo Combat Work Pants Trousers 30-36[Black,33]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Diana Botkoveli</CompanyName>					
+									<ContactPerson>Diana Botkoveli</ContactPerson>					
+									<AddressLine1>8 McCullough Dr</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>New Castle</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>19720-9000</PostalCode>					
+									<StateOrProvince>DE</StateOrProvince>								
+									<Phone>995 593 6037 12</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.6</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>440387</Reference1>					
+									<Reference2>53S6635980487494P</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>Fashion Women Simple Design Square Handbag Satchel Shoulder Purse Bag ESY1[Black]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Tanya Reshel</CompanyName>					
+									<ContactPerson>Tanya Reshel</ContactPerson>					
+									<AddressLine1>25820 S Macarthur Dr</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Tracy</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>95376-8127</PostalCode>					
+									<StateOrProvince>CA</StateOrProvince>								
+									<Phone>209 918 2025</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.3</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>439619</Reference1>					
+									<Reference2>73R05240EV1321136</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>South Korea Men’s Stylish Designed Hoodies Jacket/Coat/Sweatshirt[Black,Asian XXL US L]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>2</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>EVERETT CHESHEWALLA</CompanyName>					
+									<ContactPerson>EVERETT CHESHEWALLA</ContactPerson>					
+									<AddressLine1>13750 N Cincinnati Ave</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>SKIATOOK</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>74070-3343</PostalCode>					
+									<StateOrProvince>OK</StateOrProvince>								
+									<Phone>682 241 3932</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.7</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>437888</Reference1>					
+									<Reference2>99W80429DJ0786627</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>W3LE Doorway Gym Exercise Bar Power Twister Pull-up Chin-up Push-up Tools Silver</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Jevie Buck</CompanyName>					
+									<ContactPerson>Jevie Buck</ContactPerson>					
+									<AddressLine1>3320 Orcutt Rd Apt F</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Santa Maria</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>93455</PostalCode>					
+									<StateOrProvince>CA</StateOrProvince>								
+									<Phone>805 264 7189</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>2.6</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>437520</Reference1>					
+									<Reference2>2AM217347T2815433</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>NEW Women Bicycle Cycling Bike Short Underwear Pants Gel 3D Padded Hotsale Black[Asian XL.170/74A]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Nick Adams</CompanyName>					
+									<ContactPerson>Nick Adams</ContactPerson>					
+									<AddressLine1>24615 Los Adornos</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Yorba Linda</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>92887-5101</PostalCode>					
+									<StateOrProvince>CA</StateOrProvince>								
+									<Phone>714 692 3022</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>2</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>436622</Reference1>					
+									<Reference2>7JY05504U9744225T</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>Men&acute;s Slim Top Designed Sexy Hooded Zipper Hoodie Jacket Coat Outwear Tops W3LE[#4 Side zip coat,Dark blue,Asian XXL US L 1...</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>richard becker</CompanyName>					
+									<ContactPerson>richard becker</ContactPerson>					
+									<AddressLine1>2043 Pinewoods Way</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Spring</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>77386-2194</PostalCode>					
+									<StateOrProvince>TX</StateOrProvince>								
+									<Phone>713 725 6554</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.4</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>436214</Reference1>					
+									<Reference2>3HD31392F2237115T</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>New Black Universal Aluminum Sandwich Oil Adaptor Filter Cooler Plate Kit EP98</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>3</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Roy Farrell - Employee Benefit S</CompanyName>					
+									<ContactPerson>Roy Farrell - Employee Benefit S</ContactPerson>					
+									<AddressLine1>775 Belton Ave</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Norton Shores</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>49441-4701</PostalCode>					
+									<StateOrProvince>MI</StateOrProvince>								
+									<Phone>616 970 5262</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.3</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>436106</Reference1>					
+									<Reference2>24H729569R7505748</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>240 LED Car Truck Magnetic Roof Top Strobe Bar Block Amber/White Lamp Light EA77</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Jan Kent</CompanyName>					
+									<ContactPerson>Jan Kent</ContactPerson>					
+									<AddressLine1>PO Box 240</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>High Island</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>77623-0240</PostalCode>					
+									<StateOrProvince>TX</StateOrProvince>								
+									<Phone>409 286 2234</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>2.1</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>435769</Reference1>					
+									<Reference2>95W30809JG3945647</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>Hot  Red Lights Decorative Christmas Party Festival Twinkle String 10M 100 LED</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>10</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>MICHAEL ZAGLIFA</CompanyName>					
+									<ContactPerson>MICHAEL ZAGLIFA</ContactPerson>					
+									<AddressLine1>16505 S. NOTTINGHAM CT</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Orland Park</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>60467</PostalCode>					
+									<StateOrProvince>IL</StateOrProvince>								
+									<Phone>708 417 3529</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.4</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>435293</Reference1>					
+									<Reference2>9U355236K8998773A</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>Wall Garden Pathway Solar Powered 3 LED Fence Gutter Lamp Light Outdoor Garden</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>8</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Julie Myers</CompanyName>					
+									<ContactPerson>Julie Myers</ContactPerson>					
+									<AddressLine1>835 Woodtack Cove Way</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Henderson</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>89002-8295</PostalCode>					
+									<StateOrProvince>NV</StateOrProvince>								
+									<Phone>702 510 1315</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.9</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>425808</Reference1>					
+									<Reference2>76H36786CJ263181T</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>UTAR  Women&acute;s Metal Buckle Synthetic Leather Over The Knee High Flat Boots Shoes[Brown,EU 39  US 8. AU 8 . UK 6]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>2</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+
+<OpenShipment ShipmentOption="" ProcessStatus="">
+
+<Receiver>						
+									<CompanyName>Eunis Cruz</CompanyName>					
+									<ContactPerson>Eunis Cruz</ContactPerson>					
+									<AddressLine1>2349 Heidi Pl 1</AddressLine1>					
+									<AddressLine2></AddressLine2>					
+									<AddressLine3></AddressLine3>					
+									<City>Santa Rosa</City>					
+									<CountryCode>US</CountryCode>					
+									<PostalCode>95403-2532</PostalCode>					
+									<StateOrProvince>CA</StateOrProvince>								
+									<Phone>707 843 2429</Phone>									
+								</Receiver>
+
+<ShipFrom>											
+					<CompanyOrName>Shenzhen Sailvan Network TECHNOLOGY</CompanyOrName>					
+					<Attention>Miss Zhang</Attention>					
+					<Address1>Yaoan Ind Park No. 53</Address1>					
+					<Address2>Xiantian RD Shenzhen China</Address2>					
+					<Address3></Address3>					
+					<CountryTerritory>CN</CountryTerritory>					
+					<PostalCode>518116</PostalCode>					
+					<CityOrTown>ShenZhen</CityOrTown>									
+					<Telephone>86-075589619635</Telephone>									
+					<UpsAccountNumber>R9W668</UpsAccountNumber>								
+				</ShipFrom>
+
+<Shipment>
+									<ServiceLevel>EX</ServiceLevel>
+									<PackageType>CP</PackageType>					
+									<NumberOfPackages>1</NumberOfPackages>
+									<ShipmentActualWeight>1.7</ShipmentActualWeight>													
+									<DescriptionOfGoods>refer to invoice</DescriptionOfGoods>									
+									<Reference1>425650</Reference1>					
+									<Reference2>58A06157TW091392J</Reference2>										
+									<BillingOption>PP</BillingOption>									
+								</Shipment>
+
+<Invoice>
+									<ReasonForExport></ReasonForExport>					
+									<TermOfSale></TermOfSale>														
+									<InvoiceCurrency>USD</InvoiceCurrency>
+<LineItem>					
+										<Product>
+											<HarmonizedCode></HarmonizedCode>							
+											<ProductDescription>New Mens Boys Casual Harem Baggy Hip Hop Dance Sport Sweat Pants Slacks Trousers[Grey,L]</ProductDescription>
+											<UnitOfMeasure>PCS</UnitOfMeasure>			
+											<CountryOfOriginCode>CN</CountryOfOriginCode>			
+											<CurrencyCode>USD</CurrencyCode>			
+											<UnitPrice></UnitPrice>			
+										</Product>				
+										<NumberOfUnits>1</NumberOfUnits>				
+									</LineItem>
+</Invoice>
+</OpenShipment>
+</OpenShipments>

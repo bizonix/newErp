@@ -1,0 +1,38 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/onBlackList.js"></script>
+            <div class="servar">
+                <span>
+                   <form action="index.php?mod=Blacklist&act=insert" method="post" id="omAddPlatformList">
+						平台用户名称:<input id="platformUsername" class="validate[required] text-input" name="platformUsername" value="{$p_platformUsername}"/>
+					   用户全名:<input id="username"  class="validate[required] text-input" name="username" value="{$p_username}"/>
+					   用户Email:<input id="usermail" class="validate[required,custom[email]] text-input" name="usermail" value="{$p_usermail}"/>
+					   地址:<input id="street" class="validate[required] text-input" name="street" value="{$p_street}"/>
+					   电话:<input id="phone" class="validate[required] text-input" name="phone" value="{$p_phone}"/>
+					   平台:
+					  <select name="platformId" id="platformId" onchange="onchangeSite()">
+						{foreach $platfromIAN as $value}
+						 <option value="{$value.id}">{$value.platform}</option>
+						{/foreach}
+					</select>
+					<input type="submit" value="确定"/>
+					<input type="button" id="reback" value="返回"/><br/><br/>
+						帐号名: 
+								全选:<input name="all-select"  id="all-select" type="checkbox" checked="checked">
+								反选:<input name="inverse-select" id="inverse-select" type="checkbox"><br/><br/>
+						<p id="selectPlatformAccounts">
+						<div style="width:80%;Margin:0px auto;" id="selectPlatformAccount">
+						{foreach $account as $value}
+							<div style="width:10%;float:left" >
+							<input value="{$value.id}" type="checkbox" data-val="{$value.account}" name="account[]" checked="checked">{$value.account}
+							</div>
+						{/foreach}
+						</div>
+						</p>
+						<br />
+                   	   
+                   </form>
+                </span>
+
+            </div>
+{include file="footer.htm"}

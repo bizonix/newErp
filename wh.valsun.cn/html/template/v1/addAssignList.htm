@@ -1,0 +1,66 @@
+{include file='header.htm'}
+<script type="text/javascript" src="js/whGoodsAssign.js"></script>
+{include file='goodsoutnav.htm'}
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="./js/fancybox.js"></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script type="text/javascript" src="./js/ui/jquery-ui.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+	
+	<div class="servar wh-servar" style="padding:14px;">
+        <a class="gdhref" href="index.php?mod=whGoodsAssign&act=assignList">调拨单列表</a>
+    </div>
+	<br/>
+<div class="main">
+	<div class="fourvar order-fourvar feedback-fourvar products-servar wh-fourvar">
+	       <form class="navbar-form pull-left" onsubmit="return false;" >    
+        	<input type="hidden" id="hidden" name="userName" value="{$curusername}"/>
+            <input type='hidden' name="can_submit" value="1"/>
+        	<div style="float:left;width:500px;margin-left:20px">
+        	<table id="checkinfo" cellspacing="0" width="85%">
+                <thead>
+                    <tr class="title">
+                        <td width="50%">转出仓库:
+                            <select name="outStoreId">
+                                {foreach from=$storeLists item=list}
+                                    <option value="{$list.id}">{$list.whName}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+                        <td width="50%">转入仓库:
+                            <select name="inStoreId">
+                                {foreach from=$storeLists item=list}
+                                    <option value="{$list.id}">{$list.whName}</option>
+                                {/foreach}
+                            </select>
+                        </td>
+        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd">
+                        <td width="50%">SKU：<input class="sku" name="sku[]" type="text" class="mf validate[required] text-input" value=""></td>
+                        <td width="50%">数量：<input class="num" name="num[]" type="text" class="validate[required,,custom[integer],min[0]]" value="">&nbsp;&nbsp;&nbsp;</td>
+                    </tr>
+                </tbody>
+        
+        
+            
+            </table>
+        	<br>&nbsp;
+            <span style="width:margin:0 50px;">
+                添加人：<input readonly="" value="{$user.name}"/>
+                <input type='hidden' name="createdUid" value="{$user.uid}"/>
+            </span>
+        	</div>
+        	<div style="clear:both;">&nbsp;</div>
+        	<button style="margin:0 20px;" id="addone" type="button" value="新增一行" >新增一行</button>&nbsp;&nbsp;&nbsp;
+            <button style="margin:0 20px;" id="delone" type="button" value="减去一行" >减去一行</button>&nbsp;&nbsp;&nbsp;
+            <button style="margin:0 50px;" id="assign_submit" onclick="assignSubmit('add')" class="btn btn-default" value=""/>提交</button>
+         </form>
+    </div>
+</div>
+{include file='footer.htm'}

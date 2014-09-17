@@ -1,0 +1,24 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_scanAllSkuOrder.js"></script>
+	<!--div style="height:20px;margin-top:20px"-->
+		<div id="mstatus" class="floatright"></div>
+	<!--/div-->
+	<div id="divcontent" style="">
+
+        <div id="" class="floatleft">
+            <span>发货单号 : </span><input name="order" type="text" id="ebay_id" onkeydown="checkeBayID()" class="textinput" />
+			<input name="now_sku" type="hidden" id="now_sku" value=""/>
+			<input name="now_pname" type="hidden" id="now_pname" value=""/>
+			<input name="now_detailid" type="hidden" id="now_detailid" value=""/>
+	   </div>
+        <div id="detailcontent" class="floatleft">
+            <div id="showdetail" class="floatleft"></div>
+            <!--<div id="iscomplete" class="floatleft"></div>-->
+            <div id="scansku" class="floatleft"></div>
+        </div>
+        <div id="operationcontent" class="floatleft">
+        	<input type="button" style="display:none;" value="查询" id="inquire_sku" class="buttonclass floatleft" onclick="showWindow();" />
+            <input type="button" style="display:none;" value="下一订单" id="next_order_button" class="buttonclass floatleft" onclick="javascript:window.location.href='index.php?mod=pda_orderPicking&act=pda_orderPicking'" />
+        </div>
+	</div>
+{include file="footer.htm"}

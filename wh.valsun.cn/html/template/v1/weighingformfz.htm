@@ -1,0 +1,63 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/weighinginland.js">
+</script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<div class="appletclass">
+    <Applet id="app" code="a.class" height=357 width=400>
+        <PARAM NAME = ARCHIVE VALUE = "comm.jar">
+		<param name=myName value="kaka"><param name=mySex value="mail">
+		<param name=myNum value=200630170>
+		<param name=myAge value=22>
+    </Applet>
+</div>
+<div>
+    <div id="showMsgDiv" style="padding-left:80px; margin-top:10px;">
+        <span></span>
+    </div>
+    <div class="gd_divrow">
+        <div class="gd_labeldiv">
+            发货单号/配货单号:
+        </div>
+        <div calss="gd_input" style="dispaly:none;">
+            <input id="orderidinput" onkeypress="getSkuList(event)" class="orderidinput"/>
+        </div>
+        <div class="clear:both;">
+        </div>
+    </div>
+    <div class="gd_divrow " style="margin-top:5px;">
+        <div class="gd_labeldiv">
+            重量:
+        </div>
+        <div calss="gd_input">
+            <input onfocus="getWeight();" onkeypress="goexpressinput(event);" id="skunumberinput" class="orderidinput" />G
+        </div>
+        <div class="clear:both;">
+        </div>
+    </div>
+    <div class="gd_divrow " style="margin-top:5px;">
+        <div class="gd_labeldiv">
+            包装员:
+        </div>
+        <div calss="gd_input">
+            <select id="skulistselect" class="skulist">
+                {foreach $packinguser as $uval }<option value="{$uval.global_user_id}">{$uval.global_user_name}</option>
+                {/foreach}
+            </select>
+        </div>
+        <div class="clear:both;">
+        </div>
+    </div>
+    <div class="gd_divrow " style="margin-top:5px;">
+        <div class="gd_labeldiv">
+            录入挂号:
+        </div>
+        <div calss="gd_input">
+            <input onkeypress="scansubmit(event)" id="expressinput" class="orderidinput"/>
+        </div>
+        <div class="clear:both;">
+        </div>
+    </div>
+</div>
+{include file='footer.htm'}

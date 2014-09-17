@@ -1,0 +1,148 @@
+{include file="header.htm"}
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+            <div class="servar products-servar">
+                <span>
+                    {if isAccessAll('products','addProductsCategoryAppoint') == true}
+                	<button id="addProductsCategory">添加</button>
+                    {/if}
+                </span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action firefox-table" cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td width="5%">大类名称</td>
+                        <td width="">指派工程师</td>
+                        <td width="5%">是否有效</td>
+                        <td width="5%">添加人</td>
+						<td width="10%">添加时间</td>
+                        <td width="10%">删除</td>
+                    </tr>
+                    {foreach $productsCategoryAppointList as $value}
+                    <tr>
+                        <td>{$value['largeCategoryName']}</td>
+                        <td>{getPersonNameById($value['appointPEId'])}</td>
+                        <td>{if $value['off'] == 1}<span style="color: red;">无效</span>{else}有效{/if}</td>
+                        <td>{getPersonNameById($value['addUserId'])}</td>
+                        <td>{$value['addTime']|date_format:"Y-m-d H:i"}</td>
+                        <td>
+                            {if isAccessAll('products','delProductsCategoryAppoint') == true}
+                            <a style="color: #0000FF;" href="javascript:void(0)" cid="{$value['id']}" status="delProductsCategoryAppoint" >删除</a>                       
+                            {/if}
+                        </td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+            
+            <div id="addPEAppoint" title="添加指派记录" style="display:none;">
+        		<div>
+        			<div>
+        				<div>
+                        <table cellspacing="0" width="100%">
+                            <tr>
+                                <td><span style="color:#F00;">*</span>大类：</td>                        
+                                <td>
+                                <select id="largeCategoryId">
+                                        <option value=""> </option>
+                                    {foreach OmAvailableModel::getTNameList('pc_products_large_category', 'id,largeCategoryName', 'where is_delete=0 OR isOn=1') as $value}
+                                        <option value="{$value.id}">{$value.largeCategoryName}</option>
+                                    {/foreach}
+                                </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span style="color:#F00;">*</span>产品工程师：</td>
+                                <td>
+                                    <select id="appointPEId" name="appointPEId">
+                                        <option value=""> </option>
+                                       {foreach getAllPEInfo() as $value}
+                        				<option value="{$value['global_user_id']}">{$value['global_user_name']}</option>
+                                       {/foreach}
+                       			    </select>
+                                </td>
+                            </tr>
+                        </table>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+{include file="footer.htm"}
+{literal}
+<script type="text/javascript">       
+        $(function(){           
+            $("#addProductsCategory").click(function(){
+                $('#addPEAppoint').dialog({
+            		width : 400,
+            		height : 400,
+            		modal : true,
+            		autoOpen : true,
+            		show : 'drop',
+            		hide : 'explode',
+            		buttons : {
+            			'提交' : function() {
+            			    largeCategoryId = $('#largeCategoryId').val();
+                            appointPEId = $('#appointPEId').val();
+                            if('确定提交？'){
+                                $.ajax({
+                					type	: "POST",
+                                    async   : true,
+                					dataType: "json",
+                					url		: 'json.php?mod=products&act=addProductsCategoryAppoint&jsonp=1',
+                                    data	: { largeCategoryId:largeCategoryId,appointPEId:appointPEId },
+                					success	: function (msg){
+                					     alert(msg.errMsg);
+                					}		
+                				});
+                            }                                                  	
+            			},            
+            			'关闭' : function() {
+            				$(this).dialog('close');
+                            window.location.reload();								
+            			}
+            		}
+            	});
+            });
+            
+            $("a[status='delProductsCategoryAppoint']").click(function(){
+                cid = $(this).attr('cid');
+                if(cid == ''){
+                    alert('异常');
+                    return;
+                }
+                if(confirm('确定删除？')){
+                    $.ajax({
+    					type	: "POST",
+                        async   : true,
+    					dataType: "json",
+    					url		: 'json.php?mod=products&act=delProductsCategoryAppoint&jsonp=1',
+                        data	: { id:cid },
+    					success	: function (msg){
+                             alert(msg.errMsg);
+                             if(msg.errCode == 200){
+                                window.location.reload();
+                             }
+    					}		
+    				});
+                }                
+            });
+
+            
+        });      
+</script>
+{/literal}

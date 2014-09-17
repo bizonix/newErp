@@ -1,0 +1,50 @@
+{include file='header.htm'}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whIoInvoicesType.js"></script>
+<div class="servar wh-servar">
+	<span>
+		<button  id='whIoInvoicesTypeAdd' />新增单据类型</button>
+	</span>
+</div>
+<div class="main">
+   <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="10%">编号</td>
+                <td width="10%">单据类型名称</td>
+                <td width="20%">出入库记录类型</td>
+                <td width="10%">仓库</td>
+                <td width="10%">所属公司</td>
+                <td width="10%">出入库类型</td>
+                <td width="10%">备注</td>
+                <td width="20%" align="center">操作</td>
+            </tr>
+        </thead>
+        <!-- BEGIN list -->
+        <thead>
+        {foreach key=key_id from=$whIoInvoicesTypeArrList item=list}
+            <tr class="odd">	
+                 <input type="hidden" name="key_id" value="{$list.id}" />
+                 <td  width="10%">{$list.id}</td>
+                 <td  width="10%">{$list.invoiceName}</td>
+                 <td  width="20%">{$whIoTypeArrs[$list.ioTypeId]}</td>
+                 <td  width="10%">{$whNameArr[$list.storeId]}</td>
+                 <td  width="10%">{if $list.companyId  == 1}赛维网络{/if}</td>
+                 <td  width="10%">{if $list.ioType == 0}出库{elseif $list.ioType == 1}入库{/if}</td>
+                 <td  width="10%">{$list.note}</td>
+                 <td width="20%" align="center">
+	                 <a href="index.php?mod=warehouseManagement&act=whIoInvoicesTypeEdit&editId={$list['id']}">
+                	 <button  id='whIoInvoicesTypeEdit' value="" />修改</button>
+                 	 </a> 
+                     &nbsp;
+                     &nbsp;
+             		 <button  name='whIoInvoicesTypeDel' value="" />删除</button>
+                 </td>             
+            </tr>
+         {/foreach}
+        </thead>
+    <!-- END list -->
+    </table>
+
+</div>
+{include file='footer.htm'}

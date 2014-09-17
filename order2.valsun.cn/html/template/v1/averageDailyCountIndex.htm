@@ -1,0 +1,44 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/omaverageDailyCount.js"></script>
+<div class="servar">
+    <span>
+        <button id="add"> 添加SKU</button>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+            <td>平台</td>
+            <td>帐号</td>
+            <td>SKU</td>
+            <td>时间段</td>
+            <td>添加人员</td>
+            <td>更新时间</td>
+            <td>操作</td>
+        </tr>
+        {foreach $averageDailyCountList as $value}
+        <tr class="odd">
+            <td>{$value.platformId|get_platnamebyid}</td>
+            <td>{$value.accountId|get_accountnamebyid}</td>
+            <td>{$value.sku}</td>
+            <td>{$value.orderTime1|date_format:"Y-m-d H:i"}~{$value.orderTime2|date_format:"Y-m-d H:i"}</td>
+            <td>{$userInfo[$value.operatorId]['name']}</td>
+            <td>{if $value.updateTime}{$value.updateTime|date_format:"Y-m-d H:i"}{/if}</td>
+            <td>
+                <button class='update' pid='{$value.id}'>修改</button>
+                <button class='delete' pid='{$value.id}'>删除</button>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+
+<div class="bottomvar">
+    <div class="texvar">
+    </div>
+    <div class="pagination">
+        {$show_page}
+    </div>
+</div>
+{include file="footer.htm"}

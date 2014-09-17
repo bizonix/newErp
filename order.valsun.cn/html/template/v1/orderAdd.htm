@@ -1,0 +1,223 @@
+{include file='header.htm'}
+<script language="javascript" src="js/orderAdd.js"></script>
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<div class="servar" >
+<div id='Accountsbasic_searchSearchForm' style='' class="edit view search basic">
+	<form id="add" name="add" method="post" action="index.php?mod=orderAdd&act=sureAddOrder">
+	<table width="90%" cellspacing="0" cellpadding="0" border="0" >
+	<tr>
+		<td nowrap="nowrap" scope="row" >&nbsp;
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="login_txt_bt" style="font-size: 14px;font-weight: bold;">你可以先选择平台再输入买家名称自动获取用户信息</td>
+		</tr>
+		<tr>
+			<td><div id="mess"><span style="color:green;font-size:20px">{$state}<span></div></td>
+		</tr>
+		<tr>
+			<td valign="top" class="left_txt">&nbsp;<br>
+                <table id="jump" width="89%" border="0" cellpadding="0" cellspacing="0" class="login_txt" style="border:1px solid #CCC;">
+                <tr>
+                <td width="13%">平台</td>
+                <td width="37%">
+                    <select style="width:153px;" name="platform" id="platform" onchange="change_platform()">
+                    	 <option value=""> </option>
+                        {foreach from=$platform_lsit item=list}
+                         <option value="{$list.id}">{$list.platform}</option>
+                        {/foreach}
+                    </select>(必填)
+                </td>
+                <td></td>
+                <td></td>
+                </tr>
+                <tr>
+                <td width="13%">Full name</td>
+                <td width="37%"><input style="width:153px;" name="fullname" type="text" id="fullname" value=""> (必填) </td>
+                <td>账号：</td>
+                    <td><select style="width:153px;" name="account" id="account">
+                        {foreach from=$account_lsit item=list}
+                         <option value="{$list.id}">{$list.account}</option>
+                        {/foreach}
+                    </select> (必填)
+                </td>
+                </tr>
+                <tr>
+                    <td>Street1</td>
+                    <td><input style="width:153px;" name="street1" type="text" id="street1" value="" > (必填) <strong></strong></td>
+                    <td>买家ID</td>
+                    <td><input style="width:153px;" name="userid" type="text" id="userid" value=""  > (必填) <input type="button" class="input_button" value="获取用户信息" onclick="getuserinfo()"/></td>
+                </tr>
+
+                <tr>
+                    <td>Street2</td>
+                    <td><input style="width:153px;" name="street2" type="text" id="street2" value=""  ></td>
+                    <td width="15%">订单号</td>
+                    <td><input style="width:153px;" name="orderid" type="text" id="orderid" value="" > (必填) <strong></strong></td>
+                </tr>
+
+                <tr>
+                    <td>City</td>
+                    <td><input style="width:153px;" name="city" type="text" id="city" value="" > (必填)</td>
+                    <td>下单时间</td>
+                    <td><input style="width:153px;" name="ebay_createdtime" type="text" id="ebay_createdtime" value="" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  /> (必填)</td>
+                </tr>
+
+                <tr>
+                    <td>State</td>
+                    <td><input style="width:153px;" name="state" type="text" id="state" value="" > (必填)</td>
+                    <td>付款时间</td>
+                    <td><input style="width:153px;" name="ebay_paidtime" type="text" id="ebay_paidtime" value="" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"  /> (必填)</td>
+                </tr>
+
+                <tr>
+                    <td>Country</td>
+                    <td><input style="width:153px;" name="country" type="text" id="country" value="" > (必填)</td>
+                    <td>产品总金额</td>
+                    <td><input style="width:153px;" name="ebay_itemprice" type="text" id="ebay_itemprice" value="" > </td>
+                </tr>
+
+                <tr>
+                    <td>Postcode</td>
+                    <td><input style="width:153px;" name="zip" type="text" id="zip" value=""  > (必填)</td>
+                    <td>物流费用</td>
+                    <td><input style="width:153px;" name="ebay_shipfee" type="text" id="ebay_shipfee" value="" ></td>
+                </tr>
+
+                <tr>
+                    <td>Tel1</td>
+                    <td><input style="width:153px;" name="tel1" type="text" id="tel1" value=""  > (必填)</td>
+                    <td>订单金额</td>
+                    <td><input style="width:153px;" name="ebay_total" type="text" id="ebay_total" value="" > (必填)</td>
+                </tr>
+                <tr>
+                    <td>Tel2</td>
+                    <td><input style="width:153px;" name="tel2" type="text" id="tel2" value=""></td>
+                    <td>币种</td>
+                    <td><select style="width:153px;" id="ebay_currency" name="ebay_currency" onchange="othercurrency()">
+                        <option value="" >请选择</option>
+                        <option value="USD" >USD</option>
+                        <option value="RMB" >RMB</option>
+                        <option value="EUR" >EUR</option>
+                        <option value="GBP" >GBP</option>
+                        <option value="HKD" >HKD</option>
+                        <option value="AUD" >AUD</option>
+                        <option value="CAD" >CAD</option>
+                        <option value="其他" >其他</option>
+                    </select>
+                     (必填)
+                     <input style="display:none;" name="other_currency" type="text" id="other_currency" value="" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tel3</td>
+                    <td><input style="width:153px;" name="tel3" type="text" id="tel3" value="" ></td>
+                    <td>Transaction ID</td>
+                    <td><select style="width:153px;" name="ebay_ptid" id="ebay_ptid" onchange="otherptid()">
+                        <option value="" >请选择</option>
+                        <option value="T/T" >T/T</option>
+                        <option value="现金">现金</option>
+                        <option value="支付宝">支付宝</option>
+                        <option value="Escrow">Escrow</option>
+                        <option value="国内汇款">国内汇款</option>
+                        <option value="paypal">paypal</option>
+                        <option value="西联" >西联</option>
+                        <option value="支票" >支票</option>
+                        <option value="其他" >其他</option>
+                    </select>
+                     (必填)
+                     <input style="display:none" name="other_ptid" type="text" id="other_ptid" value="" >
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>买家邮箱1</td>
+                    <td><input style="width:153px;" name="ebay_usermail1" type="text" id="ebay_usermail1" value=""  > (必填)</td>
+                    <td>估算重量</td>
+                    <td><input style="width:153px;" name="orderweight" type="text" id="orderweight" value="" ></td>
+                </tr>
+                <tr>
+                    <td>买家邮箱2</td>
+                    <td><input style="width:153px;" name="ebay_usermail2" type="text" id="ebay_usermail2" value="" ></td>
+                    <td>买家选择发货物流</td>
+                    <td><select style="width:153px;" name="ebay_carrier" id="ebay_carrier" onchange="change_carrier()" >
+                        <option value="" >请选择</option>
+                        {foreach from=$Shiping item=list}
+                         <option value="{$list.id}">{$list.carrierNameCn}</option>
+                        {/foreach}
+                    </select>
+                     (必填)
+                    </td>
+                </tr>
+                <tr>
+                    <td>买家邮箱3</td>
+                    <td><input style="width:153px;" name="ebay_usermail3" type="text" id="ebay_usermail3" value="" ></td>
+                    <td>跟踪号：</td>
+                    <td><input style="width:153px;" name="ebay_tracknumber" type="text" id="ebay_tracknumber" value="" ></td>
+                </tr>
+
+                <tr>
+                    <td>订单备注</td>
+                    <td><textarea name="ebay_noteb" cols="50" rows="3" id="ebay_noteb"  ></textarea></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+	<td class="left_txt">
+		<table id="jump1"  width="80%" border="0" cellpadding="0" cellspacing="0" class="left_txt" style="border: #CCC 1px solid" >
+        <tr>
+            <td colspan="8" style="font-size: 14px;font-weight: bold;">添加产品</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+		<tr>
+            <td>sku 数量列</td><td><textarea name="sku_row" cols="30" rows="5" id="sku_row"  ></textarea></td><td valign="bottom"><input type="button" class="input_button" value="填充产品" onclick="fillsku()"/></td>
+        </tr>
+        <tr>
+            <td width="10%"></td>
+            <td width="10%" style="padding-left:70px;padding-right:22px;">SKU(必填)</td>
+            <td width="20%" style="padding-left:70px;">数量(必填)</td>
+            <td style="padding-left:60px;">产品名称</td>
+			<td>&nbsp;</td>
+        </tr>
+        <tr>
+			<td colspan="4" class="left_txt">
+				<table id="gallery" width="100%" border="0" cellpadding="0" cellspacing="0" class="left_txt">
+					<tr>
+						<td><a id="addrow" href="javascript:;" onclick="addImg(this);">[+]</a></td>
+						<td width="20%" ><input name="sku[]" type="text" id="tsku0"  bool="0"/></td>
+						<td width="20%" ><input name="qty[]" type="text" id="tqty0"  /></td>
+						<td ><input name="name[]" type="text" id="tname0"  /></td>
+					</tr>
+				</table>
+			</td>
+			<td>&nbsp;</td>
+         </tr>
+		<tr><td>&nbsp;</td></tr>
+        <tr>
+			<td>&nbsp;</td>
+        	<td colspan="2" style="padding-left:220px;"><input type="button" class="input_button" value="查看总数量" onclick="getallqty()"/></td>
+        </tr>
+		<tr><td>&nbsp;</td></tr>
+        </table>
+     </td>
+    </tr>
+ </table>
+</td>
+</tr>
+</table>
+
+<div class="clear"></div>
+	</div>
+	<button style="margin-top:10px;margin-left:10px;"  onclick="return check(this.form)"/>保存订单</button>
+</div>
+
+</form>
+{include file="footer.htm"}

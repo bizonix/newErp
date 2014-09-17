@@ -1,0 +1,126 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+
+<script type="text/javascript" src="./js/skuStock.js"></script>
+<div class="servar wh-servar" >
+<span>
+	<span>
+		单据编号：
+	</span>
+	<span style="color: red;">
+		{$whIoStore.id}
+	</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+
+<span>
+	<span>
+		单据编码：
+	</span>
+	<span style="color: red;">
+		{$whIoStore.ordersn}
+	</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<span>
+	<span>
+		单据类型：
+	</span>
+	<span style="color: red;">
+		{$whIoStore.invoiceName}
+	</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<span>
+	<span>
+		出/入库：
+	</span>
+	<span style="color: red;">
+		{if $whIoStore.ioType == 1}出库{else}入库{/if}
+	</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<span>
+	<span>
+		状态：
+	</span>
+	<span style="color: red;">
+		{if $whIoStore.ioStatus == 0}未审核{else}已审核{/if}
+	</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<span>
+	<span>
+		申请人：
+	</span>
+	<span style="color: red;">
+		{$whIoStore.userName}
+	</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<span>
+	<span>
+		创建时间：
+	</span>
+	<span style="color: red;">
+		{$whIoStore.createdTime|date_format:"Y-m-d H:i"}
+	</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<span>
+	<span>
+		结束时间：
+	</span>
+	<span style="color: red;">
+		{$whIoStore.endTime|date_format:"Y-m-d H:i"}
+	</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<span>
+	<span>
+		付款方式：
+	</span>
+	<span style="color: red;">
+		{$whIoStore.paymentMethods}
+	</span>
+</span>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<span>
+	<span>
+		仓库：
+	</span>
+	<span style="color: red;">
+		{$whIoStore.whName}
+	</span>
+</span>
+</div>
+
+<div class="main">
+
+	<table cellspacing="0" width="100%">
+		<tr class="title">
+			<td>sku</td>
+			<td>数量</td>
+			<td>成本</td>
+			<!--td>prices</td-->
+			<td>purchaseId</td>
+		</tr>
+		{foreach from=$whIoStoreDetailList item=value}
+		<tr class="odd">
+			<td>{$value.sku}</td>
+			<td>{$value.amount}</td>
+			<td>{$value.cost}</td>
+			<!--td>{$value.prices}</td-->
+			<td>{$value.purchaseId}</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="texvar">
+	</div>
+	<div class="pagination">
+	   {$show_page}
+	</div>
+</div>
+{include file="footer.htm"}

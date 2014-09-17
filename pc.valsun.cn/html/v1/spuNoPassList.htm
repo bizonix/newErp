@@ -1,0 +1,185 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">
+            					  <span>SPU：
+								   <input name="spu" type="text" id="spu" value="{$smarty.get.spu}"/>
+								   </span>
+                                  <span>|&nbsp;采购员：
+								   <select name="purchaseId" id="purchaseId" >
+								    <option value="0" > </option>
+								    {foreach getAllPurchaser() as $value}
+									<option value="{$value['userId']}" {if $smarty.get.purchaseId == $value['userId']}selected='selected'{/if}>{$value['userName']}</option>
+									{/foreach}
+								  </select>
+								   </span>
+                                   <span>|&nbsp;有无反审核：
+								   <select name="isCounterAudit" id="isCounterAudit" >
+								    <option value="0" > </option>
+									<option value="1" {if $smarty.get.isCounterAudit == 1}selected='selected'{/if}>无</option>
+									<option value="2" {if $smarty.get.isCounterAudit == 2}selected='selected'{/if}>有</option>
+								  </select>
+                                  </span>
+								   <span>|&nbsp;类别&nbsp;&nbsp;
+									<select name="sku_category" id="pid_one" onchange="select_one();">
+										<option value="0">请选择</option>
+										{foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid=0") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[0]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+									</select>
+									<span align="left" id="div_two" {if empty($pidArr[1])}style="width:auto; display:none"{/if}>
+                                        {if !empty($pidArr[1])}
+                                        <select name='pid_two' id='pid_two' onchange='select_two()'>
+                                        <option value='0'>请选择</option>
+                                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[0]}") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[1]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+                                        </select>
+                                        {/if}
+                                    </span>    
+									<span align="left" id="div_three" {if empty($pidArr[2])}style="width:auto; display:none"{/if}>
+                                        {if !empty($pidArr[2])}
+                                        <select name='pid_three' id='pid_three' onchange='select_three()' >
+                                        <option value='0'>请选择</option>
+                                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[1]}") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[2]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+                                        </select>
+                                        {/if}
+                                    </span>
+									<span align="left" id="div_four" {if empty($pidArr[3])}style="width:auto; display:none"{/if}>
+                                        {if !empty($pidArr[3])}
+                                        <select name='pid_four' id='pid_four'>
+                                        <option value='0'>请选择</option>
+                                        {foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid={$pidArr[2]}") as $value}
+										<option value="{$value['id']}" {if $value['id'] == $pidArr[3]}selected='selected'{/if}>{$value['name']}</option>
+										{/foreach}
+                                        </select>
+                                        {/if}
+                                    </span>
+								</span>
+                                <span><button id='seachNoPassSpuArchive'>搜索</button></span>
+                                     &nbsp;
+                                <span style="color: red;" id="ajaxStatus">{$smarty.get.status}</span>                                   
+            </div>
+                        <div class="main products-main">
+                <table class="products-action" cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td width="8%" >操作</td>
+                        <td width="5%" align="left">SPU</td>
+                        <td width="15%">类别</td>
+                        <td>采购员</td>
+                        <td>参考月销量</td>
+                        <td>估算重量(KG)</td>
+                        <td>起订量</td>
+                        <td>对应平台</td>
+						<td>采购价(RMB)</td>
+						<td>平台最低售价(USD)</td>
+						<td>运费(USD)</td>
+                        <td>SPU状态</td>					
+						<td>审核人</td>
+                        <td>审核时间</td>
+                        <td>反审核人</td>
+                        <td>反审核时间</td>						
+                    </tr>
+                    {foreach $spuNoPassList as $value}
+                    {if $value@iteration is odd by 1}
+                    <tr>
+                        <td rowspan="5">
+                        {if $value['isCounterAudit'] == 1 && isAccessAll('autoCreateSpu','auditSpuArchive') == true}    
+						<input type="button" value="反审核" cid="{$value['id']}" class="counterAuditSpuInNoPass"/>
+                        {/if}					
+                        </td>
+                		<td align="left">{$value['spu']}</td>
+                		<td name="api_goodsCategory" data-goodscategory="1">{getAllCateNameByPath($value['categoryPath'])}
+                        </td>
+                        <td>{getPersonNameById($value['purchaseId'])}</td>
+                        <td>{$value['referMonthSales']}</td>
+                        <td>{$value['spuCalWeight']}</td>
+                        <td>{$value['minNum']}</td>
+                        <td>{$value['platformName']}</td>
+                		<td>{$value['spuPurchasePrice']}</td>
+              		    <td>{$value['spuLowestPrice']}</td>
+						<td>{$value['freight']}</td>
+                		<td>{$value['spuStatusName']}</td>                        
+                        <td>{getPersonNameById($value['auditorId'])}</td>
+                        <td>{$value['auditTime']|date_format:"Y-m-d H:i"}</td>
+                        <td>{getPersonNameById($value['counterAuditorId'])}</td>
+                        <td>{$value['counterAuditTime']|date_format:"Y-m-d H:i"}</td>
+            		</tr>
+                    
+            		<tr>                    	     	              	
+                		<td colspan="16" align="left">描述：{$value['spuName']}</td>
+            		</tr>
+                    <tr>                    	     	              	
+                		<td colspan="16" align="left">备注：<span style="color: green;">{$value['spuNote']}</span></td>
+            		</tr>
+                    <tr>                    	     	              	
+                		<td colspan="16" align="left">链接：<a href="javascript:void(0)" onclick="window.open('http://{$value['lowestUrl']}')">最低价链接</a>&nbsp;|&nbsp;<a href="javascript:void(0)" onclick="window.open('http://{$value['bidUrl']}')">参考listing链接</a></td>
+            		</tr>
+                    
+                    <tr>   	              	
+                		<td colspan="16" align="left">审核不通过原因：<span style="color: red;">{$value['noPassReason']}</span></td>
+            		</tr>
+            		
+                    {else}
+                    <tr style="background-color: #F2F2F2;">
+                        <td rowspan="5">
+                        {if $value['isCounterAudit'] == 1 && isAccessAll('autoCreateSpu','auditSpuArchive') == true}    
+						<input type="button" value="反审核" cid="{$value['id']}" class="counterAuditSpuInNoPass"/>
+                        {/if}					
+                        </td>
+                		<td align="left">{$value['spu']}</td>
+                		<td name="api_goodsCategory" data-goodscategory="1">{getAllCateNameByPath($value['categoryPath'])}
+                        </td>
+                        <td>{getPersonNameById($value['purchaseId'])}</td>
+                        <td>{$value['referMonthSales']}</td>
+                        <td>{$value['spuCalWeight']}</td>
+                        <td>{$value['minNum']}</td>
+                        <td>{$value['platformName']}</td>
+                		<td>{$value['spuPurchasePrice']}</td>
+              		    <td>{$value['spuLowestPrice']}</td>
+						<td>{$value['freight']}</td>
+                		<td>{$value['spuStatusName']}</td>                        
+                        <td>{getPersonNameById($value['auditorId'])}</td>
+                        <td>{$value['auditTime']|date_format:"Y-m-d H:i"}</td>
+                        <td>{getPersonNameById($value['counterAuditorId'])}</td>
+                        <td>{$value['counterAuditTime']|date_format:"Y-m-d H:i"}</td>
+            		</tr>
+                    
+            		<tr style="background-color: #F2F2F2;">                    	     	              	
+                		<td colspan="16" align="left">描述：{$value['spuName']}</td>
+            		</tr>
+                    
+                    <tr style="background-color: #F2F2F2;">   	              	
+                		<td colspan="16" align="left">备注：<span style="color: green;">{$value['spuNote']}</span></td>
+            		</tr>
+                    <tr style="background-color: #F2F2F2;">   	              	
+                		<td colspan="16" align="left">链接：<a href="javascript:void(0)" onclick="window.open('http://{$value['lowestUrl']}')">最低价链接</a>&nbsp;|&nbsp;<a href="javascript:void(0)" onclick="window.open('http://{$value['bidUrl']}')">参考listing链接</a></td>
+            		</tr>
+                    <tr style="background-color: #F2F2F2;">   	              	
+                		<td colspan="16" align="left">审核不通过原因：<span style="color: red;">{$value['noPassReason']}</span></td>
+            		</tr>
+                    {/if}
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachNoPassSpuArchive').click(); 
+			}        
+        });       
+</script>

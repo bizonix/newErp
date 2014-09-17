@@ -1,0 +1,102 @@
+{include file="header.htm"}
+<link rel="stylesheet" href="./js/jquery/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="js/jquery/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script src="js/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery/ui/jquery-ui.min.js"></script>
+<script language="javascript" type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="./js/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<link rel="stylesheet" type="text/css" href="./js/fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+<script type="text/javascript" src="./js/pasteLabel.js"></script>
+<script language="javascript" src="js/inventory.js"></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script type="text/javascript" src="./js/ui/jquery-ui.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+{include file='whNav.htm'}
+
+<div class="servar wh-servar">   
+   <!--form id="searchform" style="margin-left:25px;" class="navbar-form pull-left" action="./index.php?act=labelingList&mod=pasteLabel" method="POST"-->
+		&nbsp;&nbsp;&nbsp;贴标员：&nbsp;&nbsp;&nbsp;<select class="queryformselect" style="width:130px" id="checkUser" name="checkUser">
+        	<option value="0">请选择</option>
+			{foreach from=$tallyUser item=list}
+				<option value="{$list.global_user_id}" {if $list.global_user_id==$labelingUserId}selected{/if}>{$list.global_user_name}</option>
+			{/foreach}</select>
+			
+		贴标状态：&nbsp;&nbsp;&nbsp;<select class="queryformselect" style="width:100px" id="status" name="status">
+        	<option value="0">请选择</option>
+			<option value="1" {if $status==1}selected{/if}>进行中</option>
+			<option value="2" {if $status==2}selected{/if}>已完成</option>
+			</select>
+			
+        SKU:&nbsp;&nbsp;&nbsp;<input type="text" name="sku" value="{$sku}" id="sku"/>
+		开始日期：&nbsp;&nbsp;&nbsp;<input type="text" name="startdate" id="startdate" value="{$start}" />
+		结束日期：&nbsp;&nbsp;&nbsp;<input type="text" name="enddate" id="enddate" value="{$end}" />
+		<button  id='serch' value="" />搜 索</button>
+		<input type="button" class="input_button" onclick="exportStatusInfo()" value="导出到XLS" />
+    <!--/form-->
+		
+	
+    
+</div>
+
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="5%">分组号</td>
+				<td width="10%">批次号</td>
+                <td width="10%">sku</td>
+                <td width="5%">数量</td>
+				<td width="10%">打标员</td>
+                <td width="10%">打标时间</td> 
+                <td width="10%">贴标员</td>
+                <td width="10%">贴标时间</td>
+				<td width="15%">贴标完成状态</td>  
+				<td width="15%">操作</td>  
+            </tr>
+        </thead>
+        
+        <tbody>
+        {foreach key=key_id from=$lists item=list}
+            <tr class="odd">	          
+                 <td width="5%">{$list.id}</td>
+				 <td width="10%">{$list.batchNum}</td>
+                 <td width="10%">{$list.sku}</td>
+                 <td width="5%">{$list.printNum}</td>
+                 <td width="10%">{if !empty($list.printerId)}{$list.printerId|getUserNameById}{/if}</td>
+                 <td width="10%">{if !empty($list.printTime)}{$list.printTime|date_format:"%Y-%m-%d %H:%M:%S"}{/if}</td>
+				 <td width="10%">{if !empty($list.labelUserId)}{$list.labelUserId|getUserNameById}{/if}</td>
+                 <td width="10%">{if !empty($list.labelTime)}{$list.labelTime|date_format:"%Y-%m-%d %H:%M:%S"}{/if}</td> 
+				 <td width="15%">{if empty($list.labelUserId)}<font style="color:#F00">进行中···</font>{else}<font style="color:#0C0">完成</font>{/if}</td>	
+				 <td width="15%">{if empty($list.labelUserId)}<!--button class="del" gid="{$list.id}" disabled="disabled">删除</button-->{else}<button class="clear" gid="{$list.id}">清空</button><button class="edit" gid="{$list.id}" gname="{$list.labelUserId|getUserNameById}">修改</button>{/if}</td>					 
+            </tr>
+         {/foreach}
+        </tbody>
+  
+    </table>
+	<div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+		{$pagestr}
+	</div>
+</div>
+<div id="form-edit-dialog" title="修改该用户信息" class="dsn" style="display:none;">
+<form action="" method="post" enctype="multipart/form-data" id="edituserform" title="修改该贴标人信息">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+    	<td width="30%"><span style="font-size:20px;">贴标人修改：</span></td>
+        <td align="right"><input type="text" name="old_username" id="old_username" style="width:100px; font-size:15px; background-color: #CCC" value="" disabled="disabled"  /> </td>
+        <td align="center"><span style="font-size:20px;">~~</span></td>
+        <td align="left">        	
+        	<input type="text" name="edit_username" id="edit_username" style="width:100px; font-size:15px;" value=""  />
+        </td>
+    </tr>
+    <tr>
+    	<td colspan="4">
+        	<div id = "errorLog" style="font-size:15px; color:#F00" ></div>
+        </td>
+    </tr>
+</table>
+</form >
+</div>
+{include file='footer.htm'}

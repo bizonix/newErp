@@ -1,0 +1,147 @@
+{include file='header.htm'}
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script type="text/javascript" src="./js/ui/jquery-ui.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+{include file='whNav.htm'}
+<script language="javascript" src="js/inventory.js"></script>
+<script language="javascript" src="js/invOperate.js"></script>
+ <div class="servar wh-servar">
+ <span>
+	<button  id='waitinv' value="" />盘点申请列表</button>
+</span>
+<span>
+	<button  id='inv' value="" />盘点</button>
+</span>
+<span>
+	<button  id='invlist' value="">盘点列表</button>
+</span>
+<span>
+	<button  id='invreason' value="">盘点原因</button>
+</span>
+<span>
+	<button  id='invcond'>盘点条件</button>
+</span>
+</div>
+<br/>
+<div class="servar wh-servar">
+	<span>
+		盘点员：
+		<select style="" id="invPeople" name="invPeople">
+			<option value="">请选择</option>
+			{foreach from=$iqc_user item=list}
+				<option value="{$list.global_user_id}" {if $list.global_user_id==$invPeople}selected{/if}>{$list.global_user_name}</option>
+			{/foreach}
+		</select>
+	</span>
+	&nbsp;&nbsp;
+	<span>
+		sku：<input type="text" id="sku" value="{$sku}" />
+	</span>
+	&nbsp;&nbsp;
+	<span>
+		盘盈/亏：
+		<select style="" id="invType" name="invType">
+			<option value="">请选择</option>
+			<option value="1" {if $invType==1}selected{/if}>盘盈</option>
+			<option value="2" {if $invType==2}selected{/if}>盘亏</option>
+		</select>
+	</span>
+	&nbsp;&nbsp;
+	<span>
+		状态：
+		<select style="" id="auditStatus" name="auditStatus">
+			<option value="3" {if $auditStatus==3}selected{/if}>请选择</option>
+			<option value="0" {if $auditStatus==0}selected{/if}>未审核</option>
+			<option value="1" {if $auditStatus==1}selected{/if}>通过</option>
+			<option value="2" {if $auditStatus==2}selected{/if}>拒接</option>
+		</select>
+	</span>
+	&nbsp;&nbsp;
+	<span>
+		日期：<input type="text" id="startdate" value="{$startdate}" />
+	</span>
+	<span>
+		<input type="text" id="enddate" value="{$enddate}" />
+	</span>
+	<span>
+		<button  id='serch' value="">搜索</button>
+	</span>
+	<span>
+		<button id="" onclick="exportStatusInfo()">导出到XLS</button>
+	</span>
+	<br/>
+	<span>
+		<button  id='allpass' value="">通过</button>
+   </span>
+   &nbsp;&nbsp;&nbsp;&nbsp;
+   <span>
+		<button  id='allnopass' value="">拒绝</button>
+   </span>
+   &nbsp;&nbsp;&nbsp;&nbsp;
+   <span>
+		<button  id='editNote' value="">修改备注</button>
+   </span>
+   <br/>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td><input type="checkbox" class="checkall"/></td>
+			<td>SKU</td>
+			<td>旧ERP系统数量</td>
+			<td>盘点数量</td>
+			<td>盘点调整</td>
+            <td>等待上架</td>
+            <td>料号单价</td>
+			<td>仓位</td>
+			<td>盘点员</td>
+			<td>采购员</td>
+			<td>盘点日期</td>
+			<td>盘点原因</td>
+			<td>状态</td>
+            <td>备注</td>
+			<td>操作</td>
+		</tr>
+		{foreach from=$inventory_info item=list}
+		<tr class="odd">
+				<td><input type="checkbox" class="invselect" name="invselect" value="{$list.id}"/></td>
+				<td>{$list.sku}</td>
+				<td>{$list.systemNums}</td>	
+				<td>{$list.invNums}</td>
+				<td>{if $list.invType==2}-{$list.adjustNums}{else}{$list.adjustNums}{/if}</td>
+                <td>{$list.wait_whself}</td>
+                <td>{$list.goodsCost}</td>
+				<td>{$list.location}</td>
+				<td>{$list.invPeople|getUserNameById}</td>
+				<td>{$list.purchaseName}</td>
+				<td>{$list.invTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+				<td>{$reason[$list.id]}</td>
+				<td>{if $list.auditStatus==0}待审核{elseif $list.auditStatus==1}通过{else}拒绝{/if}</td>
+                <td>{$list.remark}</td>
+				<td>{if $list.auditStatus==0}<button  class="passs" tid="{$list.id}"/>通过</button>  <button  class="nopass" tid="{$list.id}"/>拒绝</button>{/if}</td>
+		</tr>
+		{foreachelse}
+		<tr class="odd">
+				<td colspan="9">没有搜索值！</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination" id="spage">
+		{$show_page}
+	</div>
+</div>
+<!-- 盘点备注div-->
+ <div id="edit_note" title="添加盘点备注" style="display:none;">
+	<form id="edit_note" method="POST" action="" enctype="multipart/form-data">
+		<table id="show_note" width="100%" border="1" cellpadding="0" cellspacing="0">
+			<thead><tr width='20%'><td>SKU</td><td width="100%">备注内容</td></tr></thead>
+			<tbody></tbody>
+		</table>
+	</form>
+</div>
+<!--end-->
+{include file='footer.htm'}

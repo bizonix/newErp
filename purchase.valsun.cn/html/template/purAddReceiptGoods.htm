@@ -1,0 +1,145 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">                
+    	您的位置：<a href="index.php?mod=purToWh&act=index">收货管理</a>>>采购员手工录入收货信息
+    </div>     
+</div>            
+<div class="main underline-main">
+<table width="50%" border="0" cellpadding="0" cellspacing="0" style=" text-align:inherit; padding-left:40px;" >
+    <tr>
+        <td>订单号</td>
+        <td>
+			<input name="txt_ordersn" type="text" id="txt_ordersn" />
+			<input type="hidden" value="{$dataInfo.id}" id="hid_id" />
+		</td> 
+        <td>料号</td>
+        <td><input name="txt_sku" type="text" id="txt_sku" /></td>             
+    </tr>
+	<tr>                          
+        <td>采购时间</td>
+        <td><input name="txt_purtime" type="text" id="txt_purtime" onclick="WdatePicker()" value="{$nowTime}"  /></td>
+         <td>供应商</td>
+        <td><input name="txt_parnter" type="text" id="txt_parnter"  /></td>
+    </tr>
+    <tr>                          
+        <td>订货数量</td>
+        <td><input name="txt_purcount" type="text" id="txt_purcount"  /></td>
+		 <td>订货价格</td>
+        <td><input name="txt_purprice" type="text" id="txt_purprice" /></td>        
+    </tr>
+    <tr>                                        
+		<td>订货备注</td>
+        <td><input name="txt_purnote" type="text" id="txt_purnote" /></td>
+		<td></td> 
+        <td></td>
+    </tr>
+    <tr>
+        <td><input name="addInfo" type="button" value="保存" id="button_submit" /></td>
+        <td colspan="3">&nbsp;</td>
+    </tr>
+</table>                      
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}
+
+<script>
+{literal}
+$(document).ready(function(){
+	$('#txt_ordersn').focus();
+})
+$('#txt_ordersn').keydown(function(event){
+	if(event.keyCode == 13){ 
+		$('#txt_sku').focus();
+	}
+})
+$('#txt_sku').keydown(function(event){
+	if(event.keyCode == 13){ 
+		$('#txt_purtime').focus();
+	}
+})
+$('#txt_purtime').keydown(function(event){
+	if(event.keyCode == 13){ 
+		$('#txt_parnter').focus();
+	}
+})
+$('#txt_parnter').keydown(function(event){
+	if(event.keyCode == 13){ 
+		$('#txt_purcount').focus();
+	}
+})
+$('#txt_purcount').keydown(function(event){
+	if(event.keyCode == 13){ 
+		$('#txt_purprice').focus();
+	}
+})
+$('#txt_purprice').keydown(function(event){
+	if(event.keyCode == 13){ 
+		$('#txt_purnote').focus();
+	}
+})
+$('#button_submit').click(function(e){
+    e.preventDefault();
+	var obj         = {};
+	var data        = [];
+	var regnum      = /^[0-9]+$/; 
+	var regprice    = /^([0-9]+|[0-9]+\.[0-9]+)$/;
+	var id          = $('#hid_id').val();
+	var ordersn   	= $.trim($('#txt_ordersn').val());
+	var sku       	= $.trim($('#txt_sku').val());
+    var parnter     = $.trim($('#txt_parnter').val());     
+    var purcount    = $.trim($('#txt_purcount').val());
+    var purtime     = $.trim($('#txt_purtime').val());
+	var purprice    = $.trim($('#txt_purprice').val());   
+    var purnote     = $.trim($('#txt_purnote').val());
+	if(ordersn == '') {        
+        alertify.error('订单号不能为空');
+		$('#txt_ordersn').focus();
+        return false;
+    }
+    if(sku == '') {        
+        alertify.error('sku不能为空');
+		$('#txt_sku').focus();
+        return false;
+    }
+	if(parnter == '') {        
+        alertify.error('供应商不能为空');
+		$('#txt_parnter').focus();
+        return false;
+    }
+	if(!regnum.test(purcount)) {        
+        alertify.error('订货数量录入不合法');
+		$('#txt_purcount').focus();
+        return false;
+    }
+	if(!regprice.test(purprice)) {        
+        alertify.error('订货价格录入不合法');
+		$('#txt_purprice').focus();
+        return false;
+    } 
+	obj.ordersn 		= ordersn;
+	obj.sku     		= sku;
+	obj.parnter		 	= parnter;
+	obj.purcount 		= purcount;
+	obj.purprice 		= purprice;
+	obj.purnote  		= purnote;
+	obj.purtime         = purtime;
+	data.push(obj);
+    var url  = "json.php?mod=purToWh&act=add";  
+	$.post(url, {"data":data} , function(rtn){        
+		var code = rtn.code;
+		var msg  = rtn.msg;
+		if(code == 1){
+			alertify.alert(msg,function(){
+			   	window.location.reload(); 
+			}); 
+		}else{
+            alertify.error(msg); 
+		}
+     },"json");
+});
+
+{/literal}
+</script>
+
+            

@@ -1,0 +1,157 @@
+{include file="header.htm"}
+	<div class="fourvar">
+    	<div class="pathvar">
+        	您的位置：<a href="index.php?mod=unusualOrder&act=index">异常到货处理</a>&nbsp;>>&nbsp;不良品列表
+        </div>
+		<div class="pagination">
+            {$pageStr}
+        </div>
+    </div>
+	 <div class="servar products-servar">
+	 	<span>
+			料号:<input type="text" class="ser_sku" value="{$ser_sku}"/>
+        </span>
+		<span>状态:
+			<select class="ser_status">
+				<option value=''>请选择</option>
+				<option value='0' {if ($ser_status=='0')} selected="selected"{/if}>待处理</option>
+				<option value='2' {if ($ser_status=='2')} selected="selected"{/if}>处理完毕</option>
+			</select>
+        </span>
+		 <span>时间类型:
+			<select class="ser_timetype">
+				<option value='0'>请选择</option>
+				<option value='1' {if ($ser_timetype=='1')} selected="selected"{/if}>首次处理时间</option>
+				<option value='2' {if ($ser_timetype=='2')} selected="selected"{/if}>最后处理时间</option>
+			</select>
+			开始时间：<input type="text" class="startTime" onclick="WdatePicker()"  value = "{$ser_startTime}"/>
+		</span>
+		<span>
+			结束时间：<input type="text" class="endTime" onclick="WdatePicker()"  value = "{$ser_endTime}"/>
+		</span>
+		 <span>
+			<a href="javascript:void(0);" class="search">搜 索</a>
+		</span>
+    </div>
+	<div class="main feedback-main underline-main "">
+    	<table cellspacing="0" width="100%" class="products-action">
+        	<tr class="title purchase-title">
+				<th>检测样品记录编号</th>
+				<th>spu</th>
+				<th>sku</th>
+				<th>不良品数量</th>
+				<th>已处理数量</th>
+				<th>不良品状态</th>
+				<th>备注</th>
+				<th>首次处理时间</th>
+				<th>最后处理时间</th>
+				<th>操作</th>
+            </tr>
+			{section name=v loop=$list}
+			<tr>
+				<td>{$list[v]['infoId']}</td>
+				<td>{$list[v]['spu']}</td>
+				<td>{$list[v]['sku']}</td>
+				<td>{$list[v]['defectiveNum']}</td>
+				<td>{$list[v]['processedNum']}</td>
+				<td>{if $list[v]['defectiveStatus'] == 0}待处理{elseif $list[v]['defectiveStatus'] == 1}已审核{elseif $list[v]['defectiveStatus'] == 2}处理完毕{/if}</td>
+				<td>{$list[v]['note']}</td>
+				<td>{$list[v]['startTime']|date_format:"Y-m-d H:i"}</td>
+				<td>{$list[v]['lastModified']|date_format:"Y-m-d H:i"}</td>
+				<td>
+					{if $list[v]['defectiveStatus'] != 2}
+					<input type="button" class="scrapped" value="报废" data-id="{$list[v]['id']}" />
+                    <input type="button" class="interhandle" value="内部处理" data-id="{$list[v]['id']}" />
+                    <input type="button" class="return" value="移至待退回" data-id="{$list[v]['id']}" />
+					{/if}
+               </td>
+            </tr>
+			{/section}
+         </table>
+     </div>
+     <div class="bottomvar">
+     	<div class="pagination">
+			{$pageStr}
+        </div>
+     </div>
+{include file="footer.htm"}
+<input type="hidden" value="{$userid}" id="userid" />
+<script type="text/javascript">
+{literal}
+$("#checkAll").click(function() {
+       var checkboxs = $('.skulist');
+		for(var i=0;i<checkboxs.length;i++){
+			if(checkboxs[i].checked == false){
+				checkboxs[i].checked = true;
+			}else{
+					checkboxs[i].checked = false;
+				}	
+		}
+})
+$(".servar.products-servar").keydown(function(e){
+	if(e.keyCode !== 13){
+		return;
+	}
+	$(".search").trigger("click")
+});
+$(".search").click(function(){
+	var sku 			= $.trim($('.ser_sku').val());
+	var timetype		= $.trim($('.ser_timetype').val());
+	var starttime 		= $.trim($('.startTime').val());
+	var endtime 		= $.trim($('.endTime').val());
+	var status 			= $.trim($('.ser_status').val());
+	var purid       	= $('#userid').val();
+	if(timetype!=0&&(starttime==''||endtime=='')){
+		alertify.error('请选择时间');
+		if(starttime==''){
+			$('.startTime').focus();
+		}else if(endtime==''){
+			$('.endTime').focus();
+		}
+		return false;
+	}
+	if(timetype==0&&(starttime!=''||endtime!='')){
+		alertify.error('请选择搜索时间类型');
+		return false;
+	}
+	if(starttime>endtime){
+		alertify.error('时间范围有误,请确认');
+		return false;
+	}
+	window.location.href = "index.php?mod=badGood&act=index&sku="+sku+'&startTime='+starttime+'&endTime='+endtime+'&status='+status+'&timetype='+timetype+'&purid='+purid;
+})
+
+$('.return').click(function(){
+	var id 			 	= $(this).data('id');
+	var infoId 			= $(this).data('infoid');
+	var spu 			= $(this).data('spu');
+	var sku 			= $(this).data('sku');
+	var defectiveNum 	= $(this).data('defectivenum');
+	var processedNum 	= $(this).data('processednum');
+	window.location.href = "index.php?mod=badGood&act=handleGood&id="+id+'&type=return';
+})
+
+$('.scrapped').click(function(){
+	var id 			 	= $(this).data('id');
+	var infoId 			= $(this).data('infoid');
+	var spu 			= $(this).data('spu');
+	var sku 			= $(this).data('sku');
+	var defectiveNum 	= $(this).data('defectivenum');
+	var processedNum 	= $(this).data('processednum');
+	window.location.href = "index.php?mod=badGood&act=handleGood&id="+id+'&type=scrapped';
+})
+
+$('.interhandle').click(function(){
+	var id 			 	= $(this).data('id');
+	var infoId 			= $(this).data('infoid');
+	var spu 			= $(this).data('spu');
+	var sku 			= $(this).data('sku');
+	var defectiveNum 	= $(this).data('defectivenum');
+	var processedNum 	= $(this).data('processednum');
+	window.location.href = "index.php?mod=badGood&act=handleGood&id="+id+'&type=interhandle';
+})
+
+           
+	
+{/literal}
+</script>

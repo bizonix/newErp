@@ -1,0 +1,73 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<style type="text/css">
+#areadiv{
+	border:#CCC solid;
+	height:700px;
+	margin: 5px 5px;
+	position:relative;
+}
+.borderclass{
+	border:#CCC solid 2px;
+	float:left;
+	bottom:
+}
+</style>
+<script type="text/javascript" src="./js/whAreaList.js"></script>
+<div class="servar wh-servar">
+	<button id="positionIndex" onclick="update_area_route()">更新区域索引</button>
+	<span>注:点击区域添加对应位置的区域[单击进入对应仓位列表；双击编辑区域名称]</span>
+    <!--span>
+		<button id='warehouseAdd' />新增区域</button>
+    </span-->
+</div>
+<div class="main">
+	<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+        {section name="loop2" loop=$row_position_cloumns}
+        <tr>
+            {section name="loop3" loop=$row_position_nums}
+                {$x = $smarty.section.loop3.index}
+                {$y = $smarty.section.loop2.index}
+                {$area = "($x,$y)"}
+                <td>
+                    <div style="width:56px" axis_x="{$x}" axis_y="{$y}">								           
+                    <button class="areaname" style="display:block" id="{$x}_{$y}" store="{$storeId}" areaId="{if $area_id_arr[$area]}{$area_id_arr[$area]}{/if}" floorId="{$floorId}" >{if $area_arr[$area]}{$area_arr[$area]}{else}区域{/if}</button>
+                    </div>
+                </td>
+            {/section}
+        </tr>
+        {/section}
+                <!--/table>
+            </td>
+            <td><div style="width:10px; text-align:center;">竖通道</div></td-->
+        </tr>
+    </table>
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}
+<form id="warehouseAddForm" name="warehouseAddForm" action="index.php?mod=orderindex&act=applyTheLineEUBTrackNumber" enctype="multipart/form-data" title="添加区域" method="post" style="display:none">
+<table cellpadding='0' cellspacing='0' width='100%' border='0'>
+	<tr>
+		<td width="30%"><span>仓位名称</span></td><td width="70%"><input type="text" name="whareaname" id="whareaname" value="" /></td>
+    </tr>
+    <tr>
+		<td width="30%"><span>区域开始x坐标</span></td><td width="70%"><input type="text" name="start_x_alixs" id="start_x_alixs" value="" /></td>
+    </tr>
+    <tr>        
+        <td width="30%"><span>区域开始y坐标</span></td><td width="70%"><input type="text" name="start_y_alixs" id="start_y_alixs" value="" /></td>
+    </tr>
+    <tr>
+        <td width="30%"><span>区域结束x坐标</span></td><td width="70%"><input type="text" name="end_x_alixs" id="end_x_alixs" value="" /></td>
+    </tr>
+    <tr>
+        <td width="30%"><span>区域结束y坐标</span></td><td width="70%"><input type="text" name="end_y_alixs" id="end_y_alixs" value="" /></td>
+    </tr>
+    <tr>
+		<td colspan="2"><span id="thelineshowmsg"></span></td>
+   </tr>
+   <tr>	
+		<td colspan='2'><strong>如果指定列无数据，指定列将不会更新，如果有数据，指定列将被更新成功。</strong></td>
+   </tr>
+</table>
+</form>

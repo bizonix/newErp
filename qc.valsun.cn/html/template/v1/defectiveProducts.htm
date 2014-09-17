@@ -1,0 +1,64 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/defectiveProducts.js"></script>
+<div class="fourvar">
+{include file="iqcnav.htm"}
+	            <div class="texvar">
+
+                </div>
+                <div class="pagination">
+                	{$show_page}
+                </div>
+</div>
+            <div class="servar">
+                <span style="color: red;">{$status}</span>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td>编号</td>
+						<td>检测样品记录编号</td>
+						<td>spu</td>
+						<td>sku</td>
+						<td>不良品数量</td>
+						<td>已处理数量</td>
+						<td>不良品状态</td>
+						<td>备注</td>
+						<td>首次处理时间</td>
+						<td>最后处理时间</td>
+						<!--<td>操作</td>-->
+                    </tr>
+                    {foreach from=$defectiveProductsList item=value}
+                    <tr class="odd">
+                        <td>{$value.id}</td>
+						<td>{$value.infoId}</td>
+						<td>{$value.spu}</td>
+						<td>{$value.sku}</td>
+						<td>{$value.defectiveNum}</td>
+						<td>{$value.processedNum}</td>
+						<td>{if $value.defectiveStatus == 0}待处理{elseif $value.defectiveStatus == 2}处理完毕{/if}</td>
+						<td>{$value.note}</td>
+						<td>{$value.startTime|date_format:"Y-m-d H:i"}</td>
+						<td>{$value.lastModified|date_format:"Y-m-d H:i"}</td>
+						<!--<td>
+                            {if $value.defectiveStatus == 0}
+                            <input type="button" class="scrapped" defective_id="{$value.id}" info_id="{$value.infoId}" status="{$value.defectiveStatus}" value="报废"/>
+							{/if}
+                            {if $value.defectiveStatus == 0}
+                            <input type="button" class="inter" defective_id="{$value.id}" info_id="{$value.infoId}" status="{$value.defectiveStatus}" value="内部处理"/>
+                            {/if}
+                            {if $value.defectiveStatus == 0}
+                            <input type="button" class="return" defective_id="{$value.id}" info_id="{$value.infoId}" status="{$value.defectiveStatus}" value="待退回"/>
+                            {/if}
+                        </td>-->
+                    </tr>
+                {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

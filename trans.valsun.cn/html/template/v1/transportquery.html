@@ -1,0 +1,45 @@
+{header}
+<link rel="stylesheet" href="css/transportlist.css">
+<script language="javascript" src="js/trans_query.js"></script>
+{navdiv}
+<div class="miancontainer ">
+    <div class="t_query_form">
+        <form action="index.php?mod=query&act=getquerylist" method="post" onsubmit="return datavalidate();">
+            <p>
+                <span style="font-weight: bold">运费查询: </span>
+                <span>发货地: &nbsp;</span>
+                <select name="shaddr">
+                    <!-- BEGIN addr -->
+                    <option value="{id}">{name}</option>
+                    <!-- END addr -->
+                </select>
+                <span>发货方式: &nbsp;</span>
+                <select name="carrier">
+                    <option value="0">选择运输方式</option>
+                    <!-- BEGIN carrier -->
+                    <option value="{cid}">{carriername}</option>
+                    <!-- END carrier -->
+                </select>
+                
+                <span>国家: &nbsp;</span>
+                <select style="width: 280px" name="stdcountry">
+                    <!-- BEGIN countrylist -->
+                    <option title="{cncountryname}"  value="{cid}">{countryname}【{cncountryname}】</option>
+                    <!-- END countrylist -->
+                </select>
+                <span>邮编: &nbsp;</span>
+                <input  name="postcode" style="width: 80px;" type="text">
+                <span>重量: &nbsp;</span>
+                <input id="weightinput" name="weight" style="width: 50px;" type="text">KG
+                &nbsp;&nbsp;&nbsp;<input  type="submit" value="提交">
+            </p>
+        </form>
+    </div>
+    <div style="height: 365px;">
+        
+    </div>
+    <div>
+       
+    </div>
+</div>
+{footer}

@@ -1,0 +1,92 @@
+{include file='header2.htm'}
+{include file='omNav.htm'}
+<script language="javascript" src="js/topmenu.js"></script>
+
+<div class="servar" align="center">
+	<form action='index.php?mod=topmenu&act=insert' method="post" id="topmenuAddForm"> 
+		<p>
+			<label for="name" style="font-size:20px;">导航名称: </label>
+			<input  class="mf validate[required] text-input" id="name"  name="name" type="text" style="width:300px;height:30px;font-size:20px">
+			<span id="nameMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<label for="url" style="font-size:20px;">导航URL:&nbsp;</label>
+			<input class="mf validate[required] text-input" id="url"  name="url" type="text" style="width:300px;height:30px;font-size:20px">
+			<span id="urlMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		
+		<p>
+			<label for="position" style="font-size:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位置: </label>
+			<select  name="position"  id="position"   style="width:300px;height:30px;font-size:20px">
+				<option value="0">请选择</option>
+				<option value="3">操作导航</option>
+				<option value="2">二级导航</option>
+		        <option value="1">一级导航</option>
+			</select>(导航类型)
+			<!-- <span id="positionMsg" style="color: red;"></span><span style="color:#F00;">*</span> -->
+		</p>
+		<br/>
+		
+		<p id="modelSelect" style="display:none">
+			<label for="modeltopSelect" style="font-size:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;父级菜单:</label>
+			<select id="modeltopSelect" name="modeltopSelect"  style="width:150px;height:30px;font-size:20px;line-height:20px">
+				{foreach $top1 as $first}
+				<option value="{$first.id}">{$first.name}</option>
+				{/foreach}
+			</select>
+			<select id="modeltopSelect2" name="modeltopSelect2"  style="width:150px;height:30px;font-size:20px;line-height:20px">
+				{foreach $top2 as $tow}
+				<option value="{$tow.id}">{$tow.name}</option>
+				{/foreach}
+			</select>(请选择父级导航)
+		</p>
+		<p id="modelInput" style="display:none">
+			<label for="modeltopInput" style="font-size:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model名称:</label>
+			<input type="text" class="mf validate[required] text-input" id="modeltopInput" name="modeltopInput" style="width:300px;height:30px;font-size:20px"/>
+		(请输model名称)
+		</p>
+		<br/>
+		<p id="model2">
+			<label for="model" style="font-size:20px;">所属模块: </label>
+			<select id="model" name="model"  style="width:300px;height:30px;font-size:20px;line-height:20px">
+				<div style="line-height:17px;">
+				<option value="NULL">无</option>
+					{foreach $Topmenu as $key=>$third}
+					<option value='{$key}' class="second">|&nbsp;&nbsp;&nbsp;|-{$key}</option>
+						{foreach $third as $tpm}
+						<option  value='{$key}-{$tpm}' class="third">|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-{$tpm}</option>
+						{/foreach}
+					{/foreach}
+				</div>
+			</select>
+			<span id="modelMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		
+		
+		
+		
+		<p>
+			<label for="sort" style="font-size:20px;">&nbsp;&nbsp;&nbsp;&nbsp;排序: </label>
+			<input  class="mf validate[required,custom[number],min[0]] text-input" id="sort"  name="sort" type="text" style="width:300px;height:30px;font-size:20px">
+			<span id="sortMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		
+		<p>
+			<div style="width:300px;height:30px;font-size:20px;">
+			状态:&nbsp;<label class="radio inline"><input checked="checked" name="is_disable" value="1" type="radio" >启用</label>
+			<label class="radio inline"><input name="is_disable" value="0" type="radio" >禁用</label>
+			</div>
+			<!-- <span id="is_deleteMsg" style="color: red;"></span><span style="color:#F00;">*</span> -->
+		</p>
+		<br/>
+		<p>
+			<input type="submit" id="topmenuAddSumit" class="input_button" value="提交">
+			<input type="button" class="input_button" id='back' value="返回" />
+		</p>
+	</form>
+</div>
+{include file="footer.htm"}

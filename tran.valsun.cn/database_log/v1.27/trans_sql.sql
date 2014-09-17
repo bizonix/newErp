@@ -1,0 +1,10 @@
+ALTER TABLE `trans_track_number` ADD `toCity` VARCHAR(30) DEFAULT '' COMMENT '城市';
+ALTER TABLE `trans_track_number` ADD `toUserId` VARCHAR(30) DEFAULT '' COMMENT '收件人ID';
+ALTER TABLE `trans_track_number` ADD `toUserEmail` VARCHAR(50) DEFAULT '' COMMENT '收件人电子邮箱';
+ALTER TABLE `trans_track_number` ADD `toMarkTime` int(10) DEFAULT '0' COMMENT '标记发货时间';
+ALTER TABLE `trans_track_number` ADD `toEmailSend` tinyint(1) DEFAULT '0' COMMENT '是否已发送跟踪邮件，0没发送';
+ALTER TABLE `trans_track_number` ADD `fhTime` int(10) DEFAULT '0' COMMENT '复核时间';
+ALTER TABLE `trans_track_wedo_number` ADD `weight` decimal(10,4) DEFAULT '0.0000' COMMENT '重量';
+ALTER TABLE `trans_track_wedo_number` ADD `toCity` VARCHAR(30) DEFAULT '' COMMENT '城市';
+ALTER TABLE `trans_email_stat` ADD `MessageId` VARCHAR(100) DEFAULT '' COMMENT 'SES MID';
+ALTER TABLE `trans_email_stat` ADD `RequestId` VARCHAR(100) DEFAULT '' COMMENT 'SES RID';

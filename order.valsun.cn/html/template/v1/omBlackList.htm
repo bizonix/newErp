@@ -1,0 +1,94 @@
+{include file="header.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/onBlackList.js"></script>
+<div class="fourvar">
+	            <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+</div>
+            <div class="servar">
+                <span>
+					添加黑名单:
+                    <form action="index.php?mod=omBlackList&act=addBlackList" method="post" id="omAddPlatformList">
+							平台名称:<input id="platformUsername" name="platformUsername" value="{$platformUsername}"/>
+						   用户名:<input id="username" name="username" value="{$username}"/>
+						   用户Email:<input id="usermail" name="usermail" value="{$usermail}"/>
+						   地址:<input id="street" name="street" value="{$street}"/>
+						   电话:<input id="phone" name="phone" value="{$phone}"/>
+						   <br />
+						   平台:
+						  <select name="platformId" id="platformId" onchange="onchangeSite()">
+							{foreach $platform as $value}
+							<option value="{$value.id}" {if $platformId == $value.id}selected="selected"{/if}>{$value.platform}</option>
+							{/foreach}
+							</select>
+							<br />
+							帐号名: 
+									全选:<input name="all-select"  id="all-select" type="checkbox" checked="checked">
+									反选:<input name="inverse-select" id="inverse-select" type="checkbox"><br />
+							<d id="selectPlatformAccount">
+							{foreach $account as $value}
+								<input value="{$value.id}" type="checkbox" data-val="{$value.account}" name="account[]" checked="checked">{$value.account}
+							{/foreach}
+							</d>
+							<br />
+                    	   <input type="submit" value="确定"/>
+						   <input name="status" id="status" type="hidden" value="{$status}"/>
+                           <span style="color: red;">{$status}</span>
+                    </form>
+                </span>
+
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+						<td>编号</td>
+                        <td>平台名称</td>
+						<td>用户名</td>
+						<td>所属平台</td>
+						<td>用户邮箱</td>
+						<td>街道地址</td>
+						<td>电话</td>
+						<td>添加/修改时间</td>
+						<td>帐号</td>
+						<td>添加人</td>
+                        <td>操作</td>
+                    </tr>
+                    {foreach $omBlackList as $value}
+                    <tr class="odd">
+                        <td>{$value.id}</td>
+						<td>{$value.platformUsername}</td>
+                        <td>{$value.username}</td>
+						<td>
+						{foreach $platform as $v}
+						{if $v.id == $value.platformId}{$v.platform}{/if}
+						{/foreach}
+						</td>
+						<td>{$value.usermail}</td>
+						<td>{$value.street}</td>
+						<td>{$value.phone}</td>
+                        <td>{$value.addTime|date_format:"Y-m-d H:i"}</td>
+						<td>
+						{foreach $accountAll as $v}
+						{if $v.id == $value.account}{$v.account}{/if}
+						{/foreach}
+						</td>
+						<td>{$value.addUser}</td>
+                        <td>
+                            <button class='update' pid='{$value.id}'>修改</button>
+                            <button class='delete' pid='{$value.id}'>删除</button>
+                        </td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

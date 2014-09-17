@@ -1,0 +1,46 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+            </div>
+			<div class="servar products-servar">
+			<span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="main feedback-main">
+					<table class="products-action" width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+                            <td>SPU：
+                            <input value="{$spu}" disabled="disabled"/>
+							<input name="spu" id="spu" value="{$spu}" type="hidden"/>
+							</td>
+						</tr>
+                        <tr>
+                           	    <td>
+                                    类别:
+									<select name="sku_category" id="pid_one" onchange="select_one();">
+										<option value="0">请选择</option>
+										{foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid=0") as $value}
+										<option value="{$value['id']}">{$value['name']}</option>
+										{/foreach}
+									</select>
+									<span align="left" id="div_two" style="width:auto; display:none"></span>
+									<span align="left" id="div_three" style="width:auto; display:none"></span>
+									<span align="left" id="div_four" style="width:auto; display:none"></span>
+								</td>
+						</tr>
+                        <tr>
+                            <td><input type="button" value="提交" id="editAutoCreateSpu"/>
+							<input type="button" value="返回" id="back"/></td>
+						</tr>
+					</table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

@@ -1,0 +1,109 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=trackWarnNode&act=index">运输方式节点预警管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select name="carrierId" id="carrierId">
+			<option value=0>==全部运输方式==</option>
+			{foreach item=list from=$carrierList}
+			{if !$list.is_track }<option value="{$list.id}" {if $carrierId == $list.id}selected="selected"{/if}>{$list.carrierNameCn}</option>{/if}
+			{/foreach}
+		</select>
+	</span>
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='nodeName'{if ($type=='nodeName')} selected="selected"{/if}>节点名称</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=trackWarnNode&act=add">添加</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>运输方式名</th>
+			<th>渠道名称</th>
+			<th>节点名称</th>
+			<th>节点预警小时</th>
+			<th>节点关键词</th>
+			<th>创建时间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.carrierNameCn}</td>
+			<td>{if empty($list.channelId)}暂无{else}
+			{$channel = TransOpenApiModel::getCarrierChannel("",$list.channelId)}
+			{$channel[0]['channelName']}
+			{/if}
+			</td>
+			<td>{$list.nodeName}</td>
+			<td>{$list.nodeDays}</td>
+			<td>{$list.nodeKey}</td>
+			<td>{if empty($list.createTime)}暂无{else}{date('Y-m-d H:i:s',$list.createTime)}{/if}</td>
+			<td><a href="index.php?mod=trackWarnNode&act=modify&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info({$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+{literal}
+<script type="text/javascript">
+//搜索入口
+$("#search").click(function(){
+	var type = key = carrierId = hurl = surl = "";
+	carrierId  = $.trim($("#carrierId").val());
+	type  = $.trim($("#type").val());
+	key   = encodeURIComponent($.trim($("#key").val()));
+	hurl  = "index.php?mod=trackWarnNode&act=index";
+	if (carrierId!='0') {
+		surl += "&carrierId="+carrierId;
+	}
+	if (type!='0' && key!=''){
+		surl += "&type="+type+"&key="+key;
+	}
+	if (surl=='') {
+		alertify.error("搜索条件没选或搜索关键词不能为空！");
+		return false;
+	}
+	window.location.href = hurl+surl;
+});
+//删除入口
+function del_info(id){
+	var url  = web_url + "json.php?mod=trackWarnNode&act=delTrackWarnNode";
+	var data = {"id":id};
+	alertify.confirm("真的要删除吗？", function (e) {
+		if (e) {
+			$.post(url,data,function(res){
+				if(res.errCode == 0){
+					alertify.alert("删除成功！",function(){
+						window.location.reload();
+					});
+				}else {
+					 alertify.error(res.errMsg);
+				   }
+			}, "jsonp");
+		}
+	});
+}
+</script>
+{/literal}
+{include file="footer.htm"}

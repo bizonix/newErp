@@ -1,0 +1,48 @@
+{include file="header.htm"}
+<div class="main order-main" align="left">
+    <span></span>
+    <table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+	  <tr>
+		<td width="65%">
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+				<tr>
+                    <td><span style="font-size: 25px;">{$title}</span></td>
+                </tr>
+                <tr>
+					<td nowrap="nowrap" class='paginationActionButtons'>
+                    <form action="index.php?mod=excelImport&act=addOrUpdateSpuOverseaTaxOn" enctype="multipart/form-data" title="批量导入/更新SPU关税" method="post" target="_blank">
+						<table border="0"  cellpadding="10" cellspacing="1" bgcolor="#c0ccdd" id="content">
+                            <tr>
+                                <td>上传文件:</td>
+                                <td><input name="upfile" type="file"/></td>
+                                <td><input id="countryCode" name="countryCode" type="hidden" value="{$countryCode}"/>&nbsp;</td>
+                                <td><input id="submit" name="submit" type="submit" value="提交"/></td>
+                            </tr>
+  						</table>
+                    </form>
+					  <p>
+                         A1:SPU
+                         <br />
+                         B1:US关税（单位%,数据中请带上%）
+                         <br />
+                         <span style="color: red;">注意：数据从第二行开始有效，第一行为表头，系统不读取数据</span>
+                      	 <br />
+				    	 导入模板下载:<a href="" target="_blank">下载</a>
+                         <br />
+                         <br />
+                         <br />
+					  </p>
+
+                   </td>
+			    </tr>
+			</table>
+         </td>
+	</tr>
+    <tr>
+        <td>
+            <span id="printInfo"></span>
+        </td>
+    </tr>
+</table>
+</div>
+{include file="footer.htm"}

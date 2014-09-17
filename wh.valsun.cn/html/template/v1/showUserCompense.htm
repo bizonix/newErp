@@ -1,0 +1,39 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/usercompense.js"></script>
+<!--<div class="servar">
+	
+</div>-->
+<div class="main">
+    <div id="accordion">
+    	<h3>运输方式权限控制-{$uid|getUserNameById}</h3>
+        <div>
+		<input type="hidden" id="uid" name="uid" value="{$uid}" />
+        <p>      
+			全选:<input style="width:20px;padding-top:15px;" onclick="chooseornot(this)" type="checkbox" /><br/>
+			{foreach $shipingtypelist as $shitemval}
+				<input type="checkbox"  id="" {if in_array($shitemval.id,$shipArr)}checked='checked'{/if}  class="checkclass" value="{$shitemval.id}" />&nbsp;{$shitemval.carrierNameCn}&nbsp;&nbsp;&nbsp;
+			{/foreach}
+
+		</p>
+		<input type="button" value="提交" onclick="updateShiping();"/>
+        </div>
+		<h3>平台权限控制-{$uid|getUserNameById}</h3>
+        <div>
+		<input type="hidden" id="uid" name="uid" value="{$uid}" />
+        <p>            
+			{foreach $platformAccountList as $key=>$platformlist}
+				<input type="checkbox"  id="checkboxes_platform_{$key}" name="checkboxes_platform[]" value="{$key}" onclick="platformCheckBox({$key});" {if in_array($key,$powerPlatformList)}checked='checked'{/if}/>&nbsp;<b>{$platformlist.name}</b><br>&nbsp;&nbsp;&nbsp;&nbsp;
+				{foreach $platformlist.account as $k=>$account}
+						<input type="checkbox" class="checkplat"  id="checkboxes_account_{$k}" name="checkboxes_account_{$key}[]" value="{$k}" fatherkey="{$key}" {if in_array($k,$powerAccountList)}checked='checked'{/if}/>&nbsp;{$account}&nbsp;&nbsp;
+				{/foreach}
+				<br>
+			{/foreach}
+
+		</p>
+		<input type="button" value="提交" onclick="updatePlatform();"/>
+        </div>
+
+    </div>
+
+</div>
+{include file="footer.htm"}

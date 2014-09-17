@@ -1,0 +1,75 @@
+{include file="header.htm"}
+{include file="secendNav_tpl.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./css/page.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/listingsendemail.js"></script>
+<div class="topmenue" align="left">
+    ItemID:<input type="text" size="12" id="itemid" />
+    <button onclick="addItemId();" id="addItemId">添加ItemID</button>
+</div>
+<div class="topmenue" align="left">
+    <span id="showMsg" style="color:#0000FF" style="width:120px"></span>
+          ebay账号:<input type="text" size="20" id="ebayAccount" />
+		  邮箱账号:<input type="text" size="20" id="ebayEmail" />
+          邮箱密码:<input type="text" size="20" id="emailPassword" />
+    <button onclick="addEbayAccount();" id="addEbayAccount">添加账号</button>
+    <font style="font-size:8px; color:#FF0000">请务必填写正确的邮箱账号及密码</font>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tbody>
+            <tr class="title">
+                <td>ItemID</td>
+                <td>ebay账号</td>
+                <td>买家数</td>
+                <td>发送状态</td>
+                <td>发送邮件时间</td>
+                <td>发送买家数</td>
+                <td>添加人</td>
+                <td>添加时间</td>
+                <td>详情</td>
+            </tr>
+			{foreach $listInfo as $v}
+            <tr class="odd">
+                <td>{$v.itemId}</td>
+                <td>{$v.account}</td>
+                <td>{$v.totalqty}</td>
+                <td>
+                	{if $v.status == 1}<font style="color:#FF0000">未发送</font>
+                	{else}<font style="color:#00FF00">已发送</font>
+                	{/if}
+                </td>
+                <td>{if ($v.sendtime==0)}{else}{$v.sendtime|date_format:'%Y-%m-%d'}{/if}</td>
+                <td>{$v.sendqty}</td>
+                <td>{$v.adduser}</td>
+                <td>{$v.addtime|date_format:'%Y-%m-%d'}</td>
+                <td>
+                	<table cellspacing="0" width="100%">
+                		<tbody>
+				            <tr class="title">
+				                <td>userId</td>
+				                <td>email</td>
+				                <td>是否发送</td>
+				            </tr>
+				         	{foreach $detail[$v.itemId] as $vv}
+				            <tr class="odd">
+				                <td>{$vv.userId}</td>
+				                <td>{$vv.email}</td>
+				                <td>
+				                	{if $vv.status == 1}<font style="color:#FF0000">未发送</font>
+                					{else}<font style="color:#00FF00">已发送</font>
+                					{/if}
+                				</td>
+				            </tr>
+				            {/foreach}
+                	</table>
+                </td>
+            </tr>
+			{/foreach}
+        </tbody>
+    </table>
+	<div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+           {$pagestr}
+    </div>
+</div>
+{include file="footer.htm"}

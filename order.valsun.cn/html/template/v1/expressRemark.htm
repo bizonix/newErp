@@ -1,0 +1,82 @@
+{include file='headerNoNav.htm'}
+<script src="js/expressRemark.js"></script>
+<div align="left">
+    <div id="content" >
+    	{if $transportId == 9}
+        <div id="tabs-1">
+            <h2>FedEx备注【总金额：{$total}】{$showinfo}</h2>			
+            <form id="addFedexDescForm" name="addFedexDescForm" method="post" action="index.php?mod=expressRemark&act=index&jsonp=1&orderid={$orderid}&transportId={$transportId}&type=1" onSubmit="return check();">
+            <input type="hidden" name="action" value="addfedex" />
+            <table id="gallery-table" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+            <th></th>
+            <th scope='col' nowrap="nowrap">申报单价(数字)</th>
+            <th scope='col' nowrap="nowrap">数量(数字)</th>
+            <th scope='col' nowrap="nowrap">海关编码(不能为空)</th>
+            <th scope='col' nowrap="nowrap">品牌备注(没的可不填)</th>
+            <th scope='col' nowrap="nowrap">描述(不能含有中文)</th>
+            </tr>
+            {foreach key=rid item=remarklist name=foo1 from=$ExpressRemarkList}
+            <tr>
+            <td>{if $smarty.foreach.foo1.index == 0}<a href="javascript:void(0);" onclick="addImg(this);">[+]</a>&nbsp;{/if}<a href="javascript:void(0);" onclick="removeImg(this);">[-]</a></td>
+            <td><input name="price[]" type="text" value="{$remarklist.price}" /></td>
+            <td><input name="amount[]" type="text" value="{$remarklist.amount}" /></td>
+            <td><input name="hamcodes[]" type="text" value="{$remarklist.hamcodes}" /></td>
+            <td><input name="brand" {if $remarklist.isBrand == 1} type="checkbox" {/if} />是否有牌
+            <input name="branddescrip[]" type="text" value="{$remarklist.branddescrip}" />
+            </td>
+            <td><textarea name="description[]" cols="35" rows="3">{$remarklist.description}</textarea></td>
+            </tr>
+            {foreachelse}
+            <tr>
+            <td><a href="javascript:void(0);" onclick="addImg(this);">[+]</a>&nbsp;<a href="javascript:void(0);" onclick="removeImg(this);">[-]</a></td>
+            <td><input name="price[]" type="text" value="" /></td>
+            <td><input name="amount[]" type="text" value="" /></td>
+            <td><input name="hamcodes[]" type="text" value="" /></td>
+            <td><input name="brand" type="checkbox" />是否有牌
+            <input name="branddescrip[]" type="text" value="" />
+            </td>
+            <td><textarea name="description[]" cols="35" rows="3"></textarea></td>
+            </tr>
+            {/foreach}
+            </table>
+            <input name="submit" type="submit" value="保存" />
+            </form>
+        </div>
+        {/if}
+        {if $transportId == 5 || $transportId == 8 || $transportId == 59}
+        <div id="tabs-2">
+            <h2>DHL备注【总金额：{$total}】{$showinfo}</h2>
+            <form id="addDHLDescform" name="addDHLDescform" method="post" action="index.php?mod=expressRemark&act=index&jsonp=1&orderid={$orderid}&transportId={$transportId}&type=1" onSubmit="return check_dhl();">
+            <input type="hidden" name="action" value="adddhl" />
+            <table id="gallery-table2" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                <th></th>
+                <th scope='col' nowrap="nowrap">申报单价(数字)</th>
+                <th scope='col' nowrap="nowrap">数量(数字)</th>
+                <th scope='col' nowrap="nowrap">描述(不能含有中文)</th>
+                </tr>
+                {foreach key=rid item=remarklist name=foo2 from=$ExpressRemarkList}
+                <tr>
+                <td>{if $smarty.foreach.foo2.index == 0}<a href="javascript:;" onclick="addImg2(this);">[+]</a>&nbsp;{/if}<a href="javascript:void(0);" onclick="removeImg2(this);">[-]</a></td>
+                <td><input name="price2[]" type="text" value="{$remarklist.price}" /></td>
+                <td><input name="amount2[]" type="text" value="{$remarklist.amount}" /></td>
+                <td><textarea name="description2[]" cols="35" rows="3">{$remarklist.description}</textarea></td>
+                </tr>
+                {foreachelse}
+                <tr>
+                <td><a href="javascript:;" onclick="addImg2(this);">[+]</a>&nbsp;<a href="javascript:;" onclick="removeImg2(this);">[-]</a></td>
+                <td><input name="price2[]" type="text" value="" /></td>
+                <td><input name="amount2[]" type="text" value="" /></td>
+                <td><textarea name="description2[]" cols="35" rows="3"></textarea></td>
+                </tr>
+                {/foreach}
+            </table>
+            <input name="submit2" type="submit" value="保存" />
+            </form>
+        </div>
+        {/if}
+    	<div class="clear"></div>
+    </div>
+</div>
+{*include file="footer.htm"*}

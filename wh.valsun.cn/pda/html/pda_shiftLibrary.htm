@@ -1,0 +1,23 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_shiftLibrary.js"></script>
+		<div id="mstatus" class="floatright" style="margin-bottom:5px;"></div>
+		<div class="floatleft" style="width:1000px;">
+            <span>&nbsp;&nbsp;&nbsp;SKU : &nbsp;&nbsp;&nbsp;</span><input name="nowsku" type="text" id="nowsku" onkeydown="inputsku()" class="textinput" />
+			<input type="button" value="查询" id="inquire_sku" class="buttonclass" onclick="showWindow();" />
+		</div>
+		<div id="old_position" class="floatleft" style="display:none;margin:4px 0;">
+        	<span>旧仓位号 : </span><input type="text" class="textinput" name="oldposition" id="oldposition" onkeydown="oldposition()" value="" />
+        </div>
+		<div id="shownews" style="display:none">
+			<div id="new_position" class="floatleft" style="margin:4px 0;">
+				<span>新仓位号 : </span><input type="text" class="textinput" name="newposition" id="newposition" onkeydown="newposition()" value="" />
+			</div>
+			<div id="shift_num" class="floatleft" style="margin:4px 0;">
+				<span>移动数量 : </span><input type="text" class="textinput" name="nums" id="nums" value="" />
+			</div>
+			<div class="clear"></div>
+			<div id="scancontent" style="margin:4px 0;text-align:center;">
+				<input type="button"  value="提交" id="subdata" class="buttonclass" onclick="subdata()" />
+			</div>
+		</div>
+{include file="footer.htm"}

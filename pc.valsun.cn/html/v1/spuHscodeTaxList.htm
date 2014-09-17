@@ -1,0 +1,217 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">                
+                </div>
+                <div class="texvar">                
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+            <div class="servar products-servar">
+                <span>SPU：
+			   <input name="spu" type="text" id="spu" value="{$smarty.get.spu}" style="width: 120px;"/>
+			   </span>
+                <span><button id='seachSpuHscodeTaxList'>搜索</button></span>
+            </div>
+            <div class="main feedback-main firefox-table">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <td width="5%">SPU</td>
+                        <td width="20%">货物描述</td>
+    					<td>中文品名</td>
+                        <td>中文材质</td>
+                        <td>英文品名</td>
+                        <td>英文材质</td>
+                        <td width="9%">海关编码</td>
+    					<td>出口退税率(%)</td>
+    					<td>进口最惠国税率(%)</td>
+    					<td>一般税率(%)</td>
+                        <td>监管条件</td>
+    					<td width="4%">操作</td>
+                    </tr>
+                    {foreach $spuHscodeTaxList as $value}
+                                <tr>
+                                    <td><a href="index.php?mod=goods&act=getGoodsList&seachdata={$value['spu']}&searchs=1" target="_blank">{$value['spu']}</a></td>
+                                    <td>{$value['spuName']}</td>
+                                    <td>{$value['customsName']}</td>
+                                    <td>{$value['materialCN']}</td>
+                                    <td>{$value['customsNameEN']}</td>
+                                    <td>{$value['materialEN']}</td>
+                                    <td>{$value['hsCode']}</td>
+                                    <td>{$value['exportRebateRate']}</td>
+                                    <td>{$value['importMFNRates']}</td>
+                                    <td>{$value['generalRate']}</td>
+                                    <td>{$value['RegulatoryConditions']}</td>
+                                    <td>
+                                        {if isAccessAll('goods', 'updateSpuHsRela')}
+                                        <a style="color: #0000FF;" href="javascript:void(0)" edit="edit" editId="{$value['id']}" spu="{$value['spu']}" target="_blank">编辑</a>
+                                        {/if}
+                                    </td>                                 
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+            {if isAccessAll('goods', 'updateSpuHsRela')}
+            <div id="updateSpuHscodeRelaDialog" title="编辑（留空项将不会更新）" style="display:none;">
+                <table cellspacing="0" width="100%" id="tableBas">
+                    <tr>
+                        <input id="editId" value="" type="hidden"/>
+                        <input id="editSpuHidden" value="" type="hidden"/>
+                        <td><span style="color:#F00;"></span>SPU</td>                        
+                        <td><input id="editSpuDisabled" value="" disabled="disabled"/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>中文品名</td>
+                        <td><input id="customsName" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>中文材质</td>
+                        <td><input id="materialCN" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>英文品名</td>
+                        <td><input id="customsNameEN" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>英文材质</td>
+                        <td><input id="materialEN" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>海关编码</td>
+                        <td><input id="hsCode" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>出口退税率(%)</td>
+                        <td><input id="exportRebateRate" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>进口最惠国税率(%)</td>
+                        <td><input id="importMFNRates" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>一般税率(%)</td>
+                        <td><input id="generalRate" value=""/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>监管条件</td>
+                        <td><input id="RegulatoryConditions" value=""/></td>
+                    </tr>
+                </table>
+            </div>
+            {/if}
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachSpuHscodeTaxList').click(); 
+			}        
+        });
+        $(function(){
+            $('#seachSpuHscodeTaxList').click(function(){
+                spu = $('#spu').val();
+                location.href = "index.php?mod=goods&act=getSpuHscodeTaxList&spu="+spu;
+            });
+            
+            $("a[edit='edit']").click(function(){
+                editId = $(this).attr('editId');
+                $.ajax({
+					type	: "POST",
+                    async   : false,
+					dataType: "jsonp",
+					url		: 'json.php?mod=goods&act=getSpuHsListById&jsonp=1',
+					data	: { id:editId },
+					success	: function (msg){
+						if(msg.errCode == 200){
+		                  $('#editId').val(msg.data.id);
+                          $('#editSpuHidden').val(msg.data.spu);
+                          $('#editSpuDisabled').val(msg.data.spu);
+                          $('#customsName').val(msg.data.customsName);
+                          $('#materialCN').val(msg.data.materialCN);
+                          $('#customsNameEN').val(msg.data.customsNameEN);
+                          $('#materialEN').val(msg.data.materialEN);
+                          $('#hsCode').val(msg.data.hsCode);
+                          $('#exportRebateRate').val(msg.data.exportRebateRate);
+                          $('#importMFNRates').val(msg.data.importMFNRates);
+                          $('#generalRate').val(msg.data.generalRate);
+                          $('#RegulatoryConditions').val(msg.data.RegulatoryConditions);
+						}else{
+						  alert('获取数据失败！');
+                          $('#updateSpuHscodeRelaDialog').dialog('close');
+						}			
+					}		
+				});
+                
+                $('#updateSpuHscodeRelaDialog').dialog({
+            		width : 440,
+            		height : 520,
+            		modal : true,
+            		autoOpen : true,
+            		show : 'drop',
+            		hide : 'explode',
+            		buttons : {
+            			'确认修改' : function() {
+            			    var customsName = $('#customsName').val();
+            				var materialCN = $('#materialCN').val();
+                            var customsNameEN = $('#customsNameEN').val();
+                            var materialEN = $('#materialEN').val();
+                            var hsCode = $('#hsCode').val();
+                            var exportRebateRate = $('#exportRebateRate').val();
+                            var importMFNRates = $('#importMFNRates').val();
+                            var generalRate = $('#generalRate').val();
+                            var RegulatoryConditions = $('#RegulatoryConditions').val();
+                    		
+                            if(hsCode >= 10000000000 && $.trim(hsCode)){
+                                alert("海关编码是不超过10位的数字，请检查");
+                                return;
+                            }
+                            
+                            if(isNaN(exportRebateRate) || exportRebateRate > 17 && $.trim(exportRebateRate)){
+                                alert("出口退税率不能超过17%，请检查");
+                                return;
+                            }
+                            
+                            if(isNaN(importMFNRates) && $.trim(importMFNRates)){
+                                alert("进口最惠国税率为非数字，请检查");
+                                return;
+                            }
+                            
+                            if(isNaN(generalRate) && $.trim(generalRate)){
+                                alert("一般税率为非数字，请检查");
+                                return;
+                            }
+                            
+            				//alert(spu + '   '+ pid);return;
+                            if(confirm('确定修改？')){
+                                $.ajax({
+                					type	: "POST",
+                					dataType: "jsonp",
+                					url		: 'json.php?mod=goods&act=updateSpuHsRelaById&jsonp=1',
+                					data	: { id:editId,customsName:customsName,materialCN:materialCN,customsNameEN:customsNameEN,materialEN:materialEN,hsCode:hsCode,exportRebateRate:exportRebateRate,importMFNRates:importMFNRates,generalRate:generalRate,RegulatoryConditions:RegulatoryConditions },
+                					success	: function (msg){
+                					    alert(msg.errMsg);
+                						if(msg.errCode==200){
+                						    $('#updatePidDialog').dialog('close');
+                							window.location.reload();
+                						}				
+                					}		
+                				});
+                            }
+            			},            
+            			'关闭' : function() {
+            				$(this).dialog('close');								
+            			}
+            		}
+            	});
+            });       
+        });      
+</script>

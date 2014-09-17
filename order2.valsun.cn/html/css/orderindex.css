@@ -1,0 +1,83 @@
+@CHARSET "UTF-8";
+.menuitem{
+	
+
+	font-size:12px;
+	text-align:center;
+	display:none;
+}
+.title td span:hover .menuitem{
+	visibility:visible;
+	display:block;
+	position:absolute;
+	
+}
+.title td span:hover  .menuitem div:hover{
+	background-color:#0092dc;
+    color:#fff;
+}
+.ax_cell{
+	-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;
+    /*background-image:url(../img/buto.gif);*/ background-repeat:repeat-x; color:#333; border:1px #c9c9c9 solid;
+    width:90px;
+	cursor:pointer;
+    background-color:#fff;
+}
+.ax_cell:hover{
+    /*background-image:url(../img/botoaction.gif);*/ background-repeat:repeat-x; color:#FFF; border:1px solid #167fb4;
+}
+.itemtontainer{
+	text-align:center;
+}
+.ax_cell span{
+	margin:0 auto;
+}
+.copyorder input{
+	width:160px;
+}
+
+#scrollNav {position:fixed; top:570px; right:2px;}
+.scrollItem {width:20px; height:70px;border:#e1e1e1 1px solid; cursor: pointer; text-align: center; padding-top: 10px;}
+
+#m,#l,#s{ position: relative; width: 720px; margin: auto;}
+#l{width: 750px; margin-top: 20px;}
+#l .lm{ padding-left: 20px;}
+#m .s_btn_wr{ position: absolute; top:0px; right: 82px;}
+#s{width: 750px; margin-top: 20px;}
+#m .s_ipt_wr{ width: 545px; display: inline-block; }
+#m .s_ipt{width: 532px; height: 25px;}
+#m .s_btn {
+    background: #0092dc;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    height: 30px;
+    width: 100px;
+    border: none;
+}
+#s select{
+    width: 200px; height: 24px;
+}
+
+#orderDetailShow span{
+    display: inline-block;
+    width: 33%;
+    font-size: 14px;
+}
+#ModifyFm tr{font-weight:100; font-size: 12px; height: 30px;}
+#ModifyFm input{width:125px;}
+#ModifyFm .butt{background-color: #0092dc; border: 1px solid #00689d; color: #fff; padding: 5px 12px;}
+
+#loadImg{display:none;position: absolute;height: 100%;width: 100%;background: rgba(0,0,0,0.2) none repeat scroll !important;color:#fff; z-index: 99999; top: 0; left: 0; text-align: center;}
+#loadImg .loaddiv{ position: absolute; top: 5%; left: 40%; font-size: 14px;  font-weight: bold;}
+
+#orderLog {}
+#orderLog tr td{width: 100%;word-wrap: break-word;word-break:break-all}
+
+.channel-txt{position: relative; margin-right: 0; cursor: pointer;}
+#orderDetailShow .channel-txt .channelMouse{ width:100%;}
+#orderDetailShow .channel-txt .channelHide{ width:100%;position: absolute; z-index: 99; top: 22px; left: 5px; background: #ccc none repeat scroll !important; padding: 10px; display: none;}
+.channel-txt .channelHide{ width:100%;position: absolute; z-index: 99; top: 22px; left: 5px; background: #ccc none repeat scroll !important; padding: 10px; display: none;}
+.channel-txt a{display: inline;}
+
+#skuList textarea{ width: 180px;}

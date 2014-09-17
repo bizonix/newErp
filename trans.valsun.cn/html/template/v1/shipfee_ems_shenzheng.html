@@ -1,0 +1,44 @@
+﻿{header}
+<link rel="stylesheet" href="css/transportlist.css">
+{navdiv}
+<script type="text/javascript" src="./js/partitionManage.js"></script>	
+<div class="miancontainer ">
+    <table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                    <tr>
+                            
+                            <td>分组</td>
+                            <td>渠道名称</td>
+                            <td>国家列表</td>
+                            <td>首重</td>
+                            <td>firstweight0</td>
+							<td>nextweight</td>
+							<td>折扣</td>
+							<td>files</td>
+							<td>declared_value</td>
+							<td>编辑</td>
+                    </tr>
+            </thead>
+            <tbody>
+            	<!-- BEGIN list -->
+                    <tr class="odd">
+                            
+                            <td>{groupName}</td>
+                            <td>{channelName}</td>
+                            <td>{countries}</td>
+                            <td>{firstweight}</td>
+                           <td>{firstweight0}</td>
+							<td>{nextweight}</td>
+							<td>{discount}</td>
+							<td>{files}</td>
+							<td>{declared_value}</td>
+							<td><a href="http://trans.valsun.cn/index.php?mod=shipfee&act=modify_ems_shenzhen&&channelName={channelName}&id={id}&channelId={channelId}&carrierId={carrierId}&carrierName={carrierName}">编辑</a></td>
+                    </tr>
+                <!-- END list -->
+            </tbody>
+			<tfoot>
+
+			</tfoot>
+    </table>
+</div>
+{footer}

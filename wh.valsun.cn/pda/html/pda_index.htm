@@ -1,0 +1,34 @@
+{include file="header.htm"}
+	<script language="JavaScript" src="./js/pda_com.js"></script>
+	<div id="divcontent" style="text-align:center; height:200px;">
+		<div id="indexcontent1" style="text-align:center;">
+		<input type="button" value="出库操作" id="chukucaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?act=pda_index11&mod=pda_index'" />
+		&nbsp;
+		<input type="button" value="入库操作" id="rukucaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?act=pda_inStore&mod=pda_whShelf'" />
+		</div>
+		<div id="indexcontent2" style="text-align:center;">
+		<input type="button" value="盘点操作" id="pandiancaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?mod=pda_index&act=pda_index13'"/>
+		&nbsp;
+        <input type="button" value="移库操作" id="yikucaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?mod=pda_shiftLibrary&act=pda_shiftLibrary'" />
+		<!--<input type="button" value="复核操作" id="fuhecaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?mod=pda_index&act=pda_index3'" />-->
+		</div>
+		<div id="indexcontent3" style="text-align:center;">
+		<input type="button" value="退货操作" id="tuihuocaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?mod=pda_index&act=pda_index4'" />
+		&nbsp;
+		<input type="button" value="待开发" id="yikucaozuo" class="buttonclass2" onclick="" />
+		</div>
+		<!--<div id="indexcontent3" style="text-align:center;">
+        <input type="button" value="仓库调拨" id="goodsassign" class="buttonclass2" onclick="javascript:window.location.href='index.php?act=pda_index7&mod=pda_index'" />
+        &nbsp;
+		<input type="button" value="海外仓补货" onclick="javascript:window.location.href='index.php?act=pda_index6&mod=pda_index'" id="yikucaozuo" class="buttonclass2" />
+		</div>-->
+        <!--
+        <div id="indexcontent3" style="text-align:center;">
+        <input type="button" value="跟踪号绑定" id="bcaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?act=pda_tracking&mod=pda_tracking'" />
+		&nbsp; 
+        <input type="button" value="待开发" id="yikucaozuo" class="buttonclass2" onclick="" />
+        
+        </div>
+        -->
+	 </div>
+{include file="footer.htm"}

@@ -1,0 +1,19 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_ajaxwraper.js"></script>
+<script type="text/javascript" src="js/ow_returnbox.js"></script>
+	<div id="mstatus" class="floatright"></div>
+	<div id="divcontent" style="">
+        <div id="" >
+            箱号:<input type="text" id="boxid" onkeydown="scanBox(event)" class="textinput" /><br><br>
+	   </div>
+	</div>
+	<div>
+	   料号:<input id="sku" onkeydown="scanSku(event)" class="textinput" /><br><br>
+	   数量:<input id="num" onkeydown="inNum(event)" size="6" />
+	</div>
+	<div style="text-align:center">
+	   <br>
+	   <button onclick="submitReturnBox()">&nbsp;提&nbsp;交&nbsp;</button>
+	</div>
+	<div id="showMsg"></div>
+{include file="footer.htm"}

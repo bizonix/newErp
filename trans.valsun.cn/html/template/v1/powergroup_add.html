@@ -1,0 +1,28 @@
+{header}
+<link rel="stylesheet" href="css/powermanage.css">
+<script language='javascript' src='js/power_addgroup.js'></script>
+{navbar}
+<div class="maincontentdiv" >
+    <fieldset style="height: 353px;">
+            <legend>{actname}</legend>
+            <form action='index.php?mod=powergroup&act=groupformsubmit' method="post">
+            <p>
+                <label for="sf">名称: </label>
+                <input value="{gname}" id='groupnameinput' onblur="checkgroupname()" class="sf" name="groupname" type="text" >
+                <span id='showmessage'></span>
+            </p>
+            <p>
+                <label for="mf">说明: </label>
+                <input value="{gnamezh}" class="mf" name="groupdesc" type="text" >
+            </p>
+            <!-- IF hasgid -->
+                <input name="gid" type="hidden" value="{gid}">
+            <!-- ENDIF hasgid -->
+            <p>
+                <input class="button" type="submit" value="提交">
+                <input class="button" onclick="window.location='index.php?mod=powergroup&act=grouplist'" type="reset" value="取消">
+            </p>
+        </form>
+    </fieldset>
+</div>
+{footer}

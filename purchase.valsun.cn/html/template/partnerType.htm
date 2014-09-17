@@ -1,0 +1,91 @@
+{*header*}
+{include file="header.htm"}
+<div class="fourvar">
+    <div class="pathvar">
+    	您的位置：<a href="index.php?mod=partnerType&act=index">供应商管理</a>>>类型列表
+    </div>         
+    <div class="pagination">
+    	{$pageIndex}
+    </div>
+</div>
+<div class="servar products-servar">
+    <span  style=" margin-right:5px;">
+        <a href="index.php?mod=partnerType&act=addType" id="button_add" >添加</a>
+    </span>     
+    <span  style=" margin-right:15px;">
+    	<a href="javascript:void(0)" id="button_delete" >删除</a>
+    </span>       
+</div>
+<div class="main underline-main  feedback-main">
+    <table cellspacing="0" width="100%"  class="products-action" >
+    	<tr class="title purchase-title">
+        	<td><input type="checkbox" id="checkAll" value=""></td>
+            <td>类型名称</td>                        
+            <td>操作</td>
+        </tr>                     	                   
+        {foreach name=outer item=typeList from=$typeLists}
+        <tr>
+            <td>
+            	<input name="checkbox-list" type="checkbox" value="{$typeList.id}" />
+            </td>     
+            {foreach key=key item=item from=$typeList}
+                 {if $key!='id'}<td>{$item}</td>{/if}
+            {/foreach}
+            <td>
+            	<!--a href="index.php?mod=partnerType&act=editType&id={$typeList.id}"><font color="green">修改</font></a-->
+                <input type="button" value="修改" onclick="window.location.href='index.php?mod=partnerType&act=editType&id={$typeList.id}' "/>
+            </td>
+        </tr>
+        {/foreach}                            
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination">
+        {$pageIndex}
+    </div>
+</div>            
+
+{include file="footer.htm"}
+<script>
+var web_api  = "{$WEB_API}";
+{literal} 
+
+$('#checkAll').click(function(){
+  select_all('checkAll','input[name="checkbox-list"]',0);
+});
+
+$('#button_delete').click(function(e){
+	e.preventDefault();        
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	if(checkBoxArr.length==0){	
+	    alertify.alert('请选择要删除的项！');
+		return false;
+	}
+	if(!confirm('确定删除吗？')){
+		return false;
+    };
+	idArr=[];
+	checkBoxArr.each(function(i){
+		idArr.push($(this).val());        
+	});  
+
+    var url  = "json.php?mod=partnerType&act=delPartnerTypes";          
+    $.post(url, {"idArr":idArr}, function(rtn) {
+        console.log(rtn);
+        window.location.reload();
+		/*
+        if(rtn.errCode == 0) {
+            window.location.reload();
+        } else {
+            alertify.alert(rtn.errMsg);
+        }           
+		*/
+     },"jsonp");  
+});
+
+
+
+{/literal}
+</script>
+
+            

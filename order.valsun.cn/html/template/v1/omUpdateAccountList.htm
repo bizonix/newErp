@@ -1,0 +1,58 @@
+{include file="header.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/omAccountList.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=omAccount&act=updateAccountList' method="post" id="omUpdateAccountList">
+    	<div>
+            <input type="hidden" name="id" value="{$id}"/>
+        	<label for="account" style="font-size:20px;">账户名称：</label>
+            <input value="{$account}" id='account' class="validate[required] text-input" name="account" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="accountSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div>
+            <label for="appname" style="font-size:20px;">账户简称：</label>
+            <input value="{$appname}" id='auditorId' class="validate[required] text-input" name="appname" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="appnameSpan" style="color: red;">*</span>
+		</div>
+		<br />
+        <div>
+            <label for="platformId" style="font-size:20px;">所属平台：</label>
+            <select name="platformId" id="platformId" style="width:200px;height:30px;font-size:20px" class="validate[required]">
+                {foreach OmAvailableModel::getTNameList('om_platform','id,platform','WHERE is_delete=0') as $value}
+                <option value="{$value.id}" {if $platformId == $value.id}selected="selected"{/if}>{$value.platform}</option>
+                {/foreach}
+			 </select>
+            <span id="platformIdSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        <div>
+        	<label for="email" style="font-size:20px;">对应邮箱：</label>
+            <input value="{$email}" id='email' class="" name="email" type="text" style="width:200px;height:30px;font-size:20px">
+          <!--<span id="emailSpan" style="color: red;">*</span>validate[required,custom[email]] text-input-->
+		</div>
+        <br />
+        <div>
+            <label for="suffix" style="font-size:20px;">对应后缀：</label>
+            <input value="{$suffix}" id='suffix' class="" name="suffix" type="text" style="width:200px;height:30px;font-size:20px">
+            <!--<span id="suffixSpan" style="color: red;">*</span>-->
+		</div>
+        <br />
+        <div>
+            <label for="charger" style="font-size:20px;">负责人 ：</label>
+            <input value="{$charger}" id='charger' class="validate[option] text-input" name="charger" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="chargerSpan" style="color: red;"></span>
+		</div>
+        <br />
+        <div>
+            <input type="submit" value="提交"/>
+            &nbsp;
+            <input type="button" id="back" value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.htm"}

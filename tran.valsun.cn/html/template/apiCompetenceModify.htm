@@ -1,0 +1,74 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=apiCompetence&act=index">API开放授权</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>修改API开放授权</h1>
+    <form onSubmit="return edit_check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+                <td align="right" width="11%">授权用户：</td>
+                <td width="27%" align="left">
+				<select name="apiUid" id="apiUid" class="flexselect">
+					{foreach item=gid from=$gids}
+					<option value="{$gid.global_user_id}" {if $apiUid==$gid.global_user_id}selected="selected"{/if}>{$gid.global_user_name}--{$gid.company_name}</option>
+					{/foreach}
+				</select>
+                </td>
+			</tr>
+            <tr>
+                <td align="right" width="11%">接口名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select name="apiName" id="apiName">
+						<option value="">=请选择开放接口=</option>
+						<option value="openBestCarrierShipFee" {if $apiName=='openBestCarrierShipFee'}selected="selected"{/if}>开放批量运费计算接口</option>
+					</select>
+                </td>
+			</tr>
+            <tr>
+                <td align="right" width="11%">授权内容：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					{foreach item=list from=$lists}
+                    <label title="{$list.carrierNameCn}-{$list.carrierId}-{$list.carrierAbb}"><input type="checkbox" id="apiValue" style="vertical-align:middle" name="apiValue" value="{$list.carrierId}" {if in_array($list.carrierId,$apiValue)}checked="checked"{/if}/>{$list.carrierNameCn}({$list.carrierAbb})</label>
+					{/foreach}
+                </td>
+			</tr>
+            <tr>
+                <td align="right" width="11%">当天最大调用次数：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="apiMaxCount" id="apiMaxCount" value="{$apiMaxCount}" maxlength="10" style="ime-mode:Disabled;" onkeyup="check_int(this)" onafterpaste="check_int(this)"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">API TOKEN：</td>
+                <td width="27%" align="left">{$apiToken}</td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">API TOKEN 有效期：</td>
+                <td width="27%" align="left">
+					<input type="text" name="apiTokenExpire" id="apiTokenExpire" value="{date('Y-m-d',$apiTokenExpire)}" maxlength="10" style="ime-mode:Disabled;" onclick="WdatePicker()" readonly="readonly"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">是否启用：</td>
+                <td width="27%" align="left">
+				<select name="apiEnable" id="apiEnable">
+					<option value="0" {if $apiEnable==0}selected="selected"{/if}>启用</option>
+					<option value="1" {if $apiEnable==1}selected="selected"{/if}>禁用</option>
+				</select>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+					<input type="hidden" name="act-id" id="act-id" value="{$id}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=apiCompetence&act=index'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript" src="./public/js/tran_api_competence.js"></script>
+{include file="footer.htm"}

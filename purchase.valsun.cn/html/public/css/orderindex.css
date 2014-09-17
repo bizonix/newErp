@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+.menuitem{
+	
+
+	font-size:12px;
+	text-align:center;
+	display:none;
+}
+.orderTitle  span:hover .menuitem{
+	visibility:visible;
+	display:block;
+	position:absolute;
+	
+}
+.orderTitle  span:hover  .menuitem div:hover{
+	background-color:#0092dc;
+    color:#fff;
+}
+.ax_cell{
+	-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;
+    background-image:url(../img/buto.gif); background-repeat:repeat-x; color:#333; border:1px #c9c9c9 solid;
+    width:90px;
+	cursor:pointer;
+    background-color:#fff;
+}
+.ax_cell:hover{
+    background-image:url(../img/botoaction.gif); background-repeat:repeat-x; color:#FFF; border:1px solid #167fb4;
+}
+.itemtontainer{
+	text-align:center;
+}
+.ax_cell span{
+	margin:0 auto;
+}
+.copyorder input{
+	width:160px;
+}

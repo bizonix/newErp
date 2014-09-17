@@ -1,0 +1,65 @@
+{include file="admin/header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=webAd&act=index">网站广告</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select name="typeId" id="typeId">
+			<option value="">=全部广告类型=</option>
+			<option value="1" {if ($typeId=='1')}selected="selected"{/if}>文字</option>
+			<option value="2" {if ($typeId=='2')}selected="selected"{/if}>图片</option>
+			<option value="3" {if ($typeId=='3')}selected="selected"{/if}>富媒体</option>
+		</select>
+	</span>
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='topic' {if ($type=='topic')}selected="selected"{/if}>标题</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=webAd&act=add">添加</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="topic purchase-topic">
+			<th>ID</th>
+			<th>标题</th>
+			<th>排序</th>
+			<th>类型</th>
+			<th>是否启用</th>
+			<th>创建时间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.id}</td>
+			<td width="50%">{$list.topic}</td>
+			<td>{$list.layer}</td>
+			<td>{if ($list.typeId==1)}文字{elseif ($list.typeId==2)}图片{else}富媒体{/if}</td>
+			<td>{if empty($list.is_enable)}启用{else}<font color="red">禁用</font>{/if}</td>
+			<td>{if empty($list.addTime)}暂无{else}{date('Y-m-d H:i:s',$list.addTime)}{/if}</td>
+			<td><a href="index.php?mod=webAd&act=modify&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info({$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<script type="text/javascript" src="./public/js/track_web_ad.js"></script>
+{include file="admin/footer.htm"}

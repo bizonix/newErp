@@ -1,0 +1,46 @@
+{include file='header.htm'}
+<script language="JavaScript" src="./js/pda_expresstrackrecheck.js"></script>
+<div onload="loaded()" id="divcontent" style="height:200px;width:215px;padding-left:10px">	
+	<div id="showMsgDiv" >
+		<span></span>
+	</div>
+    <div style="margin-top:10px">
+
+           	 发货单:
+
+
+            <input id="orderidinput" style="width:130px" onkeypress="gonextinput(event)"/>
+
+
+    </div>
+
+	<div style="margin-top:5px;" id="onetrack">
+
+        	跟踪号:
+
+
+           <input onkeypress="scansubmit(event)" style="width:130px" id="tracknumberinput"/>
+		<div style="margin-top:10px;">
+			<input type="button" class = "buttonclass" onclick="multrack()" value="多号"/>
+		</div>
+    </div>
+
+
+	<div id="multrack" style="display:none"> 
+		<div style="margin-top:5px;">
+			<div>
+				跟踪号:
+			</div>
+			<div>
+				<textarea id="tracknumberinputs"></textarea>
+			</div>
+		</div>
+		<div style="margin-top:10px;float:left;margin-right:10px">
+			<input type="button" class = "buttonclass2" onclick="submitmul()" value="提交">
+		</div>
+		<div style="margin-top:18px;">
+			<input type="button" class = "buttonclass" onclick="onetrack()" value="单号">
+		</div>
+	</div>
+</div>
+{include file='footer.htm'}

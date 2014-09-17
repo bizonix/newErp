@@ -1,0 +1,101 @@
+{include file = 'header.htm'}
+  <script type="text/javascript" src="http://misc.erp.valsun.cn/js/alertify.js"></script>
+  <script src="./public/js/smspower.js" type="text/javascript" charset="utf-8"></script>
+  
+  <div class="fourvar">
+  <div class="pathvar">
+                	您的位置：<a href="index.php?mod=user&act=userList">首页</a>&gt;&gt;<a href="index.php?mod=user&act=userList">通迅录</a>
+    </div>
+  	<div class="pagination">{$pageIndex}</div>
+  </div>
+ <div class="servar"  >
+	<span >
+		<select  class = 'flexselect'  	id="keyword"  >
+				<option value = ''  name = 'flexselect' >{$search_word}</option>
+				{foreach from = $allName item = all_name }
+				<option value = "{$all_name['name']}" {if $smarty.get.keyword == $all_name['name']} selected {/if}>{$all_name['name']}</option>
+				{/foreach}
+		</select>
+	</span>
+	<span><a href = "javascript:void(0);" id="button-search">{$search_button}</a></span>
+    <span><a href = "javascript:void(0);" id="button-sms">短信权限</a></span>
+ </div>
+ 
+ <div class="main underline-main"><!-- 主内容 -->
+   <table cellspacing="0" width="100%">
+	<thead>
+		<tr class="title">
+			<th><input type="checkbox" id="checkAll" value=""></th>
+            <th>{$usernames}</th>
+			<th>{$phones}</th>
+			<th>{$emails}</th>
+		</tr>
+	</thead>
+    
+    <tbody>    
+        {foreach from = $userlist item = Userlist }
+        <tr>
+            <td><input type="checkbox" name="checkbox-list" value="{$Userlist.global_user_name}"></td>
+        	<td>{$Userlist.global_user_name}</td>
+            <td>{$Userlist.global_user_phone}</td>                    
+        	<td>{$Userlist.global_user_email}</td>	
+        </tr>  
+<!--     <div id="changpage"></div>   	 -->
+		{foreachelse}
+			<tr>
+				<td colspan='4'> {$search_empty}</td>
+			</tr>	
+		{/foreach}
+  </tbody>
+  </table>
+
+	<div class="bottomvar">
+						<div class="pagination">{$pageIndex}</div>
+	</div>
+
+</div>
+<!-- 短信权限弹出框 -->
+<div id="sms-dialog" title="短信权限管理">
+        <label>设置每天可发送短信数(默认为5条，设置为0则没有限制)</label></br>
+        </br>
+        <input id="sms-num" type="text" ></input>
+</div>
+
+{include file = 'footer.htm'}
+  
+<input type="hidden" value="{$lang_operat_failedMsg}"       id="lang_operat_failedMsg"/>
+<input type="hidden" value="{$lang_select_operatingitem}"   id="lang_select_operatingitem"/>
+<input type="hidden" value="{$lang_select_seachcondition}"  id="lang_select_seachcondition"/>
+
+
+<script>
+var web_api  = "{$smarty.const.WEB_API}";
+/**
+ * for page division
+ */
+var checkflag = false;
+$("#checkAll").click(function() {    
+    if(!checkflag) {
+        $("input[name='checkbox-list']").attr("checked","true"); 
+        checkflag = true;
+    } else {
+        $("input[name='checkbox-list']").removeAttr("checked");
+        checkflag = false;
+    }    
+})
+
+$('#button-search').click(function(e){
+    e.preventDefault();
+	var keyword = $.trim($('#keyword').val());
+	if(keyword == ''){
+		alertify.error('联系人不应为空!');
+		$('#keyword').focus();
+		return;
+	}	
+
+    var url = "index.php?mod=user&act=userList&keyword="+keyword;
+    window.location.href = url;
+
+});
+
+</script>

@@ -1,0 +1,292 @@
+<table cellspacing="0" width="100%">
+<tr class="title">
+    <td valign="middle" style="border-right:1px #999 solid;padding:0;" width="11%">
+        <input class="checkclass" name="ckb" type="checkbox" value="{$orderData.id}" valType="{$orderData.orderType}" valStatus="{$orderData.orderStatus}" />
+        <input type="hidden" id="invoice_{$orderData.id}" name="invoice_{$orderData.id}" value="{$AbOrderShow[$orderData.id]}" />
+        {include file="editField.htm"}
+    </td>
+    <td colspan="3" align="left" id="OrderShow{$omOrderId}">
+        <span style="width:30%">平&nbsp;&nbsp;&nbsp;&nbsp;台：{$orderData.platformId|get_platnamebyid}</span>
+        <span style="width:30%">运输类型：{$orderData.isExpressDelivery|get_isExpressDeliveryName}</span>
+        <span style="width:30%">下单时间：{$orderData.ordersTime|date_format:"%Y-%m-%d %H:%I:%S"}</span>
+        <span style="width:30%">帐&nbsp;&nbsp;&nbsp;&nbsp;号：{$orderData.accountId|get_accountnamebyid}</span>
+        <span style="width:30%">运输渠道方式：<span id="channelIdDef{$omOrderId}" style="display: inline;">{if $orderData.channelId}{get_usefulCarrierChannel($orderData.channelId,'/')}{else}--{/if}</span></span>
+        <span style="width:30%">付款时间：{$orderData.ordersTime|date_format:"%Y-%m-%d %H:%I:%S"}</span>
+        <span style="width:30%">系统编号：{$omOrderId}</span>
+        <span style="width:30%">发往国家：{$orderUserInfoData.countryName}</span>
+        <span style="width:30%">发货时间：{if $orderData.marketTime}{$orderData.marketTime|date_format:"%Y-%m-%d %H:%I:%S"}{else}--{/if}</span>
+        <span style="width:30%">Record NO：{$orderData.recordNumber}</span>
+        <span style="width:30%">重&nbsp;&nbsp;&nbsp;&nbsp;量：{if $orderData.calcWeight neq 0.00}{$orderData.calcWeight} KG {else}--{/if}</span>
+        <span style="width:30%">状态类别：{$orderData.orderStatus|get_orderStatusName} - {$orderData.orderType|get_orderTypeName}</span>
+        <span style="width:30%">买家&nbsp;&nbsp;ID：{$orderUserInfoData.platformUsername}</span>
+        <span style="width:30%">运&nbsp;&nbsp;&nbsp;&nbsp;费：{if $orderData.calcShipping neq 0.00}{$orderData.calcShipping}{else}--{/if}</span>
+        <span style="width:30%" id="channel-{$omOrderId}" class="channel-txt" data-text="{get_usefulCarrierChannel($orderData.usefulChannelId,'<br />')}" data-html="{get_usefulCarrierChannel($orderData.usefulChannelId,'/')}">
+            可用运输方式: {get_usefulCarrierChannel($orderData.usefulChannelId,'/')}
+        </span>
+        <span style="width:30%">买家姓名：{$orderUserInfoData.username}</span>
+        <span style="width:30%">包&nbsp;&nbsp;&nbsp;&nbsp;材：{$orderData.pmId|get_maternamebyid}</span>
+        <span style="width:30%">估算重量: {$orderCalculation.calOrderWeight}</span>
+        <span style="width:30%">买家邮箱：{$orderUserInfoData.email}</span>
+        <span style="width:30%">交易&nbsp;&nbsp;ID：{$orderExtenData.payPalPaymentId}</span>
+        <span style="width:30%">估算运费: {$orderCalculation.calcOrderShipping}</span>
+        <span style="width:30%">金&nbsp;&nbsp;&nbsp;&nbsp;额：{$orderData.actualTotal}&nbsp;{$orderUserInfoData.currency}</span>
+
+        <span style="width:30%">跟踪号&nbsp;&nbsp;：
+            {foreach item=tracknumber from=$orderTracknumber}
+                {$tracknumber.tracknumber}&nbsp;&nbsp;
+            {/foreach}
+        </span>
+        <span style="width:30%">估算运输/渠道方式: {$orderCalculation.calOrderTransportId|getCarrierNameByCarrierId}:{$orderCalculation.calOrderChannelId|get_usefulChannel}</span>
+        <span style="width:100%;color:red;">留&nbsp;&nbsp;&nbsp;&nbsp;言：{$orderExtenData.feedback}</span>
+    </td>
+</tr>
+<tr>
+    <td colspan="3">
+        <div style="padding:10px;">
+            <table width="100%">
+                <tr class="title">
+                    <td>图片</td>
+                    <!--<td>RecordNo.</td>-->
+                    <td>料号</td>
+                    <td>数量</td>
+                    <td>售价</td>
+                    <td>sfee</td>
+                    <td>实际库存</td>
+                    <td>待发货</td>
+                    <td>被拦截</td>
+                    <td>待审核</td>
+                    <td>已预定</td>
+                    <td>每天均量</td>
+                    <td>预警</td>
+                    <td>采购</td>
+                    <td>成本(RMB)</td>
+                    <td>链接</td>
+                    <td>审核</td>
+                    <td>配货</td>
+                </tr>
+                {foreach key=omOrderdetailId item=orderDetailData  from=$orderlist.orderDetail}
+                {assign var=orderDetail value=$orderDetailData.orderDetail}
+                {assign var=orderDetailExten value=$orderDetailData.orderDetailExtension}
+                {$skuinfos = get_orderskulist($orderDetail.sku)}
+
+                {if $orderData.orderType == 214}
+                {assign var=auditStatusName value=$orderDetail.id|getRecordsOrderAudit}
+                {else}
+                {assign var=auditStatusName value='--'}
+                {/if}
+
+                {if $smarty.foreach.foo.index != 0}
+                <tr>
+                    <td colspan="17">
+                        <div style=" border-bottom:#999999 dashed 1px; margin-left:5px; margin-right:5px;">{$skuinfos.isCombine}</div>
+                    </td>
+                </tr>
+                {/if}
+                {if $skuinfos['isCombine'] gt '1'}
+                    {assign var=combinesku value=$skuinfos.combinesku}
+                    <tr>
+                        <td class="unpicurl">
+                            <a href="javascript:void(0)" id="imgb-{$combinesku.skupic}" data-sku="imgb-{$combinesku.skupic}" class="fancybox" style="margin-left:0;">
+                                <img src="" class="skuimg" id="imgs-{$combinesku.skupic}" width="60" height="60" data-sku="{$combinesku.skupic}" data-spu="{$combinesku.spu}">
+                            </a>
+                            <br />
+                            <span>{$orderDetail.recordNumber}</span>
+                        </td>
+                        <td>
+                            {$orderDetail.sku}<br />
+                            {$combinesku.sku}<br />
+                            {if $combinesku.sku}
+                            {if array_search($combinesku.sku,$conversion)}
+                            <span style="color: green">旧料号:{array_search($combinesku.sku,$conversion)}</span>
+                            {/if}
+                            {/if}
+                        </td>
+                        <td>{$orderDetail.amount}</td>
+                        <td>{$orderDetail.itemPrice}</td>
+                        <td>{$orderDetail.shippingFee}</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td class="unpicurl" width="10%">
+                            <a href="{$orderDetailExten.itemId|get_itemurl:$orderData.platformId}" target="_blank" title="{$orderDetailExten.itemId}">{$orderDetailExten.itemTitle}</a>
+                        </td>
+                        <td>{$auditStatusName}</td>
+                        <td>
+                            <!--<font color="green" >是</font>-->
+                            <font color="red" >否</font>
+                        </td>
+                    </tr>
+                    {foreach item=realsku from=$skuinfos.realsku}
+                    {$skudaily = get_skudailystatus($realsku.sku)}
+                    <tr>
+                        <td class="unpicurl">组合料号</td>
+                        <td>
+                            {$orderDetail.sku}<br />
+                            {$realsku.sku}<br />
+                            {if $realsku.sku}
+                            {if array_search($realsku.sku,$conversion)}
+                            <span style="color: green">旧料号:{array_search($realsku.sku,$conversion)}</span>
+                            {/if}
+                            {/if}
+                        </td>
+                        <td>{$realsku.amount * $orderDetail.amount}</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>{$realsku.sku|get_skuStock:$orderDetail.storeId}</td>
+                        <td>{$skudaily.waitingSendCount}</td>
+                        <td>{$skudaily.interceptSendCount}</td>
+                        <td>{$skudaily.waitingAuditCount}</td>
+                        <td>{$realsku.sku|get_reservecount}</td>
+                        <td>{$realsku.sku|getSkuAverageDailyCount}</td>
+                        <td>{if $skudaily.is_warning ==='1'}<font color="red">是</font>{/if}{if $skudaily.is_warning ==='0'}<font color="green">否</font>{/if}</td>
+                        <td>{$realsku.purchaseName}</td>
+                        <td>{$realsku.goodsCost}</td>
+                        <td class="unpicurl" width="10%">&nbsp;</td>
+                        <td>
+                            {foreach from=$orderAudit item=orderAuditVal name=auditVal}
+                            {if $orderAuditVal.sku == $ssku}
+                            <span>{if $orderAuditVal.auditStatus ==  '1'}<font color="green" >通过</font>{elseif $orderAuditVal.auditStatus == '2'}<font color="red" >拦截</font>{else}<font color="orange" >状态有误</font>{/if}</span>
+                            {/if}
+                            {/foreach}
+                        </td>
+                        <td>{$auditStatusName}</td>
+                    </tr>
+                    {/foreach}
+                {else}
+                    {foreach item=realsku from=$skuinfos.realsku}
+                    {$skudaily = get_skudailystatus($realsku.sku)}
+                        <tr>
+                            <td class="unpicurl">
+                                <a href="javascript:void(0)" id="imgb-{$realsku.skupic}" data-sku="imgb-{$realsku.skupic}" class="fancybox" style="margin-left:0;">
+                                    <img src="" class="skuimg" id="imgs-{$realsku.skupic}" width="60" height="60" data-sku="{$realsku.skupic}" data-spu="{$realsku.spu}">
+                                </a>
+                                <br />
+                                <span>{$orderDetail.recordNumber}</span>
+                            </td>
+                            <td>
+                                {$orderDetail.sku}<br />
+                                {$realsku.sku}<br />
+                                {if $realsku.sku}
+                                    {if array_search($realsku.sku,$conversion)}
+                                    <span style="color: green">旧料号:{array_search($realsku.sku,$conversion)}</span>
+                                    {/if}
+                                {/if}
+                            </td>
+                            <td>{$orderDetail.amount}</td>
+                            <td>{$orderDetail.itemPrice}</td>
+                            <td>{$orderDetail.shippingFee}</td>
+                            <td>{$realsku.sku|get_skuStock:$orderDetail.storeId}</td>
+                            <td>{$skudaily.waitingSendCount}</td>
+                            <td>{$skudaily.interceptSendCount}</td>
+                            <td>{$skudaily.waitingAuditCount}</td>
+                            <td>{$realsku.sku|get_reservecount}</td>
+                            <td>{$realsku.sku|getSkuAverageDailyCount}</td>
+                            <td>{if $skudaily.is_warning ==='1'}<font color="red">是</font>{else}<font color="green">否</font>{/if}</td>
+                            <td>{$realsku.purchaseId|get_usernamebyid}</td>
+                            <td>{$realsku.goodsCost}</td>
+                            <td class="unpicurl" width="10%">
+                                <a href="{$orderDetailExten.itemId|get_itemurl:$orderData.platformId}" target="_blank" title="{$orderDetailExten.itemId}">{$orderDetailExten.itemTitle}</a>
+                            </td>
+                            <td>{$auditStatusName}</td>
+                            <td>
+                                <!--<font color="green" >是</font>-->
+                                <font color="red" >否</font>
+                            </td>
+                        </tr>
+                    {foreachelse}
+                        <tr>
+                            <td class="unpicurl">
+                                <a href="javascript:void(0)" id="imgb-{$realsku.skupic}" data-sku="imgb-{$realsku.skupic}" class="fancybox" style="margin-left:0;">
+                                    <img src="" class="skuimg" id="imgs-{$realsku.skupic}" width="60" height="60" data-sku="{$realsku.skupic}" data-spu="{$realsku.spu}">
+                                </a>
+                                <br />
+                                <span>{$orderDetail.recordNumber}</span>
+                            </td>
+                            <td>
+                                {$orderDetail.sku}<br />
+                                {if $orderDetail.sku}
+                                    {if array_search($orderDetail.sku,$conversion)}
+                                        <span style="color: green">旧料号:{array_search($orderDetail.sku,$conversion)}</span>
+                                    {/if}
+                                {/if}
+                            </td>
+                            <td>{$orderDetail.amount}</td>
+                            <td>{$orderDetail.itemPrice}</td>
+                            <td>{$orderDetail.shippingFee}</td>
+                            <td>{$realsku.sku|get_skuStock:$orderDetail.storeId}</td>
+                            <td>{$skudaily.waitingSendCount}</td>
+                            <td>{$skudaily.interceptSendCount}</td>
+                            <td>{$skudaily.waitingAuditCount}</td>
+                            <td>{$realsku.sku|get_reservecount}</td>
+                            <td>{$realsku.sku|getSkuAverageDailyCount}</td>
+                            <td>{if $skudaily.is_warning ==='1'}<font color="red">是</font>{else}<font color="green">否</font>{/if}</td>
+                            <td>{$realsku.purchaseId|get_usernamebyid}</td>
+                            <td>{$realsku.goodsCost}</td>
+                            <td class="unpicurl" width="10%">
+                                <a href="{$orderDetailExten.itemId|get_itemurl:$orderData.platformId}" target="_blank" title="{$orderDetailExten.itemId}">{$orderDetailExten.itemTitle}</a>
+                            </td>
+                            <td>{$auditStatusName}</td>
+                            <td>
+                                <!--<font color="green" >是</font>-->
+                                <font color="red" >否</font>
+                            </td>
+                        </tr>
+                    {/foreach}
+                {/if}
+                {foreachelse}
+                <tr>
+                    <td colspan="17" ><span>订单明细为空，请核实订单的信息！</span></td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+    </td>
+</tr>
+<tr class="title">
+    <td align="center">
+                <span style="width:auto;">
+                {foreach $statusMenu as $vk}
+                    {if	$orderData.orderType == ''}
+                        {if $vk.statusCode == $orderData.orderStatus}{$vk.statusName}{/if}
+                    {/if}
+                    {if	$orderData.orderType != ''}
+                        {if $vk.statusCode == $orderData.orderType}{$vk.statusName}{/if}
+                    {/if}
+                {/foreach}
+                </span>
+    </td>
+    <td colspan="2">
+        <span style="width:38%">同步时间：{$orderData.orderAddTime|date_format:"%Y-%m-%d %H:%I:%S"}</span>
+                <span style="width:20%">
+                    {if $orderData.combinePackage == 1 && $combinePackage.son != ''}该订单为#[{$combinePackage.son}]#合并包裹发货{/if}
+                    {if $orderData.combinePackage == 2 && $combinePackage.main != ''}该订单被{$combinePackage.main}合并{/if}
+                </span>
+                <span>
+                    {if $orderData.isSplit == 1}被拆分的订单{/if}
+                    {if $orderData.isSplit == 2}拆分产生的订单{/if}
+                </span>
+                <span>
+                    {if $orderData.isCopy == 1}被复制订单{/if}
+                    {if $orderData.isCopy == 2}{if $orderData.isBuji == 2}补寄订单{else}复制订单{/if}{/if}
+                </span>
+        <span>{if $orderData.combineOrder == 2}合并订单{/if}</span>
+        {if $orderNote}
+                <span>
+                备注：
+                {foreach $orderNote as $ve}
+                    {if $ve.content != ''}{$ve.content}&nbsp;{/if}
+                {/foreach}
+                </span>
+        {/if}
+        {if $orderData.isLock == 1}
+        <span> 锁定人：{$orderData.lockUser|get_usernamebyid} &nbsp;&nbsp; 锁定时间：{$orderData.lockTime|date_format:"%Y-%m-%d %H:%I:%S"}</span>
+        {/if}
+    </td>
+</tr>
+</table>

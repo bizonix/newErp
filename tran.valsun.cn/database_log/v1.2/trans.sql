@@ -1,0 +1,24 @@
+================运输方式管理系统V1.2版本数据库更新记录================
+UPDATE trans_freight_dhl_shenzhen SET addTime = UNIX_TIMESTAMP(createdtime),editTime = UNIX_TIMESTAMP(modifiedtime);
+ALTER TABLE `trans_freight_dhl_shenzhen` DROP `createdtime`;
+ALTER TABLE `trans_freight_dhl_shenzhen` DROP `modifiedtime`;
+ALTER TABLE `trans_freight_dhl_shenzhen` DROP `creator`;
+UPDATE trans_freight_globalmail_shenzhen SET addTime = UNIX_TIMESTAMP(createdtime),editTime = UNIX_TIMESTAMP(modifytime);
+ALTER TABLE `trans_freight_globalmail_shenzhen` DROP `createdtime`;
+ALTER TABLE `trans_freight_globalmail_shenzhen` DROP `modifytime`;
+ALTER TABLE `trans_freight_globalmail_shenzhen` DROP `creator`;
+ALTER TABLE `trans_track_number` ADD `platAccount` VARCHAR(30) DEFAULT '' COMMENT '平台帐号';
+ALTER TABLE `trans_track_number` ADD `platForm` VARCHAR(20) DEFAULT '' COMMENT '平台名称';
+ALTER TABLE `trans_track_number` ADD `trackTime` int(10) DEFAULT '0' COMMENT '最后跟踪时间';
+ALTER TABLE `trans_track_number` ADD INDEX `trackTime` (`trackTime`);
+ALTER TABLE `trans_track_number_warn_info` DROP INDEX `warnEndTime`;
+UPDATE `trans_track_number` SET trackTime = lastTime;
+UPDATE `trans_freight_ups_us` SET fuelcosts = '0.185';
+ALTER TABLE `trans_channels` ADD `postName1` VARCHAR(40) DEFAULT '' COMMENT '收寄局名称2';
+ALTER TABLE `trans_channels` ADD `postName2` VARCHAR(40) DEFAULT '' COMMENT '收寄局名称3';
+UPDATE `trans_freight_fedex_shenzhen` SET baf = '0.18';
+ALTER TABLE `trans_track_number` ADD `trackTime` int(10) DEFAULT '0' COMMENT '最后跟踪时间';
+ALTER TABLE `trans_freight_hkpostrg_hk` ADD `exchange_rate` decimal(10,4)  DEFAULT '0' COMMENT '汇率';
+ALTER TABLE `trans_freight_hkpostsf_hk` ADD `exchange_rate` decimal(10,4)  DEFAULT '0' COMMENT '汇率';
+UPDATE `trans_freight_hkpostrg_hk` SET exchange_rate = discount,discount = 0;
+UPDATE `trans_freight_hkpostsf_hk` SET exchange_rate = discount,discount = 0;

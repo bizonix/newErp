@@ -1,0 +1,125 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelManage&act=index&id={$id}">渠道管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>添加渠道</h1>
+    <form onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+                <td align="right" width="11%">运输方式：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select name="ship_id" id="ship_id">
+					<option value="">=请选择=</option>
+					{foreach item=list from=$lists}
+					<option value="{$list.id}" {if $id == $list.id}selected="selected"{/if}>{$list.carrierNameCn}</option>
+					{/foreach}
+					</select>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">渠道名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="ch_name" id="ch_name" value="" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">渠道别名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="ch_alias" id="ch_alias" value="" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">渠道折扣：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="ch_discount" id="ch_discount" value="" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">收寄局名称：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="ch_post" id="ch_post" value="" maxlength="30"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">(备用)收寄局名称2：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="ch_post1" id="ch_post1" value="" maxlength="30"/> 没有可以不用填写
+				</td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">(备用)收寄局名称3：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="ch_post2" id="ch_post2" value="" maxlength="30"/> 没有可以不用填写
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">物流跟踪时差：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="ch_time" id="ch_time" value="0" maxlength="4" onkeyup="check_timeZone(this)" onafterpaste="check_timeZone(this)" onblur="check_timeZone(this)"/> 0代表中国北京时间，其它时间相对北京时间做增减
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">是否启用：</td>
+                <td width="27%" align="left">
+				<select name="ch_enabel" id="ch_enabel">
+					<option value="1">启用</option>
+					<option value="0">不启用</option>
+				</select>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=channelManage&act=index&id={$id}'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+{literal}
+<script type="text/javascript">
+function check(){
+	var ch_name = ch_alias = ch_discount = ch_enabel = ch_post = ch_post1 = ch_post2 = ship_id = ch_time = "";
+	ship_id 	= $.trim($("#ship_id").val());
+	ch_name 	= $.trim($("#ch_name").val());
+	ch_alias	= $.trim($("#ch_alias").val());
+	ch_post		= $.trim($("#ch_post").val());
+	ch_post1	= $.trim($("#ch_post1").val());
+	ch_post2	= $.trim($("#ch_post2").val());
+	ch_discount	= $.trim($("#ch_discount").val());
+	ch_enabel	= $.trim($("#ch_enabel").val());
+	ch_time		= $.trim($("#ch_time").val());
+	if (ship_id == "" || ship_id == 0) {
+		alertify.error("运输方式不能不选！");
+		$("#ship_id").focus();
+		return false;
+	}
+	if (ch_name == "") {
+		alertify.error("渠道名称不能为空！");
+		$("#ch_name").focus();
+		return false;
+	}
+	if (ch_alias == "") {
+		alertify.error("渠道别名不能为空！");
+		$("#ch_alias").focus();
+		return false;
+	}
+	var url  = web_url + "json.php?mod=channelManage&act=addChannelManage";
+	var data = {"ship_id":ship_id,"ch_name":ch_name,"ch_alias":ch_alias,"ch_discount":ch_discount,"ch_enabel":ch_enabel,"ch_post":ch_post,"ch_post1":ch_post1,"ch_post2":ch_post2,"ch_time":ch_time};
+	$.post(url,data,function(res){
+		if(res.errCode == 0){
+			alertify.alert("添加成功！",function(){
+				window.location.reload();
+			});
+		}else {
+			 alertify.error(res.errMsg);
+		   }
+	}, "jsonp");
+	return false;
+}
+</script>
+{/literal}
+{include file="footer.htm"}

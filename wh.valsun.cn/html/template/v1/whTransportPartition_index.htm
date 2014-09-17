@@ -1,0 +1,44 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<div class="servar wh-servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button-normal" href="index.php?mod=whTransportPartition&act=add" >新增分区</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="20%">分区名称</td>
+                <td width="20%">分区简写</td>
+                <td width="20%">运输方式</td>
+                <td width="10%">分区筒号</td>
+				<td width="10%">优先级</td>
+                <td width="20%" align="center">操作</td>
+            </tr>
+        </thead>
+        <!-- BEGIN list -->
+        <thead>
+        {foreach key=key_id from=$list item=vo}
+            <tr class="odd">	
+                 <input type="hidden" name="key_id" value="{$vo.id}" />
+                 <td {if $vo['status'] == 0}style="color:#999"{/if} width="20%">{$vo.title}</td>
+                 <td {if $vo['status'] == 0}style="color:#999"{/if} width="20%">{$vo.shortTitle}</td>
+                 <td {if $vo['status'] == 0}style="color:#999"{/if} width="20%">{$vo.transportId}</td>
+                 <td {if $vo['status'] == 0}style="color:#999"{/if} width="10%">{$vo.partition}</td>
+                 <td {if $vo['status'] == 0}style="color:#999"{/if} width="10%">{$vo.priority}</td>
+				 <td width="20%" align="center">
+                     <a class="button-normal" href="index.php?mod=whTransportPartition&act=edit&id={$vo['id']}">编辑</a>
+                     &nbsp;|&nbsp; <a class="button-normal" onclick="return confirm('确定要删除{$vo.title}分区吗？');" href="index.php?mod=whTransportPartition&act=delete&id={$vo['id']}">删除</a>
+                 </td>
+            </tr>
+         {/foreach}
+        </thead>
+    <!-- END list -->
+    </table>
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}

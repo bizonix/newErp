@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+.maincontainer{
+	margin:3px 3px;
+	border:solid 1px #c0c0c0;
+	height:500px;
+}
+.titlediv{
+	border-bottom:solid 2px #c0c0c0;
+	margin:0 5px;
+	height:35px;
+	line-height:35px;
+	font-size:25px;
+}
+
+.inputline{
+	margin:5px 5px;
+}
+
+.inputline .line-left{
+	float:left;
+	font-size:18px;
+	width:180px;
+	text-align:right;
+	margin-right:15px;
+}
+
+.firstline{
+	height:35PX;
+	line-height:35PX;
+}
+
+.firstline input{
+	height:30px;
+	width:250px;
+	font-size:20px;
+}
+
+.secondeline textarea{
+	width:300px;
+	height:100px;
+}
+.submitbutton{
+	margin-top:15px;
+	margin-left:280px;
+}
+.checkline{
+	height:35px;
+	line-height:35px;
+}
+.checkline span{
+	font-size:13px;
+	height:15px;
+	line-height:15px;
+}
+.checkline input{
+	height:auto;
+	width:auto;
+}

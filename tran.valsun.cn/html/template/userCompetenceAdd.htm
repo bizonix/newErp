@@ -1,0 +1,41 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=userCompetence&act=index">用户开放授权</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>添加用户开放授权</h1>
+    <form onSubmit="return add_check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+                <td align="right" width="11%">授权用户：</td>
+                <td width="27%" align="left">
+				<select name="gid" id="gid" class="flexselect">
+					{foreach item=gid from=$gids}
+					<option value="{$gid.global_user_id}">{$gid.global_user_name}--{$gid.company_name}</option>
+					{/foreach}
+				</select>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">授权内容：</td>
+                <td width="27%" align="left">
+				<select name="competence" id="competence" multiple="multiple" size="10">
+					{foreach item=list from=$lists}
+					<option value="{$list.item}:{$list.content}">{section name=loop loop=$list.level start=1}|&nbsp;{/section}├{$list.title}</option>
+					{/foreach}
+				</select>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=userCompetence&act=index&id={$id}'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript" src="./public/js/tran_user_competence.js"></script>
+{include file="footer.htm"}

@@ -1,0 +1,166 @@
+{include file="header.htm"}
+<div class="fourvar">
+    <div class="pathvar">
+      您的位置：<a href="index.php?mod=purchaseOrder&act=index">采购管理</a>>>特殊运输调整
+    </div>
+</div>
+<div class="main underline-main feedback-main">
+    <table cellspacing="0" width="100%" class="products-action">
+                <thead>
+                    <tr class="title">
+                      <th >ID</th>
+                      <th width="8%" valign="middle" align="center" style="width: 75px;">产品类别名</th>
+                      <th width="44%" valign="middle" align="center" style="width: 510px;">料号列表</th>
+                      <th width="20%" valign="middle" align="center" style="width: 291px;">国家列表</th>
+                      <th width="12%" valign="middle" align="center" style="width: 102px;">原运输方式</th>
+                      <th width="12%" valign="middle" align="center" style="width: 128px;">修改的运输方式</th>
+                      <th width="10%" valign="middle" align="center" style="width: 110px;">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="tab">
+                    {foreach from=$adjust_transport  item=adjust_transport_list}
+                    <tr >
+                        <td id="pt_id">
+                            {$adjust_transport_list['id']}
+                        </td>
+                        <td >
+                            {$adjust_transport_list['category']}
+                        </td>
+                        <td id="pt_value">
+                            <div style="word-break:break-all; word-wrap:break-word; width:505px; overflow:hidden;">
+                            {$adjust_transport_list['skulist']}
+                            </div>
+                        </td>
+                        <td  id="pt_country">
+                            <div style="word-break:break-all; word-wrap:break-word; width:305px; overflow:hidden;">
+                            {$adjust_transport_list['country']}
+                            </div>
+                        </td>
+                        <td >
+                            {$adjust_transport_list['original_transport']}
+                        </td>
+                        <td>
+                            {$adjust_transport_list['current_transport']}
+                        </td>
+                        <td>
+                           
+                            <input type="button" value="编辑" onClick="edit({$adjust_transport_list['id']});" />
+                            <input type="button" value="删除" onClick = "del({$adjust_transport_list['id']});" />
+                           
+                            <input type="button" onClick ={if $adjust_transport_list['is_show']==1} "line({$adjust_transport_list['id']},'down')"{else}"line({$adjust_transport_list['id']},'up')"{/if}  class='show_adjust_transport'  adjust_id='{$adjust_transport_list['id']}' show='{$adjust_transport_list['is_delete']}' {if $adjust_transport_list['is_show']==1}value="下线"{else}value="上线"{/if}>
+                           
+							<!--button onClick = "del({$adjust_transport_list['id']});">删除</button-->
+                            <!--button onClick ={if $adjust_transport_list['is_show']==1} "line({$adjust_transport_list['id']},'down')"{else}"line({$adjust_transport_list['id']},'up')"{/if}  class='show_adjust_transport'  adjust_id='{$adjust_transport_list['id']}' show='{$adjust_transport_list['is_delete']}'>{if $adjust_transport_list['is_show']==1}下线{else}上线{/if}</button-->
+                            
+
+                            
+						</td>
+                    </tr>
+                   {/foreach} 
+                </tbody>
+            </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination">{$fpage}</div>
+</div>
+{include file="footer.htm"}
+<script>
+var web_api = "{$smarty.const.WEB_API}";
+{literal}
+function edit(id){
+	var id = id,edit_content;
+	$.get(web_api+"json.php?mod=purchaseOrder&act=adjust_transport",{"type":"getContent","id":id},function(rtn){
+		console.log(rtn);
+		if(rtn.errCode == "1"){
+			var data = rtn.data;
+			console.log(data);
+			edit_content = '<div id="eidt_content" >\
+				<table cellspacing="0" width="100%">\
+			<tr>\
+		    	<td width="30%">产品类别名:<input type="hidden" id="edit_id" name="edit_id" value="'+data[0]['id']+'" /></td>\
+		        <td align="left"><input type="text" name="edit_category" id="edit_category" style="width:200px;" value="'+data[0]['category']+'" /></td>\
+		    </tr>\
+		    <tr>\
+		    	<td>料号列表:</td>\
+		        <td align="left"><textarea id="edit_skulist" name="edit_skulist" style="width:300px; height:50px;">'+data[0]['skulist']+'</textarea><br/>以逗号隔开,半角逗号</td>\
+		    </tr>\
+		    <tr>\
+		    	<td>国家列表:</td>\
+		        <td align="left"><textarea id="edit_country" name="edit_country" style="width:300px; height:50px;">'+data[0]['country']+'</textarea><br />以逗号隔开,半角逗号</td>\
+		    </tr>\
+		    <tr>\
+		    	<td>原来的运输方式:</td>\
+		        <td align="left"><input type="text" name="edit_original_transport" id="edit_original_transport" style="width:200px;" value="'+data[0]['original_transport']+'" /></td>\
+		    </tr>\
+		    <tr>\
+		    	<td>需要修改的运输方式:</td>\
+		        <td align="left"><input type="text" name="edit_current_transport" id="edit_current_transport" style="width:200px;" value="'+data[0]['current_transport']+'" /></td>\
+		    </tr>\
+		</table>\
+	</div>';
+ 
+			alertify.confirm(edit_content,function(e){
+				if(e==true){
+					edit_save();
+				}
+			});			
+		}else{
+			alertify.error("获取内容失败");
+		}
+		
+	},"jsonp");
+	
+}
+function edit_save(){
+	var data = {};
+	data.id =	$("#edit_id").val();
+	data.category =	$.trim($("#edit_category").val());
+	var skulist = $.trim($("#edit_skulist").val());
+	var country = 	$.trim($("#edit_country").val());
+	data.skulist = skulist.replace(/，/g,",");
+	data.country = country.replace(/，/g,",");
+	data.original_transport = 	$.trim($("#edit_original_transport").val());
+	data.current_transport = 	$.trim($("#edit_current_transport").val());
+	$.get(web_api+"json.php?mod=purchaseOrder&act=adjust_transport_save",{"data":data},function(rtn){
+		console.log(rtn);
+		if(rtn.errCode == '001'){
+			window.location.reload();
+			return;
+		}
+		alertify.error(rtn.errMsg);
+	},"jsonp");
+}
+function del(id){
+	alertify.confirm("确定要删除？",function(e){
+		if(e){
+			$.get(web_api+"json.php?mod=purchaseOrder&act=adjust_transport_delete",{"id":id},function(rtn){
+				console.log(rtn);
+				if(rtn.errCode == '001'){
+					window.location.reload();
+					return;
+				}
+				alertify.error(rtn.errMsg);
+			},"jsonp");
+		}
+	});
+
+}
+function line(id,type){
+	var id = id;
+	var type = type;
+	$.get(web_api+"json.php?mod=purchaseOrder&act=adjust_transport_line",{"id":id,"type":type},function(rtn){
+		console.log(rtn);
+		if(rtn.errCode == '001'){
+			window.location.reload();
+			return;
+		}
+		alertify.error(rtn.errMsg);
+	},"jsonp");
+}
+$(document).ready(function(){
+	$(".main button").css("margin-top","5px");
+});
+
+{/literal}
+
+</script>   

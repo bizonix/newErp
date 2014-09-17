@@ -1,0 +1,25 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/pregoodsManage.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<div>
+    <div style="height:30px; line-height:30px; font-size:20px; padding-left:30px; border:solid 1px #cccccc; ">
+        {$orderInfo.ordersn}
+    </div>
+    <div style="margin-top:10px;border:solid 1px #cccccc; ">
+        <div style="padding-left:30px;">
+                                    备货单状态:
+            <select name="status" id ="orderStatus">
+		        <option value="NULL">请选择类型</option>
+		        <option {if $orderInfo.status==1 }selected="selected"{/if} value="1">待处理</option>
+		        <option {if $orderInfo.status==2 }selected="selected"{/if} value="2">待配货</option>
+		        <option {if $orderInfo.status==3 }selected="selected"{/if} value="3">待复核</option>
+		        <option {if $orderInfo.status==4 }selected="selected"{/if} value="4">配货完毕</option>
+		    </select>
+		    <input type="button" onclick="changeOrderStatus({$orderInfo.id})" value="修改">
+        </div>
+    </div>
+</div>
+{include file='footer.htm'}

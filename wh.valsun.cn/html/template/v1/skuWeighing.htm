@@ -1,0 +1,61 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script src="js/jSound.js"></script>
+<script src="js/sounds.js"></script>
+<script src="js/webcam.js"></script>
+
+<script language="javascript" src="js/skuWeighing.js"></script>
+<script type="text/javascript" src="./js/fancybox.js"></script>
+<input id="now_time" type='hidden' disabled="" value="{$now_time}"/>
+<div class="main" style="min-height:500px">
+    <div style="width: 100%;hegith:50px;">
+        <div style="width:70%;float:left;">
+            <div style="font-size:30px;margin:20px auto auto 60px">SKU：<input type="text" id="sku" style="width:200px; height:35px;font-size:20px;"/></div>
+            <div style="font-size:30px;margin:20px auto auto 60px">
+                订单号：<input type="text" id="ebay_id" onkeydown="updateOrderWeight(event, this)" style="width:200px; height:35px;font-size:20px;"/>
+            </div>
+        </div>
+        <div id="show_photo" style="float:left;margin-left:50px;width:20%;height:100px;margin-top:10px;">
+            
+        </div>
+    </div>
+	
+    <!--<div style="float:right;">
+            <img src= 'images/sku_photo/2014/07/03/sku_8020_M.jpg' width="50px" height="50px"/>
+        </div>-->
+	<div style="height:60px;width:250px;font-size:20px" id="mstatus" >
+	</div>
+	<div style="width:450px;min-height:200px;float:left;margin-left:10px;margin-top:50px;" >
+		<Applet id="app" code="a.class" height=387 width=400>
+			<PARAM NAME = ARCHIVE VALUE = "comm.jar" >
+			<param name=myName value="kaka"> 
+			<param name=mySex value="mail">
+			<param name=myNum value=200630170> 
+			<param name=myAge value=22>
+		</Applet>
+	</div>
+    <div id="flashArea" class="flashArea" style="float: left;margin-top:50px;margin-bottom:10px;padding-left:10px;">
+        <embed id="webcam_movie" src="./js/webcam.swf" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="520" height="390" name="webcam_movie" align="middle" allowscriptaccess="always" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="shutter_enabled=0&amp;shutter_url=shutter.mp3&amp;width=520&amp;height=400&amp;server_width=600&amp;server_height=400"/>
+    </div>
+
+	<div style="width:auto;min-width:300px;min-height:200px;float:right;margin-right: 10px;margin-top:50px;" >
+		<div id="imgshow" style="display:none">
+			<a href="javascript:void(0)" id="imgb" class="fancybox">
+				<img src="" id="imgs" class="skuimg" width="260" height="260">
+			</a>
+		</div>
+		<div id="flat_order" style=" padding: 10px 10px;font-size:24px;">					
+			<fieldset id="flat_fieldset1" style=" float:left; margin-top:5px; padding:3px 0;"><legend>料号重量扫描</legend>			
+				<div style="margin-top:10px">
+				同步重量:				
+				<input name="curweight_flat" type="text" id="curweight_flat" style="width:120px; height:35px;font-size:20px;"/>
+				<!--<input type="button" class="input_button" value="手动确认重量" onclick="skuWeight()" />-->
+				</div>
+			</fieldset>
+		</div>
+		
+	</div>
+</div>
+
+{include file='footer.htm'}

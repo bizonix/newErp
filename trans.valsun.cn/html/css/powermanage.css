@@ -1,0 +1,102 @@
+.navdiv{
+    height: 35px;
+    line-height: 35px;
+    font-size: 13px;
+    padding-left: 10px;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    border-bottom:  #999 solid 3px;
+}
+
+.maincontentdiv{
+    width: 1180px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.leftcontainer{
+    float: left;
+    width: 960px;
+}
+.topmenudiv{
+    padding-left: 50px;
+    padding-top: 5px;
+    border:  #cccccc solid 1px;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 10px;
+}
+.topmenudiv a{
+    float: right; 
+    text-decoration: none; 
+    margin-right: 30px; 
+    color: #333333;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.topmenudiv a:hover{
+    color: red;
+}
+
+.powerusertable{
+    width: 99%;
+    border:  #cccccc solid 1px;
+    margin: auto;
+}
+.powerusertable thead{
+    height: 35px;
+    line-height: 35px;
+}
+.powerusertable thead th{
+    border-bottom: solid 1px #cccccc;
+    font-size: 15px;
+}
+.powerusertable tbody td{
+    border-bottom: solid 1px #cccccc;
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+}
+
+.powerusertable tbody td a{
+    text-decoration: none;
+    color: #333333;
+}
+.powerusertable tbody td a:hover{
+   color: red;
+}
+
+.powerusertable tfoot tr {
+   text-align: center;
+   font-size: 13px;
+}
+
+.powertable{
+    border: #e3e3e3 solid 1px;
+    width: 100%;
+}
+.powertable thead tr th {
+    border-bottom:  #e3e3e3 solid 1px;
+    height: 38px;
+    line-height: 38px;
+}
+
+.powertable tbody tr td{
+    border-bottom:  #e3e3e3 solid 1px;
+    height: 38px;
+    line-height: 38px;
+}
+
+.navhref{
+    text-decoration: none;
+    color: #0044cc;
+}
+.navhref:hover{
+    color: red;
+}
+.navlast{
+    color: red;
+}

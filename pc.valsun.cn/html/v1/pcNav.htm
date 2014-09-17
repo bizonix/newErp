@@ -1,0 +1,2 @@
+        您的位置
+        {foreach $navlist as $navval}<a {if $navval@last}class="navlasthref" {/if} href="{$navval.url}">{$navval.title}</a>{if $navval@last}{else}>>{/if}{/foreach}

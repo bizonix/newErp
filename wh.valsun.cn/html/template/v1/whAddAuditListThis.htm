@@ -1,0 +1,57 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script type="text/javascript" src="./js/whAuditList.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=WhAudit&act=addAuditList' method="post" id="whUpdateAuditList" onsubmit="return addDjCheck();">
+    	<div style="width:500px; margin:auto; text-align:left;">
+        	<label style="font-size:20px;">单据类型：</label>&nbsp;&nbsp;&nbsp;&nbsp; 
+            <span style="width:200px;height:30px;font-size:20px;color: red;">
+                <input type="hidden" name='invoiceTypeId' value="{$value.invoiceTypeId}"/>
+             	{WhIoStoreModel::getInvoiceTypeNameById({$value.invoiceTypeId})}
+			 </span>
+          <span id="invoiceTypeIdSpan" style="color: red;"></span>
+        </div>
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+            <label for="auditorName" style="font-size:20px;">审核人名：</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input value="" id='auditorName' class="mf validate[required] text-input" name="auditorName" type="text" style="width:200px;height:30px;font-size:20px">
+            <input type="hidden" id = "auditorId" name="auditorId" value="" />
+            <span id="auditorNameSpan" style="color: red;">*</span>
+		</div>
+		<br />
+        <div style="width:500px; margin:auto; text-align:left;">
+            <label for="auditLevel" style="font-size:20px;">审核级别：</label>&nbsp;&nbsp;&nbsp;&nbsp; 
+            <input value="" id='auditLevel' class="validate[required,custom[integer],min[0]] text-input" name="auditLevel" type="text" style="width:200px;height:30px;font-size:20px"  onchange="userTipFunction(this)">
+            <span id="auditLevelSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+        	<label style="font-size:20px;">仓库位置：</label>&nbsp;&nbsp;&nbsp;&nbsp; 
+            <span style="width:200px;height:30px;font-size:20px;color: red;">
+                <input type="hidden" name='storeId' value="{$value.storeId}"/>
+             	{WhIoStoreModel::getWhNameById({$value.storeId})}
+			 </span>
+          <span id="storeIdSpan" style="color: red;"></span>
+		</div>
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+            <label for="is_enable" style="font-size:20px;">是否启动：</label>&nbsp;&nbsp;&nbsp;&nbsp; 
+            <select name="is_enable" id="is_enable" style="width:205px;height:30px;font-size:20px" class="validate[required]">
+                <option value="1" >启用</option>
+                <option value="2" >禁用</option>
+	        </select>
+            <span id="is_enableSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        <div style="width:500px; margin:auto; text-align:center;">
+            <input style="width:80px; height:30px; font-size:20px;" type="submit" value="提交"/>
+            &nbsp;
+            <input style="width:80px; height:30px; font-size:20px;" type="button"  id='back' value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.htm"}

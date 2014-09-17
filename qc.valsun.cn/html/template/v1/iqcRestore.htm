@@ -1,0 +1,89 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/iqcsku.js"></script>
+<div class="fourvar">
+    {include file="iqcnav.htm"}
+    <div class="pagination" id="fpage">
+        {$show_page}
+    </div>
+</div>
+<div class="servar">
+<span style="color:#FF0000">*此功能支持扫描搜索:扫描时不能刷新页面。</span>
+    <br/>
+    <span>
+        批量搜索：<input type="text" id="nowdsku" value="{$sku}" style="width:150px;height:30px;font-size:20px;" onkeydown="scanSku(1)"/>
+    </span>
+    <span>
+        <button  id='serchDelsku' value="" />搜索</button>
+    </span>
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+<input type="hidden" id="havesku" value="">
+    <table cellspacing="0" width="100%" id="scantable" style="display:none;color:#000">
+        <tr class="title">
+            <td><input type="checkbox" class="checkall" /></td>
+            <td>批次</td>
+            <td>料号</td>
+            <td>到货数</td>
+            <td>录入时间</td>
+            <td>描 述</td>
+            <td>采 购</td>
+            <td>仓 位</td>
+            <td>IQC领货人</td>
+            <td>删除人员</td>
+        </tr>
+        <tr><td id="addrow" colspan="9"></td></tr> 
+    </table>
+    <table cellspacing="0" width="100%" id="nowtable" style="color:#000">
+        <tr class="title">
+            <td><input type="checkbox" id="checkall" /></td>
+            <td>批次</td>
+            <td>料号</td>
+            <td>到货数</td>
+            <td>录入时间</td>
+            <td>描 述</td>
+            <td>采 购</td>
+            <td>仓 位</td>
+            <td>IQC领货人</td>
+            <td>删除人员</td>
+        </tr>
+        {foreach from=$iqcList item=list}
+        <tr class="odd">
+                <td><input type="checkbox" class="iqcselect" name="iqcselect" value="{$list.id}"/></td>
+                <td>{$list.printBatch}</td>
+                <td>{$list.sku}</td>
+                <td>{$list.num}</td>
+                <td>{$list.printTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                <td width="30%" align="left">{$list.goodsName}</td>
+                {$cache_purchase_username = UserModel::getUsernameById($list.purchaseId)}
+                <td>{if !empty($cache_purchase_username)} {$cache_purchase_username} {else} {$list.purchaseId} {/if}</td>
+                <td>{$list.location}</td>
+                {$get_username = UserModel::getUsernameById($list.getUserId)}
+                <td>{if !empty($get_username)}{$get_username}{else}{$list.getUserId}{/if}</td>
+                {$delete_username = UserModel::getUsernameById($list.deleteUserId)}
+                <td>{if !empty($delete_username)} {$delete_username} {else} {$list.deleteUserId} {/if}</td>
+        </tr>
+        {foreachelse}
+        <tr class="odd">
+                <td colspan="8">没有搜索值！</td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination" id="spage">
+        {$show_page}
+    </div>
+</div>
+{include file="footer.htm"}
+<div id="qcskulists" title="此SKU包含多条记录！请选择" style="display:none;">
+	<form id="qcskulists" method="POST" action="" enctype="multipart/form-data">
+		<table id="show_tab" width="100%" border="1" cellpadding="0" cellspacing="0">
+			<thead><tr class="title"><td ><input type="checkbox" class="checkall" /></td><td>料号</td><td>数量</td><td>打标日期</td><td>打标人员</td></tr></thead>
+			<tbody>
+
+    		</tbody>
+		</table>
+	</form>
+</div>

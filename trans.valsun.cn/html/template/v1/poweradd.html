@@ -1,0 +1,38 @@
+{header}
+<link rel="stylesheet" href="css/powermanage.css">
+<script language='javascript' src='js/power_addgroup.js'></script>
+{navbar}
+<div class="maincontentdiv" style="height: 405px;" >
+    <fieldset style="height: 314px;">
+            <legend>新增权限</legend>
+            <form action='index.php?mod=power&act=addpowersubmit' method="post">
+             <p>
+		<label for="dropdown">所属权限组: </label>
+		<select id="groupselect" name="group" class="dropdown">
+                    <option value="0">请选择一个分组</option>
+                    <!-- BEGIN grouplist -->
+                    <option {isselected} value="{gid}">{text}</option>
+                    <!-- END grouplist -->
+		</select>
+            </p>   
+            <p>
+                <label for="sf">名称: </label>
+                <input value="{powername}" id='groupnameinput' onblur="checkpowername()" class="sf" name="powername" type="text" >
+                <span id='showmessage'>30个字符以下</span>
+            </p>
+            
+            <p>
+                <label for="mf">说明: </label>
+                <input value="{desc}" class="mf" name="powerdesc" type="text" >
+            </p>
+            <!-- IF haspid -->
+                <input name="pid" type="hidden" value="{pid}">
+            <!-- ENDIF haspid -->
+            <p>
+                <input class="button" type="submit" value="提交">
+                <input class="button" onclick="window.location='index.php?mod=power&act=powerlist'" type="reset" value="取消">
+            </p>
+        </form>
+    </fieldset>
+</div>
+{footer}

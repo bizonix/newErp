@@ -1,0 +1,16 @@
+{include file="header.htm"}
+<script language="javascript" src="./js/pda_tracking.js"></script>
+ <div id="mstatus" class="floatright"></div>
+<div id="divcontent" style="height:200px;width:225px">
+ <div class="floatleft">
+            <span>发货单号 : </span><input style="width:150px;" name="order" type="text" id="ebay_id" onkeydown="checkPartion()" class="textinput" />
+            <input id='real_partion' type="hidden"/>
+            <input id='package_id' type="hidden"/>
+        </div>
+		<div class="floatleft" >
+            <span>跟踪号: </span><input style="width:150px;" name="tracking" type="text" id="tracking" onkeydown="checkeBayID()" class="textinput" />
+            <div class="floatleft" id="show_review_total" style="display: none; padding-top:4px;">
+            </div>
+        </div>        
+</div>
+{include file="footer.htm"}

@@ -1,0 +1,419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/flexselect.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="./js/easyTooltip.js"></script>
+<script type="text/javascript" src="./js/ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./js/jquery.wysiwyg.js"></script>
+<script type="text/javascript" src="./js/hoverIntent.js"></script>
+<script type="text/javascript" src="./js/superfish.js"></script>
+<script type="text/javascript" src="./js/custom.js"></script>
+<script src="./js/jquery.validationEngine-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+<!--<script type="text/javascript" src="http://misc.erp.valsun.cn/js/alertify.js"></script>-->
+<link href="http://misc.erp.valsun.cn/css/alertify.css" rel="stylesheet" type="text/css" />
+<script src="http://api.notice.valsun.cn/js/swJsNotice.js" type="text/javascript"></script>
+<!--<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />-->
+<link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" type="text/css"/>
+</head>
+
+<body>
+	<div class="container">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	产品中心
+                </div>
+                <div class="onevar">
+                	<ul>
+                        {if isAccessMod('goods') == true}
+                    	<li>
+                        	<a href="index.php?mod=goods&act=getGoodsList" class="ProductInformation {if $onevar == 1}cho{/if}" >产品信息</a>
+                        </li>
+                        {/if}
+                        {if isAccessMod('autoCreateSpu') == true}
+                        <li>
+                        	<a href="index.php?mod=autoCreateSpu&act=getAutoCreateSpuList" class="skumanage {if $onevar == 2}cho{/if}">SPU管理</a>
+                        </li>
+                        {/if}
+                        {if isAccessMod('products') == true}
+                        <li>
+                        	<a href="index.php?mod=products&act=getProductsComfirmList" class="ProductsMake {if $onevar == 5}cho{/if}">产品制作</a>
+                        </li>
+                        {/if}
+                        {if isAccessMod('packingMaterials') == true}
+                        <li>
+                        	<a href="index.php?mod=packingMaterials&act=getPmList" class="Package {if $onevar == 3}cho{/if}">包材管理</a>
+                        </li>
+                        {/if}
+                        {if isAccessMod('category') == true}
+                        <li>
+                        	<a href="index.php?mod=category&act=getCategoryList" class="category {if $onevar == 4}cho{/if}">类别管理</a>
+                        </li>
+                        {/if}
+                        {if isAccessMod('excelImport') == true}
+                        <li>
+                        	<a href="index.php?mod=excelImport&act=welcomeExcelImport" class="writein {if $onevar == 6}cho{/if}">Excel导入</a>
+                        </li>
+                        {/if}
+                        {if isAccessMod('excelOutPut') == true}
+                        <li>
+                        	<a href="index.php?mod=excelOutPut&act=welcomeExcelOutPut" class="suppliermanage {if $onevar == 7}cho{/if}">报表导出</a>
+                        </li>
+                        {/if}
+                        {if isAccessMod('user') == true}
+                        <li>
+                        	<a href="index.php?mod=user&act=index" class="systemsettings {if in_array($mod,array('user','job','dept'))}cho{/if}" >系统设置</a>
+                        </li>
+                        {/if}
+                    </ul>
+                </div>
+                <div class="user">
+                	<a class="news-img" href="javascript:javascript:void(0)" onclick="swntc_call('{getPersonNameById($_userid)}')">消息</a>
+                    <input id='swNoticeUrl' type='hidden'  value='index.php?mod=notice&act=sendMessage'/>
+                	<a href="javascript:void(0);" >{getPersonNameById($_userid)}</a><a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;" title="注销安全退出">退出</a>
+                </div>
+            </div>
+            <div class="twovar">
+            	<ul>
+            		{if $onevar == 1}
+                    {if isAccessAll('goods','getGoodsList') == true}
+                	<li>
+                    	<a href="index.php?mod=goods&act=getGoodsList" {if $twovar == 11}class="cho"{/if}>产品信息</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('goods','getCombineList') == true}
+                    <li>
+                    	<a href="index.php?mod=goods&act=getCombineList" {if $twovar == 12}class="cho"{/if}>虚拟料号管理</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('goods','skuWeight') == true}
+                    <li>
+                    	<a href="index.php?mod=goods&act=skuWeight" {if $twovar == 13}class="cho"{/if}>产品重量维护</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('goods','skuVP') == true}
+                    <li>
+                    	<a href="index.php?mod=goods&act=skuVP" {if $twovar == 16}class="cho"{/if}>产品体积包材维护</a>
+                    </li>
+                    {/if}
+                    <!-- TODO: {if isAccessAll('goods','skuVolume') == true}
+                    <li>
+                    	<a href="index.php?mod=goods&act=skuVolume" {if $twovar == 14}class="cho"{/if}>产品体积维护</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('goods','addSkuPm') == true}
+                    <li>
+                    	<a href="index.php?mod=goods&act=addSkuPm" {if $twovar == 15}class="cho"{/if}>产品包材维护</a>
+                    </li>
+                    {/if} -->
+                    {if isAccessAll('goods','getSkuConversionList') == true}
+                    <li>
+                    	<a href="index.php?mod=goods&act=getSkuConversionList" {if $twovar == 17}class="cho"{/if}>料号转换</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('goods','getSpuHscodeTaxList') == true}
+                    <li>
+                    	<a href="index.php?mod=goods&act=getSpuHscodeTaxList" {if $twovar == 18}class="cho"{/if}>SPU-海关编码</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('goods','getOverseaTaxList') == true}
+                    <li>
+                    	<a href="index.php?mod=goods&act=getOverseaTaxList" {if $twovar == 19}class="cho"{/if}>海外仓关税</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('goods','getSkuWeightAuditList') == true}
+                    <li>
+                    	<a href="index.php?mod=goods&act=getSkuWeightAuditList" {if $twovar == 110}class="cho"{/if}>SKU重量审核列表</a>
+                    </li>
+                    {/if}
+                    {/if}
+                    {if $onevar == 2}
+                    {if isAccessAll('autoCreateSpu','getAutoCreatePrefixList') == true}
+                    <li>
+                    	<a href="index.php?mod=autoCreateSpu&act=getAutoCreatePrefixList" {if $twovar == 21}class="cho"{/if}>自动生成SPU</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('autoCreateSpu','getAutoCreateSpuList') == true}
+                    <li>
+                    	<a href="index.php?mod=autoCreateSpu&act=getAutoCreateSpuList" {if $twovar == 22}class="cho"{/if}>生成SPU列表管理</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('autoCreateSpu','getSpuArchiveList') == true}
+                    <li>
+                    	<a href="index.php?mod=autoCreateSpu&act=getSpuArchiveList" {if $twovar == 23}class="cho"{/if}>SPU档案管理</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('autoCreateSpu','getNoPassSpuList') == true}
+                    <li>
+                    	<a href="index.php?mod=autoCreateSpu&act=getNoPassSpuList" {if $twovar == 25}class="cho"{/if}>SPU审核不通过管理</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('spu','getSpuPrefixList') == true}
+                    <li>
+                    	<a href="index.php?mod=spu&act=getSpuPrefixList" {if $twovar == 24}class="cho"{/if}>SPU自动生成前缀管理</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('autoCreateSpu','getSpuModityRecordList') == true}
+                    <li>
+                    	<a href="index.php?mod=autoCreateSpu&act=getSpuModityRecordList" {if $twovar == 26}class="cho"{/if}>SPU产品修改/优化管理</a>
+                    </li>
+                    {/if}
+                    {/if}
+                    {if $onevar == 5}
+                    {if isAccessAll('products','getProductsComfirmList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getProductsComfirmList" {if $twovar == 51}class="cho"{/if}>1.确认收到料号</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getProductsTakeList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getProductsTakeList" {if $twovar == 52}class="cho"{/if}>2.成功领取料号</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getProductsCompleteList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getProductsCompleteList" {if $twovar == 53}class="cho"{/if}>3.制作完成</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getProductsReturnList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getProductsReturnList" {if $twovar == 54}class="cho"{/if}>4.归还产品</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getNewGoodsList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getNewGoodsList" {if $twovar == 55}class="cho"{/if}>新品列表</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','tmpReturnPros') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=tmpReturnPros" {if $twovar == 56}class="cho"{/if}>新品归还</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getOutStoreList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getOutStoreList" {if $twovar == 57}class="cho"{/if}>领料单</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getInStoreList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getInStoreList" {if $twovar == 58}class="cho"{/if}>退料单</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','tmpModGetPros') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=tmpModGetPros" {if $twovar == 59}class="cho"{/if}>修改产品领取</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','tmpModReturnPros') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=tmpModReturnPros" {if $twovar == 510}class="cho"{/if}>修改产品归还</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getIsNotBackSkuList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getIsNotBackSkuList" {if $twovar == 511}class="cho"{/if}>未归还产品查询</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getProductsCategoryList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getProductsCategoryList" {if $twovar == 517}class="cho"{/if}>服装/电子大类维护</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getProductsCategoryAppointList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getProductsCategoryAppointList" {if $twovar == 518}class="cho"{/if}>大类-工程师指派维护</a>
+                    </li>
+                    {/if}
+                    <!-- TODO: {if isAccessAll('products','getAppointPersonList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getAppointPersonList" {if $twovar == 512}class="cho"{/if}>人员指派维护</a>
+                    </li>
+                    {/if} -->
+                    {if isAccessAll('products','getProductsPECountList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getProductsPECountList" {if $twovar == 516}class="cho"{/if}>指派数量维护</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getProductsCombineSpuList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getProductsCombineSpuList" {if $twovar == 513}class="cho"{/if}>1.虚拟SPU指派</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getProductsCombineSpuTakeList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getProductsCombineSpuTakeList" {if $twovar == 514}class="cho"{/if}>2.虚拟SPU领取</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('products','getProductsCombineSpuCompleteList') == true}
+                    <li>
+                    	<a href="index.php?mod=products&act=getProductsCombineSpuCompleteList" {if $twovar == 515}class="cho"{/if}>3.虚拟SPU完成</a>
+                    </li>
+                    {/if}
+                    {/if}
+                    {if $onevar == 3}
+                    {if isAccessAll('packingMaterials','getPmList') == true}
+                    <li>
+                    	<a href="index.php?mod=packingMaterials&act=getPmList" {if $twovar == 31}class="cho"{/if}>包材管理</a>
+                    </li>
+                    {/if}
+                    {/if}
+                    {if $onevar == 4}
+                    {if isAccessAll('category','getCategoryList') == true}
+                    <li>
+                    	<a href="index.php?mod=category&act=getCategoryList" {if $twovar == 41}class="cho"{/if}>产品类别管理</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('property','getPropertyList') == true}
+                    <li>
+                    	<a href="index.php?mod=property&act=getPropertyList" {if $twovar == 42}class="cho"{/if}>产品选择属性管理</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('property','getInputList') == true}
+                    <li>
+                    	<a href="index.php?mod=property&act=getInputList" {if $twovar == 43}class="cho"{/if}>产品文本属性管理</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('spuSpecialProperty','getSpuSpecialPropertyList') == true}
+                    <li>
+                    	<a href="index.php?mod=spuSpecialProperty&act=getSpuSpecialPropertyList" {if $twovar == 44}class="cho"{/if}>特殊属性-运输方式管理</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('spuSpecialProperty','getSpuSpecialTMList') == true}
+                    <li>
+                    	<a href="index.php?mod=spuSpecialProperty&act=getSpuSpecialTMList" {if $twovar == 45}class="cho"{/if}>特殊料号-运输方式管理</a>
+                    </li>
+                    {/if}
+					{/if}
+                    {if $onevar == 6}
+                    {if isAccessAll('excelImport','welcomeExcelImport') == true}
+                    <li>
+                    	<a href="index.php?mod=excelImport&act=welcomeExcelImport" {if $twovar == 61}class="cho"{/if}>导表说明事项</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelImport','changePurchaseBatch') == true}
+                    <li>
+                    	<a href="index.php?mod=excelImport&act=changePurchaseBatch" {if $twovar == 62}class="cho"{/if}>批量修改料号对应采购</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelImport','addOrUpdateSpuSalerForEbay') == true}
+                    <li>
+                    	<a href="index.php?mod=excelImport&act=addOrUpdateSpuSalerForEbay" {if $twovar == 63}class="cho"{/if}>Ebay批量添加/修改SPU对应销售</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelImport','addOrUpdateSpuSalerForAmazon') == true}
+                    <li>
+                    	<a href="index.php?mod=excelImport&act=addOrUpdateSpuSalerForAmazon" {if $twovar == 64}class="cho"{/if}>Amazon批量添加/修改SPU对应销售</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelImport','addOrUpdateSpuSalerForAliexpress') == true}
+                    <li>
+                    	<a href="index.php?mod=excelImport&act=addOrUpdateSpuSalerForAliexpress" {if $twovar == 65}class="cho"{/if}>Aliexpress批量添加/修改SPU对应销售</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelImport','addOrUpdateSpuSalerForOversea') == true}
+                    <li>
+                    	<a href="index.php?mod=excelImport&act=addOrUpdateSpuSalerForOversea" {if $twovar == 69}class="cho"{/if}>Oversea批量添加/修改SPU对应销售</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelImport','addOrUpdateSpuHscodeTax') == true}
+                    <li>
+                    	<a href="index.php?mod=excelImport&act=addOrUpdateSpuHscodeTax" {if $twovar == 66}class="cho"{/if}>SPU-海关编码-税率/监管条件</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelImport','addOrUpdateSpuMaker') == true}
+                    <li>
+                    	<a href="index.php?mod=excelImport&act=addOrUpdateSpuMaker" {if $twovar == 67}class="cho"{/if}>批量导入/更新SPU产品制作人</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelImport','addOrUpdateSpuUSTax') == true}
+                    <li>
+                    	<a href="index.php?mod=excelImport&act=addOrUpdateSpuUSTax" {if $twovar == 68}class="cho"{/if}>批量导入/更新US关税</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelImport','addOrUpdateSpeicailSpu') == true}
+                    <li>
+                    	<a href="index.php?mod=excelImport&act=addOrUpdateSpeicailSpu" {if $twovar == 69}class="cho"{/if}>批量导入/更新SPU特殊属性</a>
+                    </li>
+                    {/if}
+					{/if}
+                    {if $onevar == 7}
+                    {if isAccessAll('excelOutPut','welcomeExcelOutPut') == true}
+                    <li>
+                    	<a href="index.php?mod=excelOutPut&act=welcomeExcelOutPut" {if $twovar == 71}class="cho"{/if}>报表导出欢迎页</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelOutPut','skuPriceOptimizeExcelOutPut') == true}
+                    <li>
+                    	<a href="index.php?mod=excelOutPut&act=skuPriceOptimizeExcelOutPut" {if $twovar == 72}class="cho"{/if}>SKU价格优化导出</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelOutPut','spuHscodeTaxExcelOutPut') == true}
+                    <li>
+                    	<a href="index.php?mod=excelOutPut&act=spuHscodeTaxExcelOutPut" {if $twovar == 73}class="cho"{/if}>SPU-海关编码/税率/监管条件导出</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelOutPut','pkSpuByAuditTimeExcelOutPut') == true}
+                    <li>
+                    	<a href="index.php?mod=excelOutPut&act=pkSpuByAuditTimeExcelOutPut" {if $twovar == 74}class="cho"{/if}>PK产品信息导出</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelOutPut','spuSalersInfoExcelOutPut') == true}
+                    <li>
+                    	<a href="index.php?mod=excelOutPut&act=spuSalersInfoExcelOutPut" {if $twovar == 75}class="cho"{/if}>SPU销售等信息导出</a>
+                    </li>
+                    {/if}
+                    {if isAccessAll('excelOutPut','3WithoutGoodsInfoExcelOutPut') == true}
+                    <li>
+                    	<a href="index.php?mod=excelOutPut&act=3WithoutGoodsInfoExcelOutPut" {if $twovar == 76}class="cho"{/if}>三无产品信息导出</a>
+                    </li>
+                    {/if}
+                    {/if}
+					{if in_array($mod,array('user','job','dept'))}
+                    {if isAccessAll('user','index') == true}
+                    <li><a href="index.php?mod=user&act=index" {if $act=='index' && $mod=='user'}class="cho"{/if}>用户管理</a></li>
+                    {/if}
+                    {if isAccessAll('job','index') == true}
+					<li><a href="index.php?mod=job&act=index" {if $act=='index' && $mod=='job'}class="cho"{/if}>岗位管理</a></li>
+                    {/if}
+                    {if isAccessAll('dept','index') == true}
+					<li><a href="index.php?mod=dept&act=index" {if $act=='index' && $mod=='dept'}class="cho"{/if}>部门管理</a></li>
+					{/if}
+                    {/if}
+                </ul>
+            </div>
+		    <!--div class="threevar">
+            	<ul>
+                	<li>
+                    	<a href="#" class="cho">三级导航</a>
+                    </li>
+                    <li>
+                    	<a href="#">三级导航</a>
+                    </li>
+                    <li>
+                    	<a href="#">三级导航</a>
+                    </li>
+                    <li>
+                    	<a href="#">三级导航</a>
+                    </li>
+                    <li>
+                    	<a href="#">三级导航</a>
+                    </li>
+                    <li>
+                    	<a href="#">三级导航</a>
+                    </li>
+                    <li>
+                    	<a href="#">三级导航</a>
+                    </li>
+                    <li>
+                    	<a href="#">三级导航</a>
+                    </li>
+                </ul>
+            </div-->

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>海外仓备货打印</title>
+</head>
+<style>
+.floatdiv{
+	float:left;
+	margin:10px;
+	width:6.6cm;
+}
+</style>
+<body style="margin:0">
+<?php
+	foreach($finalAr as $item){
+?>
+	<div style="width:20cm;padding-top:5px; page-break-after: always;">
+	   <?php if(!empty($item['skulist'])){ ?>
+	   <div style="text-align:center">
+	       <img width="240" height="60" src="barcode128.class.php?data=<?php echo $item['orderInf']['ordersn']; ?>" ><br>
+	       <?php echo $item['orderInf']['ordersn']; ?>
+	   </div>
+	   <?php } ?>
+	   <div>
+			<?php foreach($item['skulist'] as $skus) { ?>
+				<div class="floatdiv">【<?php echo $skus['sku']; ?>】--配货数:[<font color="#FF0000"; style="font-weight:bolder"><?php echo $skus['amount']; ?></font>]<br/>系统库存:<font color="#00CC00"; style="font-weight:bolder"><?php echo $skus['qtyB'];?></font>
+				</div>
+			<?php } ?>  
+	   		<div style="clear:both"></div>
+	   </div>
+	</div>
+<?php
+}
+?>
+</body>
+</html>

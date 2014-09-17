@@ -1,0 +1,94 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=shipfeeQuery&act=index">运费查询</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="servar">
+	<form name="form" action="index.php?mod=shipfeeQuery&act=query" method="post" onSubmit="return check()">
+	<span>
+		发货地址:
+		<select name="ship_add" id="ship_add" onchange="show_channel_list(this.value)">
+		<option value="">=请选择=</option>
+		{foreach item=list from=$addrlist}
+		<option value="{$list.id}" {if $ship_add == $list.id}selected="selected"{/if}>{$list.addressNameCn}</option>
+		{/foreach}
+		</select>
+		<input type="hidden" id="ship_carrier_id" value="{$ship_carrier}" />
+	</span>
+	<span id="channelList">
+		<select name="ship_carrier" id="ship_carrier">
+		<option value="">=请选择发货运输方式=</option>
+		{foreach item=list from=$carrierlist}
+		<option value="{$list.id}" {if $ship_carrier == $list.id}selected="selected"{/if}>{$list.carrierNameCn}</option>
+		{/foreach}
+		</select>
+	</span>
+	<span id="countrys">
+		<select name="ship_country" id="ship_country" class="flexselect">
+		<option value="">=请选择发往国家/地区=</option>
+		{foreach item=list from=$countrylist}
+		<option value="{$list.id}" {if $ship_country == $list.id}selected="selected"{/if}>{if $ship_add == 5}{$list.countryName}{else}{$list.countryNameEn}--{$list.countryNameCn}{/if}</option>
+		{/foreach}
+		</select>
+	</span>
+	<span>
+		重量:
+		<input type="text" name="ship_weight" id="ship_weight" value = "{$ship_weight}" style="width:50px;ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)" onblur="check_float(this)"/> KG
+	</span>
+	<span id="ship_tids">
+		<select name="ship_tid" id="ship_tid">
+		<option value="">=请选择转运中心=</option>
+		{foreach item=list from=$transitlist}
+		<option value="{$list.id}" {if $ship_tid == $list.id}selected="selected"{/if}>{$list.cn_title}-{$list.en_title}</option>
+		{/foreach}
+		</select>
+	</span>
+	<span id="postcodes">
+		邮编:
+		<input type="text" name="ship_postcode" id="ship_postcode" value = "{$ship_postcode}" style="width:50px;ime-mode:Disabled" onkeyup="check_int(this)" onafterpaste="check_int(this)" onblur="check_int(this)"/>
+	</span>
+	<span>
+        <button name="button" type="submit" id="submit-btn" value="submit" />查询运费</button>
+	</span>
+	</form>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="sortTable" class="tablesorter">
+		{if empty($errMsg) }
+			<thead> 
+			<tr class="title purchase-title">
+				<th>运输方式</th>
+				<th>渠道</th>
+				<th>折扣率</th>
+				<th>折后价({if $ship_add == 2}${else}￥{/if})</th>
+				<th>原价({if $ship_add == 2}${else}￥{/if})</th>
+			</tr>
+			</thead>
+			<tbody> 
+			{foreach item=list from=$lists}
+			<tr>
+				<td>{$list.carriername}</td>
+				<td>{$list.chname}</td>
+				<td>{if $list.rate <= 0}无{else}{$list.rate}{/if}</td>
+				<td>{$list.shipfee}</td>
+				<td>{$list.totalfee}</td>
+			</tr>
+			{foreachelse}
+			<tr>
+				<td colspan="5">暂无查询结果，请确认您选择的条件！</td>
+			</tr>
+			{/foreach}
+			</tbody> 			
+		{else}
+			<tr><td>
+			<p>{$errMsg}
+			<br/><br/>
+			<button name="button" type="button" id="bottom" value="history" onclick="location.href='index.php?mod=shipfeeQuery&act=index'"/>返 回</button>
+			</p>
+			<td></tr>
+		{/if}
+	</table>
+</div>
+<script type="text/javascript" src="./public/js/tran_shipfee_query.js"></script>
+{include file="footer.htm"}

@@ -1,0 +1,617 @@
+{include file="header.htm"}
+<ol class="breadcrumb">
+  <li><a href="#">采购系统</a></li>
+  <li><a href="#">预警管理</a></li>
+  <li class="active">销售库存数据分析</li>
+</ol>
+<div class="well well-lg" style="clear:both">
+	<div class="row">
+		<div class="col-md-4">
+			<input name="" type="text" id="keyword" {if $smarty.get.keyword} value="{$smarty.get.keyword}" {/if}  class="form-control"/>
+		</div>   
+
+		<div class="col-md-2">
+			<select id="type"  class="form-control">
+					<option value='-1'>请选择类型</option>
+					<option value='sku' {if $smarty.get.type == "sku" }selected="selected"{/if}>料号子SKU</option>
+					<option value='spu' {if $smarty.get.type == "spu" }selected="selected"{/if}>主料号</option>
+					<option value= "goodsName" {if $smarty.get.type == "goodsName" }selected="selected"{/if}>产品名称</option>
+			</select>
+		</div>
+		<div class="col-md-2">
+			 <select id="flag"  class="form-control">
+				<option value='-1'>选择状态</option> 
+				<option value='1' {if $smarty.get.status == "1" } selected{/if}>在线</option> 
+				<option value='2' {if $smarty.get.status == "2" } selected{/if}>停售</option> 
+				<option value='3' {if $smarty.get.status == "3" } selected{/if}>暂时停售</option> 
+				<option value='4' {if $smarty.get.status == "4" } selected{/if}>部分侵权停售</option> 
+			</select>
+		</div>
+		<div class="col-md-2">
+			<select id="pid"  class="form-control flexselect">
+				<option value='-1'>请选择供应商</option>
+				{foreach  item=list from=$partnerList } 
+				<option value="{$list['partnerId']}" {if $smarty.get.pid == $list['partnerId'] }selected="selected"{/if}>{$list['companyname']}</option>
+				{/foreach} 
+			</select>
+		</div> 
+		<div class="col-md-2">
+			<select id="pcid" class="form-control flexselect">
+				<option value="-1" selected>请选择采购员</option> 
+				{foreach item=list from=$purchaseList}
+				<option value="{$list['global_user_id']}" {if $smarty.get.pcid eq $list['global_user_id']} selected="selected"{elseif $smarty.session.sysUserId eq $list['global_user_id'] && $smarty.get.pcid=="" }selected="selected"{/if}>{$list["global_user_name"]}</option>
+				{/foreach}
+			</select> 
+		</div> 
+	</div>
+	<div class="row" style="margin-top:10px">
+		<div class="col-md-2">
+			<select id="is_warn" class="form-control">
+				<option value='-1' {if $smarty.get.is_warn == '-1' } selected{/if}>请选择是否预警</option> 
+				<option value='1'  {if $smarty.get.is_warn == '1' } selected{/if}>预警货品信息</option> 
+				<option value='1'  {if $smarty.get.is_warn == '2' } selected{/if}>all货品信息</option> 
+			</select>
+		</div>
+		<div class="col-md-1">
+			<select id="dailyNum" class="form-control">
+				<option value='-1' {if $smarty.get.dailyNum == '-1' } selected{/if}>请选择销量顺序排列</option> 
+				<option value='1' {if $smarty.get.dailyNum == '1' } selected{/if}>销量从高到低</option> 
+				<option value='2' {if $smarty.get.dailyNum == '2' } selected{/if}>销量从低到高</option> 
+			</select>
+		</div>
+		<div class="col-md-1">
+			<div class="radio">
+			  <label>
+				<input type="radio" name="optionsRadios" id="bookNum" value="1" >
+				已订购的sku
+			  </label>
+			</div>
+		</div>
+		<div  class="col-xs-8">
+			<button type="button" class="btn btn-primary" id="search-btn" >搜索</button>
+			<button type="button" class="btn btn-success" id="createPur" >生成采购订单</button>
+			<button type="button" class="btn btn-info" id="pl-partner" >批量更新供应商</button>
+			<button type="button" class="btn btn-warning" id="move-sku" data-toggle="modal" href="#responsive" >移交料号</button>
+			<button type="button" class="btn btn-danger" id="pl-status-btn" >批量修改状态</button>
+			<button type="button" class="btn btn-info" id="pl-days" >批量更新天数</button>
+			<button type="button" style="display:" class="btn btn-success" id="pl-cache" >更新缓存</button>
+			<button type="button" style="display:" class="btn btn-success" id="pl-single" >单个更新</button>
+		</div>
+	</div>
+
+	
+</div>
+<div class="main products-main reply-main warning-main pagemargin-main">
+	<table  class="table table-striped">
+		<tbody>
+			<tr class="purchase-title title">
+				<td>
+					<input type="checkbox" name="inverse-check" id="inverse-check" />
+				</td>
+				<td>image</td>
+				<td>SKU</td>
+				<td>是否预警</td>
+				<td>产品名称</td>
+				<td>成本</td>
+				<td>供应商</td>
+				<td>实际库存</td>
+				<td>待发货</td>
+				<td>虚拟库存</td>
+				<td>被拦截</td>
+				<td>自动拦截</td>
+				<td>待审核</td>
+				<td>可用天数</td>
+				<td>每天均量</td>
+				<td>上次均量</td>
+				<td>预警天数</td>
+				<td>采购天数</td>
+				<td>已订购</td>
+				<td>建议采购数量</td>
+				<td>重量</td>
+				<td>在线状态</td>
+				<td>采购</td>
+			</tr>
+			{foreach item=list key=key from=$skuInfo name=foo}
+			{$key=$key%6}
+			<tr class="{$tableColor[$key]}">
+				<td>
+					<input type="checkbox" name="inverse" value="{$list.gsku}" data-rec="{ceil($list.purchasedays*$list.averageDailyCount)}"/>
+				</td>
+				<td>
+					<a href="javascript:void(0)" id="imgb-{$list.gsku}" class="fancybox">
+						<img src="" class="skuimg img-circle"  id="imgs-{$list.sku}"  width="40" height="40" data-spu="{$list.spu}" data-sku="{$list.gsku}">
+			   		</a>
+				</td>
+		
+				<td>
+					<span class="font-16">{$list.gsku}</span>
+				</td>
+				<td>
+					{if $list.is_warning eq 1}<span style="color:red">是</span>{else}<span style="color:green">否</span>{/if}
+				</td>
+				<td>{$list.goodsName}</td>
+				<td>
+					{$list.goodsCost}
+				</td>
+
+				{$ptlist	= PurchaseOrderAct::getPartnerId($list.gsku)}
+				<td>{$ptlist['companyname']}</td>
+				<td style="color:green;font-weight:bold">
+					{$list.actualStockCount}		
+				</td>
+				<td style="color:red;font-weight:bold">{$list.waitingSendCount}</td>
+				<td style="color:red;font-weight:bold">
+					{$list.actualStockCount-$list.waitingSendCount}
+				</td>
+				<td>
+					{$list.interceptSendCount}
+				</td>
+				<td>
+					{$list.shortageSendCount}
+				</td>
+				<td>
+					{$list.waitingAuditCount}
+				</td>
+				<td >
+					{ceil($list.availableStockCount/$list.averageDailyCount)}
+				</td>
+				<td style="color:blue;font-weight:bold">
+					{$list.averageDailyCount}
+				</td>
+				<td>{$list.last_everyday_sale}</td>
+				<td>{$list.goodsdays}</td>
+				<td>{$list.purchasedays}</td>
+				<td style="color:blue;font-weight:bold">{$list.booknums}</td>
+				<td>{ceil($list.purchasedays*$list.averageDailyCount)}</td>
+				<td>{$list.goodsWeight}</td>
+				<td>{if $list.status==1}在线{else if $list.status==2}暂时停售{else if $list.status==3}永久性停售{else}在线{/if}</td>
+				<td>{$list.global_user_name}</td>
+			</tr>
+			{/foreach}
+
+		</tbody>
+	</table>
+<div>
+<div class="bottomvar">
+<div class="pagination">
+	{$pageStr}
+</div>
+</div>
+
+
+<input type="hidden" value="{$_userid}" id="userid" />
+
+{include file="footer.htm"}
+
+<div id="responsive" class="modal fade" tabindex="-1" data-width="600" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">移交料号........</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+		<div class="col-md-9">
+			<div class="form-group">
+				<select class="form-control" id="receiveUser">
+					<option value='-1'>请选择接收的采购员</option> 
+					{foreach  item=itemUser from=$allPurchaser } 
+					<option value="{$itemUser['global_user_id']}" >{$itemUser["global_user_name"]}</option>
+					{/foreach}
+				</select>
+			</div>
+		</div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn btn-default" id="changeSku-close">Close</button>
+    <button type="button" class="btn btn-primary" id="save-changeSku">保存</button>
+  </div>
+</div>
+
+
+<div id="pl-partner-layer" class="modal fade" tabindex="-1" data-width="600" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">批量更新供应商....</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+		<div class="col-md-9">
+			<div class="form-group">
+				<select class="form-control" id="updatePartner">
+				<option value='-1'>请选择供应商</option>
+				{foreach  item=list from=$partnerList } 
+				<option value="{$list['partnerId']}" {if $smarty.get.pid == $list['partnerId'] }selected="selected"{/if}>{$list['companyname']}</option>
+				{/foreach} 
+				</select>
+			</div>
+		</div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn btn-default" id="partner-close">Close</button>
+    <button type="button" class="btn btn-primary" id="save-partner">保存</button>
+  </div>
+</div>
+
+
+<div id="pl-days-layer" class="modal fade" tabindex="-1" data-width="600" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">批量更新采购天数和预警天数...</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+		<div class="col-md-6">
+			<h4>采购天数:</h4>
+			<p><input class="form-control" type="text" id="purchasedays"></p>
+		</div>
+		<div class="col-md-6">
+			<h4>预警天数：</h4>
+			<p><input class="form-control" type="text" id="goodsdays"></p>
+		</div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn btn-default" id="changeDays-close">Close</button>
+    <button type="button" class="btn btn-primary" id="save-changeDays">保存</button>
+  </div>
+</div>
+
+
+<div id="pl-status-layer" class="modal fade" tabindex="-1" data-width="600" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 class="modal-title">批量设置sku 在线状态</h4>
+  </div>
+  <div class="modal-body">
+	{foreach  item=itemPlatform from=$platformInfo } 
+		<div class="row">
+			<div class="col-md-4">
+				<div class="radio">
+				  <label>
+					  <input type="radio" name="{$itemPlatform.en_name}" id="{$itemPlatform.en_name}1" value="1" checked>
+					{$itemPlatform.cn_name} 平台在线 
+				  </label>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="radio">
+				  <label>
+					  <input type="radio" name="{$itemPlatform.en_name}" id="{$itemPlatform.en_name}2" value="2">
+					{$itemPlatform.cn_name} 平台暂时停售 
+				  </label>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="radio">
+				  <label>
+					<input type="radio" name="{$itemPlatform.en_name}" id="{$itemPlatform.en_name}3" value="3">
+					{$itemPlatform.cn_name} 平台停售 
+				  </label>
+				</div>
+			</div>
+		</div>
+	{/foreach }
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn btn-default" id="changeStatus-close">Close</button>
+    <button type="button" class="btn btn-primary" id="save-changeStatus">保存</button>
+  </div>
+</div>
+
+<script>
+var totalNum = {$totalPageNum};
+</script>
+{literal}
+<script type="text/javascript">
+
+function showAlert(content,callback){
+	$('#alert-content').html(content);
+	$('#alert-layer').modal();
+}
+
+$("#pl-days").click(function(){
+	var skuArr;
+	skuArr = getSkuList();
+	if(skuArr.length == 0){
+		showAlert("请选择要批量更新天数的sku..........");
+		return;
+	}
+	$("#pl-days-layer").modal();
+});
+
+$("#save-changeDays").click(function(){
+	var skuArr,purchasedays,goodsdays,url = "json.php?mod=Sku&act=changeDays";
+	skuArr = getSkuList();
+	purchasedays = $.trim($("#purchasedays").val());
+	goodsdays = $.trim($("#goodsdays").val());
+	$.post(url,{"skuArr":skuArr,"purchasedays":purchasedays,"goodsdays":goodsdays},function(rtn){
+		console.log(rtn);
+		$.each(rtn,function(i,item){
+			if(item.code == 1){
+				alertify.success(item.msg);
+			}else{
+				alertify.error(item.msg);
+			}
+		});
+	},"json");
+});
+
+$("#pl-status-btn").click(function(){
+	var skuArr;
+	skuArr = getSkuList();
+	if(skuArr.length == 0){
+		showAlert("请选择要操作的sku..........");
+		return;
+	}
+	$("#pl-status-layer").modal();
+});
+
+$("#save-changeStatus").unbind("click").bind("click",function(){
+
+		var skuArr,statusObj,data={},url;
+		skuArr = getSkuList();
+		/*
+		url = "json.php?mod=Sku&act=changeSkuStatus";
+		statusObj = $("#pl-status-layer input[type='radio']:checked");
+		*/
+	
+		console.log("#############");
+		/*
+		$.each(statusObj,function(i,item){
+			data[$(item).attr("name")] = $(item).val();
+		});
+
+		$.post(url,{"skuArr":skuArr,"data":data},function(rtn){
+			console.log(rtn);
+		},"json");
+		*/
+});
+
+$("#save-changeSku").click(function(){
+		var skuArr,receiveUserId,url = "json.php?mod=Common&act=changeSku";
+		receiveUserId = $("#receiveUser").val();
+		if(receiveUserId == -1){
+			$("#receiveUser").parent().addClass("has-error");
+			return ;
+		}
+
+		skuArr = getSkuList();
+		$("#changeSku-close").trigger("click");
+		$.post(url,{"skuArr":skuArr,"receiveUserId":receiveUserId},function(rtn){
+			console.log(rtn);
+			if(rtn.errCode == 200){
+				alertify.alert('料号移交成功......',function(){
+					window.location.reload();
+				});
+			}
+		},"json");
+
+});
+
+//搜索入口	
+function search(){
+	var type,keyword,pid,pcid,is_warn,flag,url,dailyNum,bookNum;
+	url		= "index.php?mod=productStockalarm&act=analyze";
+	keyword   	= encodeURIComponent($.trim($("#keyword").val()));
+	type	= $.trim($("#type").val());
+	pid		= $.trim($("#pid").val());
+	pcid  	= $.trim($("#pcid").val());
+	flag  	= $.trim($("#flag").val());
+	is_warn = $.trim($("#is_warn").val());
+	dailyNum = $.trim($("#dailyNum").val());
+	if($("#bookNum").attr("checked") == "checked"){
+		bookNum = $("#bookNum").val();
+	}
+	console.log(bookNum);
+	if( keyword != ''){
+		url += "&keyword="+keyword;
+	}
+	if(type != -1){
+		url += "&type="+type;
+	}
+	if(flag != -1){
+		url += "&status="+flag;
+	}
+	if(pid != -1){
+		url += "&pid="+pid;
+	}
+	if(is_warn != -1){
+		url += "&is_warn="+is_warn;
+	}
+	if(pcid !=-1){
+		url += "&pcid="+pcid;
+	}
+	if(dailyNum != -1){
+		url += "&dailyNum="+dailyNum;
+	}
+	if(bookNum != undefined){
+		url += "&bookNum="+bookNum;
+	}
+
+	window.location.href = url;
+}
+$("#search-btn").click(function() {
+	search();
+});
+
+function getCookie(name){
+	var value=(document.cookie.match(new RegExp('(^' + name + '| ' + name + ')=([^;]*)')) == null)?'':RegExp.$2;
+	if(value!=''){
+		return decodeURIComponent(value);
+	}
+	return '';
+}
+
+function setCookie(name,value,hours){
+	var expire = "; path=/";
+	if(hours != null) {
+		expire = new Date((new Date()).getTime() + hours * 3600000);
+		expire = "; expires=" + expire.toGMTString() + "; path=/";
+	}
+	document.cookie = name + "=" + escape(value)+';domain=;'+expire;
+}
+
+//全选入口
+$("#inverse-check").click(function(){
+	select_all("inverse-check","input[name='inverse']",0);
+});
+//生成采购订单
+$("#createPur").click(function(){
+	var skuArr , url,skulist = [];
+	var skuArr 	= $('input[name="inverse"]:checked');
+	if(skuArr.length == 0){
+		alertify.alert('请选择需下订单的料号');
+		return false;
+	}else{
+		$.each(skuArr ,function(i,item){
+			var skuObj = {};
+			skuObj.sku = $(item).val();
+			skuObj.rec = $(item).data("rec"); //建议采购数量
+			skulist.push(skuObj);
+		});
+	}
+	var url  = "json.php?mod=purchaseOrder&act=createOrder";
+	$.post(url, {"skulist":skulist}, function(rtn){
+		console.log(rtn);
+		var data = rtn.msg;
+		if(data == 'noPower'){
+			alertify.alert('您不是采购员,没有权限生成采购订单');
+		}else if(data == 'success'){
+			alertify.alert('生成采购订单成功',function(){
+				window.location.reload();
+			});
+		}else{
+			alertify.alert('生成采购订单失败'+data.msg);
+		}
+	},'jsonp');
+});
+
+$("#pl-partner").click(function(){
+		var skulist,partner={},url; 
+		skulist = getSkuList();
+	    url  = "json.php?mod=purchaseOrder&act=updatePartner";
+		if(skulist.length == 0){
+			showAlert("please 选择需要更新供应商的sku。。。。");
+		}else{
+			$("#pl-partner-layer").modal();
+
+		}
+});
+
+$("#save-partner").click(function(){
+	var newPartner = $("#updatePartner").val();
+	if(newPartner == -1){
+		$("#updatePartner").parent().addClass("has-error");
+		return;
+	}else{
+	    var url  = "json.php?mod=purchaseOrder&act=updatePartner";
+		var partner ={};
+		var skulist = getSkuList();
+		partner.partnerId = $("#updatePartner").val();
+		partner.partnerName =$("#updatePartner").find("option:selected").text();
+		$.post(url,{"skulist":skulist,"partner":partner},function(rtn){
+			//console.log(rtn);
+			alertify.alert('批量更新供应商成功。。。',function(){
+				window.location.reload();
+			});
+		});
+	}
+});
+
+//批量更新sku 最新数据
+function updateCache(){
+	var skulist,url,pcid,pageNum; 
+	url = "json.php?mod=Common&act=getNewData"
+	skulist = getSkuList();
+	pageNum = get_url_parameter("page");
+	pcid = $("#pcid").val();
+	if(pageNum == ""){
+		setCookie("pageNum",1);
+		pageNum = 1;
+	}else{
+		pageNum = getCookie("pageNum");
+	}
+	if(skulist.length == 0){
+		$("#inverse-check").trigger('click');
+		showAlert("正在更新第"+pageNum+"页数据..........." );
+		setCookie("pageNum",pageNum);
+		skulist = getSkuList();
+	}
+	$.post(url,{"skuArr":skulist,"pcid":pcid},function(rtn){
+		console.log(rtn);
+		var code = [];
+		$.each(rtn,function(i,item){
+			if(item.code == 0){
+				alertify.error(item.msg+"sku 更新失败。。。。");
+				code.push(item.code);
+			}
+		});
+		if(code.length == 0){
+			pageNum = parseInt(pageNum) + 1;
+			setCookie("pageNum",pageNum);
+			var pcid = get_url_parameter('pcid');
+			window.location.href = "index.php?mod=productStockalarm&act=analyze&updateCache=1&page="+pageNum+"&pcid="+pcid;
+			/*
+			alertify.alert("获取数据并更新成功。。。。",function(){
+				window.location.reload();
+			});
+			*/
+		}else{
+			alertify.alert("sorry,部分料号获取不到数据。。。。");
+		}
+	},"json");
+}
+
+$("#pl-cache").click(function(){
+	updateCache();
+});
+
+
+$("#pl-single").click(function(){
+	var skulist,url,pcid,pageNum; 
+	url = "json.php?mod=Common&act=getNewData"
+	skulist = getSkuList();
+	pcid = $("#pcid").val();
+	$.post(url,{"skuArr":skulist,"pcid":pcid},function(rtn){
+
+		//window.location.href = "index.php?mod=productStockalarm&act=analyze";
+	},"json");
+});
+
+var updateCacheFlag = get_url_parameter("updateCache");
+var nowPageNum = get_url_parameter('page');
+
+if(updateCacheFlag == 1){
+	if(nowPageNum < totalNum){
+		updateCache();
+	}else{
+		showAlert("数据更新完毕。。。。。");
+		window.location.href = "index.php?mod=productStockalarm&act=analyze";
+	}
+}
+			
+
+
+function getSkuList(){
+	var skuArr , skulist = [];
+	var skuArr 	= $('input[name="inverse"]:checked');
+	if(skuArr.length != 0){
+		$.each(skuArr ,function(i,item){
+			var sku = $(item).val();
+			skulist.push(sku);
+		});
+	}
+	return skulist;
+}
+
+
+window.onkeyup = function(e) {
+	if(e.keyCode == 13) {
+		search();
+	}
+}
+
+</script>
+
+{/literal}

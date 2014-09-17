@@ -1,0 +1,34 @@
+{include file='header.htm'}
+{include file='omNav.htm'}
+<script language="javascript" src="js/currency.js"></script>
+
+<div class="servar">
+   <span>
+		<button  id='addCurr' value="" />添加币种</button>
+   </span>
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td>id</td>
+			<td>币种名称</td>
+			<td>汇率</td>
+			<td>操作</td>
+		</tr>
+		{if !empty($currency)}
+		{foreach from=$currency item=list}
+		<tr class="odd">
+				<td>{$list.id}</td>
+				<td>{$list.currency}</td>
+				<td>{$list.rates}</td>
+				<td><button  class="curr_mod" tid="{$list.id}"/>编辑</button></td>
+		</tr>
+		{/foreach}
+		{/if}
+	</table>
+</div>
+
+ 
+{include file='footer.htm'}

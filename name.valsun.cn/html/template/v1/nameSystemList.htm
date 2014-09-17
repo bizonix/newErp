@@ -1,0 +1,188 @@
+{include file='header.htm'}
+{include file='nameNav.htm'}
+<link type="text/css" rel="stylesheet" href="css/nameSystemList.css">
+<script src="./js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src="./js/nameSystemList.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="js/jTPS/jTPS.css" />
+<link rel="stylesheet" type="text/css" href="js/jTPS/jTPSadditional.css" />
+<script type="text/javascript" src="./js/jquery/ui/jquery.ui.button.js"></script>
+<script type="text/javascript" src="./js/jTPS/jTPS.js"></script>
+<script src="js/jquery/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="js/jquery/ui/jquery-ui-sliderAccess.js"></script>
+<style>
+	.dsn{ display:none;}
+	#main{ padding:5px; margin:0;}
+	.textinput{
+		 height:50px;
+		 font-size:24px;
+	}
+	.stephere{
+		border:1px solid red;
+	}
+</style>
+<div class="fourvar">
+    <div class="texvar">
+    </div>
+    <div class="pagination">
+    {$show_page}
+    </div>
+</div>
+<div class="fourvar order-fourvar">
+	<form name="nameSystemFrom" id="nameSystemFrom" action="index.php?mod=nameSystem&act=nameSystemList" method="post">                   	
+        <table>
+            <tr>
+                <td style="padding-left:17px;">
+                    条件：
+                </td>
+                <td style="padding-left:15px;">
+                    <select name="keyWordsType">
+                        <option value="name" {if $keyWordsType == name}selected="selected"{/if}>名称</option>
+                        <option value="addUsernameId" {if $keyWordsType == addUsernameId}selected="selected"{/if}>添加人</option>
+                    </select>
+                </td>
+                <td style="padding-left:19px;">
+                    <input type="text" value="{$keyWords}" name='keyWords' id='keyWords'/>
+                </td>
+                <td style="padding-left:17px;">
+                   所属系统:
+                </td>
+                <td style="padding-left:15px;">
+                    <select name="systemName" id="systemName">
+                    <option value="0" {if $systemName == '0'} selected="selected"{/if} >=====请选择=====</option>
+					{foreach key = keySystemNameId from=$systemNameArr item=systemNameList}
+                        <option {if $systemName == $keySystemNameId} selected="selected"{/if} value="{$keySystemNameId}" >{$systemNameList}</option>
+                    {/foreach}
+                    </select>
+                </td>
+                <td style="padding-left:17px;">
+                   名称分类:
+                </td>
+                <td style="padding-left:15px;">
+                    <select name="nameType" id="nameType">
+                    	<option value="0" {if $nameType == '0'} selected="selected"{/if} >=====请选择=====</option>
+                        {foreach key = keyValTypeId from=$valTypeArr item=valTypeNameList}
+                        <option {if $nameType == $keyValTypeId} selected="selected"{/if} value="{$keyValTypeId}" >{$valTypeNameList}</option>
+                        {/foreach}
+                    </select>
+                </td>
+                <td style="padding-left:17px;">
+                    添加时间:
+                </td>
+                <td style="padding-left:15px;">
+                	 <input id="startTime" name="startTime" type="text" value="{$startTime}" />
+                     ~
+					 <input id="endTime" name="endTime" type="text" value="{$endTime}" />
+                </td>
+                <td style="padding-left:15px;">
+                    <button class="btn" type="submit">搜索</button>
+                </td>
+            </tr>
+            <tr>
+            	<td colspan="10">
+                	<br />
+                </td>
+            </tr>
+            <tr>
+            	<td style="padding-left:17px;">
+                	操作：
+                </td>
+            	<td>
+                	<button class="btn" type="button" id = "addName" name="addName">添加名称</button>
+                </td>
+                <td>
+                    <button class="btn" type="button" id = "delName" name = "delName">废弃名称</button>
+                </td>
+            </tr>
+        </table>
+     </form>
+</div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                   		<td colspan="7" align="left"><div id="tipList"></div></td>
+                    </tr>
+                	<tr class="title">
+                   		<td><input onclick="chooseornot(this)" type="checkbox"/></td>
+                        <td>名称</td>
+						<td>功能说明</td>
+                        <td>所属系统</td>
+                        <td>名称分类</td>
+                        <td>添加人</td>
+                        <td>添加时间</td>
+                    </tr>
+					{foreach key = key_id from=$nameListArr item=list}
+                    <tr class="odd">
+                    	<td><input class="checkclass" id="nameSystemId" name="nameSystemId" type="checkbox" value="{$list.id}" onchange="displayselect()"></td>
+                        <td>{$list.name}</td>
+						<td>{$list.functionNote}</td>
+                        <td>{$systemNameArr[$list.systemId]}</td>
+                        <td>{$valTypeArr[$list.systemTypeId]}</td>
+                        {$uname = UserModel::getUsernameById($list.addUsernameId)}
+                        <td>{$uname}</td>
+                        <td>{if empty($list.addTime)} {else}{$list.addTime|date_format:"%Y-%m-%d %H:%M:%S"}{/if}</td>
+                    </tr>  
+                    {/foreach}       
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<div id="form-borrow-dialog" title="请填写名称申请单" class="dsn">
+<form id="borrow-write" action="json.php?mod=nameSystem&act=addNameSubmit" method="post" enctype="multipart/form-data">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+    	<td width="30%"></td>
+        <td>
+        <br />
+        <br />
+        </td>
+    </tr>
+	
+	<tr>
+    	<td width="30%">名称:</td>
+        <td><input type="text" name="addNewName" id="addNewName" style="width:200px;" value="" onblur="addNewNameVerifyList()" class="mf validate[required] text-input"/><font color='#FF0000'>*</font>
+        	<div id = "addNewNameVerifyList"></div>
+        </td>
+    </tr>
+    <tr>
+    	<td width="30%">所属系统:</td>
+        <td>
+            <select name="chooseSystem" id="chooseSystem" style="width:205px;" class="mf validate[required] text-input">
+                <option value="" selected="selected">=====请选择=====</option>
+                {foreach key = keySystemNameId from=$systemNameArr item=systemNameList}
+                    <option value="{$keySystemNameId}" >{$systemNameList}</option>
+                {/foreach}
+            </select>
+            <font color='#FF0000'>*</font>
+        </td>
+    </tr>
+    <tr>
+    	<td width="30%">名称分类:</td>
+        <td><select name="chooseNameType" id="chooseNameType" style="width:205px;" class="mf validate[required] text-input" >
+                    	<option value="" selected="selected">=====请选择=====</option>
+                        {foreach key = keyValTypeId from=$valTypeArr item=valTypeNameList}
+                        <option value="{$keyValTypeId}" >{$valTypeNameList}</option>
+                        {/foreach}
+                    </select><font color='#FF0000'>*</font></td>
+    </tr>
+    <tr>
+   		<td width="30%">功能备注:</td>        
+        <td><textarea id="addFunctionNote" name="addFunctionNote" style="width:200px;" value="" class="mf validate[required] text-input"></textarea><font color='#FF0000'>*</font>
+        </td>
+    </tr>
+    <tr>
+    	<td width="30%">注释:</td>
+        <td>
+        <font color='#FF0000'>'*':必填<br></font>
+        </td>
+    </tr>
+    
+</table>
+</form>
+</div>
+

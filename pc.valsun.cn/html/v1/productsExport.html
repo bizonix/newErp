@@ -1,0 +1,18 @@
+{header}
+<script type="text/javascript" src="./js/productsExport.js"></script>
+<script type="text/javascript" src="./js/publicDatePicker/WdatePicker.js"></script>
+			<div id="bgwrap">
+				<div id="content">
+					<div id="main">
+                    <h1>报表导出</h1>
+		<div class="pad20" style="font-size:20px">
+			<div id="export">
+                <button id="exp" style="width: 80px; height: 25px; font-size: 15px;">统计报表</button>
+                起:<input id="startdate" onclick="WdatePicker()" value="{startdate}"/>
+                止:<input id="enddate" onclick="WdatePicker()" value="{enddate}"/>
+                <span id="exportSpan" style="color: red;"></span>
+            </div>
+		</div>
+{footer}
+
+

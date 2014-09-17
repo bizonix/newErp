@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link  type="text/css" rel="stylesheet" href="css/printexpress.css"/>
+		<!--script language="JavaScript" src="js/printexpress.js"></script-->
+    </head>
+    <body>
+		{if $expressname == 'dhl'}
+            <div class="dhl_cmname">{$companyinfo.name}</div>
+            <div class="dhl_cmaddr">{$companyinfo.address}</div>
+            <div class="dhl_cmzipcode">{$companyinfo.postcode}</div>
+            <div class="dhl_cmphone">{$companyinfo.phone}</div>
+            <div class="dhl_readdr">
+                {$orderinfo.street}
+				{$orderinfo.city}
+				{$orderinfo.state}
+				{$orderinfo.zipCode}
+				{$orderinfo.countryName}
+            </div>
+            <div class="dhl_rezipcode">{$orderinfo.zipCode}</div>
+            <div class="dhl_recountry">{$orderinfo.countryName}</div>
+            <div class="dhl_rename">
+               {$orderinfo.username}&nbsp;&nbsp;&nbsp;{$orderinfo.phone}
+            </div>
+            <div class="dhl_redes">
+                {foreach $orderinfo.remark as $key=>$val}
+					{$val.description}&nbsp;&nbsp;&nbsp; ×{$val.amount}</br>
+				{/foreach}
+            </div> 
+		{elseif $expressname == 'dhlfp'}
+            <img hight='982' width='755' src='images/dhlfp.jpg'></img>
+            <div class='dhlfp_readdr'>{$orderinfo.street}&nbsp; {$orderinfo.city}&nbsp; {$orderinfo.state} {$orderinfo.postcode} &nbsp; {$orderinfo.countryName}</div>
+            <div class='dhlfp_reaname'>{$orderinfo.username}</div>
+            <div class='dhlfp_reatel'>{$orderinfo.phone}</div>
+            <div class='dhlfp_reacountry'>{$orderinfo.countryName}</div>
+            <table class='dhlfp_reasb' cellspacing=10 >
+					{foreach $orderinfo.remark as $key=>$val}
+                    <tr>
+                        <td class='dhlfp_td1'>{$val.description}</td>
+                        <td class='dhlfp_td2'>{$val.amount}</td>
+                        <td class='dhlfp_td3'>{$val.price}&nbsp;<span style="font-weight:bold;">USD</span></td>
+                        <td class='dhlfp_td4'>{$val.amount}*{$val.price}&nbsp;<span style="font-weight:bold;">USD</span></td>
+                    </tr>
+					{/foreach}
+            </table>
+            <div class='dhlfp_reatotal'>{$orderinfo.remarkTotal}&nbsp;<span style="font-weight:bold;">USD</span></div>
+        {elseif $expressname == 'emsinternational'}
+			<div class="emsint_reusername">{$orderinfo.username}</div>
+            <div class="emsint_recity">{$orderinfo.city}</div>
+            <div class="emsint_recountry">{$orderinfo.countryName}({$orderinfo.countryZh})</div>
+            <div class="emsint_readdr">
+				{$orderinfo.street}
+				{$orderinfo.city}
+				{$orderinfo.state}
+				{$orderinfo.zipCode}
+				{$orderinfo.countryName}
+            </div>
+            <div class="emsint_repostcode">{$orderinfo.zipCode}</div>
+            <div class="emsint_rephone">{$orderinfo.phone}</div>
+            <table class="emsint_remdes">
+				{foreach $orderinfo.remark as $key=>$val}
+            	<tr>
+                        <td class="emsint_remdes_des">{$val.description}</td>
+                        <td class="emsint_remdes_amt">{$val.amount}</td>
+                        <td class="emsint_remdes_sholder"></td>
+                        <td class="emsint_remdes_price"></td>
+                        <td class="">china</td>
+                    </tr>
+				{/foreach}
+            </table>
+            <div class="emsint_returned">√</div>
+            <div class="emsint_parcel">√</div>
+        {elseif $expressname == 'ups'}
+            <div class="ups_cmaddr">{$companyinfo.name}</div>
+            <div class="ups_cmpostcode">{$companyinfo.postcode}</div>
+            <div class="ups_cmcountry">{$companyinfo.country}</div>
+            <div class="ups_rename">
+				{$orderinfo.username}{$orderinfo.phone}
+            </div>
+            <div class="ups_readdr">
+				{$orderinfo.street}
+				{$orderinfo.city}
+				{$orderinfo.state}
+				{$orderinfo.postcode}
+				{$orderinfo.countryName}
+            </div>
+            <div class="ups_repostcode">{$orderinfo.postcode}</div>
+            <div class="ups_recountry">{$orderinfo.countryName}</div>
+            
+            <div class="ups_redes">
+                {foreach $orderinfo.remark as $key=>$val}
+					{$val.description}&nbsp;&nbsp;&nbsp; ×{$val.amount}</br>
+				{/foreach}
+            </div>
+        {elseif $expressname == 'emssingapore'}
+            <div class="emssi_rename">{$orderinfo.username}</div>
+            <div class="emssi_retel">{$orderinfo.phone}</div>
+            <div class="emssi_readdr">
+				{$orderinfo.street}{$orderinfo.city}{$orderinfo.state}{$orderinfo.countryName}
+            </div> 
+            <div class="emssi_recity">{$orderinfo.city}</div>
+            <div class="emssi_repostcode">{$orderinfo.postcode}</div>
+            <div class="emssi_recountry">{$orderinfo.countryName}</div>
+            <table class="emssi_remdes">
+				{foreach $orderinfo.remark as $key=>$val}
+                    <tr>
+                        <td class="emssi_remdes_des">{$val.description}</td>
+                        <td class="emssi_remdes_amt">{$val.amount}</td>
+                    </tr>
+				{/foreach}
+            </table>
+			<div class="emssi_total">{$orderinfo.remarkTotal}USD</div>
+	{else}
+            <div style="font-family: serif; font-size: 25; text-align: center; margin: 0 auto;">快递代码出错</div>
+	{/if}
+
+    </body>
+</html>
+<script language='javascript'>
+
+	//document.onkeypress = printPage(event,'{$orderinfo.id}');
+	//var ordersn = '{$orderinfo.id}';
+	document.onkeypress = function printPage(event){
+                            if( window.event.keyCode == 112 ) {
+								window.open('index.php?mod=orderWaitforPrint&act=printTemplateExpress&express=dhlfp&ids={$orderinfo.id}');
+							}
+						};
+
+</script>

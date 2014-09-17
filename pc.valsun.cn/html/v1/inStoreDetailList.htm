@@ -1,0 +1,73 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/iostore.js"></script>
+<script type="text/javascript" src="./js/publicDatePicker/WdatePicker.js"></script>
+<div class="fourvar">
+                <div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>         
+            </div>
+            <div class="servar products-servar products-main">
+                {if $inStore.isAudit == 1}
+                <span style="float: left;" class="products-action">
+                   <form action="index.php?mod=products&act=addIoStoreDetail" method="post" id="addIoStoreDetailForm" onsubmit="return confirm('确定添加？')">
+                   <span style="color: red;">*</span>SKU：
+    			   <input name="sku" id="sku" value="" class='validate[required]'/>
+                   <input name="iostoreId" id="iostoreId" value="{$inStore.id}" type="hidden"/>
+                   <input type="submit" value="添加"/>
+                   </form>
+			   </span>
+                &nbsp;
+                {/if}
+                <span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div> 
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                            <td>序号</td>
+                            <td>SKU</td>
+                            <td>描述</td>
+                            <td>仓位</td>
+                            <td>仓库</td>
+							<td>数量</td>
+							<td>添加人</td>
+                            <td>添加时间</td>
+                            <td>操作</td>   
+                    </tr>
+                    {foreach $inStoreDetailList as $value}
+                                <tr id="tr{$value['id']}">
+                                    <td>{$value@index + 1}</td>
+                                    <td>{$value['sku']}</td>
+                                    <td>{$value['goodsName']}</td>
+                                    <td>{$value['location']}</td>
+                                    <td>{$value['whName']}</td>
+									<td>{$value['amount']}</td>
+                                    <td>{getPersonNameById($value['addUserId'])}</td>
+                                    <td>{$value['addTime']|date_format:"Y-m-d H:i"}</td>
+                                    <td>
+                                        {if $inStore.isAudit == 1}
+                                        <input class="deleteIoStoreDetailSku" ioStoreDetailId="{$value['id']}" type="button" value="删除"/>
+                                        {/if}
+                                    </td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachOutStoreDetail').click(); 
+			}        
+        });       
+</script>

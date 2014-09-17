@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--link rel="stylesheet" type="text/css" href="css/label50x100.css"/-->
+<title>Print</title>
+<style>
+
+    body{ padding: 0; margin: 0;}
+	
+</style>
+</head>
+<body>
+
+{foreach $ordersinfo as $key=>$orderval}
+
+<table width="200" height="100" border="0" cellpadding="0" cellspacing="0" style="border:1px dashed #999999; height:46mm; width:120mm">
+  <tr>
+	<td> 
+		<span>Title[{$orderval.id}]:<br>{$orderval.itemTitle}</span>
+	</td>
+  </tr>
+  <tr>
+	<td> 
+		<span><strong>MYnote:{if empty($orderval.notes)}无{else if}{$orderval.notes}{/if}</strong></span>	
+	</td>
+  </tr>
+  <tr>
+	<td> 
+		<span>{$orderqk}</span>	
+	</td>
+  </tr>
+  <tr>
+	<td>{$key+1}/{$totalCount}&nbsp;</td>
+  </tr>
+</table>
+<div style="page-break-after:always;">&nbsp;</div>
+<table width="200" height="100" border="0" cellpadding="0" cellspacing="0" style="border:1px dashed #999999; height:46mm; width:120mm">
+  <tr>
+	<td width="72" valign="top"  style="border-right:#000000 1px dashed">
+	  <table width="74" border="0" cellpadding="0" cellspacing="0" style="width:65px; table-layout:fixed; overflow: scroll;word-break:break-all;">
+		<tr>
+      	  <td><span class="STYLE5" style="font-size: 11px">{$orderval.recordNumber}&nbsp;</span></td>
+        </tr>
+        <tr>
+          <td><span class="STYLE5" style="font-size: 11px">{$orderval.carrier}&nbsp;</span></td>
+        </tr>
+        <tr>
+          <td><span class="STYLE5" style="font-size: 11px">ZL:{$orderval.calcWeight}&nbsp;</span><span class="STYLE5">&nbsp;</span></td>
+          </tr>
+          <tr>
+            <td><span class="STYLE5" style="font-size: 11px">YF:</span><span class="STYLE5" style="font-size: 10px">{$orderval.calcShipping}</span></td>
+          </tr>
+          <tr>
+            <td><span class="STYLE5" style="font-size: 11px">{$orderval.pmNameStr}&nbsp;</span>
+              <span class="STYLE5" style="font-size: 10px">{$orderval.total}&nbsp;</span></td>
+          </tr>
+          <tr>
+            <td><span class="STYLE5" style="font-size: 11px">mj:</span><span class="STYLE5" style="font-size: 10px">{$orderval.username}&nbsp;</span></td>
+          </tr>
+		  <tr>
+            <td><span class="STYLE5" style="font-size: 11px">zh:</span><span class="STYLE5" style="font-size: 10px">{$orderval.account}&nbsp;</span></td>
+          </tr>
+          <tr>
+            <td>{$key+1}/{$totalCount}&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="136" valign="top" style="border-right:#000000 1px dashed" >
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="word-break:break-all;">
+          
+			{foreach $orderval.finalposition as $pinfo}
+			<tr><td><strong>
+			[{$pinfo.location}]&nbsp;{$pinfo.sku}*{$pinfo.amount}
+			</strong></td></tr>
+
+			{/foreach}
+
+          
+		  <tr>
+            <td><strong>Total Qty:{$orderval.totalnum}</strong></td>
+          </tr>
+        </table></td>
+			<td width="244" valign="top"><table width="95%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+              <td><img src="barcode128.class.php?data={$orderval.id}" alt="" width="180" height="40"/></td>
+              <td>{$orderval.id}&nbsp;</td>
+          </tr>
+            <tr>
+              <td colspan="2"><div style="font-size:15px; font-weight:bold">Send To:<br>{$orderval.username}<br>{$orderval.street}<br>{if $orderval.address2 !==""}{$orderval.address2}<br>{/if}{$orderval.city}, {$orderval.state}<br>{$orderval.zipCode}<br>{$orderval.countryName}({$orderval.countryZh})</br>Tel:{if $orderval.phone != ''}{$orderval.phone}</br>{/if}
+					  {if $orderval.phone == '' && $orderval.landline != ''}{$orderval.landline}</br>{/if}</div></td>
+            </tr>
+        </table></td>
+      </tr>
+    </table>
+
+
+
+<div style="page-break-after:always;">&nbsp;</div>  
+{/foreach}
+</body>
+</html>
+

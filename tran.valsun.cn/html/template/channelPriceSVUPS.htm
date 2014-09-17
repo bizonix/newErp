@@ -1,0 +1,110 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelManage&act=index&id={$carrierId}">渠道管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select id="zone">
+			<option value='0'>全部分区</option>
+			{foreach item=list from=$zoneList}
+			<option value='{$list.zone}' {if $list.zone==$zone}selected="selected"{/if}>{$list.zone}</option>
+			{/foreach}
+		</select>
+	</span>
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='weight'{if ($type=='weight')} selected="selected"{/if}>重量</option>
+			<option value='cost'{if ($type=='cost')} selected="selected"{/if}>运费</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key_from" value = "{$key_from}" style="ime-mode:Disabled;width:60px;" onkeyup="check_float(this)" onafterpaste="check_float(this)"/>&nbsp;&nbsp;至&nbsp;&nbsp;<input type="text" id="key_to" value = "{$key_to}" style="ime-mode:Disabled;width:60px;" onkeyup="check_float(this)" onafterpaste="check_float(this)"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=channelPrice&act=add&chname={$chname}&chid={$chid}">添加</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>分区</th>
+			<th>重量区间</th>
+			<th>运费(USD)</th>
+			<th>住宅运送费(USD)</th>
+			<th>燃油附加费</th>
+			<th>中港运输费(RMB/KG)</th>
+			<th>空运费(HKD/KG)</th>
+			<th>目的地清关费(USD/个)</th>			
+			<th>折扣</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.pr_group}</td>
+			<td>{$list.pr_kilo_next}</td>
+			<td>{$list.pr_kilo}</td>
+			<td>{$list.pr_handlefee}</td>
+			<td>{$list.pr_other}</td>
+			<td>{$list.pr_isfile}</td>
+			<td>{$list.pr_air}</td>
+			<td>{$list.pr_file}</td>
+			<td>{$list.pr_discount}</td>
+			<td><a href="index.php?mod=channelPrice&act=modify&chid={$chid}&chname={$chname}&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info('{$chname}', {$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+
+<script type="text/javascript">
+//搜索入口
+$("#search").click(function(){
+	var type = key = key_from = key_to = zone = unit = "";
+	type		= $.trim($("#type").val());
+	key_from	= $.trim($("#key_from").val());
+	key_to		= $.trim($("#key_to").val());
+	type		= $.trim($("#type").val());
+	zone		= $.trim($("#zone").val());
+	if (key_from!='' && key_to!='') key = key_from+'-'+key_to;
+	if (type!='0' && key!=''){
+		window.location.href = "index.php?mod=channelPrice&act=index&chid={$chid}&chname={$chname}&type="+type+"&key="+key+"&zone="+zone;
+	} else {
+		alertify.error("搜索条件没选或搜索关键词不能为空！");
+		return false;
+	}
+});
+{literal}
+//删除入口
+function del_info(chname,id){
+	var url  = web_url + "json.php?mod=channelPrice&act=delChannelPrice";
+	var data = {"id":id,"chname":chname};
+	alertify.confirm("真的要删除吗？不可恢复哦？", function (e) {
+		if(e) {
+			$.post(url,data,function(res) {
+				if(res.errCode == 0) {
+					alertify.alert("删除成功！",function() {
+						window.location.reload();
+					});
+				} else {
+					alertify.error(res.errMsg);
+				   }
+			}, "jsonp");
+		}
+	});
+}
+{/literal}
+</script>
+{include file="footer.htm"}

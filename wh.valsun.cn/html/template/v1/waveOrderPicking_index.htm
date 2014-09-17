@@ -1,0 +1,319 @@
+{include file="header.htm"}
+
+<script src="./js/wave_order_picking.js"></script>
+<link href="./css/buttons.css" rel="stylesheet" type="text/css" />
+<link href="./css/whcss.css" rel="stylesheet" type="text/css" />
+
+<style>
+td.st { width:60px; }
+td.sc { width:150px; }
+td.sc input { width:200px; }
+td.sc select { width:224px; }
+td.dat input { width:80px; }
+div.orderinfo { font-size:25px; line-height:50px; color:#006600; }
+.show_info { color: #ff0000; }
+.showresult { color:#ff0000; width: 100px; border-bottom:1px solid #888888; padding:5px 20px; }
+</style>
+{include file='whNav.htm'}
+
+<div class="main">
+	<div class="searchnav">仓库出库 - 待分拣</div>
+	<div style="float:left; width:400px;">
+	<table class="searchform" style="border:none;">
+		<tr>
+			<td class="st" style="width:80px;">扫描配货单号</td><td class="sc"><input name="waveId" class="waveId firstinput" type="text" ></td>
+			<td width="20"></td>
+			<td rowspan="4" valign="top">
+			</td>
+		</tr>
+		<tr id= "skuPick" style="display:none;">
+			<td class="st">分拣SKU</td><td class="sc"><input name="sku" class="sku" type="text" ></td>
+			<td width="20"></td>
+			<td></td>
+		</tr>
+		<tr id= "shipOrderPick">
+			<td class="st">发货单投放</td><td class="sc"><input name="shipOrderIdPick" class="shipOrderIdPick" type="text"></td>
+			<td width="20"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="st">设置端口</td><td class="sc">
+				<select class="portlist" name="port" >
+		        	<option value="1">COM1</option>
+		        </select> <span class="port_status"></span>
+				</td>
+			<td width="20"></td>
+			<td></td>
+		</tr>	
+		<tr>
+			<td class="st">报警时长</td><td class="sc">
+				<select class="warnning" name="warnning" >
+		    	<option value="500">0.5秒</option>
+		    	<option value="1000">1秒</option>
+		        <option value="2000">2秒</option>
+		        <option value="3000">3秒</option>
+		        <option value="4000">4秒</option>
+		        <option value="5000">5秒</option>
+		        <option value="500000000">一直报警</option>
+		        </select>
+		    </td>
+			<td width="20"></td>
+			<td></td>
+		</tr>								
+	</table>
+	</div>
+	<div style="float:left;margin-left:10px;">
+		<div class="orderinfo">
+					<b>发货单号:</b> <input class="shipOrderId" type='text'/>&nbsp;<br/>
+					<b>筒　　号:</b> <span class="showresult pickLight">&nbsp;</span>
+					<div class="show_info"></div>
+				</div>
+	</div>
+	<div style="clear:both;"></div>
+	<div style="margin-top:10px;">
+		<input type="button" class="button-normal stoppicking" value="手动完结分拣" />
+		<input type="button" class="button-normal selfchecking" value="指示灯自检" />
+		<input type="button" class="button-normal offall" value="指示灯全灭" />		
+	</div>
+</div>
+
+<script type="text/javascript">
+
+function sendOffFlag(){
+   	$(".offall").click();
+}
+
+function clearInfo(){
+	$(".show_info").html('');
+	$(".shipOrderId").val('');
+	$(".pickLight").html('&nbsp;');	
+}
+
+$(document).ready(function() {
+    var LODOP, aport; 
+	LODOP = getLodop();
+	$(".waveId").focus();
+	$(".waveId").blur(function(){
+		//$(this).focus();
+	}).live("keydown", function(event){
+        if(event.keyCode==13){
+        	var waveId = "";
+        	waveId = $(".waveId").val();
+        	clearInfo();
+        	if(waveId == ''){
+        		$(".show_info").html('请输入配货单号');
+        		return false;
+        	}
+        	LODOP.WRITE_PORT_DATA("COM"+aport, 'A99');
+        	$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "index.php?mod=waveOrderPicking&act=waveinit",
+				data: { "waveId":waveId },
+				success: function(response){
+					LODOP.WRITE_PORT_DATA("COM"+aport, response.status);
+					$(".show_info").html(waveId+' >> '+response.msg);
+					if(response.status == 'A00'){
+						//报警 延时1延关闭
+						var wtime = $('.warnning').val();
+						setTimeout('sendOffFlag()', wtime);	
+						$(".waveId").val('');
+						$(".waveId").focus();						
+					}else{
+						if(response.hasShippingPick === true){
+							$('#skuPick').css('display','none');
+							$('#shipOrderPick').css('display','');
+							$(".shipOrderIdPick").focus();
+						}else{
+							$('#skuPick').css('display','');
+							$('#shipOrderPick').css('display','none');
+							$(".sku").focus();
+						}
+						
+					}
+				}
+			});
+        }
+    });
+	$(".shipOrderIdPick").blur(function(){
+		//$(this).focus();
+	}).live("keydown", function(event){
+        if(event.keyCode==13){
+        	var shipOrderId, waveId;
+        	waveId = $(".waveId").val();
+        	shipOrderId = $(".shipOrderIdPick").val();
+        	clearInfo();
+        	if(waveId == ''){
+        		$(".show_info").html('请输入配货单号');
+        		return false;
+        	}
+        	if(shipOrderId == ''){
+        		$(".show_info").html('请输入发货单号');
+        		return false;
+        	}
+        	LODOP.WRITE_PORT_DATA("COM"+aport, 'A99');
+        	$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "json.php?mod=waveOrderPicking&act=shipOrderpick&jsonp=1",
+				data: { "shipOrderId":shipOrderId, "waveId":waveId },
+				success: function(response){
+					LODOP.WRITE_PORT_DATA("COM"+aport, response.status);
+					if(response.waveStatus == 'A99'){
+						//发货单投放完结
+						$(".show_info").html(waveId+' >> '+response.msg);
+						$(".shipOrderId").val(response.shipOrderId);
+						$(".pickLight").html(response.pickLight);
+						$(".shipOrderIdPick").val('');
+						$('#shipOrderPick').css('display','none');
+						$('#skuPick').css('display','');
+						$(".sku").focus();
+					}else if(response.status == 'A00'){
+						//报警 延时1延关闭
+						var wtime = $('.warnning').val();
+						setTimeout('sendOffFlag()', wtime);
+						$(".show_info").html(response.msg);
+						$(".shipOrderIdPick").val('');
+						$(".shipOrderIdPick").focus();
+						//$(".waveId").val('');
+					}else if(response.pickLight != undefined){
+						if(response.msg != '' && response.msg != undefined)$(".show_info").html(shipOrderId+' >> '+response.msg);
+						$(".shipOrderId").html(response.shipOrderId);
+						$(".pickLight").html(response.pickLight);
+						$(".shipOrderIdPick").val('');
+						$(".shipOrderIdPick").focus();
+					}
+				}
+			});
+        }
+    });
+	
+	$(".sku").blur(function(){
+		//$(this).focus();
+	}).live("keydown", function(event){
+        if(event.keyCode==13){
+        	var sku, waveId;
+        	waveId = $(".waveId").val();
+        	sku = $(".sku").val();
+        	clearInfo();
+        	if(waveId == ''){
+        		$(".show_info").html('请输入配货单号');
+        		return false;
+        	}
+        	if(sku == ''){
+        		$(".show_info").html('请输入料号');
+        		return false;
+        	}
+        	LODOP.WRITE_PORT_DATA("COM"+aport, 'A99');
+        	$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "index.php?mod=waveOrderPicking&act=skupick",
+				data: { "sku":sku, "waveId":waveId },
+				success: function(response){
+					LODOP.WRITE_PORT_DATA("COM"+aport, response.status);
+					if(response.waveStatus == 'A99'){
+						//波次完结
+						$(".show_info").html(waveId+' >> '+response.msg);
+						$(".waveId").val('');
+						$(".sku").val('');
+						$(".waveId").focus();
+					}else if(response.status == 'A00'){
+						//报警 延时1延关闭
+						var wtime = $('.warnning').val();
+						setTimeout('sendOffFlag()', wtime);
+						$(".show_info").html(sku+' >> '+response.msg);
+						$(".sku").val('');
+						$(".sku").focus();
+						//$(".waveId").val('');
+					}else if(response.pickLight != undefined){
+						if(response.msg != '' && response.msg != undefined)$(".show_info").html(sku+' >> '+response.msg);
+						$(".shipOrderId").val(response.shipOrderId);
+						$(".pickLight").html(response.pickLight);
+						$(".sku").val('');
+						$(".sku").focus();
+					}
+				}
+			});
+        }
+    });
+	$(".stoppicking").click(function(){
+       	var waveId;
+       	waveId = $(".waveId").val();
+       	if(waveId == ''){
+       		$(".show_info").html('请输入配货单号');
+       		alert('请输入配货单号');
+       		$(".waveId").focus();
+       		return false;
+       	}
+       	LODOP.WRITE_PORT_DATA("COM"+aport, 'A99');
+       	$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "index.php?mod=waveOrderPicking&act=stoppicking",
+			data: { "waveId":waveId },
+			success: function(response){
+				LODOP.WRITE_PORT_DATA("COM"+aport, response.status);
+				$(".show_info").html(waveId+response.msg);
+				$(".shipOrderId").val('');
+				$(".pickLight").html('&nbsp;');
+				//波次完结
+				$(".waveId").val('');
+				$(".sku").val('');
+				$(".waveId").focus();	
+				if(response.status == 'A00'){
+					//报警 延时1延关闭
+					var wtime = $('.warnning').val();
+					setTimeout('sendOffFlag()', wtime);		
+				}
+			}
+		});
+    });    
+    //自检
+    $(".selfchecking").click(function(){
+    	LODOP.WRITE_PORT_DATA("COM"+aport, 'A98');
+    	$(".waveId").val('');
+    	$(".sku").val('');
+    	$(".waveId").focus();
+    });
+    //全灭
+    $(".offall").click(function(){
+    	LODOP.WRITE_PORT_DATA("COM"+aport, 'A99');
+    	var wid = $(".waveId").val();
+    	if(wid == ''){
+    		$(".waveId").focus();	
+    	}else{
+    		$(".sku").focus();
+    	}
+    });
+    var porthtml = '';
+    for(var i=1; i<=40; i++){
+    	porthtml += '<option value="'+i+'">COM'+i+'</option>';
+    }
+    
+    $(".portlist").html(porthtml).change(function(){
+    	var comv = $(this).val();
+    	var connectConf="mode com"+comv+":9600,n,8,1";
+    	if(!LODOP.WRITE_PORT_DATA("COM"+comv,connectConf)){
+    		$(".port_status").html('端口COM'+comv+'通讯失败！请选择正确的端口');
+    	}else{
+    		$(".port_status").html('');
+    		aport = comv;
+    	}
+    	Browser.setCookie('PARTION_COM', comv);
+    	$(".waveId").focus();
+    });
+    
+    aport = $(".portlist").val();
+    var com1 = Browser.getCookie('PARTION_COM');
+    if(com1)aport = com1;
+    $(".portlist").val(aport);
+    var connectConf="mode com"+aport+":9600,n,8,1";
+    if(!LODOP.WRITE_PORT_DATA("COM"+aport,connectConf)){
+    	$(".port_status").html('端口COM'+aport+'通讯失败！请选择正确的端口');
+    }
+    
+});
+</script>
+
+{include file='footer.htm'}

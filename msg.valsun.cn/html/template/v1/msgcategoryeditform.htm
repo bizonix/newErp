@@ -1,0 +1,48 @@
+{include file="header.htm"}
+{include file="secendNav_cat.htm"}
+<link rel="stylesheet" href="./css/msg_catform.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/categoryedit.js"></script>
+<div class="maincontainer">
+	<div class="titlediv">
+		{$act}分类信息
+	</div>
+<form id="categoryform" onsubmit="return submitdata();$('#submitbutton').attr('disabled',true);" action="{$submiturl}" method="post">
+	<div class="inputline firstline">
+		<div class="line-left">分类名称：</div>
+		<div class="line-right">
+			<input id="category_name" value="{$catinfo.category_name}" name="catname">
+		</div>
+	</div>
+	<div class="inputline secondeline ">
+		<div class="line-left">分类规则：</div><a href="javascript:selectmenu()">全选</a>
+		<div class="line-right" style="clear: both; width: 800px; margin-left: 192px;">
+			{foreach $alphabet as $alval}
+				<input class="rules" {if $cid && in_array($alval, $rules, true)}checked="checked"{/if} name="alphabet[]" type="checkbox" value="{$alval}"> {$alval}
+			{/foreach}
+		</div>
+	</div>
+	<div class="inputline secondeline ">
+		<div class="line-left">管理哪些帐号：</div>
+		<div class="line-right">
+			<select id="countslector" name='account'>
+				<option value="-1">请选择账号</option>
+			{foreach $accounts as $acval}
+				<option {if $catinfo.ebay_account==$acval}selected="selected"{/if} value="{$acval}">{$acval}</option>
+			{/foreach}
+			</select>
+		</div>
+	</div>
+	<div class="inputline firstline">
+		<div class="line-left">分类备注：</div>
+		<div class="line-right">
+			<input value="{$catinfo.ebay_note}" name="notes">
+		</div>
+	</div>
+	{if $cid}
+	<input type="hidden" name="cid" value="{$cid}">
+	{/if}
+	<button id="submitbutton" class="submitbutton">提交</button>
+	<button class="submitbutton" type="button" onclick="window.location='{$gobackurl}'">取消</button>
+</form>
+</div>
+{include file="footer.htm"}

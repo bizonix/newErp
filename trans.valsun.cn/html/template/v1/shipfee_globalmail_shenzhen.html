@@ -1,0 +1,45 @@
+﻿{header}
+<link rel="stylesheet" href="css/transportlist.css">
+{navdiv}
+<script type="text/javascript" src="../../js/shipfee.js"></script>	
+<div class="miancontainer ">
+    <table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                    <tr>
+                            
+                           
+                            <td>渠道名称</td>
+                            <td>国家列表</td>
+                            <td>重量区间——运费</td>
+                            <td>燃油费率</td>
+							
+                    </tr>
+            </thead>
+            <tbody>
+            	<!-- BEGIN list -->
+                    <tr class="odd">
+                            
+                           
+                            <td>{channelName}</td>
+                            <td>{countries}</td>
+                            <td>{weight_freight}</td>
+                            <td>{fuelcosts}</td>
+                            
+                    </tr>
+                <!-- END list -->
+            </tbody>
+			<tfoot>
+
+			</tfoot>
+    </table>
+	<input type="button" id="modify_globalmail_shenzhen" value="修改运费价目表"/>
+	 <div id="importexcel" style="display:none">
+		
+		<form method="post" id="importform" enctype="multipart/form-data" action="json.php?mod=shipfee&act=modify_globalmail_shenzhen&channelName={channelName}">
+			
+			<span style="font-size:14px">请上传指定格式的excel文件</span><input name="upfile" type="file" id="upfile"/>
+			<br><input type="submit" name="import" value="提交"/>
+		</form>
+	 </div>
+</div>
+{footer}

@@ -1,0 +1,69 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/cate.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+<div class="servar products-servar">
+<span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="main feedback-main">
+            	<form id="form" name="form" method="post" action="">
+								  <table class="products-action" width="100%" border="0" cellpadding="0" cellspacing="0">
+								  <tr>
+									<td width="25%" align="right" >
+										<div align="left" id="div_one">
+											<select name="pid_one" id="pid_one" onchange="select_one();" multiple="multiple" style="width:150px; height:180px;">
+												<option value="0">==请选择==</option>
+												{foreach $categoryList as $value}
+												<option value="{$value['id']}"/>{$value['name']}</option>
+												{/foreach}
+											</select>
+									  </div>
+									  </td>
+									<td width="25%" align="right"  id="show_second" style="display:none">
+									 <div align="left" id="div_two"></div></td>
+									<td width="25%" align="right"  id="show_third" style="display:none">
+									 <div align="left" id="div_three"></div></td>
+									<td width="25%" align="right"  id="show_fourth" style="display:none">
+									 <div align="left" id="div_four"></div></td>
+									</tr>
+									<tr>
+										<td align="left" >分类名称:
+										  <input type="text" id="txt_one" />&nbsp;&nbsp;
+										  <input type="button" id="btn_one_add" class="addcate" tid="txt_one" tcate="1" value="添加"/></td>
+										<td width="24%" align="left"  id="show_second_name" style="display:none">
+											分类名称:
+												 <input type="text" id="txt_two" />&nbsp;&nbsp;
+												 <input type="button" id="btn_two_add" class="addcate" tid="txt_two" tcate="2" value="添加"  />
+
+										</td>
+										<td width="24%" align="left" id="show_third_name" style="display:none">
+											分类名称:
+												 <input type="text" id="txt_three" />&nbsp;&nbsp;
+												 <input type="button" id="btn_three_add" class="addcate" tid="txt_three" tcate="3" value="添加" />
+
+									   </td>
+									   <td width="24%" align="left"  id="show_fourth_name" style="display:none">
+											分类名称:
+												 <input type="text" id="txt_four" />&nbsp;&nbsp;
+												 <input type="button" id="btn_four_add" class="addcate" tid="txt_four" tcate="4" value="添加" />
+
+									   </td>
+									</tr>
+									</table>
+									</form>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

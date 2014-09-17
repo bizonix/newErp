@@ -1,0 +1,64 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whIoInvoicesType.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=warehouseManagement&act=whIoInvoicesTypeSubmit&type=edit' method="post" id="whIoInvoicesTypeForm" onsubmit="return editCheck();">
+    	<input type="hidden" id="key_id" name="key_id" value="{$key_id}" readonly="readonly"/>
+    	<div style="width:600px; margin:auto; text-align:left;">
+            <label for="invoiceNameEdit" style="font-size:20px;">出入库单据名：</label>        
+            <input value="{$invoiceName}" id='invoiceNameEdit' class="mf validate[required] text-input" name="invoiceNameEdit" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="invoiceNameInputSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+            <label for="ioTypeIdEdit" style="font-size:20px;">出入库记录名：</label>    
+			<select name="ioTypeIdEdit" id="ioTypeIdEdit" style="width:200px;height:30px;font-size:20px" class="mf validate[required]">
+             	<option value="" selected="selected">请选择</option>
+                {foreach name="ioTypeIdList" from=$whIoTypeArrs key=whKey item=whIoTypeArrsValue}
+                <option value="{$whKey}" {if $ioTypeId == $whKey}selected="selected"{/if} >{$whIoTypeArrsValue}</option>
+                {/foreach}
+			 </select>
+          <span id="ioTypeIdInputSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+            <label for="ioTypeEdit" style="font-size:20px;">出入库类型：</label>    
+            &nbsp;&nbsp;
+             <select name="ioTypeEdit" id="ioTypeEdit" style="width:200px;height:30px;font-size:20px" class="mf validate[required]">
+             	<option value="" >请选择</option>
+                <option value="0" {if $ioType == 0}selected="selected"{/if} >出库类型</option>
+                <option value="1" {if $ioType == 1}selected="selected"{/if} >入库类型</option>
+			 </select>  
+            <span id="ioTypeInputSpan" style="color: red;">*</span>
+        </div> 
+    <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+        	<label for="storeIdEdit" style="font-size:20px;">所属仓库选择：</label>    
+<select name="storeIdEdit" id="storeIdEdit" style="width:200px;height:30px;font-size:20px" class="mf validate[required]">
+             	<option value="" selected="selected">请选择</option>
+                {foreach name="storeIdList" from=$whNameArr key=whKey item=whNameArrValue}
+                <option value="{$whKey}" {if $storeId == $whKey}selected="selected"{/if} >{$whNameArrValue}</option>
+                {/foreach}
+			 </select>
+          <span id="storeIdInputSpan" style="color: red;">*</span>
+  		</div>
+        <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+            <label for="noteEdit" style="font-size:20px;">备注：</label>     
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <textarea id='noteEdit' name="noteEdit" style="width:200px; height:97px; font-size:15px;">{$note}</textarea>
+            <span id="noteInputSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div>   		       
+            <button  id='whIoInvoicesTypeSubmit' value="" />提交</button>
+            &nbsp;
+            <input type="button"  id='returnPage' value="取消" class="input_button" />
+        </div>        
+    </form>
+</div>
+{include file="footer.htm"}

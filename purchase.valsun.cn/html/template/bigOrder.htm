@@ -1,0 +1,268 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=purchaseOrder&act=index&three_status=1">采购管理</a>>>超大订单审核
+	</div>
+</div>
+
+<div class="well well-lg" style="clear:both;margin-top:10px;margin-bottom:10px">
+	<div class="row">
+		<div class="col-md-2">
+				<select id="search-type" class="form-control">
+					<option value="-1">请选择搜索类型</option>
+					<option value="orderid" {if $smarty.get.type=="orderid"}selected {/if}>订单编号</option>
+					<option value="sku"  {if $smarty.get.type=="sku"}selected {/if}>SKU</option>
+					<option value="note" {if $smarty.get.type=="note"}selected {/if}>备注</option>
+				</select>
+		</div>	
+	
+		<div class="col-md-2">
+			<input id="search-keyWord" type="text" value="{$smarty.get.keyWord}" placeholder="请输入要搜索的内容" class="form-control" />
+		</div>
+		
+		<div class="col-md-2">
+				<select id="audit-status" class="form-control" >
+					<option value="-1">请选择审核状态</option> 
+					{foreach key=key item=value from=$auditStatusList}
+						<option value="{$key}" {if $smarty.get.auditStatus==$key} selected="selected"{/if}>{$value}</option>
+					{/foreach}
+				</select>
+		</div>
+		
+		<div class="col-md-2">
+				<select id="time-type" class="form-control">
+					<option value="-1">选择时间类型</option>
+					<option value="addtime" {if $smarty.get.timeType=="addtime"}selected {/if}>添加时间</option>
+					<option value="audittime" {if $smarty.get.timeType=="audittime"}selected {/if}>审核时间</option>
+				</select>
+		</div>
+		
+		<div class="col-md-2 ">
+			<input id="start-date" onclick="WdatePicker()" type="text" value="{$smarty.get.startTime}" class="form-control" />
+		</div>
+		
+		<div class="col-md-2 " >
+			<input id="end-date" onclick="WdatePicker()" type="text" value="{$smarty.get.endTime}"  class="form-control"/>
+		</div>
+	</div>
+	
+	<div class="row" style="margin-top:6px">
+		<div class="col-md-12" >
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary" id="search-btn">search</button>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<div style="clear:both;" class="main underline-main">
+	<table  cellspacing="0" width="100%" class="products-action">
+			<tr class="title purchase-title">
+				<td>订单编号</td>
+				<td>添加时间</td>
+				<!-- <td>订单状态</td>
+				<td>账号</td> -->
+				<td>SKU</td>
+				<td>图片</td>
+				<td>描述</td>
+				<td>单价</td>
+				<td>数量</td>
+				<td>实际库存</td>
+				<td>待发货</td>
+				<td>已订购</td>
+				<td>每天均量</td>
+				<td>状态</td>
+				<td>审核时间</td>
+				<td>备注</td>
+				<td>操作</td>
+			</tr>
+		{foreach from=$listData item=list}
+			<tr>
+				<td>{$list['omOrderId']}</td>
+				<td style="color:#FF0000; font-weight:bolder">{$list['addTime']|date_format:'%Y-%m-%d '}</td>
+				<!-- <td>订单状态</td>
+				<td>账号</td> -->
+				<td>{$list['sku']}</td>
+				<td>
+					<a href="javascript:void(0)" id="imgb-{$list['sku']}" class="fancybox" data-sku="imgb-{$list['sku']}">
+						<img src="" class="skuimg" id="imgs-{$list['sku']}"  width="40" height="40"  data-sku="{$list['sku']}">
+					</a>
+				</td>
+				<td>{$list['goodsName']}</td>
+				<td>{$list['goodsCost']}</td>
+				<td>{$list['amount']}</td>
+				<td>{$list['real_stock']}</td>
+				<td>{$list['salensend']}</td>
+				<td>{$list['newBookNum']}</td>
+				<td>{$list['everyday_sale']}</td>
+				<td>
+					{if $list['status'] == 0}未处理
+					{elseif $list['status'] == 1}<font color="green">审核通过</font>
+					{elseif $list['status'] == 2}<font color="red">拦截</font>
+					{else}
+					{/if}
+				</td>
+				<td>{if $list['auditTime'] != 0}{$list['auditTime']|date_format:'%Y-%m-%d '}{/if}</td>
+				<td>{$list['auditNote']}</td>
+				<td>
+				{if $list['status'] == 0}
+					<input  type="button" data-rowid="{$list['id']}" data-status="1"  value="审核通过" class="bigorder" />
+					<input  type="button" data-rowid="{$list['id']}" data-status="2" value="拦截" class="bigorder" />
+				{elseif $list['status'] == 2}
+					<input  type="button" data-rowid="{$list['id']}" data-status="1"  value="审核通过" class="bigorder" />			
+				{/if}
+				</td>
+			</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">{$pageStr}</div>
+</div>
+{include file="footer.htm"}
+
+
+{literal}
+<script>
+
+$(".servar").keyup(function(e) {
+	if(e.keyCode == 13) {
+		$("#search-btn").trigger("click");
+	}
+});
+
+$("#search-btn").click(
+	function() {
+		var flag1 = false, flag2 = false, flag3 = false,para = '';
+		
+		if ($("#search-type").val() != "-1") {
+			var type = $("#search-type").val();
+			para += '&type=' + type;
+		} else {
+			$("#search-keyWord").val('');
+			para += '&type=-1';
+		}
+		
+		if ($("#search-keyWord").val() != "") {
+			keyWord = $.trim($("#search-keyWord").val());
+			para += '&keyWord=' + encodeURIComponent(keyWord);
+		}
+		
+		var audit_status = $("#audit-status").val();
+		para += '&auditStatus=' + audit_status;
+		
+		if ($("#time-type").val() != "-1") {
+			timetype = $("#time-type").val();
+			para += '&timeType=' + timetype;
+			flag1 = true;
+		} else {
+			para += '&timeType=-1';
+		}
+		
+		if ($("#start-date").val() != "") {
+			starTime = $.trim($("#start-date").val());
+			para += '&startTime=' + starTime;
+			flag2 = true;
+		}
+		
+		if ($("#end-date").val() != "") {
+			endTime = $.trim($("#end-date").val());
+			para += '&endTime=' + endTime;
+			flag3 = true;
+		}
+		
+		if (flag1 && flag2 && flag3) {
+			d = new Date(starTime);
+			starTime = d.getTime();
+			
+			d = new Date(endTime);
+			endTime = d.getTime();
+			
+			if (starTime > endTime) {
+				alertify.alert("开始时间不能大于结束时间");
+				return false;
+			}
+		}
+		
+		three_status = get_url_parameter("three_status");
+		window.location.href = "index.php?mod=purchaseOrder&act=checkSuperOrder&three_status="+three_status + para;
+});
+
+function purToOrder(url, data) {
+	var ret = {flag:0,msg:''};
+	$.ajax({
+		   type: "POST",
+		   url: url,
+		   data: data,
+		   dataType: 'json',
+		   async: false,
+		   success: function(rtn){
+			   if(rtn.code == '1'){
+				   ret.flag = 1;
+				   ret.msg = 'success';
+			   } else {
+				   ret.flag = 0;
+				   ret.msg = rtn.msg;
+			   }
+		   }
+		});
+	return ret;
+}
+
+$('.bigorder').click(function(){
+	var loading     	= '<img src="./public/img/spinner.gif" />';
+	var data 			= {};
+	data.id 			= $(this).data('rowid');
+	data.status 		= $(this).data('status');
+	var url 			= "json.php?mod=purToOrderAPI&act=pushBigOrder";
+	
+	var data2			= {};
+	data2.id 			= data.id;
+	data2.status 		= data.status;
+	var url2			= "json.php?mod=superorderAudit&act=saveAuditResult";
+		
+	if(data.status == 2){// 拦截
+		alertify.prompt("备注信息", function (e, str) {
+			if(e){
+				data.note = str;
+				var re = purToOrder(url, data);
+				if (re.flag) {
+					data2.note = str;
+					$.post(url2, data2, function(rtn){
+						if(rtn.code == 1){
+							alertify.success('拦截成功');
+							window.setTimeout("window.location.reload()", 2000);
+						}else{
+							alertify.error(rtn.msg);
+						}
+					},'json');
+				} else {
+					alertify.error(re.msg);
+				} 
+			}
+		})
+	} else {
+		alertify.confirm('确认审核通过？', function (e) {
+			if(e){
+				data.note = '';
+				var re = purToOrder(url, data);
+				if (re.flag) {
+					data2.note = '';
+					$.post(url2, data2, function(rtn){
+						if(rtn.code == 1){
+							alertify.success('审核通过');
+							window.setTimeout("window.location.reload()", 2000);
+						}else{
+							alertify.error(rtn.msg);
+						}
+					},'json');
+				} else {
+					alertify.error(re.msg);
+				}
+			}
+		})
+	}
+})
+</script>
+{/literal}

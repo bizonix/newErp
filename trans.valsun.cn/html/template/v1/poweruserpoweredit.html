@@ -1,0 +1,45 @@
+{header}
+<link rel="stylesheet" href="css/powermanage.css">
+<script language="javascript" src="js/powerusermanage.js"></script>
+{navbar}
+<div class="maincontentdiv" style="height: 405px;">
+    <div style="float: left; margin-right: 10px;">
+        {powerleftmenu}
+    </div>
+    <div class="leftcontainer">
+        <div class="topmenudiv">
+            用户ID：<span style="margin-right: 80px;">{userid}</span>
+            用户名：<span>{username}</span>
+        </div>
+        <form action="index.php?mod=poweruser&act=powerEditSubmit" method="post">
+        <div class='power_user_list_table'>
+            <table class="powertable">
+                    <thead>
+                    	<tr>
+                        	<th align="center" width="10%">权限组</th><th align="center">权限</th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                         <!-- BEGIN actionlist -->
+                         <tr>
+                        	<td>
+                                    <label title="{groupnamezh}">{groupname}【{groupnamezh}】</label>
+                                </td>
+                                <td>
+                                    {actions}
+                                </td>
+                        </tr>
+                        <!-- END actionlist -->
+                     </tbody>
+           </table>
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+            <input type="hidden" value="{userid}" name="userid">
+            <input type="submit" style="width: 50px; height: 35px; cursor: pointer;" value="提交">
+            <input onclick="window.location='index.php?mod=power&act=powerlist'" type="button" style="width: 50px; height: 35px; cursor: pointer;" value="取消">
+        </div>
+        </form>
+    </div>
+    <div style="clear: both"></div>
+</div>
+{footer}

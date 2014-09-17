@@ -1,0 +1,95 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="css/label50x100.css"/>
+</head>
+<body>
+{foreach $ordersinfo as $orderval}
+	<table width="" height="100" border="0" cellpadding="0" cellspacing="0" style="border:1px dashed #999999; height:46mm; width:120mm">
+	  <tbody>
+	    <tr>
+	      <td width="75" valign="top" style="border-right:#000000 1px dashed;padding:2px 0 0 4px;"><table width="75" border="0" cellpadding="0" cellspacing="0" style="width:75px; table-layout:fixed; overflow: scroll;word-break:break-all;">
+	          <tbody>
+	            <tr>
+	              <td align="center"><span class="STYLE5">{$orderval.id}&nbsp;</span></td>
+	            </tr>
+	            <tr>
+	              <td><span class="STYLE5" style="font-size:12px">{$orderval.shipname}&nbsp;</span></td>
+	            </tr>
+	            <tr>
+	              <td><span class="STYLE5" style="font-size:12px">{$orderval.channelname}&nbsp;</span></td>
+	            </tr>
+	            <tr>
+	              <td><span class="STYLE5">ZL:</span><span class="STYLE5"> {$orderval.calcWeight}             
+	                &nbsp;</span></td>
+	            </tr>
+	            <tr>
+	              <td><span class="STYLE5">YF:</span><span class="STYLE5">{$orderval.calcShipping}</span></td>
+	            </tr>
+	            <tr>
+	              <td><span class="STYLE5">A2&nbsp;</span> <span class="STYLE5"> 17.24                    &nbsp;</span></td>
+	            </tr>
+	            <tr>
+	              <td><span class="STYLE5">mj</span><span class="STYLE5">{$orderval.platformUsername}&nbsp;</span></td>
+	            </tr>
+	            <tr>
+	              <td>Its77<br>
+	                1/2&nbsp;</td>
+	            </tr>
+	            <tr>
+	              <td><br>
+	                <span class="STYLE5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KP</span> </td>
+	            </tr>
+	          </tbody>
+	        </table></td>
+	      <td width="160" valign="top" style="border-right:#000000 1px dashed"><div style="height:90%;">
+	          <table width="100%" border="0" cellspacing="0" cellpadding="0" style="word-break:break-all;">
+	            <tbody>
+	            	{foreach $orderval.finalposition as $skuval}
+	              <tr>
+	                <td><strong>N&nbsp;[{$skuval.location}] {$skuval.sku}*{$skuval.amount}</strong></td>
+				  </tr>
+				  {/foreach}
+	              <tr>
+	                <td> Total Qty:{$orderval.totalnum}<br></td>
+	              </tr>
+	            </tbody>
+	          </table>
+	        </div>
+	        <div style="height:10%;" align="center">
+	          <table>
+	            <tbody>
+	              <tr>
+	                <td> Made in China </td>
+	              </tr>
+	            </tbody>
+	          </table>
+	        </div></td>
+	      <td width="210" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+	          <tbody>
+	            <tr>
+	              <td align="center">{$orderval.id}</td>
+	            </tr>
+	            <tr>
+	              <td><img src="http://192.168.200.200:9999/barcode128.class.php?data={$orderval.id}" alt="" width="180" height="40"></td>
+	            </tr>
+	            <tr>
+	              <td><div style="font-size:15px; font-weight:bold; padding:0 0 0 4px;"><i>Send To: </i>{$orderval.username}<br>
+	                  {if $orderval.street != ''}{$orderval.street}</br>{/if}
+					  {if $orderval.city != ''}{$orderval.city}</br>{/if}
+					  {if $orderval.state != ''}{$orderval.state}</br>{/if}
+					  {if $orderval.zipcode != ''}{$orderval.zipcode}</br>{/if}
+					  {if $orderval.countryName != ''}{$orderval.countryName}({$orderval.countryZh})</br>{/if}
+					  Tel:{if $orderval.phone != ''}{$orderval.phone}</br>{/if}
+					  {if $orderval.address2 != ''}{$orderval.address2}</br>{/if}
+					  {if $orderval.address3 != ''}{$orderval.address3}</br>{/if}
+	            </tr>
+	          </tbody>
+	        </table></td>
+	    </tr>
+	  </tbody>
+	</table>
+	<div style="page-break-after:always;">&nbsp;</div>
+{/foreach}
+</body>
+</html>

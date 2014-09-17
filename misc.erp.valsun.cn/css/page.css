@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+
+.pagination{ float:right; padding-right:10px; color:#878787;}
+.pagination a{ padding:4px 6px; border:1px #878787 solid; margin-left:4px; margin-top:3px;}
+.pagination a:hover{ background-color:#0092dc; color:#FFF; border:1px #00689d solid;}
+.pagination .thispage{padding:4px 6px; margin-left:4px; margin-top:3px;}
+.goPage .int{background-color:#0092dc; color:#FFF; border:1px #00689d solid;padding:4px 6px;cursor:pointer;}
+.goPage .int:hover{ background-color:#007fbf;}
+.goPage input{width:50px;text-align:center;margin-left:5px;}

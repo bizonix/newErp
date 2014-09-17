@@ -1,0 +1,87 @@
+{header}
+<!-- 
+/*
+ * 小语种国家对照表HTML页面 smallCountriesManage.html
+ * ADD BY 陈伟 2013.7.25
+ */
+-->
+		<link rel="stylesheet" href="css/transportlist.css">
+		<script type="text/javascript" src="./js/countriesManage.js"></script>
+{navdiv}
+        
+     
+				<!-- Main Content -->
+				<div id="content">
+					<div id="main">
+					<div class="pad20">
+					<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+						 <tbody>
+                        		 <tr>
+                                   <td>分类切换：</td>
+                                   <td><a style="font-size:25px;" href="index.php?mod=countriesManage&act=countriesList">标准国家列表</a>&nbsp;</td>
+                                   <td><a style="font-size:25px;" href="index.php?mod=countriesManage&act=smallCountriesList">小语种国家对照列表</a>&nbsp;</td>
+                                   <td><a style="font-size:25px;" href="index.php?mod=countriesManage&act=carrierCountriesList">运输方式对照国家列表</a>&nbsp;</td>
+                                   
+                                </tr>
+                                
+                                <tr>
+                                   <td>操作区域：</td>
+                                   <td></td>
+                                   <td><input type="button" id='addNewSmallCountries' style="width:150px;height:45px;font-size:20px" value="添加国家小语种" /></td>
+                                   <td align="right">
+                                    {show_page}
+                                    </td>
+                                   
+                                </tr>
+                                
+					<!-- Big buttons -->
+						<table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <td><input type="checkbox" class="checkall" /></td>
+                                    <td>小语种国家名</td>
+                                    <td>英文国家名称</td>
+                                    <td>描       述</td>
+                                    <td>操       作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<!-- BEGIN list -->
+                                <tr class="odd">
+                                	<td><input type="checkbox" name="c_id" value="{c_id}"/></td>
+                                    <td>{small_country}</td>
+                                    <td>{countryName}</td>
+                                    <td>{conversionType}</td>
+                                    <td>
+                                    
+                                    <a href="index.php?mod=countriesManage&act=smallCountriesEditPage&smallCountryId={c_id}"><input type="button" style="width:50px;height:30px;font-size:10px" value="编辑" /></a>
+                                    &nbsp;
+                                    &nbsp;
+                                    <input type="button" name='small_country_delete' style="width:50px;height:30px;font-size:10px" value="删除" />
+                                     
+                                    </td>
+                                </tr>
+                                <!-- END list -->
+                            </tbody>
+                            <tfoot>
+                                <tr class="odd">
+                                    <td colspan="5" align="right">
+                                    {show_page}
+                                    </td>
+                                </tr>
+                        	</tfoot>
+                        </table>
+					</div>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					</div>
+				</div>
+				<!-- End of Main Content -->
+
+
+			</div>
+			<!-- End of bgwrap -->
+		</div>
+{footer}
+
+

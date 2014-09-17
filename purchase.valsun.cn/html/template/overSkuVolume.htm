@@ -1,0 +1,91 @@
+﻿{include file="header.htm"}
+	<div class="fourvar">
+    	<div class="pathvar">
+        	您的位置：<a href="index.php?mod=productStockalarm&act=index">预警管理</a>&nbsp;>>&nbsp;B仓库存立方数
+        </div>
+		<div class="pagination">
+            {$pageStr}
+        </div>
+    </div>
+	 <div class="servar products-servar">	
+        <span>
+			综合搜索
+			<input type="text" id="keyword" value="{$smarty.get.keyword}" /><font style="color:#FF0000; font-size:10px;">支持(料号、描述、采购员)关键字搜索</font>
+        </span>
+		<span>
+			<a href="javascript:void(0);" id="search">搜 索</a>
+			<a href="javascript:void(0);" id="btnExport">报表导出</a>
+		</span>
+		<span style="float:right">
+			搜索条件立方数:【<font style="color:#009933; font-size:18px; font-weight:bolder;">{$totalVolume}</font>】---
+			总立方数:【<font style="color:#FF0000; font-size:18px; font-weight:bolder;">{$allTotalVolume}</font>】单位:M
+		</span>
+    </div>
+	<div class="main underline-main ">
+    	<table cellspacing="0" width="100%" class="products-action">
+        	<tr class="title purchase-title">
+		    	<td>料号</td>
+				<td>立方数</td>
+				<td>B仓库存</td>
+				<td>封箱库存</td>
+				<td>采购员</td>
+                <td>长</td>
+                <td>宽</td>
+				<td>高</td>
+				<td>长宽高单位</td>
+				<td>描述</td>
+            </tr>
+			{section name=list loop=$list}
+			<tr>
+				<td>{$list[list]['sku']}</td>
+				<td style="color:#FF0000; font-size:18px; font-weight:bolder;">
+					{$list[list]['goodsLength'] * $list[list]['goodsWidth'] * $list[list]['goodsHeight'] * ($list[list]['b_stock_cout'] + $list[list]['inBoxQty']) / 1000000 }
+				</td>
+				<td>{$list[list]['b_stock_cout']}</td>
+				<td>{$list[list]['inBoxQty']}</td>
+				<td>{$list[list]['OverSeaSkuCharger']|getUserNameById}</td>
+				<td>{$list[list]['goodsLength']}</td>
+                <td>{$list[list]['goodsWidth']}</td>
+                <td>{$list[list]['goodsHeight']}</td>
+				<td>cm</td>
+				<td>{$list[list]['goodsName']}</td>
+            </tr>
+			{/section}
+         </table>
+     </div>
+     <div class="bottomvar">
+     	<div class="pagination">
+        	{$pageStr}
+        </div>
+     </div>
+<script type="text/javascript">
+{literal}
+function search(){
+	var keyword 		= $("#keyword").val();
+	var condition 	= '';
+	if(keyword != ''){
+		condition += "&keyword=" + keyword;
+	}
+	window.location.href = "index.php?mod=productStockalarm&act=overSkuVolume" + condition;
+}
+
+$("#search").click(function(){
+		search();
+});
+
+$(document).keyup(function(e){
+	if(e.keyCode == 13){
+		search();
+	}
+});
+
+$('#btnExport').click(function(){
+	var keyword 		= $("#keyword").val();
+	var condition 	= '';
+	if(keyword != ''){
+		condition += "&keyword=" + keyword;
+	}
+	window.location.href = "index.php?mod=purToWh&act=exportOverSkuVolume" + condition;
+})
+{/literal}
+</script>

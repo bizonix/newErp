@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$toptitle}--仓库系统</title>
+<link rel="stylesheet" href="css/content_new.css" type="text/css" >
+<script type="text/javascript" src="js/common.js"></script>
+</head>
+<body scroll=no onload="fuc_onload()">
+<div id="wrapper_content">
+    <div id="moduleTitle" class="floatleft">
+       <span style="float:left">{if $curusername}({$curusername}){/if}{$action}</span><span style="color:blue;float:left;" id="showTime"></span>
+       <div id="smenu" class="floatright">
+            <ul id="nav">
+                <li><span onclick="show_menu_list()">菜单</span>
+                    <ul id="menuname">
+                       <li><a href="javascript:history.go(-1)">后退</a></li>
+                       <li><a href="index.php?act=pda_logout&mod=pda_public">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div> 

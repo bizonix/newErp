@@ -1,0 +1,564 @@
+{include file="header.htm"}
+<style>
+body{
+ font-family:Arial,Verdana,Helvetica,sans-serif;
+}
+td input{
+border: 1px #abc3d7 solid;
+padding: 4px 12px;
+cursor: pointer;
+background-color: #ecf1f4;
+color: #000;
+}
+</style>
+<script type="text/javascript" src="js/ui/jquery-ui-timepicker-addon.js"></script>
+<!--script type="text/javascript" src="./js/fbkList.js"></script-->
+<script type="text/javascript" src="./js/ebayFeedbackManage.js"></script>
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=feedbackManage&act=ebayFeedbackManage">卖家评价</a>&nbsp;&gt;&gt;&nbsp;Feedback管理
+    </div>
+    <div class="pagination" id="fpage">
+        {$show_page}
+    </div>
+</div>
+<div class="servar">
+	<span>
+        UserID: <input name="userId" id="userId" type="text"  value="{$userId}" />
+    </span>
+    <span>
+        SKU: <input name="sku" id="sku" type="text"  value="{$sku}" />
+    </span>
+    <span>
+    最终评价类型:
+      <select name="latest_type" id="latest_type">
+        <option value="" {if $latest_type == ''} selected="selected"{/if}>请选择</option>
+        <option value="Positive" {if $latest_type == 'Positive'} selected="selected"{/if}>Positive</option>
+        <option value="Neutral" {if $latest_type == 'Neutral'} selected="selected"{/if}>Neutral</option>
+        <option value="Negative"{if $latest_type == 'Negative'} selected="selected"{/if}>Negative</option>
+      </select>
+    </span>
+    <span>
+        原始评价类型:
+        <select name="original_type" id="original_type">
+            <option value="" {if $original_type == ''} selected="selected"{/if}>请选择</option>
+            <option value="Neutral" {if $original_type == 'Neutral'} selected="selected"{/if}>Neutral</option>
+            <option value="Negative" {if $original_type == 'Negative'} selected="selected"{/if}>Negative</option>
+        </select>
+    </span>
+    <span>
+        账号：
+        <select name="account" id="account">
+            <option value="" {if $account == ''} selected="selected"{/if} >无</option>
+            {foreach from=$accountList item=templist}
+            <option {if $account == $templist.account} selected="selected"{/if} value="{$templist.account}" >{$templist.account}</option>
+            {/foreach}
+        </select>
+    </span>
+    <span>
+       原因：
+        <select name="feedbackReasonId" id="feedbackReasonId">
+            <option value="" {if $feedbackReasonId == ''} selected="selected"{/if} >无</option>
+            {foreach from=$reasonList item=reason}
+            <option {if $feedbackReasonId == $reason.id} selected="selected"{/if} value="{$reason.id}" >{$reason.content}</option>
+            {/foreach}
+        </select>
+    </span>
+     <br/>
+    <span>
+        排序方式:
+        <select name="sort_type" id="sort_type">
+             <!--option value="">无</option-->
+             <option value="1" {if $sort_type == '1'} selected="selected"{/if}>评价时间降序</option>
+             <option value="2" {if $sort_type == '2'} selected="selected"{/if}>评价时间升序</option>
+        </select>
+    </span>
+    <span>
+        时间:
+         <input name="start_time" id="start_time" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd ' } )"  value="{$smarty.get.start_time}" />
+        -<input name="end_time" id="end_time" type="text" onClick="WdatePicker( { dateFmt:'yyyy-MM-dd ' } )"   value="{$smarty.get.end_time}"/>
+    </span>
+
+    <span>
+        <button  id='ebayFBK_serch_btn' value="" onclick="ebayManageSearch()" />搜索</button>
+    </span>
+    {if isAccessMod('feedbackManage','ebayManageMutilDel') == true}
+    <span>
+        <button  id='ebayFBK_mutil_del' value="" onclick="ebayManageMutilDel()"/>批量删除</button>
+    </span>
+    {/if}
+    <span>
+        <button  id='ebayFBK_mutil_reply' value="" onclick="ebayManageMutilReply()" />批量Reply</button>
+    </span>
+    <span>
+        <button  id='ebayFBK_mutil_message' value="" onclick="ebayManageMutilmessage()" />批量Message</button>
+    </span>
+        <button  id='ebayFBK_mutil_Request' value="" onclick="ebayManageMutilRequest()" />批量添加请求</button>
+    </span>
+   <br>
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+<input type="hidden" id="havesku" value="">
+    <table width="100%" cellspacing="0"  id="nowtable" style="color:#000">
+        <tr class="title" style="font-weight:bold;">
+            <td><input type="checkbox" class="checkall" /></td>
+            <td width="10%">编号</td>
+            <td width="5%">eBay帐号</td>
+            <td width="5%">SKU</td>
+            <td width="5%">数量</td>
+            <td width="5%">原因</td>
+            <td width="15%">操作</td>
+            <td width="20%">Feedback</td>
+            <td width="5%">From</td>
+            <td width="5%">Price</td>
+            <td width="7%">Date/Time</td>
+            <td width="5%">原始评价</td>
+            <td width="5%">最终评价</td>
+        </tr>
+        {foreach from=$fbkList item=list}
+        <tr>
+            <td><input type="checkbox" class="iqcselect" name="fbkselect" value="{$list.id}" account="{$list.account}" recordnumber="{$list.recordNumber}"/></td>
+            <td>{$list.FeedbackID}
+            	<input type="hidden" id="hd_feedbackID{$list.id}" value="{$list.FeedbackID}"/>
+            </td>
+            <td >{$list.account}
+            <input type="hidden" id="hd_account{$list.id}" value="{$list.account}"/>
+            </td>
+            <td scope='row'  id="showsku{$list.id}">
+            {if $list.sku}
+            		{$list.sku}
+
+            	{else}
+            	<input name="button" type="button" id="patch_edit{$list.id}" onclick="edit_patch('{$list.id}');" value="补充料号" size="4" />
+            	<!-- <input name="getSku" type="button" id="getSku{$list.id}" onclick="get_sku('{$list.CommentingUser}','{$list.ItemID}','{$list.TransactionID}','{$list.FeedbackID}','{$list.CommentType}');" value="获取料号" size="4" /> -->
+				<span id="patch{$list.id}" style="display:none">
+				料号:<input type="text" id="patch_sku{$list.id}" /><br/>
+				数量:<input type="text" id="patch_amount{$list.id}" /><br/>
+				</span>
+				<input type="button" size="8" value="Save" id="patch_save{$list.id}" style="display:none" onclick="save_patch('{$list.id}');"/>
+			    <input type="button" size="8" value="Cancel" id="patch_cancel{$list.id}" style="display:none" onclick="cancel_patch('{$list.id}');"/>
+            {/if}
+            <input type="hidden" id="hd_sku{$list.id}" value="{$list.sku}"/>
+            </td>
+            <td scope='row'  id="showqty{$list.id}" ><?php echo $qty; ?>{$list.Qty}</td>
+            <td>
+            <font color="red" id="reason{$list.id}">
+            {foreach from=$reasonList item=reason}
+            	{if $list.reasonId == $reason.id}{$reason.content}{/if}
+            {/foreach}
+            </font>
+            </td>
+
+            <td>
+                <input type="button" size="8" value="Edit" name="button" id="edit_btn_{$list.id}" onclick="edit_click('{$list.id}');" />
+                <input type="button" size="8" value="Save" id="save_btn_{$list.id}" style="display:none" onclick="save_click('{$list.id}');"/>
+                <input type="button" size="8" value="Cancel" id="cancel_btn_{$list.id}" style="display:none" onclick="cancel_click('{$list.id}');"/>
+            	<select name="sd" id="note_txt_{$list.id}" style="display:none">
+     				<option value="">请选择</option>
+		            {foreach from=$reasonList item=reason}
+		            <option value="{$reason.id}" content="{$reason.content}">{$reason.content}</option>
+		            {/foreach}
+                </select>
+            </td>
+            <td style="text-align:left">
+            {$list.CommentText}
+            {if $list.reply_feedback!= ""}
+            <img src='images/notes.gif' title='".$reply_feedback."' width="20" height="20"/>
+            {/if}
+            </td>
+            <td scope='row'>
+            	{$list.CommentingUser}
+                <input type="hidden" id="hd_itemID{$list.id}"  value="{$list.ItemID}" />
+                <input type="hidden" id="hd_commentText{$list.id}"  value="{$list.CommentText}" />
+                <input type="hidden" id="hd_commentType{$list.id}"  value="{$list.CommentType}" />
+                <input type="hidden" id="hd_commentingUser{$list.id}" value="{$list.CommentingUser}" />
+                <input type="hidden" id="hd_transactionID{$list.id}" value="{$list.TransactionID}" /><br/>
+                <input type="button" value="Reply" id="reply_btn_{$list.id}" onclick="feedback_reply({$list.id})" />
+ 				<input type="button" value="Message" id="message_btn_{$list.id}" onclick="feedback_message({$list.id})"/>
+            </td>
+            <td>{$list.ItemPrice*$list.Qty}</td>
+            <td>{($list.feedbacktime+15*3600)|date_format:"%Y-%m-%d %H:%M:%S"}
+            <br>
+            <a href="http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&item={$list.ItemID}" target="_blank" style="display:block;color:#06C;text-decoration:none;">View Item</a>
+            </td>
+            <td>
+                {if $list.status != "0"}
+                    {if in_array($list.status,array("31","32","33"))}
+                    <img src="images/iconNegative_16x16.gif" width="16" height="16">
+                    {elseif in_array($list.status,array("21","23","22"))}
+                    <img src="images/iconNeutral_16x16.gif" width="16" height="16">
+                    {else}
+                    <img src="images/icon{$list.CommentType}_16x16.gif" width="16" height="16">
+                    {/if}
+                {else}
+                <img src="images/icon{$list.CommentType}_16x16.gif" width="16" height="16">
+                {/if}
+            </td>
+            <td><img src="images/icon{$list.CommentType}_16x16.gif" width="16" height="16"></td>
+        </tr>
+        {foreachelse}
+        <tr class="odd">
+            <td colspan="8">没有搜索到任何记录！</td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+
+<!-- reply弹框 START-->
+<div id="ebayReply_pop_form" title="Reply" style="display:none;">
+	<form action="" method="POST" enctype="multipart/form-data" id="ebayReply_pop_form">
+	<table id="tab_ebayReply_pop_form">
+		<!--  span>
+	       	 账号: <input name="reply_account" id="reply_account" type="text"  value="" readonly />
+    	</span--> 接收人:
+    	<span id='reply_pop_commentingUser'>
+	              接收人: {*$list.CommentingUser*} <!-- input name="reply_userId" id="reply_userId" type="text"  value="" readonly /-->
+	    </span>
+	     <br/> SKU:
+	    <span id='reply_pop_sku'>
+	          {*$list.sku*}<!-- input name="reply_userId" id="reply_userId" type="text"  value="" readonly /-->
+	    </span>
+	    <br/>
+	    	评价内容:
+	    <span id='reply_pop_commentText'>
+	    	{$list.CommentText} <!-- textarea name="feedback_content" id="feedback_content" cols="50" rows="2" readonly ></textarea-->
+	    </span>
+	    <br/>
+	    <span>
+	    	回复内容: <br/><textarea name="reply_content" id="reply_content" cols="60" rows="5"></textarea>
+	    </span>
+	    <div id="add_status">
+		    <span style="color:red;font-size:20px"><span>
+	    </div>
+	</table>
+	</form>
+</div>
+<!--弹框 END-->
+
+<!-- message弹框 START-->
+<div id="ebayMessage_pop_form" title="Message" style="display:none;">
+	<form action="" method="POST" enctype="multipart/form-data" id="ebayMessage_pop_form">
+	<table id="tab_ebayMessage_pop_form" height="400px" width="100%" border="0" cellpadding="0" cellspacing="0">
+		接收人:
+		<span id='message_pop_commentingUser'></span>	    <br/>
+	    ItemID:
+	    <span id='message_pop_itemID'></span>	   <br/>
+	     SKU:
+	    <span id='message_pop_sku'> </span>
+	    <br/>
+	   	 评价内容:
+	     <span id='message_pop_commentText'></span>
+	    <br/>
+	    <span>
+	    	回复内容: <br/><textarea name="message_content" id="message_content" cols="60" rows="5"></textarea>
+	    </span>
+	    <div id="add_status">
+		    <span style="color:red;font-size:20px"><span>
+	    </div>
+	</table>
+	</form>
+</div>
+<!--弹框 END-->
+
+
+<!-- 批量reply弹框 START-->
+<div id="ebayMutilReply_pop_form" title="批量Reply" style="display:none;">
+	<form action="" method="POST" enctype="multipart/form-data" id="ebayMutilReply_pop_form">
+	<table id="tab_ebayMutilReply_pop_form" width="100%" border="0" cellpadding="0" cellspacing="0">
+	    <span>
+	    	内容:<br/> <textarea name="ebayMutilReply_content" id="ebayMutilReply_content" cols="50" rows="5"></textarea>
+	    </span>
+	    <div id="add_status">
+		    <span style="color:red;font-size:20px"><span>
+	    </div>
+	</table>
+	</form>
+</div>
+<!--弹框 END-->
+
+<!-- 批量message弹框 START-->
+<div id="ebayMutilMessage_pop_form" title="批量Message" style="display:none;">
+	<form action="" method="POST" enctype="multipart/form-data" id="ebayMutilMessage_pop_form">
+	<table id="tab_ebayMutilMessage_pop_form" width="100%" border="0" cellpadding="0" cellspacing="0">
+	    <span>
+	    	内容: <textarea name="ebayMutilMessage_content" id="ebayMutilMessage_content" cols="50" rows="10"></textarea>
+	    </span>
+	    <div id="add_status">
+		    <span style="color:red;font-size:20px"><span>
+	    </div>
+	</table>
+	</form>
+</div>
+<!--弹框 END-->
+
+<div class="bottomvar">
+    <div class="pagination" id="spage">
+        {$show_page}
+    </div>
+</div>
+{include file="footer.htm"}
+
+<script>
+{literal}
+/*//批量评论
+$('#ebayFBK_mutil_del').click(function(){
+	var bill 			= new Array;
+	$("input[name='fbkselect']").each(function(index, element) {
+		if($(this).attr("checked") == "checked") {
+
+			bill.push($(this).val());
+		}
+	 });
+	if(bill == ""){
+		alert("你没有选择任何选项!");
+		//$('#mess').html('<span style="color:red;font-size:20px">-你没有选择任何选项-<span>');
+		return false;
+	}
+	$.ajax({
+		type	: "POST",
+		dataType: "jsonp",
+		url		: 'json.php?mod=EbayFeedback&act=orderMutilDel&jsonp=1',
+		data	: {'bill':bill},
+		success	: function (msg){
+			if(msg.errCode==0){
+				alertify.success('批量删除成功');
+				window.location.reload();
+			}else{
+				alertify.error(msg.errMsg);
+			}
+		}
+
+	});
+})
+
+//条件搜索
+function ebayManageSearch() {
+     var userId,sku,latest_type,original_type,account,sort_type,ebay_start_time,ebay_end_time;
+     userId      = $.trim($('#userId').val());
+     sku         = $.trim($('#sku').val());
+     latest_type = $.trim($('#latest_type').val());
+     original_type = $.trim($('#original_type').val());
+     account     = $.trim($('#account').val());
+     sort_type   = $.trim($('#sort_type').val());
+     ebay_start_time = $.trim($('#start_time').val());
+     ebay_end_time   = $.trim($('#end_time').val());
+     var url = "index.php?mod=feedbackManage&act=ebayFeedbackManage&userId="+userId+"&sku="+sku+"&latest_type="+latest_type+"&original_type="+original_type+"&account="+account+"&sort_type="+sort_type+"&ebay_start_time="+ebay_start_time+"&ebay_end_time="+ebay_end_time;
+     window.location.href = url;
+}
+
+
+var checkSkuflag   = false;
+//全选
+function checkAllSku(){
+    if(!checkSkuflag) {
+        $("input[name='checkbox-list']").attr("checked","true");
+        checkSkuflag = true;
+    } else {
+        $("input[name='checkbox-list']").removeAttr("checked");
+        checkSkuflag = false;
+    }
+}
+
+function edit_click(id){
+	var edit 	= document.getElementById('edit_btn_'+id);
+	var save 	= document.getElementById('save_btn_'+id);
+	var cancel 	= document.getElementById('cancel_btn_'+id);
+	var note    = document.getElementById('note_txt_'+id);
+	edit.style.display 		= "none"
+	save.style.display 		= "";
+	cancel.style.display	= "";
+	note.style.display 		= "";
+}
+
+//保存feedback原因
+function save_click(id){
+	var edit 	= document.getElementById('edit_btn_'+id);
+	var save 	= document.getElementById('save_btn_'+id);
+	var cancel 	= document.getElementById('cancel_btn_'+id);
+	var note 	= document.getElementById('note_txt_'+id);
+
+	edit.style.display = "";
+	save.style.display = "none";
+	cancel.style.display = "none";
+	note.style.display = "none";
+
+	var url = 'update_feedback_note.php';
+	var text_note = document.getElementById('note_txt_'+id).value;
+	var param = 'id='+id+'&note='+text_note;
+	createXMLHttpRequest();
+	xmlHttpRequest.open("POST",url,true);
+	xmlHttpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	xmlHttpRequest.onreadystatechange = updateNote;
+	xmlHttpRequest.send(param);
+}
+function cancel_click(id){
+	var edit = document.getElementById('edit_btn_'+id);
+	var save = document.getElementById('save_btn_'+id);
+	var cancel = document.getElementById('cancel_btn_'+id);
+	var note = document.getElementById('note_txt_'+id);
+	note.value = "";
+	edit.style.display = "";
+	save.style.display = "none";
+	cancel.style.display = "none";
+	note.style.display = "none";
+}
+
+//评论
+function feedback_reply(id) {
+
+	var commentinguser = $.trim($('#hd_commentingUser'+id).val());
+	var account 	   = $.trim($('#hd_account'+id).val());
+	$('#reply_account').val(account);
+	$('#reply_userId').val(commentinguser);
+	var form = $('#ebayReply_pop_form');
+	console.log(id);
+	form.dialog({
+		width : 600,
+		height : 300,
+		modal : true,
+		autoOpen : true,
+		show : 'drop',
+		hide : 'drop',
+		buttons : {
+			'确认回复' : function() {
+				comfirmReply(id,'1');
+			},
+
+			'关闭' : function() {
+				$(this).dialog('close');
+			}
+		}
+	});
+}
+
+//批量评论
+$('#ebayFBK_mutil_reply').click(function(){
+
+	var bill 			= new Array;
+	$("input[name='fbkselect']").each(function(index, element) {
+		if($(this).attr("checked") == "checked") {
+			bill.push($(this).val());
+		}
+	});
+	if(bill == ""){
+		alert("你没有选择任何选项!");
+		//$('#mess').html('<span style="color:red;font-size:20px">-你没有选择任何选项-<span>');
+		return false;
+	}
+
+
+
+	var form = $('#ebayMutilReply_pop_form');
+	form.dialog({
+		width : 600,
+		height : 300,
+		modal : true,
+		autoOpen : true,
+		show : 'drop',
+		hide : 'drop',
+		buttons : {
+			'确认添加' : function() {
+				comfirmAdd();
+			},
+
+			'关闭' : function() {
+				$(this).dialog('close');
+			}
+		}
+	});
+
+})
+
+//回复邮件
+function feedback_message(id) {
+
+	var feedbackID 	   = $.trim($('#hd_feedbackID'+id).val());
+	var commentinguser = $.trim($('#hd_commentingUser'+id).val());
+	var transactionID  = $.trim($('#hd_transactionID'+id).val());
+	var itemID 	       = $.trim($('#hd_itemID'+id).val());
+	var commentText    = $.trim($('#hd_commentText'+id).val());
+	var sku 	       = $.trim($('#hd_sku'+id).val());
+	var account 	   = $.trim($('#hd_account'+id).val());
+	var reply_content  = $.trim($('#reply_content'+id).val());
+	$('#reply_account').val(account);
+	$('#reply_userId').val(commentinguser);
+
+	var form = $('#ebayReply_pop_form');
+	form.dialog({
+		width : 600,
+		height : 300,
+		modal : true,
+		autoOpen : true,
+		show : 'drop',
+		hide : 'drop',
+		buttons : {
+			'确认添加' : function() {
+				comfirmReply(id,'1');
+			},
+
+			'关闭' : function() {
+				$(this).dialog('close');
+			}
+		}
+	});
+}
+
+function comfirmMessage(id,type) {
+	var feedbackID 	   = $.trim($('#hd_feedbackID'+id).val());
+	var commentinguser = $.trim($('#hd_commentingUser'+id).val());
+	var transactionID  = $.trim($('#hd_transactionID'+id).val());
+	var itemID 	       = $.trim($('#hd_itemID'+id).val());
+	var commentText    = $.trim($('#hd_commentText'+id).val());
+	var sku 	       = $.trim($('#hd_sku'+id).val());
+	var account 	   = $.trim($('#hd_account'+id).val());
+	var reply_content  = $.trim($('#reply_content').val());
+
+	$.ajax({
+		type	: "POST",
+		dataType: "jsonp",
+		url		: 'json.php?mod=EbayFeedback&act=feedbackMessage&jsonp=1',
+		data	: {'feedbackID':feedbackID,'commentinguser':commentinguser,'transactionID':transactionID,'itemID':itemID,'commentText':commentText,'sku':sku,'account':account,'reply_content':reply_content},
+		success	: function (msg){
+			if(msg.errCode==0){
+				alertify.success('邮件发送成功');
+				window.location.reload();
+			}else{
+				alertify.error(msg.errMsg);
+			}
+		}
+
+	});
+}
+
+
+function comfirmReply(id,type) {
+	var feedbackID 	   = $.trim($('#hd_feedbackID'+id).val());
+	var commentinguser = $.trim($('#hd_commentingUser'+id).val());
+	var transactionID  = $.trim($('#hd_transactionID'+id).val());
+	var itemID 	       = $.trim($('#hd_itemID'+id).val());
+	var commentText    = $.trim($('#hd_commentText'+id).val());
+	var sku 	       = $.trim($('#hd_sku'+id).val());
+	var account 	   = $.trim($('#hd_account'+id).val());
+	var reply_content  = $.trim($('#reply_content').val());
+
+	$.ajax({
+		type	: "POST",
+		dataType: "jsonp",
+		url		: 'json.php?mod=EbayFeedback&act=feedbackReply&jsonp=1',
+		data	: {'feedbackID':feedbackID,'commentinguser':commentinguser,'transactionID':transactionID,'itemID':itemID,'commentText':commentText,'sku':sku,'account':account,'reply_content':reply_content},
+		success	: function (msg){
+			if(msg.errCode==0){
+				alertify.success('回复成功');
+				window.location.reload();
+			}else{
+				alertify.error(msg.errMsg);
+			}
+		}
+
+	});
+}*/
+{/literal}
+</script>

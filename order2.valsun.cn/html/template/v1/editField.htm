@@ -1,0 +1,183 @@
+<span>
+<a style="margin:0;">操&nbsp;&nbsp;作</a>
+<div id="u220" class="sub_menu" style=" z-index: 1009;">
+<!-- Unnamed (表格) -->
+<div id="u221" class="menuitem">
+{foreach item=menu2 key=mId from=$editMenu2}
+{if in_array($mId,$competence)}
+    {if $mId == 200}
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+        <!-- Unnamed () -->
+        <div id="u223" class="text" style="top: 12px; ">
+            <p id="cache4"  >
+                <span id="cache5" style="" onclick="getOrderList({$orderData.id},1)">
+                    编辑买家信息
+                </span>
+            </p>
+        </div>
+    </div>
+    {/if}
+    {if $mId == 201}
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+        <!-- Unnamed () -->
+        <div id="u223" class="text" style="top: 12px; ">
+            <p id="cache4"  >
+                <span id="cache5" style="" onclick="getOrderList({$orderData.id},2)">
+                    编辑地址信息
+                </span>
+            </p>
+        </div>
+    </div>
+    {/if}
+{if $mId == 202}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4"  >
+            <span id="cache5" style="" onclick="getOrderList({$orderData.id},3)">
+                编辑运输信息
+            </span>
+        </p>
+    </div>
+</div>
+{/if}
+{if $mId == 203}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4"  >
+            <span id="cache5" style="" onclick="getOrderList({$orderData.id},4)">
+                编辑发货信息
+            </span>
+        </p>
+    </div>
+</div>
+{/if}
+{if $mId == 204}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4"  >
+            <span id="cache5" style="" onclick="editDetail({$orderData.id},4)">
+                编辑明细
+            </span>
+        </p>
+    </div>
+</div>
+{/if}
+{if $mId == 205}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4"  >
+        <span id="cache5" style="" onclick="orderLog({$orderData.id});">
+            操作记录
+        </span>
+        </p>
+    </div>
+</div>
+{/if}
+{if $mId == 206}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4"  >
+        <span id="cache5" style="" onclick="addnote({$orderData.id});">
+            添加备注
+        </span>
+        </p>
+    </div>
+</div>
+{/if}
+{if $mId == 207}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4"  >
+        <span id="cache5" style="" onclick="resendorder({$orderData.id})">
+            复制订单
+        </span>
+        </p>
+    </div>
+</div>
+{/if}
+{if $mId == 208}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4"  >
+        <span id="cache5" style="" onclick="canceldeal({$orderData.id},3)">
+            暂不寄
+        </span>
+        </p>
+    </div>
+</div>
+
+{/if}
+{if $mId == 209}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4"  >
+        <span id="cache5" style="" onclick="canceldeal({$orderData.id},1)">
+            取消交易
+        </span>
+        </p>
+    </div>
+</div>
+{/if}
+{if $mId == 210}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4"  >
+        <span id="cache5" style="" onclick="applyRefund()">
+            Paypal退款
+        </span>
+        </p>
+    </div>
+</div>
+{/if}
+{if $mId == 211}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4"  >
+        <span id="cache5" style="" onclick="handRefund()">
+           手工退款
+        </span>
+        </p>
+    </div>
+</div>
+{/if}
+{if $mId == 212}
+<!-- Unnamed (菜单项) -->
+<div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+        <p id="cache4">
+        <span id="cache5" style="" onclick="expressDescription({$orderData.id},{$orderData.transportId});">
+            快递描述
+        </span>
+        </p>
+    </div>
+</div>
+{/if}
+
+{/if}
+{/foreach}
+</div>
+</div>
+</span>

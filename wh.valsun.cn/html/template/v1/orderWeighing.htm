@@ -1,0 +1,51 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+
+<script src="js/jSound.js"></script>
+<script src="js/sounds.js"></script>
+<script src="js/webcam.js"></script>
+<script language="javascript" src="js/orderWeighing.js"></script>
+<div class="main" style="min-height:500px">
+	<div style="font-size:30px;margin:20px auto auto 60px">发货单号：<input type="text" id="orderid" style="width:200px; height:35px;font-size:20px;"/></div>
+	<div style="height:60px;font-size:24px;margin-left:60px" id="mstatus" >
+		<span>  
+			<span id="successLog" style="color: #0F0">{$successLog}</span>
+			<span id="errorLog" style="color: #F00">{$errorLog}</span>
+		</span>
+	</div>
+	<div style="width:450px;min-height:200px;float:left;margin-left:10px" >
+		<Applet id="app" code="a.class" height=387 width=400>
+			<PARAM NAME = ARCHIVE VALUE = "comm.jar" >
+			<param name=myName value="kaka"> 
+			<param name=mySex value="mail">
+			<param name=myNum value=200630170> 
+			<param name=myAge value=22>
+		</Applet>
+	</div>
+	<div style="width:500px;min-height:100px;float:right;" >
+		<input type="hidden" name="now_time" id="now_time" value="{$time}">
+		<input name="least_scan" type="hidden" id="least_scan" value=""/>
+		<input name="now_ebayid" type="hidden" id="now_ebayid" value=""/>
+		<div id="show_picture" style="display:none;"><h2 style="color:green">最近扫描订单</h2></div><br/>
+		<div id="least_scan_id" style="float:left;">
+		</div>
+	</div>
+	<div style="width:500px;min-height:200px;float:right;" >
+		<div id="flat_order" style=" padding: 10px 10px;font-size:24px;display:none;">
+					
+			<fieldset id="flat_fieldset1" style=" float:left; margin-top:5px; padding:3px 0;"><legend>小包称重</legend>	
+						<div id="mstatus2"></div>
+						
+						<div style="margin-top:10px">
+						同步重量:
+						
+						<input name="curweight_flat" type="text" id="curweight_flat" style="width:120px; height:35px;font-size:20px;"/>
+						<!-- <input type="button" class="input_button" value="手动确认重量" onclick="flat_out()" /> -->
+						</div>
+			</fieldset>
+		</div>
+	</div>
+</div>
+
+{include file='footer.htm'}

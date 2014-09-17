@@ -1,0 +1,17 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_ajaxwraper.js"></script>
+<script type="text/javascript" src="js/ow_scanpda.js"></script>
+	<div id="mstatus" class="floatright"></div>
+	<div id="divcontent" style="">
+       <div id="" >
+       		备货单号:<input name="order" type="text" id="ebay_id" onkeydown="checkPreGoodsOrder(event)" />
+	   </div>
+	</div>
+	<div>
+	   </br>
+	   配货料号:<input id="sku" onkeydown="validateSku(event)"><br>
+	   <div id="showSkuInfo"></div><br>
+	   配货数量:<input id="skunum" onkeydown="submitNum(event)" size="6">
+	</div>
+	<div id="showMsg"></div>
+{include file="footer.htm"}

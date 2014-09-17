@@ -1,0 +1,14 @@
+{include file="header.htm"}
+
+<div onload="loaded()" id="divcontent" style="height:200px;width:225px">
+        <div id="scancontent" class="floatleft">
+            <span>  扫描条码 : </span><input name="insert_scan_data" type="text" id="insert_scan_data" onkeydown="insert_scan_data()" style="width:135px;height:20px;" class="skuinput stephere" />
+        </div>
+
+        <div class="floatleft">
+        	<div id="mstatus" class="floatright" style="height:40px;"></div>
+        </div>
+		<input type="hidden" id="scan_user" value="{$curusername}"/>
+</div>
+<script language="javascript" src="../js/pda_scanRecord.js"></script>
+{include file = "footer.htm"}

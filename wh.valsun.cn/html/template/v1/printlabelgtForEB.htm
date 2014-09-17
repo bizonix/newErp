@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+#body{
+	padding:0;
+	margin:0;}
+#main{
+	font-family:黑体;
+	font-weight:bolder;
+	height:409px;
+	width:742px;
+	position:relative;
+	left:135px;
+	top:15px;
+	}
+	#From{
+		font-size:20px;
+		height:30px;
+		width:200px;
+		position:absolute;
+		top:90px;
+		left:60px;}
+		#Departure{
+			  font-size:22px;
+		      height:40px;
+		      width:180px;
+		      position:absolute;
+		      top:80px;
+		      left:200px;}
+			  #Add{
+			  			font-size:20px;
+				  		height:60px;
+		                width:240px;
+		                position:absolute;
+		                top:120px;
+		                left:25px;}
+						#Company{
+		font-size:20px;
+		height:27px;
+		width:250px;
+		position:absolute;
+		top:215px;
+		left:45px;}
+						#Name{
+		font-size:20px;
+		height:27px;
+		width:240px;
+		position:absolute;
+		top:190px;
+		left:10px;}
+		#Sender{
+		height:60px;
+		width:200px;
+		position:absolute;
+		top:260px;
+		left:25px;}
+		#Picked{
+		font-size:25px;
+		height:60px;
+		width:150px;
+		position:absolute;
+		top:345px;
+		left:272px;}
+		#To{
+		font-size:20px;
+		height:20px;
+		width:220px;
+		position:absolute;
+		top:190px;
+		left:360px;}
+		#City{
+		font-size:20px;
+		height:30px;
+		width:120px;
+		position:absolute;
+		top:80px;
+		left:586px;}
+		#Address{
+		font-size:20px;
+		height:65px;
+		width:250px;
+		position:absolute;
+		top:120px;
+		left:350px;}
+		#Mobile{
+		font-size:20px;
+		height:20px;
+		width:220px;
+		position:absolute;
+		top:215px;
+		left:410px;}
+	#Other{
+		font-size:35px;
+		height:100px;
+		width:320px;
+		position:absolute;
+		top:260px;
+		left:390px;}
+#BarCode{
+		text-align:right;
+		height:72px;
+		width:200px;
+		position:absolute;
+		top:345px;
+		left:0px;}
+</style>
+<title>国内国通打印页面</title>
+</head>
+<body>
+{foreach $orderInfo as $value}
+<div id="main">
+<div id="From">
+赛维网络-{$value.id}
+</div>
+<div id="Departure">
+
+</div>
+<div id="Add">
+深圳市龙岗区龙岗中心城新生村仙田路53号耀安工业园2栋2楼
+</div>
+<div id="Company">
+0755-89619815
+</div>
+<div id="Name">
+李勇成
+</div>
+<div id="Sender">
+
+</div>
+<div id="Picked">
+
+</div>
+<div id="To">
+{$value.username}
+</div>
+<div id="City">
+
+</div>
+<div id="Address">
+{if strlen($value.address)> 120}
+<span style='font-size:16px'>{$value.address}</span>
+{else}
+{$value.address}
+{/if}
+</div>
+<div id="Mobile">
+{if $value.phone != ''}{$value.phone}{else}{$value.landline}{/if}
+</div>
+<div id="Other">
+
+</div>
+<div id='BarCode'>
+
+</div>
+</div>
+{if $value@total > 1 && $value@iteration != $value@total}
+<div style="page-break-after:always;">&nbsp;</div>
+{/if}
+{/foreach}
+</body>
+</html>

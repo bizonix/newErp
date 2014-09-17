@@ -1,0 +1,97 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/sampleCoefficient.js"></script>
+<div class="fourvar">
+{include file="iqcnav.htm"} 
+	            <div class="texvar">
+                
+                </div>
+                <div class="pagination">
+                </div>
+</div>
+            <div class="servar">
+<!--                <span>
+                	<input type="button" id='' style="width:100px;height:35px;font-size:20px; cursor:pointer;" value="添加系数" />
+                </span>
+                <span>
+                	<input type="button" id='' style="width:100px;height:35px;font-size:20px; cursor:pointer;" value="增加标准" />
+                </span>
+                <span>
+                	<input type="button" id='' style="width:150px;height:35px;font-size:20px; cursor:pointer;" value="增加标准详细" />
+                </span>-->
+            </div>
+            <div class="main">
+                <form id="updateSampleCoff" action="index.php?mod=sampleCoefficient&act=updateSampleCoefficient" method="post" onsubmit="return submitUpdate();">
+                	<table cellspacing="0" width="100%">
+                                	<input type="hidden" id="id" name="id" value="{$id}" readonly="readonly"/>
+                            <tr>
+        						<td>
+                                    <span>系数名称：</span>
+                                	<input type="hidden" id="cName" name="cName" value="{$cName}" readonly="readonly"/>
+                                    <span style="color: red;">{$cName}</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>样本类型：</span>
+                                	<input type="hidden" id="sampleTypeId" name="sampleTypeId" value="{$sampleTypeId}" readonly="readonly"/>
+                                    <span style="color: red;">{$sampleTypeName}</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>样本大小：</span>
+                                	<input type="hidden" id="sizeCodeId" name="sizeCodeId" value="{$sizeCodeId}" readonly="readonly"/>
+                                    <span style="color: red;">{$sizeCodeNum}</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>允收数目：</span>
+                                	<input class="validate[required,custom[integer],min[0]] text-input" id="Ac" name="Ac" value="{$Ac}"/>
+                                    <span id="AcSpan" style="color: red;">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>拒收数目：</span>
+                                	<input class="validate[required,custom[integer],min[0]] text-input" id="Re" name="Re" value="{$Re}"/>
+                                    <span id="ReSpan" style="color: red;">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>追加数目：</span>
+                                	<input class="validate[required,custom[integer],min[0]] text-input" id="Al" name="Al" value="{$Al}"/>
+                                    <span id="AlSpan" style="color: red;">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>退回抽检百分比(%)：</span>
+                                	<input class="validate[required,custom[number],min[0],max[100]] text-input" id="Rt" name="Rt" value="{$Rt}"/>
+                                    <span id="RtSpan" style="color: red;">*</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <span>是否开启：</span>
+                                	<input type="hidden" id="is_open" name="is_open" value="{$is_open}" readonly="readonly"/>
+                                    <span style="color: red;">{if $is_open == 0}否{else}是{/if}</span>
+                                </td>
+                            </tr>
+                            <tr>
+        						<td>
+                                    <input type="submit" value="提交"/>
+                                	<input type="button" id="back" value="返回"/>
+                                </td>
+                            </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

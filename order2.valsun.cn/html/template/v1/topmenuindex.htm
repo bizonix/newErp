@@ -1,0 +1,40 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/topmenu.js"></script>
+<div class="servar">
+    <span>
+        <input type="text" name="name" id="name">
+        <button  id="search">搜索</button>
+        <button  id="add">添加导航</button>
+    </span>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+            <td>编号</td>
+            <td>名称</td>
+            <td>链接地址</td>
+            <td>所属模块</td>
+            <td>位置</td>
+            <td>状态</td>
+            <td>排序</td>
+            <td>操作</td>
+        </tr>
+        {foreach $TopmenuList as $menu}
+        <tr class="odd" id="{$menu.id}">
+            <td>{$menu.id}</td>
+            <td><span>{$menu.name}</span></td>
+            <td><span>{$menu.url}</span> </td>
+            <td><span>{$menu.model}</span> </td>
+            <td>{$menu.position}</td>
+            <td>{if $menu.is_delete==0}<img src="images/right.png" width="16px" height="16px">{/if}</td>
+            <td>{$menu.sort}</td>
+            <td>
+                <button class='update' pid='{$menu.id}'>修改</button>
+                <button class='delete' pid='{$menu.id}'>删除</button>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+{include file="footer.htm"}

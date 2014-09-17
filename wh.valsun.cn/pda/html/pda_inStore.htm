@@ -1,0 +1,21 @@
+{include file="header.htm"}
+	<script language="JavaScript" src="./js/pda_com.js"></script>
+	<div id="divcontent" style="text-align:center; height:200px;">
+		<div id="indexcontent1" style="text-align:center;">
+    		<input type="button" value="常规入库" id="chukucaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?act=pda_whShelf&mod=pda_whShelf&storeId=1'" />
+    		&nbsp;
+    		<input type="button" value="包材入库" id="rukucaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?act=pda_package&mod=pda_whShelf'" />
+		 </div>
+		 <div id="indexcontent2" style="text-align:center;">
+    		<input type="button" value="盘点查询" id="pandiancaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?act=pda_inventorySearch&mod=pda_whShelf'"/>
+    		&nbsp;
+    		<input type="button" value="B仓点货入库" id="fuhecaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?act=pda_whShelf&mod=pda_whShelf&storeId=2'"/>
+		 </div>
+         <div id="indexcontent2" style="text-align:center;">
+    		<input type="button" value="关联仓位" id="pandiancaozuo" class="buttonclass2" onclick="javascript:window.location.href='index.php?act=pda_contactPosition&mod=pda_whShelf'"/>
+    		&nbsp;
+		    <input type="button" value="待开发" id="fuhecaozuo" class="buttonclass2" onclick="javascript:window.location.href='#'"/>
+		 </div>
+		
+    </div>
+{include file="footer.htm"}

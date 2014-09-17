@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{title}</title>
+                
+		<!-- Libraries -->
+		<link type="text/css" href="css/login.css" rel="stylesheet" />	
+		<!-- End of Libraries -->
+                <script language="javascript" src="js/jquery-ui/js/jquery-1.9.1.js"></script>
+                <script language="javascript" src="js/login.js"></script>
+        </head>
+	<body>
+	<div id="container">
+		<div class="logo">
+			<a href="#"><img src="images/logo.png" alt="" /></a>
+		</div>
+		<div id="box">
+                    <form onsubmit="return false;">
+			<p class="main">
+				<label>用户名: </label>
+				<input name="username" id="username" /> 
+				<label>密码: </label>
+				<input type="password" id="password" name="password" >
+			</p>
+			<p class="space">
+                            <span id="messagespan" style="padding-left: 120px;font-size:15px; color: red;" ></span>
+                            <input type="submit" value="登陆" class="login" id="loginbutton" onclick="login()" />
+			</p>
+                    </form>
+		</div>
+	</div>
+
+	</body>
+</html>

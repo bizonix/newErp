@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$title}</title>
+<script src="./public/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="./public/js/global.js" type="text/javascript"></script>
+<script type="text/javascript" src="./public/js/WdatePicker/WdatePicker.js"></script>
+
+<!-- 引入JQueryDialog -->
+<script src="./public/js/jquery-ui-1.9.2.custom.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="./public/css/ui-lightness/jquery-ui-1.9.2.custom.css" type="text/css" />
+
+<!-- notice嵌入其他系统需要引入的js和css文件 -->
+<script src="http://notice.valsun.cn/public/js/swJsNotice.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://notice.valsun.cn/public/js/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="http://notice.valsun.cn/public/css/chosen.css" type="text/css" />
+
+<script src="./public/js/self_Notice.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery.flexselect.js"></script>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/liquidmetal.js"></script>
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />	
+
+<!-- 引入弹框 start -->
+<link href="http://misc.erp.valsun.cn/css/alertify.css" rel="stylesheet" type="text/css" />
+<!-- 引入弹框 end -->
+<link rel="stylesheet" href="http://misc.erp.valsun.cn/css/flexselect.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./public/css/self_notice.css" type="text/css" media="screen" />
+</head>
+<body>
+
+<div class="container">
+<div class="content">
+
+<div class="header">
+ <a href = 'index.php?mod=user&act=userList'>
+   	<div class="logo">
+                	赛维网络
+                </div>
+</a>                
+ <div class="onevar">
+    <ul >
+   		<li id="nav-userList"><a  class = ' contacts {if in_array($smarty.get.mod,array('user')) && $smarty.get.act == 'userList' }cho {/if}' href="index.php?mod=user&act=userList">通讯录</a></li>
+   		<li id="nav-emailNoticeList"><a class = ' logging  {if  in_array($smarty.get.mod,array('notice'))} cho {/if}' href="index.php?mod=notice&act=emailNoticeList">消息记录</a></li>
+		<li>
+		<a href="index.php?mod=user&act=index" class="systemsettings {if in_array($smarty.get.mod,array('user','job','dept')) && $smarty.get.act != 'userList'}cho{/if}">系统设置</a>
+		</li>
+	</ul>
+</div><!-- 一级导航 -->
+ <div class="user">
+	 <input id='notice-search-url' type='hidden'  value='index.php?mod=noticeApi&act=searchUser'/>
+ 	<input id='swNoticeUrl' type='hidden'  value='index.php?mod=noticeApi&act=sendMessage'/>
+      <a class="news-img" href="javascript:javascript:void(0)" onclick="swntc_call('{$_username}')">消息</a>
+      <a href="javascript:void(0);" >{$_username}</a><a href="index.php?mod=public&act=logout"" style="background: none; font-size: 14px;" title="注销安全退出">退出</a>
+</div><!-- 退出和消息位置 -->
+</div><!-- header -->
+<div class="twovar {if in_array($smarty.get.mod,array('notice','user','job','dept')) && $smarty.get.act != 'userList'}  {else} nothing-twovar{/if}"><!--   二级导航 -->
+  	<ul>
+{if in_array($smarty.get.mod,array('notice'))}
+          	<li><a  {if  in_array($smarty.get.act,array('emailNoticeList','emailNoticeList_receive'))} class = 'cho' {/if} href="index.php?mod=notice&act=emailNoticeList">邮件记录</a></li>
+
+			<li ><a {if  in_array($smarty.get.act,array('smsNoticeList','smsNoticeList_receive'))} class = 'cho' {/if} href="index.php?mod=notice&act=smsNoticeList">短信记录</a></li>
+{/if}
+{if in_array($smarty.get.mod,array('user','job','dept')) && $smarty.get.act != 'userList'}
+          <li><a href="index.php?mod=user&act=index" {if $smarty.get.act =='index' && $smarty.get.mod == 'user'}class="cho"{/if}>用户管理</a></li>
+		<li><a href="index.php?mod=job&act=index" {if $smarty.get.act =='index' && $smarty.get.mod == 'job'}class="cho"{/if}>岗位管理</a></li>
+		<li><a href="index.php?mod=dept&act=index" {if $smarty.get.act =='index' && $smarty.get.mod == 'dept'}class="cho"{/if}>部门管理</a></li>
+{/if}		
+	</ul>
+</div>
+
+<div class="threevar">
+		{if $smarty.get.mod == "notice" }
+			<ul>
+			 {if $smarty.get.act=='emailNoticeList'}
+				<li><a  class="cho"  href="index.php?mod=notice&act=emailNoticeList">发送记录</a></li>
+				<li><a  href="index.php?mod=notice&act=emailNoticeList_receive">接收记录</a></li>
+			{elseif  $smarty.get.act=='emailNoticeList_receive'}
+				<li><a   href="index.php?mod=notice&act=emailNoticeList">发送记录</a></li>
+				<li><a  class="cho"  href="index.php?mod=notice&act=emailNoticeList_receive">接收记录</a></li>
+			{/if}
+			{if $smarty.get.act=='smsNoticeList'}
+				<li><a class='cho'href="index.php?mod=notice&act=smsNoticeList">发送记录</a></li>
+				<li><a  href="index.php?mod=notice&act=smsNoticeList_receive">接收记录</a></li>
+			{elseif  $smarty.get.act=='smsNoticeList_receive'}
+					<li><a href="index.php?mod=notice&act=smsNoticeList">发送记录</a></li>
+				<li><a  class='cho'  href="index.php?mod=notice&act=smsNoticeList_receive">接收记录</a></li>
+			{/if}
+			</ul>
+		{/if}
+</div>
+<!-- 引入弹框 start -->
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/alertify.js"></script>
+<!-- 引入弹框 end -->

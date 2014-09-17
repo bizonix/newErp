@@ -1,0 +1,40 @@
+{include file="header.htm"}
+<script language="javascript" src="./js/pda_orderPartion.js"></script>
+<div id="divcontent" style="height:200px;width:225px">
+	<div id="" style="width:220px;height:50px;">
+		发货单号：&nbsp;<input type="text" class="textinput" name="orderid"  id="orderid" onkeydown="checkinput()" value=""/> 
+
+	</div>
+	<div id="message" style="font-size:12px;clear:both;margin-left:10px">
+		<span id="successLog" style="color: #0F0">{$successLog}</span>
+		<span id="errorLog" style="color: #F00">{$errorLog}</span>
+	</div>
+	{if isset($partion)}
+	5555
+	<table id="checkinfo" cellpadding='0' cellspacing='0' style="TABLE-LAYOUT: fixed;font-size:14px;border-collapse:collapse; margin:5px auto;" class='list view' border="1px" >
+	    <tr>
+			<td scope='col' width="36%" height="40px">分区</td>
+			<td scope='col' width="24%">总重量（kg）</td>
+			<td scope='col' width="20%">总数量</td>
+			<td scope='col' width="20%">操作</td>		
+	    </tr>
+		{foreach from=$lists key=key_id item=list}
+		<tr  class='oddListRowS1'>
+			<td align='left' width="36%" style='WORD-WRAP: break-word;color:red;font-weight:bold;' valign='top'>{$list.partion}</td>
+			<td align='left' width="24%" style='WORD-WRAP: break-word' valign='top'>{number_format($list.totalWeight/1000,3,'.','')}</td>
+			<td align='left' width="20%" style='WORD-WRAP: break-word' valign='top'>{$list.totalNum}</td>
+			<td align='left' width="20%" style='WORD-WRAP: break-word' valign='top'><input type="button" style="margin:0px 0px;font-size:14px" id="" name="pack" value="打包" onclick="pack()"/></td>
+		</tr>
+		{/foreach}
+	</table>
+	{/if}
+	<div id="packdiv" style="display:none;margin-top:10px;">
+		<select id="partionuser">
+			{foreach from=$partionuser key=key_id item=list}
+			<option {if isset($partion) && $partion==$list.partion}selected{/if} value="{$list.partion}">{$list.partion}</option>
+			{/foreach}
+		</select>
+		<input id="packageid" name="packageid" class="textinput" onkeydown="scan_packageid()"/>
+	</div>
+</div>
+{include file="footer.htm"}

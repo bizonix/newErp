@@ -1,0 +1,74 @@
+{include file="header.html"}
+<script type="text/javascript" src="./js/iqcsku.js"></script>
+<div class="fourvar">
+            	{include file="iqcnav.html"}
+                <div class="pagination" id="fpage">
+                	{$show_page}
+                </div>
+            </div>
+            <div class="servar">
+            	<span>
+                	批量搜索：<input type="text" id="nowdsku" value="{$sku}" style="width:150px;height:30px;font-size:20px;" onkeydown="scanSku()"/>
+                </span>
+                <span>
+					<button  id='serchsku' value="" />搜索</button>
+				</span>
+                <span>
+					<button  id='getsku' value="" />领取</button>
+			   </span>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>
+                	<button  id='del' value="" />异常删除</button>
+			   </span>
+			   <br>
+			   <div id="mess"></div>
+            </div>
+            <div class="main">
+			<input type="hidden" id="havesku" value="">
+				<table cellspacing="0" width="100%" id="scantable" style="display:none">
+                	<tr class="title">
+                    	<td><input type="checkbox" class="checkall" /></td>
+                        <td>料号</td>
+						<td>到货数</td>
+						<td>录入时间</td>
+						<td>打印人员</td>
+						<td>描 述</td>
+						<td>采 购</td>
+						<td>仓 位</td>
+						<td>IQC领货人</td>
+                    </tr>
+					<tr><td id="addrow" colspan="9"></td></tr> 
+				</table>
+            	<table cellspacing="0" width="100%" id="nowtable">
+                	<tr class="title">
+                    	<td><input type="checkbox" class="checkall" /></td>
+                        <td>料号</td>
+						<td>到货数</td>
+						<td>录入时间</td>
+						<td>打印人员</td>
+						<td>描 述</td>
+						<td>采 购</td>
+						<td>仓 位</td>
+						<td>IQC领货人</td>
+                    </tr>
+					{foreach from=$iqcList item=list}
+                    <tr class="odd">
+                            <td><input type="checkbox" class="iqcselect" name="iqcselect" value="{$list.id}"/></td>
+                            <td>{$list.sku}</td>
+                            <td>{$list.num}</td>
+                            <td>{$list.printTime|date_format:"%Y-%m-%d %H-%M-%S"}</td>
+                            <td>{$list.printerId}</td>
+                            <td></td>
+                            <td>{$list.purchaseId}</td>
+                            <td></td>
+                            <td></td>
+                    </tr>
+					{/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="pagination" id="spage">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.html"}

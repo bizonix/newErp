@@ -1,0 +1,176 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+        您的位置：<a href="index.php?mod=partner&act=index">供应商管理</a>>>优质供应商管理
+    </div>
+    <div class="pagination">
+    	{$pageIndex}
+	</div>
+</div>
+<div class="servar products-servar">
+	<span>
+    	关键字：<input name="" type="text" id="keyword" value="{$keyword}"/>
+    </span>
+    <span>
+    	类型：
+    <select name=states id="type">
+        {html_options values=$option_values selected=$option_selected output=$option_output}
+    </select>
+    </span>
+    <span>
+    	<a href="javascript:void(0)" id="button_search" >搜索</a>
+    </span>
+    <span>
+    	<a href="javascript:void(0)" id="button_moveout" >移出优质供应商</a>
+    </span>
+    <span>
+    	<a href="javascript:void(0)" id="button_moveinBlack" >加入黑名单</a>
+    </span>
+</div>
+<div class="main main-in">
+	<table cellspacing="0" width="100%" border="0" style="table-layout: fixed;word-wrap: break-word;">
+    	<tr class="title purchase-title">
+        	<td><input type="checkbox" id="checkAll" value=""></td>
+            <td width= '20%'>公司名称</td>
+            <td>店铺链接</td>
+            <td >公司类型</td>
+            <td >联系人</td>
+            <td >状态</td>
+            <td >座机</td>
+            <td >手机</td>
+            <td >采购员</td>
+            <!--td>单位名称</td>
+            <td>单位类型</td>
+            <td>姓名</td>
+            <td>状态</td>
+            <td>电话</td>
+            <td>移动电话</td>
+            <td>传真</td>
+            <td>QQ</td>
+            <td>阿里旺旺</td>
+            <td>电子邮件</td>
+            <td>店铺链接</td>
+            <td>客户地址</td>
+            <td>所属城市</td>
+            <td>支持邮件</td>
+            <td>支持短信</td>
+            <td>采购员</td>
+            <td>备注</td>
+            <td>关联公司</td-->
+        </tr>
+        {foreach name=outer item=userList from=$userLists}
+        <tr>
+            <td><input name="checkbox-list" type="checkbox" value="{$userList.id}" /></td>
+            <td name="changeLine">{$userList.company_name}</td>
+            <td style="cursor:pointer;" onClick="openUrl('{$userList.shoplink}');" >{$userList.shoplink}</td>
+            <td>{$userList.category_name}</td>
+            <td>{$userList.username}</td>
+            <td>{$userList.status}</td>
+            <td>{$userList.tel}</td>
+            <td>{$userList.phone}</td>
+            <td>{$userList.purchaser}</td>
+
+            <!--td>{$userList.company_name}</td>
+            <td>{$userList.category_name}</td>
+            <td>{$userList.username}</td>
+            <td>{$userList.status}</td>
+            <td>{$userList.tel}</td>
+            <td>{$userList.phone}</td>
+            <td><div style="overflow:hidden;white-space:nowrap;word-break:keep-all;">{$userList.fax}</div></td>
+            <td>{$userList.QQ}</td>
+            <td>{$userList.AliIM}</td>
+            <td>{$userList.e_mail}</td>
+            <td>{$userList.shoplink}</td>
+            <td>{$userList.address}</td>
+            <td>{$userList.city}</td>
+            <td>{$userList.email_status}</td>
+            <td>{$userList.sms_status}</td>
+            <td>{$userList.purchaser}</td>
+            <td>{$userList.note}</td>
+            <td>{$userList.company}</td-->
+        </tr>
+        {/foreach}
+    </table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+        {$pageIndex}
+	</div>
+</div>
+{include file="footer.htm"}
+<script>
+var web_api = "{$WEB_API}";
+{literal}
+
+$('#checkAll').click(function(){
+  select_all('checkAll','input[name="checkbox-list"]',0);
+});
+
+$('#button_search').click(function(e){
+    e.preventDefault();
+	var type = $.trim($('#type').val());
+	var keyword  = $.trim($('#keyword').val());
+    var url = "index.php?mod=partner&act=whiteList&type="+type+"&keyword="+keyword;
+    window.location.href = url;
+});
+
+$('#button_moveout').click(function(e){
+	e.preventDefault();
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	if(checkBoxArr.length==0){
+	    alertify.alert('请选择要操作的项！');
+		return false;
+	}
+	if(!confirm('确定移出优质供应商吗？')){
+		return false;
+    };
+	idArr=[];
+	checkBoxArr.each(function(i){
+		idArr.push($(this).val());
+	});
+    var url  = web_api+"json.php?mod=partner&act=moveOutWhiteList";
+    $.post(url, {"idArr":idArr}, function(rtn) {
+        console.log(rtn);
+        if(rtn.errCode == 0) {
+            window.location.reload();
+        } else {
+            alertify.alert(rtn.errMsg);
+        }
+     },"jsonp");
+});
+
+$('#button_moveinBlack').click(function(e){
+	e.preventDefault();
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	if(checkBoxArr.length==0){
+	    alertify.alert('请选择要操作的项！');
+		return false;
+	}
+	if(!confirm('确定移入黑名单吗？')){
+		return false;
+    };
+	idArr=[];
+	checkBoxArr.each(function(i){
+		idArr.push($(this).val());
+	});
+    var url  = web_api+"json.php?mod=partner&act=moveinBlackList";
+    $.post(url, {"idArr":idArr}, function(rtn) {
+        console.log(rtn);
+        if(rtn.errCode == 0) {
+            window.location.reload();
+        } else {
+            alertify.alert(rtn.errMsg);
+        }
+     },"jsonp");
+});
+
+function openUrl(url){
+	if(url == ''){
+		return false;
+	}
+    window.open(url);
+}
+
+{/literal}
+</script>
+

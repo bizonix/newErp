@@ -1,0 +1,40 @@
+﻿{header}
+<link rel="stylesheet" href="css/transportlist.css">
+{navdiv}
+
+<div class="miancontainer ">
+    <table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                    <tr>
+                            <td><input type="checkbox" class="checkall" /></td>
+                            <td>运输方式名称</td>
+                            <td>渠道名称</td>
+                            <td>折扣</td>
+                            <td>是否启用</td>
+							<td>运费价目表</td>
+							<td>拣货分区列表</td>
+                            <td>编辑</td>
+                    </tr>
+            </thead>
+            <tbody>
+            	<!-- BEGIN list -->
+                    <tr class="odd">
+                            <td><input type="checkbox" name="ckbs" value="{id}"/></td>
+                            <td>{carrierName}</td>
+                            <td>{channelName}</td>
+                            <td>{discount}</td>
+                            <td>{enable}</td>
+							<td><a href="index.php?mod=shipfee&act={channelAlias}&channelName={channelName}&channelId={id}&carrierId={carrierId}&carrierName={carrierName}">运费价目表</a></td>
+                            <td><a href="index.php?mod=partitionManage&act=partition&channelId={id}&carrierId={carrierId}&carrierName={carrierName}">拣货分区列表</a></td>
+							<td><a href="index.php?mod=channelsManage&act=channelModify&id={id}&carrierId={carrierId}&carrierName={carrierName}">编辑</a></td>
+                    </tr>
+                <!-- END list -->
+            </tbody>
+			<tfoot>
+			    <tr><td>
+			    <a href="index.php?mod=channelsManage&act=addNewChannel&carrierName={carrierName}" id="addNewChannel">添加新渠道</a>
+				</td></tr>
+			</tfoot>
+    </table>
+</div>
+{footer}

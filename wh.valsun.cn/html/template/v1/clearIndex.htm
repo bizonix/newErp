@@ -1,0 +1,29 @@
+{include file='header.htm'}
+
+{include file='goodsoutnav.htm'}
+<!--script type="text/javascript" src="http://misc.erp.valsun.cn/js/global.js"--></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="./js/fancybox.js"></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script type="text/javascript" src="./js/ui/jquery-ui.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+    <div id="mess"><span style="color:red;font-size:20px">{$msg}<span></div>
+	<div class="fourvar order-fourvar feedback-fourvar products-servar wh-fourvar" style="border-radius: 12px;">
+		<form action="/index.php?mod=clearSkuLocation&act=clearSkuPost" method="post">
+            <span>请在下面输入框中输入料号，多个料号请用换行隔开:</span>
+            <br /><br />
+            <textarea name="skus" style="width: 40%; height:400px;border-radius: 12px;">
+            
+            </textarea>
+            <input style="width:150px; height:30px; background-color: #9760b3; background-position: 0 0; border-radius: 4px;" type="submit" value="提交"/>
+        </form>
+	</div>
+</div>
+<p id="back-top">
+    <a href="#toppage"><span></span>Back to Top</a>
+</p>
+<script type="text/javascript" src="js/clearSku.js"></script>
+{include file='footer.htm'}

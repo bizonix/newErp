@@ -1,0 +1,55 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+            <div class="servar products-servar">
+                <span>SPU：
+			   <input name="spu" type="text" id="spu" value="{$smarty.get.spu}" style="width: 120px;"/>
+			   </span>
+                <span><button id='seachSpuOverseaTaxList'>搜索</button></span>
+            </div>
+            <div class="main feedback-main firefox-table">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <td>SPU</td>
+    					<td>US关税(%)</td>
+    					<td>操作</td>
+                    </tr>
+                    {foreach $spuList as $value}
+                                <tr>
+                                    <td><a href="index.php?mod=goods&act=getGoodsList&seachdata={$value['spu']}&searchs=1" target="_blank">{$value['spu']}</a></td>
+                                    <td>{$value['USTax']}</td>
+                                    <td></td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachSpuOverseaTaxList').click();
+			}
+        });
+        $(function(){
+            $('#seachSpuOverseaTaxList').click(function(){
+                spu = $('#spu').val();
+                location.href = "index.php?mod=goods&act=getOverseaTaxList&spu="+spu;
+            });
+        });
+</script>

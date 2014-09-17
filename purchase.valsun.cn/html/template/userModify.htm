@@ -1,0 +1,200 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=user&act=index">用户信息管理</a>&nbsp;&gt;&gt;&nbsp;用户编辑
+    </div>     
+    </div>          
+    <div class="main underline-main">
+    <h1>修改用户资料</h1>
+    <form id="form" action="index.php?mod=user&act=update" method="post" onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+                <td align="right" width="11%">姓名：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="username" id="username" value="{$modifyuser.user_name}"/>
+                  <span class="red">*</span>
+                </td>
+              <td align="right" width="13%">密码：</td>
+                <td width="49%" align="left">
+                <input type="password" name="password" id="password" value=""/>
+                <span style="color:red;">密码为空，则不修改密码</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" width="11%">工号：</td>
+                <td align="left">
+                    <input type="text" name="jobno" id="jobno" value="{$modifyuser.user_job_no}"/>
+                </td>
+              <td align="right">联系电话：</td>
+                <td align="left">
+                    <input type="text" name="phone" id="phone" value="{$modifyuser.user_phone}" maxlength="20"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">Email：</td>
+                <td colspan="3" align="left">
+                    <input type="text" name="email" id="email" value="{$modifyuser.user_email}" size="35" maxlength="80"/>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">是否独立权限：</td>
+                <td align="left">
+                    <label><input name="user_independence" type="radio" value="1"{if $modifyuser.user_independence=='1'} checked{/if}/>独立</label>
+                    <label><input name="user_independence" type="radio" value="0"{if $modifyuser.user_independence=='0'} checked{/if}/>共享</label>
+                <span class="red">*</span>
+                </td>
+              <td align="right" width="13%">用户状态：</td>
+                <td align="left">
+                    <label><input name="user_status" type="radio" value="1"{if $modifyuser.user_status=='1'} checked{/if}/>有效</label>
+                    <label><input name="user_status" type="radio" value="0"{if $modifyuser.user_status=='0'} checked{/if}/>无效</label>
+                <span class="red">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">所属岗位权限：</td>
+                <td align="left">
+                <select name="userjob" id="userjob">
+                    <option value=""> 请选择岗位 </option>
+                    {foreach item=joblist from=$joblists}
+                    <option value="{$joblist.jobpower_id}|{$joblist.job_id}|{$joblist.job_path}" {if $joblist.job_id==$modifyuser.user_job}selected="selected"{/if}>{$joblist.job_name}</option>
+                    {foreachelse}
+                    <option value="" selected="selected"> 无岗位权限 </option>
+                    {/foreach}
+                </select>
+                <span class="red">*</span>
+                </td>
+              <td align="right">所属部门：</td>
+                <td align="left">                
+                <select name="userdept" id="userdept">
+                    <option value=""> 请选择部门 </option>
+                    {foreach item=deptlist from=$deptlists}
+                    <option value="{$deptlist.dept_id}" {if $deptlist.dept_id==$modifyuser.user_dept}selected="selected"{/if}>{$deptlist.dept_name}</option>
+                    {foreachelse}
+                    <option value=""> 无岗位权限 </option>
+                    {/foreach}
+                </select>
+                <span class="red">*</span>
+                </td>
+            </tr>
+             <tr>
+                <td align="right">Token授权日期：</td>
+                <td align="left">
+                <input name="grantDate" readonly="true" id="grantDate" size="20" onclick="WdatePicker()" type="text" value="{$modifyuser.user_token_grant_date|date_format:'Y-m-d'}"/>
+                <span class="red">*</span>
+                </td>
+               <td align="right">Token有效天数：</td>
+                <td align="left">
+                <input name="effectiveDate" id="effectiveDate" size="20" type="text" value="{$modifyuser.user_token_effective_date}"/>
+                <span class="red">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">用户token：</td>
+                <td align="left">
+                <input name="userToken" id="userToken" disabled="disabled" value="{$modifyuser.user_token}" size="35" maxlength="32"/>
+                <span style="color:red;">不可编辑</span>
+                </td>
+              <td align="right">用户注册时间：</td>
+                <td align="left">
+                <input type="text" disabled="disabled" value="{$modifyuser.user_register_time|date_format:'Y-m-d'}"  size="20"/>
+                <span style="color:red;">不可编辑</span></td>
+            </tr>                
+            <tr>            	
+                <td colspan="4">                
+                <table width="100%" height="100%" border="0" class="action">
+                    <tr>
+                        <td align="center" width="10%">ActionGroup</td><td align="center">Action</td>
+                    </tr>
+                    {foreach item=_actlist key=groupname from=$basepowers}
+                    <tr>
+                        <td align="left">
+                        <label title="{$groupname}"><input id="ActionGroup" type="checkbox" value="{$groupname}" style="vertical-align:middle"/>{$_actlist.groupdesc}<br/>{$groupname}</label></td>
+                        <td align="left">
+							{foreach item=actlist from=$_actlist.action}
+                       	  <label title="{$actlist.actionname}"><input type="checkbox" id="action" {if $actlist.actioncheck=='1'}checked{/if} style="vertical-align:middle" name="{$groupname}[]" value="{$actlist.actionname}"/>{$actlist.actionname}({$actlist.actiondesc})</label>
+                            {/foreach}
+                      </td>
+                  </tr>
+                    {foreachelse}
+                   <tr><td colspan=2>you can't modify the permissions!</td></tr>
+                    {/foreach}
+                </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center">
+					<input type="hidden" value="{$modifyuser.user_token}" name="usertoken" id="usertoken"/>
+                    <button name="button" type="submit" id="submit-btn"/>提 交</button>
+                    <button name="button" type="button" id="bottom" onclick="location.href='index.php?mod=user&act=index'"/>返 回</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    </div>
+    <div class="bottomvar"></div>
+</div>
+{include file="footer.htm"}
+<script>
+{literal}
+function check(){
+    var username,password,jobno,phone,email,independence,stat,userjob,userdept,grantDate,effectiveDate;
+	username = $.trim($("#username").val());
+    password = $.trim($("#password").val());
+    jobno 	 = $.trim($("#jobno").val());
+    phone	 = $.trim($("#phone").val());
+    email	 = $.trim($("#email").val());
+    independence 	= $('input[name="user_independence"]:checked').val();
+    stat	 = $('input[name="user_status"]:checked').val();
+    userjob	 = $.trim($("#userjob").val());
+    userdept = $.trim($("#userdept").val());
+    grantDate		= $.trim($("#grantDate").val());
+    effectiveDate	= $.trim($("#effectiveDate").val());
+    userToken		= $.trim($("#userToken").val());
+
+	if(username == ''){
+		alertify.error("亲,用户名不能为空!");
+		$("#username").focus();
+		return false;
+	}
+	if(userjob == ''){
+		alertify.error("亲,所属岗位不能为空!");
+		$("#userjob").focus();
+		return false;
+	}
+	if(userdept == ''){
+		alertify.error("亲,所属部门不能为空!");
+		$("#userdept").focus();
+		return false;
+	}	
+	if(grantDate == ''){
+		alertify.error("亲,Token授权日期不能为空!");
+		$("#grantDate").focus();
+		return false;
+	}
+	if(effectiveDate == ''){
+		alertify.error("亲,Token有效天数不能为空!");
+		$("#effectiveDate").focus();
+		return false;
+	}
+	return true;
+}
+{/literal}
+$(document).ready( function() { 
+  $("#ActionGroup").live('click',function(){
+	  if($(this).attr("checked"))
+	  {
+		$(this).parent().parent().nextAll().find('input').attr('checked','checked');
+	  }else
+	  {
+		  $(this).parent().parent().nextAll().find('input').removeAttr("checked");
+	  }
+  });  
+  
+  $("#action").live('click',function(){
+	  if(!$(this).attr("checked"))
+	  {
+		$(this).parent().parent().prevAll().find('input').removeAttr("checked");
+	  }
+  });	
+});
+</script>

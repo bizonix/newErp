@@ -1,0 +1,184 @@
+{include file="header.htm"}
+<div class="fourvar">
+            	<div class="pathvar">
+                	{$your_position}{$first_position}{$second_position}
+                </div>               
+            </div>
+            <div class="servar">
+            	<span>
+                	{$key_value}：<input name="" type="text" id="keyword" value="{$keyword}"/>
+                </span>
+                <span>
+                	{$select_type}：                           
+                <select name=states id="type">
+                    {html_options values=$option_values selected=$option_selected output=$option_output}
+                </select>
+
+                </span>      
+                <span>
+                	<a href="javascript:void(0)" id="button_search" >{$button_search}</a>
+                </span>               
+                <span>
+                	<a href="javascript:void(0)" id="button_export" >{$button_export}</a>
+                </span>      
+            </div>
+            <div class="main underline-main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<!--td><input type="checkbox" id="checkAll" value="">{*$select_all*}</td-->                        
+                        {foreach key=key item=item from=$tableHeads}   
+                            <td>{$item}</td>   
+                        {/foreach}
+                    </tr>
+                        
+                    <tr>
+                    	<!--td>
+                        	<input name="checkbox-list" type="checkbox" value="{$userList[index1].id}" />
+                        </td-->                       
+                        
+                        {foreach key=key item=item from=$tableDatas}   
+                            <td>{$item}</td>   
+                        {/foreach}
+                        
+                        <td>
+                        	<a href="index.php?mod=partner&act=editPartner&id={$userList[index1].id}">{$button_edit}</a>
+                        </td>
+                    </tr>
+                                    
+                </table>
+            </div>
+            <div class="bottomvar">            
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+  display: none;
+}
+
+</style>
+                  
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript" src="./public/js/d3.v3.min.js"></script>
+<script>
+var web_api             = {$WEB_API};
+var operate_failed_msg  = {$operate_failed_msg};
+var select_item         = {$select_item};
+var operate_failed_msg  = {$operate_failed_msg};
+var operate_success     = {$operate_success};
+
+{literal} 
+
+/***** start for lib d3.js *******/
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var formatPercent = d3.format(".0%");
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickFormat(formatPercent);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.tsv("data.tsv", type, function(error, data) {
+  x.domain(data.map(function(d) { return d.letter; }));
+  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis)
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Frequency");
+
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.letter); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.frequency); })
+      .attr("height", function(d) { return height - y(d.frequency); });
+
+});
+
+function type(d) {
+  d.frequency = +d.frequency;
+  return d;
+}
+/***** end for lib d3.js *******/
+
+
+$('#checkAll').click(function(){
+  select_all('checkAll','input[name="checkbox-list"]',0);
+});
+
+$('#button_search').click(function(e){
+    e.preventDefault();        
+	var type = $.trim($('#type').val());
+	var keyword  = $.trim($('#keyword').val());	
+    var url = "index.php?mod=partner&act=index&type="+type+"&keyword="+keyword;
+    window.location.href = url;
+});
+
+
+$('#button_export').click(function(e){
+	e.preventDefault();        
+    var checkBoxArr=$("[name='checkbox-list']:checked");
+	if(checkBoxArr.length==0) {		   
+        //alertify.alert('如果您不选择供应商，将会导出所有供应商数据！');	
+	}    
+	idArr=[];
+	checkBoxArr.each(function(i){
+		idArr.push($(this).val());        
+	});
+   	url	 = "index.php?mod=partner&act=export&idArr="+idArr;
+	window.open(url);
+    
+});
+
+
+{/literal}
+</script>
+
+            

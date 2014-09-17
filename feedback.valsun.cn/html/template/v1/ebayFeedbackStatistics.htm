@@ -1,0 +1,138 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/ui/jquery-ui-timepicker-addon.js"></script>
+<!--script type="text/javascript" src="./js/fbkList.js"></script-->
+<script type="text/javascript" src="./js/ebayFeedbackManage.js"></script>
+
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=feedback&act=ebayFeedbackManage">卖家评价</a>&nbsp;&gt;&gt;&nbsp;Feedback管理
+    </div>
+    <div class="pagination" id="fpage">
+        {$show_page}
+    </div>
+</div>
+<div class="servar">    
+    <span>
+        UserID: <input name="userId" id="userId" type="text"  value="{$userId}" />
+    </span>
+    <span>
+        SKU: <input name="sku" id="sku" type="text"  value="{$sku}" />
+    </span>
+    <span>
+    最终评价类型:
+      <select name="latest_type" id="latest_type">
+        <option value="" {if $latest_type == ''} selected="selected"{/if}>请选择</option>
+        <option value="Positive" {if $latest_type == 'Positive'} selected="selected"{/if}>Positive</option>
+        <option value="Neutral" {if $latest_type == 'Neutral'} selected="selected"{/if}>Neutral</option>
+        <option value="Negative"{if $latest_type == 'Negative'} selected="selected"{/if}>Negative</option>
+      </select> 
+    </span>
+    <span>
+        原始评价类型:
+        <select name="original_type" id="original_type">
+            <option value="" {if $original_type == ''} selected="selected"{/if}>请选择</option>
+            <option value="Neutral" {if $original_type == 'Neutral'} selected="selected"{/if}>Neutral</option>
+            <option value="Negative" {if $original_type == 'Negative'} selected="selected"{/if}>Negative</option>
+        </select> 
+    </span>
+    <span>
+        账号：
+        <select name="account" id="account">
+            <option value="" {if $account == 0} selected="selected"{/if} >无</option>
+            {foreach from=$accountList item=templist}
+            <option {if $account == $templist.account} selected="selected"{/if} value="{$templist.account}" >{$templist.account}</option>
+            {/foreach}
+        </select> 
+    </span>
+    <br/>
+    <span>
+        排序方式:
+        <select name="sort_type" id="sort_type">
+             <!--option value="">无</option-->
+             <option value="1" {if $sort_type == '1'} selected="selected"{/if}>评价时间降序</option>
+             <option value="2" {if $sort_type == '2'} selected="selected"{/if}> 评价时间升序</option>
+        </select> 
+    </span>
+    <span>         
+        时间:
+        <input name="ebay_start_time" id="ebay_start_time" type="text" value="{$ebay_start_time}"/>-<input name="ebay_end_time" id="ebay_end_time" type="text" value="{$ebay_end_time}" />        
+    </span>
+
+    <span>
+        <button  id='ebayFBK_serch_btn' value="" />搜索</button>
+    </span>
+    <br/> 
+
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+<input type="hidden" id="havesku" value="">  
+    <table cellspacing="0" width="100%" id="nowtable" style="color:#000">
+        <tr class="title" style="font-weight:bold;">
+            <td><input type="checkbox" class="checkall" /></td>
+            <td>编号</td>
+            <td>eBay帐号</td>
+            <td>SKU</td>
+            <td>数量</td>
+            <td>原因</td> 
+            <td>操作</td>
+            <td>Feedback</td>   
+            <td>From</td>  
+            <td>Price</td>  
+            <td>Date/Time</td>  
+            <td>原始评价</td>  
+            <td>最终评价</td>
+        </tr>
+        {foreach from=$fbkList item=list}
+        <tr class="odd">
+            <td><input type="checkbox" class="iqcselect" name="fbkselect" value="{$list.id}" account="{$list.account}" recordnumber="{$list.recordNumber}"/></td>
+            <td>{$list.FeedbackID}</td>
+            <td>{$list.account}</td>
+            <td>{$list.sku}</td>
+            <td>{$list.Qty}</td>
+            <td>{$list.feedback_note}</td>                                                            
+            <td>
+                <input name="button" type="button" id="btn_edit{$list.id}" onclick="edit_click('{$list.id}');" value="Edit" size="8"/>
+                <input type="button" size="8" value="Save" id="btn_save{$list.id}" style="display:none" onclick="save_click('{$list.id}');"/>
+                <input type="button" size="8" value="Cancel" id="btn_cancel{$list.id}" style="display:none" onclick="cancel_click('{$list.id}');"/>           
+            </td>
+            <td>{$list.CommentText}</td>                            
+            <td>
+                <input type="hidden" id="hd_itemID{$list.id}"  value="{$list.id}" /> 
+                <input type="hidden" id="hd_commentingUser{$list.id}" value="{$list.CommentingUser}" />        
+                <input type="hidden" id="hd_transactionID{$list.id}" value="{$list.TransactionID}" /><br/>
+                <input type="button" value="Reply" id="btn_feedback" onclick="Reply_feedback({$list.id})" {if $list.TransactionID !=''} disabled="disabled"{/if}/>
+                <input type="button" value="Message" id="btn_message" onclick="Reply_message({$list.id})"/>
+            </td>
+            <td>{$list.ItemPrice*$list.Qty}</td> 
+            <td>{($list.feedbacktime+15*3600)|date_format:"%Y-%m-%d %H:%M:%S"}
+            <br>            
+            <a href="http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&item={$list.ItemID}" target="_blank">View Item</a>
+            </td>
+            <td>               
+                {if $list.status != "0"}                 
+                    {if in_array($list.status,array("31","32","33"))}                
+                    <img src="images/iconNegative_16x16.gif" width="16" height="16">
+                    {elseif in_array($list.status,array("21","23","22"))}                   
+                    <img src="images/iconNeutral_16x16.gif" width="16" height="16">
+                    {/if}
+                {else}               
+                <img src="images/icon{$list.CommentType}_16x16.gif" width="16" height="16">
+                {/if}
+            </td> 
+            <td><img src="images/icon{$list.CommentType}_16x16.gif" width="16" height="16"></td>
+        </tr>
+        {foreachelse}
+        <tr class="odd">
+            <td colspan="8">没有搜索到任何记录！</td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination" id="spage">
+        {$show_page}
+    </div>
+</div>
+{include file="footer.htm"}

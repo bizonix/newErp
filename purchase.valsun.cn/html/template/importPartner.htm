@@ -1,0 +1,36 @@
+{include file="header.htm"}
+<div class="fourvar">
+            	<div class="pathvar">                
+                    您的位置：<a href="index.php?mod=partner&act=index">供应商管理</a>>>导入供应商信息
+                </div>     
+            </div>            
+             <div class="servar products-servar">     
+                
+                <span>
+                    <form action="index.php?mod=partner&act=importSave" enctype="multipart/form-data" method="post" target="_blank">
+                    <table border="0" cellpadding="3" cellspacing="1" bgcolor="#c0ccdd" id="content">
+                    <tr>
+                        <td>上传文件:</td>
+                        <td><input name="upfile" type="file" class="button"  size=35/>&nbsp;</td>
+                        <td><input name="提交" type="submit" class="button" value="更新" />&nbsp;</td>
+                        <td>
+                            <a href="upload/PartnerInfo.xls">导入模板下载</a> 
+                                                   
+                        </td>
+                    </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <br />
+                    <strong>以上列中，如果指定列无数据，指定列将不会更新，如果有数据，指定列将被更新成功。</strong><br />
+                    <br />
+                    </form> 
+                </span>    
+                
+            </div>                
+            <div class="main underline-main">
+            </div>
+            <div class="bottomvar"> 
+            </div>
+{include file="footer.htm"}
+            

@@ -1,0 +1,66 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/products.js"></script>
+<div class="fourvar">
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar">                               
+            					   <span>虚拟SPU：
+								   <textarea id="combineSpu" style="width: 250px;margin-bottom: -13px;margin-top: -15px;" rows="2" name="sku">{$smarty.get.combineSpu}</textarea>
+                                   </span>
+                                   <span><button id='seachProductsCombineSpuCompleteList'>搜索</button></span>
+                                   &nbsp;
+                                   <!-- TODO: <span><button id="syncCache">更新</button></span> -->
+			<span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <td align="left"><input type="checkbox" id="selectAll" /></td>
+                        <td align="left">SPU</td>
+						<td align="left">申请人</td>
+                        <td align="left">指派人</td>
+                        <td align="left">指派时间</td>
+                        <td align="left">领取时间</td>
+                        <td align="left">制作完成时间</td>					                       
+                    </tr>
+                    {foreach $productsCombineSpuList as $value}
+                                <tr>
+                                    <td align="left">{if $smarty.session.userId == $value['webMakerId']}<input type="checkbox" name="selectSing" value="{$value['id']}"/>{/if}</td>
+                                    <td align="left"><a href="index.php?mod=goods&act=getCombineList&searchComField=1&fieldValue={$value['spu']}" target="_blank">{$value['spu']}</a></td>
+                                    <td align="left">{getPersonNameById($value['purchaseId'])}</td>
+                                    <td align="left">{getPersonNameById($value['webMakerId'])}</td>
+                                    <td align="left">{if !empty($value['addTime'])}{$value['addTime']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                                    <td align="left">{if !empty($value['takeTime'])}{$value['takeTime']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                                    <td align="left">{if !empty($value['completeTime'])}{$value['completeTime']|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+
+<script type="text/javascript">
+		$(document).ready(function() {
+          
+            $("#seachProductsCombineSpuCompleteList").click(function(){
+                var combineSpu = $("#combineSpu").val();
+                location.href = "index.php?mod=products&act=getProductsCombineSpuCompleteList&combineSpu="+combineSpu;
+            });
+        });
+
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachProductsCombineSpuCompleteList').click();
+			}  
+        });
+        
+</script>
+{include file="footer.htm"}

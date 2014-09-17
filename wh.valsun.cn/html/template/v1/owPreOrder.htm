@@ -1,0 +1,61 @@
+{include file='header.htm'}
+{include file='owNav.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/pregoodsManage.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<div>
+<div style="margin-top:5px; padding-left:20px;">
+    <form action="index.php?mod=owGoodsReplenishManage&act=showOrderList" method="get" style="display:inline-block">
+	箱&nbsp;号：<input type="text" value="{$boxid}" name="orderid">&nbsp;&nbsp;&nbsp;
+	状态:
+	<select name="status">
+	    <option value="NULL">请选择类型</option>
+	    <option {if $status==1 }selected="selected"{/if} value="1">待处理</option>
+	    <option {if $status==2 }selected="selected"{/if} value="2">已发货</option>
+	</select>
+	开始时间:<input type="text" value="{$starttime}" onClick="WdatePicker()" name="startTime">
+	结束时间:<input type="text" value="{$endtime}" onClick="WdatePicker()" name="endTime">
+	<input type="hidden" name="mod" value="owGoodsReplenishManage">
+	<input type="hidden" name="act" value="preOrderList">
+	<input type="submit" value="搜索">
+    </form>
+    <input style="margin-left:30px;" onclick="chooseCheckBox()" type="button" value="选择">
+    <input style="margin-left:25px;" type="button" onclick="applyOrder()" value="申请补货单">
+    <!--<input style="margin-left:20px;" type="button" onclick="window.location='index.php?mod=owGoodsReplenishManage&act=returnBxoScanPage'" value="退箱扫描">-->
+</div>
+	<div class="main underline-main order-main">
+        <table cellspacing="0" width="100%">
+            <tr class="title">
+                <td></td>
+                <td>记录号</td>
+				<td>清单号</td>
+                <td>生成时间</td>
+                <td>生成人</td>
+                <td>状态</td>
+				<td>离美国仓库上架还差多少天</td>
+                <td width="15%">操作</td>
+            </tr>
+            {foreach $orderlist as $box}
+            <tr>
+                <td><input type="checkbox" value="{$box.boxid}" class="ordercheckbox"></td>
+                <td>{$box.id}</td>
+				<td>{$box.ordersn}</td>
+                <td>{$box.timestr}</td>
+                <td>{$box.userName}</td>
+                <td>{$box.statusstr}</td>
+				<td style="color:#009900; font-weight:bolder;">{$box.arriveday}(天)</td>
+                <td>
+                    <a href="index.php?mod=owGoodsReplenishManage&act=showPreOrderDetail&orderid={$box.ordersn}">详情</a>
+                    <a href="index.php?mod=owGoodsReplenishManage&act=changePreOrderStatusPage&orderid={$box.ordersn}">修改</a>
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+    </div>
+<div style="text-align:center;">
+    {$pagestr}
+</div>
+</div>
+{include file='footer.htm'}

@@ -1,0 +1,131 @@
+<!-- 
+	* 库存不良品定期检测、不定时发现不良品检测程序
+    * stockScan.htm
+    * add by chenwei 2013.12.11
+ -->
+{include file="header.htm"}
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<script type="text/javascript" src="./js/stockScan.js"></script>
+<style type="text/css">
+	.textinput{
+		 height:50px;
+		 font-size:24px;
+	}
+	.stephere{
+		border:1px solid red;
+	}
+</style>
+<div class="fourvar">
+{include file="iqcnav.htm"}               
+</div>
+<link href="./js/alanhamlett/fancyBox/jquery.fancybox.css?v=2.0.5" rel="stylesheet" type="text/css" media="screen" />
+<link href="./js/alanhamlett/jquery.picasagallery.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="./js/alanhamlett/fancyBox/helpers/jquery.fancybox-thumbs.css?v=2.0.5" rel="stylesheet" type="text/css" media="screen" />
+<script src="./js/alanhamlett/fancyBox/jquery.fancybox.pack.js?v=2.0.5" type="text/javascript"></script>
+<script src="./js/alanhamlett/fancyBox/helpers/jquery.fancybox-thumbs.js?v=2.0.5" type="text/javascript"></script>
+<script src="./js/alanhamlett/jquery.picasagallery.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/alertify.js"></script>
+<div class="servar">
+	<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+		<tr>
+			<td valign="top">
+				<div id="mess" style="font-size:24px;"></div>
+            	<table border='0' cellpadding='0' cellspacing='0' width='100%' class='paginationTable'>
+					<tr>
+				  		<td nowrap="nowrap" class='paginationActionButtons'>
+				    		<table width="100%" border="0" align="center">
+				      			<tr>
+				        			<td width="24%">
+						 			 	<div style="font-size:24px">检测料号:
+                                            <input name="whSku" type="text" id="whSku" onkeydown="whSkuInfoShow()" style="width:150px;height:30px;" class="textinput" />
+                                            <!-- 仓库实际库存:检测数不能超过实际库存数量 -->
+                                            <input type="hidden" id="whNum" value="">
+                                            <!-- 返回正确SKU -->
+                                            <input type="hidden" id="reWhSku" value="">
+                                            <!-- 返回正确SPU -->
+                                            <input type="hidden" id="reWhSpu" value="">
+                                            <!-- 返回SKU描述 -->
+                                            <input type="hidden" id="skuName" value="">
+                                            <!-- 返回SKU检测类别ID -->
+                                            <input type="hidden" id="sampleTypeId" value="">
+						 				</div>
+						  				<div id="mstatus" style="font-size:24px"><br></div>						
+                                    </td>
+					    			<td width="76%">&nbsp;</td>
+				      			</tr>
+						   </table>
+				 	   </td>
+			   	   </tr>
+				   <tr>
+                       <td nowrap="nowrap" class='paginationActionButtons'>
+                            <table width="100%" border="0" align="center">
+                                <tr>
+                                    <td width="24%">
+                                        <div style="font-size:24px">检测数目:
+                                          <input name="whCheckNum" type="text" id="whCheckNum" onkeydown="whCheckNumFunction()" style="width:150px;height:30px;" class="textinput" />
+                                            <div style="font-size:15px; color:#F00">*回车：默认有不良品；CTRL+ENTER：无不良品提交。</div>
+                                        </div>	
+                                        <div id="mstatus1" style="font-size:24px"><br></div>		
+                                    </td>
+                                    <td width="76%">&nbsp;</td>
+                                </tr>
+                            </table>
+                       </td>
+			   	   </tr>
+                   <tr>
+                       <td nowrap="nowrap" class='paginationActionButtons'>
+                            <table width="100%" border="0" align="center">
+                                <tr>
+                                    <td width="24%">
+                                    	<div style="font-size:24px;">检测方法:
+                                       		 <div id="checkMethod" style="font-size:24px; color:#F00"></div>			
+                                        </div>
+                                    </td>
+                                    <td width="76%">&nbsp;</td>
+                                </tr>
+                            </table>
+                       </td>
+			   	   </tr>
+                   <tr>
+                        <td align="left" colspan="2">
+                            <div style="font-size:24px" id="detectResults">
+                            有不良品:
+                            <input type="checkbox" name="rejects" id="rejects" onclick="rejects()" onkeydown="rejects()"/>
+                            </div>
+                        </td>
+                   </tr>
+				   <tr style="display:none" id="rejectsInfo">
+                        <td align="left" colspan="2">
+                          <div style="font-size:15px">
+                           不良品数：
+                           <input id="rejectsNum" type="text" value="" onkeydown="check_rejects_num()" style="width:80px;height:20px;" />
+                           <br />
+                           <br />
+                           <div id="mstatus2" style="font-size:24px"><br></div>
+                           不良原因：
+                          <select id="badReason" name="badReason" onchange="check_bad_reason()">
+                          <option value="">请选择</option>
+                          {foreach from=$bad_reason key=key_id item=reason}
+                              <option value='{$reason}'>{$reason}</option>
+                          {/foreach}
+                          </select>
+                          <div id="mstatus3" style="font-size:24px"><br></div>
+                          </div>
+                        </td>
+                     </tr>		   				
+			</table>
+		 </td>
+         <!-- 图片系统信息显示 -->
+         <td nowrap="nowrap" class='paginationActionButtons' width="73%">
+            <table width="100%" border="0" align="left">
+                 <tr>
+                    <td scope='row' align="center">
+                    <div class='picasagallery' id="show_product_image"></div>
+                    </td>
+                 </tr>      
+            </table>
+         </td>
+	 </tr>
+  </table>
+</div>
+{include file="footer.htm"}

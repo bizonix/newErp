@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$toptitle}--订单系统</title>
+
+
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+
+<script src="http://api.notice.valsun.cn/js/swJsNotice.js" type="text/javascript"></script>
+<script src="http://misc.erp.valsun.cn/js/global.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="./js/jquery/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/jquery/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<link rel="stylesheet" href="./css/alertify/alertify.core.css" />
+<link rel="stylesheet" href="./css/alertify/alertify.default.css" />
+<link rel="stylesheet" href="./css/flexselect.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="./css/validationEngine/validationEngine.jquery.css" />
+
+<script type="text/javascript" src="./js/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery-ui.min.js"></script>
+<script src="./js/validationEngine/languages/jquery.validationEngine-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/validationEngine/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="./js/alertify/alertify.min.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery.ui.core.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="./js/jquery/ui/jquery-ui-sliderAccess.js"></script>
+<script type="text/javascript" src="./js/datetimepicker.js"></script>
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+
+</head>
+<body id="toppage"  class="order-body">
+	<div class="container container_wh">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	订单系统
+                </div>
+                
+                 <!-- start 一级导航 -->
+                <div class="onevar">
+	               {foreach name=a key=sorta item=menua from=$menul1}
+	              		
+		                	<ul>
+		                    	<li>
+		                        	<a href="{$menua.url}" class="{$menua.showStyle} {if $toplevel == $sorta}cho{/if}">{$menua.name}</a>
+		                        </li>
+		                    </ul>
+	                     
+	              {/foreach}
+			   </div>
+			  <!-- 用户信息 -->
+                <div class="user">
+                	<a class="news-img" href="javascript:javascript:void(0)" onclick="swntc_call('{$_username}')">消息</a>
+                	<input id='swNoticeUrl' type='hidden'  value='index.php?mod=notice&act=sendMessage'/>
+					<a href="javascript:void(0)">{get_userid()|get_usernamebyid}</a>
+                    <a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;">退出</a>
+                </div>
+            </div>
+             <!-- end 一级导航 -->
+            
+              <!-- start 二级导航 -->
+            <div class="twovar">
+             {foreach name=a key=sorta item=menua from=$menul1}
+                    {if $toplevel == $sorta && $toplevel!=2}
+             		{foreach name=b key=sortb item=menub from=$menul2}
+            	          {if $menua.id==$menub.pid}
+            	            <ul>
+            	            <li>
+            	            	<a href="{$menub.url}" {if $menub.pid|cat:$secondlevel == $sortb}class="cho"{/if}>{$menub.name}</a>
+            	            </li>
+            	            </ul>
+            	            {/if}
+             		{/foreach}
+             		{/if}
+             {/foreach}
+             
+              <!-- 订单中心特殊处理 -->
+             {if $toplevel == 2 }
+             <ul>
+					{foreach $ostatus as $status}
+                    <li>
+                        <a href="index.php?mod=Order&act=list&ostatus={$status.id}" {if $g_ostatus == $status.id}class="cho"{/if}>{$status.statusName}<!--（<span>{$second_count[$list.statusCode]}</span>）--></a>
+                    </li>
+					{/foreach}
+			</ul>
+			{/if}
+            </div>
+            <!-- end  三级导航 -->
+            
+           <!-- start 三级导航 -->
+            <div class="threevar order-minwidth">
+            {foreach name=a key=sorta item=menua from=$menu1}
+                    {if $toplevel == $sorta}
+             		{foreach name=b key=sortb item=menub from=$menu2}
+             		    {if $secondlevel == $sorta|cat:$sortb}
+             		        {foreach name=c key=sortc item=menuc from=$menu3}
+		             			
+		            	            <ul>
+		            	            	<a href="{$menuc.url}" {if $secondlevel == $sorta|cat:$sortb|cat:$sortc}class="cho"{/if}>{$menuc.name}</a>
+		            	            </ul>
+		            	        
+		            	      {/foreach}
+            	        {/if}
+             		{/foreach}
+             		{/if}
+             {/foreach}
+            
+            
+                <ul>
+                    {foreach $otype as $type}
+                    <li>
+                        <a href="index.php?mod=Order&act=list&ostatus={$g_ostatus}&otype={$type.id}" {if $type.id == $g_otype}class="cho"{/if}>{$type.statusName}<!--（<span>{$three_count[$list.statusCode]}</span>）--></a>
+                    </li>
+					{/foreach}
+                </ul>
+                
+            </div>
+            
+           <!-- 结束 三级导航 -->

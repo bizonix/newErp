@@ -1,0 +1,34 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=transitCenter&act=index">转运中心管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>修改转运中心</h1>
+    <form onSubmit="return edit_check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+                <td align="right" width="11%">转运中心中文名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="cn_name" id="cn_name" value="{$cn_name}" maxlength="15"/>
+                </td>
+			</tr>
+            <tr>
+                <td align="right" width="11%">转运中心英文名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="en_name" id="en_name" value="{$en_name}" maxlength="15"/>
+                </td>
+			</tr>			
+			<tr>
+                <td colspan="2" align="center">
+					<input type="hidden" id="act-id" value="{$id}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=transitCenter&act=index'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript" src="./public/js/transit_center.js"></script>
+{include file="footer.htm"}

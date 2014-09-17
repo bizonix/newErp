@@ -1,0 +1,57 @@
+{include file='header.htm'}
+{include file='whNav.htm'}
+<script language="javascript" src="js/invOperate.js"></script>
+
+<div class="servar wh-servar" align="center">
+	<form action='index.php?mod=inventory&act=sureAddCon' method="post" id="condiAddForm"> 
+		<input type="hidden" name="conId" id="conId" value="{$condition[0].id}" /> 	
+		<table width="100%" cellpadding="0" cellspacing="0" style="line-height:50px;">
+			<tbody>
+				<tr>
+					<td style="font-size:20px;padding-right:20px" align="right" width="50%">
+						审核名称：
+					</td>
+					<td align="left" width="50%">
+						<input value="{$condition[0].auditName}" class="mf validate[required] text-input" id="auditName"  name="auditName" type="text" style="width:200px;height:30px;font-size:20px" readonly>
+						<span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="font-size:20px;padding-right:20px" align="right" width="50%">
+						审核盘点限制值：
+					</td>
+					<td align="left" width="50%">
+						<input value="{$condition[0].auditValues}" class="mf validate[required,custom[integer],min[0]] text-input" id="auditValues"  name="auditValues" type="text" style="width:200px;height:30px;font-size:20px">
+						<span style="color:#F00;">*</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="font-size:20px;padding-right:20px" align="right" width="50%">
+						备注：
+					</td>
+					<td align="left" width="50%">
+						<input value="{$condition[0].notes}" class="mf validate[required] text-input" id="notes"  name="notes" type="text" style="width:200px;height:30px;font-size:20px">
+						<span style="color:#F00;">*</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="font-size:20px;padding-right:20px" align="right" width="50%">
+					</td>
+					<td align="left" width="50%">
+						<label for="is_enable" style="font-size:20px;">是否开启:  </label>
+						<input value="1" class="" id="is_enable"  name="is_enable" type="checkbox" {if $condition[0].is_enable == 1}checked{/if}{if !isset($condition[0].is_enable)}checked{/if}>
+					</td>
+				</tr>
+				<tr>
+					<td style="font-size:20px;padding-right:20px" align="right" width="50%">
+					</td>
+					<td align="left" width="50%">
+						<input type="submit" id="countriesAddFormSumit" class="input_button" value="提交">
+						<input type="button" class="input_button" id='back' value="返回" />
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
+{include file="footer.htm"}

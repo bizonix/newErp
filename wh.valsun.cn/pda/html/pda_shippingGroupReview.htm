@@ -1,0 +1,39 @@
+{include file="header.htm"}
+<script language="javascript" src="./js/pda_shippingGroupReview.js"></script>
+ <div id="mstatus" class="floatright"></div>
+<div id="divcontent" style="height:200px;width:225px">
+      <div class="floatleft">
+            <span>口袋号:</span><input style="width:100px;" type="text" id="packageid" onkeydown="checkPackage()" class="textinput" />
+            <!--
+            <input type="button" value="出库" class="buttonclass" onclick="javascript:window.location='scan_pda_ship_outstore.php'" />
+        -->
+        </div>
+		<div class="floatleft" style="height: auto;padding: 3px 0;width:100%;">
+            <table id="listtable" cellpadding="0" cellspacing="0" style="TABLE-LAYOUT: fixed;font-size:14px;border-collapse:collapse; margin:3px auto;width:100%;" class="list view" border="1px">
+                <thead>
+                    <tr>
+                        <td colspan='3' width="100%" id="partion"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+    					 <td></td><td>订单总数</td><td>总重量(KG)</td>
+    	             </tr>
+                     <tr>
+    					 <td>分区数据</td><td id="totalnum"></td><td id="totalweight"></td>
+    	             </tr>
+                     <tr>
+    					 <td>复核数据</td><td id="review_num"></td><td id="review_weight"></td>
+    	             </tr>
+                </tbody>
+            </table>
+            <div id="order_show" class="floatleft;" style="display:none;">
+            	<span>订单号:</span><input type="text" id="ebay_id" onkeydown="checkOrder()"/>
+            </div>
+        </div>
+        
+        <div class="floatleft" style="margin-top: 2px;">
+        	<input type="button" value="下一口袋" class="buttonclass floatleft" onclick="javascript:window.location.reload();" />
+        </div>
+</div>
+{include file="footer.htm"}

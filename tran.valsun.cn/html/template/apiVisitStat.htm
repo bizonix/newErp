@@ -1,0 +1,63 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=apiVisitStat&act=index">API接口访问统计</a>&nbsp;>>&nbsp;<a href="index.php?mod=apiVisitStat&act=index&id={$id}">API调用统计</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select name="apiId" id="apiId" class="flexselect">
+			<option value="0">==全部接口==</option>
+			{foreach item=list from=$apiList}
+			<option value="{$list.id}" {if $apiId == $list.id}selected="selected"{/if}>{$list.apiName}</option>
+			{/foreach}
+		</select>
+	</span>
+	<span>
+		<select id="times">
+			<option value='0'>请选择时间节点</option>
+			<option value='firstTime'{if ($timeNode == 'firstTime')} selected="selected"{/if}>首次调用时间</option>
+			<option value='lastTime'{if ($timeNode == 'lastTime')} selected="selected"{/if}>最后调用时间</option>
+		</select>
+		<input type="hidden" id="now-time" value="{(time()*1000)}"/>
+	</span>
+	<span>
+		开始时间：<input type="text" id="start-date" onclick="WdatePicker()"  value = "{$startTimeValue}" style="width:80px;"/>
+	</span>
+	<span>
+		结束时间：<input type="text" id="end-date" onclick="WdatePicker()"  value = "{$endTimeValue}" style="width:80px;"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>API使用人</th>
+			<th>API名称</th>
+			<th>调用次数</th>
+			<th>首次调用时间</th>
+			<th>最近一次调用时间</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.global_user_name}</td>
+			<td>{$list.apiName}</td>
+			<td>{$list.apiCount}</td>
+			<td>{if empty($list.firstTime)}暂无{else}{date('Y-m-d H:i:s',$list.firstTime)}{/if}</td>
+			<td>{if empty($list.lastTime)}暂无{else}{date('Y-m-d H:i:s',$list.lastTime)}{/if}</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<script type="text/javascript" src="./public/js/api_visit_stat.js"></script>
+{include file="footer.htm"}

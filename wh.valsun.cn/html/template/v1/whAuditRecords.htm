@@ -1,0 +1,56 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script type="text/javascript" src="./js/whAuditList.js"></script>
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+            <div class="servar wh-servar">
+    				<span>
+    					<label for="ordersn">单据编码：</label>
+    					<input name="ordersn" id="ordersn" value="{$smarty.get.ordersn}"/>
+                        &nbsp;|&nbsp;
+                        <label for="auditStatus">审核状态:</label>
+                        <select name="auditStatus" id="auditStatus">
+                            <option value='0'>请选择</option>
+                            <option value='1' {if $smarty.get.auditStatus == 1}selected="selected"{/if}>审核通过</option>
+                            <option value='2' {if $smarty.get.auditStatus == 2}selected="selected"{/if}>审核不通过</option>
+                        </select>
+                        &nbsp;|&nbsp;
+                        <label for="cStartTime">审核时间：</label>
+                        <input onclick="WdatePicker()" id='cStartTime' value='{$smarty.get.cStartTime}'/>
+                        &nbsp;至&nbsp;
+                        <input onclick="WdatePicker()" id='cEndTime' value='{$smarty.get.cEndTime}' />
+                        &nbsp;|&nbsp;
+						<button id="search">搜索</button>
+    				</span>
+                    &nbsp;&nbsp;
+                    <span style="color: red;">{$status}</span>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+						<td>单据编码</td>
+                        <td>最大审核等级</td>
+                        <td>当前审核等级</td>
+                        <td>审核状态</td>
+                        <td>审核人</td>
+                        <td>审核时间</td>
+                    </tr>
+                    {foreach $whAuditRecords as $value}
+                    <tr class="odd">
+                        <td>{$value.ordersn}</td>
+						<td>{$value.auditLevel}</td>
+                        <td>{$value.nowAuditLevel}</td>
+                        <td>{if $value.auditStatus == 1}审核通过{elseif $value.auditStatus == 2}审核不通过{else}无{/if}</td>
+                        <td>{$value.auditor}</td>
+                        <td>{$value.auditTime|date_format:"Y-m-d H:i"}</td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+            	</div>
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

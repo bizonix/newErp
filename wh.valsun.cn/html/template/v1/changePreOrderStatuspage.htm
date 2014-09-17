@@ -1,0 +1,29 @@
+{include file='header.htm'}
+{include file='owNav.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/pregoodsManage.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<div>
+    <div style="height:30px; line-height:30px; font-size:20px; padding-left:30px; border:solid 1px #cccccc; ">
+        清单号：{$orderInfo.ordersn}
+    </div>
+    <div style="margin-top:10px;border:solid 1px #cccccc; ">
+        <div style="padding-left:30px;">
+                                    清单状态:
+            <select name="status" id="orderStatus">
+                <option value="NULL">请选择类型</option>
+                <option {if $orderInfo.status == 1}selected="selected"{/if} value="1">待处理</option>
+                <option {if $orderInfo.status == 2}selected="selected"{/if} value="2">已发柜</option>
+				<option {if $orderInfo.status == 3}selected="selected"{/if} value="3">海外仓已收货</option>
+            </select>
+			
+            <input type="button" onclick="changePerOrderStatus({$orderInfo.id})" value="保存">
+        </div><br/>
+		<div style="padding-left:30px;">
+			离美国仓库上架还差多少天:<input type="text" id="arriveday" size="3" value="{$orderInfo.arriveday}" />天
+		</div>
+    </div>
+</div>
+{include file='footer.htm'}

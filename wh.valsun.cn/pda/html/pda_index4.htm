@@ -1,0 +1,10 @@
+{include file = "header.htm"}
+	<script language="JavaScript" src="./js/pda_com.js"></script>
+	<div id="divcontent" style="text-align:center; height:200px;">
+            <!--<input  type="button" value="挂号复核" id="registerreview" class="buttonclass2" onclick="header_page(12);" /><br>-->
+            <input type="button" style="width:180px" value="料号入库" id="insert_scan" class="buttonclass2" onclick="javascript:window.location.href='index.php?mod=pda_skuReturn&act=pda_skuReturn'" /><br>
+            <input type="button" style="width:180px" value="异常退货" id="insert_scan" class="buttonclass2" onclick="javascript:window.location.href='index.php?mod=pda_orderReturn&act=pda_orderReturn'" /><br>
+			<input type="button" style="width:180px" value="邮局退回入库" id="insert_scan" class="buttonclass2" onclick="javascript:window.location.href='index.php?mod=pda_postReturn&act=pda_postReturn'" /><br>
+            <input type="button" style="width:180px" value="点货调整" id="insert_scan" class="buttonclass2" onclick="javascript:window.location.href='index.php?mod=pda_packageCheck&act=pda_packageCheck'" />
+	</div>
+{include file = "footer.htm"}

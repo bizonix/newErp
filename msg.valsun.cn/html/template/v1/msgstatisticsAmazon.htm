@@ -1,0 +1,76 @@
+{include file="header.htm"}
+{include file="secendNav_statistics.htm"}
+<link rel="stylesheet" href="./css/msglist.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./css/page.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="./js/msgstatistic.js"></script>
+<div class="topmenue">
+	<form action="index.php"  method="get">
+		<input type="hidden" name="mod" value="amazonMessageStatistics">
+		<input type="hidden" name="act" value="messageStatistics">
+		<span>开始时间：</span> <input type="text" onclick="WdatePicker()" id="starttime" name="starttime" value="{$starttime}">
+		<span>结束时间：</span> <input type="text" onclick="WdatePicker()" id="endtime" name="endtime" value="{$endtime}">
+		<input type="submit" value="搜索" class="order-search">
+		<a id="export_btn"  class="order-search" >导出</a>
+	</form>
+	<form  target="export" id="export"  method="post">
+    </form>
+    <iframe name="export" style="display:none"></iframe>
+</div>
+
+<div class="main">
+    <table cellspacing="0" id="statisticaltable" width="100%">
+        <tbody>
+            <tr class="title">
+				<td>回复人</td>
+                <td width="20%"><a 
+					href="index.php?mod=amazonMessageStatistics&act=messageStatistics&starttime={$starttime}&endtime={$endtime}&srtn={if $condition=='sort_no' }{if $sorttype=='asc'}desc{else}asc{/if}{else}asc{/if}">
+                	未回复数量{if $condition=='sort_no' }{if $sorttype=='asc'}（升序）{else}（降序）{/if}{/if}
+					</a>
+				</td>
+				<td width="20%"><a
+					href="index.php?mod=amazonMessageStatistics&act=messageStatistics&starttime={$starttime}&endtime={$endtime}&srth={if $condition=='sort_h' }{if $sorttype=='asc'}desc{else}asc{/if}{else}asc{/if}">
+					已回复{if $condition=='sort_h' }{if $sorttype=='asc'}（升序）{else}（降序）{/if}{/if}
+					</a>
+				</td>
+<!-- 				<td width="20%"><a -->
+<!-- 					href="index.php?mod=amazonMessageStatistics&act=messageStatistics&starttime={$starttime}&endtime={$endtime}&srti={if $condition=='sort_i' }{if $sorttype=='asc'}desc{else}asc{/if}{else}asc{/if}"> -->
+<!-- 					回复中{if $condition=='sort_i' }{if $sorttype=='asc'}（升序）{else}（降序）{/if}{/if} -->
+<!-- 					</a> -->
+<!-- 				</td> -->
+<!--                 <td width="20%"><a -->
+<!-- 					href="index.php?mod=amazonMessageStatistics&act=messageStatistics&starttime={$starttime}&endtime={$endtime}&srtm={if $condition=='sort_m' }{if $sorttype=='asc'}desc{else}asc{/if}{else}asc{/if}"> -->
+<!-- 					标记回复{if $condition=='sort_m' }{if $sorttype=='asc'}（升序）{else}（降序）{/if}{/if} -->
+<!-- 					</a> -->
+<!-- 				</td> -->
+                <td ><a
+					href="index.php?mod=amazonMessageStatistics&act=messageStatistics&starttime={$starttime}&endtime={$endtime}&srtt={if $condition=='sort_t' }{if $sorttype=='asc'}desc{else}asc{/if}{else}asc{/if}">
+					总数<span style="color:#0e6f3c">(回复数+未回复数)</span>{if $condition=='sort_t' }{if $sorttype=='asc'}（升序）{else}（降序）{/if}{/if}
+					</a>
+				</td>
+            </tr>
+			{foreach $sortindex as $kvar=>$row }
+            <tr class="odd">
+                <td class="">{$statistics.$kvar.name}</td>
+				<td>{if $statistics.$kvar.0 == 0}0{else}{$statistics.$kvar.0}{/if}</td>
+				<td>{if $statistics.$kvar.2 == 0}0{else}{$statistics.$kvar.2}{/if}</td>
+              <!--    <td>{if $statistics.$kvar.1 == 0}0{else}{$statistics.$kvar.1}{/if}</td>-->
+               <!--  <td>{if $statistics.$kvar.3 == 0}0{else}{$statistics.$kvar.3}{/if}</td> -->
+				 <td>{if $statistics.$kvar.4 == 0}0{else}{$statistics.$kvar.4}{/if}</td>
+            </tr>
+			{/foreach}
+			<tr>
+			     <td style="color:red; font-weight:bold;">统计</td>
+			     <td style="color:red; font-weight:bold;">{$total_noreply}</td>
+			     <td style="color:red; font-weight:bold;">{$total_replyed}</td>
+<!-- 			     <td style="color:red; font-weight:bold;">{$total_replying}</td> -->
+<!-- 			     <td style="color:red; font-weight:bold;">{$total_markreply}</td> -->
+			     <td style="color:red; font-weight:bold;">{$total_total}</td>
+			</tr>
+        </tbody>
+    </table>
+	<div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+            {$pagestr}
+        </div>
+</div>
+{include file="footer.htm"}

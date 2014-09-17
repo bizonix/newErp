@@ -1,0 +1,86 @@
+{include file="header.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/omAccountList.js"></script>
+<script type="text/javascript" src="./js/liquidmetal.js"></script>
+<script type="text/javascript" src="./js/jquery.flexselect.js"></script>
+<link rel="stylesheet" href="./css/flexselect.css" type="text/css" media="screen" />
+<!--<div class="fourvar">
+	            <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+</div>-->
+<div class="servar">
+    <span>
+        <button id="add">
+            添加账号
+        </button>
+
+    </span>
+    &nbsp;|&nbsp;
+    <span>
+        <label for="accountId">账号：</label>
+        <select name="accountId" id="accountId" class="flexselect">
+            <option value="0">全部</option>
+            {foreach OmAvailableModel::getTNameList('om_account','id,account','WHERE is_delete=0') as $value}
+            <option value="{$value.id}" {if $value.id == $smarty.get.accountId}selected="selected"{/if}>{$value.account}</option>
+            {/foreach}
+        </select>
+    </span>
+    <span>
+        <label for="platformId">所属平台：</label>
+        <select name="platformId" id="platformId">
+            <option value="">全部</option>
+            {foreach OmAvailableModel::getTNameList('om_platform','id,platform','WHERE is_delete=0') as $value}
+            <option value="{$value.id}" {if $value.id == $smarty.get.platformId}selected="selected"{/if}>{$value.platform}</option>
+            {/foreach}
+        </select>
+    </span>
+    &nbsp;|&nbsp;
+    <input type="button" value="搜索" id="search"/>
+    <span style="color: red;">{$status}</span>
+
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+            <td>编号</td>
+            <td>账号名称</td>
+            <td>账号简称</td>
+            <td>所属平台</td>
+            <td>对应邮箱</td>
+            <td>对应后缀</td>
+            <td>负责人</td>
+            <td>添加人</td>
+            <td>添加时间</td>
+            <td>操作</td>
+        </tr>
+        {foreach $omAccountList as $value}
+        <tr class="odd">
+            <td>{$value.id}</td>
+            <td>{$value.account}</td>
+            <td>{$value.appname}</td>
+            <td>{OmAvailableModel::getPlatformById($value.platformId)}</td>
+            <td>{$value.email}</td>
+            <td>{$value.suffix}</td>
+            <td>{$value.charger}</td>
+            <td>{$value.addUser}</td>
+            <td>{$value.addTime|date_format:"Y-m-d H:i"}</td>
+            <td>
+                <button onclick="javascript:window.location.href='index.php?act=eubAccount&mod=eubAccount&id={$value.id}'"  pid='{$value.id}'>EUB授权设置</button>
+                <button class='update' pid='{$value.id}'>修改</button>
+                <button class='delete' pid='{$value.id}'>删除</button>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="texvar">
+    </div>
+    <div class="pagination">
+        {$show_page}
+    </div>
+</div>
+{include file="footer.htm"}

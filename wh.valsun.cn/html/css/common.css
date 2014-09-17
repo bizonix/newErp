@@ -1,0 +1,92 @@
+/* 
+公共样式
+*/
+
+.cur_sec_leve{  /* 二级菜单选选中样式*/
+    background-color: #009ded;
+}
+
+.fourvar{
+    border-bottom: #cccccc solid 1px;
+    height: 35px;
+}
+
+.typelista{
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.skulistul{
+	list-style:none;
+	border:solid 1px #43af58;
+	width:100%;
+	margin-bottom:5px;
+	background-color:#edf1f0;
+}
+.skulistul li{
+	height:25px;
+	line-height:25px;
+	border-bottom:solid 1px #c0c0c0;
+	margin-bottom:2px;
+	text-align:left;
+	padding-left:30px;
+}
+
+.valuespan{
+	display:inline-block;
+	color:red;
+	width:80px;
+	margin:0 5px;
+	margin-left:10px;
+}
+
+/*
+Back to top button 
+*/
+#back-top {
+	position: fixed;
+	bottom: 20px;
+	right:20px;
+	/*margin-left: -150px;*/
+}
+#back-top a {
+	width: 108px;
+	display: block;
+	text-align: center;
+	font: 11px/100% Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #bbb;
+	/* background color transition */
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+#back-top a:hover {
+	color: #000;
+}
+/* arrow icon (span tag) */
+#back-top span {
+	width: 108px;
+	height: 108px;
+	display: block;
+	margin-bottom: 7px;
+	background: #ddd url(../images/up-arrow.png) no-repeat center center;
+	/* rounded corners */
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	/* background color transition */
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+#back-top a:hover span {
+	background-color: #777;
+}
+
+/*库存管理Table样式*/
+#reportTable { border-collapse:collapse;}
+#reportTable div.arrow { background:transparent url(../images/arrows.png) no-repeat scroll 0px -16px; width:16px; height:16px; display:block;}
+#reportTable div.up { background-position:0px 0px;}

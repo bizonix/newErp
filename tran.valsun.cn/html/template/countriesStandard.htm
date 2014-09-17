@@ -1,0 +1,86 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=countriesStandard&act=index">标准国家列表管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='countryNameCn'{if ($type=='countryNameCn')} selected="selected"{/if}>国家中文名</option>
+			<option value='countryNameEn'{if ($type=='countryNameEn')} selected="selected"{/if}>国家英文名</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=countriesStandard&act=add">添加</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>国家中文名称</th>
+			<th>国家英文缩写</th>
+			<th>国家简称</th>
+			<th>添加时间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.countryNameCn}</td>
+			<td>{$list.countryNameEn}</td>
+			<td>{$list.countrySn}</td>
+			<td>{if empty($list.createdTime)}暂无{else}{date('Y-m-d H:i:s',$list.createdTime)}{/if}</td>
+			<td><a href="index.php?mod=countriesStandard&act=modify&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info({$list.id})"><b>删除</b></a></td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+{literal}
+<script type="text/javascript">
+//搜索入口
+$("#search").click(function(){
+	type  = $.trim($("#type").val());
+	key   = encodeURIComponent($.trim($("#key").val()));
+	if (type!='0' && key!=''){
+		window.location.href = "index.php?mod=countriesStandard&act=index&type="+type+"&key="+key;
+	} else {
+		alertify.error("搜索条件没选或搜索关键词不能为空！");
+		return false;
+	}
+});
+//删除入口
+function del_info(id){
+	var url  = web_url + "json.php?mod=countriesStandard&act=delCountriesStandard";
+	var data = {"id":id};
+	alertify.confirm("真的要删除吗？", function (e) {
+		if (e) {
+			$.post(url,data,function(res){
+				if(res.errCode == 0){
+					alertify.alert("删除成功！",function(){
+						window.location.reload();
+					});
+				}else {
+					 alertify.error(res.errMsg);
+				   }
+			}, "jsonp");
+		}
+	});
+}
+</script>
+{/literal}
+{include file="footer.htm"}

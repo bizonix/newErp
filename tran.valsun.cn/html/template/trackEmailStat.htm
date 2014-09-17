@@ -1,0 +1,71 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=trackEmailStat&act=index">跟踪邮件管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=trackEmailStat&act=index&id={$id}">跟踪邮件</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='trackNumber'{if ($type=='trackNumber')} selected="selected"{/if}>跟踪号</option>
+			<option value='platAccount'{if ($type=='platAccount')} selected="selected"{/if}>平台帐号</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<select id="times">
+			<option value='0'>请选择时间节点</option>
+			<option value='addTime'{if ($timeNode == 'addTime')} selected="selected"{/if}>发送时间</option>
+			<option value='lastTime'{if ($timeNode == 'lastTime')} selected="selected"{/if}>重试时间</option>
+		</select>
+		<input type="hidden" id="now-time" value="{(time()*1000)}"/>
+	</span>
+	<span>
+		开始时间：<input type="text" id="start-date" onclick="WdatePicker()"  value = "{$startTimeValue}" style="width:80px;"/>
+	</span>
+	<span>
+		结束时间：<input type="text" id="end-date" onclick="WdatePicker()"  value = "{$endTimeValue}" style="width:80px;"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>跟踪号</th>
+			<th>店铺帐号</th>
+			<th>SES MID</th>
+			<th>SES RID</th>
+			<th>重试次数</th>
+			<th>重试时间</th>
+			<th>是否发送成功</th>
+			<th>发送时间</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.trackNumber}</td>
+			<td>{$list.platAccount}</td>
+			<td>{$list.MessageId}</td>
+			<td>{$list.RequestId}</td>
+			<td>{$list.retryCount}</td>
+			<td>{if empty($list.lastTime)}no{else}{date('Y-m-d H:i:s',$list.lastTime)}{/if}</td>
+			<td>{if $list.is_success=='1'}<font color="green">成功</font>{else}<font color="red">失败</font>{/if}</td>
+			<td>{if empty($list.addTime)}no{else}{date('Y-m-d H:i:s',$list.addTime)}{/if}</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<script type="text/javascript" src="./public/js/track_email_stat.js"></script>
+{include file="footer.htm"}

@@ -1,0 +1,210 @@
+{include file='header.html'}
+{include file='goodsoutnav.html'}
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="js/bootstrap.min.js"></script>
+<script language="javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+<script language="javascript" src="js/dispatchbillquery.js"></script>
+<div class="cneterdiv">
+    <div class="well queryformdiv">
+        <form id="queryform" method="get" class="queryform">
+            <div class="formtitle"> 发货单查询：</div>
+            <input type="hidden" name="mod" value="dispatchBillQuery" />
+            <input type="hidden" name="act" value="showForm" />
+            <div class="formcomponentdiv">
+                <div class="div_line">
+                    <input type="text" value="{$keywords}" name='keywords' class="form-control inputinput" style="width: 160px;display: inline;">
+                    <span class="queryformspan">类型：</span>
+                    <select class="queryformselect" name="keytype" style="width: 130px;">
+                        <option {if $keytype == 1}selected="selected"{/if} value="1">订单号</option>
+                        <option {if $keytype == 2}selected="selected"{/if} value="2">配货单号</option>
+                    </select>
+                    <span class="queryformspan">状态：</span>
+                    <select class="queryformselect" name="status" style="width: 130px;">
+                        <option value="0">请选择状态</option>
+                        {foreach $outstatuslist as $itemvar}
+                            <option  {if $status == $itemvar.statusCode}selected="selected"{/if} value="{$itemvar.statusCode}">{$itemvar.statusName}</option>
+                        {/foreach}
+                    </select>
+                    <span class="queryformspan">下单日期：</span>
+                    <span class="queryformspan">从:</span>
+                    <input value="{$ordertimestart}" type="text" name='ordertimestart' onclick="WdatePicker()" class="form-control inputinput" style="width: 160px;display: inline;">
+                    <span class="queryformspan">到:</span>
+                    <input type="text" value="{$ordertimeend}" name="ordertimeend" onclick="WdatePicker()" class="form-control inputinput" style="width: 160px;display: inline;">
+                </div>
+                <div class="div_line">
+                    <!--
+					<span class="queryformspan">出库日期：</span>
+                    <span class="queryformspan">从:</span>
+                    <input type="text" value="{$goodsouttimestart}" name="goodsouttimestart" onclick="WdatePicker()" class="form-control inputinput" style="width: 160px;display: inline;">
+                    <span class="queryformspan">到:</span>
+                    <input type="text" value="{$goodsouttimeend}" name="goodsouttimeend" onclick="WdatePicker()" class="form-control inputinput" style="width: 160px;display: inline;">
+                    -->
+					<span class="queryformspan">运输方式：</span>
+                    <select name='shiptype' class="queryformselect" style="width: 130px;">
+                        <option value="">选择运输方式</option>
+                        {foreach $shipingtypelist as $shitemval}
+                            <option {if $shiptype == $shitemval.id}selected="selected"{/if} value="{$shitemval.id}">{$shitemval.carrierNameCn}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="formsubmitdiv">
+                <button type="button" onclick="dosearch()" class="btn btn-default navbar-btn queryformsubbutton">查 询</button>
+            </div>
+            <div style="clear: both;"></div>
+        </form>
+    </div>
+    <div class="well typelista">
+        <div class="btn-group">
+            <ul class="nav">
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">打印预览 <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a onclick="goprintById(50)" href="#">DHL快递单打印</a></li>
+                  <li><a onclick="goprintById(51)" href="#">EMS国际特快</a></li>
+                  <li><a onclick="goprintById(52)" href="#">DHLfp</a></li>
+                  <li class="divider"></li>
+                  <li><a onclick="goprintById(50)" href="#">DHL快递单打印</a></li>
+                  <li><a onclick="goprintById(51)" href="#">EMS国际特快</a></li>
+                  <li><a onclick="goprintById(52)" href="#">DHLfp</a></li>
+                  <li><a onclick="goprintById(53)" href="#">UPS快递单打印</a></li>
+                  <li><a onclick="goprintById(54)" href="#">EMS新加坡</a></li>
+                  <li><a onclick="goprintById(1)" href="#">芬哲圆通打印</a></li>
+                  <li><a onclick="goprintById(2)" href="#">芬哲申通打印</a></li>
+                </ul>
+              </li>
+            </ul>
+        </div>
+        <!--<button class="btn" id="print_preview">打印预览</button>-->
+        <button class="btn" id="application_print">申请打印</button>
+    </div>
+    <div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+        {$pagestr}
+    </div>
+    <div class="main">
+        <table cellspacing="0" cellpadding="0" width="100%" id="reportTable">
+            <tbody><tr class="title" style="font-weight:bolder;">
+                    <td>
+                        <input onclick="chooseornot(this)" type="checkbox"/>
+                    </td>
+                    <td>
+                        I D
+                    </td>
+                    <td>
+                        订单编号
+                    </td>
+                    <td>
+                        运输方式
+                    </td>
+                    <td>
+                        销售账号
+                    </td>
+                    <td>
+                        收件人
+                    </td>
+                    <td>
+                      	邮箱 
+                    </td>
+                    <td>
+                        收件地址
+                    </td>
+                    <td>
+                        跟踪号
+                    </td>
+                    <td>
+                        生成时间
+                    </td>
+                    <td>
+                        发货时间
+                    </td>
+					<td>
+						操作
+					</td>
+                    <td>
+						&nbsp;&nbsp;
+					</td>
+                </tr>
+                {foreach $billlist as $billvalue }
+                <tr>
+                    <td>
+                        <input class="checkclass" id="orderids" name="orderids" type="checkbox" value="{$billvalue.id}">
+                    </td>
+                    <td>
+                        {$billvalue.id}
+                    </td>
+                    <td>
+                        {$billvalue.originOrderId}
+                    </td>
+                    <td>
+                        {$billvalue.shipingname}
+                    </td>
+                    <td>
+                        {$billvalue.account}
+                    </td>
+                    <td>
+                        {$billvalue.username}
+                    </td>
+                    <td>
+                        {$billvalue.email}
+                    </td>
+                    <td>
+                        {$billvalue.street}&nbsp;
+                        {$billvalue.city}&nbsp;
+                        {$billvalue.state}&nbsp;
+                        {$billvalue.countryName}&nbsp;
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        {$billvalue.createdTime}
+                    </td>
+                    <td>
+                        {$billvalue.weightTime}
+                    </td>
+					<td>
+                        <a href="index.php?mod=editeDispatchBill&act=editeForm&orderid={$billvalue.id}">编&nbsp;辑</a>
+                    </td>
+                    <td>
+                    	<div class="arrow"></div>
+                    </td>
+                </tr>
+				<tr>
+                	<td colspan="3">
+                        {$billvalue.statusname}
+                    </td>
+					<td colspan="9">
+						<ul class="skulistul">
+							<!--<li style="background-color:#e1fbfb;">料号列表</li>-->
+							{foreach $billvalue.skulistar as $skuval}
+							<li>
+								SKU:<span class="valuespan">{$skuval.sku} </span>
+								数量 ：<span class="valuespan">{$skuval.amount}</span>
+								组合料号 ：<span class="valuespan">{$skuval.combineSku}</span>
+								组合料号数量：<span class="valuespan">{$skuval.combineNum}</span>
+							</li>
+                            {foreachelse}
+                            	<span class="valuespan">该订单无料号明细！</span>
+							{/foreach}
+						</ul>
+					</td>
+				</tr>
+                {/foreach}
+            </tbody>
+        </table>
+        <div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+            {$pagestr}
+        </div>
+    </div>
+</div>
+<p id="back-top">
+    <a href="#toppage"><span></span>Back to Top</a>
+</p>
+<form target="_blank" action="" method="post" id="hiddenpost" style="display:none;">
+	<input type="hidden" id="idsinput" name="ids" value="">
+	<input type="hidden" name="express" id="expressinput" value="">
+</form>
+{include file='footer.html'}

@@ -1,0 +1,50 @@
+{include file="header.htm"}
+{include file="secendNav_tpl.htm"}
+<link rel="stylesheet" href="./css/msg_tplform.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/tpledit.js"></script>
+<div >
+	<div class="titlediv">
+		{$act}分类信息
+	</div>
+<form id="categoryform" action="index.php?mod=messageTemplate&act=addNewCsTpl" method="post">
+	<div class="inputline firstline">
+		<div class="line-left">标题：</div>
+		<div class="line-right">
+			<input value="{$tplinfo.name}" name="title">
+		</div>
+	</div>
+	<div class="inputline firstline">
+		<div class="line-left">主题：</div>
+		<div class="line-right">
+			<input value="{$tplinfo.subject}" name="topic">
+		</div>
+	</div>
+	<div class="inputline secondeline ">
+		<div class="line-left">模板内容：</div>
+		<div class="line-right">
+			<textarea style="width:900px; height:200px;" name="content">{$tplinfo.content}</textarea>
+		</div>
+	</div>
+	
+	{foreach $countryList as $key=>$counRow}
+        <div class="inputline secondeline ">
+            <div class="line-left">第 {$key} 组：<input type="checkbox" onclick="changeSet(this,{$key})"></div>
+            <div class="line-right">
+                <table style="width:900px;">
+                   {foreach $counRow as $RowLev2}
+                       <tr>
+                          {foreach $RowLev2 as $country}
+                           <td><input class="country_{$key}" type="checkbox" name="country[]" {if $country.checked==1 }checked="checked"{/if} value="{$country.countryCode}">{$country.countryName}</td>
+                          {/foreach}
+                       </tr>
+                   {/foreach}
+               </table>
+            </div>
+        </div>
+    {/foreach}
+	
+	<button  class="submitbutton">提交</button>
+	<button type="button" onclick="window.location='index.php?mod=messageTemplate&act=showEbayTplList'" class="submitbutton">取消</button>
+</form>
+</div>
+{include file="footer.htm"}

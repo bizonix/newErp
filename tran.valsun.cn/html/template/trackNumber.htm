@@ -1,0 +1,87 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=trackNumber&act=index">跟踪号管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select name="carrierId" id="carrierId" onchange = "show_channel_list(this.value)">
+			<option value=0>==全部运输方式==</option>
+			{foreach item=list from=$carrierList}
+			{if !$list.is_track }<option value="{$list.id}" {if $carrierId == $list.id}selected="selected"{/if}>{$list.carrierNameCn}</option>{/if}
+			{/foreach}
+		</select>
+	</span>
+	<span id="nodeList"></span>
+	<span>
+		<select name="country" id="country" class="flexselect">
+			<option value="">==国家不限==</option>
+			{foreach item=list from=$countrys}
+			<option value="{$list.countryNameEn}" {if $country==$list.countryNameEn}selected="selected"{/if}>{$list.countryNameEn}--{$list.countryNameCn}</option>
+			{/foreach}
+		</select>
+	</span>
+	<span>
+		<select name="selectId" id="selectId">
+			<option value="-1" {if $selectId==-1}selected="selected"{/if}>==不限跟踪号使用情况==</option>
+			<option value="0" {if $selectId==0}selected="selected"{/if}>==跟踪号未使用==</option>
+			<option value="1" {if $selectId==1}selected="selected"{/if}>==跟踪号已使用==</option>
+		</select>
+	</span>
+	<span>
+		<select id="type">
+			<option value='0'>请选择搜索条件</option>
+			<option value='trackNumber'{if ($type=='trackNumber')} selected="selected"{/if}>跟踪号</option>
+			<option value='orderId'{if ($type=='orderId')} selected="selected"{/if}>订单编号</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="index.php?mod=trackNumber&act=add">添加</a>
+	</span>
+	<span>
+		<a href="index.php?mod=trackNumber&act=trackNumberImport">批量导入</a>
+	</span>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>运输方式名</th>
+			<th>渠道名</th>
+			<th>跟踪号</th>
+			<th>所属国家</th>
+			<th>分配时间</th>
+			<th>订单编号</th>
+			<th>创建时间</th>
+			<th>操作</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.carrierNameCn}</td>
+			<td>{if empty($list.channelName)}暂无{else}{$list.channelName}{/if}</td>
+			<td>{$list.trackNumber}</td>
+			<td>{if empty($list.countrys)}不限{else}{$list.countrys}{/if}</td>
+			<td>{if empty($list.assignTime)}暂无{else}{date('Y-m-d H:i:s',$list.assignTime)}{/if}</td>
+			<td>{if empty($list.orderId)}未分配{else}{$list.orderId}{/if}</td>
+			<td>{if empty($list.addTime)}暂无{else}{date('Y-m-d H:i:s',$list.addTime)}{/if}</td>
+			<td>{if empty($list.assignTime) && empty($list.orderId)}<a href="index.php?mod=trackNumber&act=modify&id={$list.id}"><b>编辑</b></a> | <a href="javascript:void(0)" onclick="del_info({$list.id})"><b>删除</b></a>{/if}</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<script type="text/javascript" src="./public/js/track_number.js"></script>
+{include file="footer.htm"}

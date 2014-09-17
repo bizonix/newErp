@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+
+.methodechoose {
+    font-size: 25px;
+    padding-left: 50px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.formdiv {
+    padding-left: 60px;
+}
+
+.form1 {
+    border: #000 dashed 2px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 800px;
+    display: none;
+}
+
+.formtable {
+    width: 600px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.title {
+    width: 290px;
+    background-color: #3d96ee;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    height: 30px;
+    line-height: 30px;
+}
+
+.tbcontent {
+    background-color: #edeff1;
+    height: 30px;
+    line-height: 30px;
+    width: 300px;
+}
+
+.tbcontent input {
+    width: 280px;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    border: none;
+}
+
+.deltd {
+    cursor: pointer;
+    color: red;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.submitbtn {
+    cursor: pointer;
+    border: #66ccff solid 1px;
+    padding: 3px;
+    font-weight: 600;
+}
+
+.submitbtn:hover {
+    background-color: #6666ff;
+    color: #fff;
+}

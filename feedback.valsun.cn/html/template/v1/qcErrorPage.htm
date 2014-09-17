@@ -1,0 +1,18 @@
+{include file="header.htm"}
+<div class="fourvar">
+	{include file="iqcnav.htm"}               
+</div>
+<link rel="stylesheet" href="css/powermanage.css">
+<div style='width: 960px; margin: auto; height: 403px;'>
+    <div class="message error " style='margin-top: 50px;' > 
+            <b><font color="red">Error!</font></b>
+            <br />
+            <!-- BEGIN errmsg -->
+            <b><font color="red">{$msgval}</font></b>
+            <!-- END errmsg -->
+    </div>
+    <div style='padding-right: 50px;'>
+        <a style="float: right;font-size: 25px; text-decoration: none; color: #333333" href='{$link}'>返回》》</a>
+    </div>
+</div>
+{include file="footer.htm"}

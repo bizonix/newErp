@@ -1,0 +1,168 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">                
+    	您的位置：<a href="index.php?mod=purToWh&act=index">收货管理</a>>>手工录入收货信息
+    </div>     
+</div>            
+<div class="main underline-main">
+<table width="50%" border="0" cellpadding="0" cellspacing="0" style=" text-align:inherit; padding-left:40px;" >
+    <tr>
+        <td>订单号</td>
+        <td>
+			<input name="txt_ordersn" type="text" id="txt_ordersn" value="{$dataInfo.ordersn}" disabled="disabled" />
+			<input type="hidden" value="{$dataInfo.id}" id="hid_id" />
+		</td> 
+        <td>料号</td>
+        <td><input name="txt_sku" type="text" id="txt_sku" value="{$dataInfo.sku}" disabled="disabled"/></td>             
+    </tr>
+	<tr>                          
+        <td>采购时间</td>
+        <td><input name="txt_purtime" type="text" id="txt_purtime" onclick="WdatePicker()" value="{$dataInfo.purtime|date_format:'%Y-%m-%d'}" disabled="disabled"/></td>
+         <td>供应商</td>
+        <td><input name="txt_parnter" type="text" id="txt_parnter" value="{$dataInfo.parnter}" disabled="disabled" /></td>
+    </tr>
+    <tr>                          
+        <td>订货数量</td>
+        <td><input name="txt_purcount" type="text" id="txt_purcount" value="{$dataInfo.purcount}" disabled="disabled" /></td>
+		 <td>订货价格</td>
+        <td><input name="txt_purprice" type="text" id="txt_purprice" value="{$dataInfo.purprice}" disabled="disabled" /></td>        
+    </tr>
+    <tr>                                        
+        <td>采购员</td> 
+        <td><input name="txt_cguser" type="text" id="txt_cguser" value="{$dataInfo.cguser}" disabled="disabled" /></td>
+		<td>订货备注</td>
+        <td><input name="txt_purnote" type="text" id="txt_purnote" value="{$dataInfo.purnote}" disabled="disabled" /></td>
+    </tr>
+    <tr>
+        <td>到货数量</td>
+        <td><input name="txt_incount" type="text" id="txt_incount" value="{$dataInfo.incount}" onblur="updActualCount();" /></td>
+		<td>实收数量</td>
+        <td>
+			<input name="txt_actualcount" type="text" id="txt_actualcount" value="{$dataInfo.actualcount}" disabled="disabled"/>
+			<input type="hidden" id="hidactualcount" value="{$dataInfo.actualcount}" />
+		</td>
+    </tr>
+    <tr>
+        <td>收货备注</td>
+        <td><input name="txt_innote" type="text" id="txt_innote" value="{$dataInfo.innote}" /></td>
+		<td>收货日期</td>
+		<td>
+			<input name="txt_intime" type="text" id="txt_intime" onclick="WdatePicker()" value="{$recTime}"/>
+		</td>                   
+    </tr>
+    <tr>
+        <td><input name="addPartner" type="button" value="保存" id="button_submit" /></td>
+        <td><input name="addPartner" type="button" value="返回" id="button_back" /></td>
+		<td>
+			<input name="serspu" type="hidden" value="{$smarty.get.ser_sku}" id="serspu" />
+			<input name="serspu" type="hidden" value="{$smarty.get.ser_orderstu}" id="serorderstu" />
+			<input name="serspu" type="hidden" value="{$smarty.get.ser_receiptstu}" id="serreceiptstu" />
+		</td>
+		<td></td>
+    </tr>
+</table>                      
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}
+
+<script>
+{literal}
+$(document).ready(function(){
+	$('#txt_incount').focus();
+})
+$('#txt_incount').keydown(function(event){
+	if(event.keyCode == 13){ 
+		var tips = '确认收货';
+		alertify.confirm(tips, function (e) {
+			if(e){
+				submitData();
+			}
+		})
+	}
+})
+//动态更新实收数量
+function updActualCount(){
+	var actualcount 	= $.trim($('#hidactualcount').val());
+	var incount         = $.trim($('#txt_incount').val());
+	if(incount != ''){
+		actualcount         = parseInt(actualcount);
+		incount             = parseInt(incount);
+		var totalcount  	= actualcount + incount;
+		$('#txt_actualcount').val(totalcount);
+	}else{
+		$('#txt_actualcount').val(actualcount);
+	}
+}
+$('#button_submit').click(function(){
+	submitData();
+})
+function submitData(){
+	var obj         = {};
+	var data        = [];
+	var regnum      = /^[0-9]+$/; 
+	var id          = $('#hid_id').val();
+	var ordersn   	= $.trim($('#txt_ordersn').val());
+	var sku       	= $.trim($('#txt_sku').val());
+	var actualcount = $.trim($('#txt_actualcount').val()); 
+    var incount     = $.trim($('#txt_incount').val());  
+    var innote      = $.trim($('#txt_innote').val());
+	var purcount    = $('#txt_purcount').val();
+	var rectime     = $.trim($('#txt_intime').val());
+	var serspu      = $.trim($('#serspu').val());
+	var serorderstu      	= $.trim($('#serorderstu').val());
+	var serreceiptstu      	= $.trim($('#serreceiptstu').val());
+	if(incount == ''){
+		alertify.error('请录入到货数量');
+		$('#txt_incount').focus();
+		return false;
+	}
+	if(!regnum.test(incount) || incount==0) {        
+		alertify.error('到货数量录入不合法');
+		$('#txt_incount').focus();
+		return false;
+	}
+	purcount 			= parseInt(purcount);
+	actualcount         = parseInt(actualcount);
+	if(actualcount > purcount){
+		alertify.error('实收数量不能大于订货数量');
+		$('#txt_incount').focus();
+		return false;
+	}
+	if(rectime == ''){
+		alertify.error('请填写收货时间');
+		$('#txt_intime').focus();
+		return false;
+	}
+	obj.ordersn 		= ordersn;
+	obj.sku     		= sku;
+	obj.incount  		= incount;
+	obj.innote   		= innote;
+	obj.rectime         = rectime;
+	obj.actualcount 	= actualcount;
+	obj.rid       		= id;
+	data.push(obj);
+    var url  = "json.php?mod=purToWh&act=addDetail";  
+	$.post(url, {"data":data} , function(rtn){        
+		var code = rtn.code;
+		var msg  = rtn.msg;
+		if(code == 1){
+			alertify.alert(msg,function(){
+               if(id != 'no'){
+			   		window.location.href="index.php?mod=purToWh&act=index&ser_sku="+serspu+'&ser_orderstu='+serorderstu+'&ser_receiptstu='+serreceiptstu;
+			   }else{
+			   		window.location.reload(); 
+			   } 
+			}); 
+		}else{
+            alertify.error(msg); 
+		}
+     },"json");
+}
+$('#button_back').click(function(){
+	window.location.href="index.php?mod=purToWh&act=index";
+})
+{/literal}
+</script>
+
+            

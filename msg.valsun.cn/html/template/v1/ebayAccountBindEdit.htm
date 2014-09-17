@@ -1,0 +1,22 @@
+{include file="header.htm"} {include file="secendNav_localpower.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css"
+	media="screen" />
+<script type="text/javascript" src="./js/localpower.js"></script>
+
+<div class="main">
+    <form method="post" action="index.php?mod=localPower&act=changeAccountBind">
+	    <div style="margin-top:10px;padding-left:30px;margin-bottom:10px;">
+	        <input type="hidden" name="account" value="{$account}">
+	        <span style="font-size:20px;">账号:{$account}</span>
+	    </div>
+	    <div style="padding-left:50px;padding-right:50px;">
+		    {foreach $userList as $user}
+		        <input {if in_array($user.global_user_id, $ids)}checked="checked"{/if} type="checkbox" name="userId[]" value="{$user.global_user_id}">{$user.global_user_name}
+		    {/foreach}
+	    </div>
+	    <div style="text-align:center; margin-top:10px;">
+	       <input type="submit" value="提交">
+	    </div>
+    </form>
+</div>
+{include file="footer.htm"}

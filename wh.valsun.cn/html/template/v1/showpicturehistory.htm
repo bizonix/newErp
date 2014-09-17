@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$toptitle}--仓库系统</title>
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<script language="javascript" src="js/jquery-1.8.3.js"></script>
+<script language="javascript" src="js/ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./js/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<link rel="stylesheet" href="./css/validationEngine/validationEngine.jquery.css" type="text/css"/>
+<script src="./js/languages/jquery.validationEngine-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+<script language="javascript" src="./js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./css/alertify/alertify.core.css" />
+<link rel="stylesheet" href="./css/alertify/alertify.default.css" />
+<script language="javascript" type="text/javascript" src="./js/alertify/alertify.min.js"></script>
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<script src="http://api.notice.valsun.cn/js/swJsNotice.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="./js/fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+
+</head>
+<body id="toppage">
+	<div class="container container_wh">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	仓库系统
+                </div>
+                <div class="onevar">
+                    <ul class="wh_toul">
+                    	<li>
+                        	<a class=" house {if $toplevel === 0}cho{/if}"  href="index.php?mod=skuStock&act=searchSku">&nbsp;&nbsp;库存管理&nbsp;&nbsp;</a>
+                        </li>
+                        <li>
+                            <a class=" outhouse {if $toplevel === 2}cho{/if}"  href="index.php?mod=dispatchBillQuery&act=showForm&storeId=1">&nbsp;&nbsp;出库业务&nbsp;&nbsp;</a>
+                        </li>
+                        <li>
+                        	<a class=" inhouse {if $toplevel === 1}cho{/if}"  href="index.php?act=packageCheck&mod=packageCheck">&nbsp;&nbsp;入库业务&nbsp;&nbsp;</a>
+                        </li>
+						<li>
+                            <a class=" receipt {if $toplevel === 3}cho{/if}"  href="index.php?mod=whIoStore&act=getWhOutStoreList">&nbsp;&nbsp;单据业务&nbsp;&nbsp;</a>
+                        </li>
+                        <li>
+                            <a class=" housesetup {if $toplevel === 4}cho{/if}"  href="index.php?mod=warehouseManagement&act=whStore">&nbsp;&nbsp;仓库设置&nbsp;&nbsp;</a>
+                        </li>
+						<li>
+                        	<a href="index.php?mod=user&act=index" class=" systemsettings {if in_array($mod,array('user','job','dept'))} cho{/if}">系统设置</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user">
+					<a class="news-img" href="javascript:javascript:void(0)" onclick="swntc_call('{$_userCNname}')">消息</a>
+                	<a href="javascript:void(0)">{$_userCNname}</a>
+                    <a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;">退出</a>
+                </div>
+            </div>
+            <div class="twovar">
+
+            	<ul>
+					{if $toplevel == 0}
+					{if in_array($mod,array('user','job','dept'))}
+                    <li><a href="index.php?mod=user&act=index" {if $act=='index' && $mod=='user'}class="cho"{/if}>用户管理</a></li>
+					<li><a href="index.php?mod=job&act=index" {if $act=='index' && $mod=='job'}class="cho"{/if}>岗位管理</a></li>
+					<li><a href="index.php?mod=dept&act=index" {if $act=='index' && $mod=='dept'}class="cho"{/if}>部门管理</a></li>
+					{else}
+                    <li>
+			            <a {if $secondlevel == '01'}class="cho"{/if} href="index.php?mod=skuStock&act=searchSku">货品资料</a>
+			        </li>
+                    <li>
+						<a {if $secondlevel == '34'}class="cho"{/if} href="index.php?mod=whIoRecords&act=getWhIoRecordsList&ioType=1">出库记录</a>
+					</li>
+					<li>
+						<a {if $secondlevel == '35'}class="cho"{/if} href="index.php?mod=whIoRecords&act=getWhIoRecordsList&ioType=2">入库记录</a>
+					</li>
+                    <li>
+			            <a {if $secondlevel == '04'}class="cho"{/if} href="index.php?mod=inventory&act=inventory">盘点管理</a>
+			        </li>
+                    <li>
+						<a {if $secondlevel == '09'}class="cho"{/if} href="index.php?mod=WhRecManage&act=getWhRecManageList">收货管理</a>
+					</li>
+                    <li>
+						<a {if $secondlevel == '02'}class="cho"{/if} href="index.php?mod=whExportManage&act=whExportManageList">仓库报表管理</a>
+					</li>
+					<li>
+						<a {if $secondlevel == '03'}class="cho"{/if} href="index.php?mod=packageCheck&act=showPackage">点货清单</a>
+					</li>
+                    <li>
+						<a {if $secondlevel == '05'}class="cho"{/if} href="index.php?mod=pictureAudit&act=showpicture">图片审核</a>
+					</li>
+					{/if}
+					{elseif $toplevel == 1}
+                    <!--<li>
+						<a {if $secondlevel == '10'}class="cho"{/if} href="#">入库清单</a>
+					</li>-->
+					<li>
+						<a {if $secondlevel == '11'}class="cho"{/if} href="index.php?mod=packageCheck&act=packageCheck">点货操作</a>
+					</li>
+					<li>
+						<a {if $secondlevel == '12'}class="cho"{/if} href="index.php?mod=printLabel&act=printLabel">打标操作</a>
+					</li>
+					<!--<li>
+						<a {if $secondlevel == '13'}class="cho"{/if} href="#">IQC</a>
+					</li>-->
+					<!--li>
+						<a {if $secondlevel == '14'}class="cho"{/if} href="index.php?mod=whShelf&act=whShelf">上架操作</a>
+					</li-->
+					<li>
+						<a {if $secondlevel == '15'}class="cho"{/if} href="index.php?mod=whNoOrder&act=whNoOrder">未订单列表</a>
+					</li>
+					<li>
+						<a {if $secondlevel == '16'}class="cho"{/if} href="index.php?mod=postOfficeReturned&act=returned">邮局退回</a>
+					</li>
+					<li>
+						<a {if $secondlevel == '17'}class="cho"{/if} href="index.php?mod=pasteLabel&act=pasteLabel">贴标录入</a>
+					</li>
+					
+					{elseif $toplevel == 2}
+					<li><a {if $secondlevel== '21'}class="cho"  {/if} href="index.php?mod=dispatchBillQuery&act=showForm&storeId=1">发货单</a></li>
+					<li><a {if $secondlevel== '22'}class="cho"	{/if} href="index.php?mod=orderWaitforPrint&act=printList">打印发货单</a></li>
+					<li><a {if $secondlevel== '23'}class="cho"  {/if} href="index.php?mod=dispatchBillQuery&act=showForm&secondlevel=23&status=402">待配货</a></li>
+					<li><a {if $secondlevel== '24'}class="cho"	{/if} href="index.php?mod=dispatchBillQuery&act=showForm&secondlevel=24&status=403">待复核</a></li>
+					<li><a {if $secondlevel== '25'}class="cho"	{/if} href="index.php?mod=dispatchBillQuery&act=showForm&secondlevel=25&status=404">待包装</a></li>
+					<li><a {if $secondlevel== '26'}class="cho"	{/if} href="index.php?mod=dispatchBillQuery&act=showForm&secondlevel=26&status=405">待称重</a></li>
+					<li><a {if $secondlevel== '27'}class="cho"	{/if} href="index.php?mod=orderPartion&act=orderPartion">待分区</a></li>
+					<li><a {if $secondlevel== '28'}class="cho"	{/if} href="index.php?mod=dispatchBillQuery&act=showForm&secondlevel=28&status=605">快递待复核</a></li>
+					<li><a {if $secondlevel== '29'}class="cho"	{/if} href="index.php?mod=dispatchBillQuery&act=showForm&secondlevel=29&status=900">废弃发货单</a></li>
+					<li><a {if $secondlevel== '212'}class="cho"	{/if} href="index.php?mod=dispatchBillQuery&act=showForm&secondlevel=212&status=901">异常发货单</a></li>
+					<li><a {if $secondlevel== '210'}class="cho"	{/if} href="index.php?mod=pdaManagement&act=inquiry">pda操作查询</a></li>
+                    <li><a {if $secondlevel== '211'}class="cho"	{/if} href="index.php?mod=skuWeighing&act=skuWeighing">料号称重</a></li>
+                    <li><a {if $secondlevel== '213'}class="cho" {/if} href="index.php?mod=dispatchBillScan&act=inputForm">异常发货单扫描</a></li>
+                    <li><a {if $secondlevel== '214'}class="cho" {/if} href="index.php?mod=owGoodsReplenishManage&act=showOrderList">海外仓补货</a></li>
+					{elseif $toplevel == 3}
+                    <!--
+                    <li>
+			            <a {if $secondlevel == '30'}class="cho"{/if} href="index.php?mod=internalIoSell&act=internalBuyList">内部使用申请单</a>
+			        </li>
+                    -->
+                    <li>
+			            <a {if $secondlevel == '31'}class="cho"{/if} href="index.php?mod=internalIoSell&act=internalUseIostoreList">内部使用</a>
+			        </li>
+                    <li>
+						<a {if $secondlevel == '32'}class="cho"{/if} href="index.php?mod=whIoStore&act=getWhOutStoreList">出库单</a>
+					</li>
+					<li>
+						<a {if $secondlevel == '33'}class="cho"{/if} href="index.php?mod=whIoStore&act=getWhInStoreList">入库单</a>
+					</li>
+					<li>
+						<a {if $secondlevel == '34'}class="cho"{/if} href="index.php?mod=whIoStore&act=getAuditOutStoreList">待审核出库单</a>
+					</li>
+					<li>
+						<a {if $secondlevel == '35'}class="cho"{/if} href="index.php?mod=whIoStore&act=getAuditInStoreList">待审核入库单</a>
+					</li>
+                    <li>
+						<a {if $secondlevel == '011'}class="cho"{/if} href="index.php?mod=WhAudit&act=getWhAuditList">审核管理</a>
+					</li>
+                    <li>
+						<a {if $secondlevel == '012'}class="cho"{/if} href="index.php?mod=WhAudit&act=getWhAuditRecords">审核记录</a>
+					</li>
+					
+                    {elseif $toplevel == 4}
+					<!--<li>
+			            <a {if $secondlevel == '02'}class="cho"{/if} href="index.php?mod=goodsInfo&act=showSearchForm">货品资料</a>
+			        </li>-->
+			        <li>
+			            <a {if $secondlevel == '05'}class="cho"{/if} href="index.php?mod=warehouseManagement&act=whStore">仓库列表</a>
+			        </li>
+			        <li>
+			            <a {if $secondlevel == '06'}class="cho"{/if} href="index.php?mod=warehouseManagement&act=whIoTypeList">出入库类型</a>
+			        </li>
+                    <li>
+			            <a {if $secondlevel == '07'}class="cho"{/if} href="index.php?mod=warehouseManagement&act=whIoInvoicesTypeList">单据类型</a>
+			        </li>
+                    <li>
+			            <a {if $secondlevel == '08'}class="cho"{/if} href="index.php?mod=LibraryStatus&act=libraryStatusList">状态管理</a>
+			        </li>
+					<li>
+						<a {if $secondlevel == '010'}class="cho"{/if} href="index.php?mod=position&act=positionList">A仓管理</a>
+					</li>
+					<li>
+						<a {if $secondlevel == '011'}class="cho"{/if} href="index.php?mod=position&act=positionListB">B仓管理</a>
+					</li>
+					<li>
+						<a {if $secondlevel == '46'}class="cho"{/if} href="index.php?mod=locationPrint&act=locationPrint">仓位打印</a>
+					</li>
+					{/if}
+					
+                </ul>
+
+            </div>
+
+{include file='whNav.htm'}
+<meta http-equiv="Pragma" Content="No-cach">
+<script type="text/javascript" src="./fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<link rel="stylesheet" type="text/css" href="./fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="./js/picture.js"></script>
+<script type="text/javascript" src="./js/jquery.lazyload.mini.js"></script>
+<style>
+.search{
+background-color: #0092DC;
+color: #FFF;
+border: 1px solid #00689D;
+padding: 5px 12px;
+}
+.pic{
+float:left;margin:10px;width:300px;
+}
+.pic_content{
+	width:98%;margin:10px auto;
+}
+.hidden{
+position:absolute;
+display:none;
+}
+</style>
+<div class="servar wh-servar">
+<form action="index.php?mod=pictureAudit&act=searchpicturehistory" method="post">
+<div class="tag1">
+		拍照日期|
+		开始时间  <input name="startdate" type="text" id="startdate"  onClick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"   value="{$smarty.post.startdate}"/>	  
+		  结束时间 <input name="enddate" type="text" id="enddate"  onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )"   value="{$smarty.post.enddate}" />
+		 拍照人<input name="scanuser" type="text" id="scanuser" value="{$smarty.post.scanuser}"/>
+		 定单号<input name="ordersn" type="text" id="ordersn" value="{$smarty.post.ordersn}">
+</div>
+<div class="hidden"><img src="" class="showpics"/></div>
+<div class="tag2">
+		拍照类型<select name="pic_type" id="pic_type">
+		     <option value="" >请选择 </option>
+		     <option value="fh" {if $smarty.post.pic_type == 'fh'} selected='selected' {/if}>复核 </option>
+		     <option value="cz" {if $smarty.post.pic_type == 'cz'} selected='selected' {/if}>称重 </option>
+		     </select>
+		照片状态<select name="pic_status" id="pic_status">
+		     <option value="2" {if $smarty.post.pic_status ==2} selected='selected' {/if} >未评分  </option>
+		     <option value="1" {if $smarty.post.pic_status ==1} selected='selected' {/if}>合格</option>
+		     <option value="0" {if $smarty.post.pic_status ==0} selected='selected' {/if}>不合格 </option>
+			</select>
+			<input type="hidden" id="hidden" name="userName" value="{$curusername}"/>
+			显示数量：<input type="text" id="limit" name="limit" value="{$smarty.post.limit}"></input>
+			<input type="submit" value="搜索" name="search" onclick="return checkForm()"/>
+			<!-- <a class="search" href="index.php?mod=pictureAudit&act=excelOutPut&starttime=">报表导出</a> -->
+			<a class="search" href="javascript:void(0);" id="excelOutPut">报表导出</a>
+			<font color="red">{if $audited}其中已审核{$audited}张,未审核{$unaudit}张{/if}</font>
+</div>
+</form>
+</div>
+<div class="pic_content">
+{if $srcArr}
+{foreach $srcArr as $value}
+<div class="pic"> <!-- onerror='this.src="{$value.srconerror}"' -->
+<a href="{$value.srconerror}" class="fancy"><img class="lazy" src="gred.jpg" data-original="{$value.srconerror}"  width="300" height="300"/></a>
+<div style="padding:5px;font-size:14px;">
+	<div style="float:left;">
+		<div>
+			<span id="{$value.ebayid}scanuser">{$value.scanuser}  </span>{if $value.stype=='fh'}复核{else}称重{/if}
+		</div>
+		<div>
+			订单编号：<span>{$value.ebayid}</span>
+		</div>
+		<div>
+			料号总数：{if $value.amount}{$value.amount}{/if}
+		</div>
+	</div>
+	<div style="float:right;">
+		<label for="{$value.ebayid}T"   class="aduitradio"><input type="radio" id="{$value.ebayid}T" {if $smarty.post.pic_status ==1} checked="checked" {/if} name="ispass{$value.ebayid}" value="1" scantime="{$value.scantime}" audit="ispass" stype="{$value.stype}"/>合格 </label>
+		<label for="{$value.ebayid}F"   class="aduitradio"><input type="radio" id="{$value.ebayid}F" {if $smarty.post.pic_status ==0} checked="checked" {/if} name="ispass{$value.ebayid}" value="0" scantime="{$value.scantime}" audit="ispass" stype="{$value.stype}"/>不合格</label>
+	</div>
+</div>
+</div>
+{/foreach}
+{else}
+<div><font>{$status}</font></div>
+{/if}
+</div>
+{include file='footer.htm'}

@@ -1,0 +1,76 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/fromOpenConfig.js"></script>
+<div class="servar">
+    <span>
+        <form action="index.php?mod=FromOpenConfig&act=insert" method="post" id="fromOpenConfigList">
+            <label for="functionname">函数名称：</label>
+            <input value="" id='functionname' class="validate[required] text-input" name="functionname" type="text"/>
+            <label for="fname">函数说明：</label>
+            <input value="" id='fname' class="validate[required] text-input" name="fname" type="text"/>
+            <label for="requesturl">请求地址：</label>
+            <input value="" id='requesturl' class="validate[required] text-input" name="requesturl" type="text"/>
+            <label for="method">请求API：</label>
+            <input value="" id='method' class="validate[required] text-input" name="method" type="text"/>
+            <label for="format">返回数据类型：</label>
+            <select id='format' class="validate[required] text-input" name="format">
+            <option value="json">json</option>
+            <option value="xml">xml</option>
+            </select><br/>
+            <label for="v">版本：</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input value="" id='v' class="validate[required] text-input" name="v" type="text"/>
+            <label for="username">用户：</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input value="" id='username' class="validate[required] text-input" name="username" type="text"/>
+            <label for="cachetime">缓存时间：</label>
+            <input value="" id='cachetime' class="validate[required] text-input" name="cachetime" type="text"/>
+            <input type="submit" value="添加" id="add" style="background-color: #0092dc;color: #FFF;border: 1px #00689d solid;padding: 5px 12px;"/>
+            
+        </form>
+    </span>
+</div>
+
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+            <td>编号</td>
+            <td>函数名称</td>
+            <td>函数说明</td>
+            <td>请求地址</td>
+            <td>请求API</td>
+            <td>返回数据类型</td>
+            <td>版本</td>
+            <td>用户</td>
+            <td>缓存时间</td>
+            <td>操作</td>
+        </tr>
+        {foreach $FromOpenConfigList as $FromOpenConfig}
+        <tr class="odd" id="{$FromOpenConfig.id}">
+            <td>{$FromOpenConfig.id}<input type="hidden" value="{$FromOpenConfig.id}"></td>
+            <td><span>{$FromOpenConfig.functionname}</span></td>
+            <td><span>{$FromOpenConfig.name}</span></td>
+            <td><span>{$FromOpenConfig.requesturl}</span></td>
+            <td><span>{$FromOpenConfig.method}</span></td>
+            <td><span>{$FromOpenConfig.format}</span></td>
+            <td><span>{$FromOpenConfig.v}</span></td>
+            <td><span>{$FromOpenConfig.username}</span></td>
+            <td><span>{$FromOpenConfig.cachetime}</span></td>
+            <td>
+            	<!-- <button class='doactive'  pid='{$FromOpenConfig.id}'>激活</button> -->
+                <button class='update'  pid='{$FromOpenConfig.id}'>修改</button>
+                <button class='delete'  pid='{$FromOpenConfig.id}'>删除</button>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+
+<div class="bottomvar">
+	<span id="showSelectNum"></span>
+    {if $status == ''}
+    <div class="pagination">
+        {$show_page}
+    </div>
+    {/if}
+</div>
+
+{include file="footer.htm"}

@@ -1,0 +1,63 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whChannelPartition.js"></script>
+<div class="servar wh-servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button-normal" href="index.php?mod=whTransportPartition&act=add" >新增分渠道</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<style>
+.main table td { text-align:left; }	
+.main { padding-left:30px; }
+.main input.sinput { width:400px; }
+.main textarea.sinput { width:400px; }
+.main select.sinput { width:405px; }
+.main table { border:0px solid #ff0000; }
+</style>
+<div class="main">
+<form action='index.php?mod=whChannelPartition&act=add' method="post">
+    <table cellspacing="0">
+         <tr>
+         	<td width="100">分渠道名称</td>
+         	<td><input type="text" class="sinput" name="title" value=""></td>
+         </tr>
+         <tr>
+         	<td>运输方式</td>
+         	<td><select class="sinput" name="transportId" onchange="channelChange(this);">
+         		<option value="0">选择运输方式</option>
+         		{foreach from=$transportlist item=vo}
+         			<option value="{$vo.id}">{$vo.carrierNameCn}</option>	
+         		{/foreach}
+         		</select></td>
+         </tr>
+         <tr>
+         	<td>运输渠道</td>
+         	<td>
+         		<select class="sinput" name="channelId" id="channelId" onchange="selectChannelName(this);">
+         			<option value="0">请选择运输渠道</option>
+         		</select>
+         		<input type="hidden" name="channelName" id="channelName" value=''>
+         	</td>
+         </tr>
+         <tr>
+         	<td>分拣设备筒号</td>
+         	<td><select class="sinput" name="partition">
+         		<option value="0">选择筒号</option>
+         		{section name=loop loop=40}
+         			<option value="{$smarty.section.loop.index+1}">{$smarty.section.loop.index+1}号筒</option>	
+         		{/section}
+         		</select></td>
+         </tr>
+    </table>
+    <div>   		       
+            <button type="submit" name="submit" value="1" class="button-normal" />提交</button>
+            &nbsp;
+            <input type="button" onclick="location.href='index.php?mod=whChannelPartition&act=index'" value="取消" class="button-normal input_button" />
+     </div>
+ </form>
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}

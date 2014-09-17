@@ -1,0 +1,19 @@
+{include file="header.htm"}
+<div class="main">
+	<table cellspacing="0" width="100%">
+			<tr class="title purchase-title">
+				<th>信息提示！</th>
+			</tr>
+			<tr><td>
+			<p>{$message}
+			<br/><br/>
+			{if empty($url)}
+			<button name="button" type="button" id="bottom" value="history" onclick="history.back()"/>返 回</button>
+			{else}
+			<button name="button" type="button" id="bottom" value="history" onclick="location.href='{$url}'"/>返 回</button>
+			{/if}
+			</p>
+			<td></tr>
+	</table>
+</div>
+{include file="footer.htm"}

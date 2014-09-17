@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="./public/js/command.js"></script>
+<script type="text/javascript" src="./public/js/My97DatePicker/WdatePicker.js"></script>
+<script src="./public/js/jquery-ui-1.9.2.custom.js"></script>
+<script src="./public/js/liquidmetal.js" type="text/javascript"></script>
+<script src="./public/js/jquery.flexselect.js" type="text/javascript"></script>
+<script src="http://notice.valsun.cn/public/js/swJsNotice.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://notice.valsun.cn/public/js/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="kindeditor/kindeditor-min.js" charset="utf-8" type="text/javascript"></script>
+<script src="kindeditor/lang/zh_CN.js" charset="utf-8" type="text/javascript"></script>
+<script src="./public/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+<link href="kindeditor/themes/default/default.css" rel="stylesheet" />
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/alertify.css" rel="stylesheet" type="text/css" />
+<link href="./public/css/tran.css" rel="stylesheet">
+<link href="./public/css/ui-lightness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<link href="./public/css/flexselect.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="./public/css/sortblue/style.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="http://notice.valsun.cn/public/css/chosen.css" type="text/css" rel="stylesheet"/>
+
+<script type="text/javascript">
+var web_url = "{$smarty.const.WEB_URL}";
+</script>
+</head>
+<body class="tran-body">
+	<div class="container">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	物流系统
+                </div>
+                <div class="onevar purchase-onevar">
+                	<ul>
+						<li>
+                            <a href="index.php?mod=trackEmailStat&act=index" class="trackEmail {if in_array($mod,array('trackEmailStat','trackEmailTemplate','trackEmailAccount'))}cho{/if}">跟踪邮件管理</a>
+                        </li>
+						<li>
+                            <a href="index.php?mod=trackWarnInfo&act=index" class="FreightInquiry {if in_array($mod,array('trackWarnCarrier','trackWarnNode','trackWarnNodeData','trackWarnInfo'))}cho{/if}">跟踪号预警</a>
+                        </li>
+                        <li>
+                            <a href="index.php?mod=carrierManage&act=index" class="Transportation {if in_array($mod,array('shipfeeQuery','carrierManage','channelManage','partitionManage','shipPrice','trackNumber'))}cho{/if}">运输方式管理</a>
+                        </li>
+						<li>
+                            <a href="index.php?mod=wedoApi&act=index" class="openBusiness {if in_array($mod,array('wedoApi'))}cho{/if}">开放业务管理</a>
+                        </li>
+                        <li>
+                            <a href="index.php?mod=countriesStandard&act=index" class="CountryList {if in_array($mod,array('countriesUsazone','countriesStandard','countriesSmall','countriesShip','countriesChina'))}cho{/if}" >国家列表管理</a></li>
+                        </li>
+                        <li>
+                        	<a href="index.php?mod=shippingAddress&act=index" class="PlatformManagement {if in_array($mod,array('shippingAddress','platForm','transitCenter'))}cho{/if}">地址平台管理</a>
+                        </li>
+						<li>
+                        	<a href="index.php?mod=user&act=index" class="Authorize {if in_array($mod,array('user','job','dept'))}cho{/if}">授权管理</a>
+                        </li>
+						<!--<li>
+                        	<a href="index.php?mod=userCompetences&act=index" class="Authorize {if in_array($mod,array('userCompetences','userCompetence'))}cho{/if}">用户开放授权</a>
+                        </li>-->					
+                    </ul>
+                </div>
+                <div class="user">
+                	<a class="news-img" href="javascript:javascript:void(0)" onclick="swntc_call('{$_username}')">消息</a>
+                	<a href="javascript:void(0);" >{$_username}</a><a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;" title="注销安全退出">退出</a>
+                </div>
+            </div>
+            <div class="twovar {if in_array($mod,array('shippingAddress1'))}nothing-twovar{/if}">
+            	<ul>
+					{if in_array($mod,array('platForm','carrierPlatForm','shippingAddress','transitCenter'))}
+					<li><a href="index.php?mod=shippingAddress&act=index" {if $mod=='shippingAddress' }class="cho"{/if}>发货地址管理</a></li>
+					<li><a href="index.php?mod=platForm&act=index" {if $mod=='platForm' }class="cho"{/if}>平台管理</a></li>
+					<li><a href="index.php?mod=carrierPlatForm&act=index" {if $mod=='carrierPlatForm' }class="cho"{/if}>运输平台管理</a></li>
+					<li><a href="index.php?mod=transitCenter&act=index" {if $mod=='transitCenter' }class="cho"{/if}>转运中心管理</a></li>
+					{/if}
+					{if in_array($mod,array('wedoApi'))}
+					<li><a href="index.php?mod=wedoApi&act=index" {if $mod=='wedoApi' && $act=='index' }class="cho"{/if}>开放业务管理</a></li>
+					<li><a href="index.php?mod=wedoApi&act=orderImport" {if $mod=='wedoApi' && in_array($act,array('orderImport','saveOrderImport')) }class="cho"{/if}>运德物流订单导入</a></li>
+					<li><a href="index.php?mod=wedoApi&act=orderExport" {if $mod=='wedoApi' && $act=='orderExport' }class="cho"{/if}>运德物流订单导出</a></li>
+					<li><a href="index.php?mod=wedoApi&act=wedoSn" {if $mod=='wedoApi' && in_array($act,array('wedoSn','addWedoSn','modifyWedoSn')) }class="cho"{/if}>运德跟踪号生成管理</a></li>
+					{/if}
+					{if in_array($mod,array('trackWarnCarrier','trackWarnNode','trackWarnNodeData','trackWarnInfo','trackWarnStat','trackWarnExport','trackWarnCountry'))}
+					<li><a href="index.php?mod=trackWarnCarrier&act=index" {if $mod=='trackWarnCarrier' }class="cho"{/if}>运输方式预警管理</a></li>
+					<li><a href="index.php?mod=trackWarnCountry&act=index" {if $mod=='trackWarnCountry' }class="cho"{/if}>目的地国家预警管理</a></li>
+					<li><a href="index.php?mod=trackWarnNode&act=index" {if $mod=='trackWarnNode' }class="cho"{/if}>运输方式预警节点管理</a></li>
+					<li><a href="index.php?mod=trackWarnNodeData&act=index" {if $mod=='trackWarnNodeData' }class="cho"{/if}>运德物流节点数据管理</a></li>
+					<li><a href="index.php?mod=trackWarnInfo&act=index" {if $mod=='trackWarnInfo' }class="cho"{/if}>跟踪号预警信息</a></li>
+					<li><a href="index.php?mod=trackWarnStat&act=index" {if $mod=='trackWarnStat' }class="cho"{/if}>跟踪号信息统计</a></li>
+					{/if}
+					{if in_array($mod,array('trackEmailStat','trackEmailTemplate','trackEmailAccount','trackEmailSmtp','carrierProNode'))}
+					<li><a href="index.php?mod=trackEmailStat&act=index" {if $mod=='trackEmailStat' }class="cho"{/if}>跟踪邮件发送列表</a></li>
+					<li><a href="index.php?mod=trackEmailTemplate&act=index" {if $mod=='trackEmailTemplate' }class="cho"{/if}>跟踪邮件模版设置</a></li>
+					<li><a href="index.php?mod=carrierProNode&act=index" {if $mod=='carrierProNode' }class="cho"{/if}>跟踪邮件处理节点设置</a></li>
+					<li><a href="index.php?mod=trackEmailAccount&act=index" {if $mod=='trackEmailAccount' }class="cho"{/if}>客服邮件帐号管理</a></li>
+					<li><a href="index.php?mod=trackEmailSmtp&act=index" {if $mod=='trackEmailSmtp' }class="cho"{/if}>邮件服务配置</a></li>
+					{/if}
+					{if in_array($mod,array('shipfeeQuery','carrierManage','channelManage','partitionManage','channelPrice','trackNumber','carrierOpen','apiCompetence','apiVisitStat'))}
+                    <li><a href="index.php?mod=shipfeeQuery&act=index" {if $mod=='shipfeeQuery' && $act=='index' }class="cho"{/if}>运费查询</a></li>
+                    <li><a href="index.php?mod=shipfeeQuery&act=batch" {if $mod=='shipfeeQuery' && in_array($act, array('batch','saveBatch'))}class="cho"{/if}>批量运费查询</a></li>
+                    <li><a href="index.php?mod=shipfeeQuery&act=shipfeeQueryImport" {if $mod=='shipfeeQuery' && in_array($act, array('shipfeeQueryImport','batchShipfeeQueryImport'))}class="cho"{/if}>批量运费查询导入导出</a></li>
+                    <li><a href="index.php?mod=carrierManage&act=index" {if $mod=='carrierManage' }class="cho"{/if}>运输方式管理</a></li>
+                    <li><a href="index.php?mod=trackNumber&act=index" {if $mod=='trackNumber' }class="cho"{/if}>跟踪号管理</a></li>
+                    <li><a href="index.php?mod=carrierOpen&act=index" {if $mod=='carrierOpen' }class="cho"{/if}>开放运输方式管理</a></li>
+                    <li><a href="index.php?mod=apiCompetence&act=index" {if $mod=='apiCompetence' }class="cho"{/if}>开放API授权管理</a></li>
+                    <li><a href="index.php?mod=apiVisitStat&act=index" {if $mod=='apiVisitStat' }class="cho"{/if}>API调用管理</a></li>
+					{/if}
+					{if in_array($mod,array('countriesUsazone','countriesStandard','countriesSmall','countriesShip','countriesChina'))}
+					<li><a href="index.php?mod=countriesStandard&act=index" {if $mod=='countriesStandard' }class="cho"{/if}>标准国家列表</a></li>
+					<li><a href="index.php?mod=countriesSmall&act=index" {if $mod=='countriesSmall' }class="cho"{/if}>小语种对照国家列表</a></li>
+					<li><a href="index.php?mod=countriesShip&act=index" {if $mod=='countriesShip' }class="cho"{/if}>运输方式对照国家列表</a></li>
+					<li><a href="index.php?mod=countriesUsazone&act=index" {if $mod=='countriesUsazone' }class="cho"{/if}>美国邮政分区列表</a></li>
+					<li><a href="index.php?mod=countriesChina&act=index" {if $mod=='countriesChina' }class="cho"{/if}>中国地区列表</a></li>
+					{/if}
+					{if in_array($mod,array('user','job','dept'))}
+                    <li><a href="index.php?mod=user&act=index" {if $mod=='user' }class="cho"{/if}>用户管理</a></li>
+					{if $_username=='管拥军'}
+					<li><a href="index.php?mod=job&act=index" {if $mod=='job' }class="cho"{/if}>岗位管理</a></li>
+					<li><a href="index.php?mod=dept&act=index" {if $mod=='dept' }class="cho"{/if}>部门管理</a></li>
+					{/if}					
+					{/if}
+					{if in_array($mod,array('userCompetences','userCompetence'))}
+                    <li><a href="index.php?mod=userCompetences&act=index" {if $mod=='userCompetences' }class="cho"{/if}>开放用户权限管理</a></li>
+                    <li><a href="index.php?mod=userCompetence&act=index" {if $mod=='userCompetence' }class="cho"{/if}>用户开放权限管理</a></li>
+					{/if}
+                </ul>
+            </div>

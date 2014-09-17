@@ -1,0 +1,26 @@
+{include file='header.htm'}
+<link type="text/css" rel="stylesheet" href="css/orderindex.css">
+<script language="javascript" src="js/orderindex.js"></script>
+<script language="javascript" src="js/orderRefund.js"></script>
+<script src="./js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script type="text/javascript" src="./js/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<link rel="stylesheet" type="text/css" href="./js/fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+
+<div class="main order-main" align="left">
+    <form id="thelineupfile" name="thelineupfile" action="index.php?mod=omEUBTrackNumber&act=applyTheLineEUBTrackNumber" enctype="multipart/form-data" title="线下EUB申请" method="post">
+    <span>{$showerrorinfo}</span>
+    <table cellpadding='0' cellspacing='0' width='100%' border='0'>
+        <tr>
+            <td width="20%"><a href="#">上传模板</a></td>
+            <td width="20%"><input name="theline_upfile" type="file" />&nbsp;</td>
+            <td width="20%"><input type="submit" value="上传excel"/></td>
+			<td width="30%"><span id="thelineshowmsg"></span></td>
+			
+       </tr>
+       <tr>	
+            <td colspan='3'><strong>如果指定列无数据，指定列将不会更新，如果有数据，指定列将被更新成功。</strong></td>
+       </tr>
+    </table>
+    </form>
+</div>
+{include file='footer.htm'}

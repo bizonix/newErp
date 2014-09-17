@@ -1,0 +1,2 @@
+[ 2014-03-14T09:59:35+08:00 ] /mail_subscription/html/ | ERR: [2] filemtime(): stat failed for D:/Workspace/PHP/mail_subscription/smarty/templates_c\af109f6b9187910c1f66d3a794bdc3c039583fb6.file.login.htm.php smarty_resource.php 第 720 行.
+[ 2014-03-14T09:59:35+08:00 ] /mail_subscription/html/ | ERR: [2] unlink(D:/Workspace/PHP/mail_subscription/smarty/templates_c\af109f6b9187910c1f66d3a794bdc3c039583fb6.file.login.htm.php): No such file or directory smarty_internal_write_file.php 第 57 行.

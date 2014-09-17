@@ -1,0 +1,158 @@
+{include file="header.htm"}
+<link rel="stylesheet" href="./js/kindeditor-4.1.10/themes/simple/simple.css" />
+<link rel="stylesheet" href="./js/kindeditor-4.1.10/plugins/code/prettify.css" />
+<script charset="utf-8" src="./js/kindeditor-4.1.10/kindeditor-min.js"></script>
+<script charset="utf-8" src="./js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script charset="utf-8" src="./js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+            <div class="main products-main">
+                <form id="addSpuModityRecordForm" name="addSpuModityRecordForm" method="post" action="json.php?mod=goods&act=addSpuModityRecordOn&jsonp=1"> 
+					<table class="products-action" width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+                            <td align="right" width="200px"><span style="color:#F00;">*</span>SPU：</td>
+							<td align="left">
+                            <input name="spu" id="spu" class="validate[required]"/>
+                            <span style="color: red;" id="spuErrorString"></span>
+							</td>
+						</tr>
+                        <tr>
+                       	    <td align="right" width="200px">
+                                <span style="color:#F00;">&nbsp;</span>所关联的虚拟SPU：
+                            </td>
+                            <td align="left">
+								<textarea cols="60" rows="3" name="combineSpuRelativeContent" id="combineSpuRelativeContent" readonly="readonly"></textarea>
+							</td>
+						</tr>
+                        <tr>
+                            <td align="right" width="200px"><span style="color:#F00;">*</span>修改/优化：</td>
+                            <td align="left">
+                                 <select id="recordType" name="recordType" class="validate[required]">
+                                    <option value=""></option>
+                                    <option value="1">修改</option>
+                                    <option value="2">优化</option>
+                                 </select>
+							</td>
+						</tr>         
+                        <tr>
+                            <td align="right" width="200px"><span style="color:#F00;">*</span>修改类型：</td>
+                            <td align="left">
+                                 {foreach getisOnModifyTypeList() as $value}
+                                 <input class="validate[minCheckbox[1] checkbox" type="checkbox" name="modifyTypeName[]" id="{$value['modifyTypeName']}" value="{$value['modifyTypeName']}"/>
+                                 <label for="{$value['modifyTypeName']}">{$value['modifyTypeName']}</label>
+                                 {/foreach}
+							</td>
+						</tr>
+                        <tr>
+                            <td align="right" width="200px"><span style="color:#F00;">*</span>修改内容：</td>
+                            <td align="left">
+							     <textarea class="validate[required]" id="modityContent" name="modityContent" style="width:700px;height:200px;visibility:hidden;"></textarea>
+                            </td>
+						</tr>
+                        <tr>
+                            <td align="right" width="200px"><span style="color:#F00;">&nbsp;</span>备注：</td>
+                            <td align="left">
+                                 <textarea cols="60" rows="3" name="note" id="note"></textarea>
+							</td>
+						</tr>
+                        <tr>
+                            <td></td>                            
+							<td align="left"><input type="submit" value="提交"/>
+                            </td>
+						</tr>
+					</table>
+                </form>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">        
+        $(document).ready(function(){
+            jQuery("#addSpuModityRecordForm").validationEngine();
+            $("#spu").focus();
+            $("#spu").blur(function(){
+                $("#combineSpuRelativeContent").val('');
+                spu = $("#spu").val();
+                if(!$.trim(spu)){
+                   $('#spuErrorString').html('SPU为空');
+                   $("#spu").focus();
+                   return; 
+                }else{
+                    $('#spuErrorString').html('');
+                    $.ajax({
+        				type	: "POST",
+        				dataType: "jsonp",
+        				url		: 'json.php?mod=goods&act=isExistBySpu&jsonp=1',
+        				data	: { spu:spu },
+        				success	: function (msg){
+        					if(msg.errCode == 200){
+        					    $.ajax({
+                    				type	: "POST",
+                    				dataType: "jsonp",
+                    				url		: 'json.php?mod=goods&act=getCombineSpuBySpu&jsonp=1',
+                    				data	: { spu:spu },
+                    				success	: function (msg){
+                    					if(msg.errCode == 200){
+                    					    $("#combineSpuRelativeContent").val(msg.data);
+                                            return;
+                    					}
+                    				}
+                    			});
+        					}else{
+    					       $('#spuErrorString').html(msg.errMsg);
+                               $("#combineSpuRelativeContent").val('');
+                               $("#spu").focus();
+                               return;
+        					}
+        				}
+        			});
+                }
+            });
+            
+            $("#back").click(function(){
+        		history.back();
+        	});
+        });       
+</script>
+<script type="text/javascript">
+        KindEditor.ready(function(K) {
+        	var editor1 = K.create('textarea[name="modityContent"]', {
+        		width : '70%',
+        		items :[
+        		        'source', '|',
+        		        'undo', 'redo', '|',
+        		        'preview', 'cut', 'copy', 'paste', 'plainpaste', 'wordpaste', '|',
+        		        'emoticons' , 'image', 'table', 'hr' , '|',
+        		        'selectall' , 'quickformat' , 'fullscreen'
+        		        ],
+        		cssPath : './js/kindeditor-4.1.10/plugins/code/prettify.css',
+        		uploadJson : './js/kindeditor-4.1.10/php/upload_json.php',
+        		fileManagerJson : './js/kindeditor-4.1.10/php/file_manager_json.php',
+        		allowFileManager : true,
+        		afterCreate : function() {
+        			var self = this;
+        			K.ctrl(document, 13, function() {
+        				self.sync();
+        				K('form[name=addSpuModityRecordForm]')[0].submit();
+        			});
+        			K.ctrl(self.edit.doc, 13, function() {
+        				self.sync();
+        				K('form[name=addSpuModityRecordForm]')[0].submit();
+        			});
+        		}
+        	});
+        	prettyPrint();
+        });
+</script>

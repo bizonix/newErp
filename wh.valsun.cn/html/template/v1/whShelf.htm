@@ -1,0 +1,67 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/whShelf.js"></script>
+
+{include file='whNav.htm'}
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+
+<div class="servar wh-servar">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="succeedLog" style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="errorLog" style="color: #F00">{$errorLog}</span>
+</div>
+
+<div class="main">
+ <form id="check_form"  action="" >    
+	<input type="hidden" name="userName" value="{$curusername}"/>
+	<div style="float:left;width:300px;margin-left:20px">
+	<table id="checkinfo" cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="40%">sku</td>
+				<td width="60%"><input name="sku" type="text" class="mf validate[required] text-input" value=""></td>
+             
+      
+
+            </tr>
+        </thead>
+        <tbody id="tablebody" style="display:none">
+            <tr class="odd">
+                <td width="40%">需上架数量</td>
+                <td width="60%" style="padding-left:23px" align="left"><span  id="nums_need" name="nums_need"></span></td>
+                
+                
+                
+            </tr>
+		    <tr class="odd">
+                <td width="40%">数量</td>
+                <td width="60%"><input name="nums" id="nums" class="validate[required,custom[integer],min[0]]" type="text" value=""/></td>
+                
+                
+                
+            </tr>
+			<tr class="odd">
+                <td width="40%">仓位</td>
+                <td width="60%"><input name="position" type="text" id="position" value=""/></td>
+                
+                
+                
+            </tr>
+			<tr class="odd">
+                <td width="40%">存货位置</td>
+                <td width="60%" style="padding-left:20px"><input style="display:none" name="store_position" type="text"  value=""/><select style="width:130px" class="queryformselect" onchange="select(this)" name="store_position" id="store_position"><option value="">请选择</option></select></td>
+                
+                
+                
+            </tr>
+		</tbody>
+    
+    </table>
+	
+	</div>
+	
+	<div style="clear:both;">&nbsp;</div>
+	
+ </form>
+ <button style="margin:0 50px;display:none;"    id="submitform" value="">提交</button>
+</div>
+{include file='footer.htm'}

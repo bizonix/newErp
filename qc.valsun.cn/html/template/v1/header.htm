@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$module}--QC管理系统</title>
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/alertify.css" rel="stylesheet" type="text/css" />
+<!--meta name="viewport" content="width=device-width, initial-scale=1.0"-->
+<link rel="stylesheet" href="js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/easyTooltip.js"></script>
+<script type="text/javascript" src="js/hoverIntent.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+<script type="text/javascript" src="js/jquery.wysiwyg.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<link rel="stylesheet" href="./css/validationEngine/validationEngine.jquery.css" type="text/css"/>
+<script src="./js/languages/jquery.validationEngine-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/general.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/alertify/alertify.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/linksEffect.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://api.notice.valsun.cn/js/swJsNotice.js" type="text/javascript"></script>
+<!--link rel="stylesheet" href="css/iqc.css"-->
+</head>
+
+<body>
+	<div class="container">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	QC管理系统
+                    <input type="hidden" id="mod" value="{$smarty.get.mod}"/>
+                    <input type="hidden" id="act" value="{$smarty.get.act}"/>
+                </div>
+                <div class="onevar">
+                	<ul>
+                    	<li>
+                        	<a href="index.php?mod=iqc&act=iqcList" class="receive {if in_array($smarty.get.mod,array('iqc'))}cho{/if}">检测领取</a>
+                        </li>
+                        <li>
+                        	<a href="index.php?mod=iqcDetect&act=iqcScan" class="detect {if in_array($smarty.get.mod,array('iqcDetect'))}cho{/if}">QC检测</a>
+                        </li>
+						<li>
+                        	<a href="index.php?mod=iqcInfo&act=iqcScanList" class="base {if in_array($smarty.get.mod,array('iqcInfo','defectiveProducts','pendingProducts','scrappedProducts','returnProducts'))}cho{/if}">QC库</a>
+                        </li>
+                        <li>
+                        	<a href="index.php?mod=nowSampleStandard&act=nowSampleType" class="standard {if in_array($smarty.get.mod,array('nowSampleStandard','sampleStandard','sampleCoefficient'))}cho{/if}">检测标准</a>
+                        </li>
+                        <li>
+                        	<a href="index.php?mod=user&act=index" class="systemsettings {if in_array($smarty.get.mod,array('user','job','dept'))}cho{/if}">授权管理</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user">
+					<a class="news-img" href="javascript:javascript:void(0)" onclick="swntc_call('{$_username}')">消息</a>
+                	<input id='swNoticeUrl' type='hidden'  value='index.php?mod=notice&act=sendMessage'/>
+					<a href="javascript:void(0)">{$_username}</a>
+                    <a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;">退出</a>
+                </div>
+            </div>
+            <div class="twovar">
+
+            	<ul>
+					{if $secnev == 1}
+                	<li>
+                    	<a href="index.php?mod=iqc&act=iqcList" {if $mod=="iqc" && $act=="iqcList"}class="cho"{/if}>等待领取SKU</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=iqc&act=iqcWaitCheck" {if $mod=="iqc" && $act=="iqcWaitCheck"}class="cho"{/if}>等待检测SKU</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=iqc&act=iqcRestore" {if $mod == "iqc" && $act=="iqcRestore"}class="cho"{/if}>检索已删SKU</a>
+                    </li>
+					{elseif $secnev == 2}
+                    <li>
+                    	<a href="index.php?mod=iqcDetect&act=iqcScan" {if $mod=="iqcDetect" && $act=="iqcScan"}class="cho"{/if}>入库检测</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=iqcDetect&act=backScan" {if $mod=="iqcDetect" && $act=="backScan"}class="cho"{/if}>退件检测</a>
+                    </li>
+					<li>
+                    	<a href="index.php?mod=iqcDetect&act=stockScan" {if $mod=="iqcDetect" && $act=="stockScan"}class="cho"{/if}>常规检测</a>
+                    </li>
+					{elseif $secnev == 3}
+                    <li>
+                    	<a href="index.php?mod=iqcInfo&act=iqcScanList" {if $mod=="iqcInfo" }class="cho"{/if}>检测记录</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=defectiveProducts&act=getDefectiveProductsList" {if $mod=="defectiveProducts" }class="cho"{/if}>不良品库</a>
+                    </li>
+					<li>
+                    	<a href="index.php?mod=pendingProducts&act=getPendingProductsList" {if $mod=="pendingProducts" }class="cho"{/if}>待定库</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=scrappedProducts&act=getScrappedProductsList" {if $mod=="scrappedProducts" }class="cho"{/if}>报废/内部处理</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=returnProducts&act=getReturnProductsList" {if $mod=="returnProducts" }class="cho"{/if}>待退回库</a>
+                    </li>
+					{elseif $secnev == 4}
+
+                    <li>
+                    	<a href="index.php?mod=nowSampleStandard&act=nowSampleType" {if $mod=="nowSampleStandard" && $act=="nowSampleType"}class="cho"{/if}>当前检测标准</a>
+                    </li>
+					<li>
+						<a href="index.php?mod=nowSampleStandard&act=sampleStandardList" {if $mod=="nowSampleStandard" && $act!="nowSampleType"}class="cho"{/if}>样本标准</a>
+					</li>
+					<li>
+                    	<a href="index.php?mod=sampleStandard&act=skuCategoryList" {if $mod=="sampleStandard" && $act=="skuCategoryList"}class="cho"{/if}>产品分类</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=sampleStandard&act=skuTypeQcList" {if $mod=="sampleStandard" && $navinfo=="1"}class="cho"{/if}>检测分类</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=sampleStandard&act=detectionTypeList" {if $mod=="sampleStandard" && $navinfo=="2"}class="cho"{/if}>检测方式</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=sampleStandard&act=sampleSizeList" {if $mod=="sampleStandard" && $navinfo=="3"}class="cho"{/if}>检测标准样本大小</a>
+                    </li>
+                    <li>
+                    	<a href="index.php?mod=sampleCoefficient&act=getSampleCoefficientList" {if $mod=="sampleCoefficient"}class="cho"{/if}>样本系数</a>
+                    </li>
+					{/if}
+                    {if in_array($smarty.get.mod,array('user','job','dept'))}
+                    <li><a href="index.php?mod=user&act=index" {if $mod=='user' }class="cho"{/if}>用户管理</a></li>
+					<li><a href="index.php?mod=job&act=index" {if $mod=='job' }class="cho"{/if}>岗位管理</a></li>
+					<li><a href="index.php?mod=dept&act=index" {if $mod=='dept' }class="cho"{/if}>部门管理</a></li>
+					{/if}
+                </ul>
+
+            </div>

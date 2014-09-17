@@ -1,0 +1,104 @@
+{include file="header.htm"}
+{include file="secendNav.htm"}
+{include file="thirdNav_amazon.htm"}
+<link rel="stylesheet" href="./css/msglist.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./css/page.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/msglistAmazon.js"></script>
+<div class="topmenue">
+	<form action="index.php" method="get">
+		<input type="hidden" name="mod" value="amazonMessagefilter">
+		<input type="hidden" name="act" value="getAmazonMessageListByConditions">
+		<span>发送人：</span> <input type="text" name="sender" value="{$sender} " maxlength="100" >
+		<span>文件夹:</span>
+		<select name="catid">
+			<option value="false">请选择文件夹</option>
+			{foreach $powerlist as $acuval}
+				<option {if $category eq $acuval.id}selected="selected"{/if} value="{$acuval.id}">{$acuval.category_name}</option>
+			{/foreach}
+		</select>
+		<span>状态:</span>
+		<select name="status">
+			<option {if $status eq 'all'}selected="selected"{/if} value="all">请选择</option>
+			<option {if $status eq 1}selected="selected"{/if} value="1">已回复</option>
+			<option {if $status eq 2}selected="selected"{/if} value="2">未回复</option>
+			<option {if $status eq 3}selected="selected"{/if} value="3">发送中</option>
+			<option {if $status eq 4}selected="selected"{/if} value="4">回复失败</option>
+		</select>
+		<input name="from" value="{$from}" type="hidden">
+		<input type="submit" value="搜索" class="order-search">
+	</form>
+</div>
+<div class="topmenue">
+		<input type="hidden" name="mod" value="messagefilter">
+		<input type="hidden" name="act" value="getMessageListByConditions">
+		<span>操作：</span> 
+		<select onchange="changecategory(this,'change')">
+			<option value="0">移动到文件夹：</option>
+			{foreach $catlist as $catval}
+			<option value="{$catval.id}">{$catval.category_name}</option>
+			{/foreach}
+		</select>
+		<!-- <select onchange="markas(this)" name="account">
+			<option value="">标记为:</option>
+			<option value="read">read</option>
+			<option value="unread">unread</option>
+			<option value="flagged">flagged</option>
+			<option value="unflagged">unflagged</option>
+		</select> -->
+		<button onclick="marklocalStatus(1,'reply')">标记已回复</button>
+		<button onclick="marklocalStatus(2,'reply')">标记未回复</button>
+		<button onclick="goreplymessage('reply')">回复message</button>
+		<!-- <button onclick="reReplyMessage()">批量重回</button> -->
+		<button onclick="selectAll()">全选</button>
+</div>
+
+<div class="main unhovercolor">
+    <div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+    <form action="index.php" method="get" id="changepagesize" style="display:inline">
+    <input type="hidden" name="mod" value="amazonMessagefilter">
+		<input type="hidden" name="act" value="getAmazonMessageListByConditions">
+        <span>每页记录数:</span><select id="recordnumselector" name="pagesize">
+        <option value = "-1">请选择每页记录数</option>
+         <option value = "50">50</option>
+          <option value = "100">100</option>
+           <option value = "200">200</option>
+            <option value = "500">500</option>
+        </select> 
+        </form>    {$pagestr}
+    </div>
+    <table cellspacing="1" width="100%">
+        <tbody>
+            <tr class="title hovercolor">
+            	<td><input onclick="setCheckbox(this)" type="checkbox"></td>
+                <td width="2%"></td>
+				<td width="2%"></td>
+				<td>Amazon账号</td>
+                <td><a href="index.php?{$url}">发送人</a></td>
+                <td>主题</td>
+				<td width="10%">message接收时间</td>
+				<td width="14%">所属分类</td>
+                <td width="4%">回复人</td>
+                <td width="10%">回复时间</td>
+            </tr>
+			{foreach $msglist as $msgval }
+            <tr class="odd" style="{if $msgval@iteration is div by 2}background-color:#f2f2f2;{/if}">
+                <td style="border-bottom:#60D7D7 solid 1px;"><input class="msgcheckbox" type="checkbox" name="msgid" value="{$msgval.id}" status="{$msgval.status}"></td>
+				<td style="border-bottom:#60D7D7 solid 1px;"><img src="http://misc.erp.valsun.cn/img/{if $msgval.status == 2 || $msgval.status == 3 }replied.png{elseif $msgval.status ==1 }reply.png{elseif $msgval.status ==4 }misreply.png{else}noreply.png{/if}"
+					title="{if $msgval.status == 2 || $msgval.status == 3 }回复成功{elseif $msgval.status ==1 }回复中，请稍候{elseif $msgval.status ==4 }回复失败{else}未回复{/if}" style="cursor:pointer;"></td>
+                <td style="border-bottom:#60D7D7 solid 1px;"><span style="cursor:pointer;"><img mark="{$msgval.messagelevel}" onclick="markmessage(this, {$msgval.id})" src="http://misc.erp.valsun.cn/img/{if $msgval.messagelevel==0}nostar.png{else}star.png{/if}"></span></td>
+                <td style="border-bottom:#60D7D7 solid 1px;">{$msgval.amazon_account}</td>
+				<td style="border-bottom:#60D7D7 solid 1px;">{$msgval.sendid}</td>
+				<td style="text-align:left; border-bottom:#60D7D7 solid 1px;"><a target="_blank" class="subject" href="index.php?mod=amazonMessageReply&act=replyMessageForm&msgids={$msgval.id}">{$msgval.subjectfm}</a></td>
+                <td style="border-bottom:#60D7D7 solid 1px;">{$msgval.revtime}</td>
+                <td style="border-bottom:#60D7D7 solid 1px;">{$msgval.classname}</td>
+				<td style="border-bottom:#60D7D7 solid 1px;">{$msgval.username}</td>
+				<td style="border-bottom:#60D7D7 solid 1px;">{$msgval.retime}</td>
+            </tr>
+			{/foreach}
+        </tbody>
+    </table>
+	<div style="text-align: right; padding-right: 50px; margin-top: 20px;">
+            {$pagestr}
+        </div>
+</div>
+{include file="footer.htm"}

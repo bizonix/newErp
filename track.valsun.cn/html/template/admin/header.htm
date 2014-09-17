@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="./public/js/commandAdmin.js"></script>
+<script type="text/javascript" src="./public/js/My97DatePicker/WdatePicker.js"></script>
+<script src="./public/js/jquery-ui-1.9.2.custom.js"></script>
+<script src="./public/js/liquidmetal.js" type="text/javascript"></script>
+<script src="./public/js/jquery.flexselect.js" type="text/javascript"></script>
+<script src="kindeditor/kindeditor-min.js" charset="utf-8" type="text/javascript"></script>
+<script src="kindeditor/lang/zh_CN.js" charset="utf-8" type="text/javascript"></script>
+<link href="kindeditor/themes/default/default.css" rel="stylesheet" />
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/alertify.css" rel="stylesheet" type="text/css" />
+<link href="./public/css/track.css" rel="stylesheet">
+<link href="./public/css/ui-lightness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<link href="./public/css/flexselect.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript">
+var web_url = "{$smarty.const.WEB_URL}";
+</script>
+</head>
+<body class="tran-body">
+	<div class="container">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	运德物流
+                </div>
+                <div class="onevar purchase-onevar">
+                	<ul>
+						<li>
+                            <a href="index.php?mod=webConfig&act=index" class="trackEmail {if in_array($mod,array('webConfig'))}cho{/if}">网站配置管理</a>
+                        </li>
+						<li>
+                            <a href="index.php?mod=webSinglePage&act=index" class="FreightInquiry {if in_array($mod,array('webSinglePage'))}cho{/if}">网站单页管理</a>
+                        </li>
+                        <li>
+                            <a href="index.php?mod=webAd&act=index" class="Transportation {if in_array($mod,array('webAd'))}cho{/if}">网站广告管理</a>
+                        </li>
+						<li>
+                            <a href="index.php?mod=webAdStat&act=index" class="Transportation {if in_array($mod,array('webAdStat'))}cho{/if}">广告效果统计</a>
+                        </li>
+						<li>
+                        	<a href="index.php?mod=user&act=index" class="Authorize {if in_array($mod,array('user','job','dept'))}cho{/if}">授权管理</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user">
+                	<a class="news-img" href="javascript:javascript:void(0)" onclick="swntc_call('{$_username}')">消息</a>
+					<input id='swNoticeUrl' type='hidden'  value='index.php?mod=notice&act=sendMessage'/>
+                	<a href="javascript:void(0);" >{$_username}</a><a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;" title="注销安全退出">退出</a>
+                </div>
+            </div>
+            <div class="twovar">
+            	<ul>
+					{if in_array($mod,array('webConfig'))}
+					<li><a href="index.php?mod=webConfig&act=index" {if $mod=='webConfig' }class="cho"{/if}>网站配置管理</a></li>
+					{/if}
+					{if in_array($mod,array('webSinglePage'))}
+					<li><a href="index.php?mod=webSinglePage&act=index" {if $mod=='webSinglePage' }class="cho"{/if}>网站单页管理</a></li>
+					{/if}
+					{if in_array($mod,array('webAd'))}
+					<li><a href="index.php?mod=webAd&act=index" {if $mod=='webAd' }class="cho"{/if}>网站广告管理</a></li>
+					{/if}
+					{if in_array($mod,array('webAdStat'))}
+					<li><a href="index.php?mod=webAdStat&act=index" {if $mod=='webAdStat' }class="cho"{/if}>网站广告点击统计</a></li>
+					{/if}
+					{if in_array($mod,array('user'))}
+                    <li><a href="index.php?mod=user&act=index" {if $mod=='user' }class="cho"{/if}>用户管理</a></li>
+					{/if}					
+                </ul>
+            </div>

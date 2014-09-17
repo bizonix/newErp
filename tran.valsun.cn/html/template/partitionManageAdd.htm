@@ -1,0 +1,120 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=channelManage&act=index&id={$carrierId}">渠道管理</a>&nbsp;>>&nbsp;<a href="index.php?mod=partitionManage&act=index&chid={$chid}">分区管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>添加分区</h1>
+    <form onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+                <td align="right" width="11%">分区名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pt_name" id="pt_name" value="" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">分区简称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pt_ali" id="pt_ali" value="" maxlength="12"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">分区代码：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="pt_code" id="pt_code" value="" maxlength="10"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">回邮地址：</td>
+                <td width="27%" align="left">
+					<input type="text" name="pt_add" id="pt_add" value="" maxlength="100" style="width:460px;"/>
+                </td>
+			</tr>
+			{if in_array($_username,array('席慧超','黄伟生','管拥军'))}
+			<tr>
+                <td align="right" width="11%">回邮地址HTML标签：</td>
+                <td width="27%" align="left">
+					<textarea name="pt_add_html" id="pt_add_html" rows=10 style="width:460px"></textarea>
+                </td>
+			</tr>
+			{/if}
+			<tr>
+                <td align="right" width="11%">分区国家：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<textarea name="pt_country" id="pt_country" rows=10 style="width:460px"></textarea>
+					<br/>多个国家请用英文逗号隔开
+				</td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">是否启用：</td>
+                <td width="27%" align="left">
+				<select name="pt_enable" id="pt_enable">
+					<option value="1">启用</option>
+					<option value="0">不启用</option>
+				</select>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+					<input type="hidden" id="ch_id" value="{$chid}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=partitionManage&act=index&chid={$chid}'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+{literal}
+<script type="text/javascript">
+function check(){
+	var pt_name = pt_ali = pt_code = pt_add = pt_enable = ch_id = pt_country = pt_add_html = "";
+	ch_id 	= $.trim($("#ch_id").val());
+	pt_name = $.trim($("#pt_name").val());
+	pt_ali  = $.trim($("#pt_ali").val());
+	pt_code	= $.trim($("#pt_code").val());
+	pt_add	= $.trim($("#pt_add").val());
+	pt_country	= $.trim($("#pt_country").val());
+	pt_add_html	= $.trim($("#pt_add_html").val());
+	pt_enable	= $.trim($("#pt_enable").val());
+	if (ch_id == "" || ch_id == 0) {
+		alertify.error("渠道非法！");
+		return false;
+	}
+	if (pt_name == "") {
+		alertify.error("分区名称不能为空！");
+		$("#pt_name").focus();
+		return false;
+	}
+	if (pt_ali == "") {
+		alertify.error("分区简称不能为空！");
+		$("#pt_ali").focus();
+		return false;
+	}
+	if (pt_code == "") {
+		alertify.error("分区代码不能为空！");
+		$("#pt_code").focus();
+		return false;
+	}
+	if (pt_country == "") {
+		alertify.error("分区国家不能为空！");
+		$("#pt_country").focus();
+		return false;
+	}
+	var url  = web_url + "json.php?mod=partitionManage&act=addPartitionManage";
+	var data = {"ch_id":ch_id,"pt_name":pt_name,"pt_ali":pt_ali,"pt_code":pt_code,"pt_add":pt_add,"pt_enable":pt_enable,"pt_country":pt_country,"pt_add_html":pt_add_html};
+	$.post(url,data,function(res){
+		if(res.errCode == 0){
+			alertify.alert("添加成功！",function(){
+				window.location.reload();
+			});
+		}else {
+			 alertify.error(res.errMsg);
+		   }
+	}, "jsonp");
+	return false;
+}
+</script>
+{/literal}
+{include file="footer.htm"}

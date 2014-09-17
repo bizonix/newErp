@@ -1,0 +1,69 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierOpen&act=index">开放运输方式管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>修改开放运输方式</h1>
+    <form onSubmit="return edit_check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+                <td align="right" width="11%">运输方式：<span class="red">*</span></td>
+                <td width="27%" align="left">
+				<select name="carrierId" id="carrierId" class="flexselect">
+				<option value="">=请选择=</option>
+				{foreach item=list from=$lists}
+				{if !$list.is_track }<option value="{$list.id}" {if $carrierId == $list.id}selected="selected"{/if}>{$list.carrierNameCn}</option>{/if}
+				{/foreach}
+				</select>				
+				</td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">运输方式简称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="carrierAbb" id="carrierAbb" value="{$carrierAbb}" maxlength="20"/> 20个字符，由大写字母字符和下划线组成
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">运输方式英文名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="carrierEn" id="carrierEn" value="{$carrierEn}" maxlength="50"/> 50个字符，由大写或小写字母字符组成
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">首字母索引：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="carrierIndex" id="carrierIndex" value="{$carrierIndex}" maxlength="1"/> 大写字母[A-Z]任意一个
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">开放折扣：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="carrierDiscount" id="carrierDiscount" value="{$carrierDiscount}" maxlength="6"  style="ime-mode:Disabled" onkeyup="check_float(this)" onafterpaste="check_float(this)"/> 0表示开放原价,0.6表示在原价的基础上再加60%的折扣
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">时效描述：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="carrierAging" id="carrierAging" value="{$carrierAging}" maxlength="45" style="width:360px;"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">备注：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="carrierNote" id="carrierNote" value="{$carrierNote}" maxlength="200" style="width:360px;"/>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="left" style="padding-left:300px;">
+					<input type="hidden" id="act-id" value="{$id}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=carrierOpen&act=index'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript" src="./public/js/carrier_open.js"></script>
+{include file="footer.htm"}

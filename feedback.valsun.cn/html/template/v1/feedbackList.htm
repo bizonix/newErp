@@ -1,0 +1,99 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/fbkList.js"></script>
+<div class="fourvar">
+    {include file="navigation.htm"}
+    <div class="pagination" id="fpage">
+        {$show_page}
+    </div>
+</div>
+<div class="servar">
+    <!-- span style="color:#FF0000">*此功能支持扫描搜索:扫描时不能刷新页面。</span>
+    <br/>
+    <span>
+        批量搜索：<input type="text" id="nowdsku" value="{$sku}" style="width:150px;height:30px;font-size:20px;" onkeydown="scanSku()"/>
+    </span-->
+    <span id="span_is_combine">
+		状态：
+		<select name="valuatestatus" id="valuatestatus">
+		    <option value="0" {if $valuatestatus == 0} selected="selected"{/if}>未评价</option>
+		    <option value="1" {if $valuatestatus == 1} selected="selected"{/if}>已评价</option>
+		</select>               	
+     </span>                
+     <span>
+		账号：
+		<select name="accountId" id="accountId">
+		    <option value="0" {if $accountId == 0} selected="selected"{/if} >全部</option>
+            {foreach from=$accountList item=account}
+            <option {if $accountId == $account.id} selected="selected"{/if} value="{$account.id}" >{$account.account}</option>
+            {/foreach}
+		</select>          	
+	</span>
+    <span>
+        <button  id='serch_btn' value="" />搜索</button>
+    </span>
+    <br/>
+    
+    <span id="span_is_combine">
+		评分：
+		<select name="valuatescore" id="valuatescore">
+		    <option value="5">五星</option>
+		    <option value="4">四星</option>
+		    <option value="3">三星</option>
+		    <option value="2">二星</option>
+		    <option value="1">一星</option>
+		</select>               	
+     </span>                
+     <span>
+		评价内容：
+		<select name="valuatecontent" id="valuatecontent">
+		    <option value="PEFECT!">PEFECT!</option>
+            <option value="Excellent!">Excellent!</option>		    
+		    <option value="Excellent buyer. A+++">Excellent buyer. A+++</option>            
+		    <option value="Quick response and fast payment. Perfect!!">Quick response and fast payment. Perfect!!</option>		  
+		 	ast payment!</option>
+            <option value="FAST PAYMENT 5 STARS VALUED BUYER!">FAST PAYMENT 5 STARS VALUED BUYER!</option>
+		</select>
+	</span>
+    <span>
+        <button  id='feedbk_btn' value="" />提交评价</button>
+    </span>
+    
+   
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+<input type="hidden" id="havesku" value="">  
+    <table cellspacing="0" width="100%" id="nowtable" style="color:#000">
+        <tr class="title">
+            <td><input type="checkbox" class="checkall" /></td>
+            <td>速卖通账号</td>
+            <td>订单号</td>
+            <td>打分</td>
+            <td>评价内容</td>
+            <td>状态</td> 
+            <td>评价时间</td>          
+        </tr>
+        {foreach from=$fbkList item=list}
+        <tr class="odd">
+            <td><input type="checkbox" class="iqcselect" name="fbkselect" value="{$list.id}" account="{$list.account}" recordnumber="{$list.recordNumber}"/></td>
+            <td>{$list.account}</td>
+            <td>{$list.recordNumber}</td>
+            <td>{$list.score}</td>
+            <td>{$list.content}</td>
+            <td>{if $list.content==0}未评价{else}已评价{/if}</td>
+            <td>{$list.addTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+        </tr>
+        {foreachelse}
+        <tr class="odd">
+            <td colspan="8">没有搜索到任何记录！</td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination" id="spage">
+        {$show_page}
+    </div>
+</div>
+{include file="footer.htm"}

@@ -1,0 +1,86 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+			<div class="servar products-servar products-main">
+								   <span>新/旧SKU：
+								   <input name="sku" type="text" id="sku" value="{$smarty.get.sku}"/>
+								   </span>
+                                   <span><button id='seachSkuConversion'>搜索</button></span>
+                                    {if isAccessAll('goods','addSkuConversion') == true}
+                                   <span style="float:right;margin-right: 90px;" class="products-action">
+                                   <form action="index.php?mod=goods&act=addSkuConversion" method="post" id="skuConversionForm" onsubmit="return confirm('确定添加？')">
+                                   <span style="color: red;">*</span>旧SKU：
+								   <input name="old_sku" id="old_sku" value="" class='validate[required]'/>
+                                   <span style="color: red;">*</span>新SKU:
+                                   <input name="new_sku" id="new_sku" value="" class='validate[required]'/>
+                                   <input type="submit" value="添加"/>
+                                   </form>
+								   </span>
+								   {/if}
+            </div>
+            {if !empty($smarty.get.status)}
+            <div class="servar products-servar products-main">
+            <span style="color: red;">{$smarty.get.status}</span>
+            </div>
+            {/if}
+            <div class="main feedback-main">
+            	<table cellspacing="0" width="100%" class="products-action">
+                	<tr class="title">
+                    	<td>旧料号</td>
+						<td>新料号</td>
+						<td>添加人</td>
+                        <td>添加时间</td>
+                        <td>审核状态</td>
+                        <td>审核人</td>
+                        <td>审核时间</td>
+                        <td>操作</td>
+                    </tr>
+                    {foreach $skuConversionList as $value}
+                    <tr>
+                    	<td><input id="old_sku{$value['id']}" value="{$value['old_sku']}" disabled="disabled"/></td>
+                        <td><span style="color: red;">*</span><input id="new_sku{$value['id']}" value="{$value['new_sku']}" disabled="disabled"/></td>
+                        <td>{getPersonNameById($value['addUserId'])}</td>
+                        <td>{$value['createdTime']|date_format:"Y-m-d H:i:s"}</td>
+                        <td>{if $value['auditStatus']==2}已审核{else}<font color="red">未审核 </font>{/if}</td>
+                        <td>{if $value['auditUserId']!=0}{getPersonNameById($value['auditUserId'])}{/if}</td>
+                        <td>{if $value['auditTime']!=0}{$value['auditTime']|date_format:"Y-m-d H:i:s"}{/if}</td>
+                        <td>
+                            {if isAccessAll('goods','auditSkuConversion') && $value['auditStatus'] == 1}
+							<!-- <input class='updateSkuConversion' cid="{$value['id']}" type="button" value="修改"/> -->
+							<input class='auditSkuConversion' cid="{$value['id']}" type="button" value="审核"/>
+                            {/if}
+                            {if isAccessAll('goods','unAuditSkuConversion') && $value['auditStatus'] == 2}
+							<input class='unAuditSkuConversion' cid="{$value['id']}" type="button" value="反审核"/>
+                            {/if}
+                            {if getIsAccess($value['addUserId']) && $value['auditStatus'] == 1}
+                            <input type="button" onclick="if(confirm('确定删除？')) window.location.href = 'json.php?mod=goods&act=deleteSkuConversion&id={$value['id']}'" value="删除"/>
+                            {/if}
+                        </td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachSkuConversion').click();
+			}
+        });
+</script>

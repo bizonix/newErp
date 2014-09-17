@@ -1,0 +1,58 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/omaverageDailyCount.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=averageDailyCount&act=update' method="post" id="omAddAverageDailyCount">
+        <div>
+            <input type="hidden" name="id" value="{$averageDailyCountList.id}"/>
+            <label for="platformId" style="font-size:20px;">平台:</label>
+            <select name="platformId" id="platformId" style="width:200px;height:30px;font-size:20px" class="validate[required]"  onchange="changePlatform()">
+                <option value="">全部</option>
+                {foreach key=pid item=accounts from=$plataccount}
+                <option value="{$pid}" {if $averageDailyCountList.platformId == $pid}selected="selected"{/if}>{$pid|get_platnamebyid}</option>
+                {/foreach}
+            </select>
+            <span id="platformSpan" style="color: red;">*</span>
+        </div>
+        <br />
+
+        <div id="selectAccountList">
+            <label for="accountId" style="font-size:20px;">帐号：</label>
+            <select name="accountId" id="accountId" style="width:200px;height:30px;font-size:20px" class="validate[required]">
+                <option value="">全部账号</option>
+                {if $averageDailyCountList.platformId}
+                {foreach item=accountid from=$plataccount[$averageDailyCountList.platformId]}
+                <option value="{$accountid}" {if $averageDailyCountList.accountId == $accountid}selected="selected"{/if}>{$accountid|get_accountnamebyid}</option>
+                {/foreach}
+                {/if}
+            </select>
+            <span id="accountSpan" style="color: red;">*</span>
+        </div>
+        <br />
+
+        <div>
+            <label for="sku" style="font-size:20px;">SKU：</label>
+            <input value="{$averageDailyCountList.sku}" id='sku' class="validate[required] text-input" name="sku" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="emailSpan" style="color: red;">*</span>
+        </div>
+        <br />
+
+        <div>
+            <label for="sku" style="font-size:20px;">时间段：</label>
+            <input name="OrderTime1" id="OrderTime1" type="text" value="{$averageDailyCountList.orderTime1|date_format:'Y-m-d H:i:s'}" /> - <input name="OrderTime2" id="OrderTime2" type="text" value="{$averageDailyCountList.orderTime2|date_format:'Y-m-d H:i:s'}" />
+        </div>
+        <br />
+
+        <br />
+        <div>
+            <input type="submit" value="提交"/>
+            &nbsp;
+            <input type="button" id="back" value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.htm"}

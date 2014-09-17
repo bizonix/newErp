@@ -1,0 +1,63 @@
+{include file='header2.htm'}
+{include file='omNav.htm'}
+<script language="javascript" src="js/statusMenu.js"></script>
+{literal}
+<style type="text/css">
+.main table td.statusmenu1{padding-left:5px;text-align:left;}
+.main table td.statusmenu2{padding-left:40px;text-align:left;}
+.main table td.statuscode{text-align:left;}
+</style>
+{/literal}
+<div class="servar">
+   <span>
+		<button  id='addMenu' value="" />新增流程</button>
+   </span>
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td>id</td>
+			<td class="statuscode" >状态名称</td>
+			<td class="statuscode" >入库状态码</td>
+			<td>所属分组</td>
+			<td>排序</td>
+			<td>备注</td>
+			<td>操作</td>
+		</tr>
+		{if !empty($statusMenuList)}
+		{foreach from=$statusMenuList item=list}
+		<tr class="odd " id="{$list.id}">
+				<td>{$list.id}</td>
+				<td class="statusmenu1">{$list.statusName}</td>
+				<td class="statuscode" >{$list.statusCode}</td>
+				<td>{$groupList[$list.id]}</td>
+				<td>{$list.sort}</td>
+				<td>{$list.note}</td>
+				<td><button  class="menu_mod" tid="{$list.id}"/>修改</button>
+				<button  class="del_menu" tid="{$list.id}"/>删除</button></td>
+		</tr>
+			{if $list.child}
+				{foreach from=$list.child item=list2}
+					<tr class="odd" id="{$list2.id}">
+							<td>{$list2.id}</td>
+							<td class="statusmenu2">{$list2.statusName}</td>
+							<td class="statuscode" >{$list2.statusCode}</td>
+							<td>{$groupList[$list2.id]}</td>
+							<td>{$list2.sort}</td>
+							<td>{$list2.note}</td>
+							<td><button  class="menu_mod" tid="{$list2.id}"/>修改</button>
+							<button  class="del_menu" tid="{$list2.id}"/>删除</button></td>
+					</tr>
+				{/foreach}
+			{/if}
+		{/foreach}
+		
+		
+		{/if}
+	</table>
+</div>
+
+ 
+{include file='footer.htm'}

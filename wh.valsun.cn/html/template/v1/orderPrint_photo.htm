@@ -1,0 +1,49 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script language="javascript" src="js/LodopFuncs.js"></script>
+<script src="/js/jSound.js"></script>
+<script src="/js/sounds.js"></script>
+<script src="/js/webcam.js"></script>
+<link href="/css/dispatch.css" rel="stylesheet" type="text/css" />
+<br/>
+<input type='hidden' id="printIndex" name="printIndex" value="{$printIndex}"/>
+<input type='hidden' id="pageIndex" name="pageIndex" value="{$pageIndex}"/>
+<input type='hidden' id="lastShipOrderId" name="lastShipOrderId" value="{$lastShipOrderId}"/>
+<input type='hidden' id="now_time" name="now_time" value="{$now_time}"/>
+<input type='hidden' id="now_ebay_id"/>
+<!--<div class="fourvar order-fourvar " style="font-size: 20px;max-height:40px;margin-bottom:2px;margin-top:2px;">
+<a>重新打印面单</a><a>重新拍照</a>
+</div>-->
+
+<div class="fourvar order-fourvar " style="font-size: 24px;height:420px;margin-bottom:10px;">
+    <div style="height: 10px; width:35%;float:left;">
+        <div id="show_msg" style="margin-left:30px;font-size: 26px;display:none;">
+        </div>
+        
+        <div style="min-height:50px; width:100%;margin-top:40px;">
+            <span style="padding-left: 30px;">请扫描发货单号：
+                <input style="width: 200px;height:30px;" type="text" id="ebay_id" name="ebay_id" onkeypress="print_order(this, event)"/>
+            </span>
+        </div>
+        <div style="min-height:50px; width:100%;margin-top:25px;font-size: 24px;">
+            <button class="btn" onclick="operate('reprint')">重新打印面单</button>&nbsp;&nbsp;
+            <button class="btn" onclick="operate('rephoto')">重新拍照</button>
+        </div>
+        <iframe id="print_order" style="display: block;" width="2" height="2">
+    
+        </iframe>
+        <div style="float: left;padding-left:5px;display:none;" id="show_image">
+            
+        </div>
+    </div>
+    <div id="flashArea" class="flashArea" style="float: left;margin-top:0px;padding-left:5px;">
+    </div>
+</div>
+<div style="display:none;width:200px;" id="dialog">
+    <span style="padding-left: 30px;">请扫描发货单号：
+        <input type='hidden' id="reType"/>
+        <input style="width: 200px;height:30px;" type="text" id="re_shipOrderId" onkeydown="re_operation(this, event)"/>
+    </span>
+</div>
+<script type="text/javascript" src="/js/orderPrint_photo.js?vesion=1.0"></script>
+{include file="footer.htm"}

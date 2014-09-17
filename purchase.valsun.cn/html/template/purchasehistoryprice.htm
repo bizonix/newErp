@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<link href="./public/css/style.css" rel="stylesheet" type="text/css" />
+<link href="./public/css/page.css" rel="stylesheet" type="text/css" />
+<div class="servar">
+	<table width="100%" cellspacing="0">
+		<tr>
+			<th align='center'>产品编号</th>
+			<th align='center'>产品名称</th>
+			<th align='center'>产品进货成本</th>
+			<th align='center'>单据添加日期</th>
+			<th align='center'>单据审核日期</th>
+		</tr>
+		{foreach from=$list item=List}
+		<tr>
+			<td align='center'>{$List["sku"]}</td>
+			<td align='center'>{getSkuNameBySku($List["sku"])}</td>
+			<td align='center'>{$List["price"]}</td>
+			<td align='center'>{if $List["addtime"]}{date("Y-m-d H:i:s",$List["addtime"])}{else}无数据{/if}</td>
+			<td align='center'>{if $List["aduittime"]}{date("Y-m-d H:i:s",$List["aduittime"])}{else}无数据{/if}</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="footer">
+	<p>版权所有Copyright©深圳市赛维网络科技有限公司 粤IPC备12055809</p>
+</div>
+<script type="text/javascript">
+	
+</script>

@@ -1,0 +1,30 @@
+{include file="header.htm"} {include file="secendNav_localpower.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css"
+	media="screen" />
+<script type="text/javascript" src="./js/localpower.js"></script>
+
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tbody>
+			<tr class="title">
+				<td width="5%">账号</td>
+				<td width="5%">所属用户</td>
+				<td width="10%">操作</td>
+			</tr>
+			{foreach $accountList as $account}
+			<tr class="odd">
+				<td>{$account}</td>
+				<td>
+				    {foreach $powerList.$account as $rel}
+				        {$rel.name}
+				    {/foreach}
+				</td>
+				<td>
+					<button	onclick="window.location='index.php?mod=localPower&act=ebayAccountBindEdit&account={$account}'" class="update" pid="1">修改</button>
+				</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>
+{include file="footer.htm"}

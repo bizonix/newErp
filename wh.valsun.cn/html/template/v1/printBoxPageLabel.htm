@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<title>打印预览</title>
+<style media="print">
+.noprint {
+	display: none
+}
+</style>
+<style type="text/css">
+body {
+	margin-right:5px;
+	margin-left:5px;
+	margin-top: 5px;
+	font-family: Calibri;
+}
+table#showtable td{ border: #000 3px solid;}
+</style>
+</head>
+<?php foreach($listData as $k=>$v ){
+			$detailTotal = 0;
+?>
+
+<table id="tableclass" width="420" cellspacing="0" cellpadding="0" border="0">
+	<tbody>
+		<tr valign="middle">
+			<td width="100%">
+				<table width="100%" cellspacing="0" cellpadding="0"
+					border="0">
+					<tbody>
+						<!--
+						<tr>
+							<td width="40%" valign="middle" height="20" align="left"><strong><font
+									size='4'>CTN ID:</font></strong></td>
+							<td width="210" valign="middle" height="20" align="left"><strong><font
+									size='4'><?php echo $v['replenshId']."_".$v['boxid'];?></font></strong></td>
+						</tr>-->
+						<tr>
+							<td width="40%" valign="middle" height="20" align="left">
+								<strong>
+									<font size='4'>CNT NO:</font>
+								</strong>
+							</td>
+							<td width="210" valign="middle" height="20" align="left">
+								<strong>
+									<font size='4'><?php echo $v['boxid'];?></font>
+								</strong>
+							</td>
+						</tr>
+						<tr>
+							<td width="40%" valign="middle" height="20" align="left">
+								<strong>
+									<font size='4'>CNT MEASUREMENT:</font>
+								</strong>
+							</td>
+							<td width="210" valign="middle" height="20" align="left">
+								<strong>
+									<font size='4'>(L)<?php if($v['length'] == ''){ ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php }else{ echo $v['length'];} ?>&nbsp;x&nbsp;(W)<?php if($v['width'] == ''){ ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php }else{ echo $v['width'];} ?>&nbsp;x&nbsp;(H)<?php if($v['high'] == ''){ ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php }else{ echo $v['high'];} ?>&nbsp;&nbsp;CM</font>
+								</strong>
+							</td>
+						</tr>
+						<tr>
+							<td width="40%" valign="middle" height="20" align="left">
+								<font size='4'>
+									<strong>N.W.&nbsp;:&nbsp;&nbsp;<?php if($v['netWeight'] == ''){ ?> &nbsp;&nbsp;&nbsp;&nbsp;<?php }else{ echo $v['netWeight'];} ?>&nbsp;&nbsp;KG</strong>
+								</font>
+							</td>
+							<td width="140" valign="middle" height="20" align="left">
+								<font size = '4'>
+									<strong>G.W.&nbsp;:&nbsp;&nbsp;<?php if($v['grossWeight'] == ''){ ?> &nbsp;&nbsp;&nbsp;&nbsp;<?php }else{ echo $v['grossWeight'];} ?>&nbsp;&nbsp;KG</strong>
+								</font>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<table id="showtable" width="100%" cellspacing="0" cellpadding="0" border="1" style="border-collapse: collapse">
+									<tbody>
+										<tr>
+											<td width="140" valign="middle" height="20" align="center">
+												<font size="4">
+													<strong>NO</strong>
+												</font>
+											</td>
+											<td width="140" valign="middle" height="20" align="center">
+												<font size="4">
+													<strong>SKU</strong>
+												</font>
+											</td>
+											<td width="140" valign="middle" height="20" align="center">
+												<font size="4">
+													<strong>QTY</strong>
+												</font>
+											</td>
+										</tr>
+										<?php
+											$dataDetail = $listDetail[$v['boxid']];
+										 	if($dataDetail){
+												foreach($dataDetail as $kk => $vv){
+													$detailTotal += $vv["num"];
+										?>
+										<tr>
+
+											<td width="140" valign="middle" height="20" align="center">
+												<font size="4">
+													<strong><?php echo $kk+1;?></strong>
+												</font>
+											</td>
+											<td width="140" valign="middle" height="20" align="center">
+												<font size='5' style = "padding:0px 5px">
+													<strong><?php echo $vv["sku"];?></strong>
+												</font>
+											</td>
+											<td width="140" valign="middle" height="20" align="center">
+												<font size="5">
+													<strong><?php echo $vv["num"];?></strong>
+												</font>
+											</td>
+
+										</tr>
+										<?php }?>	
+										<?php }else{?>
+											<tr>
+											<td colspan="3" align = 'middle'><font size='4'><strong>空箱子</strong></font></td>
+										</tr>
+										<?php }?>	
+									</tbody>
+								</table>
+						</td>
+						</tr>
+						<!--
+						<tr>
+							<td valign="middle" align="center" height="180" colspan="2">
+                            <br /><br />
+                            <img width="360" height="100" alt="" src="barcode128.class.php?data=<?php echo (int)$v['replenshId']+1000000;?>">
+                            </td>
+						</tr>-->
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<?php if($total !==$k+1) {?>
+	<div style="page-break-after: always;">&nbsp;</div>
+<?php }
+ }
+ ?>
+</html>

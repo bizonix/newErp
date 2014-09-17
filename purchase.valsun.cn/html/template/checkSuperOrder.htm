@@ -1,0 +1,148 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=purchaseOrder&act=index">采购管理</a>>>超大订单审核
+	</div>
+</div>
+<!--
+<div class="servar products-servar">
+		<span>
+				SKU:<input type="text" class="ser_sku"  value="{$smarty.get.ser_sku}"/>
+	    </span>
+	 	<span>
+			订单编号:<input type="text"  id="recordNumber"  value="{$smarty.get.recordNumber}"/>
+        </span>
+		 <span>时间类型:
+			<select class="ser_timetype">
+				<option value=''>选择时间</option>
+				<option value='ordersTime' {if $smarty.get.ser_timetype == "ordersTime" }  selected{/if}>下单时间</option>
+				<option value='paymentTime' {if $smarty.get.ser_timetype == "paymentTime" }  selected{/if}>付款时间</option>
+			</select>
+			开始时间：<input type="text" class="startTime" onclick="WdatePicker()"  value = "{$smarty.get.startTime}"/>
+		</span>
+		<span>
+			结束时间：<input type="text" class="endTime" onclick="WdatePicker()"  value = "{$smarty.get.endTime}"/>
+		</span>
+		 <span>
+			<a href="javascript:void(0);" class="search"  id="search">搜 索</a>
+		</span>
+    </div>
+-->
+<div class="main underline-main products-main">
+	<table  class="table table-striped" id="super-table">
+		<thead>
+			<tr class="title">
+				<th>订单号</th>
+				<th>账号</th>
+				<th>sku</th>
+				<th>图片</th>
+				<th>描述</th>
+				<th>单价</th>
+				<th>数量</th>
+				<th>实际库存</th>
+				<th>待发货</th>
+				<th>已订购</th>
+				<th>每天均量</th>
+				<th>状态</th>
+				<th>备注</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		{foreach from=$orderList item=list}
+			<tr>
+				{if !empty($list.auditRecord)}
+					{$auditRecordInfo = $list.auditRecord}
+				{/if}
+				<td>{$list.orderid}</td>
+				<td>{$list.accountId}</td>
+				<td>{$list.sku.sku}</td>
+				<td>
+					<a href="javascript:void(0)" id="imgb-{$list.sku.sku}" class="fancybox" data-sku="imgb-{$list.sku.sku}">
+						<img src="" class="skuimg" id="imgs-{$list.sku.sku}"  width="40" height="40"  data-sku="{$list.sku.sku}">
+					</a>
+				</td>
+				<td>{$list.sku.goodsName}</td>
+				<td>{$list.sku.goodsCost}</td>
+				{$skuData = getSkuData({$list.sku.sku})}
+				<td>{$list.amount}</td>
+				<td>{$skuData['actualStockCount']}</td>
+				<td>{$skuData['waitingSendCount']}</td>
+				<td>{$skuData['booknums']}</td>
+				<td>{$skuData['averageDailyCount']}</td>
+				<td>
+					{if $list.auditRecord==null}未处理
+					{else}
+						{if $auditRecordInfo.auditStatus==1}已审核
+						{else}已拦截
+					    {/if}
+				    {/if}
+				</td>
+				<td>{$list.auditRecord.note}</td>
+				<td>
+				{if $list.auditRecord==null}
+					<input  type="button" data-orderid="{$list.orderid}" data-sku="{$list.sku.sku}" data-purid="{$purid}" data-type="1"  value="审核通过" >
+					<input  type="button" data-orderid="{$list.orderid}" data-sku="{$list.sku.sku}" data-purid="{$purid}" data-type="2" value="拦截" >
+				{else}
+					{if $auditRecordInfo.auditStatus==1}
+						<input  type="button" data-orderid="{$list.orderid}" data-sku="{$list.sku.sku}" data-purid="{$purid}" data-type="2" value="拦截" >
+					{else}
+						<input  type="button" data-orderid="{$list.orderid}" data-sku="{$list.sku.sku}" data-purid="{$purid}" data-type="1" value="审核通过" >
+					{/if}
+				{/if}
+				</td>
+			</tr>
+		{/foreach}
+		</tbody>
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">{$fpage}</div>
+</div>
+{include file="footer.htm"}
+
+{literal}
+<script>
+
+$("#super-table").on("click","input",function(){
+		var self = $(this),orderid,sku,status,purid,type,content,data = {},url,html;
+		data.orderid = self.data("orderid");
+		data.sku = self.data("sku");
+		data.status = self.data("type");
+		data.type = self.data("type");
+		data.purid = self.data("purid");
+		url  = "json.php?mod=purchaseOrder&act=auitSupperOrder";
+
+		if(data.type == 2){// 拦截
+			alertify.prompt("Message", function (e, str) {
+				// str is the input text
+				if (e) {
+					// user clicked "ok"
+					data.content = str;
+					$.post(url, {"data":data}, function(rtn){
+						console.log(rtn);
+						if(rtn.errCode == 200){
+							alertify.success('审核成功.........');
+						}else{
+							alertify.success('审核failure..........');
+						}
+					},'json');
+				} else {
+					// user clicked "cancel"
+				}
+			}, "");
+		}else{
+			$.post(url, {"data":data}, function(rtn){
+					console.log(rtn);
+					if(rtn.errCode == 200){
+						alertify.success('审核成功.........');
+					}else{
+						alertify.success('审核failure..........');
+					}
+			},'json');
+		}
+
+});
+
+{/literal}
+</script>

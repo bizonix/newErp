@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>海外仓备货打印</title>
+</head>
+<style>
+.floatdiv{
+	float:left;
+	margin:5px;
+	width:4.6cm;
+}
+</style>
+<body style="margin:0">
+<?php
+    foreach($finalSku as $key=>$item){
+?>
+	<div style="width:10cm;padding-top:5px;page-break-after: always;">
+	   <div style="text-align:center">
+	       <img width="240" height="60" src="http://192.168.200.188/barcode128.class.php?data=<?php echo $key; ?>" ><br>
+	       <?php echo $key; ?>
+	   </div>
+	   <div style="height:100px;">
+	           <?php foreach($item as $skus) { ?>
+	               <div class="floatdiv"><?php echo $skus['sku']; ?> * <?php echo $skus['num']; ?></div>
+	           <?php } ?>
+	           <div style="clear:both"></div>
+	   </div>
+	</div>
+<?php
+}
+?>
+
+</body>
+</html>

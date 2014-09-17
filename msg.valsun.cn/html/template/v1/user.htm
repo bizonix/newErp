@@ -1,0 +1,131 @@
+{include file="header.htm"}
+{include file="secendNav_localpower.htm"}
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=user&act=index">用户信息管理</a>&nbsp;&gt;&gt;&nbsp;用户列表
+    </div>
+	<div class="pagination">{$pageStr}</div>
+</div>
+<div class="servar">
+	<form name="form" id="sform" action="" enctype="text/plain" method="get">
+        <span>
+            用户名：<input type="text" name="username" value="{$g_username}"/>
+        </span>
+        <span>
+            所属岗位权限：
+            <select name="userjob" id="userjob">
+                <option value=""> 请选择岗位 </option>
+				{$g_userjob=explode("|",$g_userjob)}
+				{$g_userjob=$g_userjob[1]}
+                {foreach item=joblist from=$joblists}
+                <option value="{$joblist.jobpower_id}|{$joblist.job_id}" {if $joblist.job_id==$g_userjob}selected="selected"{/if}>{$joblist.job_name}</option>
+                {foreachelse}
+                <option value="" selected="selected"> 无岗位权限 </option>
+                {/foreach}
+            </select>
+        </span>
+        <span>
+            所属部门：
+            <select name="userdept" id="userdept">
+                <option value=""> 请选择部门 </option>
+                {foreach item=deptlist from=$deptlists}
+                <option value="{$deptlist.dept_id}" {if $deptlist.dept_id==$g_userdept}selected="selected"{/if}>{$deptlist.dept_name}</option>
+                {foreachelse}
+                <option value=""> 无岗位权限 </option>
+                {/foreach}
+            </select>
+        </span>
+        <span>
+            权限类别：
+            <select name="userindependence">
+                <option selected value="*">- 全部 -</option>
+                <option value="1" {if $g_userindependence == '1'}selected="selected"{/if}>- 独立 -</option>
+                <option value="0" {if $g_userindependence == '0'}selected="selected"{/if}>- 共享 -</option>
+            </select>
+        </span>
+        <span>
+            用户状态：
+            <select name="userstatus">
+                <option selected value="*">- 全部 -</option>
+                <option value="1" {if $g_userstatus == '1'}selected="selected"{/if}>- 有效 -</option>
+                <option value="0" {if $g_userstatus == '0'}selected="selected"{/if}>- 无效 -</option>
+                <option value="2" {if $g_userstatus == '2'}selected="selected"{/if}>- 同步中 -</option>
+            </select>
+        </span>
+        <span>
+        	<input name="mod" type="hidden" value="{$g_mod}" />
+            <input name="act" type="hidden" value="{$g_act}" />
+            <input name="page" type="hidden" value="{$g_page}" />
+            <button name="button" type="submit" id="bottom" value="search" />搜索</button>
+        </span>
+        <span>
+            <button name="button" type="button" id="bottom" value="history" onclick="location.href='index.php?mod=user&act=add'"/>添加</button>
+        </span>
+	</form>
+</div>
+
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+        	<td>编号</td>
+            <td>用户名</td>
+            <td>姓名</td>
+            <td>电话</td>
+            <td>岗位</td>       
+            <td>部门</td> 
+            <td>公司</td>    
+            <td>上次登陆时间</td>    
+            <td width="80">权限类别</td>
+            <td width="80">用户状态</td>            
+            <td width="120">Token授权日期</td>
+            <td width="120">Token有效天数</td>
+            <td width="100">操作</td>
+        </tr> 
+ 		{foreach item=userlist from=$userlists}
+        <tr>
+            <td><input name="checkbox-list" type="checkbox" value="{$userlist.user_id}" /></td>
+            <td>{$userlist.user_name}</td>
+            <td>{$userlist.user_name}</td>
+            <td>{$userlist.user_phone}</td>
+            <td>{$userlist.job_name}</td>
+            <td>{$userlist.dept_name}</td>
+            <td>{$userlist.company_name}</td>
+            <td>{$userlist.user_lastUpdateTime|date_format:"Y-m-d H:i:s"}</td>
+            <td>{if $userlist['user_independence'] == '1'}独立{else}共享{/if}</td>
+            <td>{if $userlist.user_status == '1'}有效{elseif $userlist.user_status == '2'}同步中..{else}无效{/if}</td>
+            <td>{$userlist.user_token_grant_date|date_format:"Y-m-d"}</td>
+            <td>{$userlist.user_token_effective_date}</td>     
+            <td>
+                <a href="index.php?mod=user&act=modify&uid={$userlist.user_id}">编辑</a> | 
+                <a href="javascript:void(0)" onclick="del_user({$userlist.user_id})" id="del-btn">删除</a>
+            </td>
+        </tr>  
+		{foreachelse}
+        <tr>
+            <td colspan="12" align="center">{$runmsg}</td>
+        </tr> 
+        {/foreach}                
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination">{$pageStr}</div>
+</div>
+{include file="footer.htm"}
+<script>
+{literal}
+//删除用户
+function del_user(uid){
+	alertify.confirm("亲,真的要删除当前用户吗？", function (e) {
+	if (e) {
+		$.post("index.php?mod=user&act=delete",{"userid":uid},function(rtn){
+			if($.trim(rtn) == "ok"){              
+				alertify.success("亲,删除成功!");
+				//window.location.reload();
+			}else {
+				 alertify.error("亲,删除失败!");
+		   }
+		});
+	}});
+}
+{/literal}
+</script>   

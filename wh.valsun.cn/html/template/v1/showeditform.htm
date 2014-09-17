@@ -1,0 +1,173 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/getgoods.js">
+</script>
+<link href="css/editForm.css" rel="stylesheet" type="text/css" />
+<div class="panel panel-primary maincontaiter">
+    <div class="panel-heading" style="text-align:center;">
+        <span class="label label-success labelcalss">单号：1234567</span>
+        <span class="label label-success labelcalss">订单号：1234567</span>
+        <span class="label label-success labelcalss">订单类型：发货单</span>
+        <span class="label label-success labelcalss">状态：待配货</span>
+    </div>
+    <div class="panel-body">
+        <div class="panel panel-default">
+            <form method="post" action="index.php?mod=editeDispatchBill&act=editeSubmit">
+                <div class="panel-body">
+                    <div class="rowdiv">
+                        <table width="100%" border="0" height="100%">
+                            <tr>
+                                <td class="splitclass">
+                                    <span class="titlespan">收件人:</span>
+                                    <input class="inputclass" name="recipient" value='{$recipient}' />
+                                </td>
+                                <td>
+                                    <span class="titlespan">邮箱/EMAIL:</span>
+                                    <input class="inputclass" name="email" value="{$email}"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="rowdiv">
+                        <table width="100%" border="0" height="100%">
+                            <tr>
+                                <td class="splitclass">
+                                    <span class="titlespan">国家/country:</span>
+                                    <input class="inputclass" name="countryname" value="{$country}" />
+                                </td>
+                                <td>
+                                    <span class="titlespan">国家简称:</span>
+                                    <input class="inputclass" name="abbreviation" value="{$abbreviation}"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="rowdiv">
+                        <table width="100%" border="0" height="100%">
+                            <tr>
+                                <td class="splitclass">
+                                    <span class="titlespan">州/state:</span>
+                                    <input class="inputclass" name="state" value="{$state}"/>
+                                </td>
+                                <td>
+                                    <span class="titlespan">市/city:</span>
+                                    <input class="inputclass" name="city" value="{$city}" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="rowdiv">
+                        <table width="100%" border="0" height="100%">
+                            <tr>
+                                <td class="splitclass">
+                                    <span class="titlespan">街道/street:</span>
+                                    <input class="inputclass" name="street" value="{$street}" />
+                                </td>
+                                <td>
+                                    <span class="titlespan">地址2/address2:</span>
+                                    <input class="inputclass" name="address2" value="{$address2}"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="rowdiv">
+                        <table width="100%" border="0" height="100%">
+                            <tr>
+                                <td class="splitclass">
+                                    <span class="titlespan">地址3/address3:</span>
+                                    <input class="inputclass" name="address3" value="{$address3}" />
+                                </td>
+                                <td>
+                                    <span class="titlespan">币种:</span>
+                                    <input class="inputclass" name="currency" value="{$currency}" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="rowdiv">
+                        <table width="100%" border="0" height="100%">
+                            <tr>
+                                <td class="splitclass">
+                                    <span class="titlespan">运输方式:</span>
+									<select name="shippingtype" style="margin-left:5px;">
+										<option value="0">未知的运输方式</option>
+										{foreach $shippinglist as $shval}
+											<option {if $shipping == $shval.id}selected="selected"{/if} value="{$shval.id}">{$shval.carrierNameCn}</option>
+										{/foreach}
+									</select>
+                                </td>
+                                <td>
+                                    <span class="titlespan">销售账号:</span>
+                                    <input class="inputclass" name="sellaccount" value="{$sellaccount}" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="rowdiv">
+                        <table width="100%" border="0" height="100%">
+                            <tr>
+                            	<!--
+                                <td class="splitclass">
+                                    <span class="titlespan">发货单属性:</span>
+                                    <input class="inputclass" name="status" value="{$status}" />
+                                </td> -->
+								<td class="splitclass">
+                                    <span class="titlespan">实际重量:</span>
+                                    <input class="inputclass" name="actualweight" value="{$actualweight}"/>
+                                </td>
+								<!-- 以后处理
+                                <td>
+                                    <span class="titlespan">渠道:</span>
+                                    <input class="inputclass" name="channel" value="{$channel}"/>
+                                </td>
+								-->
+								<td>
+                                    <span class="titlespan">实际运费</span>
+                                    <input class="inputclass" name="acturalfee" value="{$actualshipfee}" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="rowdiv">
+                        <table width="100%" border="0" height="100%">
+                            <tr>
+                                <td class="splitclass">
+                                    <span class="titlespan">估算重量:</span>
+                                    <input class="inputclass" name="calcWeight" value="{$calcWeight}" />
+                                </td>
+                                <td>
+                                    <span class="titlespan">估算运费</span>
+                                    <input class="inputclass" name="calcShipping" value="{$calcShipping}" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+					<!--
+                    <div class="rowdiv">
+                        <table width="100%" border="0" height="100%">
+                            <tr>
+                                <td class="splitclass">
+                                    <span class="titlespan">实际重量:</span>
+                                    <input class="inputclass" name="actualweight" value="{$actualweight}"/>
+                                </td>
+								
+                                <td>
+                                    <span class="titlespan">实际运费</span>
+                                    <input class="inputclass" name="acturalfee" value="" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+					-->
+                </div>
+				<div class="submitdiv">
+					<input type="hidden" name="orderid" value="{$orderid}">
+					<input type="submit" value="提交">
+					<span style="display:inline-block; width:380px;"></span>
+					<input type="button" onclick="window.location='index.php?mod=dispatchBillQuery&act=showForm'" value="取消">
+				</div>
+            </form>
+        </div>
+    </div>
+</div> {include file='footer.htm'}

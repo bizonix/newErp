@@ -1,0 +1,94 @@
+{include file="header.htm"}
+<link href="./public/css/sortblue/style.css" rel="stylesheet" type="text/css" media="screen" />
+<script src="./public/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+<div class="index-main">
+            <div class="result-search">
+                <form onsubmit="return check_shipfee()">
+                    <div>
+                        <span class="col1">Departure：</span>
+                        <span class="col2">
+							<input readonly="readonly" class="text-width-long" value="CHINA" type="text" name="addStr" id="addStr"/>
+							<input type="hidden" readonly="readonly" maxlength="1" value="{$addId}" name="addId" id="addId"/>
+						</span>
+                        <span class="col3">Destination：</span>
+                        <span class="col4">
+							<select class="flexselect" name="country" id="country">
+							{foreach item=list from=$countrys}
+							<option value="{$list.countryNameEn}" {if $country==$list.countryNameEn}selected="selected"{/if}>{$list.countryNameEn}</option>
+							{/foreach}
+							</select>
+                        </span>
+                    </div>
+                    <div class="col-margin">
+                        <span class="col1">Bulk：</span>
+                        <span class="col2">
+                            <input class="text-width-short" type="text" id="longs" value="{$longs}" name="longs"/>
+                            <input class="text-width-short" type="text" id="widths" value="{$widths}" name="widths"/>
+                            <input class="text-width-short" type="text" id="heights" value="{$heights}" name="heights"/>
+							<select class="text-width-short" name="unit" id="unit">
+								<option {if $unit=='CM'}selected="selected"{/if}>CM</option>
+								<option {if $unit=='IN'}selected="selected"{/if}>IN</option>
+								<option {if $unit=='M'}selected="selected"{/if}>M</option>
+							</select>
+						</span>
+                        <span class="col3">Weight：</span>
+                        <span class="col4">
+                            <input class="text-width-mid" type="text" id="weights" name="weights" value="{$weights}"/>
+							<select class="select-width-mid" name="unitW" id="unitW">
+								<option {if $unitW=='KG'}selected="selected"{/if}>KG</option>
+								<option {if $unitW=='LB'}selected="selected"{/if}>LB</option>
+								<option {if $unitW=='OZ'}selected="selected"{/if}>OZ</option>
+							</select>
+                            <input class="search-sub float-right search-sub-f" type="submit" value="" id="search">
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <div id="trackLoadTip"></div>
+			<div class="calus-main" id="shipFees">
+                <table id="sortTable" class="tablesorter">
+                    <thead>
+                        <tr>
+                            <th width="15%">
+                            </th>
+                            <th width="15%">
+                                Express Type
+                            </th>
+                            <th width="10%">
+                                Price
+                            </th>
+                            <th width="15%">
+                                Efficiency
+                            </th>
+                            <th width="45%">
+                                memo
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="shipFeeList">
+					{foreach key=key item=list from=$openFees}
+						{if $key>$maxItem}
+						<tr class="dis_none"><td></td><td>{$list.abb}</td><td>{$list.totalFee}</td><td>{$list.aging}</td><td>{$list.note}</td></tr>
+						{else if $key<$topNum}
+						<tr><td class="No{$key+1}"></td><td>{$list.abb}</td><td>{ceil(floatval($list.totalFee))}</td><td>{$list.aging}</td><td>{$list.note}</td></tr>
+						{else}
+						<tr><td></td><td>{$list.abb}</td><td>{$list.totalFee}</td><td>{$list.aging}</td><td>{$list.note}</td></tr>
+						{/if}
+					{/foreach}
+					</tbody> 
+                </table>
+				<div class="load-more" id="loadMore" {if $key>$maxItem}class="dis_none"{/if}>
+                    <a class="load-bt" href="javascript:void(0)" onclick="show_ship_fee_more()">{if $key>$maxItem}load {$moreItem} items more{/if}</a>
+                </div>
+                <div>
+                    <img src="./public/img/table_footer.gif" />
+                </div>
+            </div>
+            <h1 class="recom-title">
+                Our Recommendation
+            </h1>
+            <div class="recom-main" id="shipFeeAd1"></div>
+            <div class="fare-main" id="shipFeeAd2"></div>
+</div>
+<script type="text/javascript" src="./public/js/track_ship_fee.js"></script>
+{include file="footer.htm"}

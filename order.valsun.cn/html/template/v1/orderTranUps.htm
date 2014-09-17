@@ -1,0 +1,20 @@
+{include file="header.htm"}
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=orderTranUps&act=index">UPS美国专线</a>&nbsp;&gt;&gt;&nbsp;信息导入导出
+    </div>
+</div>
+<div class="servar">
+	<form action="ups_us_xml_handle.php" enctype="multipart/form-data" method="post" target="_blank">
+		<table border="0"  cellpadding="10" cellspacing="1" bgcolor="#c0ccdd" id="content">
+		  <tr>
+			<td colspan="2">上传XML文件:&nbsp;&nbsp;<input name="upfile" type="file" class="button" style="height:22px;"   size=35/></td>
+		  </tr>
+		  <tr>
+			<td><input name="submit" type="submit" class="button" value="导入" /></td><td></td>
+		  </tr>
+		</table>
+	</form>
+</div>
+{include file="footer.htm"}
+      

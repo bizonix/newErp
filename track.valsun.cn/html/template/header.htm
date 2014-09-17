@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<meta name="keywords" content="{$keywords},Wedo,WedoExpress,WedoExpress.com" />
+<meta name="description" content="{$description}" />
+<meta name="author" content="WedoExpress" />
+<meta name="robots" content="index, follow" />
+<meta name="revisit-after" content="1 days" />
+<meta name="rating" content="general" />
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="./public/js/command.js"></script>
+<script type="text/javascript" src="./public/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="./public/js/jquery.rotate.1-1.js"></script>
+<script src="./public/js/liquidmetal.js" type="text/javascript"></script>
+<script src="./public/js/jquery.flexselect.front.js" type="text/javascript"></script>
+<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<link rel="stylesheet" href="./public/css/flexselect.front.css" type="text/css" media="screen" />
+<link href="./public/css/wedo.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/alertify.css" rel="stylesheet" type="text/css" />
+<link href="./public/css/ui-lightness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script type="text/javascript">
+var web_url = "{$smarty.const.WEB_URL}";
+</script>
+</head>
+<body>
+<div class="container">
+<div class="header">
+	<img class="logo" src="./public/img/logo.gif" alt="wedo logo"/>
+	<select class="header-select">
+		<option>
+			English
+		</option>
+	</select>
+</div>
+<div class="nav">
+	<div class="nav-main">
+		<ul>
+			<li>
+				<a href="index.php?mod=trackInquiry&act=index" {if $mod=='trackInquiry'}class="nav-selected"{/if}>Track</a>
+			</li>
+			<li>
+				<a href="index.php?mod=trackShipFee&act=index" {if $mod=='trackShipFee'}class="nav-selected"{/if}>Logistices Estimate</a>
+			</li>
+			<li>
+				<a href="pages-2.html" {if $mod=='webSinglePage' && $id==2}class="nav-selected"{/if}>Standard Code</a>
+			</li>
+			<li>
+				<a href="pages-7.html" {if $mod=='webSinglePage' && $id==7}class="nav-selected"{/if}>Q and A</a>
+			</li>
+			<li>
+				<a href="pages-3.html" {if $mod=='webSinglePage' && $id==3}class="nav-selected"{/if}>About Wedo</a>
+			</li>
+		</ul>
+	</div>
+</div>	

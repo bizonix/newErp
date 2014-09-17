@@ -1,0 +1,97 @@
+{include file="header.htm"}
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="./js/ui/jquery-ui-sliderAccess.js"></script>
+<script type="text/javascript" src="./js/iqcScanList.js"></script>
+<div class="fourvar">
+    {include file="iqcnav.htm"}
+    <div class="pagination">
+       {$show_page}
+    </div>            
+</div>
+            <div class="servar">
+            	<form name="iqcScanListFrom" id="iqcScanListFrom" action="index.php?mod=iqcInfo&act=iqcScanList" method="post">
+            	<span>
+                	SKU:<input id="sku" name="sku" type="text" {if $sku != ""} value="{$sku}" {/if}/>
+                </span>
+                <span>
+					导出类型：<select name="d_status" id="d_status">
+						    <option value="0" {if $d_status == 0} selected="selected"{/if} >请选择</option>
+						    <option value="1" {if $d_status == 1} selected="selected"{/if}>不良品统计</option>
+						 </select>               	
+                </span>
+                <span id="span_is_combine" {if $d_status == 0} style="display:none;" {/if} >
+					是否合并：<select name="isCombine" id="isCombine">
+						    <option value="0" {if $isCombine == 0} selected="selected"{/if} >是</option>
+						    <option value="1" {if $isCombine == 1} selected="selected"{/if}>否</option>
+						 </select>               	
+                </span>
+                <span>
+					大卖家：<select name="sellerId" id="sellerId">
+						    <option value="1" >赛维网络</option>
+						    </select>               	
+                </span>
+                <span>
+					检测类型：<select name="j_status" id="j_status">
+						    <option value="0" {if $j_status == 0} selected="selected"{/if} >请选择</option>
+                            {foreach name="dTypeArrList" from=$detectionTypeArrList item=dTypeArrValue}
+                            <option {if $j_status == $dTypeArrValue.id} selected="selected"{/if} value="{$dTypeArrValue.id}" >{$dTypeArrValue.typeName}</option>
+                            {/foreach}
+						    </select>          	
+                </span>
+                <span>
+					SKU分类检测：<select name="t_status" id="t_status">
+						    <option value="0" {if $t_status == 0} selected="selected"{/if} >请选择</option>
+                            {foreach name="skuTypeQcList" from=$skuTypeQcArrList item=skuTypeQcArrValue}
+                            <option {if $t_status == $skuTypeQcArrValue.id} selected="selected"{/if} value="{$skuTypeQcArrValue.id}" >{$skuTypeQcArrValue.typeName}</option>
+                            {/foreach}
+						    </select>          	
+                </span>
+                <span>
+                	 检测开始时间：<input id="startTime" name="startTime" type="text" value="{$startTime}" />
+					 结束时间： <input id="endTime" name="endTime" type="text" value="{$endTime}" />
+                </span>				
+				<br><br>
+           操作：
+                <span>
+                	<button type="submit" />搜索</button>
+					<button id="exportExcelButton" type="button" />导出到EXCEL</button>
+				</span>
+               	</form>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td>SKU</td>
+                        <td>名称</td>                         
+                        <td>到货数</td>
+                        <td>检测类型</td>	                      
+						<td>抽检数</td>	
+                        <td>SKU分类检测</td>				
+                        <td>不良数</td>
+						<td>不良原因</td>
+						<td>检测人</td>
+						<td>检测时间</td>
+                    </tr>
+                    {foreach key=key_id from=$iqcCompleteInfoList item=list}
+                    <tr class="odd">
+                            <td>{$list.sku}</td>
+                            <td width="30%" align="left">{$list.goodsName}</td>
+                            <td>{$list.arrivalNum}</td>
+                            <td>{$detectionTypeArr[$list.checkTypeID]}</td>
+                            <td>{$list.checkNum}</td>
+                            <td>{$skuTypeQcArr[$list.skuTypeCheckID]}</td>
+                            <td>{$list.rejectsNum}</td>
+                            <td>{$list.rejectsReason}</td>
+							{$username = UserModel::getUsernameById($list.checkUser)}
+                            <td>{if !empty($username)}{$username}{else}{$list.checkUser}{/if}</td>
+                            <td>{$list.checkTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+<div class="bottomvar">
+    <div class="pagination">
+       {$show_page}
+    </div>
+</div>
+{include file="footer.htm"}

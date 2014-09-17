@@ -1,0 +1,72 @@
+{include file="header.htm"}
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=user&act=index">部门信息管理</a>&nbsp;&gt;&gt;&nbsp;部门列表
+    </div>
+	<div class="pagination">{$pageStr}</div>
+</div>
+<div class="servar">
+	<form name="form" id="sform" action="" enctype="text/plain" method="get">
+        <span>
+            用户名：<input type="text" name="deptname" value="{$g_deptname}"/>
+        </span>
+        <span>
+        	<input name="mod" type="hidden" value="{$g_mod}" />
+            <input name="act" type="hidden" value="{$g_act}" />
+            <input name="page" type="hidden" value="{$g_page}" />
+            <button name="button" type="submit" id="bottom" value="search" />搜索</button>
+        </span>
+        <span>
+            <button name="button" type="button" id="bottom" value="history" onclick="location.href='index.php?mod=dept&act=add'"/>添加</button>
+        </span>
+	</form>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+        	<td>编号</td>
+            <td>公司</td>
+            <td>部门</td>
+            <td>部门负责人</td>
+            <td>操作</td>
+        </tr> 
+ 		{foreach item=deptlist from=$deptlists}
+        <tr>
+            <td>{$deptlist.dept_id}</td>
+            <td>{$deptlist.company_name}</td>
+            <td>{$deptlist.dept_name}</td>
+            <td>{$deptlist.dept_principal}</td>
+            <td>
+                <a href="index.php?mod=dept&act=modify&did={$deptlist.dept_id}">编辑</a> | 
+                <a href="javascript:void(0)" onclick="del_dept({$deptlist.dept_id})" id="del-btn">删除</a>
+            </td>
+        </tr>  
+		{foreachelse}
+        <tr>
+            <td colspan="12" align="center">{$runmsg}</td>
+        </tr> 
+        {/foreach}                
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination">{$pageStr}</div>
+</div>
+{include file="footer.htm"}
+<script>
+{literal}
+//删除部门
+function del_dept(id){
+	alertify.confirm("亲,真的要删除当前部门吗？", function (e) {
+	if (e) {
+		$.post("index.php?mod=dept&act=delete",{"deptId":id},function(rtn){
+			if($.trim(rtn) == "ok"){              
+				alertify.success("亲,删除成功!");
+				//window.location.reload();
+			}else {
+				 alertify.error("亲,删除失败!");
+		   }
+		});
+	}});
+}
+{/literal}
+</script>      

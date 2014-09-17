@@ -1,0 +1,83 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/whAuditList.js"></script>
+{include file='warehouseSubnav.htm'}
+<div class="servar wh-servar">
+<table cellspacing="0" width="100%">
+	<tr >
+    	<td>
+        	<a href="index.php?mod=WhAudit&act=scanAddAuditList">
+                	 添加审核单据类型
+                 	 </a>
+            &nbsp;|&nbsp;
+            <label for="invoiceTypeId">单据类型：</label>    
+            <select name="invoiceTypeId" id="invoiceTypeId">
+             	<option value="">请选择</option>
+                {foreach WhAuditModel::getTNameList('wh_invoice_type','id,invoiceName','') as $value}
+                <option value="{$value.id}" {if $value.id == $smarty.get.invoiceTypeId}selected="selected"{/if}>{$value.invoiceName}</option>
+                {/foreach}
+			 </select>
+             &nbsp;|&nbsp;
+             <label for="storeId">仓库：</label>    
+            <select name="storeId" id="storeId">
+                <option value="">请选择</option>
+                {foreach WhAuditModel::getTNameList('wh_store','id,whName','') as $value}
+                <option value="{$value.id}" {if $value.id == $smarty.get.storeId}selected="selected"{/if}>{$value.whName}</option>
+                {/foreach}
+			 </select>
+             &nbsp;|&nbsp;
+			 <button id="searchAuditList">搜索</button>
+             &nbsp;
+            <span style="color: red;">{$status}</span>
+        </td>
+        <td class="pagination">
+             {$show_page}
+        </td>
+    </tr>
+</table>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="10%">编号</td>
+                <td width="10%">单据类型</td>
+                <td width="10%">审核人</td>
+                <td width="10%">审核级别</td>
+                <td width="10%">添加时间</td>
+                <td width="10%">仓库名称</td>
+                <td width="10%">是否启用</td>
+                <td width="10%" align="center">操作</td>
+            </tr>
+        </thead>
+        <!-- BEGIN list -->
+        <thead>
+        {foreach $whAuditList as $value}
+            <tr class="odd">
+                 <input type="hidden" name="key_id" value="{$value.id}" />
+                 <td  width="10%">{$value.id}</td>
+                 <td  width="10%">{WhIoStoreModel::getInvoiceTypeNameById($value['invoiceTypeId'])}</td>
+                 <td  width="10%">{$value.auditor}</td>
+                 <td  width="10%">{$value.auditLevel}</td>
+                 <td  width="10%">{$value.createdTime|date_format:"Y-m-d H:i"}</td>
+                 <td  width="10%">{WhIoStoreModel::getWhNameById($value['storeId'])}</td>
+                 <td  width="10%">{if $value.is_enable == 1}启用{else}禁用{/if}</td>
+                 <td width="10%" align="center">
+	                 <a href="index.php?mod=WhAudit&act=scanUpdateAuditList&id={$value.id}">
+                	 <button id='update'>修改</button>
+                 	 </a>
+                     <a href="index.php?mod=WhAudit&act=scanAddAuditListThis&id={$value.id}">
+                	 <button id='update'>增加等级</button>
+                 	 </a>
+                 </td>
+            </tr>
+         {/foreach}
+        </thead>
+    <!-- END list -->
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination">
+       {$show_page}
+    </div>
+</div>
+{include file="footer.htm"}

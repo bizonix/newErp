@@ -1,0 +1,79 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<script type="text/javascript" src="./js/fromOpenConfig.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=fromOpenConfig&act=update' method="post" id="fromOpenConfigEdit" onsubmit="return check()">
+    	<div>
+            <input type="hidden" name="id" value="{$fromOpenConfig.id}"/>
+        	<label for="functionname" style="font-size:20px;">函数名称：</label>
+            <input value="{$fromOpenConfig.functionname}" id='functionname' class="validate[required] text-input" name="functionname" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="typeSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        
+        <div>
+        	<label for="name" style="font-size:20px;">函数说明：</label>
+            <input value="{$fromOpenConfig.name}" id='name' class="validate[required] text-input" name="name" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="typeSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        
+        <div>
+        	<label for="requesturl" style="font-size:20px;">请求地址：</label>
+            <input value="{$fromOpenConfig.requesturl}" id='requesturl' class="validate[required] text-input" name="requesturl" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="requesturl" style="color: red;">*</span>
+        </div>
+        <br />
+        
+        
+         <div>
+        	<label for="method" style="font-size:20px;">请求API：</label>
+            <input value="{$fromOpenConfig.method}" id='method' class="validate[required] text-input" name="method" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="methodSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        
+        
+        <div>
+            <label for="format" style="font-size:20px;">  返回数据类型</label>
+            <select id='format' id="status{$fromOpenConfig.id}" class="active" name="format" style="width:200px;height:30px;font-size:20px">
+	            <option value="json" {if $fromOpenConfig.format==json} selected="selected" {/if}>json</option>
+	            <option value="xml" {if $fromOpenConfig.format==xml} selected="selected" {/if}>xml</option>
+	        </select>
+            <span id="formatSpan" style="color: red;">*</span>
+		</div>
+		<br />
+		
+		 <div>
+        	<label for="v" style="font-size:20px;">版本：</label>
+            <input value="{$fromOpenConfig.v}" id='v' class="validate[required] text-input" name="v" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="v" style="color: red;">*</span>
+        </div>
+        <br />
+		
+        <div>
+            <label for="username" style="font-size:20px;">用户：</label>
+             <input value="{$fromOpenConfig.username}" id='username' class="validate[required] text-input" name="username" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="usernameSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        
+         <div>
+            <label for="cachetime" style="font-size:20px;">缓存时间：</label>
+             <input value="{$fromOpenConfig.cachetime}" id='cachetime' class="validate[required] text-input" name="cachetime" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="cachetimeSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        
+        <div>
+            <input type="submit" value="提交"/>
+            &nbsp;
+            <input type="button" id="back" value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.htm"}

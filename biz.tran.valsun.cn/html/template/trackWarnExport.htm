@@ -1,0 +1,46 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=trackWarnExport&act=index">跟踪号信息导出</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select name="carrierId" id="carrierId" onchange="show_channel_list(this.value)">
+			<option value="0">==全部运输方式==</option>
+			{foreach item=list from=$carrierList}
+			{if !$list.is_track }<option value="{$list.id}" {if $carrierId == $list.id}selected="selected"{/if}>{$list.carrierNameCn}</option>{/if}
+			{/foreach}
+		</select>
+	</span>
+	<span>
+		<select name="flag" id="flag">
+			<option value=''>==全部跟踪号状态==</option>
+			{foreach key=keys item=item from=$statusList}
+			<option value="{$keys}" {if $status === $keys}selected="selected"{/if}>{$item}</option>
+			{/foreach}
+		</select>
+	</span>
+	<span>
+		<select id="times">
+			<option value='0'>请选择时间节点</option>
+			<option value='scanTime'{if ($timeNode == 'scanTime')} selected="selected"{/if}>公司发货时间</option>
+			<option value='lastTime'{if ($timeNode == 'lastTime')} selected="selected"{/if}>最后跟踪时间</option>
+		</select>
+		<input type="hidden" id="now-time" value="{(time()*1000)}"/>
+	</span>
+	<span>
+		开始时间：<input type="text" id="start-date" onclick="WdatePicker()"  value = "{$startTimeValue}" style="width:80px;"/>
+	</span>
+	<span>
+		结束时间：<input type="text" id="end-date" onclick="WdatePicker()"  value = "{$endTimeValue}" style="width:80px;"/>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="export-xls">EXCELL报表导出</a>
+	</span>
+</div>
+<script type="text/javascript" src="./public/js/track_warn_export.js"></script>
+{include file="footer.htm"}

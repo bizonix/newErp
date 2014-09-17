@@ -1,0 +1,5 @@
+[ 2013-07-17T20:05:42+08:00 ] /kpi.valsun.cn/html/index.php?mod=kpiList&act=kpiList | ERR: [2] opendir(D:/web/www/kpi.valsun.cn/view/,D:/web/www/kpi.valsun.cn/view/):  framework.php 第 108 行.
+[ 2013-07-17T20:05:42+08:00 ] /kpi.valsun.cn/html/index.php?mod=kpiList&act=kpiList | ERR: [2] opendir(D:/web/www/kpi.valsun.cn/view/): failed to open dir: No such file or directory framework.php 第 108 行.
+[ 2013-07-17T20:05:42+08:00 ] /kpi.valsun.cn/html/index.php?mod=kpiList&act=kpiList | ERR: [2] closedir() expects parameter 1 to be resource, boolean given framework.php 第 119 行.
+[ 2013-07-17T21:06:12+08:00 ] /kpi.valsun.cn/api/json.php?mod=kpiList&act=outProduct&jsonpcallback=jQuery183016324076937520915_1374066286955 | ERR: [2] opendir(D:/web/www/kpi.valsun.cn/action/): failed to open dir: No error framework.php 第 108 行.
+[ 2013-07-17T21:06:12+08:00 ] /kpi.valsun.cn/api/json.php?mod=kpiList&act=outProduct&jsonpcallback=jQuery183016324076937520915_1374066286955 | ERR: [2] closedir() expects parameter 1 to be resource, boolean given framework.php 第 119 行.

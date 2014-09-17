@@ -1,0 +1,17 @@
+{include file="header.htm"}
+<script type="text/javascript" src="js/pda_ajaxwraper.js"></script>
+<script type="text/javascript" src="js/ow_boxininfo.js"></script>
+	<div id="mstatus" class="floatright"></div>
+	<div id="divcontent" style="">
+       <div id="" >
+       		箱号:<input name="txt_boxid" type="text" id="txt_boxid" onkeydown="checkBoxId()" size="6" />
+	   </div>
+	</div>
+	<div><br>
+	   &nbsp;&nbsp;&nbsp;长:<input id="txt_length" type="text" onkeydown="checkLength()" size="6" />
+	   宽:<input id="txt_width" type="text" onkeydown="checkWidth()" size="6" /><br><br>
+	   &nbsp;&nbsp;&nbsp;高:<input id="txt_hight" type="text" onkeydown="checkHight()" size="6" /><br><br>
+	   重量:<input id="txt_weight" type="text" onkeydown="checkWeight()" size="6" /><font color="#FF0000">(kg)</font>
+	</div><br/>
+	<div id="showMsg"></div>
+{include file="footer.htm"}

@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+body{
+	margin:0 !important;
+	background-color:#fff !important;
+}
+.itemdiv{
+	border:solid 1px #c0c0c0;
+}
+.row1{
+	height:35px;
+	line-height:35px;
+	border-bottom:solid 1px #c0c0c0;
+}
+.row1 .clu{
+	display:inline-block;
+}
+
+.row1 .clu span{
+	width:90px;
+	display:inline-block;
+	text-align:right;
+	margin-right:3px;
+}
+
+.row2 {
+	padding-left:48px;
+	height:35px;
+	line-height:35px;
+	border-bottom:solid 1px #c0c0c0;
+}
+
+.row3{
+	height:35px;
+	line-height:35px;
+	border-bottom:solid 1px #c0c0c0;
+	padding-left:48px;
+}
+
+.row2 span{
+	margin-right:8px;
+}
+
+.messagecontent{
+	height:200px;
+	overflow-y:scroll;
+}
+a{
+	text-decoration:none !important;
+	color:#fff !important;
+}
+table a{
+	color:#000 !important;
+}
+pre {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	font-size: 15px;
+	font-family: "微软雅黑",arial,sans-serif;
+	padding: 4px 8px;
+	margin: 0;
+	text-indent: 0pt;
+}
+div[id^="content_"]{
+	font-size:15px;
+	font-family: "微软雅黑",arial,sans-serif;
+}
+#origin pre{
+	font-size: 10px;
+}
+#origin{
+	font-size: 10px;
+}
+#downloadattach{
+	color:#388162 !important;
+	font-weight:bold !important;
+	font-size:20px !important;
+	border:2px solid gray;
+	border-radius:10px;
+	padding:10px;
+}
+#downloadattach:hover{
+	background-color:#9c968b;
+	transition:background-color 2s;
+}

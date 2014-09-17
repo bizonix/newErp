@@ -1,0 +1,327 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/goodslist.js"></script>
+<script type="text/javascript" src="./js/jquery.flexselect.js"></script>
+<script type="text/javascript" src="./js/liquidmetal.js"></script>
+<script type="text/javascript" src="./js/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<link rel="stylesheet" type="text/css" href="./js/fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+<div class="fourvar">
+            	<div class="pathvar">
+               {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+			<div class="servar products-servar">
+			<span style="color: red;" id="error"></span>
+            </div>
+            <form action="index.php?mod=autoCreateSpu&act=addSkuSingOn" method="post" id="SpuArchiveValidation" onsubmit="return checkSubmit()" target="a">
+            <div class="main products-main basic-main">
+            	<table cellspacing="0" width="100%" id="tableBas">
+                	<tr class="title">
+                    	<td align="left" colspan="5" style="font-size:16px; font-weight:bold; padding-left:15px;">基本信息</td>
+                    </tr>
+                    <tr>
+                    	<td width="38%" style="padding-left: 30px;" class="products-action" rowspan="100" style="width:450px;">
+                        <div>
+                          <ul>
+                            <li>
+                                <a id="fancy" class="fancybox" href="javascript:void(0)" target="_blank">
+                                    <img src="css/images/Testera.jpg" width="400px" height="400px"/>
+                                </a>
+                    	    </li>
+                          </ul>
+                        </div>
+						</td>
+                        <td width="8%"><span style="color:#F00;">*</span>SPU</td>
+                        <td width="15%">
+                            <input value="{$spu}" disabled="disabled"/>
+							<input name="spu" id="spu" value="{$spu}" type="hidden"/>
+                        </td>
+                        <td style="width:90px;"><span style="color:#F00;">*</span>产品类别</td>
+                        <td>
+                            <input value="{getAllCateNameByPath($pid)}" disabled="disabled"/>
+							<input name="pid" id="pid" value="{$pid}" type="hidden"/>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td><span style="color:#F00;"></span>估算重量(KG)</td>
+                        <td><input value="{$spuCalWeight}" disabled="disabled"/></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color:#F00;"></span>状态</td>
+                        <td>
+                            <select name="goodsStatus" id="goodsStatus">
+                                <option value="1">在线</option>
+                            	<!-- TODO: <option value="2">停售</option>
+                            	<option value="3">暂时停售</option>
+                            	<option value="4">部分侵权-ebay</option>
+                            	<option value="5">部分侵权-B2B</option>
+                                <option value="6">部分侵权-其他平台</option> -->
+                                <option value="51" {if $spuStatus == 51}selected="selected"{/if}>PK产品</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td><span style="color:#F00;">*</span>新/老品</td>
+                        <td>
+                            <select name="isNew" id="isNew">
+                            	{if !isSpuOldExist($spu)}<option value="1">新品</option>{/if}
+                            	<option value="0">老品</option>
+                            </select>
+                        </td>
+                    <tr>
+                        <td><span style="color:#F00;"></span>备注</td>
+                        <td><input name="goodsNote" id="goodsNote" value="{$spuNote}"/></td>
+                    </tr>
+                </table>
+
+                <table cellspacing="0" width="100%" id="tableAddSku">
+                    <tr>
+                        <td class="products-action"><input type="button" value="添加子料号" id="addSkuTr"/></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 20px;"><span style="color:#F00;">*</span>SKU（如果只有一个子料号，请留空）</td> <td><span style="color:#F00;">*</span>描述</td> <td><span style="color:#F00;">*</span>成本(RMB)</td> {if $isColor != false}<td>颜色</td>{/if} {if $isSize != false}<td>尺码</td>{/if} <td>备注</td>
+                    </tr>
+                    {if $isColor != false && $isSize != false}{* 颜色和尺码属性都存在时 *}
+                    {foreach $isColor as $valueColor}
+                    {foreach $isSize as $valueSize}
+                    {if getPpvShortForPPVId($valueColor['propertyValueId']) != '' && getPpvShortForPPVId($valueSize['propertyValueId']) != '' && isSkuExist($spu|cat:'_'|cat:getPpvShortForPPVId($valueColor['propertyValueId'])|cat:'_'|cat:getPpvShortForPPVId($valueSize['propertyValueId'])) == false}
+                    <tr>
+                        <td style='padding-left: 20px;'>{$spu}<input {if $isColor || $isSize || $isSpuExist}class='validate[required]'{/if} name='sku[]' id='sku' value="_{getPpvShortForPPVId($valueColor['propertyValueId'])}_{getPpvShortForPPVId($valueSize['propertyValueId'])}" /></td>
+                        <td><input class='validate[required]' name='goodsName[]' value='{$spuName|cat:'--'|cat:OmAvailableModel::getPropertyValueById($valueColor['propertyValueId'])|cat:'--'|cat:OmAvailableModel::getPropertyValueById($valueSize['propertyValueId'])}'/></td>
+                        <td><input class='validate[required,custom[number],min[0.001]] text-input' name='goodsCost[]' id='goodsCost' value='{$spuPurchasePrice}'/></td>
+                        
+                            {if $isColor != false}
+                            <td>
+                            <select name='goodsColor[]' id='goodsColor' class='validate[required]'>
+                                {foreach $isColor as $value}
+                                	{if !empty($value)}
+                                	<option value='{$value['propertyValueId']}' {if $value['propertyValueId'] == $valueColor['propertyValueId']}selected='selected'{/if}>{OmAvailableModel::getPropertyValueById($value['propertyValueId'])}</option>
+                                	{/if}
+                                 {/foreach}
+                            </select>
+                            </td>
+                            {/if}
+                                                
+                            {if $isSize != false}
+                            <td>
+                            <select name='goodsSize[]' id='goodsSize' class='validate[required]'>
+                                {foreach $isSize as $value}
+                                	{if !empty($value)}
+                                	<option value='{$value['propertyValueId']}' {if $value['propertyValueId'] == $valueSize['propertyValueId']}selected='selected'{/if}>{OmAvailableModel::getPropertyValueById($value['propertyValueId'])}</option>
+                                	{/if}
+                                 {/foreach}
+                            </select>
+                            </td>
+                            {/if}
+                        
+                        <td>
+                           <input name='goodsNote[]' id='goodsNote' value='{$spuNote}'/>&nbsp;<a href='javascript:void(0)' class='delTr'>删除行</a>
+                        </td>
+                    </tr>
+                    {/if}
+                    {/foreach}
+                    {/foreach}
+                    
+                    {elseif $isColor != false && $isSize == false}{* 颜色存在，尺码不存在时 *}
+                    {foreach $isColor as $valueColor}
+                    {if getPpvShortForPPVId($valueColor['propertyValueId']) != '' && isSkuExist($spu|cat:'_'|cat:getPpvShortForPPVId($valueColor['propertyValueId'])) == false}
+                    <tr>
+                        <td style='padding-left: 20px;'>{$spu}<input {if $isColor || $isSize || $isSpuExist}class='validate[required]'{/if} name='sku[]' id='sku' value="_{getPpvShortForPPVId($valueColor['propertyValueId'])}" /></td>
+                        <td><input class='validate[required]' name='goodsName[]' value='{$spuName|cat:'--'|cat:OmAvailableModel::getPropertyValueById($valueColor['propertyValueId'])}'/></td>
+                        <td><input class='validate[required,custom[number],min[0.001]] text-input' name='goodsCost[]' id='goodsCost' value='{$spuPurchasePrice}'/></td>
+                        
+                            {if $isColor != false}
+                            <td>
+                            <select name='goodsColor[]' id='goodsColor' class='validate[required]'>
+                                {foreach $isColor as $value}
+                                	{if !empty($value)}
+                                	<option value='{$value['propertyValueId']}' {if $value['propertyValueId'] == $valueColor['propertyValueId']}selected='selected'{/if}>{OmAvailableModel::getPropertyValueById($value['propertyValueId'])}</option>
+                                	{/if}
+                                 {/foreach}
+                            </select>
+                            </td>
+                            {/if}
+                                                
+                            {if $isSize != false}
+                            <td>
+                            <select name='goodsSize[]' id='goodsSize' class='validate[required]'>
+                                {foreach $isSize as $value}
+                                	{if !empty($value)}
+                                	<option value='{$value['propertyValueId']}' {if $value['propertyValueId'] == $valueSize['propertyValueId']}selected='selected'{/if}>{OmAvailableModel::getPropertyValueById($value['propertyValueId'])}</option>
+                                	{/if}
+                                 {/foreach}
+                            </select>
+                            </td>
+                            {/if}
+                        
+                        <td>
+                           <input name='goodsNote[]' id='goodsNote' value='{$spuNote}'/>&nbsp;<a href='javascript:void(0)' class='delTr'>删除行</a>
+                        </td>
+                    </tr>
+                    {/if}
+                    {/foreach}
+                    
+                    {elseif $isColor == false && $isSize != false}{* 颜色不存在，尺码存在时 *}
+                    {foreach $isSize as $valueSize}
+                    {if getPpvShortForPPVId($valueSize['propertyValueId']) != '' && isSkuExist($spu|cat:'_'|cat:getPpvShortForPPVId($valueSize['propertyValueId'])) == false}
+                    <tr>
+                        <td style='padding-left: 20px;'>{$spu}<input {if $isColor || $isSize || $isSpuExist}class='validate[required]'{/if} name='sku[]' id='sku' value="_{getPpvShortForPPVId($valueSize['propertyValueId'])}" /></td>
+                        <td><input class='validate[required]' name='goodsName[]' value='{{$spuName|cat:'--'|cat:OmAvailableModel::getPropertyValueById($valueSize['propertyValueId'])}}'/></td>
+                        <td><input class='validate[required,custom[number],min[0.001]] text-input' name='goodsCost[]' id='goodsCost' value='{$spuPurchasePrice}'/></td>
+                        
+                            {if $isColor != false}
+                            <td>
+                            <select name='goodsColor[]' id='goodsColor' class='validate[required]'>
+                                {foreach $isColor as $value}
+                                	{if !empty($value)}
+                                	<option value='{$value['propertyValueId']}' {if $value['propertyValueId'] == $valueColor['propertyValueId']}selected='selected'{/if}>{OmAvailableModel::getPropertyValueById($value['propertyValueId'])}</option>
+                                	{/if}
+                                 {/foreach}
+                            </select>
+                            </td>
+                            {/if}
+                                                
+                            {if $isSize != false}
+                            <td>
+                            <select name='goodsSize[]' id='goodsSize' class='validate[required]'>
+                                {foreach $isSize as $value}
+                                	{if !empty($value)}
+                                	<option value='{$value['propertyValueId']}' {if $value['propertyValueId'] == $valueSize['propertyValueId']}selected='selected'{/if}>{OmAvailableModel::getPropertyValueById($value['propertyValueId'])}</option>
+                                	{/if}
+                                 {/foreach}
+                            </select>
+                            </td>
+                            {/if}
+                        
+                        <td>
+                           <input name='goodsNote[]' id='goodsNote' value='{$spuNote}'/>&nbsp;<a href='javascript:void(0)' class='delTr'>删除行</a>
+                        </td>
+                    </tr>
+                    {/if}
+                    {/foreach}
+                    
+                    {elseif $isColor == false && $isSize == false}{* 颜色和尺码都不存在时 *}
+                    <tr>
+                        <td style='padding-left: 20px;'>{$spu}<input {if $isColor || $isSize || $isSpuExist}class='validate[required]'{/if} name='sku[]' id='sku' value="" /></td>
+                        <td><input class='validate[required]' name='goodsName[]' value='{$spuName}'/></td>
+                        <td><input class='validate[required,custom[number],min[0.001]] text-input' name='goodsCost[]' id='goodsCost' value='{$spuPurchasePrice}'/></td>
+                        
+                            {if $isColor != false}
+                            <td>
+                            <select name='goodsColor[]' id='goodsColor' class='validate[required]'>
+                                {foreach $isColor as $value}
+                                	{if !empty($value)}
+                                	<option value='{$value['propertyValueId']}' {if $value['propertyValueId'] == $valueColor['propertyValueId']}selected='selected'{/if}>{OmAvailableModel::getPropertyValueById($value['propertyValueId'])}</option>
+                                	{/if}
+                                 {/foreach}
+                            </select>
+                            </td>
+                            {/if}
+                                                
+                            {if $isSize != false}
+                            <td>
+                            <select name='goodsSize[]' id='goodsSize' class='validate[required]'>
+                                {foreach $isSize as $value}
+                                	{if !empty($value)}
+                                	<option value='{$value['propertyValueId']}' {if $value['propertyValueId'] == $valueSize['propertyValueId']}selected='selected'{/if}>{OmAvailableModel::getPropertyValueById($value['propertyValueId'])}</option>
+                                	{/if}
+                                 {/foreach}
+                            </select>
+                            </td>
+                            {/if}
+                        
+                        <td>
+                           <input name='goodsNote[]' id='goodsNote' value='{$spuNote}'/>&nbsp;<a href='javascript:void(0)' class='delTr'>删除行</a>
+                        </td>
+                    </tr>
+                    {/if}
+                    
+                </table>
+                
+                <div align="center" class="products-action">
+                	<input type="submit" value="保存"/>
+                    <input type="button" value="返回" id="back"/>
+                </div>
+                </form>
+                <iframe style="display: none;" name="a"></iframe>
+
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}
+
+<script type="text/javascript">
+$(function(){
+    $("#addSkuTr").click(function(){ //alert('111');
+$("#tableAddSku").append("<tr><td style='padding-left: 20px;'>{$spu}<input {if $isRelatedColor || $isRelatedSize}class='validate[required]'{/if} name='sku[]' id='sku'/></td><td><input class='validate[required]' name='goodsName[]' value='{$spuName}'/></td><td><input class='validate[required,custom[number],min[0.001]] text-input' name='goodsCost[]' id='goodsCost' value='{$spuPurchasePrice}'/></td>{if $isColor != false}<td><select name='goodsColor[]' id='goodsColor' class='validate[required]'>{foreach $isColor as $value}{if !empty($value)}<option value='{$value['propertyValueId']}'>{OmAvailableModel::getPropertyValueById($value['propertyValueId'])}</option>{/if}{/foreach}</select></td>{/if}{if $isSize != false}<td><select name='goodsSize[]' id='goodsSize' class='validate[required]'>{foreach $isSize as $value}{if !empty($value)}<option value='{$value['propertyValueId']}'>{OmAvailableModel::getPropertyValueById($value['propertyValueId'])}</option>{/if}{/foreach}</select></td>{/if}<td><input name='goodsNote[]' id='goodsNote' value='{$spuNote}'/>&nbsp;<a href='javascript:void(0)' class='delTr'>删除行</a></td></tr>");
+    });
+
+    $(".delTr").live('click',function(){
+        $(this).parent().parent().remove();
+    });
+    
+    $(".fancybox").fancybox({
+				helpers: {
+					title : {
+						type : 'outside'
+					},
+					overlay : {
+						speedOut : 0
+					}
+				}
+			});
+          
+        	        		//var spu = $("#spu").val();
+//                if(spu == ''){
+//                    return;
+//                }
+//        		$.ajax({
+//    				type	: "POST",
+//    				dataType: "jsonp",
+//    				url		: 'json.php?mod=goods&act=ajaxGetAllArtPicBySpu&jsonp=1',
+//    				data	:  { spu:spu } ,
+//    				success	: function (msg){
+//    					if(msg.data != false){
+//                            html = '';
+//                            var i = 1;
+//                            for(var key in msg.data) {
+//                                if(i > 6){
+//                                    break;
+//                                }
+//                                html = html + "<li style='float: left;'><a href='"+ msg.data[key] +"' title='"+ key + "' target='_blank'><img src='"+ msg.data[key] +"' width='150px' height='150px'/></a></li>";    
+//                                i++;
+//                            }
+//                            $("#ulHtml").html(html);
+//                            return;
+//    					}else{
+//    						return;
+//    					}
+//    				}
+//    			});     
+    $("select[class*=flexselect]").flexselect();
+});
+
+function  checkSubmit(){
+    //var arr = $("input[name='sku[]']");
+//    var length = arr.length;
+//    arr.each(function(){
+//        alert(this);
+//    });
+    //for(var i=0;i < length;i++){
+//        alert(arr[i].length);
+//    }
+
+    //alert(arr.length);
+    return true;
+}
+</script>

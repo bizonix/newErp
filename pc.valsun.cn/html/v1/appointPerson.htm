@@ -1,0 +1,126 @@
+{include file="header.htm"}
+<div class="fourvar">
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+            <div class="servar products-servar">
+                <span>部门：
+    			   <select id="searchDepId" name="searchDepId" style="width: 120px;">
+                   <option value=""> </option>
+                   {foreach getAppointPersonDept() as $value}
+    				<option value="{$value['dept_id']}" {if $smarty.get.searchDepId == $value['dept_id']}selected='selected'{/if}>{$value['dept_name']}</option>
+                   {/foreach}
+    			  </select>
+                </span> 
+                <span>&nbsp;|&nbsp;指派工程师 : </span>
+                <select id="searchUserId" name="searchUserId">
+                    <option value=""> </option>
+                   {foreach getAllPEInfo() as $value}
+    				<option value="{$value['global_user_id']}" {if $smarty.get.searchUserId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+                   {/foreach}
+   			    </select>              			         
+            <span><button id='seachAppointPerson'>搜索</button></span>
+            </div>
+            {if isAccessAll('products','addAppointPerson') == true}
+			<div class="servar products-servar">
+                <span>部门：
+    			   <select id="addDepId" name="addDepId" style="width: 120px;">
+                   <option value=""> </option>
+                   {foreach getAppointPersonDept() as $value}
+    				<option value="{$value['dept_id']}" {if $smarty.get.addDepId == $value['dept_id']}selected='selected'{/if}>{$value['dept_name']}</option>
+                   {/foreach}
+    			  </select>
+                </span>               
+			    <span>&nbsp;|&nbsp;指派工程师 : </span>
+                <select id="addUserId" name="addUserId">
+                    <option value=""> </option>
+                   {foreach getAllPEInfo() as $value}
+    				<option value="{$value['global_user_id']}" {if $smarty.get.addUserId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+                   {/foreach}
+   			    </select>
+                <span><button id='addAppointPerson'>添加</button></span>                   
+                &nbsp;
+		        <span style="color: red;" id="error">{$smarty.get.status}</span>
+            </div>
+            {/if}
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                        <td>序号</td>
+                        <td>部门</td>
+                        <td>指派工程师</td>
+                        <td>添加人</td>
+                        <td>添加时间</td>
+                        <td>操作</td>
+                    </tr>
+                    {foreach $appointPersonList as $value}
+                                <tr id="tr{$value['id']}">
+                                    <td>{$value@index + 1}</td>
+                                    <td>{$value['depName']}</td>
+                                    <td>{$value['userName']}</td>
+                                    <td>{$value['addUserName']}</td>
+                                    <td>{$value['addTime']|date_format:"Y-m-d H:i:s"}</td>
+                                    <td>
+                                    {if isAccessAll('products','addAppointPerson') == true}
+                                    <input type="button" class="deleteAppointPerson" deleteId="{$value['id']}" value="删除"/>
+                                    {/if}
+                                    </td>
+                                </tr>
+                     {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}
+<script type="text/javascript">       
+        $(document).ready(function(){
+            $("#seachAppointPerson").click(function(){               
+                searchUserId = $("#searchUserId").val();
+                searchDepId = $("#searchDepId").val();
+                addUserId = $("#addUserId").val();
+                addDepId = $("#addDepId").val();
+                location.href = 'index.php?mod=products&act=getAppointPersonList&searchUserId='+searchUserId+'&searchDepId='+searchDepId+'&addUserId='+addUserId+'&addDepId='+addDepId;     
+            });
+            
+            $("#addAppointPerson").click(function(){
+                searchUserId = $("#searchUserId").val();
+                searchDepId = $("#searchDepId").val();
+                addUserId = $("#addUserId").val();
+                addDepId = $("#addDepId").val();
+                location.href = 'index.php?mod=products&act=addAppointPerson&addUserId='+addUserId+'&addDepId='+addDepId+'&searchUserId='+searchUserId+'&searchDepId='+searchDepId;     
+            });
+            
+            $(".deleteAppointPerson").click(function(){
+            if(true){
+                var id = $(this).attr('deleteId');
+                if(isNaN(id)){
+                    $("#error").html('无效记录，删除失败');
+                    return;
+                }
+                
+                $.ajax({
+    				type	: "POST",
+    				dataType: "jsonp",
+    				url		: 'json.php?mod=products&act=deleteAppointPersonById&jsonp=1',
+    				data	: { id:id },
+    				success	: function (msg){				        
+    					if(msg.errCode == '200'){
+                            $("#tr"+id).hide();
+                            $("#error").html('删除成功');
+    					}else{
+    					   $("#error").html('删除失败');
+    					}
+    				}
+    			});
+            }  
+        });
+
+        });      
+</script>

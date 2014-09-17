@@ -1,0 +1,51 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=trackEmailAccount&act=index">客服邮件帐号管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>修改客服邮件帐号</h1>
+    <form onSubmit="return edit_check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+                <td align="right" width="11%">平台名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select name="acc_plat" id="acc_plat">
+					<option value="">=请选择=</option>
+					{foreach item=list from=$lists}
+					<option value="{$list.platformNameEn}" {if $acc_plat == $list.platformNameEn}selected="selected"{/if}>{$list.platformNameCn}</option>
+					{/foreach}
+					</select>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">平台帐号：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="acc_count" id="acc_count" value="{$acc_count}" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">客服姓名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="acc_user_name" id="acc_user_name" value="{$acc_user_name}" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">客服邮箱：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<input type="text" name="acc_user_email" id="acc_user_email" value="{$acc_user_email}" maxlength="100"/>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+					<input type="hidden" id="act-id" value="{$id}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=trackEmailAccount&act=index'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript" src="./public/js/track_email_account.js"></script>
+{include file="footer.htm"}

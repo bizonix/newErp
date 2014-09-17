@@ -1,0 +1,145 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/orderPartion.js"></script>
+<script src="./js/wave_order_picking.js"></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link href="./css/buttons.css" rel="stylesheet" type="text/css" />
+<link href="./css/whcss.css" rel="stylesheet" type="text/css" />
+{include file='whNav.htm'}
+
+<style type="text/css">
+.textinput{
+	padding:5px 10px; height:50px; line-height:50px;font-size:30px; width: 300px;
+}
+h2 {
+	font-size:30px;	
+}
+.moduleTitle {
+	height: 50px; line-height:30px;
+}
+.btn {
+	padding:6px 20px !important;	
+}
+tr.pagination td { padding-left:120px; }
+tr.pagination td div { width:220px; float:left; height:30px; line-height:30px; }
+.port_status { color:red; }
+.bcolor { color:blue }
+.leftblock { width:450px; float:left; margin:10px 0px 0px 40px; }
+.rightblock { width:450px; float:left; }
+.show_result { font-size:40px !important; line-height:50px !important; padding:5px 20px !important; color:blue; }
+</style>
+
+<!---通用口袋模版-->
+<form class="servar wh-servar" id="PartionPrintForm" style="padding-left:50px;font-size:16px" method="POST" target="_blank" action="./index.php?act=orderPartionPrint&mod=orderPartion">
+    <input type='hidden' name="type" value="common"/>
+    <span>  
+		请选择要打印的分区：
+        <select id="partions" name="partions" class="queryformselect validate[required]" width="150px">
+		<option value="">请选择</option>
+		{foreach  $partion as $list}
+		  <option value="{$list.id}">{$list.title}</option>
+		{/foreach}
+		</select>
+		请输入要打印数量<input type="text" name="nums" id="nums" class="mf validate[required]"/>
+		<button type="submit" id="print"  value="" >打印口袋编号</button> 
+    </span>
+</form>
+
+<!---新加坡DHL GM模版-->
+<form class="servar wh-servar" id="PartionPrintForm" style="padding-left:50px;font-size:16px" method="POST" target="_blank" action="./index.php?act=orderPartionPrint&mod=orderPartion">
+    <input type='hidden' name="type" value="singapore"/>
+    <span>  
+		打印分区：
+        <select name="partions" class="queryformselect validate[required]" width="150px">
+		  <option>新加坡DHL GM平邮</option>
+          <option>新加坡DHL GM挂号</option>
+		</select>
+        &nbsp;&nbsp;国家：&nbsp;
+        <select name="country_dhl" class="queryformselect validate[required]" width="80px">
+            <option>Spain(西班牙)</option>
+            <option>Germany(德国)</option>
+            <option>France(法国)</option>
+            <option>United Kingdom(英国)</option>
+            <option>Switzerland(瑞士)</option>
+            <option>Austria(奥地利)</option>
+            <option>Chile(智利)</option>
+            <option>Ireland(爱尔兰)</option>
+            <option>Bulgaria(保加利亚)</option>
+            <option>Netherlands(荷兰)</option>
+            <option>India(印度)</option>
+            <option>Denmark(丹麦)</option>
+            <option>Romania(罗马尼亚)</option>
+            <option>Sweden(瑞典)</option>
+            <option>Cyprus(塞浦路斯)</option>
+            <option>Italy(意大利)</option>
+            <option>Norway(挪威)</option>
+            <option>Lithuania(立陶宛)</option>
+            <option>Latvia(拉脱维亚)</option>
+            <option>Macedonia(马其顿)</option>
+            <option>Slovakia(斯洛伐克)</option>
+            <option>Malta(马耳他)</option>
+            <option>Belarus(白俄罗斯)</option>
+		</select>
+        &nbsp;&nbsp;&nbsp;国家(手动输入)：&nbsp;<input type="text" name="country_dhl1" id="country_dhl1"/> &nbsp;&nbsp;&nbsp;
+		Consignment：&nbsp;<input type="text" name="consignment" id="consignment" /> &nbsp;&nbsp;&nbsp;
+		请输入要打印数量<input type="text" name="nums" id="nums" class="mf validate[required]"/>
+		<button type="submit" id="print"  value="" >打印口袋编号</button> 
+    </span>
+</form>
+
+<!---赛维美国专线模版-->
+<form class="servar wh-servar" id="PartionPrintForm" style="padding-left:50px;font-size:16px" method="POST" target="_blank" action="./index.php?act=orderPartionPrint&mod=orderPartion">
+    <input type='hidden' name="type" value="sailvan"/>
+    <span>
+		赛维美国专线：
+        <select id="partions" name="partions" class="queryformselect validate[required]" width="150px">
+    		<option value="USPS FirstClass">USPS FirstClass</option>
+			<option value="UPS SurePost">UPS SurePost</option>
+            <option value="UPS Ground Commercia">UPS Ground Commercia</option>
+		</select>
+        HAWB#:&nbsp;<input type="text" name="HAWB"/> &nbsp;&nbsp;&nbsp;
+		请输入要打印数量<input type="text" name="nums" id="nums" class="mf validate[required]"/>
+		<button type="submit" id="print"  value="" >打印口袋编号</button> 
+    </span>
+</form>
+
+<div class="main">
+<div class="leftblock">
+    <div class="subblock order" style="width: 800px;">
+    	<div style="margin-left:35px;">
+	    	<input type="radio" name="partitionType" value="channel"> 分渠道
+	    	<input type="radio" name="partitionType" value="partition">分区
+    	</div>
+    	<br/>
+        发货单 <input name="shipOrderId" type="text" id="shipOrderId" class="orderinput textinput" />
+        <div style="display: none;margin-left:20px;font-size:24px;" id="show_total">
+            总订单数：<span id="total_order" style="color: red;"></span>  &nbsp;&nbsp; 总重量：<span id="total_weight" style="color: red;"></span>KG
+        </div>
+    </div>
+    <div class="subblock" style="padding-left: 40px; margin-top:10px; margin-bottom: 20px;">
+    	<input class="button-normal selfchecking" type="button" value="指示灯自检" /> 
+        <input class="button-normal offall" type="button" value="指示灯全灭" />
+        <input class="button-normal packet" type="button" value="口袋打包" />
+    </div>
+    <div class="subblock"><span class="title">设置端口: </span><select class="portlist" name="port" >
+		                          		<option value="1">COM1</option>
+		                          		</select> <span class="port_status"></span></div>
+    <div class="subblock"><span class="title">报警时长: </span><select class="warnning" name="warnning" >
+		                          		<option value="500">0.5秒</option>
+		                          		<option value="1000">1秒</option>
+		                          		<option value="2000">2秒</option>
+		                          		<option value="3000">3秒</option>
+		                          		<option value="4000">4秒</option>
+		                          		<option value="5000">5秒</option>
+		                          		<option value="500000000">一直报警</option>
+		                          		</select></div>
+</div><div class="rightblock">
+ <div class="show_result"></div>
+</div>                                        
+		<div class="clear"></div>
+</div>
+<div style="display:none;">
+<div id="data">
+	扫描口袋编号：<input type="text" class="packageid"/>
+</div>
+</div>
+{include file='footer.htm'}

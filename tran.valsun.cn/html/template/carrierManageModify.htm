@@ -1,0 +1,214 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=carrierManage&act=index">运输方式管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+{if (!empty($errMsg)) }
+	    <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+				<td>
+					<p>{$errMsg}<br/><br/>
+                    <button name="button" type="button" id="history" value="history" onclick="javascript:history.back();"/>返 回</button>
+					</p>
+				</td>
+			</tr>
+		</table>
+{else}
+    <h1>修改运输方式</h1>
+    <form method="post" action="index.php?mod=carrierManage&act=update" onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+                <td align="right" width="11%">运输方式中文名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="cn_name" id="cn_name" value="{$cn_name}" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">运输方式英文名：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="en_name" id="en_name" value="{$en_name}" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">运输方式简称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="ship_ali" id="ship_ali" value="{$ship_ali}" maxlength="10"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">运输方式简码：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="ship_abb" id="ship_abb" value="{$ship_abb}" maxlength="5"/> 只能由5个大写字母[A-Z]组成
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">字母索引：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="ship_index" id="ship_index" value="{$ship_index}" maxlength="1"/> 只能由1个大写字母[A-Z]组成
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">LOGO图片：</td>
+                <td width="27%" align="left">
+					<input class="ke-input-text" type="text" id="ship_logo" name="ship_logo" value="{$ship_logo}" readonly="readonly" /> <input type="button" id="uploadButton" value="上传LOGO图片" />
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">所属平台：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					{foreach item=list from=$platFormlist}
+						{if in_array($list.id,$platList)}
+						<label title="{$list.platformNameEn}"><input type="checkbox" id="plat_name" style="vertical-align:middle" name="plat_name[]" value="{$list.id}" checked="checked"/>{$list.platformNameCn}</label>
+						{else}
+						<label title="{$list.platformNameEn}"><input type="checkbox" id="plat_name" style="vertical-align:middle" name="plat_name[]" value="{$list.id}"/>{$list.platformNameCn}</label>
+						{/if}
+					{/foreach}
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">发货地址：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select name="ship_add" id="ship_add">
+					<option value="">=请选择=</option>
+					{foreach item=list from=$addrlist}
+					<option value="{$list.id}" {if $ship_add==$list.id}selected="selected"{/if}>{$list.addressNameCn}</option>
+					{/foreach}
+					</select>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">物流类型：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select name="ship_type" id="ship_type">
+					<option value="">=请选择=</option>
+					<option value="0" {if $ship_type == 0}selected="selected"{/if}>非快递</option>
+					<option value="1" {if $ship_type == 1}selected="selected"{/if}>快递</option>
+					</select>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">是否能跟踪物流信息：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                    <label><input type="checkbox" id="is_track" style="vertical-align:middle" name="is_track[]" value="0" {if !$is_track}checked="checked"{/if}/>勾选,表示可以跟踪</label>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">重量最小值：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="min_weight" id="min_weight" value="{$min_weight}" maxlength="20"/> KG
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">重量最大值：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="max_weight" id="max_weight" value="{$max_weight}" maxlength="20"/> KG
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">递送时间：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="ship_day" id="ship_day" value="{$ship_day}" maxlength="20"/> 天
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">备注：</td>
+                <td width="27%" align="left">
+                  <input type="text" name="ship_note" id="ship_note" value="{$ship_note}" maxlength="30"/>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+					<input type="hidden" id="act-id" name="act-id" value="{$id}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=carrierManage&act=index'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+{literal}
+<script type="text/javascript">
+function check(){
+	var cn_name 	= $.trim($("#cn_name").val());
+	var en_name		= $.trim($("#en_name").val());
+	var ship_ali	= $.trim($("#ship_ali").val());
+	var ship_abb	= $.trim($("#ship_abb").val());
+	var ship_index	= $.trim($("#ship_index").val());
+	var ship_type	= $.trim($("#ship_type").val());
+	var ship_add	= $.trim($("#ship_add").val());
+	var min_weight	= $.trim($("#min_weight").val());
+	var max_weight	= $.trim($("#max_weight").val());
+	var ship_day	= $.trim($("#ship_day").val());
+	var ship_note	= $.trim($("#ship_note").val());
+	var id			= $("#act-id").val();
+	if (cn_name == "") {
+		alertify.error("中文名称不能为空！");
+		$("#cn_name").focus();
+		return false;
+	}
+	if (en_name == "") {
+		alertify.error("英文名称不能为空！");
+		$("#en_name").focus();
+		return false;
+	}
+	if (ship_ali == "") {
+		alertify.error("运输方式简称不能为空！");
+		$("#ship_ali").focus();
+		return false;
+	}
+	if (ship_abb == "" || !(/^[A-Z]{5,5}$/.test(ship_abb))) {
+		alertify.error("运输方式简码不能为空且填写必须正确！");
+		$("#ship_abb").focus();
+		return false;
+	}
+	if (ship_index == "" || !(/^[A-Z]{1,1}$/.test(ship_index))) {
+		alertify.error("字母索引不能为空且填写必须正确！");
+		$("#ship_index").focus();
+		return false;
+	}
+	plArr = $('input[id="plat_name"]:checked');
+	if(plArr.length == 0){
+		alertify.error("所属平台不能不选!");
+		return false;
+	}
+	if (ship_add == "") {
+		alertify.error("发货地址不能不选！");
+		$("#ship_add").focus();
+		return false;
+	}
+	if (ship_type == "") {
+		alertify.error("物流类型不能不选！");
+		$("#ship_type").focus();
+		return false;
+	}
+	return true;
+}
+
+//LOGO图片上传
+KindEditor.ready(function(K) {
+var uploadbutton = K.uploadbutton({
+		button : K('#uploadButton')[0],
+		fieldName : 'imgFile',
+		url : 'kindeditor/php/upload_json.php?dir=image',
+		afterUpload : function(data) {
+			if (data.error === 0) {
+				var url = K.formatUrl(data.url, 'absolute');
+				K('#ship_logo').val(url);
+			} else {
+				alertify.error(data.message);
+			}
+		},
+		afterError : function(str) {
+			alertify.error('自定义错误信息: ' + str);
+		}
+	});
+	uploadbutton.fileBox.change(function(e) {
+		uploadbutton.submit();
+	});
+});
+</script>
+{/literal}
+{/if}
+{include file="footer.htm"}

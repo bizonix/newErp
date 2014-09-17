@@ -1,0 +1,367 @@
+<form name="modify" id="modify" style="display:none">
+    <div id="orderModify">
+    </div>
+    <hr />
+    <font size="2">料号信息:</font><br />
+    <div>
+    <table width="100%" align="center">
+        <a id="skuModify">
+        </a>
+    </table>
+    </div>
+    <hr />
+    <font size="2">买家地址:</font><br />
+    <div id="userInfo">
+    </div>
+    <hr />
+    <font size="2">运费详情:</font><br />
+    <div id="freight">
+    </div>
+    <hr />
+    <font size="2">订单详情:</font><br />
+    <div id="orderMessage">
+    </div>
+    <hr />
+    <font size="2">操作记录:</font><br />
+    <div id="operationLog">
+    </div>
+</form>
+<form id="thelineupfile" name="thelineupfile" action="index.php?mod=orderindex&act=applyTheLineEUBTrackNumber" enctype="multipart/form-data" title="线下EUB申请" method="post" style="display:none">
+<table cellpadding='0' cellspacing='0' width='100%' border='0'>
+	<tr>
+		<td width="20%"><a href="#">上传模板</a></td>
+		<td width="40%"><input name="theline_upfile" type="file" />&nbsp;</td>
+		<td width="30%"><span id="thelineshowmsg"></span></td>
+   </tr>
+   <tr>	
+		<td colspan='3'><strong>如果指定列无数据，指定列将不会更新，如果有数据，指定列将被更新成功。</strong></td>
+   </tr>
+</table>
+</form>
+<form id="batchMoveForm" name="batchMoveForm" method="post" title="批量修改" style="display:none;" action="">
+	<table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>	
+            <td nowrap="nowrap" scope="row" width="100%">批量修改：您已经选择了<span id="recordnum"></span>条记录，<br />请在需要批量修改的地方输入新值</div></td>
+        </tr>
+    </table>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="left" bgcolor="#f2f2f2">
+                <span style="white-space: nowrap;">
+                    <input name="f_status" id="f_status" type="checkbox" value="1" />	
+                </span>
+            </td>
+            <td align="left" bgcolor="#f2f2f2">订单状态</td>
+            <td align="left" bgcolor="#f2f2f2">
+                <span>
+                <select name="batch_ostatus" id="batch_ostatus" style="width:157px" onchange="changeOstatus2()">
+                    <option value="">请选择</option>
+                   {foreach key=statusid item=types from=$statusmenus}
+                    <option value="{$statusid}" {if $statusid == $g_ostatus}selected="selected"{/if}>{$statusid|get_statusmenunamebyid}</option>
+                  {/foreach}
+                </select><select name="batch_otype" id="batch_otype" style="width:157px">
+                    <option value="">请选择</option>
+                    {if $g_ostatus}
+               		{foreach item=typeid from=$statusmenus[$g_ostatus]}
+               		<option value="{$typeid}" {if $typeid == $g_otype}selected="selected"{/if}>{$typeid|get_statusmenunamebyid}</option>
+               		{/foreach}
+                	{/if}
+                </select>
+                </span>
+            </td>
+        </tr>
+        <tr>
+        	<td align="left" bgcolor="#f2f2f2" class="left_txt">
+                <span style="white-space: nowrap;">
+                    <input name="f_style" id="f_style" type="checkbox" value="1" />
+                </span>
+            </td>
+            <td align="left" bgcolor="#f2f2f2" class="left_txt">发货方式</td>
+            <td align="left" bgcolor="#f2f2f2" class="left_txt">
+                <span>
+                <select id="batch_transport" name="batch_transport">
+                <option value="">请选择</option>
+                {html_options options=$transportationList}
+                </select>
+                </span>
+            </td>
+        </tr>
+        <tr>				 
+            <td align="left" colspan="3"><span id="batch_showerror"></span></td>
+        </tr>
+    </table>
+</form>
+
+<!-- 复制订单操作 -->
+<form id="copyOrderForm" name="copyOrderForm" method="post" action="" style="display:none;" title="复制和补寄页面">
+<input type="hidden" name="send_orderid" id="send_orderid" value="" />
+<input type="hidden" name="tablekey" id="tablekey" value="{$tablekey}" />
+<fieldset id="copyOrderFieldset" style="padding:10px 10px; margin:5px 5px;">
+<legend>订单复制</legend>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  	<td>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr height="40px">
+        <td width="40%">复制后的订单状态为：</td>
+        <td width="60%">
+        	<span>
+            <select name="copy_ostatus" id="copy_ostatus" style="width:157px" onchange="changeOstatus3(this)">
+                <option value="">请选择</option>
+                  {foreach $ostatus as $status}
+           			 <option value="{$status.id}" {if $g_ostatus == $status.id}selected{/if}>{$status.statusName} </option>
+            {/foreach}
+            </select><select name="copy_otype" id="copy_otype" style="width:157px">
+                <option value="">请选择</option>
+               {if $g_ostatus}
+               {foreach $otype as $type}
+                    <option value="{$type.id}" {if $g_otype == $type.id}selected{/if}>{$type.statusName} </option>
+                    {/foreach}
+                {/if}
+            </select>
+            </span>
+        </td>
+        </tr>
+  <tr>
+    <!-- <td>
+	<span style="color:blue; font-weight:bolder;">复制为补寄：</span><input type="checkbox" name="is_sendreplacement" id="is_sendreplacement" value="1" onclick="showResendArr()" />
+	</td> -->
+    <td>
+		<select name="resendArr" id="resendArr" style="display:none;">
+        <!--<option value="1">补寄全部</option>
+        <option value="2">补寄主体</option>
+        <option value="3">补寄配件</option>-->
+        </select>
+		<select name="reason_noteb" id="reason_noteb" style="display:none;">
+			<option value="0">=====未选择原因=====</option>
+            
+		</select>
+		<textarea name="extral_noteb" id="extral_noteb" style="display:none; margin-top:5px; height:80px;"></textarea> 
+	</td>
+  </tr>
+    </table>
+    </td>
+    <td><input name="submit" type="button" value="确认复制" id="buttoncopyorder" onclick="sendreplacement();" /></td>
+  </tr>
+</table>
+</fieldset>
+<!-- <p><span style="color:red;"><em>操作注意</em>：如果需要复制订单为补寄，选中"复制为补寄" 复选框，弹出补寄状态（补寄全部，补寄主体，补寄配件），选择其中一个并确认提交。</span></p> -->
+</form>
+
+<!-- 编辑订单的公用页面【包含操作记录展示】 -->
+<form id="modifyUserInfo" name="modifyUserInfo" style="display: none">
+    <div id="modifyOrderUserInfo">
+    </div>
+</form>
+
+<!-- 添加备注 -->
+<form id="modifyNote" name="modifyNote" style="display: none" title="添加和查看留言">
+    <div id="modifyOrderNote">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr id="note"></tr>
+            <tr><td colspan="2"><hr ></td></tr>
+            <tr>
+                <td colspan="2">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="noteList">
+
+                    </table>
+                </td>
+            </tr>
+            <tr><td colspan="2"><hr ></td></tr>
+            <tr height="50px">
+                <td><input type="checkbox" id="specialPick" value="1">特殊配货</td>
+                <td><input type="checkbox" id="specialPack" value="2">特殊包装</td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><textarea id="orderNote" cols="90" rows="8"></textarea></td>
+            </tr>
+        </table>
+    </div>
+</form>
+
+<!--快递描述-->
+<form id="ModifyExpressDes" name="ModifyExpressDes" style="display: none" title="报关信息编辑">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr><td colspan="9"><br /></td></tr>
+        <tr><td colspan="9"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr style="font-weight: bold; font-size: 16px;">
+                <td style="width: 90px;">运输方式</td><td id="transportId" style="color: red"></td>
+                <td style="width: 90px;">订单金额</td><td id="actualTotal" style="color: red"></td>
+                <td style="width: 90px;">申报总金额</td><td id="declareTotal" style="color: red">&nbsp;</td>
+            </tr>
+        </table>
+        </td></tr>
+        <tr><td colspan="9"><br /></td></tr>
+        <tr><td colspan="9">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" id="skuList">
+
+            </table>
+        </td></tr>
+    </table>
+</form>
+
+
+
+<!--手工退款操作-->
+<div id="add_form_handapply" title="手工退款/退款登记" style="display:none;">
+	<form id="add_form_handapply" method="POST" action="" enctype="multipart/form-data">
+        <div class="take-main"> 
+            <table width="100%">                
+                <tr>
+                    <td>平台：</td>
+                    <td><input type="text" readonly="" id="hand_pop_platform" value=""></td>
+                </tr>                
+                <tr>
+                    <td>交易ID：</td>
+                    <td><input type="text" readonly="" id="hand_pop_transId" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>RecordNo.：</td>
+                    <td><input type="text" readonly="" id="hand_pop_orderId" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>下单时间：</td>
+                    <td><input type="text" readonly="" id="hand_pop_ordertime" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>付款时间：</td>
+                    <td><input type="text" readonly="" id="hand_pop_paytime" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>订单金额：</td>
+                    <td><input type="text" readonly="" id="hand_pop_totalSum" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>退款金额：</td>
+                    <td><input type="text" id="hand_pop_refundSum" value="0.00"></td>        
+                </tr>             
+                <tr>
+                    <td class="thinfield">退款类型：</td>
+                    <td>
+                        <select name="refundType" id="hand_pop_refundType" onchange="showallprice2();">
+                        <option value="-1">请选择退款类型</option>
+                        <option value="Full">全额</option>
+                        <option value="Partial">部分</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>退款原因：</td>
+                    <td>
+                        <select name="refund-reson" id="hand_pop_refundReason">              
+                    	</select>
+                    </td>   
+                </tr>
+                <tr>
+                    <td>物品是否退回：</td>
+                    <td>
+                    <input type="radio" name="hand_pop_return" value="1">
+                    是&nbsp; &nbsp;&nbsp; &nbsp;
+                    <input type="radio" name="hand_pop_return" value="0">
+                    否&nbsp; &nbsp;&nbsp; &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>买家退回挂号条码：</td>
+                    <td><input type="text" name="hand_pop_barcode" id="hand_pop_barcode" value=""></td>
+                </tr>                
+                <tr>
+                    <td>备注：</td>
+                    <td><textarea name="memo" cols="50" rows="3" id="hand_pop_note"></textarea></td>        
+                </tr>   
+            </table>            
+            <table width="100%"  id="hand_table-skuList">
+            </table>
+    	</div>
+   	</form>
+</div>
+
+<!--申请PAYPAL退款操作-->
+<div id="add_form_apply" title="PAYPAL退款" style="display:none;">
+	<form id="add_form_apply" method="POST" action="" enctype="multipart/form-data">
+        <div class="take-main"> 
+            <table width="100%">                
+                <tr>
+                    <td>平台：</td>
+                    <td><input type="text" readonly="" id="pop_platform" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>交易ID：</td>
+                    <td><input type="text" readonly="" id="pop_transId" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>RecordNo.：</td>
+                    <td><input type="text" readonly="" id="pop_orderId" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>下单时间：</td>
+                    <td><input type="text" readonly="" id="pop_ordertime" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>付款时间：</td>
+                    <td><input type="text" readonly="" id="pop_paytime" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>订单金额：</td>
+                    <td><input type="text" readonly="" id="pop_totalSum" value=""></td>        
+                </tr>                
+                <tr>
+                    <td>退款金额：</td>
+                    <td><input type="text" id="pop_refundSum" value="0.00"></td>        
+                </tr>             
+                <tr>
+                    <td class="thinfield">退款类型：</td>
+                    <td>
+                        <select name="refundType" id="pop_refundType" onchange="showallprice();">
+                        <option value="-1">请选择退款类型</option>
+                        <option value="Full">全额</option>
+                        <option value="Partial">部分</option>
+                        </select>
+                    </td>
+                </tr>                          
+                <tr>
+                <td>选择PayPal账号：</td>
+                    <td>
+                        <select name="payPalAccount" id="pop_payPalAccount">              
+                    	</select>
+                    </td>   
+                </tr> 
+                               <tr>
+                    <td>退款原因：</td>
+                    <td>
+                        <select name="refund-reson" id="pop_refundReason">              
+                    	</select>
+                    </td>   
+                </tr>                  
+                <tr>
+                    <td>备注：</td>
+                    <td><textarea name="memo" cols="50" rows="3" id="pop_note"></textarea></td>        
+                </tr>   
+            </table>            
+            <table width="100%"  id="table-skuList">
+            </table>
+    	</div>
+   	</form>
+</div>
+
+<!-- 编辑订单明细 -->
+<form id="ModifyOrderDetail" style="display: none" title="编辑订单明细">
+    <div id="orderDetailShow" style="width: 100%"></div><hr />
+    <div id="action" style="width: 100%"></div>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="ModifyFm">
+
+    </table>
+</form>
+<div id="scrollNav">
+    <div id="toTop" class="scrollItem">
+        回到顶部
+    </div>
+    <!--<div id="toBottom" class="scrollItem">
+        回到底部
+    </div>-->
+</div>
+
+<div id="loadImg">
+    <div class="loaddiv"><img src="./images/ajax-loader.gif"><span style="color: #000000">订单修改后执行拦截流程,请稍后</span></div>
+</div>

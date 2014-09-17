@@ -1,0 +1,70 @@
+{include file="header.html"}
+{include file="mailNavLocation.html"}
+<div class="main products-main align-main" style="border:1px solid #ccc;">
+  <div class="title font-18" style="font-weight:bold;padding:10px;"> 新增邮件 </div>
+  <div style="padding:10px;">
+  <form name="addMail" method="post" action="index.php?mod=MailManage&act=addMailUser&list_id={$list_id}">
+    <table style="border:none;margin:0 auto;">
+      <tbody>
+        <tr>
+          <td> 邮件名称： </td>
+          <td>{$mailName}</td>
+        </tr>
+        <tr>
+          <td> 邮件描述： </td>
+          <td>{$mailDescript}</td>
+        </tr>
+        <tr>
+          <td> 邮件英文ID： </td>
+          <td>{$mailEnglish}</td>
+        </tr>
+        <tr>
+        	<td>所属系统：</td>
+        	<td>{$mailSystem}</td>
+        </tr>
+        <div id="showAll_0">
+        <tr>
+          <td style="vertical-align:top"> 新增订阅用户： </td>
+          <td>
+          <table style="border:0;" id="show">
+          <tr>
+	          <td>
+	          <select name="company[]" id="company_0" onChange="showDept(this);" class="company">
+	          	  <option value="default">-----请选择-----</option>
+	          {foreach item=company from=$showCompany}
+	              <option value="{$company.company_id}">{$company.company_name}</option>
+	          {/foreach}
+	            </select>
+	            <select name="dept[]" id="dept_0" onChange="showUserJob(this);" class="dept">
+	              <option value="default">-----请选择-----</option>
+	            </select>
+	            <select name="jobs[]" id="job_0" onChange="checkUserPower({$list_id}, this);showUser(this);" class="job">
+	              <option value="default">-----请选择-----</option>
+	            </select>
+	            </td>
+            	<td></td>
+           </tr>
+           <tr>
+           	<td name="users[]"><span id="user_0"></span>
+           	</td>
+           </tr>
+          </table>
+          </td>
+        </div>
+        </table>
+        <table style="border:none;margin:0 auto;">
+        <tr>
+          <td></td>
+          <td><input type="submit" name="submit" value="提交" />
+          </td>
+        </tr>
+        </table>
+        </form>
+      </tbody>
+  </div>
+</div>
+</div>
+{include file="footer.html"}
+</div>
+</body>
+</html>

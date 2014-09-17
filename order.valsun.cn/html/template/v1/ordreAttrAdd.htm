@@ -1,0 +1,19 @@
+{include file='header.htm'}
+{include file='omNav.htm'}
+<script language="javascript" src="js/orderAttr.js"></script>
+
+<div class="servar" align="center">
+	<form action='index.php?mod=orderSetting&act=sureAddAttr' method="post" id="orderAttrAddForm"> 
+		<input type="hidden" name="attrId" id="attrId" value="{$orderAttr[0].id}" /> 	
+		<p>
+			<label for="attributesName" style="font-size:20px;">属性名称: </label>
+			<input value="{$orderAttr[0].attributesName}" class="mf validate[required] text-input" id="attributesName"  name="attributesName" type="text" style="width:200px;height:30px;font-size:20px">
+			<span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<p>
+			<input type="submit" id="countriesAddFormSumit" class="input_button" value="提交">
+			<input type="button" class="input_button" id='back' value="返回" />
+		</p>
+	</form>
+</div>
+{include file="footer.htm"}

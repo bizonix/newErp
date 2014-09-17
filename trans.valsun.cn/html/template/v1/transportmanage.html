@@ -1,0 +1,42 @@
+{header}
+<link rel="stylesheet" href="css/transportlist.css">
+<script type="text/javascript" src="./js/transportmanage.js"></script>
+{navdiv}
+
+<div class="miancontainer ">
+	<div class="pad20">
+	<div id="showMessage"></div>
+	<input type="button" id='addNewCarrier' style="width:150px;height:45px;font-size:20px; cursor:pointer;" value="添加新运输方式" />&nbsp;&nbsp;<input type="button" id='openCarrier' style="width:50px;height:45px;font-size:20px; cursor:pointer;" value="启用" />&nbsp;&nbsp;<input type="button" id='dropCarrier' style="width:50px;height:45px;font-size:20px; cursor:pointer;" value="禁用" />
+    </div>
+    <table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                    <tr>
+                            <td><input type="checkbox" class="checkall" /></td>
+                            <td>名称</td>
+                            <td>代码</td>
+                            <td>接受重量范围最小值(克)</td>
+                            <td>接受重量范围最大值(克)</td>
+                            <td>递送时间(天)</td>
+                            <td>备注</td>
+                            <td>操作</td>
+                            <td>状态</td>
+                    </tr>
+            </thead>
+            <tbody>
+            	<!-- BEGIN list -->
+                    <tr class="odd">
+                            <td><input type="checkbox" name="carrierName" value="{id}"/></td>
+                            <td>{carrierNameCn}</td>
+                            <td>{carrierNameEn}</td>
+                            <td>{weightMin}</td>
+                            <td>{weightMax}</td>
+                            <td>{timecount}</td>
+                            <td>{note}</td>
+                            <td><a href="index.php?mod=channelsManage&act=channels&carrierId={id}">渠道列表</a>&nbsp;&nbsp;<a href="index.php?mod=transportmanage&act=editPage&carrierId={id}">修改运输方式</a></td>
+                            <td>{is_delete}</td>
+                    </tr>
+                <!-- END list -->
+            </tbody>
+    </table>
+</div>
+{footer}

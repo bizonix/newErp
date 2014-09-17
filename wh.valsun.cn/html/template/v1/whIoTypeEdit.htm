@@ -1,0 +1,53 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whIoType.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=warehouseManagement&act=whIoTypeSubmit&type=edit' method="post" id="whIoTypeForm" onsubmit="return editCheck();">
+    	<input type="hidden" id="key_id" name="key_id" value="{$key_id}" readonly="readonly"/>
+    	<div style="width:600px; margin:auto; text-align:left;">
+            <label for="typeCodeEdit" style="font-size:20px;">出入库类型编码：</label>        
+            <input value="{$typeCode}" id='typeCodeEdit' class="mf validate[required] text-input" name="typeCodeEdit" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="typeCodeInputSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+            <label for="typeNameEdit" style="font-size:20px;">出入库类型名称：</label>        
+            <input value="{$typeName}" id='typeNameEdit' class="mf validate[required] text-input" name="typeNameEdit" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="typeNameInputSpan" style="color: red;">*</span>
+		</div>        	
+        <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+            <label for="ioTypeEdit" style="font-size:20px;">出入库类型：</label>    
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <select name="ioTypeEdit" id="ioTypeEdit" style="width:200px;height:30px;font-size:20px" class="mf validate[required]">
+             	<option value="" >请选择</option>
+                <option value="0" {if $ioType == 0}selected="selected"{/if} >出库类型</option>
+                <option value="1" {if $ioType == 1}selected="selected"{/if} >入库类型</option>
+			 </select>  
+            <span id="ioTypeInputSpan" style="color: red;">*</span>
+        </div> 
+    <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+        	<label for="storeIdEdit" style="font-size:20px;">所属仓库选择：</label>    
+            &nbsp;&nbsp;&nbsp;
+<select name="storeIdEdit" id="storeIdEdit" style="width:200px;height:30px;font-size:20px" class="mf validate[required]">
+             	<option value="" selected="selected">请选择</option>
+                {foreach name="storeIdList" from=$whNameArr key=whKey item=whNameArrValue}
+                <option value="{$whKey}" {if $storeId == $whKey}selected="selected"{/if} >{$whNameArrValue}</option>
+                {/foreach}
+			 </select>
+          <span id="storeIdInputSpan" style="color: red;">*</span>
+  </div>
+        <br />
+        <div>   		       
+            <button  id='whIoTypeSubmit' value="" />提交</button>
+            &nbsp;
+            <input type="button"  id='returnPage' value="取消" class="input_button" />
+        </div>        
+    </form>
+</div>
+{include file="footer.htm"}

@@ -1,0 +1,88 @@
+{include file='header.htm'}
+{include file='owNav.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/pregoodsManage.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<div>
+<div style="margin-top:5px; padding-left:20px;">
+    <form action="index.php?mod=OwBoxManage&act=boxManage" method="get" style="display:inline-block">
+	补货单号:<input type="text" value="{$orderSn}" name="ordersn" id="orderSn" size="12">&nbsp;&nbsp;&nbsp;
+	箱&nbsp;号:<input type="text" value="{$boxid}" name="boxid" size="6">&nbsp;&nbsp;&nbsp;
+	料&nbsp;号:<input type="text" value="{$sku}" name="sku" id="sku" size="10">&nbsp;&nbsp;&nbsp;
+	状态:
+	<select name="status" id="status">
+	    <option value="">请选择类型</option>
+	    <option {if $status==1 }selected="selected"{/if} value="1">已配货</option>
+	    <option {if $status==2 }selected="selected"{/if} value="2">已复核</option>
+	    <option {if $status==3 }selected="selected"{/if} value="3">已装柜</option>
+	</select>
+	开始时间:<input type="text" onClick="WdatePicker()" name="startTime" id="startTime" size="8">
+	结束时间:<input type="text" onClick="WdatePicker()" name="endTime" id="endTime" size="8">
+	<input type="hidden" name="mod" value="OwBoxManage">
+	<input type="hidden" name="act" value="boxManage">
+	<input type="submit" value="搜索">
+    </form>
+	<input style="margin-left:20px;" type="button" onclick="importBoxInfo()" value="导入箱号信息">
+	<input style="margin-left:20px;" type="button" onclick="goPrintboxReview()" value="打印复核单">
+	<br/>
+   	开始箱号:<input type="text" id="startBox" size="6" />截止箱号:<input type="text" id="endBox" size="6" />
+	<input style="margin-left:20px;" type="button" onclick="printBoxPageLabel()" value="打印箱号包装单">
+	<input style="margin-left:20px;" type="button" onclick="exportBoxInfo()" value="箱号报表导出">
+	
+</div>
+	<div class="main underline-main order-main">
+        <table cellspacing="0" width="100%">
+			<tr class="title">
+                <td><input type="checkbox" onclick="chooseCheckBox()" /></td>
+                <td>箱号</td>
+                <td>补货单号</td>
+				<td>箱长</td>
+				<td>箱宽</td>
+				<td>箱高</td>
+				<td>箱毛重</td>
+				<td>箱净重</td>
+                <td>装箱时间</td>
+                <td>装箱操作人</td>
+                <td>发柜时间</td>
+                <td>状态</td>
+				<td>详情</td>
+            </tr>
+			{foreach $boxList as $box}
+            <tr class="title">
+                <td><input type="checkbox" value="{$box.boxid}" class="ordercheckbox"></td>
+                <td>{$box.boxid}</td>
+                <td>{$box.replenshId}</td>
+				<td>{$box.length}</td>
+				<td>{$box.width}</td>
+				<td>{$box.high}</td>
+				<td>{$box.grossWeight|shurtDouble}</td>
+				<td>{$box.netWeight|shurtDouble}</td>
+                <td>{$box.timestr}</td>
+                <td>{$box.addUserName}</td>
+                <td>{$box.sendtime}</td>
+                <td>{$box.statusStr}</td>
+				<td>
+					<table cellspacing="0" width="100%" style="border: none; margin: 0;">
+                        <tr>
+                            <td>sku</td>
+                            <td>数量</td>
+                        </tr>
+                     {foreach $box.skudetail as $skuinfo}
+                        <tr>
+                            <td>{$skuinfo.sku}</td>
+                            <td>{$skuinfo.num}</td>
+                        </tr>
+                     {/foreach}
+                    </table>
+				</td>
+            </tr>
+			{/foreach}
+        </table>
+    </div>
+<div style="text-align:center;">
+    {$pagestr}
+</div>
+</div>
+{include file='footer.htm'}

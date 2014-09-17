@@ -1,0 +1,111 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+    </div>
+    <div class="texvar">
+    </div>
+</div>
+<div class="servar products-servar products-main">
+       <span>产品工程师：
+    	   <select name="PEId" id="PEId" style="width: 70px;">
+    	    <option value="0" ></option>
+    	    {foreach getAllPEInfo() as $value}
+    		<option value="{$value['global_user_id']}" {if $smarty.get.PEId == $value['global_user_id']}selected='selected'{/if}>{$value['global_user_name']}</option>
+    		{/foreach}
+    	  </select>
+    	</span>
+       <span><button id='seachPECountList'>搜索</button></span>
+       &nbsp;
+       <span style="color: red;">{$smarty.get.status}</span>
+       {if isAccessAll('products','addPECountOn')}              
+       <span style="float:right;margin-right: 90px;" class="products-action">
+       <form action="json.php?mod=goods&act=addPECountOn&jsonp=1" method="post" id="addPECountOnForm" onsubmit="return confirm('确定添加？')">
+       <span style="color: red;">*</span>产品工程师：
+       <select name="PEId" id="PEId" style="width: 70px;" class="validate[required]">
+	    <option value="" ></option>
+	    {foreach getAllPEInfo() as $value}
+		<option value="{$value['global_user_id']}">{$value['global_user_name']}</option>
+		{/foreach}
+	  </select>
+       <span style="color: red;">*</span>数量:
+       <input name="count" id="count" value="" class="validate[required,custom[integer],min[1]]"/>
+       <input type="submit" value="添加"/>
+       </form>
+       </span>
+       {/if}
+</div>
+<div class="main feedback-main">
+	<table cellspacing="0" width="100%" class="products-action">
+    	<tr class="title">
+        	<td>产品工程师</td>
+			<td>限制指派数量</td>
+            <td>已被指派数量</td>
+            <td>添加人</td>
+            <td>添加时间</td>
+            <td>最近修改时间</td>
+            <td>操作</td>
+        </tr>
+        {foreach $PECountList as $value}
+        <tr {if !isExistAppointByPEId2($value['PEId'])}style="color: red;"{/if}>
+            <td>{getPersonNameById($value['PEId'])}</td>
+            <td><input value="{$value['count']}" id="count{$value['id']}"></td>
+            <td>{$value['hadAppointCount']}</td>
+            <td>{getPersonNameById($value['addUserId'])}</td>
+            <td>{if !empty($value['addTime'])}{$value['addTime']|date_format:"Y-m-d H:i:s"}{else}--{/if}</td>
+            <td>{if !empty($value['lastUpdateTime'])}{$value['lastUpdateTime']|date_format:"Y-m-d H:i:s"}{else}--{/if}</td>
+            <td>
+                {if isAccessAll('products','updatePECountOn')}
+				<input type="button" value="修改" onclick="updatePECount({$value['id']})"/>
+                {/if}
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+</div>
+<div class="bottomvar">
+	<div class="texvar">
+
+	</div>
+	<!-- <div class="pagination">
+		{$show_page}
+	</div> -->
+</div>
+{include file="footer.htm"}
+<script type="text/javascript">
+        $(document).keydown(function(e) {
+			if(e.keyCode==13){
+			  $('#seachPECountList').click(); 
+			}        
+        });
+        
+        $(function(){
+            $('#seachPECountList').click(function(){
+                PEId = $('#PEId').val();
+                location.href = "index.php?mod=products&act=getProductsPECountList&PEId="+PEId;
+            });
+            jQuery("#addPECountOnForm").validationEngine();
+        });
+        
+        function updatePECount(id){
+            if(!$.trim(id)){
+                alert('无效记录！');
+                return;
+            }else{
+                var count = $("#count"+id).val();
+                if(!(/^(\+|-)?\d+$/.test(count)) || count <= 0){
+                    alert("数量必须是正整数");   
+                    return ;                      
+                }
+                $.ajax({
+    				type	: "POST",
+    				dataType: "jsonp",
+    				url		: 'json.php?mod=goods&act=updatePECountOn&jsonp=1',
+    				data	: { id:id,count:count },
+    				success	: function (msg){				        
+    					alert(msg.errMsg);
+    				}
+    			});
+            }
+            
+        }       
+</script>

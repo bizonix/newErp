@@ -1,0 +1,73 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/addInput.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                </div>
+            </div>
+{if $smarty.get.status != ''}
+<div class="servar products-servar">
+<span style="color: red;">{$smarty.get.status}</span>
+            </div>
+{/if}
+            <div class="main products-main">
+					<table class="products-action" width="100%" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+                            <td style="width: 600px;" align="right"><span style="color:#F00;">*</span>属性名：</td>
+							<td align="left">
+                            <input name="inputName" id="inputName"/>
+							</td>
+						</tr>
+                        <tr>
+                           	    <td align="right">
+                                    <span style="color:#F00;">*</span>类别：
+                                </td>
+                                <td align="left">
+									<select name="sku_category" id="pid_oneNew" onchange="select_oneNew();">
+										<option value="0">请选择</option>
+										{foreach CategoryModel::getCategoryList('*',"where is_delete=0 and pid=0") as $value}
+										<option value="{$value['id']}">{$value['name']}</option>
+										{/foreach}
+									</select>
+									<span align="left" id="div_twoNew" style="width:auto; display:none"></span>
+									<span align="left" id="div_threeNew" style="width:auto; display:none"></span>
+									<span align="left" id="div_fourNew" style="width:auto; display:none"></span>
+								</td>
+						</tr>
+                        <tr>
+                           	    <td align="right">
+                                    <span style="color:#F00;">*</span>文本方式：
+                                </td>
+                                <td align="left">
+									<select name="textStatus" id="textStatus">
+										<option value="0"> </option>
+                                        <option value="1">尺寸测量</option>
+                                        <option value="2">主观文本</option>							
+									</select>
+								</td>
+						</tr>
+                        <tr>
+                            <td align="right"></td>
+                            <td align="left">
+                            <span style="color: red;" id="error"></span>
+                            <span style="color: green;" id="correct"></span>
+                            </td>
+						</tr>               
+                        <tr>
+                            <td align="right"><input type="button" value="提交" id="addInput"/></td>
+							<td align="left"><input type="button" value="返回" id="back"/></td>
+						</tr>
+					</table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}

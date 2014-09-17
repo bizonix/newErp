@@ -1,0 +1,198 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/jqueryZtree/jquery.ztree.all-3.5.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./js/jqueryZtree/zTreeStyle.css"/>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+            <div class="servar products-servar">
+                <span>
+                    {if isAccessAll('products','addProductsCategory') == true}
+                	<button id="addProductsCategory">添加大类</button>
+                    {/if}
+                </span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action firefox-table" cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td width="5%">大类名称</td>
+                        <td width="">对应ERP类别</td>
+                        <td width="5%">是否启用</td>
+						<td width="10%">编辑</td>
+                    </tr>
+                    {foreach $productsCategoryList as $value}
+                    <tr>
+                        <td>{$value['largeCategoryName']}</td>
+                        <td>{$value['categoryNames']}</td>
+                        <td>{if $value['isOn'] == 1}启用{else}禁用{/if}</td>
+                        <td>
+                            {if isAccessAll('products','updateProductsCategory') == true}
+                            <a style="color: #0000FF;" href="javascript:void(0)" cid="{$value['id']}" status="updateProductsCategory" >删除</a>                       
+                            {/if}
+                        </td>
+                    </tr>
+                    {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+            
+            <div id="categoryDialog1" title="添加大类对应关系" style="display:none;">
+        		<div>
+        			<div>
+        				<div>
+                        <table cellspacing="0" width="100%">
+                            <tr>
+                                <td><span style="color:#F00;">*</span>大类名称：</td>                        
+                                <td><input id="largeCategoryName" value=""/></td>
+                            </tr>
+                            <tr>
+                                <td><span style="color:#F00;">*</span>是否启用：</td>
+                                <td>
+                                    <select id="isOn">
+            							<option value="1">启用</option>
+                                        <option value="2">禁用</option>
+            						</select>
+                                </td>
+                            </tr>
+                        </table>
+        				</div>
+        			</div>
+        			<div style="float:left;width:300px">
+        				<label><font color="green">ERP分类</font></label><br />
+        					<div class="zTreeDemoBackground left">  
+        						<ul id="erpTree" class="ztree"></ul>  
+        					</div>  
+        			</div>
+        		</div>
+        	</div>
+{include file="footer.htm"}
+{literal}
+<script type="text/javascript">
+        var setting = {
+        	view:{  
+        		dblClickExpand: true,  
+        		showLine: false,  
+        		showIcon:false
+        	},  
+        	data: {  
+        		simpleData: {
+        			enable: true,
+        			idKey: "id",
+        			pIdKey: "pid",
+        			rootPId: 0
+        		}  
+        	},
+        	check: {
+        		enable: true,
+        		autoCheckTrigger: true,
+        		chkStyle: "checkbox"
+        	}
+        };
+        function getId(element) {
+        	var zTree = $.fn.zTree.getZTreeObj(element);
+        	checkCount = zTree.getCheckedNodes(true);            
+            classpurview = [];           
+            for(var i=0;i<checkCount.length;i++) {
+                classpurview.push(checkCount[i].id);
+        	}
+        	return classpurview;
+        }        
+        
+        $(window).load(function() {
+            var zTree;
+            $.ajax({
+				type	: "POST",
+                async   : true,
+				dataType: "json",
+				url		: 'json.php?mod=Category&act=getAllCategoryList&jsonp=1',
+				success	: function (msg){
+                     treeNodes = msg.data;
+                     treeNodes = eval("(" + treeNodes + ")");
+                	 zTree = $.fn.zTree.init($("#erpTree"), setting, treeNodes);
+				}		
+			});         	
+        });
+        
+        $(function(){           
+            $("#addProductsCategory").click(function(){
+                $('#categoryDialog1').dialog({
+            		width : 440,
+            		height : 520,
+            		modal : true,
+            		autoOpen : true,
+            		show : 'drop',
+            		hide : 'explode',
+            		buttons : {
+            			'确认修改' : function() {
+            			    largeCategoryName = $('#largeCategoryName').val();
+                            isOn = $('#isOn').val();
+                            if(largeCategoryName == '' || isOn == ''){
+                                alert('必填项为空');return false;
+                            }
+                            inData = getId('erpTree');
+                            if(inData == ''){
+                                alert('类别为空');return false;
+                            }
+                            if('确定提交？'){
+                                $.ajax({
+                					type	: "POST",
+                                    async   : true,
+                					dataType: "json",
+                					url		: 'json.php?mod=products&act=addProductsCategory&jsonp=1',
+                                    data	: { largeCategoryName:largeCategoryName,isOn:isOn,inData:inData },
+                					success	: function (msg){
+                					     alert(msg.errMsg);
+                                         if(msg.errCode == 200){
+                                            $('#categoryDialog1').dialog('close');
+                                            window.location.reload();
+                                         }
+                					}		
+                				});
+                            }                                                  	
+            			},            
+            			'关闭' : function() {
+            				$(this).dialog('close');								
+            			}
+            		}
+            	});
+            });
+            
+            $("a[status='updateProductsCategory']").click(function(){
+                cid = $(this).attr('cid');
+                if(cid == ''){
+                    alert('异常');
+                    return;
+                }
+                if(confirm('确定删除？')){
+                    $.ajax({
+    					type	: "POST",
+                        async   : true,
+    					dataType: "json",
+    					url		: 'json.php?mod=products&act=delProductsCategoryById&jsonp=1',
+                        data	: { id:cid },
+    					success	: function (msg){
+                             alert(msg.errMsg);
+                             if(msg.errCode == 200){
+                                window.location.reload();
+                             }
+    					}		
+    				});
+                }                
+            });
+
+            
+        });      
+</script>
+{/literal}

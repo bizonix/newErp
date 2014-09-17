@@ -1,0 +1,113 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/postOfficeReturned.js"></script>
+<style>
+.clear{
+clear:both;
+}
+.restable{
+width:100%;
+margin:20px;
+border:1px solid #00689D;
+}
+.searchItem{
+width:20%;
+font-size:30px;
+margin-left:50px;
+
+}
+input{
+height:35px;
+width:200px;
+}
+td{
+height:35px;
+width:245px;
+}
+#search_package{
+height:45px;
+font-size:26px;
+width:105px;
+}
+.restable{
+width:95%;
+}
+
+</style>
+<div>
+
+<div class="servar wh-servar">
+        <div style="margin-left:265px;font-size:36px;float:left;">
+           	 发货单号/跟踪号:<input id="orderid"  class="orderidinput" style="width:200px; height:35px;font-size:20px;"/>
+			&nbsp;&nbsp;<font size="-1">提示：手工输入按回车键扫描</font>
+		</div>
+		<br/><br/>
+		<div style="margin-left:90px;font-size:24px;margin-top:30px;" >
+			<span id="partion" style="color:red;"></span>
+			<div id="mstatus" ></div>
+		</div>
+</div>
+
+<div class="servar wh-servar">
+<form action="index.php?mod=postOfficeReturned&act=serach" method="post" onsubmit="return checkform()">
+<div class="servar wh-servar">
+		<table>
+		<tr>
+		<td class="searchItem">
+		recordnumber:<input type="text" name="recordnum" id="recordnum" value=""/>
+		</td>
+		<td class="searchItem">
+		卖家账号：<input type="text" name="buyer_userid" id="buyer_userid" value=""/>
+		</td>
+		
+		<td class="searchItem"> 
+		<input type="submit" value="搜索" name="search" id="search_package"/>
+		</td>
+		</tr>
+		</table>				
+</div>
+</form >
+</div>
+
+    <div class="clear"></div>
+    <div class="result" style="">	
+    	<table class="restable">
+    	<tr>
+		<td width="25%" class="stephere2" align="center">
+		<div style="font-size:20px">订单编号</div>	         
+		</td>
+		<td width="25%" class="stephere2" align="center">
+		<div style="font-size:20px">EBAY账号</div>	         
+		</td>
+		<td width="25%" class="stephere2" align="center">
+		<div style="font-size:20px">SKU</div>	         
+		</td>
+		<td width="25%" class="stephere2" align="center">
+		<div style="font-size:20px">操 作</div>	         
+		</td>
+		</tr>
+		{if $resArr}
+		{foreach $resArr['data'] as $value}
+		<tr>
+		<td width="25%" class="stephere2" align="center">
+		{if $value['ebay_id']}{$value['ebay_id']}{/if}
+		</td>
+		<td width="25%" class="stephere2" align="center">
+		{if $value['ebay_account']}{$value['ebay_account']}{/if}
+		</td>
+		<td width="25%" class="stephere2" align="center">
+		{if $value['sku']}{$value['sku']}{/if}
+		</td>
+		<td width="25%" class="stephere2" align="center">
+		<input type="button" class="backinstore" id="backinstore{$value['ebay_id']}" ebayid="{$value['ebay_id']}" value="退货入库"/>
+		</td>
+		</tr>
+		{/foreach}
+		{/if}
+    	</table>
+    </div>
+    
+</div>
+
+{include file='footer.htm'}

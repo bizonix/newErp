@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>KPI报表导出</title>
+<!--<script language="javascript" type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>-->
+<link rel="stylesheet" href="js/jquery/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link href="js/jquery/css/ui-lightness/jquery-ui-timepicker-addon.css" type="text/css" rel="stylesheet">
+<script language="javascript" src="js/jquery/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery/ui/jquery-ui.min.js"></script>
+<script src="js/jquery/ui/jquery.ui.core.js"></script>
+<script src="js/jquery/ui/jquery.ui.widget.js"></script>
+<script src="js/jquery/ui/jquery.ui.accordion.js"></script>
+<script src="js/jquery/ui/jquery.ui.datepicker.js"></script> 
+<script src="js/jquery/ui/jquery-ui-sliderAccess.js"></script>
+<script src="js/jquery/ui/jquery-ui-timepicker-addon.js"></script>
+<script language="javascript" src="js/baobiao.js"></script>
+
+</head>
+
+<body>
+<!--onclick="WdatePicker()"-->  
+<h1>KPI报表导出</h1>
+
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiList&act=outKpi" onsubmit="checkform()" method="POST" target="_blank">
+<span>KPI统计表导出：</span>
+<span>开始时间：<input class="datetime"  name="start1" id="start1" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end1" id="end1" type="text" value="" /></span>
+<input type="submit" id="outKpi" name="outKpi" value="导出xls" />
+
+</form><br><br>
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiListNew&act=outKpi_new" onsubmit="checkform()" method="POST" target="_blank">
+<span>KPI统计表导出(新版)：</span>
+<span>开始时间：<input class="datetime"  name="start1_new" id="start1_new" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end1_new" id="end1_new" type="text" value="" /></span>
+<input type="submit" id="outKpi" name="outKpi" value="导出xls" />
+
+</form><br><br>
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiList&act=scanOrderRecord" onsubmit="checkform()" method="POST" target="_blank">
+<span>配货明细表导出：</span>
+<span>开始时间：<input class="datetime" name="start2" id="start2" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end2" id="end2" type="text"  value="" /></span>
+<input type="submit" id="scanOrderRecord" name="scanOrderRecord" value="导出xls" />
+</form><br><br>
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiListNew&act=scanOrderRecord_new" onsubmit="checkform()" method="POST" target="_blank">
+<span>配货明细表导出(新版)：</span>
+<span>开始时间：<input class="datetime" name="start2_new" id="start2_new" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end2_new" id="end2_new" type="text"  value="" /></span>
+<input type="submit" id="scanOrderRecord" name="scanOrderRecord" value="导出xls" />
+</form><br><br>
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiList&act=reviewOrderRecord" onsubmit="checkform()" method="POST" target="_blank">
+<span>复核明细表导出：</span>
+<span>开始时间：<input class="datetime" name="start3" id="start3" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end3" id="end3" type="text"  value="" /></span>
+<input type="submit" id="reviewOrderRecord" name="reviewOrderRecord" value="导出xls" />
+</form><br><br>
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiList&act=packageOrderRecord" onsubmit="checkform()" method="POST" target="_blank">
+<span>包装明细表导出：</span>
+<span>开始时间：<input class="datetime" name="start4" id="start4" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end4" id="end4" type="text"  value="" /></span>
+<input type="submit" id="packageOrderRecord" name="packageOrderRecord" value="导出xls" />
+</form><br><br>
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiListNew&act=packageOrderRecord_new" onsubmit="checkform()" method="POST" target="_blank">
+<span>包装明细表导出(新版)：</span>
+<span>开始时间：<input class="datetime" name="start4_new" id="start4_new" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end4_new" id="end4_new" type="text"  value="" /></span>
+<input type="submit" id="packageOrderRecord" name="packageOrderRecord" value="导出xls" />
+</form><br><br>
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiList&act=outProduct" onsubmit="checkform()" method="POST" target="_blank">
+<span>扫描明细表导出：</span>
+<span>开始时间：<input class="datetime" name="start" id="start" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end" id="end" type="text"  value="" /></span>
+<input type="submit" id="outPut" name="outPut" value="导出xls" />
+</form><br><br>
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiListNew&act=outKpiExpress_new" onsubmit="checkform()" method="POST" target="_blank">
+<span>快递KPI统计表导出：</span>
+<span>开始时间：<input class="datetime"  name="start5" id="start5" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end5" id="end5" type="text" value="" /></span>
+<input type="submit" id="outExpressKpi" name="outExpressKpi" value="导出xls" />
+</form><br>
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiListNew&act=outKpiExpress_baozhuang" onsubmit="checkform()" method="POST" target="_blank">
+<span>快递包装明细表导出：</span>
+<span>开始时间：<input class="datetime"  name="start6" id="start6" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end6" id="end6" type="text" value="" /></span>
+<input type="submit" id="outExpressBaozhuang" name="outExpressBaozhuang" value="导出xls" />
+</form><br>
+<form action="http://erp.valsun.cn/kpi.valsun.cn/api/json.php?mod=kpiListNew&act=outKpiExpress_peihuo" onsubmit="checkform()" method="POST" target="_blank">
+<span>快递配货明细表表导出：</span>
+<span>开始时间：<input class="datetime"  name="start7" id="start7" type="text" value="" /></span>
+<span>结束时间：<input class="datetime" name="end7" id="end7" type="text" value="" /></span>
+<input type="submit" id="outExpressPeihuo" name="outExpressPeihuo" value="导出xls" />
+</form><br>
+</body>
+</html>

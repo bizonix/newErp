@@ -1,0 +1,28 @@
+{include file="header.htm"}
+<script language="javascript" src="./js/pda_ExpressWeighing.js"></script>
+ <div id="mstatus" class="floatright"></div>
+<div id="divcontent" style="height:200px;width:225px">
+ <div class="floatleft">
+            <span>发货单号 : </span><input style="width:150px;" name="order" type="text" id="ebay_id" onkeydown="checkPartion()" class="textinput" />
+            <input id='real_partion' type="hidden"/>
+            <input id='package_id' type="hidden"/>
+        </div>
+		<div class="floatleft" >
+            <span>重量(KG): </span><input style="width:150px;" name="weighing" type="text" id="weighing" onkeydown="checkeBayID()" class="textinput" />
+            <div class="floatleft" id="show_review_total" style="display: none; padding-top:4px;">
+            </div>
+        </div>
+        
+
+        <div class="floatleft">
+        	<span>箱子数量: </span><input type="text" value="" id="count_box" class="textinput" onkeydown="checkeCountBox()"/>
+        </div>
+        <div class="floatleft">
+        	<span>跟踪号数量: </span><input type="text" value="" id="tracking" class="textinput" onkeydown="trackingCount()"/>
+            <div class="floatleft" id="show_note" style="display: none; padding-top:4px; color: #FF0000;">
+            </div>
+        </div>
+
+
+</div>
+{include file="footer.htm"}

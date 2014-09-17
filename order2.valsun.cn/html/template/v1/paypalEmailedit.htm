@@ -1,0 +1,34 @@
+{include file="header2.htm"}
+<script type="text/javascript" src="./js/paypalEmail.js"></script>
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+{include file='omNav.htm'}
+
+<div class="servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="successLog" style="color: #0F0">{$successLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="errorLog" style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<div class="mail" style="padding-top:20px">
+    <form name="addemails" id="addemails" style="text-align:center;margin:auto">
+		 <input type="hidden" value="modify" id="hidden"/>
+		 <input type="hidden" value="{$paypalEmailAll.id}" id="tid"/>
+		 请输入邮箱号：<input type="text" style="margin:0px 0px" class="validate[required,custom[email]] text-input" name="emailname" id="emailname" value="{$paypalEmailAll.email}" />
+		 <br><br>是否启用：&nbsp;&nbsp;&nbsp;&nbsp;<select style="width:154px" id="enable">
+			<option value="1" {if $paypalEmailAll.status==1}selected="selected" {/if}>是</option>
+			<option value="0" {if $paypalEmailAll.status==0}selected="selected" {/if}>否</option>
+		 </select>
+		 <br><br>请选择账号：&nbsp;
+		 <select name="account" style="width:154px;margin-right:5px" id="account">
+				{foreach from=$accountAll key=key_id item=list}
+					<option {if $paypalEmailAll.accountId == $list.id}selected="selected"{/if} value="{$list.id}">{$list.account}</option>
+				{/foreach}	
+		   </select><br><br>
+	</form>
+	
+	<div style="margin:auto auto;text-align:center" >
+	<button  id="submitform" name="submitform">提交</button>
+	<button  id="back" name="back">返回</button>
+	</div>
+</div>
+{include file="footer.htm"}

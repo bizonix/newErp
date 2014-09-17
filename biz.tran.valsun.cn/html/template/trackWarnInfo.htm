@@ -1,0 +1,184 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=trackWarnInfo&act=index">运输方式跟踪号预警管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<div class="servar">
+	<span>
+		<select name="countryId" id="countryId" class="flexselect">
+		<option value="0">=默认全部国家=</option>
+		{foreach item=list from=$countrylist}
+		<option value="{$list.id}" {if $list.id==$countryId}selected="selected"{/if}>{$list.countryNameEn}--{$list.countryNameCn}</option>
+		{/foreach}
+		</select>
+	</span>
+	<span>
+		<select name="carrierId" id="carrierId" onchange="show_channel_list(this.value)">
+			<option value="0">==全部运输方式==</option>
+			{foreach item=list from=$carrierList}
+			{if !$list.is_track }<option value="{$list.id}" {if $carrierId == $list.id}selected="selected"{/if}>{$list.carrierNameCn}</option>{/if}
+			{/foreach}
+		</select>
+		<input type="hidden" value="{$is_warn}" id="warn_flag"/>
+	</span>
+	<span id="channelList">
+	</span>
+	<span id="nodeList">
+	</span>
+	<span id="dis_warn" style="display:none">
+		<select id="is_warn">
+			<option value="1" {if $is_warn==1}selected="selected"{/if}>节点预警</option>
+			<option value="2" {if $is_warn==2}selected="selected"{/if}>节点不预警</option>
+			<option value="3" {if $is_warn==3}selected="selected"{/if}>节点处理总数</option>
+		</select>
+	</span>
+	<span>
+		<select name="flag" id="flag">
+			<option value=''>==全部跟踪号状态==</option>
+			{foreach key=keys item=item from=$statusList}
+			<option value="{$keys}" {if $status === $keys}selected="selected"{/if}>{$item}</option>
+			{/foreach}
+		</select>
+	</span>
+	<span>
+		<select name="type" id="type">
+			<option value='trackNumber' {if $type=='trackNumber'}selected="selected"{/if}>跟踪号</option>
+			<option value='orderSn' {if $type=='orderSn'}selected="selected"{/if}>订单编号</option>
+			<option value='recordId' {if $type=='recordId'}selected="selected"{/if}>订单号</option>
+		</select>
+	</span>
+	<span>
+		<input type="text" name= "key" id="key" value = "{$key}"/>
+	</span>
+	<span>
+		<select id="times">
+			<option value='0'>请选择时间节点</option>
+			<option value='scanTime'{if ($timeNode == 'scanTime')} selected="selected"{/if}>发货时间</option>
+			<option value='lastTime'{if ($timeNode == 'lastTime')} selected="selected"{/if}>最后跟踪时间</option>
+			<option value='trackTime'{if ($timeNode == 'trackTime')} selected="selected"{/if}>最后更新时间</option>
+		</select>
+		<input type="hidden" id="now-time" value="{(time()*1000)}"/>
+	</span>
+	<span>
+		开始时间：<input type="text" id="start-date" onclick="WdatePicker()"  value = "{$startTimeValue}" style="width:80px;"/>
+	</span>
+	<span>
+		结束时间：<input type="text" id="end-date" onclick="WdatePicker()"  value = "{$endTimeValue}" style="width:80px;"/>
+	</span>
+	<div style="padding-top:10px">
+	<span>
+		<a href="javascript:void(0);" id="search">搜 索</a>
+	</span>
+	<span>
+		<a href="javascript:void(0);" id="export-info">导出跟踪号信息报表</a>
+	</span>
+	</div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%">
+		<tr class="title purchase-title">
+			<th>运输方式名</th>
+			<th>运输渠道</th>
+			<th>跟踪号</th>
+			<th>发往国家</th>
+			<th>跟踪状态</th>
+			<th>最近跟踪位置</th>
+			<th>最近跟踪事件</th>
+			<th>最近跟踪时间</th>
+			<th>最后更新时间</th>
+		</tr>
+		{foreach item=list from=$lists}
+		<tr>
+			<td>{$list.carrierNameCn}</td>
+			<td>
+			{if empty($list.channelId)}暂无{else}
+			{$channel = TransOpenApiModel::getCarrierChannel($list.carrierId,$list.channelId)}
+			{$channel[0]['channelName']}
+			{/if}
+			</td>
+			<td><a class= "Detail" href="javascript:void(0)" onclick="show_track_info({$list.carrierId},'{$list.trackNumber}',false,10000)">{$list.trackNumber}</a></td>
+			<td>{$list.toCountry}</td>
+			{$stat	= C('TRACK_STATUS_DETAIL')}
+			<td class="{if $list.status == 3}font-green{elseif $list.status == 2}font-blue{elseif $list.status > 3}font-red{/if}">{$stat[$list.status]}</td>
+			<td>{$list.lastPostion}</td>
+			<td>{$list.lastEvent}</td>
+			<td>{if empty($list.lastTime)}暂无{else}{date('Y-m-d H:i:s',$list.lastTime)}{/if}</td>
+			<td>{if empty($list.trackTime)}暂无{else}{date('Y-m-d H:i:s',$list.trackTime)}{/if}</td>
+		</tr>
+		<tr>
+		<td colspan="9" align="left">
+			<div class="main products-main">
+                <div class="tran-pic">
+                    <div class="Reach ready node fore">
+                        <ul>
+                            <li>
+                                公司发货
+                            </li>
+                            <li>
+                               {if empty($list.scanTime)}暂无{else}{date('Y-m-d',$list.scanTime)}<br/>{date('H:i:s',$list.scanTime)}{/if}
+                            </li>
+                        </ul>
+                    </div>
+					{if ($list.status>0 || $list.channelId>0)}
+						{$warnInfo	= TrackWarnInfoModel::listTrackNumberWarnInfo($list.trackNumber)}
+						{foreach item=val from=$warnInfo}
+						<div class="{if $val.is_warn}TranInterrupt{elseif $val.warnStartTime}TranReach{else}TranUnReach{/if} ready proce" {if $val.is_warn}title="{$val.nodeName}-节点已预警&#10预警原因：超过了{$val.warnDays}小时"{/if}>
+							<ul>
+								<li>
+									
+								</li>
+							</ul>
+						</div>
+						<div class="{if $val.is_warn}Interrupt{elseif $val.warnStartTime}Reach{else}UnReach{/if} ready node">
+							<ul>
+								<li>
+									{$val.nodeName}
+								</li>
+								<li>
+								{if empty($val.warnEndTime)}{else}{date('Y-m-d',$val.warnEndTime)}<br/>{date('H:i:s',$val.warnEndTime)}{/if}
+								</li>
+							</ul>
+						</div>
+						{foreachelse}
+							{$warnInfo	= TransOpenApiModel::getTrackNodeList($list.carrierId,$list.channelId)}
+							{foreach item=val from=$warnInfo}
+							<div class="TranUnReach ready proce">
+								<ul>
+									<li>
+										
+									</li>
+								</ul>
+							</div>
+							<div class="UnReach ready node">
+								<ul>
+									<li>
+										{$val.nodeName}
+									</li>
+								</ul>
+							</div>
+							{/foreach}
+						{/foreach}
+					{/if}
+                </div>
+            </div>
+		</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div id="dialog-menu" title="跟踪号xxx的详细跟踪信息" class="">
+  <table id="dialog-content" cellspacing="0" width="100%">
+  <tr><td>正在努力为您加载跟踪号详细信息...</td></tr>
+  </table>
+</div>
+<div class="bottomvar">
+	<div class="pagination">
+		{$pageStr}
+	</div>
+</div>
+<script type="text/javascript" src="./public/js/track_warn_info.js"></script>
+{include file="footer.htm"}

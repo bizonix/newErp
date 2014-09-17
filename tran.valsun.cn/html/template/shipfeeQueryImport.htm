@@ -1,0 +1,30 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=shipfeeQuery&act=index">运费查询</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="servar">
+    <form onsubmit = "return file_upload()" action="index.php?mod=shipfeeQuery&act=batchShipfeeQueryImport" enctype="multipart/form-data" method="post">
+	<span>
+		上传EXCELL文件:&nbsp;&nbsp;<input name="upfile" id="upfile" type="file"/>
+	</span>
+	<span>
+		<input name="submit" type="submit" value="上传"/>&nbsp;&nbsp;<a href="temp/template/batch_shipfee_import_sample.xls" target="_blank"><font color="white">批量运费验证信息导入模版下载</font></a>
+	</span>
+	</form>
+</div>
+<div class="main">
+{if empty($errMsg) && $act == "batchShipfeeQueryImport"}
+<p style="line-height:180%;padding-left:10px;">
+<font color="green">恭喜您，批量运费验证信息导入成功！<a href="{$shipFeeUrl}" target="_blank"><font style="font-size:16px;font-weight:bold">点我下载导出的运费报表</font></a></font>
+</p>
+{elseif $act == "batchShipfeeQueryImport"}
+<p style="line-height:180%;padding-left:10px;">
+<font color="red">温馨提示，以下批量运费验证信息未导入成功！</font><br/>
+{$errMsg}
+</p>
+{/if}
+</div>
+<script type="text/javascript" src="./public/js/tran_shipfee_query.js"></script>
+{include file="footer.htm"}

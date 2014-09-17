@@ -1,0 +1,59 @@
+{include file='header.htm'}
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script type="text/javascript" src="./js/ui/jquery-ui.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+{include file='whNav.htm'}
+<script language="javascript" src="js/libraryStatus.js"></script>
+<div class="servar wh-servar">
+	<span>
+		流程分组号：
+		<select style="" id="statusGroupId" name="statusGroupId">
+			<option value="">请选择</option>
+            {html_options options=$LibraryStatusGroupInfo selected=$statusGroupId}
+		</select>
+	</span>
+	&nbsp;&nbsp;
+	<span>
+		<button  id='serch' value="" />搜索</button>
+        <a href="index.php?mod=LibraryStatus&act=libraryStatusGroupList" >状态分组</a>
+	</span>
+    <span style="float:right;">
+    <button  id='addStatus' onclick="javascript:window.open('index.php?act=addNewStatus&mod=addNewStatus');" value="" />添加</button>
+    </span>
+   <br>
+   <div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td><input type="checkbox" class="checkall"/></td>
+			<td>状态名称</td>
+			<td>入库状态码</td>
+			<td>分组</td>
+			<td>状态备注</td>
+			<td>操作</td>
+		</tr>
+		{foreach from=$LibraryStatusInfo item=list}
+		<tr class="odd">
+				<td><input type="checkbox" class="invselect" name="invselect" value="{$list.id}"/></td>
+				<td>{$list.statusName}</td>
+				<td>{$list.statusCode}</td>
+				<td>{$LibraryStatusGroupInfo[$list.groupId]}</td>
+				<td>{$list.note}</td>
+				<td></td>
+		</tr>
+		{foreachelse}
+		<tr class="odd">
+				<td colspan="9">没有搜索值！</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+<div class="bottomvar">
+	<div class="pagination" id="spage">
+		{$show_page}
+	</div>
+</div>
+ 
+{include file='footer.htm'}

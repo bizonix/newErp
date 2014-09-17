@@ -1,0 +1,51 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=trackEmailTemplate&act=index">跟踪邮件模版管理</a>&nbsp;>>&nbsp;{$title}
+	 </div>
+</div>
+<div class="main">
+    <h1>修改跟踪邮件模版</h1>
+    <form onSubmit="return edit_check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >
+			<tr>
+                <td align="right" width="11%">平台名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<select name="temp_plat" id="temp_plat">
+					<option value="">=请选择=</option>
+					{foreach item=list from=$lists}
+					<option value="{$list.platformNameEn}" {if $temp_plat == $list.platformNameEn}selected="selected"{/if}>{$list.platformNameCn}</option>
+					{/foreach}
+					</select>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">跟踪邮件模版名称：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="temp_name" id="temp_name" value="{$temp_name}" maxlength="20"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">跟踪邮件模版抬头：<span class="red">*</span></td>
+                <td width="27%" align="left">
+                  <input type="text" name="temp_title" id="temp_title" value="{$temp_title}" maxlength="100" style="width:460px"/>
+                </td>
+			</tr>
+			<tr>
+                <td align="right" width="11%">跟踪邮件模版内容：<span class="red">*</span></td>
+                <td width="27%" align="left">
+					<textarea  name="temp_content" id="temp_content" rows="10" style="width:460px">{$temp_content}</textarea>
+                </td>
+			</tr>
+			<tr>
+                <td colspan="2" align="center">
+					<input type="hidden" id="act-id" value="{$id}"/>
+                    <button name="button" type="submit" id="submit-btn" value="submit" />提 交</button>
+                    <button name="button" type="button" id="history" value="history" onclick="location.href='index.php?mod=trackEmailTemplate&act=index'"/>返 回</button>
+                </td>
+            </tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript" src="./public/js/track_email_template.js"></script>
+{include file="footer.htm"}

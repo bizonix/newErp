@@ -1,0 +1,395 @@
+{include file="header.htm" title="采购订单管理"}
+<div class="well well-lg" style="clear:both;margin-top:10px;margin-bottom:10px">
+	<div class="row">
+		<div class="col-md-2">
+			<input id="search-keyWord" type="text" value="{$smarty.get.keyWord}" placeholder="请输入要搜索的内容" class="form-control" />
+		</div>
+		<div class="col-md-2">
+				<select id="search-type" class="form-control">
+					<option value="-1">请选择搜索类型</option>
+					<option value="recordnumber" {if $smarty.get.type=="recordnumber"}selected {/if}>订单编号</option>
+					<option value="sku"  {if $smarty.get.type=="sku"}selected {/if}>SKU</option>
+					<option value="note" {if $smarty.get.type=="note"}selected {/if}>备注</option>
+				</select>
+		</div>
+		<div class="col-md-2">
+				<select id="search-pur" class="form-control" >
+					<option value="-1"  >请选择采购员</option> 
+					{foreach item=pur from=$purchaseList}
+						<option value="{$pur['global_user_id']}" {if $smarty.get.search_pur==$pur['global_user_id']} selected="selected"{/if}>{$pur["global_user_name"]}</option>
+					{/foreach}
+				</select>
+		</div>
+		<div class="col-md-2">
+				<select id="time-type" class="form-control">
+					<option value="-1">选择时间类型</option>
+					<option value="addtime" {if $smarty.get.status=="addtime"}selected {/if}>添加时间</option>
+					<option value="aduittime" {if $smarty.get.status=="aduittime"}selected {/if}>审核时间</option>
+				</select>
+		</div>
+		<div class="col-md-2 ">
+			<input id="start-date" onclick="WdatePicker()" type="text" value="{$smarty.get.starTime}" class="form-control" />
+		</div>
+		<div class="col-md-2 " >
+			<input id="end-date" onclick="WdatePicker()" type="text" value="{$smarty.get.endTime}"  class="form-control"/>
+		</div>
+	</div>
+	<div class="row" style="margin-top:6px">
+		<div class="col-md-12" >
+			<div class="pull-right">
+				<button type="button" class="btn btn-primary" id="search-btn">search</button>
+				<button type="button" id="export" onclick="exportExcel()" class="btn btn-info">导出采购订单</button>
+				{if $smarty.get.three_status eq  1}
+					<a href="javascript:void(0)" onclick="moveOrder('2')" class="btn btn-warning">审核</a>
+					<a href="javascript:void(0)" class="btn btn-danger" onClick="delAll()">批量删除</a>
+				{elseif $smarty.get.three_status eq 2 }
+					<a href="javascript:void(0)" style="display:none" id="combine-b" class="btn btn-warning" >合并到B仓</a>
+					<a href="javascript:void(0)" onclick="moveOrder(3)" id="combine-b" class="btn btn-info" >移动到移已处理</a>
+				{elseif $smarty.get.three_status eq 3 }
+					<a href="javascript:void(0)" id="push-b" class="btn btn-info" >推送到B仓</a>
+				{/if}
+			</div>
+		</div>
+	</div>
+</div>
+<table class="table">
+        <thead>
+          <tr>
+            <th>
+			<input type="checkbox" id="inverse-check">
+			</th>
+			<th>操作</th>
+            <th>订单时间</th>
+            <th>订单号</th>
+            <th>订单类型</th>
+            <th>订单状态</th>
+            <th>付款状态</th>
+            <th>操作员</th>
+            <th>采购员</th>
+            <th>审核人</th>
+            <th>总金额</th>
+            <th>订单详情</th>
+          </tr>
+        </thead>
+        <tbody>
+
+		{foreach key=key from=$orderList item=purOrderList}
+			{$key=$key%6}
+			{$getPartnerById = getPartnerById($purOrderList["partner_id"])}
+			{$purInfo 		 = PurchaseOrderAct::getParInfo($purOrderList["partner_id"])}
+			{$orderMoney 	 = clacTotalCost($purOrderList['id'])}
+			{$purchaseuserNameById = purchaseuserNameById($purOrderList["purchaseuser_id"])}
+			{$totalmoney = round_num(clacTotalCost($purOrderList['id']),2)}
+			{$orderMoney 	 = clacTotalCost($purOrderList['id'])}
+		<tr class="{$tableColor[$key]}">
+            <td>
+				<input name="inverse" type="checkbox" value="{$purOrderList['id']}" data-partner="{$getPartnerById}" data-limitmoney="{$purInfo[0]['limit_money']}" data-alertmoney="{$purInfo[0]['limit_alert_money']}" data-issign="{$purInfo[0]['is_sign']}" data-ordermoney="{$orderMoney}" />
+			  </div>
+			</td>
+			<td>
+			<a type="button" class="btn btn-info" href="index.php?mod=purchaseOrder&act=editOwOrder&id={$purOrderList['id']}&status={$smarty.get.three_status}" >编辑</a>
+			<br/>
+			<a type="button" class="btn btn-warning" href="javascript:void(0)" onclick="del({$purOrderList['id']})">删除</a>
+			</td>
+            <td>{date("Y-m-d",$purOrderList["addtime"])}</td>
+            <td>{$purOrderList['recordnumber']}</td>
+			<td>
+				{if $purOrderList["order_type"]==1}正常订单
+				{elseif $purOrderList["order_type"]==2}不良品退货
+				{elseif $purOrderList["order_type"]==3}供应商退货
+				{elseif $purOrderList["order_type"]==5}美国备货订单
+				{elseif empty($purOrderList["order_type"])}------
+				{else}采购补单
+				{/if}
+            </td>
+            <td>
+				{if $purOrderList["status"]==1}待审核
+				{elseif $purOrderList["status"]==2}已审核
+				{elseif $purOrderList["status"]==3}在途订单
+				{elseif $purOrderList["status"]==4}已配货
+				{elseif $purOrderList["status"]==5}已发货
+				{else}------{/if}
+			</td>
+            <td>
+				{if empty($purOrderList["paystatus"])}------
+				{else if $purOrderList["paystatus"] ==1 }未申请付款
+				{elseif $purOrderList["paystatus"]==2}已申请付款
+				{else}已付款{/if}
+			</td>
+            <td>{purchaseuserNameById($purOrderList["operator_id"])}</td>
+            <td>{$purchaseuserNameById}</td>
+            <td>{purchaseuserNameById($purOrderList["aduituser_id"])}</td>
+			<td>{$orderMoney}</td>
+			<td class="{$tableColor[$key]}">
+				<table class="table table-bordered">
+                      <thead>
+						  <tr>
+							<td>Img</td>
+							<td>料号</td>
+							<td>订货数量</td>
+							<td>订货价格</td>
+							<td>订单货金额</td>
+							<td>已配货</td>
+							<td>已发货</td>
+						  </tr>
+                     </thead>
+					 <tbody>
+						{$orderDetailList = getOwOrderDetailInfo($purOrderList['recordnumber'])}
+						{foreach from=$orderDetailList item=itemInfo}
+						<tr>
+							<td>
+								<a href="javascript:void(0)" id="imgb-{$itemInfo['sku']}" data-sku="{$itemInfo['sku']}" class="fancybox b{$itemInfo['sku']}">
+									<img src="" class="skuimg img-circle {$itemInfo['sku']}" id="imgs-{$itemInfo['sku']}" width="30" height="30" data-sku="{$itemInfo['sku']}">
+								</a>
+							</td>
+							<td>{$itemInfo['sku']}</td>
+							<td>{$itemInfo['count']}</td>
+							<td>{$itemInfo['price']}</td>
+							<td>{$itemInfo['price']*$itemInfo['count']}</td>
+							<td>{$itemInfo['stockqty']}</td>
+							<td>{$itemInfo['sendqty']}</td>
+						<tr>
+						{/foreach}
+					 </tbody>
+				 </table>
+			</td>
+          </tr>
+		  {/foreach}
+        </tbody>
+      </table>
+
+	  <div>
+	<div class="bottomvar">
+		<div class="pagination">{$pageStr}</div>
+	</div>
+	{include file="footer.htm"}
+</div>
+
+{literal}
+<script type="text/javascript">
+	$("#inverse-check").click(function() {
+		select_all("inverse-check", "input[name='inverse']", 0);
+	});
+	$(".servar").keyup(function(e) {
+			if(e.keyCode == 13) {
+				$("#search-btn").trigger("click");
+			}
+		}	
+	);
+	$("#search-btn").click(
+			function() {
+				var flag1 = false, flag2 = false, flag3 = false,para = '';
+				if ($("#search-type").val() != "-1") {
+					type = $("#search-type").val();
+					para += '&type=' + type;
+				}
+				if ($("#time-type").val() != "-1") {
+					status = $("#time-type").val();
+					para += '&status=' + status;
+					flag1 = true;
+				}
+				if ($("#start-date").val() != "") {
+					starTime = $.trim($("#start-date").val());
+					para += '&starTime=' + starTime;
+					flag2 = true;
+				}
+				if ($("#end-date").val() != "") {
+					endTime = $.trim($("#end-date").val());
+					para += '&endTime=' + endTime;
+					flag3 = true;
+				}
+				if ($("#search-keyWord").val() != "") {
+					keyWord = $.trim($("#search-keyWord").val());
+					para += '&keyWord=' + encodeURIComponent(keyWord);
+				}
+				if ($("#search-pur").val() != "-1") {
+					search_pur = $("#search-pur").val();
+					para += '&search_pur=' + encodeURIComponent(search_pur);
+				}
+				if (flag1 && flag2 && flag3) {
+					d = new Date(starTime);
+					starTime = d.getTime();
+					d = new Date(endTime);
+					endTime = d.getTime();
+					if (starTime > endTime) {
+						alertify.alert("开始时间不能大于结束时间");
+						return false;
+					}
+				}
+				three_status = get_url_parameter("three_status");
+				window.location.href = "index.php?mod=purchaseOrder&act=pickupList&three_status="+three_status + para;
+			});
+
+
+function del(id){
+	alertify.confirm("亲,真的要删除该订单吗？", function (e) {
+		if(e){
+			$.get("json.php?mod=purchaseOrder&act=delOrder_ow",{ "id":id },function(rtn){
+
+				console.log(rtn);
+				if(rtn.errCode="0184"){
+					window.location.reload();
+				}else{
+					alertify.error(rtn.errMsg);
+				}
+			},"jsonp");			
+		}
+	});
+}	
+
+function moveOrder(toStatus){
+	var idArr = [],limitArr = [],alertArr = [];
+	var checkboxs = $('input[name="inverse"]');
+	if(toStatus == '2'){
+		for(var i = 0;i < checkboxs.length; i++){
+			if(checkboxs[i].checked == true){
+				idArr.push(checkboxs[i].value);
+			}
+		}
+	}
+	if(toStatus == '3'){
+		$.each(checkboxs,function(index,item){
+			if($(item).attr('checked') == 'checked'){
+				var orderid    = $(item).val()
+				var ordermoney = parseInt($(this).data('ordermoney'));
+				var alertmoney = parseInt($(this).data('alertmoney'));
+				var limitmoney = parseInt($(this).data('limitmoney'));
+				var issign     = $(this).data('issign');
+				if(issign == '0' || issign == '1'){
+					if(ordermoney >= alertmoney){
+						alertArr.push(orderid);//超过预警额度的订单
+					}
+					if(ordermoney >= limitmoney){
+						limitArr.push(orderid);//超过额度的订单
+					}
+				}
+				idArr.push(orderid);
+			}
+		});
+	}
+	if(idArr.length == 0){
+		alertify.error("请选需要处理的订单");
+		return false;
+	}
+	
+	var data ={};
+	if(toStatus>4){
+		alertify.error("亲，无法再往下移动订单了！");
+		return false;
+	}
+	data.idArr = idArr;
+	
+	tips	= "<span id='label-tips' style='line-height:180%;font-size:14px;'></span>";
+	alertify.alert(tips);
+	$("#aOK").hide();
+	$("#label-tips").html("正在移动订单状态,请稍等...");
+	
+	$.get("json.php?mod=purchaseOrder&act=moveOwOrder",{ "data":data,"toStatus":toStatus  },function(rtn){
+		if(rtn.errCode=="0202"){
+			$("#alertify").hide();
+			alertify.success("亲,移动订单成功!");
+			setTimeout(
+				"window.location.reload()",2000
+			);
+		}else{
+			alertify.error("移动订单失败");
+		}
+	},"jsonp");
+}
+
+function delAll(){
+	var idArr = [];
+	var checkboxs = $('input[name="inverse"]');
+	for(var i = 0;i < checkboxs.length; i++){
+		if(checkboxs[i].checked == true){
+			idArr.push(checkboxs[i].value);
+		}
+	}
+	if(idArr.length == 0){
+		alertify.error("请选需要处理的订单");
+		return false;
+	}
+	var data ={};
+	data.idArr = idArr;
+	alertify.confirm("亲,真的要删除该订单吗？", function (e) {
+		if(e){
+			$.post("json.php?mod=purToWh&act=batchDelOwOrder",{ "idArr":idArr },function(rtn){
+				var code = rtn.code;
+				var msg  = rtn.msg;
+				if(code == 200){
+					alertify.success(msg);
+					window.setTimeout("window.location.reload()",2000);
+				}else{
+					alertify.error(msg);
+				}
+			},"json");			
+		}
+	});
+}
+
+$("#combine-b").click(function(){
+	var idArr = [];
+	var checkboxs = $('input[name="inverse"]');
+	for(var i = 0;i < checkboxs.length; i++){
+		if(checkboxs[i].checked == true){
+			idArr.push(checkboxs[i].value);
+		}
+	}
+	if(idArr.length == 0){
+		alertify.error("请选需要合并处理的订单");
+		return false;
+	}
+
+	$.post("json.php?mod=purchaseOrder&act=combine_order",{"idArr":idArr },function(rtn){
+		if(rtn.code == 1){
+			alertify.success(rtn.msg);
+		}
+	},"json");			
+});
+
+
+$("#push-b").click(function(){
+	var checkboxs = $('input[name="inverse"]:checked');
+	if(checkboxs.length == 0){
+		alertify.error("请选需要推送的订单");
+		return false;
+	}else if(checkboxs.length > 1){
+		alertify.error("一次只能选择一个需要推送的订单");
+		return false;
+	}
+	var idArr = checkboxs.val();
+
+	$.post("json.php?mod=purchaseOrder&act=push_bstock_order",{"idArr":idArr },function(rtn){
+		console.log(rtn);
+		if(rtn.data.code == "success"){
+			//alertify.success(rtn.msg);
+			alertify.alert("推送订单到B仓成功!",function(){
+				window.location.reload();
+			});
+		}
+	},"json");			
+});
+
+function exportExcel(){
+	var bills = [];
+	var val   = $('#export').val();
+	var checkboxs = $('input[name="inverse"]');
+	for(var i = 0;i < checkboxs.length; i++){
+		if(checkboxs[i].checked == true){
+			bills.push(checkboxs[i].value);
+		}
+	}
+	var bill = bills.join(',');
+	if(val == '-1'){
+		return false;
+	}
+	if(bill == ""){
+		alertify.error('请选择订单');
+		return false;
+	}
+
+	window.location.href = "exportBOrder.php?data="+bills;
+}
+
+</script>
+{/literal}

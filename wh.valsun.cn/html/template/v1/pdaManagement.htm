@@ -1,0 +1,60 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+<script language="javascript" src="js/pdaManagement.js"></script>
+<div class="servar wh-servar">
+	<div class='listViewBody'>
+		<div id='Accountsbasic_searchSearchForm' class="edit view search basic">
+			<table width="100%" cellspacing="0" cellpadding="0" border="0.5">
+				<tr><td nowrap="nowrap" scope="row" >&nbsp;</td></tr>
+			</table>
+			<div>
+			<form name="pdaForm" id="pdaForm" method="post" action="index.php?mod=pdaManagement&act=inquiry">
+			开始时间:<input name="startdate" id="startdate" type="text" value="{$startdate}" />
+			结束时间:<input name="enddate" id="enddate" type="text" value="{$enddate}" />
+			PDA配货员:
+			<select style="" id="pda_user" name="pda_user">
+				<option value="0">All</option>
+				{foreach from=$picking_info item=list}
+				<option value="{$list.global_user_id}" {if $pda_user==$list.global_user_id}selected{/if}>{$list.global_user_name}</option>
+				{/foreach}
+			</select>
+			 包装员/称重扫描人员:
+			 <select style="" id="weigh_scan_user" name="weigh_scan_user">
+				<option value="0">All</option>
+				{foreach from=$Weigh_info item=list}
+				<option value="{$list.global_user_id}" {if $weigh_scan_user==$list.global_user_id}selected{/if}>{$list.global_user_name}</option>
+				{/foreach}
+			</select>
+			<button  id="search" name="action"  value="search">搜索配货信息</button>
+			<button  id="search_scan_recheck" name="action" value="search_scan_recheck">搜索复核扫描信息</button>
+		<!--	<button  id="packge_search" name="action" value="packge_search">搜索包装信息</button>-->
+			<button  id="search_scan_weigh" name="action" value="search_scan_weigh">搜索包装称重扫描信息</button>
+			</form>
+			</div>
+			<div>{$serch_info}</div>
+			<br />
+			<div>
+			<form name="infoForm" id="infoForm" method="post" action="" >
+			<input type="text" name="orderid" id="orderid" value="{$orderid}" />            
+            <button id="infosubmit12" class ="infosubmits" name="action" value="search_info12">配货单配货记录</button>            
+            <button id="infosubmit13" class ="infosubmits" name="action" value="search_info13">发货单分拣</button>           
+			<button id="infosubmit7" class ="infosubmits" name="action" value="search_info7">配货单分拣记录</button>&nbsp;
+			<!--<button id="infosubmit" name="action" value="search_info1">查询配货清单记录</button>-->
+		<!--	<button id="infosubmit" name="action" value="search_info2">查询订单配货记录</button>-->
+			<button id="infosubmit3" class ="infosubmits" name="action" value="search_info3">复核订单记录</button>
+		<!--	<button id="infosubmit" name="action" value="search_info4">查询订单包装记录</button>-->
+			<button id="infosubmit5" class ="infosubmits" name="action" value="search_info5">订单称重扫描记录</button>
+			<button id="infosubmit6" class ="infosubmits" name="action" value="search_info6">订单分区扫描记录</button>           
+           	<button id="infosubmit9" class ="infosubmits" name="action" value="search_info9">分区复核</button>            
+            <button id="infosubmit10" class ="infosubmits" name="action" value="search_info10">发货组复核记录</button>
+           	<button id="infosubmit8" class ="infosubmits" name="action" value="search_info8">装车扫描记录</button>
+            <button id="infosubmit11" class ="infosubmits" name="action" value="search_info11">包裹下订单信息</button>
+			</form>
+			</div>
+			<div>{$serch_record}</div>
+		</div>
+	</div>
+</div>
+{include file='footer.htm'}

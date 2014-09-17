@@ -1,0 +1,175 @@
+{include file="header.htm"}
+
+<script src="./js/wave_order_picking.js"></script>
+<link href="./css/buttons.css" rel="stylesheet" type="text/css" />
+<link href="./css/whcss.css" rel="stylesheet" type="text/css" />
+
+<style>
+td.st { width:60px; }
+td.sc { width:150px; }
+td.sc input { width:200px; }
+td.sc select { width:224px; }
+td.dat input { width:80px; }
+div.orderinfo { font-size:25px; line-height:50px; color:#006600; }
+.show_info { color: #ff0000; }
+.showresult { color:#ff0000; width: 100%; border-bottom:1px solid #888888; padding:5px 20px; }
+.barcode { width:200px; height:70px; font-size:14px; text-align:center; line-height:20px; float:left; }
+.barcode img { width:200px; height:50px; }
+.printform { display:none; }
+.clear:before,
+.clear:after {
+  display: table;
+  content: " ";
+}
+.clear:after {
+  clear: both;
+}
+</style>
+{include file='whNav.htm'}
+
+<div class="main">
+	<div class="searchnav">仓库出库 - 出货单打印</div>
+	<table class="searchform" style="border:none;">
+		<tr>
+			<td class="st" style="width:80px;">扫描配货单号</td><td class="sc"><input name="waveId" class="waveId firstinput" type="text" /><input type="hidden" class="waveIds" name="waveIds"></td>
+			<td width="20"></td>
+			<td valign="top">
+			</td>
+		</tr>
+		<tr>
+			<td class="st">输入发货单号</td><td class="sc"><input name="shipOrderId" class="shipOrderId" type="text" /></td>
+			<td width="20"></td>
+			<td></td>
+			<td><input type="button" class="button-normal print" value="打印发货单" /></td>
+		</tr>							
+	</table>
+	<div style="margin-left:85px; margin-top:10px;" class="show_result">
+
+	</div>
+	<div class="clear"></div>
+	<form class="printform" method="post" action="index.php?mod=waveOrderPrinting&act=startprint"><input class="formwaveIds" name="waveIds"><input class="formwaveId" name="waveId"><input class="formshipOrderId" name="shipOrderId"></form>
+</div>
+
+<script type="text/javascript">
+var isprint = false;	//全局变量 记录当前配货单是否已打印
+$(document).ready(function() {
+	$(".waveId").focus();
+	$(".waveId").blur(function(){
+		//$(this).focus();
+	}).live("keydown", function(event){
+        if(event.keyCode==13){
+        	var waveId = "";
+        	waveId = $(".waveId").val();
+        	if(waveId == ''){
+        		$(".show_result").html('请输入配货单号');
+        		return false;
+        	}
+        	$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "index.php?mod=waveOrderPrinting&act=orderlist",
+				data: { "waveId":waveId },
+				success: function(response){
+					if(response.status == 1){
+						$(".shipOrderId").focus();
+						var orders = response.msg;
+						var shtml = '';
+						for(var i=0; i< orders.length; i++){
+							shtml += '<div class="barcode"><img src="barcode128.class.php?data='+orders[i]+'">'+orders[i]+'</div>';
+						}
+						$(".show_result").html(shtml);
+						if(isprint == true){
+							$('.waveIds').val(waveId);
+						}else{
+							var waveids = $('.waveIds').val();
+							$('.waveIds').val(waveId+','+waveids);
+						}
+					}else{
+						$(".waveId").val('');
+						$('.waveIds').val('');
+						$(".show_result").html(waveId+' >>> '+response.msg);
+					}
+				}
+			});
+        }
+    });
+    //这个发哥没有写完
+	$(".shipOrderId").blur(function(){
+		//$(this).focus();
+	}).live("keydown", function(event){
+        if(event.keyCode==13){
+        	var shipOrderId, waveId;
+        	waveId = $(".waveId").val();
+        	shipOrderId = $(".shipOrderId").val();
+            if(waveId == ''){
+                 alertify.error("请输入配货单号！");
+        		$(".show_result").html('请输入配货单号');
+        		return false; 
+            }
+        	if(shipOrderId == ''){
+        	    alertify.error("请输入发货单号！");
+        		$(".show_result").html('请输入发货单号');
+        		return false;
+        	}
+        	$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "index.php?mod=waveOrderPrinting&act=checkorder",
+				data: { "shipOrderId":shipOrderId, "waveId":waveId },
+				success: function(response){
+					if(response.status == 1){
+						orderPrint();
+					}else{
+						$(".show_result").html(response.msg+'<br/>'+$(".show_result").html());
+					}
+				}
+			});
+        }
+    });
+    
+    $('.print').click(function(){
+  	   var shipOrderId,waveIds, waveId;
+    	waveId = $(".waveId").val();
+        waveIds =$(".waveIds").val();
+    	shipOrderId = $(".shipOrderId").val();
+    	if(waveId == ''&&shipOrderId == ''){
+    	   alertify.error("请输入配货单号！");
+    		$(".show_result").html('请输入配货单号或者发货单号');
+    		return false;
+    	}  
+       	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "index.php?mod=waveOrderPrinting&act=print_all",
+		data: { "shipOrderId":shipOrderId, "waveId":waveId,"waveIds":waveIds },
+		success: function(response){
+		//  alert(response);return;
+		//  	console.log(response);
+			if(response.status == 200){			 
+		        alertify.success(response.msg);
+         //	window.open ="index.php?mod=waveOrderPrinting&act=prints&waveId='"+response.waveId+"'&shipOrderId='"+response.shipOrderId;
+		    
+			window.setTimeout('window.open("index.php?mod=waveOrderPrinting&act=prints&waveId='+response.waveId+'&shipOrderId='+response.shipOrderId+'","_blank")',200);
+			}else{			
+		       alertify.error(response.msg);
+			}
+		}
+	});
+         
+     //	orderPrint();
+    });
+    
+});
+
+function orderPrint(){
+	var f = $('.printform');
+	$('.formshipOrderId').val($('.shipOrderId').val());
+	$('.formwaveId').val($('.waveId').val());
+	$('.formwaveIds').val($('.waveIds').val());
+	isprint = true;
+	$(f).submit();
+}
+
+</script>
+
+{include file='footer.htm'}

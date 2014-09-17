@@ -1,0 +1,32 @@
+{include file='header.htm'}
+{include file='whNav.htm'}
+<script language="javascript" src="js/foorRule.js"></script>
+<div class="servar wh-servar">
+   <span>
+		<button  id='addRule' value="" />新增楼层</button>
+   </span>
+   <br>
+   <div id="mess"><span style="color: #0F0;font-size:20px">{$smarty.get.state}<span></div>
+</div>
+<div class="main">
+	<table cellspacing="0" width="100%" id="nowtable">
+		<tr class="title">
+			<td>楼层名称</td>
+			<td>楼层标签代码</td>
+			<td>操作</td>
+		</tr>
+		{foreach from=$lists item=list}
+		<tr class="odd">
+				<td>{$list.whFloor}</td>
+				<td>{$list.whCode}</td>
+				<td><button  class="rule_mod" tid="{$list.id}"/>编辑</button></td>
+		</tr>
+		{foreachelse}
+		<tr class="odd">
+				<td colspan="9">没有搜索值！</td>
+		</tr>
+		{/foreach}
+	</table>
+</div>
+ 
+{include file='footer.htm'}

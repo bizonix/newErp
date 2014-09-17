@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Print</title>
+<style>
+    td{ padding:4px 0px;}
+    body{ padding: 0; margin: 0;}
+</style>
+</head>
+<body>
+{foreach $dataInfo as $key=>$orderval}
+    {if $orderval.isNote == 1 }
+    <table style="border: 1px #000 dashed; width:373px; height: 150px; padding: 0; margin:0 10px;">
+        <tr>
+            <td>订单编号为({$orderval.id})包装注意信息:</td>
+        </tr>
+        <tr>
+            <td><strong><?php echo $ebay_noteb.'<br>'; ?></strong></td>
+        </tr>
+        <tr>
+            <td><?php echo '页数:'.$realpage.'/'.$totalpages;?></td>
+        </tr>
+    </table>
+    <div style="page-break-after:always; height:0px;"></div>
+    {/if}
+{/foreach}
+</body>
+</html>

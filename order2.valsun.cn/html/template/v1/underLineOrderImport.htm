@@ -1,0 +1,23 @@
+{include file='header.htm'}
+<link type="text/css" rel="stylesheet" href="css/orderindex.css">
+<!--<script language="javascript" src="js/underLineOrderImport.js"></script>-->
+<div class="main order-main" align="left">
+    <form id="underLineOrderImport" name="underLineOrderImport" action="index.php?mod=orderAdd&act=insertDomesticOrder" enctype="multipart/form-data" title="线下订单导入" method="post">
+    <span>{$showerrorinfo}</span>
+    <table cellpadding='0' cellspacing='0' width='100%' border='0' style="min-height:100px">
+        <tr>
+            <td width="10%"><input name="orderUpfile" type="file" />&nbsp;</td>
+            <td width="10%"><button type="submit" value=""/>上传excel</button></td>
+			<td width="80%"><span id="thelineshowmsg"></span></td>
+       </tr>
+       <tr>	
+            <td colspan='3'><strong>如果指定列无数据，指定列将不会更新，如果有数据，指定列将被更新成功。</strong></td>
+       </tr>
+    </table>
+    </form>
+    <p>
+    <br />
+    订单导入模板下载:<a href="{$httpHost}/upload/tep/guonei.xls" target="_blank">下载</a><br />
+  </p>
+</div>
+{include file='footer.htm'}

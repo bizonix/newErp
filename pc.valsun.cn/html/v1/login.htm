@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登录</title>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+<script src="./js/slideBox/jq.snow.js"></script>
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/alertify.css" rel="stylesheet" type="text/css" />
+<style>
+body {
+    padding: 0px;
+    margin: 0px;
+}#jieri {
+    position: absolute;
+    width:800px;
+    height: 200px;
+    top: 200px;
+    left: -220px;
+    overflow: hidden;
+}#jieri object,
+#jieri embed {
+    width: 800px ;
+    height: 200px;
+}#youxiajiao {
+    width: 350px;
+    height: 220px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+</style>
+
+<script type="text/javascript"> 
+var sportBox = function() {} 
+sportBox.prototype = { 
+//初始化(元素id, 元素移动的方向用123456789分别表示左上、上、右上、左、中、右、左下、下、右下) 
+init: function(id, direction) { 
+var obj = this._getId(id), dir = direction || 9; //用1-9代表九个方向，5表示居中停止 
+obj.style.position = "absolute"; 
+obj.timer = null; 
+
+this._sportDirection(obj, dir); 
+var _this = this; 
+obj.onmouseover = function() { 
+clearInterval(obj.timer); 
+}; 
+obj.onmouseout = function() { 
+_this._sportDirection(obj); 
+}; 
+}, 
+_getId: function(id) { 
+return typeof id === "string" ? document.getElementById(id) : id; 
+}, 
+//撞击的边界(返回新的运动方向) 
+_hitBorder: function(obj, direction) { 
+var d = direction || 9,b = obj,db = document.body || document.documentElement, h = 5, 
+hitsite = 5; //撞击位置，9个数字分别表示9个地点，按顺序左上角、上、右上角、左、中、右、左下角、下、右下角，5居中 
+
+if (b.offsetLeft <= 0) { 
+hitsite = 4; 
+(b.offsetTop <= 0) && (hitsite = 1); 
+(b.offsetTop + b.offsetHeight >= db.clientHeight) && (hitsite = 7); 
+} else if (b.offsetLeft > 0 && b.offsetLeft+b.offsetWidth < db.clientWidth) { 
+hitsite = 2; 
+(b.offsetTop + b.offsetHeight >= db.clientHeight) && (hitsite = 8) 
+} else if (b.offsetLeft +b.offsetWidth >= db.clientWidth) { 
+hitsite = 6; 
+(b.offsetTop <= 0) && (hitsite = 3); 
+(b.offsetTop + b.offsetHeight >= db.clientHeight) && (hitsite = 9); 
+} 
+
+switch(hitsite) { 
+case 1: 
+b.style.left = 0+'px'; 
+b.style.top = 0+'px'; 
+(d ==1) && (h = 9); 
+(d ==2) && (h = 8); 
+(d ==8) && (h = 2); 
+break; 
+case 2: 
+b.style.top = 0+'px'; 
+(d ==3) && (h = 9); 
+(d ==2) && (h = 8); 
+(d ==1) && (h = 7); 
+break; 
+case 3: 
+b.style.left = db.clientWidth-b.offsetWidth+'px'; 
+b.style.top = 0+'px'; 
+(d ==3) && (h = 9); 
+(d ==2) && (h = 8); 
+(d ==8) && (h = 2); 
+break; 
+case 4: 
+b.style.left = 0+'px'; 
+(d ==7) && (h = 9); 
+(d ==4) && (h = 6); 
+(d ==1) && (h = 3); 
+break; 
+case 5:// 
+h = 5; 
+break; 
+case 6: 
+b.style.left = db.clientWidth-b.offsetWidth+'px'; 
+(d ==9) && (h = 7); 
+(d ==6) && (h = 4); 
+(d ==3) && (h = 1); 
+break; 
+case 7: 
+b.style.left = 0+'px'; 
+b.style.top = db.clientHeight-b.offsetHeight+'px'; 
+(d ==7) && (h = 9); 
+(d ==2) && (h = 8); 
+(d ==8) && (h = 2); 
+break; 
+case 8: 
+b.style.top = db.clientHeight-b.offsetHeight+'px'; 
+(d ==9) && (h = 3); 
+(d ==7) && (h = 1); 
+(d ==8) && (h = 2); 
+break; 
+case 9: 
+b.style.left = db.clientWidth-b.offsetWidth+'px'; 
+b.style.top = db.clientHeight-b.offsetHeight+'px'; 
+(d ==8) && (h = 2); 
+(d ==6) && (h = 4); 
+(d ==9) && (h = 1); 
+break; 
+} 
+this._sportDirection(b, h); 
+}, 
+//运动方向(运动方向) 
+_sportDirection: function(obj, direction) { 
+var db = document.body || document.documentElement, mX = 0, mY = 0, _this = this, h = direction || (Math.round(Math.random()) ? 9 : 7); 
+switch(h) { 
+case 1: 
+mX = -5; 
+mY = -5; 
+break; 
+case 2: 
+mX = 0; 
+mY = -5; 
+break; 
+case 3: 
+mX = 5; 
+mY = -5; 
+break; 
+case 6: 
+mX = 5; 
+mY = 0; 
+break; 
+case 9: 
+mX = 5; 
+mY = 5; 
+break; 
+case 8: 
+mX = 0; 
+mY = 5; 
+break; 
+case 7: 
+mX = -5; 
+mY = 5; 
+break; 
+case 5: 
+mX = 0; 
+mY = 0; 
+break; 
+case 4: 
+mX = -5; 
+mY = 0; 
+break; 
+default: 
+//alert("你输入的方向不对，只允许1-9，5表停止"); 
+} 
+obj.timer = setInterval(function() { 
+if (obj.offsetLeft < 0 || obj.offsetTop < 0 || obj.offsetWidth+obj.offsetLeft > db.clientWidth || obj.offsetHeight+obj.offsetTop > db.clientHeight) { 
+clearInterval(obj.timer); 
+_this._hitBorder(obj, h); 
+} else { 
+obj.style.left = obj.offsetLeft + mX +'px'; 
+obj.style.top = obj.offsetTop + mY +'px'; 
+} 
+},60); 
+} 
+} 
+</script> 
+
+</head>
+<body class="loginbody">
+
+	<div class="loginmain">       
+    	<div class="box">
+        	<div class="loginlogo">
+            	<p>
+                	华成平台
+                </p>
+            </div>
+            <div class="userlogin">
+            	<form onsubmit="return check();">
+				<table>
+                	<tr>
+                    	<td>
+                        	<span>用户名：</span>
+                            <span style="font-size:12px; color:#F00; float:right;" id="tips-username"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<input name="username" type="text" id="username"/>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<span>登录密码：</span>
+                            <span style="font-size:12px; color:#F00; float:right;" id="tips-password"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td>
+                        	<input name="password" type="password" id="password"/>
+                        </td>
+                    </tr>
+                    <tr style="display: none;">
+                    	<td>
+                        	<span>所属公司：</span>
+                            <span style="font-size:12px; color:#F00; float:right;" id="tips-password"></span>
+                        </td>
+                    </tr>
+                    <tr style="display: none;">
+                    	<td>
+                        	<select name="companyId" id="companyId">
+                                <option value="1">赛维网络</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td class="go">
+                        	<input type="submit" value="登录" id="login-btn"/>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td class="remenber">
+                        	<span class="right">
+                        		<input name="" type="checkbox" value="" id="re" />
+                                <label for="re" class="rem">
+                                	记住我
+                                </label>
+                            </span>
+                            <span>
+                            	<input class="reset" type="reset" value="重置" id="reset-btn"/>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+				</form>
+            </div>
+        </div>
+    </div>
+    <div id="jieri">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0">
+          <param name="movie" value="jieri.swf" />
+          <param name="quality" value="high" />
+          <param name="wmode" value="transparent" /> 
+          <embed src="jieri.swf" quality="high" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" ></embed>
+        </object>
+    </div>
+    <div id="sdkl" style="position: absolute;left:600px ;top: 220px;">
+            <img src="images/xnkl.gif" alt="新年快乐" title="新年快乐" style="width: 120px;height: 120px;"/>
+    </div>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/alertify.js"></script>
+</body>
+</html>
+<script>
+{literal}
+$("#login-btn").click(function(){
+    var username,password;
+    username = $.trim($("#username").val());
+    password = $.trim($("#password").val());
+    companyId = $.trim($("#companyId").val());
+	if(username == ''){
+		$("#tips-username").html("用户名不能为空!");
+		$("#username").focus();
+		return false;
+	}else {
+		$("#tips-username").html("");
+	}
+	if(password == ''){
+		$("#tips-password").html("密码不能为空!");
+		$("#password").focus();
+		return false;
+	}else {
+		$("#tips-password").html("");
+	}
+    if(companyId == ''){
+		$("#companyId").focus();
+		return false;
+	}
+	$("#login-btn").val("登录中,请稍候...");
+	$.post("index.php?mod=public&act=userLogin",{"username":username, "password":password, "companyId":companyId},function(rtn){
+		if($.trim(rtn) == "ok"){
+			alertify.success("亲,登录成功！"); 
+			location.href = "index.php?mod=public&act=login";        
+		}else {
+			$("#login-btn").val("登录");
+			alertify.error("亲,登录失败,请检查帐号密码是否输入正确！");        
+		}
+	});
+});
+function check(){
+	return false;
+}
+
+$(function(){
+	$.fn.snow({ 
+		minSize: 5,		//雪花的最小尺寸
+		maxSize: 50, 	//雪花的最大尺寸
+		newOn: 300		//雪花出现的频率 这个数值越小雪花越多
+	});
+});
+{/literal}
+</script>
+
+<script type=text/javascript>
+    //<![CDATA[
+    var Ovr2 = '';
+    if (typeof document.compatMode != 'undefined' && document.compatMode != 'BackCompat') {
+        cot_t1_DOCtp = "_top:expression(document.documentElement.scrollTop+document.documentElement.clientHeight-this.clientHeight);_left:expression(document.documentElement.scrollLeft  + document.documentElement.clientWidth - offsetWidth);}";
+    } else {
+        cot_t1_DOCtp = "_top:expression(document.body.scrollTop+document.body.clientHeight-this.clientHeight);_left:expression(document.body.scrollLeft  + document.body.clientWidth - offsetWidth);}";
+    }
+
+    if (typeof document.compatMode != 'undefined' && document.compatMode != 'BackCompat') {
+        cot_t1_DOCtp2 = "_top:expression(document.documentElement.scrollTop-20+document.documentElement.clientHeight-this.clientHeight);}";
+    } else {
+        cot_t1_DOCtp2 = "_top:expression(document.body.scrollTop-20+document.body.clientHeight-this.clientHeight); }";
+    }
+    var cot_tl_bodyCSS = '* html { background: fixed;background-repeat: repeat;background-position: left top;}';
+    var cot_tl_fixedCSS = '#cot_tl_fixed { position:fixed;';
+    var cot_tl_fixedCSS = cot_tl_fixedCSS + '_position:absolute;';
+    var cot_tl_fixedCSS = cot_tl_fixedCSS + 'top:0px;';
+    var cot_tl_fixedCSS = cot_tl_fixedCSS + 'left:0px;';
+    var cot_tl_fixedCSS = cot_tl_fixedCSS + 'clip:rect(0 100 85 0);';
+    var cot_tl_fixedCSS = cot_tl_fixedCSS + cot_t1_DOCtp;
+    var cot_tl_popCSS = '#cot_tl_pop { background-color: transparent;';
+    var cot_tl_popCSS = cot_tl_popCSS + 'position:fixed;';
+    var cot_tl_popCSS = cot_tl_popCSS + '_position:absolute;';
+    var cot_tl_popCSS = cot_tl_popCSS + 'height:98px;';
+    var cot_tl_popCSS = cot_tl_popCSS + 'width: 1920px;';
+    var cot_tl_popCSS = cot_tl_popCSS + 'right: 120px;';
+    var cot_tl_popCSS = cot_tl_popCSS + 'top: 20px;';
+    var cot_tl_popCSS = cot_tl_popCSS + 'overflow: hidden;';
+    var cot_tl_popCSS = cot_tl_popCSS + 'visibility: hidden;';
+    var cot_tl_popCSS = cot_tl_popCSS + 'z-index: 99999;';
+    var cot_tl_popCSS = cot_tl_popCSS + cot_t1_DOCtp2;
+    document.write('<style type="text/css">' + cot_tl_bodyCSS + cot_tl_fixedCSS + cot_tl_popCSS + '</style>');
+
+    function COT(cot_tl_theLogo, cot_tl_LogoType, LogoPosition, theAffiliate) {
+        document.write('<div id="cot_tl_fixed">');
+        document.write('<img src=' + cot_tl_theLogo + ' alt="" border="0"></a>');
+        document.write('</div>');
+    }
+
+    //if(window.location.protocol == "http:")
+    COT("http://www.honeybearplayhomes.com/resources/flashing%20christmas%20lights.gif", "SC2", "none");
+    //COT("images/loginTop.gif", "SC2", "none");
+    //]]>    
+</script>
+
+<script type="text/javascript"> 
+/* 创建一个调用的实例 */ 
+//var s = new sportBox(); 
+//s.init('sdkl'); //参数表示元素id和方向(方向缺默向右下) 
+</script> 
+
+<script>
+H = 200; //高 
+W = 850; //宽 
+id = 'jieri';
+function show_con() {
+    var obj_nav = document.getElementById(id);
+    var n = 20,t = 50;
+    var timers = new Array(n);
+    for (var i = 0; i < n; i++) { (function() {
+            if (timers[i]) clearTimeout(timers[i]);
+            var j = i;
+            timers[i] = setTimeout(function() {
+                obj_nav.style.height = H - Math.round(H * (j + 1) / n);
+                obj_nav.style.width = W - Math.round(W * (j + 1) / n);
+                obj_nav.style.left = Math.round(W * (j + 1) / n) / 2;
+            },
+            (i + 1) * t);
+        })()
+    };
+}
+//setTimeout("show_con()", 2500) //if (FLASH播放完)show_con();
+//$("#username").focus(function(){
+//    setTimeout("show_con()", 0);
+//});
+</script>

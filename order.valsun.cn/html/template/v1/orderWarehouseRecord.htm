@@ -1,0 +1,133 @@
+{include file='header.htm'}
+{include file='omNav.htm'}
+
+<script type="text/javascript" src="./js/orderOperationLogList.js"></script>
+<div class="servar">
+    <form name="orderOperationLogFrom" id="orderOperationLogFrom" action="index.php?mod=orderWarehouseRecord&act=orderWarehouseRecordList" method="post" onsubmit="return checkOrder()">     
+        <span style="font-size:24px; color:#F00">订单编号：</span>             
+        <input id="omOrderId" name="omOrderId" type="text" style="width:150px;height:30px; font-size:24px;" value="{$omOrderId}" class="validate[required] text-input" />
+        &nbsp;&nbsp;
+        <!--<span style="font-size:24px; color:#F00">时间段：</span> 
+        <select name="orderLogTime" id="orderLogTime" style="width:180px;height:35px; font-size:18px;" class="validate[required] text-input">
+            {foreach key = keyChoose from=$tabelNameArr item=chooseList}
+            <option {if $isSerch == $chooseList}selected="selected"{/if} value="{$chooseList}" >{$chooseList|replace:"om_order_log_":""}</option>
+            {/foreach}
+    	</select>-->
+        &nbsp;&nbsp;
+		<button style="height:25px; font-size:15px;" value="scanRecord" name="action" type="submit">查询订单配货记录</button>
+		<button style="height:25px; font-size:15px;" value="reviewRecord" name="action" type="submit">查询订单复核记录</button>
+		<button style="height:25px; font-size:15px;" value="packageRecord" name="action" type="submit">查询订单包装记录</button>
+		<button style="height:25px; font-size:15px;" value="weighRecord" name="action" type="submit">查询订单称重记录</button>
+		<button style="height:25px; font-size:15px;" value="partionRecord" name="action" type="submit">查询订单分区记录</button>
+	</form>     
+</div>     
+<div class="main">
+	{if $action == "scanRecord"}
+		<table cellspacing="0" width="100%">
+			<tr class="title">
+				<td>订单编号</td>
+				<td>料号</td>
+				<td>已配货</td>
+				<td>未配货</td>
+				<td>配货人员</td>
+				<td>配货时间</td>
+			</tr>
+			{foreach key = keyId from=$RecordArr item=list}
+			<tr class="odd">
+				<td>{$list.omOrderId}</td>
+				<td>{$list.sku}</td>
+				<td>{$list.numyes}</td>
+				<td>{$list.numno}</td>
+				{$user = UserModel::getUsernameById($list.operatorId)}
+				<td>{$user}</td>
+				<td>{$list.createdTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+			</tr>
+			{foreachelse}
+			<tr >
+					<td colspan="8">暂无配货记录！</td>
+			</tr>
+			{/foreach}	
+		</table>
+	{elseif $action == "reviewRecord"}
+		<table cellspacing="0" width="100%">
+			<tr class="title">
+				<td>订单编号</td>
+				<td>复核人员</td>
+				<td>复核时间</td>
+			</tr>
+			{foreach key = keyId from=$RecordArr item=list}
+			<tr class="odd">
+				<td>{$list.omOrderId}</td>
+				{$user = UserModel::getUsernameById($list.operatorId)}
+				<td>{$user}</td>
+				<td>{$list.createdTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+			</tr>
+			{foreachelse}
+			<tr >
+					<td colspan="8">暂无复核记录！</td>
+			</tr>
+			{/foreach}	
+		</table>	
+	{elseif $action == "packageRecord"}
+		<table cellspacing="0" width="100%">
+			<tr class="title">
+				<td>订单编号</td>
+				<td>包装人员</td>
+				<td>包装时间</td>
+			</tr>
+			{foreach key = keyId from=$RecordArr item=list}
+			<tr class="odd">
+				<td>{$list.omOrderId}</td>
+				{$user = UserModel::getUsernameById($list.operatorId)}
+				<td>{$user}</td>
+				<td>{$list.createdTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+			</tr>
+			{foreachelse}
+			<tr >
+					<td colspan="8">暂无包装记录！</td>
+			</tr>
+			{/foreach}	
+		</table>		
+	{elseif $action == "weighRecord"}
+		<table cellspacing="0" width="100%">
+			<tr class="title">
+				<td>订单编号</td>
+				<td>称重人员</td>
+				<td>称重时间</td>
+			</tr>
+			{foreach key = keyId from=$RecordArr item=list}
+			<tr class="odd">
+				<td>{$list.omOrderId}</td>
+				{$user = UserModel::getUsernameById($list.operatorId)}
+				<td>{$user}</td>
+				<td>{$list.createdTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+			</tr>
+			{foreachelse}
+			<tr >
+					<td colspan="8">暂无称重记录！</td>
+			</tr>
+			{/foreach}	
+		</table>			
+	{elseif $action == "partionRecord"}
+		<table cellspacing="0" width="100%">
+			<tr class="title">
+				<td>订单编号</td>
+				<td>分区人员</td>
+				<td>扫描时间</td>
+			</tr>
+			{foreach key = keyId from=$RecordArr item=list}
+			<tr class="odd">
+				<td>{$list.omOrderId}</td>
+				{$user = UserModel::getUsernameById($list.operatorId)}
+				<td>{$user}</td>
+				<td>{$list.createdTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+			</tr>
+			{foreachelse}
+			<tr >
+					<td colspan="8">暂无分区记录！</td>
+			</tr>
+			{/foreach}	
+		</table>			
+	{/if}
+</div>      
+{include file='footer.htm'}

@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Feedback系统</title>
+
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+
+<link href="http://misc.erp.valsun.cn/css/alertify.css" rel="stylesheet" type="text/css" />
+
+<!--meta name="viewport" content="width=device-width, initial-scale=1.0"-->
+
+<link rel="stylesheet" href="js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+
+<link rel="stylesheet" media="all" href="js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+
+
+
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript" src="js/ui/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="js/easyTooltip.js"></script>
+
+<script type="text/javascript" src="js/hoverIntent.js"></script>
+
+<script type="text/javascript" src="js/superfish.js"></script>
+
+<script type="text/javascript" src="js/jquery.wysiwyg.js"></script>
+
+<script type="text/javascript" src="js/custom.js"></script>
+
+<link rel="stylesheet" href="./css/validationEngine/validationEngine.jquery.css" type="text/css"/>
+
+<script src="./js/languages/jquery.validationEngine-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="./js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="./js/general.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="./js/alertify/alertify.min.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="./js/linksEffect.js" type="text/javascript" charset="utf-8"></script>
+
+<!--  script src="http://api.notice.valsun.cn/js/swJsNotice.js" type="text/javascript"></script -->
+
+<!--link rel="stylesheet" href="css/iqc.css"-->
+
+</head>
+
+
+
+<body>
+
+	<div class="container">
+
+    	<div class="content">
+
+        	<div class="header">
+
+            	<div class="logo">
+
+                	Feedback系统
+
+                    <input type="hidden" id="mod" value="{$smarty.get.mod}"/>
+
+                    <input type="hidden" id="act" value="{$smarty.get.act}"/>
+
+                </div>
+
+                <div class="onevar">
+
+                	<ul>
+
+                    	<li>
+
+                        	<a href="index.php?mod=feedbackManage&act=ebayFeedbackManage" class="receive {if in_array($smarty.get.mod,array('feedbackManage'))}cho{/if}">卖家评价</a>
+
+                        </li>
+						{if isAccessMod('content','contentList')==true} 
+                        <li>
+
+                        	<a href="index.php?mod=content&act=contentList" class="detect {if in_array($smarty.get.mod,array('content'))}cho{/if}">评价模板</a>
+
+                        </li>
+						{/if}
+						
+						{if isAccessMod('user')||isAccessMod('job')||isAccessMod('dept')} 
+                        <li>
+
+                        	<a href="index.php?mod=user&act=index" class="systemsettings {if in_array($smarty.get.mod,array('user','job','dept'))}cho{/if}">授权管理</a>
+
+                        </li>
+						{/if}
+                    </ul>
+
+                </div>
+
+                <div class="user">
+
+					<a class="news-img" href="javascript:javascript:void(0)" onclick="swntc_call('{$_username}')">消息</a>
+
+                	<input id='swNoticeUrl' type='hidden'  value='index.php?mod=notice&act=sendMessage'/>
+
+					<a href="javascript:void(0)">{$_username}</a>
+
+                    <a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;">退出</a>
+
+                </div>
+
+            </div>
+
+            <div class="twovar">
+
+
+
+            	<ul>
+
+					{if $secnev == 1}
+
+                	<li>
+						{if isAccessMod('feedbackManage','fbkList') == true} 
+                    	<a href="index.php?mod=feedbackManage&act=fbkList" {if $mod=="feedbackManage" && $act=="fbkList"}class="cho"{/if}>速卖通平台</a>
+						{/if}
+                    </li>
+
+                    <li>
+						{if isAccessMod('feedbackManage') == true}
+                    	<a href="index.php?mod=feedbackManage&act=ebayFeedbackManage" {if $mod=="feedbackManage" && in_array($act,array("ebayFeedbackManage","ebayFeedbackRequestChange","ebayFeedbackStatistics","ebayFeedbackExport"))}class="cho"{/if}>Ebay平台</a>
+                    	{/if}
+                    </li>
+
+					{elseif $secnev == 2}
+
+
+					{elseif $secnev == 3}
+
+                    
+					{elseif $secnev == 4}
+
+
+					{/if}
+
+                    {if in_array($smarty.get.mod,array('user','job','dept','accountManage'))}
+                    
+					{if isAccessMod('user') == true} 
+                    <li><a href="index.php?mod=user&act=index" {if $mod=='user' }class="cho"{/if}>用户管理</a></li>
+					{/if}
+					
+					{if isAccessMod('job') == true} 
+					<li><a href="index.php?mod=job&act=index" {if $mod=='job' }class="cho"{/if}>岗位管理</a></li>
+					{/if}
+					
+					{if isAccessMod('dept') == true} 
+					<li><a href="index.php?mod=dept&act=index" {if $mod=='dept' }class="cho"{/if}>部门管理</a></li>
+					{/if}
+					
+					<li><a href="index.php?mod=accountManage&act=accountList" {if $mod=='accountManage' }class="cho"{/if}>账号权限管理</a></li>
+					{/if}
+
+                </ul>
+
+            </div>
+            
+            <div class="threevar">
+            {if in_array($smarty.get.act,array('ebayFeedbackManage','ebayFeedbackCount','ebayFeedbackRequestChange','ebayFeedbackStatistics','ebayFeedbackExport'))}
+            	<ul> 
+            		{if isAccessMod('feedbackManage','ebayFeedbackManage') == true}           	
+            	 	<li><a href="index.php?mod=feedbackManage&act=ebayFeedbackManage" {if $smarty.get.act=='ebayFeedbackManage' }class="cho"{/if}>Feedback管理</a></li>
+            	 	{/if}
+            	 	{if isAccessMod('feedbackManage','ebayFeedbackRequestChange') == true}     
+            	 	<li><a href="index.php?mod=feedbackManage&act=ebayFeedbackRequestChange" {if $smarty.get.act=='ebayFeedbackRequestChange' }class="cho"{/if}>请求修改Feedback管理</a></li>
+           	 		{/if}
+           	 		{if isAccessMod('feedbackManage','ebayFeedbackExport') == true}     
+            	 	<li><a href="index.php?mod=feedbackManage&act=ebayFeedbackExport" {if $smarty.get.act=='ebayFeedbackExport' }class="cho"{/if}>报表导出</a></li>
+            	 	{/if}
+            	 	{if isAccessMod('feedbackManage','ebayFeedbackCount') == true}     
+            	 	<li><a href="index.php?mod=feedbackManage&act=ebayFeedbackCount" {if $smarty.get.act=='ebayFeedbackCount' }class="cho"{/if}>feedback统计</a></li>
+            		{/if}
+            	</ul>
+            {/if}
+            </div>

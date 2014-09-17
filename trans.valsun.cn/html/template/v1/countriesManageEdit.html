@@ -1,0 +1,46 @@
+{header}
+<!-- 
+/*
+ * 标准国家编辑页面 countriesManageEdit.html
+ * ADD BY 陈伟 2013.7.27
+ */
+-->
+<link rel="stylesheet" href="css/transportlist.css">
+<script type="text/javascript" src="./js/countriesManage.js"></script>
+{navdiv}
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="maincontentdiv" >
+    <form action='index.php?mod=countriesManage&act=countriesEdit' method="post" id="countriesAddForm">
+    	<input type="hidden" name="countryId" id="countryId" value="{countryId}" />
+        <p>
+            <label for="countryNameEnInput" style="font-size:20px;">英文国家名称</label>
+            <input value="{countryNameEn}" id='countryNameEnInput' onchange="checkExist('En')" class="mf validate[required] text-input" name="countryNameEnInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span id="showEnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="countryNameCnInput" style="font-size:20px;">中文国家名称 </label>
+            <input value="{countryNameCn}" class="mf validate[required] text-input" id="countryNameCnInput" onchange="checkExist('Cn')" name="countryNameCnInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="countrySnInput" style="font-size:20px;">英文国家简称 </label>
+            <input value="{countrySn}" class="mf validate[required] text-input" id="countrySnInput" onchange="checkExist('Sn')" name="countrySnInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span id="showSnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <input class="button" type="submit" id="countriesAddFormSumit" style="width:100px;height:35px;font-size:20px" value="提交">
+          <!--  <input class="button" type="reset" style="width:100px;height:35px;font-size:20px" value="重置"> -->
+            <input class="button" type="button" id='returnPage' style="width:100px;height:35px;font-size:20px" value="返回" />
+        </p>
+    </form>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+{footer}

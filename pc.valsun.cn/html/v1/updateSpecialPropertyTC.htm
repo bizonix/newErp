@@ -1,0 +1,105 @@
+{include file="header.htm"}
+<div class="fourvar">
+            	<div class="pathvar">
+                {include file='pcNav.htm'}
+                </div>
+            </div>
+            <form action="json.php?mod=spuSpecialProperty&act=updateSpecialPropertyTCOn" method="post" id="updateSpecialPropertyValidation" target="a" onsubmit="return confirm('请仔细检查后提交，确认提交？');">
+            <div class="main products-main basic-main">
+            	<table cellspacing="0" width="100%" id="tableBas">
+                    <tr class="title">
+                    	<td align="left" colspan="2" style="font-size:16px; font-weight:bold; padding-left:15px;">特殊属性-运输方式（编辑）</td>
+                    </tr>
+                    <tr>
+                        <td width="10%"><span style="color:#F00;">*</span>特殊属性名称：</td>
+                        <td align="left">
+                        <input value="{$id}" name="id" id="id" type="hidden"/>
+                        <input class="validate[required,maxSize[60]]" name="propertyName" id="propertyName" value="{$propertyName}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="10%"><span style="color:#F00;">*</span>是否启用：</td>
+                        <td align="left">
+                            <select class="validate[required]" name="isOn" id="isOn">
+                                <option value=""></option>
+                                <option value="1" {if $isOn == 1}selected="selected"{/if}>启用</option>
+                                <option value="2" {if $isOn == 2}selected="selected"{/if}>禁用</option>
+                            </select>
+                        </td>                    
+                    </tr>
+                    <tr>
+                        <td width="10%"><span style="color:#F00;">*</span>是否关联运输方式：</td>
+                        <td align="left">
+                            <select class="validate[required]" name="isRelateTransport" id="isRelateTransport">
+                                <option value=""></option>
+                                <option value="1" {if $isRelateTransport == 1}selected="selected"{/if}>关联</option>
+                                <option value="2" {if $isRelateTransport == 2}selected="selected"{/if}>不关联</option>
+                            </select>
+                            <span style="color: red;">（如果不关联运输方式,则下面的数据不生效）</span>
+                        </td>                    
+                    </tr>                                       
+                </table>
+                <div id="transInfoDetail">
+                <table cellspacing="0" width="100%">
+                    <tr class="title">
+                    	<th width="20%" align="left" style="font-size:16px; font-weight:bold; padding-left:15px;">运输方式</th>
+                        <th align="left" style="font-size:16px; font-weight:bold; padding-left:15px;">渠道方式</th>
+                    </tr>
+                </table>
+                <div style="height: 300px;width: 700px; overflow-y:auto;">
+                <table cellspacing="0" width="100%">
+                    {assign var=channelArr value=getAllChannelInfo()}                	                    
+                    {foreach getAllTransportInfo() as $value}
+						<tr>
+                            <td>
+                                <input {if in_array($value['id'], $tranportIdArr)}checked="checked"{/if} style="width: 12px;" value="{$value['id']}" name="transportId[]" type="checkbox" id="transportId{$value['id']}" transport='transport'/>
+                                <label {if in_array($value['id'], $tranportIdArr)}style="color: red;"{/if} for="transportId{$value['id']}">{$value['carrierNameCn']}</label>
+                            </td>
+                            <td>
+                                {foreach $channelArr[$value['id']] as $v}
+                                    <input {if in_array($v['id'], $channelIdArr)}checked="checked"{/if} style="width: 12px;" value="{$v['id']}" name="tc{$value['id']}[]" type="checkbox" id="channelId{$v['id']}" channel="channel" tid="{$value['id']}"/>
+                                    <label {if in_array($v['id'], $channelIdArr)}style="color: red;"{/if} for="channelId{$v['id']}">{$v['channelName']}</label>
+                                {/foreach}                                
+                            </td>
+						</tr>
+                    {/foreach}
+                </table>
+                </div>
+                <hr />
+                </div>
+                <div align="center" class="products-action">
+                	<input type="submit" value="保存"/>
+                </div>
+            </form>
+            <iframe style="display: none;" name="a"></iframe>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+            	</div>
+            </div>
+{include file="footer.htm"}
+
+<script type="text/javascript">
+    $(function(){
+         $("input[transport='transport']").click(function(){
+            var flag = $(this).prop('checked');
+            $("input[name='tc"+$(this).val()+"[]'").prop('checked', flag);
+         });
+         
+         $("input[channel='channel']").click(function(){
+            tid = $(this).attr('tid');
+            flag = false;
+            $("input[tid='"+tid+"']").each(function(){
+                if($(this).prop('checked') == true){
+                    flag = true;
+                }             
+            });
+            $("#transportId"+tid).prop('checked', flag);
+         });
+         
+         jQuery("#updateSpecialPropertyValidation").validationEngine();     
+    });
+    
+</script>

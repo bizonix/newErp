@@ -1,0 +1,47 @@
+{include file="header.html"}
+<script type="text/javascript" src="./js/iqcsku.js"></script>
+<div class="fourvar">
+            	{include file="iqcnav.html"}
+                <div class="pagination">
+					{$show_page}
+                </div>
+            </div>
+            <div class="servar">
+            	<span>
+                	领错退回：<button  id='skureturn' value="" />退回</button>
+                </span>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                    	<td><input type="checkbox" class="checkall" /></td>
+                        <td>料号</td>
+						<td>到货数</td>
+						<td>录入时间</td>
+						<td>打印人员</td>
+						<td>描 述</td>
+						<td>采 购</td>
+						<td>仓 位</td>
+						<td>IQC领货人</td>
+                    </tr>
+                    {foreach from=$iqcList item=list}
+                    <tr class="odd">
+                            <td><input type="checkbox" class="iqcselect" name="iqcselect" value="{$list.id}"/></td>
+                            <td>{$list.sku}</td>
+                            <td>{$list.num}</td>
+                            <td>{$list.printTime|date_format:"%Y-%m-%d %H-%M-%S"}</td>
+                            <td>{$list.printerId}</td>
+                            <td></td>
+                            <td>{$list.purchaseId}</td>
+                            <td></td>
+                            <td>{$list.getUserId}</td>
+                    </tr>
+					{/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="pagination">
+                	{$show_page}
+            	</div>
+            </div>
+{include file="footer.html"}

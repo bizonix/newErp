@@ -1,0 +1,96 @@
+﻿################ tran.valsu.cn auto report ################
+10 22 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/auto_send_track_number_stat.php 2 "todayWarn" "30"  > /data/web/tran.valsun.cn/log/log_track_number_stat_warn_30.log
+10 22 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/auto_send_track_number_stat.php 2  > /data/web/tran.valsun.cn/log/log_track_number_stat30.log
+
+################ tran.valsu.cn fix ################
+10 1 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/fix_track_number_info.php "errEmsSG" 5 >/data/web/tran.valsun.cn/log/errEmsSG.log
+
+################ tran.valsu.cn get tracknum ################
+10 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "中国邮政挂号" 2 > /data/web/tran.valsun.cn/log/log_postgh.log
+15 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "eub" 2 > /data/web/tran.valsun.cn/log/log_eub.log
+20 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "dhl" 2 > /data/web/tran.valsun.cn/log/log_dhl.log
+25 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "fedex" 2 > /data/web/tran.valsun.cn/log/log_fedex.log
+30 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "ems" 2 > /data/web/tran.valsun.cn/log/log_ems.log
+35 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "ups ground" 2 > /data/web/tran.valsun.cn/log/log_ups_Ground.log
+40 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "usps" 2 > /data/web/tran.valsun.cn/log/log_usps.log
+45 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "顺丰快递" 2 > /data/web/tran.valsun.cn/log/log_sf.log
+45 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "圆通快递" 2 > /data/web/tran.valsun.cn/log/log_yto.log
+45 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "申通快递" 2 > /data/web/tran.valsun.cn/log/log_sto.log
+45 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "韵达快递" 2 > /data/web/tran.valsun.cn/log/log_yundaex.log
+50 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "新加坡小包挂号" 30 > /data/web/tran.valsun.cn/log/log_singpost.log
+50 23 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "德国邮政挂号" 30 > /data/web/tran.valsun.cn/log/log_deutschepost.log
+50 23 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "UPS美国专线" 90 > /data/web/tran.valsun.cn/log/log_ups_us.log
+50 04 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/crawl_erp_tracknumber_data.php "中国邮政平邮" 2 > /data/web/tran.valsun.cn/log/log_postpy.log
+
+#10 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 2 2 > /data/web/tran.valsun.cn/log/log_postgh.log
+#15 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 6 2 > /data/web/tran.valsun.cn/log/log_eub.log
+#20 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 8 2 > /data/web/tran.valsun.cn/log/log_dhl.log
+#25 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 9 2 > /data/web/tran.valsun.cn/log/log_fedex.log
+#30 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 5 2 > /data/web/tran.valsun.cn/log/log_ems.log
+#35 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 46 2 > /data/web/tran.valsun.cn/log/log_ups_Ground.log
+#40 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 47 2 > /data/web/tran.valsun.cn/log/log_usps.log
+#45 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 48 2 > /data/web/tran.valsun.cn/log/log_sf.log
+#45 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 49 2 > /data/web/tran.valsun.cn/log/log_yto.log
+#45 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 50 2 > /data/web/tran.valsun.cn/log/log_sto.log
+#45 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 51 2 > /data/web/tran.valsun.cn/log/log_yundaex.log
+#50 23 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 52 30 > /data/web/tran.valsun.cn/log/log_singpost.log
+#50 23 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 53 30 > /data/web/tran.valsun.cn/log/log_deutschepost.log
+#50 23 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/crawl_order_tracknumber_data.php 62 90 > /data/web/tran.valsun.cn/log/log_ups_us.log
+
+
+################ tran.valsu.cn get tracknum info ################
+20 1-11/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 30000 6 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_eub_detail_2.log
+20 1-11/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 2 30000 6 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_eub_detail_2.log
+20 1-11/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 3 30000 6 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_eub_detail_3.log
+20 1-11/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 4 30000 6 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_eub_detail_4.log
+20 1-11/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 5 30000 6 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_eub_detail_5.log
+20 1-11/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 50000 8 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_dhl_detail_1.log
+30 1-11/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 50000 9 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_fedex_detail_1.log
+40 1-11/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 50000 5 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_ems_detail_1.log
+50 1-11/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 50000 46 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_ups_ground_detail_1.log
+55 1-11/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 50000 47 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_usps_detail_1.log
+10 2-12/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 50000 48 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_sf_detail_1.log
+20 2-12/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 50000 49 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_yto_detail_1.log
+30 2-12/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 50000 50 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_sto_detail_1.log
+40 2-12/10 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 50000 51 "status not in(3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_yundaex_detail_1.log
+30 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_1.log
+30 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 2 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_2.log
+30 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 3 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6  > /data/web/tran.valsun.cn/log/log_detailall_3.log
+40 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 4 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_4.log
+40 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 5 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_5.log
+40 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 6 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_6.log
+50 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 7 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_7.log
+50 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 8 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_8.log
+50 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 9 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_9.log
+55 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 10 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_10.log
+55 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 11 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_11.log
+55 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 12 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_12.log
+55 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 13 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_13.log
+55 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 14 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_14.log
+55 11-23/12 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 15 30000 2 "status not in(0,3,5,6,7,8,9,10)" 6 > /data/web/tran.valsun.cn/log/log_detailall_15.log
+40 2 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 10000 52 > /data/web/tran.valsun.cn/log/log_singpost_detail_1.log
+40 2 * * * /usr/local/bin/php   /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 10000 53 > /data/web/tran.valsun.cn/log/log_deutschepost_detail_1.log
+40 2 * * * /usr/local/bin/php   /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 10000 62 > /data/web/tran.valsun.cn/log/log_upsus_detail_1.log
+
+################ tran.valsu.cn get tracknum info status 0 ################
+10 12-20/4 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 20000 2 "status=0" > /data/web/tran.valsun.cn/log/log_detailall_0_1.log
+20 12-20/4 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 2 20000 2 "status=0" > /data/web/tran.valsun.cn/log/log_detailall_0_2.log
+30 12-20/4 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 3 20000 2 "status=0" > /data/web/tran.valsun.cn/log/log_detailall_0_3.log
+40 12-20/4 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 4 20000 2 "status=0" > /data/web/tran.valsun.cn/log/log_detailall_0_4.log
+50 12-20/4 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 5 20000 2 "status=0" > /data/web/tran.valsun.cn/log/log_detailall_0_5.log
+30 12-20/4 * * * /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/crawl_track_number_detail.php 1 30000 6 "status=0" > /data/web/tran.valsun.cn/log/log_detailall_6_1.log
+
+################ tran.valsu.cn update warn info ################
+#55 14 * * 6 /usr/local/bin/php  /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 1 10000 46 "internalTime=0" > /data/web/tran.valsun.cn/log/log_update_warn_46_1.log
+#38 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 1 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_1.log
+#38 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 2 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_2.log
+#38 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 3 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_3.log
+#38 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 4 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_4.log
+#45 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 5 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_5.log
+#45 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 6 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_6.log
+#45 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 7 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_7.log
+#45 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 8 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_8.log
+#55 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 9 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_9.log
+#55 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 10 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_10.log
+#55 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 11 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_11.log
+#55 14 * * * /usr/local/bin/php /data/web/tran.valsun.cn/crontab/update_track_number_warn_info.php 12 50000 "" "1" > /data/web/tran.valsun.cn/log/warn_info_12.log

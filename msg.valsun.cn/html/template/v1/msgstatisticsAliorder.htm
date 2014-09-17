@@ -1,0 +1,59 @@
+{include file="header.htm"}
+{include file="secendNav_statistics.htm"}
+{include file="thirdNav_statistics.htm"}
+<link rel="stylesheet" href="./css/msglist.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./css/page.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+<div class="topmenue">
+	<form action="index.php" method="get">
+		<input type="hidden" name="mod" value="messageStatistics">
+		<input type="hidden" name="act" value="messageStatisticsAli">
+		<span>开始时间：</span> <input type="text" onclick="WdatePicker()" name="starttime" value="{$starttime}">
+		<span>结束时间：</span> <input type="text" onclick="WdatePicker()" name="endtime" value="{$endtime}">
+		<input type="hidden" name="type" value="{$type}">
+		<input type="submit" value="搜索" class="order-search">
+	</form>
+</div>
+
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tbody>
+            <tr class="title">
+				<td width="8%">回复人</td>
+				<td>未回复</td>
+				<td>已回复</td>
+				<td>已读</td>
+				<td>总数</td>
+            </tr>
+			{foreach $statistics as $key=>$row }
+            <tr class="odd">
+                <td>{$key}</td>
+				<td>{$row.0}</td>
+				<td>{$row.2}</td>
+				<td>{$row.1}</td>
+				<td>{$row.total}</td>
+            </tr>
+			{/foreach}
+			<tr class="odd">
+                <td><span style="font-weight:bold;color:red;">总数</span></td>
+                <td><span style="font-weight:bold;color:red;">{$totalNhandle}</span></td>
+                <td><span style="font-weight:bold;color:red;">{$totalreply}</span></td>
+                <td><span style="font-weight:bold;color:red;">{$totalread}</span></td>
+            </tr>
+        </tbody>
+    </table>
+        
+    <div style="padding-left:30px;">
+            <div style="margin-top:3px;margin-bottom:3px;height:20px; line-height:20px;">
+                <div style="Width:250px; float:left">账号</div>
+                <div style="Width:150px; float:left">总数</div>
+            </div>
+        {foreach $statistics_2 as $key=>$row }
+            <div style="margin-top:3px;margin-bottom:3px;height:20px; line-height:20px;">
+                <div style="Width:250px; float:left">{$key}</div>
+                <div style="Width:150px; float:left">{$row}</div>
+            </div>
+        {/foreach}
+    </div>
+</div>
+{include file="footer.htm"}

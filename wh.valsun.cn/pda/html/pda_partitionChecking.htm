@@ -1,0 +1,24 @@
+{include file="header.htm"}
+<script language="javascript" src="./js/pda_partitionChecking.js"></script>
+ <div id="mstatus" class="floatright"></div>
+<div id="divcontent" style="height:200px;width:225px">
+ <div class="floatleft">
+            <span>分区号 : </span><input style="width:150px;" name="order" type="text" id="partion_id" onkeydown="checkPartion()" class="textinput" />
+            <input id='real_partion' type="hidden"/>
+            <input id='package_id' type="hidden"/>
+        </div>
+		<div class="floatleft" style="height: 45%;padding: 3px 0;">
+            <span>订单号 : </span><input style="width:150px;" name="order" type="text" id="ebay_id" onkeydown="checkeBayID()" class="textinput" />
+            <div class="floatleft" id="show_review_total" style="display: none; padding-top:4px;">
+                <span>已复核数 : </span><span id="review_total"></span>
+            </div>
+        </div>
+
+        <div class="floatleft">
+        	<input type="button" value="下一分区" id="next_order_button" class="buttonclass floatleft" onclick="javascript:window.location='./index.php?mod=pda_PartitionChecking&act=pda_partitionChecking';" />
+        </div>
+        <div class="floatRight" style="float: right;">
+        	<input type="button" value="显示复核结果" id="show_review_total" class="buttonclass" onclick="showReview()"/>
+        </div>
+</div>
+{include file="footer.htm"}

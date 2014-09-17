@@ -1,0 +1,56 @@
+{include file="header.htm"}
+<!-- 
+/*
+ * 产品分类检测添加页面 skuTypeQcAdd.htm
+ * ADD BY 陈伟 2013.8.3
+ */
+-->
+<div class="fourvar">
+	{include file="iqcnav.htm"}               
+</div>
+<br />
+<br />
+<br />
+<br />
+<script type="text/javascript" src="./js/skuTypeQc.js"></script>
+<div align="center" class="main" >
+    <form action='index.php?mod=sampleStandard&act=skuTypeQcAddSubmit' method="post" id="skuTypeQcAddForm">
+    	<table>
+        <tr>
+        	<td align="left">
+                <label for="typeNameInput" style="font-size:20px;">SKU分类检测名称：</label>
+            </td>
+        	<td align="left">
+    
+                    <input value="" id='typeNameInput' class="mf validate[required] text-input" name="typeNameInput" type="text" style="width:200px;height:20px;font-size:20px">
+                    <span style="color:#F00;">*</span>
+
+        	</td>
+        <tr>
+        <br />
+        
+        
+        <tr>
+        	<td align="left">
+
+           			<label for="sortInput" style="font-size:20px;">优先级别：</label>
+            </td>
+        	<td align="left">
+    
+                    <input value="" id='sortInput' class="mf validate[required] text-input" name="sortInput" onchange="sortNum()" onblur="sortNum()" type="text" style="width:200px;height:20px;font-size:20px">
+                    <span id="showSortMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+
+        	</td>
+         </tr> 
+        <br />
+        <tr>
+        	<td colspan="2" align="center">
+            <button  id='skuTypeQcAddSubmit' value="" />提交</button>
+            &nbsp;
+            <input type="button"  id='returnPage' value="取消" class="input_button" />
+            </td>
+        </tr>
+        </table>
+    </form>
+</div>
+{include file="footer.htm"}

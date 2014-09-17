@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="css/singpore.css" />
+        <title>SINGPORE PP</title>
+    </head>
+    <body>
+        {foreach $ordersinfo as $orderval}
+        <table border="0" cellpadding="0" cellspacing="0" style="border:#000000 1px solid; width:110mm; height:100mm">
+		  <tr >
+			<td ><table height="100" width="100%"  border="0" cellspacing="0" cellpadding="0" style=" margin-left:5px">
+			  <tr>
+				<td width="46%" valign="top" style=" margin-right:120px;"><table  height="82" border="0" cellpadding="0" cellspacing="0" style="text-align:left; margin-top:0px;">
+				  <tr>
+					<td  ><font style="font-family:Arial; font-size:12px"><strong>FROM:&nbsp;&nbsp;Client001196</strong><br>C/O Airpak Express Pte Ltd 30 Kaki Bukit Road 3.#06-03/04 Empire Techno Centre Singapore 417819</font></td>
+				  </tr>
+				</table></td>
+				<td width="27%" style="border-left:#000 1px solid; border-right:#000 1px solid" align="center" valign="top"><table style="margin-top:5px" width="86%" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+					<td align="center" style="font-size:18px"><strong>SINGPORE<br>PP</strong> 60077</td>
+				  </tr>
+				  <tr>
+					<td align="center"><img src="images/hkrg1.png"  style="margin-top:5px;"/></td>
+				  </tr>
+				</table></td>
+				<td width="27%" align="center" valign="top"><table width="86%" style="margin-top:5px;" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+					<td align="center" style="font-size:14px;text-align:left;" >TRAVELER'S<br>Palm</td>
+				  </tr>
+				  <tr>
+					<td align="center"><img src="images/hkrg2.png"  style="margin-top:5px;height:70%;width:70%"/></td>
+				  </tr>
+				</table></td>
+			  </tr>
+
+			</table>
+				<div style="font-family:Arial, Helvetica, sans-serif; font-size:7px"></div></td>
+		  </tr>
+		  <tr>
+			<td valign="top" style="border-left:#000 1px solid;">
+				<table width="100%" border="0" height="200" cellspacing="0" cellpadding="2" style=" border-bottom:#000 1px solid; border-top:#000 1px solid">
+				  <tr>
+					<td width="45%" valign="top">
+					SHIP To: <strong>{$orderval.username}</strong><br />Tel: <strong>{if $orderval.phone != ''}{$orderval.phone}{else}{$orderval.landline}{/if}</strong><br/>
+					  {if $orderval.street != ''}{$orderval.street}</br>{/if}
+					  {if $orderval.address2 != ''}{$orderval.address2}</br>{/if}
+					  {if $orderval.city != ''}{$orderval.city}, {/if}
+					  {if $orderval.state != ''}{$orderval.state}</br>{/if}
+					  {if $orderval.zipCode != ''}{$orderval.zipCode}</br>{/if}
+					  {if $orderval.countryName != ''}{$orderval.countryName}({$orderval.countryZh})</br>{/if}
+					</td>
+					<td width="55%" valign="top">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" style="word-break:break-all;">
+					<tr><td align="center">{$orderval.id}</td></tr>
+					<tr><td align="center"><img src="barcode128.class.php?data={$orderval.id}" alt="" width="180" height="40"/></td></tr>
+					{foreach $orderval.finalposition as $pinfo}  
+						{if $pinfo['iscombine']==1}
+							<tr><td><div style="border:1px #000 solid; margin:1px;word-break:break-all;">
+							{foreach $pinfo['info'] as $val}
+								<strong>{$val}</strong><br>
+							{/foreach}
+							</div></td></tr>
+						{else}
+							{foreach $pinfo['info'] as $val}
+								<tr>
+									<td><strong>{$val}</strong></td>
+								</tr>
+							{/foreach}
+						{/if}
+					{/foreach}
+					<tr>
+					<td>
+					Total Qty:{$orderval.totalnum}<br>
+					</td>
+					</tr>
+					</table>
+				  </tr>
+				</table>
+			</td>
+		  </tr>
+		  <tr>
+			<td valign="bottom" style="border-bottom:0px">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" style=" border:#000 1px solid">
+			  <tr>
+				<td width="15%"><font style="font-family:Arial; font-size:80px; line-height:68px;">R</font></td>
+				<td height="110" valign="top" style="border-right:#000 1px solid; font-size: 9px;">
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+				  <tr>
+					<td height="24" align="center" valign="bottom"><span style=" font-family: Arial, Helvetica, sans-serif; font-size:15px"><strong>SINGAPORE</strong></span></td>
+				  </tr>
+				  <tr>
+					<td align="center"><div > <img src="barcode128.class.php?data={$orderval.tracknumber}" width="330" height="64" /></div></td>
+				  </tr>
+				  <tr>
+					<td align="center" valign="top"><div style="font-size:13px; line-height:12px;"><strong>{$orderval.tracknumber}</strong></div></td>
+				  </tr>
+				</table>
+			  </td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		  <tr>
+		  <td></td>
+		  </tr>
+		</table>
+		<div style="page-break-after:always;">&nbsp;</div>
+		<table width="554" height="432" border="0" cellpadding="0" cellspacing="0" style="border:#000000 1px solid; width:110mm; height:108mm; font-size: 9px; font-family: Arial, Helvetica, sans-serif;">
+		 <tr>
+			<td class="styleBottom" height="80px">
+			<div style="font-family:Arial, Helvetica, sans-serif; font-size:7px">
+				<table width="100%" border="0" cellpadding="1" cellspacing="3">
+					<tr>
+					  <td width="60%" height="80px" align="left">
+						<div style="font-family:Arial;">
+						<span class="footStyle1">CUSTOMS DECLARATION</span>
+						<br />
+						<span class="footStyle2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(May be opened officially)</span>
+						<br />
+						<br />
+						<span class="footStyle2">Postal administration</span>
+						<br />
+						<span class="footStyle1">SINGAPORE POST</span>
+						</div>
+					  </td>
+					  <td width="40%" align="right">
+						<div style="font-family:Arial; line-height:11px;">
+						<span class="footStyle0">CN 22</span>
+						<br /><br/>
+						<span class="footStyle2">Pos401G(3/05)</span>
+						<br />
+						<br />
+						<span class="footStyle1">ImPortant</span>
+						<br />
+						<br />
+						<span class="footStyle2">See instructions on the back</span>
+						</div>
+					  </td>
+					</tr>
+				</table>
+			</div>
+			</td>
+		 </tr>
+		 <tr>
+			<td height="46" valign="top">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+				<td width="100%" valign="top">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+					<td><img src="images/scangoulog.jpg" /><span class="footStyle1">Gift</span></td><td colspan="2"><img src="images/scanlog.jpg" /><span class="footStyle1">Commercial sample</span></td>
+					</tr>
+					<tr>
+					<td><img src="images/scanlog.jpg" /><span class="footStyle1">Documents</span></td><td><img src="images/scanlog.jpg" /><span class="footStyle1">Other</span></td><td align="right"><span class="footStyle2">(Tick as appropriate)</span></td>
+					</tr>
+					</table>
+				</td>
+				</tr>
+			</table>
+			</td>
+		  </tr>
+		  <tr>
+			<td height="230" colspan="2">
+			<table width="100%" height="100%" cellspacing="0" cellpadding="0" style="border: 1px solid #000;">
+			  <tr >
+				<td width="60%" height="30" align="center" class="styleBottom styleRight"><span class="STYLE2"><strong>(1)Quantity and detailed description of contents</strong></span></td>
+				<td width="15%" align="center" class="styleBottom styleRight"><span class="STYLE2"><strong>(2)Weight(kg)</strong></span></td>
+				<td width="25%" align="center" class="styleBottom styleRight"><span class="STYLE2"><strong>(3)Value</strong></span></td>
+			  </tr>
+			  <tr>
+				<td align="left" height="40px" class="styleBottom styleRight footStyle3">household articles&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X 7</td>
+				<td align="right" class="styleBottom styleRight footStyle3">0</td>
+				<td align="right" class="styleBottom styleRight footStyle3">USD 6</td>
+			  </tr>
+			  <tr>
+				<td align="left" height="40px" class="styleBorder footStyle3"><U class="footStyle1">For commericial items only</U><br />(4)If known, HS tarrif number<br />(5) and country of origin of goods</td>
+				<td align="right" class="styleBottom styleRight footStyle3">(6)Total Weight(kg)</td>
+				<td align="right" class="styleBottom styleRight footStyle3">(7)Total Value</td>
+			  </tr>
+			  <tr>
+				<td align="left" height="40px" class="styleBottom styleRight footStyle3">&nbsp;</td>
+				<td align="right" class="styleBottom styleRight footStyle3">0.00</td>
+				<td align="right" class="styleBottom styleRight footStyle3">USD 6.00</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		  <tr>
+			<td height="13" valign="bottom" class="styleBottom"><div style="font-family:Arial; font-size:12px; padding-left:5px;">I,the undersigned,whose name and address are given on the item, certify that the particulars given in this declaration are correct and that this item does not contain any dangerous article or articles prohibited by legislation or by postal or customs regulations. </div></td>
+		  </tr>
+			<tr>
+				<td height="21" valign="top">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				 <tr>
+				   <td width="79%" valign="bottom"><div style="font-family:Arial; font-size:12px; padding-left:5px;"><strong>(15)Date and sender's signature</strong></div></td>
+				   <td width="21%" align="right" valign="top"><div style="font-family:Arial; font-size:18.5px; text-align:center; padding-right:20px;"><I>Client001196</I></div></td>
+				 </tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+	<div style="page-break-after:always;">
+		&nbsp;
+	</div>
+	{/foreach}
+	</body>
+</html>

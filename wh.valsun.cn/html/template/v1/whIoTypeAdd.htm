@@ -1,0 +1,69 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whIoType.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=warehouseManagement&act=whIoTypeSubmit&type=add' method="post" id="whIoTypeForm" onsubmit="return check();">
+
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="font-size:20px;padding-right:20px;" align="right" width="50%">
+                    出入库类型编码：
+                </td>
+                <td align="left" width="50%">
+                    <input value="" id='typeCodeInput' class="mf validate[required] text-input" name="typeCodeInput" type="text" style="width:200px;height:30px;font-size:20px">
+                    <span id="typeCodeInputSpan" style="color: red;">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;padding-right:20px;" align="right" width="50%">
+                    出入库类型名称：
+                </td>
+                <td align="left" width="50%">
+                    <input value="" id='typeNameInput' class="mf validate[required] text-input" name="typeNameInput" type="text" style="width:200px;height:30px;font-size:20px">
+                    <span id="typeNameInputSpan" style="color: red;">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;padding-right:20px;" align="right" width="50%">
+                    出入库类型：
+                </td>
+                <td align="left" width="50%">
+                    <select name="ioTypeInput" id="ioTypeInput" style="width:200px;height:30px;font-size:20px" class="mf validate[required]">
+                        <option value="" selected="selected" >请选择</option>
+                        <option value="0" >出库类型</option>
+                        <option value="1" >入库类型</option>
+                    </select>  
+                    <span id="ioTypeInputSpan" style="color: red;">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;padding-right:20px;" align="right" width="50%">
+                    所属仓库选择：
+                </td>
+                <td align="left" width="50%">
+                    <select name="storeIdInput" id="storeIdInput" style="width:200px;height:30px;font-size:20px" class="mf validate[required]">
+                        <option value="" selected="selected">请选择</option>
+                        {foreach name="storeIdList" from=$whNameArr key=whKey item=whNameArrValue}
+                        <option value="{$whKey}" >{$whNameArrValue}</option>
+                        {/foreach}
+                    </select>
+                    <span id="storeIdInputSpan" style="color: red;">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:20px;padding-right:20px;" align="right" width="50%">
+                </td>
+                <td align="left" width="50%">
+                    <button  id='whIoTypeSubmit' value="" />提交</button>
+                    &nbsp;
+                    <input type="button"  id='returnPage' value="取消" class="input_button" />
+                </td>
+            </tr>
+        </table>       
+    </form>
+</div>
+{include file="footer.htm"}

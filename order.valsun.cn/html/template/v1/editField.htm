@@ -1,0 +1,220 @@
+<span>
+<a style="margin:0;">操&nbsp;&nbsp;作</a>
+<div id="u220" class="sub_menu" style=" z-index: 1009;">
+<!-- Unnamed (表格) -->
+<div id="u221" class="menuitem">
+
+    <!-- Unnamed (菜单项) -->
+    <!--<div id="u222" class="ax_cell">-->
+    <!-- Unnamed () -->
+    <!--<div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="applyexception({$value.id})">
+            发货拦截
+        </span>
+        </p>
+    </div>
+    </div>-->
+    
+    <!-- Unnamed (菜单项) -->
+    <!--<div id="u222" class="ax_cell">
+    <!-- Unnamed ()
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="showPage({$orderData.id},2)">
+            查看
+        </span>
+        </p>
+    </div>
+    </div>-->
+    
+    {if $ostatus != 2}
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="editPage({$orderData.id},1)">
+            编辑
+        </span>
+        </p>
+    </div>
+    </div>
+    
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="bestTransport({$orderData.id});">
+            最优运费
+        </span>
+        </p>
+    </div>
+    </div>
+    
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="transportFee({$orderData.id});">
+            运费计算
+        </span>
+        </p>
+    </div>
+    </div>
+    
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4">
+        <span id="cache5" style="" onclick="expressDescription({$orderData.id},{$orderData.transportId});">
+            快递描述
+        </span>
+        </p>
+    </div>
+    </div>
+    {if $ostatus == 900}
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="canceldeal({$orderData.id},2)">
+            废弃订单
+        </span>
+        </p>
+    </div>
+    </div>
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="canceldeal({$orderData.id},3)">
+            暂不寄
+        </span>
+        </p>
+    </div>
+    </div>
+    {/if}
+    
+    {/if}
+    {if $orderData.platformId == 2 || $orderData.platformId == 3 || $orderData.platformId == 4 ||  $orderData.platformId == 9}
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="negativeFeedback({$orderData.id})">
+            中差评
+        </span>
+        </p>
+    </div>
+    </div>
+    
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="">
+            退款登记
+        </span>
+        </p>
+    </div>
+    </div>
+    {/if}
+    <!-- Unnamed (菜单项) -->
+    <!--<div id="u222" class="ax_cell">
+    <!-- Unnamed ()
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="copyorder('{$orderData.id}')">
+            复制订单
+        </span>
+        </p>
+    </div>
+    </div>-->
+    
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="resendorder({$orderData.id})">
+            复制订单
+        </span>
+        </p>
+    </div>
+    </div>
+    
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="canceldeal({$orderData.id},1)">
+            取消交易
+        </span>
+        </p>
+    </div>
+    </div>
+    
+    <!-- Unnamed (菜单项) -->
+    <div id="u222" class="ax_cell">
+    <!-- Unnamed () -->
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="canceldeal({$orderData.id},4)">
+            申请异常
+        </span>
+        </p>
+    </div>
+    </div>
+    
+    {if $smarty.get.ostatus == '911' && $smarty.get.otype == '928'}
+	    <!-- 同步同步上面取件到海外仓 -->
+	    <div id="u222" class="ax_cell">
+	    <!-- Unnamed () -->
+	    <div id="u223" class="text" style="top: 12px; ">
+	      <p id="cache4"  >
+	        <span id="cache5" style="" onclick="syncLocalPickupOrder({$orderData.id})">
+	            同步上门取件
+	        </span>
+	        </p>
+	    </div>
+	    </div>
+    {/if}
+    
+    {if $smarty.get.ostatus == '911' && $smarty.get.otype == '910'}
+        <!-- 同步同步上面取件到海外仓 -->
+        <div id="u222" class="ax_cell">
+        <!-- Unnamed () -->
+        <div id="u223" class="text" style="top: 12px; ">
+          <p id="cache4"  >
+            <span id="cache5" style="" onclick="cancelTransWay({$orderData.id})">
+                取消运输方式
+            </span>
+            </p>
+        </div>
+        </div>
+    {/if}
+
+
+	<!--<div id="refund-{$orderData.id}" class="ax_cell">
+    <!-- Unnamed ()
+    <div id="u223" class="text" style="top: 12px; ">
+      <p id="cache4"  >
+        <span id="cache5" style="" onclick="canceldeal({$orderData.id},1)">
+			paypal 退款
+        </span>
+        </p>
+    </div>
+    </div>-->
+
+</div>
+</div>
+</span>

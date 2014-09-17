@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>打印box</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body style="margin:0; padding:0">
+		
+		<table width="420" border="0" cellspacing="0" cellpadding="0">
+			<tr valign="middle">
+				<td width="400">
+				{foreach $arr as $box}
+					<table width="100%" border="0"  cellspacing="0" cellpadding="0">
+						<tr>
+							<td><img src="barcode128.class.php?data={$box}" width="400" height="100"/></td>	
+						</tr>
+						<tr height="2px">
+							<td align="center" style="font-size:36px; font-weight:bolder">NO.{$box}</td>
+						</tr>
+					</table>
+					{/foreach}
+				</td>
+		    </tr>
+		</table>
+		
+        
+    </body>
+</html>

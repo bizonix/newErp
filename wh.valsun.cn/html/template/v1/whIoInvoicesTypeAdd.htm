@@ -1,0 +1,62 @@
+{include file="header.htm"}
+{include file='warehouseSubnav.htm'}
+<script type="text/javascript" src="./js/whIoInvoicesType.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=warehouseManagement&act=whIoInvoicesTypeSubmit&type=add' method="post" id="whIoInvoicesTypeForm" onsubmit="return check();">
+    	<div style="width:600px; margin:auto; text-align:left;">
+            <label for="invoiceNameInput" style="font-size:20px;">出入库单据名：</label>        
+            <input value="" id='invoiceNameInput' class="mf validate[required] text-input" name="invoiceNameInput" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="invoiceNameInputSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+            <label for="ioTypeIdInput" style="font-size:20px;">出入库记录名：</label>    
+			<select name="ioTypeIdInput" id="ioTypeIdInput" style="width:200px;height:30px;font-size:20px" class="mf validate[required]">
+             	<option value="" selected="selected">请选择</option>
+                {foreach name="ioTypeIdList" from=$whIoTypeArrs key=whKey item=whIoTypeArrsValue}
+                <option value="{$whKey}" >{$whIoTypeArrsValue}</option>
+                {/foreach}
+			 </select>
+          <span id="ioTypeIdInputSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+            <label for="ioTypeInput" style="font-size:20px;">出入库类型：</label>    
+            &nbsp;&nbsp;
+             <select name="ioTypeInput" id="ioTypeInput" style="width:200px;height:30px;font-size:20px" class="mf validate[required]">
+             	<option value="" selected="selected" >请选择</option>
+                <option value="0" >出库类型</option>
+                <option value="1" >入库类型</option>
+			 </select>  
+            <span id="ioTypeInputSpan" style="color: red;">*</span>
+        </div> 
+        <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+        	<label for="storeIdInput" style="font-size:20px;">所属仓库选择：</label>    
+<select name="storeIdInput" id="storeIdInput" style="width:200px;height:30px;font-size:20px" class="mf validate[required]">
+             	<option value="" selected="selected">请选择</option>
+                {foreach name="storeIdList" from=$whNameArr key=whKey item=whNameArrValue}
+                <option value="{$whKey}" >{$whNameArrValue}</option>
+                {/foreach}
+			 </select>
+          <span id="storeIdInputSpan" style="color: red;">*</span>
+  		</div>
+        <br />
+        <div style="width:600px; margin:auto; text-align:left;">
+            <label for="noteInput" style="font-size:20px;">备注：</label>     
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <textarea id='noteInput' name="noteInput" style="width:200px; height:97px; font-size:15px;"></textarea>
+        </div>
+        <br />
+        <div>   		       
+            <button  id='whIoInvoicesTypeSubmit' value="" />提交</button>
+            &nbsp;
+            <input type="button"  id='returnPage' value="取消" class="input_button" />
+        </div>        
+    </form>
+</div>
+{include file="footer.htm"}

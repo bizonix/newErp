@@ -1,0 +1,35 @@
+{include file='header.htm'}
+{include file='owNav.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="js/pregoodsManage.js"></script>
+<link href="css/getgoodsscan-css.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<div>
+<div style="margin-top:5px; padding-left:20px;">
+</div>
+	<div class="main underline-main order-main">
+        <table cellspacing="0" width="100%">
+            <tr class="title">
+                <td></td>
+                <td>箱&nbsp;号</td>
+                <td>生成时间</td>
+                <td>生成人</td>
+                <td>状态</td>
+            </tr>
+            {foreach $detailList as $box}
+            <tr>
+                <td><input type="checkbox" value="{$box.boxid}" class="ordercheckbox"></td>
+                <td>{$box.boxid}</td>
+                <td>{$box.timestr}</td>
+                <td>{$box.userName}</td>
+                <td>{$box.statusstr}</td>
+            </tr>
+            {/foreach}
+        </table>
+    </div>
+<div style="text-align:center;">
+    {$pagestr}
+</div>
+</div>
+{include file='footer.htm'}

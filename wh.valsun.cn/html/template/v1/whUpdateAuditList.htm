@@ -1,0 +1,63 @@
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script type="text/javascript" src="./js/whAuditList.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=WhAudit&act=updateAuditList' method="post" id="whUpdateAuditList" onsubmit="return gengxCheck();">
+    	<input type="hidden" id="id" name="id" value="{$id}"/>
+    	<div style="width:500px; margin:auto; text-align:left;">
+        	<label for="invoiceTypeId" style="font-size:20px;">单据类型：</label>&nbsp;&nbsp;&nbsp;&nbsp;   
+            <select name="invoiceTypeId" id="invoiceTypeId" style="width:205px;height:30px;font-size:20px" class="validate[required]" onfocus="this.si=this.selectedIndex;" onchange="this.selectedIndex=this.si;">
+             	<option value="">请选择</option>
+                {foreach WhAuditModel::getTNameList('wh_invoice_type','id,invoiceName','') as $value}
+                <option value="{$value.id}" {if $value.id == $invoiceTypeId}selected="selected"{/if}>{$value.invoiceName}</option>              
+                {/foreach}
+			 </select>
+          <span id="invoiceTypeIdSpan" style="color: red;">此项不能更改</span>
+        </div>
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+            <label for="auditorName" style="font-size:20px;">审核人名：</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input value="{$auditorName}" id='auditorName' class="mf validate[required] text-input" name="auditorName" type="text" style="width:200px;height:30px;font-size:20px">
+            <input type="hidden" id = "auditorId" name="auditorId" value="{$auditorId}" />
+            <span id="auditorNameSpan" style="color: red;">*</span>
+		</div>
+		<br />
+        <div style="width:500px; margin:auto; text-align:left;">
+            <label for="auditLevel" style="font-size:20px;">审核级别：</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input value="{$auditLevel}" id='auditLevel' class="validate[required,custom[integer],min[0]] text-input" name="auditLevel" type="text" style="width:200px;height:30px;font-size:20px" onchange="tipFunction(this)">
+            <input type="hidden" id = "auditLevelNum" name="auditLevelNum" value="{$auditLevel}" />
+            <span id="auditLevelSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+        	<label for="storeId" style="font-size:20px;">仓库位置：</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name="storeId" id="storeId" style="width:205px;height:30px;font-size:20px" class="validate[required]" onfocus="this.si=this.selectedIndex;" onchange="this.selectedIndex=this.si;">
+                {foreach WhAuditModel::getTNameList('wh_store','id,whName','') as $value}
+                <option value="{$value.id}" {if $value.id == $storeId}selected="selected"{/if}>{$value.whName}</option>
+                {/foreach}
+			 </select>
+          <span id="storeIdSpan" style="color: red;">此项不能更改</span>
+		</div>
+        <br />
+        <div style="width:500px; margin:auto; text-align:left;">
+            <label for="is_enable" style="font-size:20px;">是否启动：</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <select name="is_enable" id="is_enable" style="width:205px;height:30px;font-size:20px" class="validate[required]" onchange="tip_is_enable(this)">
+                <option value="1" {if $is_enable == 1}selected="selected"{/if}>启用</option>
+                <option value="2" {if $is_enable == 2}selected="selected"{/if}>禁用</option>
+	        </select>
+            <input type="hidden" id = "is_enableNum" name="is_enableNum" value="{$is_enable}" />
+            <span id="is_enableSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        <div style="width:500px; margin:auto; text-align:center">
+            <input style="width:80px; height:30px; font-size:20px;" type="submit" value="提交"/>
+            &nbsp;
+            <input style="width:80px; height:30px; font-size:20px;" type="button"  id='back' value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.htm"}

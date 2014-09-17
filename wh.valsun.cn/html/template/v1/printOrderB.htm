@@ -1,0 +1,49 @@
+{include file='header.htm'}
+{include file='whNav.htm'}
+<script language="javascript" src="js/printOrderB.js"></script>
+
+<br/>
+<div class="servar wh-servar">
+<br/>
+<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+	<tr>
+		<td width="26%">
+			<table border='0' cellpadding='0' cellspacing='0' width='100%' >
+				<tr>
+					<td nowrap="nowrap" class='paginationActionButtons'>			
+                    	<!--form id="form" name="form" method="post" action="print_order.php"-->
+                  			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+								<input name="print_list" id="print_list" type="hidden" value="{$list}" >
+								<input name="print_group" id="print_group" type="hidden" value="0" >
+								<tr>
+									<td width="15%" align="right" >
+									<div align="right">
+									<button  id="order_group" >生成提货单</button>
+									<!--input name="order_group" type="submit" id="order_group" value="生成订单配货分组"-->
+									</div>
+									</td>
+									<td width="10%" align="right" ></td>
+									<td width="75%" align="right" >
+									<div align="left">
+									提货单号：<input type="text" id="select_order_group" value=""/>
+									<button id="print_order_group">打印提货单</button>
+									(如果没有输入指定的提货单号，即打印刚刚生成的提货单号)
+									</div>
+									</td>
+									<td></td>
+								</tr>
+                			</table>
+                 		<!--/form--> 
+               		</td>
+	    		</tr>
+			</table>		
+		</td>
+	</tr> 
+	<tr>	
+		<td ><div id="operate">{$status}</div></td>
+	</tr>	
+</table>
+<br/>
+</div>
+
+{include file='footer.htm'}

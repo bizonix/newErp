@@ -1,0 +1,42 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/paypalEmail.js"></script>
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+{include file='omNav.htm'}
+
+<div class="servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="successLog" style="color: #0F0">{$successLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="errorLog" style="color: #F00">{$errorLog}</span>
+    </span>
+</div>
+<div class="mail" style="padding-top:20px">
+    <form name="addemails" id="addemails" style="text-align:center;margin:auto">
+	   {if $type == "modify"}
+	     <input type="hidden" value="{$type}" id="hidden"/>
+		 
+		 <input type="hidden" value="{$id}" id="tid"/>
+		 请输入邮箱号：<input type="text" style="margin:0px 0px"  name="emailname" id="emailname" value="{$email}" />
+		 <br><br>是否启用：&nbsp;&nbsp;&nbsp;&nbsp;<select style="width:154px" id="enable">
+			<option value="1" {if $enable==1}selected="selected" {/if}>是</option>
+			<option value="0" {if $enable==0}selected="selected" {/if}>否</option>
+		 </select>
+		 <br><br>请选择账号：&nbsp;
+		 <select name="account" style="width:154px;margin-right:5px" id="account">
+				{foreach from=$lists key=key_id item=list}
+					<option {if $accountId == $list.id}selected="selected"{/if} value="{$list.id}">{$list.account}</option>
+				{/foreach}	
+		   </select><br><br>
+	   {elseif $type == "add"}
+	   <input type="hidden" value="{$type}" id="hidden"/>
+	   批量添加邮箱(两个邮箱请以半角逗号分隔):<textarea style="width:200px; height:50px;" type="text" name="emailnames" id="emailnames" /></textarea>&nbsp;&nbsp;&nbsp;
+	   
+	   <select name="accounts[]" id="accounts" multiple="multiple" size="10">
+			{foreach from=$lists key=key_id item=list}
+				<option value="{$list.id}">{$list.account}</option>
+			{/foreach}
+	   </select><br><br>
+	   {/if}
+	</form>
+	<div style="margin:auto auto;text-align:center" ><button  id="submitform" name="submitform">提交</button></div>
+</div>
+{include file="footer.htm"}

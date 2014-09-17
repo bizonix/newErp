@@ -1,0 +1,88 @@
+{include file="header.htm"}
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=job&act=index">岗位信息管理</a>&nbsp;&gt;&gt;&nbsp;岗位列表
+    </div>
+	<div class="pagination">{$pageStr}</div>
+</div>
+<div class="servar wh-servar">
+	<form name="form" action="" enctype="text/plain" method="get">
+        <span>
+            岗位名称：<input type="text" name="jobname" value="{$g_jobname}"/>
+        </span>
+        <span>
+            所属部门：
+            <select name="userdept" id="userdept">
+                <option value=""> 请选择部门 </option>
+                {foreach item=deptlist from=$deptlists}
+                <option value="{$deptlist.dept_id}" {if $deptlist.dept_id==$g_userdept}selected="selected"{/if}>{$deptlist.dept_name}</option>
+                {foreachelse}
+                <option value=""> 无岗位权限 </option>
+                {/foreach}
+            </select>
+        </span>
+        <span>
+        	<input name="mod" type="hidden" value="{$g_mod}" />
+            <input name="act" type="hidden" value="{$g_act}" />
+            <input name="page" type="hidden" value="{$g_page}" />
+            <button name="button" type="submit" id="bottom" value="search" />搜索</button>
+        </span>
+        <span>
+            <button name="button" type="button" id="bottom" value="history" onclick="location.href='index.php?mod=job&act=add'"/>添加</button>
+        </span>
+	</form>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+        	<td align="center">编号</td>
+            <td align="center">岗位名称</td>
+            <td align="center">岗位等级</td>
+            <td align="center">部门</td>
+          	<td align="center">公司</td>
+            <td align="center">操作</td>
+        </tr> 
+ 		{foreach item=joblist from=$joblists}
+        <tr>
+          <td><input name="checkbox-list" type="checkbox" value="{$joblist.job_id}" /></td>
+            <td align="left"> 
+            	<span style="color:#00F;">{section name=loop loop=$joblist.job_level start=1}|&nbsp;{/section}├</span>
+                {$joblist.job_name}
+            </td>
+            <td align="center">{$joblist.job_level}</td>
+            <td align="center">{$joblist.dept_name}</td>
+            <td align="center">{$joblist.company_name}</td>   
+            <td>
+                <a href="index.php?mod=job&act=modify&jid={$joblist.job_id}">编辑</a> | 
+                <a href="javascript:void(0)" onclick="del_job({$joblist.job_id},{$joblist.jobpower_id})" id="del-btn">删除</a>
+            </td>
+        </tr>  
+		{foreachelse}
+        <tr>
+            <td colspan="12" align="center">{$runmsg}</td>
+        </tr> 
+        {/foreach}                
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination">{$pageStr}</div>
+</div>
+{include file="footer.htm"}
+<script>
+{literal}
+//删除岗位
+function del_job(jobId,jobpowerId){
+	alertify.confirm("亲,真的要删除当前岗位吗？", function (e) {
+	if (e) {
+		$.post("index.php?mod=job&act=delete",{"jobId":jobId,"jobpowerId":jobpowerId},function(rtn){
+			if($.trim(rtn) == "ok"){              
+				alertify.success("亲,删除成功!");
+				//window.location.reload();
+			}else {
+				 alertify.error("亲,删除失败!");
+		   }
+		});
+	}});
+}
+{/literal}
+</script>        

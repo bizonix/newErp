@@ -1,0 +1,31 @@
+{include file='header.htm'}
+
+<script language="JavaScript" src="./js/pda_recheck.js"></script>
+<div onload="loaded()" id="divcontent" style="height:200px;width:225px">
+    <div id="showMsgDiv" style="padding-left:20px;margin-bottom:5px;">
+		<span></span>
+	</div>
+    <div >
+        
+           	 发货单号:<input id="orderidinput" style="width:110px" onkeypress="getSkuList(event)"/>
+    </div>
+    <div id="detail" style="display:none">
+        <div style="margin-top:5px;">
+                未扫描料号: <br>
+                <select style="margin-top:5px" id="skulistselect" class="skulist">
+                </select>
+        </div>
+        <div style="margin-top:5px;">
+                SKU:
+                <input onkeypress="responseskuscan(event)" style="width:100px" id="scanskuinput" />
+        </div>
+        <div  style="margin-top:5px;">
+                数量:
+                <input onkeypress="scansubmit(event)" style="width:100px" id="skunumberinput"/>
+        </div>
+    </div>
+    <div align="right" style="margin-right:5px;">
+    	<input type="button" value="标记异常"  class="buttonclass3" onclick="signUnusual();"  />
+    </div>
+</div>    
+{include file='footer.htm'}

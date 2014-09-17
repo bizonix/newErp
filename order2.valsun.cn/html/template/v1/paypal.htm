@@ -1,0 +1,64 @@
+{include file="header2.htm"}
+<script type="text/javascript" src="./js/onpaypal.js"></script>
+{include file='omNav.htm'}
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action="index.php?mod=paypal&act=replace" method="post" id="updatepaypal">
+    	<div>
+            <input type="hidden" name="id" value="{$paypal.id}"/>
+        	<label for="platformUsername" style="font-size:20px;">平台名称：</label>
+            <input value="{$paypal.platformUsername}" id='platformUsername' class="validate[required] text-input" name="platformUsername" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="platformSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        
+        
+        	
+        <div>
+            <label for="username" style="font-size:20px;">&nbsp用户名：</label>
+             <input value="{$paypal.username}" id='username' class="validate[required] text-input" name="username" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="usernameSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        
+         <div>
+            <label for="usermail" style="font-size:20px;">用户邮箱：</label>
+             <input value="{$paypal.usermail}" id='usermail' class="validate[required] text-input" name="usermail" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="errormsgSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        
+         <div>
+            <label for="street" style="font-size:20px;">街道地址：</label>
+             <input value="{$paypal.street}" id='street' class="validate[required] text-input" name="street" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="streetSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        
+        <div>
+        	<label for="phone" style="font-size:20px;">&nbsp&nbsp电话：</label>
+            <input value="{$paypal.phone}" id='phone' class="validate[required] text-input" name="phone" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="phoneSpan" style="color: red;">*</span>
+        </div>
+		<br />
+		
+		<div>
+        	<label for="account" style="font-size:20px;" >&nbsp&nbsp账号：</label>
+        <select name="account" id="account" class="validate[required] text-input"  style="width:200px;height:30px;font-size:20px">
+							{foreach $accountAll as $value}
+							<option value="{$value.id}" {if $paypal.account == $value.id}selected="selected"{/if}>{$value.account}</option>
+							{/foreach}
+		</select>
+        </div>
+		<br />
+		
+        <div>
+			<input type="submit" id="changgepaypal" name="changgepaypal" value="确定"/>
+			<input type="button" id="reback" name="reback" value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.htm"}

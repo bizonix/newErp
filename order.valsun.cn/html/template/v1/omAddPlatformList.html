@@ -1,0 +1,53 @@
+{include file="header.html"}
+{include file='omNav.html'}
+<script type="text/javascript" src="./js/whAuditList1.js"></script>
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="main" >
+    <form action='index.php?mod=whAudit&act=addAuditList' method="post" id="whAddAuditList" onsubmit="return editCheck();">
+    	<div>
+        	<label for="platform" style="font-size:20px;">平台名称：</label>
+            <input value="" id='platform' class="validate[required] text-input" name="platform" type="text" style="width:200px;height:30px;font-size:20px">
+          <span id="platformSpan" style="color: red;">*</span>
+        </div>
+        <br />
+        <div>
+            <label for="auditorId" style="font-size:20px;">审核人：</label>
+            <input value="{$auditorId}" id='auditorId' class="validate[required,custom[integer],min[0]] text-input" name="auditorId" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="" style="color: red;">*</span>
+		</div>
+		<br />
+        <div>
+            <label for="auditLevel" style="font-size:20px;">审核级别：</label>
+            <input value="{$auditLevel}" id='auditLevel' class="validate[required,custom[integer],min[0]] text-input" name="auditLevel" type="text" style="width:200px;height:30px;font-size:20px">
+            <span id="" style="color: red;">*</span>
+		</div>
+        <br />
+        <div>
+        	<label for="storeId" style="font-size:20px;">仓库：</label>
+            <select name="storeId" id="storeId" style="width:200px;height:30px;font-size:20px" class="validate[required]">
+                {foreach WhAuditModel::getTNameList('wh_store','id,whName','') as $value}
+                <option value="{$value.id}" >{$value.whName}</option>
+                {/foreach}
+			 </select>
+          <span id="storeIdSpan" style="color: red;">*</span>
+		</div>
+        <br />
+        <div>
+            <label for="is_enable" style="font-size:20px;">是否启动：</label>
+            <select name="is_enable" id="is_enable" style="width:200px;height:30px;font-size:20px" class="validate[required]">
+                <option value="1" selected="selected">启用</option>
+                <option value="2" >禁用</option>
+	        </select>
+            <span id="" style="color: red;">*</span>
+		</div>
+        <div>
+            <input type="submit" value="提交"/>
+            &nbsp;
+            <input type="button"  id='back' value="返回"/>
+        </div>
+    </form>
+</div>
+{include file="footer.html"}

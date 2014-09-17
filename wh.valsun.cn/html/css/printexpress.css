@@ -1,0 +1,403 @@
+@CHARSET "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 14px;
+}
+
+/* DHL快递打印样式 */
+.dhl_cmname {
+    width: 305px;
+    height: 32px;
+    position: absolute;
+    top: 212px;
+    left: 52px;
+}
+
+.dhl_cmaddr {
+    width: 305px;
+    height: 67px;
+    position: absolute;
+    top: 245px;
+    left: 52px;
+}
+
+.dhl_cmzipcode {
+    width: 160px;
+    height: 23px;
+    position: absolute;
+    top: 315px;
+    left: 52px;
+}
+
+.dhl_cmphone {
+    width: 160px;
+    height: 23px;
+    position: absolute;
+    top: 315px;
+    left: 215px;
+}
+
+.dhl_readdr {
+    width: 130px;
+    height: 109px;
+    position: absolute;
+    top: 385px;
+    left: 52px;
+}
+
+.dhl_rezipcode {
+    width: 160px;
+    height: 23px;
+    position: absolute;
+    top: 495px;
+    left: 52px;
+}
+
+.dhl_recountry {
+    width: 146px;
+    height: 26px;
+    position: absolute;
+    top: 495px;
+    left: 212px;
+}
+
+.dhl_rename {
+    /*width: 160px;*/
+    height: 23px;
+    position: absolute;
+    top: 525px;
+    left: 52px;
+    font-size: 13px;
+}
+
+.dhl_rephone {
+    /*width: 146px;*/
+    height: 23px;
+    position: absolute;
+    top: 525px;
+    left: 212px;
+}
+
+.dhl_redes {
+    width: 321px;
+    height: 75px;
+    position: absolute;
+    top: 282px;
+    left: 366px;
+}
+
+/** ** ** ** ** ** ** ** ** ** ** ** ** */
+/* ems新加坡快递打印样式  */
+.emssi_rename {
+    width: 197px;
+    height: 18px;
+    position: absolute;
+    top: 100px;
+    left: 384px;
+}
+
+.emssi_retel {
+    /* width: 197px; */
+    height: 18px;
+    position: absolute;
+    top: 100px;
+    left: 589px;
+}
+
+.emssi_readdr {
+    width: 339px;
+    height: 18px;
+    font-size: 13px;
+    position: absolute;
+    top: 125px;
+    left: 381px;
+}
+
+.emssi_recity {
+    width: 211px;
+    height: 18px;
+    position: absolute;
+    top: 160px;
+    left: 367px;
+}
+
+.emssi_repostcode {
+    /*width: 211px; */
+    height: 18px;
+    position: absolute;
+    top: 163px;
+    left: 620px;
+}
+
+.emssi_recountry {
+    /*width: 211px; */
+    height: 18px;
+    position: absolute;
+    top: 178px;
+    left: 376px;
+}
+
+.emssi_remdes {
+    /*width: 755px; */
+    height: 63px;
+    position: absolute;
+    top: 271px;
+    left: 5px;
+}
+
+.emssi_remdes tr {
+    height: 14px;
+    line-height: 14px;
+}
+
+.emssi_remdes_des {
+    width: 348px;
+}
+
+.emssi_remdes_amt {
+    width: 169px;
+}
+
+.emssi_remdes_sholder {
+    /*width: 82px;*/
+}
+
+.emssi_remdes_price {
+    /*width: 7px;*/
+}
+
+.emssi_total {
+    position: absolute;
+    top: 280px;
+    left: 430px;
+}
+
+/** ** ** ** ** ** ** ** ** ** ** ** ** */
+/* ups快递打印样式 */
+.ups_cmaddr {
+    width: 332px;
+    height: 75px;
+    position: absolute;
+    top: 86px;
+    left: 10px;
+}
+
+.ups_cmpostcode {
+    width: 93px;
+    height: 15px;;
+    position: absolute;
+    top: 155px;
+    left: 58px;
+}
+
+.ups_cmcountry {
+    /*width: 93px; */
+    height: 15px;;
+    position: absolute;
+    top: 155px;
+    left: 170px;
+}
+
+.ups_rename {
+    /*width: 93px; */
+    height: 15px;;
+    position: absolute;
+    top: 220px;
+    left: 10px;
+}
+
+.ups_readdr {
+    width: 275px;
+    height: 78px;;
+    position: absolute;
+    top: 248px;
+    left: 10px;
+}
+
+.ups_repostcode {
+    width: 93px;
+    height: 15px;;
+    position: absolute;
+    top: 325px;
+    left: 18px;
+}
+
+.ups_recountry {
+    height: 15px;;
+    position: absolute;
+    top: 325px;
+    left: 178px;
+}
+
+.ups_redes {
+    width: 233px;
+    position: absolute;
+    top: 305px;
+    left: 318px;
+}
+
+/** ** ** ** ** ** ** ** ** ** ** ** ** */
+/* ems国际特快 */
+.emsint_reusername {
+    /*width: 233px;*/
+    position: absolute;
+    top: 96px;
+    left: 506px;
+}
+
+.emsint_recity {
+    width: 124px;
+    position: absolute;
+    top: 134px;
+    left: 505px;
+}
+
+.emsint_recountry {
+    /*  width: 124px;*/
+    position: absolute;
+    top: 134px;
+    left: 667px;
+}
+
+.emsint_readdr {
+    width: 340px;
+    position: absolute;
+    top: 209px;
+    left: 506px;
+}
+
+.emsint_repostcode {
+    width: 165px;
+    position: absolute;
+    top: 305px;
+    left: 506px;
+}
+
+.emsint_rephone {
+    width: 169px;
+    position: absolute;
+    top: 305px;
+    left: 696px;
+}
+
+.emsint_remdes {
+    position: absolute;
+    top: 465px;
+    left: 72px;
+}
+
+.emsint_remdes tr {
+    height: 18px;
+    line-height: 18px;
+}
+
+.emsint_remdes_des {
+    width: 169px;
+}
+
+.emsint_remdes_amt {
+    width: 75px;
+    padding-left: 8px;
+}
+
+.emsint_remdes_sholder {
+}
+
+.emsint_remdes_price {
+    width: 67px;
+    text-align: center;
+}
+
+.emsint_returned {
+    position: absolute;
+    top: 354px;
+    left: 188px;
+}
+
+.emsint_parcel {
+    position: absolute;
+    top: 383px;
+    left: 218px;
+}
+
+.emsint_total {
+    position: absolute;
+    top: 493px;
+    left: 322px;
+}
+
+/** ** ** ** ** ** ** ** ** ** ** ** ** */
+/****       dhl发票打印       *****/
+.dhlfp_readdr {
+    position: absolute;
+    top: 210px;
+    left: 405px;
+    width: 350px;
+    word-wrap: break-word
+}
+
+.dhlfp_reaname {
+    position: absolute;
+    top: 290px;
+    left: 410px;
+    width: 160px;
+    word-wrap: break-word
+}
+
+.dhlfp_reatel {
+    position: absolute;
+    top: 290px;
+    left: 620px;
+    width: 160px;
+    word-wrap: break-word
+}
+
+.dhlfp_reacountry {
+    position: absolute;
+    top: 440px;
+    left: 220px;
+    width: 200px;
+    word-wrap: break-word
+}
+
+.dhlfp_reatotal {
+    position: absolute;
+    top: 800px;
+    left: 680px;
+    width: 130px;
+    word-wrap: break-word
+}
+
+.dhlfp_reasb {
+    position: absolute;
+    top: 560px;
+    left: 60px;
+    width: 700px;
+    word-wrap: break-word
+}
+
+.dhlfp_td1 {
+    width: 51%;
+    text-align: center;
+}
+
+.dhlfp_td2 {
+    width: 12%;
+    text-align: center;
+}
+
+.dhlfp_td3 {
+    width: 19%;
+    text-align: center;
+}
+
+.dhlfp_td4 {
+    width: 18%;;
+    text-align: center;
+}
+
+/** ** ** ** ** ** ** ** ** ** ** ** ** */

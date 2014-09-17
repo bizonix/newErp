@@ -1,0 +1,483 @@
+{include file="header.htm" }
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置： {if in_array($mod,array("purchaseOrder"))}<a
+			href="index.php?mod=purchaseOrder&act=index&three_status=1">采购订单管理</a>>>编辑采购订单{/if}
+	</div>
+</div>
+<div class="servar">
+	<table width="100%" cellspacing="0">
+		<tr>
+			<td><a href="javascript:void(0);" onclick="save()">保存单据</a> <a
+				href="javascript:void(0);" {if $mainOrderInfo['status']==1} style="display:inline;"{else} style="display:none;" {/if}  name="audit1" onclick="audit(2,this)">审核单据</a>
+				<a
+				href="javascript:void(0);" {if $mainOrderInfo['status']==2} style="display:inline;"{else} style="display:none;" {/if} name="audit2" onclick="audit(1,this)">反审核单据</a>
+				<a
+				href="javascript:void(0);"   {if $mainOrderInfo['status']==2} style="display:inline;"{else} style="display:none;" {/if}   name="audit3"  onclick="audit(3,this)">审核到在途订单</a>
+					<a
+				href="javascript:void(0);"   {if $mainOrderInfo['status']==3} style="display:none;"{else} style="display:none;" {/if}   name="audit4"  onclick="audit(2,this)">反审核在途订单</a>
+				
+				<a href="javascript:void(0);" id="pl-edit" {if $mainOrderInfo['status']==1} style="display:;"{else} style="display:none;" {/if} >新品批量修改数量</a>
+				<a href="javascript:void(0);" id="pl-del" {if $mainOrderInfo['status']==1 } style="display:;"{else} style="display:;" {/if} >批量删除sku</a>
+			</td>
+		</tr>
+		<tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
+		<tr>
+			<td style="font-size:14px; font-weight:bold;padding-bottom:10px;">1.填写基本资料</td>
+		</tr>
+		<tr id="tr_basic_data">
+			<td>
+				<table width="100%" cellspacing="0">
+					<tbody>
+						<tr>
+							<td width="8%">供应商： *</td>
+							<td width="8%">
+								{$partnerList = getPartnerlist($mainOrderInfo["purchaseuser_id"])}
+								<select id="partner_id"  name="partner_id" class="flexselect">
+									<option value='-1'>请选择供应商</option>
+									{foreach  item=list from=$partnerList } 
+									<option value="{$list['partnerId']}" {if $mainOrderInfo["partner_id"] == $list['partnerId'] }selected="selected"{/if}>{$list['companyname']}</option>
+									{/foreach} 
+								</select>
+							</td>
+							<td width="8%">仓库：*</td>
+							<td width="8%"><select id="warehouse_id" name="warehouse_id">
+									<option value="">未设置</option>
+									{foreach from=$storeList item=StoreList}
+									<option {if $StoreList['id'] == $mainOrderInfo["warehouse_id"]}selected="selected"{/if} value="{$StoreList['id']}">{$StoreList["whName"]}</option>
+									{/foreach}
+							</select> </td>
+							<td rowspan="2" colspan="2">备注： * <textarea id="note" rows="3"
+									cols="50" name="note">{$mainOrderInfo["note"]}</textarea></td>
+						</tr>
+						<tr>
+							<td>采购员： *</td>
+							<td>
+								<select id="purchaseuser_id" name="purchaseuser_id" >
+								<option value="-1">请选择采购员</option> 
+								{foreach item=pur from=$purchaseList}
+								<option value="{$pur['global_user_id']}"  {if $pur['global_user_id'] == $mainOrderInfo["purchaseuser_id"]}selected="selected"{/if}>{$pur["global_user_name"]}</option>
+								{/foreach}
+								</select>
+							</td>
+							<td>单号： *</td>
+							<td><input type="text"
+								style="border-bottom: 1 solid black; border-left: none; border-right: none; border-top: none; BACKGROUND: none transparent scroll repeat 0% 0%;"
+								size="30" value="{$mainOrderInfo['recordnumber']}" id="recordnumber"
+								name="recordnumber" readonly="true"></td>
+						</tr>
+						<tr>
+							<td>付款方式： *</td>
+							<td><select id="paymethod" name="paymethod">
+									<option value="">未设置</option>
+									<option {if $mainOrderInfo["paymethod"] == "货到付款"}selected="selected"{/if} value="货到付款">货到付款</option>
+									<option {if $mainOrderInfo["paymethod"] == "银行转帐"}selected="selected"{/if} value="银行转帐">银行转帐</option>
+									<option {if $mainOrderInfo["paymethod"] == "电子支票"}selected="selected"{/if} value="电子支票">电子支票</option>
+									<option {if $mainOrderInfo["paymethod"] == "支付宝付款"}selected="selected"{/if} value="支付宝付款">支付宝付款</option>
+							</select></td>
+							<td>到货日期： *</td>
+							<td></td>
+							<td colspan="2">&nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
+		<tr>
+			<td style="font-size:14px; font-weight:bold;padding-bottom:10px;">2.产品资料</td>
+		</tr>
+		<tr>
+			<td>
+
+				<table width="100%" cellspacing="0" style="text-align:center;" id="order-table" data-id="{$mainOrderInfo['id']}">
+					<tbody>
+						<tr>
+							<td><input name="inverse" type="checkbox" id="inverse"></td>
+							<td>sku</td>
+							<td>图片</td>
+							<td style="width:220px;">产品<br />名称</td>
+							<td>30天<br />销量</td>
+							<td>15天<br />销量</td>
+							<td>7天<br />销量</td>
+							<td>每天均量</td>
+							<td>实际<br />库存</td>
+							<td>虚拟<br />库存</td>
+							<td>可用<br />库存</td>
+							<td>已订<br />购</td>
+							<td>待发<br />货</td>
+							<td>已拦<br />截</td>
+							<td>待审<br />核</td>
+							<td>产品进<br />货成本</td>
+							<td>数量<br />(单位个)</td>
+							<td>到货数量<br />(单位个)</td>
+							<td>操作</td>
+						</tr>
+						 <script>var SKUArr = [];</script>
+						{$detailOrderInfo = PurchaseOrderAct::getDetailOrderInfo($mainOrderInfo['id'])}
+						{section name=v loop=$detailOrderInfo start=0 step=1}
+						{$warnInfo = PurchaseOrderAct::getWarnInfoBySku($detailOrderInfo[v]['sku'])}
+						<tr>
+							<td><input name="sku_info" type="checkbox" data-id="{$detailOrderInfo[v]['id']}" ></td>
+							<td id="sku{$detailOrderInfo[v]['id']}">{$detailOrderInfo[v]['sku']}</td>
+							<td class="unbottoncolor">
+								<a href="javascript:void(0)" id="imgb-{$detailOrderInfo[v]['sku']}" class="fancybox">
+									<img src="" class="skuimg" id="imgs-{$detailOrderInfo[v]['sku']}"  width="60" height="60" data-spu="{$spu}" data-sku="{$detailOrderInfo[v]['sku']}">
+								</a>
+							</td>
+							{$skuInfo  = CommonModel::getSkuInfo($detailOrderInfo[v]['sku'])}
+							<td>{$skuInfo["goodsName"]}</td>
+							<td>{$warnInfo["thirtydays"]}</td>
+							<td>{$warnInfo["fifteendays"]}</td>
+							<td>{$warnInfo["sevendays"]}</td>
+							<td style="color:red">{$warnInfo["everyday_sale"]}</td>
+							<td>{$warnInfo["stock_qty"]}</td>
+							<td>{$warnInfo["stock_qty"] - $warnInfo["salensend"]}</td>
+							<td>{$warnInfo["stock_qty"] + $warnInfo["newBookNum"] - $warnInfo["salensend"]}</td>
+							<td>{$warnInfo["newBookNum"]}</td>
+							<td>{$warnInfo["salensend"]}</td>
+							<td>{$warnInfo["interceptnums"]}</td>
+							<td>{$warnInfo["auditingnums"]}</td>
+							<td><textarea class="price" rows="1" cols="5" id="price{$detailOrderInfo[v]['id']}" data-price="{$detailOrderInfo[v]['price']}" name="">{$detailOrderInfo[v]["price"]}</textarea></td>
+							<td><textarea class="count" rows="1" cols="5" id="count{$detailOrderInfo[v]['id']}" data-count="{$detailOrderInfo[v]['count']}" name="">{$detailOrderInfo[v]["count"]}</textarea></td>
+							<td>{$detailOrderInfo[v]["stockqty"]}</td>
+							<td><!--onclick="mod({$detailOrderInfo[v]['id']},this,0)"-->
+								
+								<a data-sku="{$sku}" style="display:none" data-initcount={$detailOrderInfo[v]["count"]}  data-initprice={$detailOrderInfo[v]["price"]} name="modAll" data-id={$detailOrderInfo[v]['id']}  class="aloneMod" href="javascript:void(0);" >修改</a>
+								<script>SKUArr.push({$detailOrderInfo[v]['id']});</script>
+							</td>
+						</tr>
+						{/section}
+						<tr>
+							<td colspan="16" align="left">
+								sku： <input type="text" id="add_sku" name="" />
+								进货成本： <input type="text" id="add_price" name="" /> 
+								数量：<input type="text"  id="add_count" />
+								<a href="javascript:void(0);" id="addDetail">添加</a>
+								<a href="javascript:void(0)" id="allMod">批量修改</a>
+							<td></td>
+							<td></td>
+							<td></td>	
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr><td>&nbsp;&nbsp;&nbsp;</td></tr>
+		<tr><td style="font-size:14px; font-weight:bold;padding-bottom:10px;">3.操作信息</td></tr>
+		<tr id="tr_opera_data">
+			<td><br> 制单人： <input  id ="purchaseuser_id2"  disabled = "disabled" name="制单人" type="text"
+				style="border-bottom: 1 solid black; border-left: none; border-right: none; border-top: none; BACKGROUND: none transparent scroll repeat 0% 0%;"
+				value="{purchaseuserNameById($mainOrderInfo['purchaseuser_id'])}"> 审核人： <input id="aduituser_id" disabled = "disabled" name="审核人" type="text"
+				style="border-bottom: 1 solid black; border-left: none; border-right: none; border-top: none; BACKGROUND: none transparent scroll repeat 0% 0%;"
+				value="{purchaseuserNameById($mainOrderInfo['aduituser_id'])}"> 制作时间： <input id="addtime" name="制作时间" type="text"
+				style="border-bottom: 1 solid black; border-left: none; border-right: none; border-top: none; BACKGROUND: none transparent scroll repeat 0% 0%;"
+				value="{date('Y-m-d H:i:s',$mainOrderInfo['addtime'])}"> 审核时间： <input id="aduittime" name="审核时间" type="text"
+				style="border-bottom: 1 solid black; border-left: none; border-right: none; border-top: none; BACKGROUND: none transparent scroll repeat 0% 0%;"
+				value="{if empty($mainOrderInfo['aduittime'])} {else} {date('Y-m-d ',$mainOrderInfo['aduittime'])}{/if}" readonly="true"> <br><input type="hidden"  value="{$mainOrderInfo['id']}"  id="orderId"/></td>
+		</tr>
+	</table>
+</div>
+{include file="footer.htm"}
+
+{literal}
+<script type="text/javascript">
+var regcount  = /^[0-9]+$/
+var regprice  = /^([0-9]+|[0-9]+\.[0-9]+)$/
+
+
+$("#pl-edit").click(function(){
+	alertify.prompt("批量修改采购数量。。。。。", function (e, data) {
+			// str is the input text
+			if (e) {
+				if(data == "" || data<=0){
+					alert("请填入有效数据。。。");
+				}else{
+					var url,orderId;
+					orderId = $("#order-table").data("id");
+					url="json.php?mod=purchaseOrder&act=updateCount";
+					$.post(url,{"id":orderId,"count":data},function(rtn){
+						if(rtn == 1){
+							window.location.reload();
+						}
+					});
+				}
+			} else {
+				// user clicked "cancel"
+			}
+		}, "");
+});
+
+function save(){
+	var data={},recordnumber;
+	data.partner_id = $("#partner_id").val();
+	if(data.partner_id == -1){
+		alertify.error("请选择供应商..........");
+		return;
+	}
+	data.warehouse_id = $("#warehouse_id").val();
+	data.paymethod = $("#paymethod").val();
+	data.recordnumber = $("#recordnumber").val();
+	$.post("json.php?mod=purchaseOrder&act=save_all",{"data":data},function(rtn){
+			console.log(rtn);
+			if(rtn == 1){
+				alertify.error("更新成功。。。");
+			}else{
+				alertify.error("更新失败。。。");
+			}
+	});
+}
+
+	//单个修改 
+	$('.aloneMod').click(function(){
+		var id 		  = $(this).data('id');
+		var sku       = $(this).data('sku');
+		var initcount = $.trim($(this).data('initcount'));
+		var initprice = $.trim($(this).data('initprice'));
+		var newcount  = $.trim($('#count'+id).val());
+	    var newprice  = $.trim($('#price'+id).val());
+		var markprice = false;
+		var markcount = false;
+		if(initcount == newcount && initprice == newprice){
+			alertify.error("料号["+sku+"]未做任何修改");
+		 	return false;
+		}
+		if(newprice == '' || newprice == 0 || !regprice.test(newprice)){
+			$('#price'+id).css({ "border":"red solid 1px" });
+			alertify.error("料号["+sku+"]价格有误,请确认");
+		 	markprice = true;
+		}else{
+			$('#price'+id).css({ "border":"" });
+		}
+		if(newcount == '' || newcount == 0 || !regcount.test(newcount)){
+			$('#count'+id).css({ "border":"red solid 1px" });
+			alertify.error("料号["+sku+"]数量有误,请确认");
+		 	markcount = true;
+		}else{
+			$('#count'+id).css({ "border":"" });
+		}
+		if(markcount||markprice){
+			return false;
+		}
+		var data   = {};
+		data.count = newcount;
+		data.price = newprice;
+		$.get("json.php?mod=purchaseOrder&act=modOrderDetail",{ "data":data,"id":id },function(rtn){
+			if(rtn.errCode=="0138"){
+				alertify.success(rtn.errMsg);
+				//setTimeout("window.location.reload();",2000);
+			}else{
+				alertify.error(rtn.errMsg);
+			}
+	 	},"jsonp");
+	})
+	//批量修改
+	$('#allMod').click(function(){
+		var skuObjArr = [];
+		var sign      = false;
+		var status = get_url_parameter("status");
+		var userCnName = Browser.getCookie("userCnName");
+		var powerUser = ["李美琴","潘旭东","陈月葵","陈小霞","郑凤娇","肖金华","周聪"];
+
+		for(var i = 0 ; i < SKUArr.length; i++){
+			var markprice = false;
+		    var markcount = false;
+			var skuObj    = {};
+			var item = SKUArr[i];
+			var newprice  = $.trim($('#price'+item).val());
+			var initprice = $.trim($('#price'+item).data('price'));
+			var newcount  = $.trim($('#count'+item).val());
+			var initcount = $.trim($('#count'+item).data('count'));
+			var sku       = $('#sku'+item).html();
+			skuObj.id     = item;
+			skuObj.count  = newcount;
+			skuObj.price  = newprice;
+			newcount = parseInt(newcount);
+			initcount = parseInt(initcount);
+
+			if(newcount <= 0){
+				$('#count'+item).css({ "border":"red solid 1px" });
+				alertify.error("料号["+sku+"]数量有误,请确认");
+				continue;
+			}
+
+			if($.inArray(userCnName,powerUser) == -1){
+				if(newcount > (initcount + 10) && initcount != 0){
+					console.log("newcount"+newcount+"initcount:"+initcount);
+					$('#count'+item).css({ "border":"red solid 1px" });
+					//alertify.error("料号["+sku+"]采购数量偏大了,请检查下.........");
+					//continue;
+				}
+				
+				if(newcount < initcount){
+					if( (initcount - newcount) > 10 ){
+						$('#count'+item).css({ "border":"red solid 1px" });
+						//alertify.error("料号["+sku+"]采购数量偏小了,请检查下.........");
+						//continue;
+					}
+				}
+
+				if(initprice != newprice){
+					if(status > 2 && $.inArray(userCnName,powerUser) == -1){
+						alertify.error("hi，你没有权限修改产品价格，请联系部门经理.........");
+						markprice = true;
+						continue;
+					}
+				}
+			}
+			skuObjArr.push(skuObj);
+		}
+		console.log(skuObjArr);
+
+
+		if(skuObjArr.length == 0) {
+			alertify.error("没有修改的内容");
+		 	return false;
+		}
+		alertify.confirm( '确定批量修改吗？', function(e){
+			if(e){
+				$.post("json.php?mod=purchaseOrder&act=modAll",{"obj":skuObjArr,"status":status},function(rtn){
+					if(rtn.code == 1){
+						alertify.success(rtn.msg);
+						window.location.reload();
+						//setTimeout("window.location.reload();",2000);
+					}else{
+						alertify.error(rtn.msg);
+					}
+				},"json");
+			}
+		});
+
+	});
+	
+	$('#addDetail').click(function(){
+		var sku 		= $.trim($("#add_sku").val());
+		var price 		= $.trim($('#add_price').val());
+		var count 		= $.trim($('#add_count').val());
+		var poid    	= $.trim($("#orderId").val());
+		var markprice 	= false;
+		var markcount   = false;
+		var marksku     = false;
+		var regsku      = /^[A-Z0-9_]+$/;
+		if(count <= 0){
+			$('#add_count').css({ "border":"red solid 1px" });
+			alertify.error("数量有误,请确认");
+			return;
+		}
+		if(sku == '' || !regsku.test(sku)){
+			$('#add_sku').css({ "border":"red solid 1px" });
+			alertify.error("料号有误,请确认");
+			marksku = true;
+		}else{
+			$('#add_sku').css({ "border":"" });
+		}
+		if(price == '' || price == 0 || !regprice.test(price)){
+			$('#add_price').css({ "border":"red solid 1px" });
+			alertify.error("价格有误,请确认");
+			markprice = true;
+		}else{
+			$('#add_price').css({ "border":"" });
+		}
+
+		if(marksku || markprice || markcount){
+			return false;
+		}
+		var data = {};
+	 	data.price = price;
+	 	data.count = count;
+	 	data.sku   = sku;
+	 	data.po_id = poid;
+		$.post("json.php?mod=purchaseOrder&act=insertOrderDetailInfo",{ "data":data },function(rtn){
+				if(rtn == 1){
+					alertify.success('添加成功');
+				}else{
+					alertify.success('haoxiang failure...............');
+				}
+	 	},"json");
+	
+	})
+ function historyprice(){
+	 var sku = $.trim($("#add_sku").val()),url;
+	 if(sku==""){
+		 alertify.alert("请先输入正确的sku号！");
+		 return;
+	 }
+	$.get("json.php?mod=purchaseOrder&act=isExistSku",{ "sku":sku },function(rtn){
+		if(rtn.errCode=="0133"){
+			url = "index.php?mod=purchaseOrder&act=purchasehistoryprice&sku="+sku;
+			window.open(url);
+		}else{
+			alertify.alert("不存在SKU");
+		}
+	},"jsonp");
+ }
+ function audit(status,dom){
+	var id = $("#orderId").val();
+	var all = $("a[name='audit1'],a[name='audit2']");
+	var selfDom=$(dom);
+	$.get("json.php?mod=purchaseOrder&act=audit",{ "id":id,"stauts":status },function(rtn){
+		if(rtn.errCode="0135"){
+			var all = $("a[name='audit1'],a[name='audit2'],a[name='audit3'],a[name='audit4']");
+			all.hide();
+			if(status==2){
+				alertify.success("订单审核成功！");
+				$("a[name='audit2'],a[name='audit3']").show();
+			}else if(status==1){
+				alertify.success("订单反审核成功！");
+				$("a[name='audit1']").show();
+			}else{
+				alertify.success("反审核在途订单成功！");
+				$("a[name='audit4']").show();
+			}
+		}else{
+			alertify.error(rtn.errMsg);
+		}
+	},"jsonp");
+ }
+
+
+$("#inverse").click(function(){
+	select_all("inverse","input[name='sku_info']",0);
+});
+
+$("#pl-del").click(function(){
+	var skuArr , url,idArr = [],status,powerUser;
+	skuArr 	= $('input[name="sku_info"]:checked');
+	status = get_url_parameter("status");
+	userCnName = Browser.getCookie("userCnName");
+	powerUser = ["李美琴","潘旭东","陈月葵","陈小霞","郑凤娇","肖金华","周聪"];
+	console.log(userCnName);
+	if(status > 2 && $.inArray(userCnName,powerUser) == -1){
+		alertify.error("hey,这个状态下的订单，不要那么冲动删除喔。。。。。");
+		return;
+	}
+	if(skuArr.length == 0){
+		alertify.alert('请选择需删除的料号');
+		return false;
+	}else{
+		$.each(skuArr,function(i,item){
+			idArr.push($(item).data("id"));
+		});
+	}
+	console.log(idArr);
+	alertify.confirm("确实要批量删除吗？",function(e){
+		  if(e){
+			$.post("json.php?mod=purchaseOrder&act=delPhOrderDetail",{ "idArr":idArr },function(rtn){
+					//window.location.reload();
+					console.log(rtn);
+					if(rtn.errCode == 0){
+						alertify.alert(rtn.msg,function(){
+							window.location.reload();
+						});
+					}else{
+						alertify.alert(rtn.msg);
+					}
+					//if()
+			},"json");	
+		  }
+	});
+
+});
+</script>
+
+{/literal}

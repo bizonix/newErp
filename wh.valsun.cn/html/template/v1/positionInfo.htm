@@ -1,0 +1,150 @@
+{include file='header.htm'}
+<link href="css/Popup.css" rel="stylesheet" type="text/css" />
+{include file='whNav.htm'}
+<script language="javascript" src="js/position_manage.js"></script>
+<script language="javascript" src="js/alixixi.js"></script>
+<script language="javascript" src="js/jquery.min.js"></script>
+<div class="servar">
+<button id="positionIndex" value="">更新仓库索引</button>
+<br/>
+<div id="mess"><span style="color:red;font-size:20px">{$state}<span></div>
+</div>
+ <div class="servar">
+	<div style="text-align:center;width:3300px;"><h4>二楼中门</h4></div>
+ </div>
+ <div class="main">
+	<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+		<tr>
+			<td>
+				<table>
+					<tr>
+						{section name="loop1" loop=$second_north_row}
+						<td>
+							<table>
+								{section name="loop2" loop=$hang}
+								<tr>
+									{section name="loop3" loop=$row_position_nums}
+										{$x = $smarty.section.loop3.index+($smarty.section.loop1.index*$distance_row)}
+										{$y = $smarty.section.loop2.index}
+										{$coordinate = "$x,$y,0,0"}
+										{$position = "($x,$y,0,0)"}
+									<td>
+										<div style="width:56px" axis_x="{$x}"  axis_y="{$y}" axis_z="0" floor="0">
+										<span id="{$x}_{$y}_0_0">{$position_arr[$position]}</span><br/>									           
+										<button class="position" style="display:block" id="{$x}_{$y}_0" store="1">编辑</button>
+										</div>
+										<div style="width:104px;display:none">
+										<input type="text" size="11" value="{$position_arr[$position]}" coordinate="{$coordinate}"/><br/>
+										<button class="save">保存</button>
+										<button class="cancel">取消</button>
+										</div>
+									</td>
+									{/section}
+								</tr>
+								{if $smarty.section.loop2.index%2!=0}
+								<tr><td><div style="height:10px"></div></td></tr>
+								{/if}
+								{/section}
+							</table>
+						</td>
+						<td><div style="width:10px"></div></td>
+						{/section}
+					</tr>
+				</table>
+			</td>
+			<td>
+			<div style="width:100px"></div>
+			</td>
+			<td>
+				<table>
+					<tr>
+						{section name="loop1" loop=$second_south_row}
+						<td>
+							<table>
+								{section name="loop2" loop=$hang}
+								<tr>
+									{section name="loop3" loop=$row_position_nums}
+									{$x = $smarty.section.loop3.index+($smarty.section.loop1.index*$distance_row)+($second_north_row*$distance_row)+$distance}
+									{$y = $smarty.section.loop2.index}
+									{$coordinate = "$x,$y,0,0"}
+									{$position = "($x,$y,0,0)"}
+									<td>
+										<div style="width:56px" axis_x="{$x}"  axis_y="{$y}" axis_z="0" floor="0">
+										<span id="{$x}_{$y}_0_0">{$position_arr[$position]}</span><br/>
+										<button class="position" style="display:block" id="{$x}_{$y}_0" store="1">编辑</button>
+										</div>
+										<div style="width:104px;display:none">
+										<input type="text" size="11" value="{$position_arr[$position]}" coordinate="{$coordinate}"/><br/>
+										<button class="save">保存</button>
+										<button class="cancel">取消</button>
+										</div>
+									</td>
+									{/section}
+								</tr>
+								{if $smarty.section.loop2.index%2!=0}
+								<tr><td><div style="height:10px"></div></td></tr>
+								{/if}
+								{/section}
+							</table>
+						</td>
+						<td><div type="width:10px"></div></td>
+						{/section}
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+ </div>
+ <div class="servar">
+	<div style="text-align:center;width:3300px;"><h4>三楼中门</h4></div>
+ </div>
+ <div class="main">
+	<table cellpadding='0' cellspacing='0' width='100%' border='0' class='list view'>
+		<tr>
+			<td>
+				<div style="width:1000px"></div>
+			</td>
+			<td>
+			<div style="width:500px"></div>
+			</td>
+			<td>
+				<table>
+					<tr>
+						{section name="loop1" loop=$third_row}
+						<td>
+							<table>
+								{section name="loop2" loop=$hang}
+								<tr>
+									{section name="loop3" loop=$row_position_nums}
+									{$x = $smarty.section.loop3.index+($smarty.section.loop1.index*$distance_row)+($second_north_row*$distance_row)+$distance}
+									{$y = $smarty.section.loop2.index}
+									{$coordinate = "$x,$y,0,1"}
+									{$position = "($x,$y,0,1)"}
+									<td>
+										<div style="width:56px" axis_x="{$x}"  axis_y="{$y}" axis_z="0" floor="1">
+										<span id="{$x}_{$y}_0_1">{$position_arr[$position]}</span><br/>
+										<button class="position" style="display:block" id="{$x}_{$y}_1" store="1">编辑</button>
+										</div>
+										<div style="width:104px;display:none">
+										<input type="text" size="11" value="{$position_arr[$position]}" coordinate="{$coordinate}"/><br/>
+										<button class="save">保存</button>
+										<button class="cancel">取消</button>
+										</div>
+									</td>
+									{/section}
+								</tr>
+								{if $smarty.section.loop2.index%2!=0}
+								<tr><td><div style="height:10px"></div></td></tr>
+								{/if}
+								{/section}
+							</table>
+						</td>
+						<td><div style="width:10px"></div></td>
+						{/section}
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+ </div>
+{include file='footer.htm'}

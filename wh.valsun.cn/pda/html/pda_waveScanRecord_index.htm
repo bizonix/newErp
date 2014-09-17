@@ -1,0 +1,57 @@
+{include file='header.htm'}
+
+<style>
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}	
+#detail table { width:98%; }
+#detail table td { border:1px solid #ccc; text-align:center; }
+.thd td { line-height:20px; }
+#detail table td.order { width:170px; }
+.wavenum { width:155px; float:left; }
+.op { width:40px; float:left; }
+.header { width:220px; }
+.header div { height:25px; line-height:25px; }
+.detaillist { height:130px; overflow-x:hidden; width:220px; overflow-y:scroll; }
+</style>
+<div onload="loaded()" id="divcontent" style="height:200px;width:225px">
+    <div id="showMsgDiv" style="padding-left:20px;">
+		<span></span>
+	</div>
+    <div style="padding-left:5px; line-height:25px;">
+         配货单 <input type="text" id="waveId" skuid="AK002-2" onkeypress="goScanIndex(event)" name="waveId" style="width:120px;" value="" >
+    </div>
+    <div id="detail">
+    	<div class="header">
+    		<div class="wavenum">配货单</div><div class="op">操作</div>
+    	</div>
+    	<div class="detaillist">
+    		<table>
+		    {foreach $wavelist as $wave}
+		    	<tr><td>{$wave.number}</td><td><input type="button" onclick="goScan('{$wave.number}')" value="配货"></td></tr>
+		    {/foreach}
+			</table>
+		</div>
+    </div>
+</div>
+<script type="text/javascript">
+    
+function goScanIndex(ev){
+	ev = ev || window.event;
+	if(ev.keyCode == 13){
+		var wave = document.getElementById('waveId');
+		var waveId = wave.value;
+		goScan(waveId);
+	}
+}
+    
+function goScan(waveId){
+	window.location.href="index.php?mod=pda_waveScanRecord&act=startscan&waveId="+waveId;
+}
+
+var wv = document.getElementById('waveId');
+wv.focus();
+
+</script>
+{include file='footer.htm'}

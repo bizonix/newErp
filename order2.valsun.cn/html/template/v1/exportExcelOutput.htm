@@ -1,0 +1,140 @@
+{include file='header2.htm'}
+<div class="main order-main" align="left">
+    <div id="content" >
+        <div class='moduleTitle'>
+        <h2>&nbsp;</h2>
+        </div>
+        
+		<div id="accordion">
+        
+        <h3>ebay数据测试导出:</h3>
+			<div>
+                <form id="ebayTestExcelOutput" method="post" action="index.php?mod=exportExcelOutput&act=ebayTestOutputOn">
+				eBay帐号:
+				<select name="ebayTestAccount[]" size="10" multiple="multiple" id="ebayTestAccount" class="validate[required]">
+                    {foreach $ebayAccountList as $accountId}
+                     <option value="{$accountId}">{get_accountnamebyid($accountId)}</option>
+                    {/foreach}					
+				</select>
+				扫描开始时间:
+				<input name="ebayTestStart" id="ebayTestStart" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				扫描结束时间:
+				<input name="ebayTestEnd" id="ebayTestEnd" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				&nbsp;
+				<input type="submit" value="导出到xls"/>
+                </form>
+			</div>
+            
+            <h3>ebay销售漏扫描报表导出:</h3>
+			<div>
+                <form id="ebayNoScanExcelOutput" method="post" action="index.php?mod=exportExcelOutput&act=ebayNoScanOutputOn">
+				eBay帐号:
+				<select name="ebayNoScanAccount[]" size="10" multiple="multiple" id="ebayNoScanAccount" class="validate[required]">
+                    {foreach $ebayAccountList as $accountId}
+                     <option value="{$accountId}">{get_accountnamebyid($accountId)}</option>
+                    {/foreach}					
+				</select>
+				扫描开始时间:
+				<input name="ebayNoScanStart" id="ebayNoScanStart" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				扫描结束时间:
+				<input name="ebayNoScanEnd" id="ebayNoScanEnd" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				&nbsp;
+				<input type="submit" value="导出到xls"/>
+                </form>
+			</div>
+			
+			
+			<h3>速卖通批量发货单订单格式化导出:</h3>
+			<div>
+                <form id="aliFormatExcelOutput" method="post" action="index.php?mod=exportExcelOutput&act=aliexpressOrderFromat">
+				aliexpress帐号:
+				<select name="aliFormatAccount[]" size="1"  id="aliFormatAccount" class="validate[required]">
+                    {foreach $ebayAccountList as $accountId}
+                     <option value="{$accountId}">{get_accountnamebyid($accountId)}</option>
+                    {/foreach}					
+				</select>
+				扫描开始时间:
+				<input name="aliFormatStart" id="aliFormatStart" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				扫描结束时间:
+				<input name="aliFormatEnd" id="aliFormatEnd" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				&nbsp;
+				<input type="submit" value="导出到xls"/>
+                </form>
+			</div>
+			
+			
+			<h3>paypal 退款数据导出:</h3>
+			<div>
+                <form id="refundExcelOutput" method="post" action="index.php?mod=exportExcelOutput&act=ebayRefundOutputOn">
+				退款开始时间
+				<input name="refundStart" id="refundStart" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				退款结束时间:
+				<input name="refundEnd" id="refundEnd" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				&nbsp;
+				<input type="submit" value="导出到xls"/>
+                </form>
+			</div>
+            
+            <h3>手工退款数据导出:</h3>
+			<div>
+                <form id="handRefundExcelOutput" method="post" action="index.php?mod=exportExcelOutput&act=handRefundOutputOn">
+				退款开始时间
+				<input name="handRefundStart" id="handRefundStart" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				退款结束时间:
+				<input name="handRefundEnd" id="handRefundEnd" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				&nbsp;
+				<input type="submit" value="导出到xls"/>
+                </form>
+			</div>   
+			<h3>B2B销售报表数据新版导出：</h3>
+			<div>
+                <form id="B2BSaleExcelOutput" method="post" action="index.php?mod=exportExcelOutput&act=B2BSaleOutputOn">
+				帐号:
+				<select name="b2bSaleAccount[]" size="10" multiple="multiple" id="b2bSaleAccount" class="validate[required]">
+                    {foreach $ebayAccountList as $accountId}
+                     <option value="{$accountId}">{get_accountnamebyid($accountId)}</option>
+                    {/foreach}					
+				</select>
+				退款开始时间
+				<input name="b2bSaleStart" id="b2bSaleStart" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				退款结束时间:
+				<input name="b2bSaleEnd" id="b2bSaleEnd" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				&nbsp;
+				<input type="submit" value="导出到xls"/>
+                </form>
+			</div>             
+			<h3>国内-销售报表数据新版导出：</h3>
+			<div>
+                <form id="InnerSaleExcelOutput" method="post" action="index.php?mod=exportExcelOutput&act=InnerSaleOutputOn">
+				帐号:
+				<select name="innerSaleAccount[]" size="10" multiple="multiple" id="innerSaleAccount" class="validate[required]">
+                    {foreach $ebayAccountList as $accountId}
+                     <option value="{$accountId}">{get_accountnamebyid($accountId)}</option>
+                    {/foreach}					
+				</select>
+				退款开始时间
+				<input name="innerSaleStart" id="innerSaleStart" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				退款结束时间:
+				<input name="innerSaleEnd" id="innerSaleEnd" type="text" class="validate[required]" onclick="WdatePicker( { dateFmt:'yyyy-MM-dd HH:mm:ss' } )" />
+				&nbsp;
+				<input type="submit" value="导出到xls"/>
+                </form>
+			</div>                  
+    </div>
+</div>
+{include file="footer.htm"}
+<script type="text/javascript">
+   $(function(){
+      $( "#accordion" ).accordion({
+		 collapsible: true
+      });
+      
+      jQuery("#ebayTestExcelOutput").validationEngine();
+      jQuery("#ebayNoScanExcelOutput").validationEngine();
+      jQuery("#aliFormatExcelOutput").validationEngine();
+      jQuery("#refundExcelOutput").validationEngine();
+      jQuery("handRefundExcelOutput").validationEngine();
+      jQuery("B2BSaleExcelOutput").validationEngine();
+      jQuery("InnerSaleExcelOutput").validationEngine();
+   });     
+</script>

@@ -1,0 +1,55 @@
+﻿{header}
+<link rel="stylesheet" href="css/transportlist.css">
+{navdiv}
+<script type="text/javascript" src="../../js/shipfee.js"></script>	
+<div class="miancontainer ">
+    <table class="fullwidth" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                    <tr>
+                            
+                            
+                            <td>渠道名称</td>
+                            <td>国家列表</td>
+							<td>重量区间</td>
+                            <td>单价</td>
+                            <td>类型</td>
+                            
+							<td>baf</td>
+                    </tr>
+            </thead>
+            <tbody>
+            	<!-- BEGIN list -->
+                    <tr class="odd">
+                            
+                            
+                            <td>{channelName}</td>
+                            <td>{countries}</td>
+							<td>{weight}</td>
+                            <td>{unitprice}</td>
+                            
+                            <td>{type}</td>
+                            <td>{baf}</td>
+                    </tr>
+                <!-- END list -->
+            </tbody>
+			<tfoot>
+				    <tr class="odd">
+						<td colspan="6" align="right">
+                              {show_page}
+                        </td>
+                    </tr>
+			</tfoot>
+    </table>
+	<input type="button" id="modify_fedex_shenzhen" value="修改运费价目表"/>
+	 <div id="importexcel" style="display:none">
+		
+		<form method="post" id="importform" enctype="multipart/form-data" action="json.php?mod=shipfee&act=fedex_shenzhen&channelName={channelName}">
+			
+			<span style="font-size:12px">请上传指定格式的excel文件</span><input type="file" name="upfile" id="upfile"/>
+			<br><br><span style="font-size:12px">运费种类：<select id="type" name="type"><option value="economica">经济快递</option><option value="prior">优先快递</option></select></span>
+			<br><br><span style="font-size:12px">燃油费：<input type="text" name="fuel" value=""/></span>
+			<br><br><input type="submit" name="import" value="提交"/> 
+		</form>
+	 </div>
+</div>
+{footer}

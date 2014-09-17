@@ -1,0 +1,67 @@
+{include file="header2.htm"}
+{include file='omNav.htm'}
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <tr class="title">
+        	<!-- TODO: <td><input id="inverse-check" type="checkbox"></input></td> -->
+            <td>用户名</td>
+            <td>姓名</td>
+            <td>联系电话</td>
+            <td>工号</td>
+            <td>岗位</td>       
+            <td>部门</td> 
+            <td>公司</td>
+            <td>入职时间</td>  
+            <td>注册时间</td>     
+            <td>用户状态</td>            
+            <td>操作</td>
+        </tr> 
+ 		{foreach $userList as $userlist}
+        <tr>
+            <!-- TODO: <td><input name="checkbox-list" type="checkbox" value="{$userlist.global_user_id}" /></td> -->
+            <td>{$userlist.global_user_login_name}</td>
+            <td>{$userlist.global_user_name}</td>
+            <td>{$userlist.user_phone}</td>
+            <td>{$userlist.global_user_job_no}</td>
+            <td>{$userlist.global_user_job}</td>
+            <td>{$userlist.global_user_dept}</td>
+            <td>{$userlist.global_user_company}</td>
+            <td>{if !empty($userlist.global_user_entry_time)}{$userlist.global_user_entry_time|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+            <td>{if !empty($userlist.global_user_register_time)}{$userlist.global_user_register_time|date_format:"Y-m-d H:i"}{else}--{/if}</td>
+            <td>{if $userlist.global_user_status == '1'}有效{elseif $userlist.global_user_status == '0' }无效{else}--{/if}</td>
+            <td>
+                <a href="index.php?mod=user&act=edit&uid={$userlist.global_user_id}">修改密码</a>
+                <a href="index.php?mod=userCompetence&act=edit&uid={$userlist.global_user_id}">权限</a>
+            </td>
+        </tr>  
+		{foreachelse}
+        <tr>
+            <td colspan="12" align="center"></td>
+        </tr> 
+        {/foreach}                
+    </table>
+</div>
+<div class="bottomvar">
+    <div class="pagination">{$pageStr}</div>
+</div>
+{include file="footer.htm"}
+<script>
+{literal}
+//删除用户
+function del_user(uid){
+	alertify.error('功能未开放!');
+	return false;
+	alertify.confirm("亲,真的要删除当前用户吗？", function (e) {
+	if (e) {
+		$.post("index.php?mod=user&act=delete",{"userid":uid},function(rtn){
+			if($.trim(rtn) == "ok"){              
+				alertify.success("亲,删除成功!");
+				//window.location.reload();
+			}else {
+				 alertify.error("亲,删除失败!");
+		   }
+		});
+	}});
+}
+{/literal}
+</script>   

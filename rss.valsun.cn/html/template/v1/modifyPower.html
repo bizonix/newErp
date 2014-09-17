@@ -1,0 +1,99 @@
+{include file="header.html"}
+{include file="mailNavLocation.html"}
+<div class="main products-main align-main" style="border:1px solid #ccc;">
+  <div class="title font-18" style="font-weight:bold;padding:10px;"> 新增邮件 </div>
+  <div style="padding:10px;">
+  <form name="addMail" method="post" action="index.php?mod=MailManage&act=modifyMailPower&list_id={$list_id}" onsubmit="return checkDatabasePower();">
+    <table style="border:none;margin:0 auto;">
+      <tbody>
+        <tr>
+          <td> 邮件名称： </td>
+          <td><input type="text" name="mail_name" id="mail_name" value="{$mailName}" onblur="checkName(this);" /><span id="inform"></span>
+          </td>
+        </tr>
+        <tr>
+          <td> 邮件描述： </td>
+          <td><input type="text" name="mail_descript" id="mail_descript" value="{$mailDescript}" onblur="checkDescript(this);" /><span id="descript"></span>
+          </td>
+        </tr>
+        <tr>
+          <td> 邮件英文ID： </td>
+          <td><input type="text" name="mail_english" id="mail_english" value="{$mailEnglish}" readonly /><span id="english"> 此项不可更改</span>
+          </td>
+        </tr>
+        <tr>
+        	<td>所属系统：</td>
+        	<td>
+            	<select name="system" id="system">
+            	{foreach item=list from=$getSystem}
+	              	<option {if $list.system_id eq $system[0]} selected="selected" {/if} value="{$list.system_id}">--{$list.system_name}--</option>
+	            {/foreach}
+	            </select>
+	        </td>
+        </tr>
+        <div id="showAll_0">
+        <tr style="vertical-align:top">
+          <td> 邮件权限： </td>
+          <td>
+          <table style="border:0;" id="show">
+          {foreach item=power key=powerList from=$getMailPower}
+          	<tr id="id_{$addId++}">
+          		<td>
+          			<select name="company[]" id="company_{$addVar++}" onChange="showDept(this);" class="company">
+			          {foreach item=company from=$showCompany}
+			              <option {if $company.company_id eq $power.company_id} selected="selected" {/if} value="{$company.company_id}">{$company.company_name}</option>
+			          {/foreach}
+            		</select>
+          			<select name="dept[]" id="dept_{$addDept++}" onChange="showJob(this);checkPowerRepeat(this);" class="dept">
+			          {foreach from=$getDept item=list}
+			          	{foreach from=$list item=dept}
+			          		<option {if $dept.company_id eq $power.company_id and $dept.dept_id eq $power.dept_id} selected="selected" {/if} value="{$dept.company_id}_{$dept.dept_id}">{$dept.dept_name}</option>
+			          	{/foreach}
+			          {/foreach}
+            		</select>
+          		</td>
+          		<td id='delete_{$delete++}'><a href="#" onclick="removejob({$remove++});">删除</a></td>
+          	</tr>
+          	<tr id="showJob_{$addJob++}">
+          		<td id="job_{$jobList++}">
+          			{foreach from=$getJob item=list key=joblist}
+          			{if $joblist eq $power.dept_id}
+	          			{foreach from=$list item=job key=getjob}
+	          			<label>
+	          				<input {if in_array($job.job_id, $power.job_id)} checked="checked" {/if} type="checkbox" class="checkJob" name="jobs[]" value="{$job.company_id}_{$job.dept_id}_{$job.job_id}" />{$job.job_name}
+	          			</label>
+	          			{if (($getjob+1)%5==0)} 
+  							<br />
+         		   		{/if}
+	          			{/foreach}
+	          		{/if}
+          			{/foreach}
+          		</td>
+          		<td></td>
+          	</tr>
+          	{/foreach}
+          </table>
+          </td>
+        </tr>
+        </div>
+        </table>
+        <table style="border:none;margin:0 auto;">
+        <tr>
+          <td></td>
+          <td><a href="#" onclick="addJobPower();">新增更多岗位</a> </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" name="submit" value="提交" />
+          </td>
+        </tr>
+        </table>
+        </form>
+      </tbody>
+  </div>
+</div>
+</div>
+{include file="footer.html"}
+</div>
+</body>
+</html>

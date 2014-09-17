@@ -1,0 +1,134 @@
+{include file='header.htm'}
+<script type='text/javascript' src='./js/goodslist.js'></script>
+<div class='fourvar'>
+            	<div class='pathvar'>
+                {include file='pcNav.htm'}
+                </div>
+                <div class='texvar'>
+                </div>
+                <div class='pagination'>
+                </div>
+            </div>
+			<!-- TODO: <div class='servar products-servar'>
+			<span style='color: red;' id='error'></span>
+            </div> -->
+            <form action='index.php?mod=goods&act=addCombineOn' method='post' id='CombineValidation' target="a">
+            <div class='main products-main basic-main'>            	
+                    <input value='1' name='amount' id='amount' type='hidden'/>
+                    <input value='{$combineSpu}' name='combineSpu' id='combineSpu' type='hidden'/>
+                                     
+                    <table class='products-action' cellspacing='0' width='100%' id='combineSkuTable' maxTrIndex="0">
+                        <tr>
+                            <td>共有&nbsp;<span style="color: red;" class="combineSkuRowCount">1</span>&nbsp;条记录
+                                <table class='main feedback-main basic-main' cellspacing='0' width='100%' id='addCombineSku0'>       
+                                    <tr>
+                                        <td style='width: 15%;background-color: #DBD6D6;'>SKU：
+                                        <span style='color:#F00;'>*</span><span style='font-size: 15px;font-weight: bold;'>{$combineSpu}</span><input name='combineSku0' id="combineSku0" style='width: 70px;'/>
+                                        </td>
+                                        <td style='width: 5%;'>长：
+                                        <input name='combineLength0' style='width: 25px;' class='validate[option,custom[number],min[0]] text-input' value='0.0'/>
+                                        </td>
+                                        <td style='width: 5%;'>宽：
+                                        <input name='combineWidth0' style='width: 25px;' class='validate[option,custom[number],min[0]] text-input' value='0.0'/>
+                                        </td>
+                                        <td style='width: 5%;'>高：
+                                        <input name='combineHeight0' style='width: 25px;' class='validate[option,custom[number],min[0]] text-input' value='0.0'/>
+                                        </td>
+                                        <td>备注：
+                                        <input name='combineNote0'/>                        
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='5'>    
+                                            <input type='button' class='addTrueSkuCom' value='添加真实料号' index='0'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan='5'>    
+                                            <span style='color:#F00;'>*</span>料号：
+                                            <input class='validate[required]' name='sku0[]'/>
+                                            <span style='color:#F00;'>*</span>数量：
+                                            <input class='validate[required,custom[integer],min[1]]' name='count0[]' value='1'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr> 
+                    </table> 
+                <div class='servar products-servar products-action'>
+                共有&nbsp;<span style="color: red;" class="combineSkuRowCount">1</span>&nbsp;条记录
+                <input type='button' value='添加CB子料号' id='addCombineSkuRow'/>
+                </div>                   
+                      
+                <div align='center' class='products-action'>
+                	<input type='submit' value='保存'/>
+                    <input type='button' value='返回' id='back2'/>
+                </div>
+            </div>
+            </form>
+            <iframe style="display: none;" name="a"></iframe>
+            <div class='bottomvar' id="down">
+            	<div class='texvar'>
+
+            	</div>
+            	<div class='pagination'>
+            	</div>
+            </div>
+{include file='footer.htm'}
+<script type='text/javascript'>
+        $(document).ready(function() {
+            //alert($('#amount').val());
+            //alert($('#combineSkuTable > tbody > tr').length);
+            $("#addCombineSkuRow").click(function() {
+                var maxTrIndex = $('#combineSkuTable').attr('maxTrIndex'); //获得该table下tr最大的索引值，默认为0
+                maxTrIndex = parseInt(maxTrIndex);
+                var thisTrIndex = maxTrIndex + 1; //添加新行，该行index默认为最大的+1
+                $('#combineSkuTable').append("<tr><td><table class='main feedback-main basic-main' cellspacing='0' width='100%' id='addCombineSku" + thisTrIndex + "'><tr><td style='width: 15%;background-color: #DBD6D6;'>SKU： <span style='color:#F00;'>*</span><span style='font-size: 15px;font-weight: bold;'>{$combineSpu}</span><input name='combineSku" + thisTrIndex + "'style='width: 70px;' class='validate[required]'/></td><td style='width: 5%;'>长： <input name='combineLength" + thisTrIndex + "'style='width: 25px;'class='validate[option,custom[number],min[0]] text-input'value='0.0'/></td><td style='width: 5%;'>宽： <input name='combineWidth" + thisTrIndex + "'style='width: 25px;' class='validate[option,custom[number],min[0]] text-input'value='0.0'/></td><td style='width: 5%;'>高： <input name='combineHeight" + thisTrIndex + "'style='width: 25px;' class='validate[option,custom[number],min[0]] text-input' value='0.0'/></td><td>备注： <input name='combineNote" + thisTrIndex + "'/>&nbsp;<a href='javascript:void(0)' class='delCombineTable'>删除CB子料号</a></td></tr><tr><td colspan='5'><input type='button' class='addTrueSkuCom' value='添加真实料号' index='" + thisTrIndex + "'/></td></tr><tr><td colspan='5'><span style='color:#F00;'>*</span>料号： <input class='validate[required]'name='sku" + thisTrIndex + "[]'/><span style='color:#F00;'> *</span>数量： <input class='validate[required,custom[integer],min[1]]'name='count" + thisTrIndex + "[]'value='1'/></td></tr></table></td></tr>");
+                var trCount = $('#combineSkuTable > tbody > tr').length; //tr的总数
+                $('.combineSkuRowCount').html(trCount);
+                $('#combineSkuTable').attr('maxTrIndex', thisTrIndex); //将最大索引值重新付给combineSkuTable;
+                $('#amount').val(thisTrIndex); //最大的tr索引
+                if(trCount == 1){
+                    $('#combineSku0').attr('class', '');
+                }else{
+                    $('#combineSku0').attr('class', 'validate[required]');
+                }
+                document.getElementById("down").scrollIntoView(false);
+                //$('.footer').scrollIntoView(true);
+                //alert($('#amount').val());
+                $.ajax({
+    				type	: "POST",
+    				dataType: "jsonp",
+    				url		: 'json.php?mod=goods&act=sessionStart&jsonp=1',
+    				success	: function (msg){
+    				}
+    			});//重新sessionStart一下
+                
+            }); 
+            
+            $(".delCombineTable").live('click',function(){
+                $(this).parent().parent().parent().parent().parent().parent().remove();
+                var trCount = $('#combineSkuTable > tbody > tr').length; //tr的总数
+                //alert(trCount);
+                $('.combineSkuRowCount').html(trCount);
+                if(trCount == 1){
+                    $('#combineSku0').attr('class', '');
+                }else{
+                    $('#combineSku0').attr('class', 'validate[required]');
+                }
+            });
+        });
+        
+        $(function() {
+            $(".addTrueSkuCom").live('click',function(){
+                var index = $(this).attr('index');
+                //alert(index);
+                //alert(index);
+        		$('#addCombineSku'+index).append("<tr><td colspan='5'><span style='color:#F00;'>*</span>料号：&nbsp;<input class='validate[required]' name='sku"+index+"[]'/><span style='color:#F00;'>&nbsp;*</span>数量：&nbsp;<input value='1' class='validate[required,custom[integer],min[1]]' name='count"+index+"[]'/>&nbsp;<a href='javascript:void(0)' class='delTr'>删除行</a></td></tr>");
+            });
+            
+            $("#back2").click(function(){
+            	history.go(-2);
+            }); 
+        });
+</script>

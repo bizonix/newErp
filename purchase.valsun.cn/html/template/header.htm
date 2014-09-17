@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/command.js"></script>
+<script type="text/javascript" src="./public/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/liquidmetal.js"></script>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery.flexselect.js"></script>
+<script src="http://api.notice.valsun.cn/js/swJsNotice.js" type="text/javascript"></script>
+<script type="text/javascript" src="./public/fancyBox/source/jquery.fancybox.js?v=2.1.3"></script>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/global.js"></script>
+<script src="./public/js/jquery-ui-1.9.2.custom.js"></script>
+<link href="./public/css/ui-lightness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/alertify.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://misc.erp.valsun.cn/css/flexselect.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="./public/fancyBox/source/jquery.fancybox.css?v=2.1.2" media="screen" />
+<link href="./public/css/select2.css" rel="stylesheet">
+<link href="./public/css/bootstrap.css" rel="stylesheet">
+<link href="./public/css/select2-bootstrap.css" rel="stylesheet">
+<link href="public/css/bootstrap-modal-bs3patch.css" rel="stylesheet" />
+<link href="public/css/bootstrap-modal.css" rel="stylesheet" />
+<script src="public/js/bootstrap.js"></script>
+<script src="public/js/bootstrap-modalmanager.js"></script>
+<script src="public/js/bootstrap-modal.js"></script>
+<script src="public/js/select2.js"></script>
+<script src="public/js/purchase.js?st=2014-7-21"></script>
+</head>
+<body class="font-Arial">
+	<div class="container">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	采购系统
+                </div>
+                <div class="onevar purchase-onevar">
+                	<ul>
+                        <li>
+                            <a href="index.php?mod=goods&act=index" class="productmanage {if in_array($mod,array('goods'))}cho{/if}"> 货品资料管理</a>
+                        </li>
+                        <li>
+                            <a href="index.php?mod=partner&act=index" class="suppliermanage {if in_array($mod,array('partner','partnerType','agreement'))}cho{/if}">供应商管理</a>
+                        </li>						
+                        <li>
+                            <a href="index.php?mod=purchaseOrder&act=index&three_status=1" class="purchasemanage {if in_array($mod,array('purchaseOrder','stockInvoice','paymentOrder','paymentRecord'))}cho{/if}" >采购管理</a></li>
+                        </li>
+                        <li>
+                        	<a href="index.php?mod=unusualOrder&act=index" class="handle {if in_array($mod,array('unusualOrder','badGood','pendGood','returnGood'))}cho{/if}">到货处理</a>
+                        </li>
+                        <li>
+                        	<a href="index.php?mod=productStockalarm&act=index" class="warning {if in_array($mod,array('productStockalarm','warning'))}cho{/if}">预警管理</a>
+                        </li>
+						<li id="system-set" style="display:none">
+                        	<a href="index.php?mod=user&act=index" class="systemsettings {if in_array($mod,array('user','job','dept'))}cho{/if}">系统设置</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user">
+                	<input id='swNoticeUrl' type='hidden'  value='index.php?mod=notice&act=sendMessage'/>
+                	<a class="news-img" href="javascript:javascript:void(0)" onClick="swntc_call('{$_username}')">消息</a>
+                	<a href="javascript:void(0);" >{$userCnName}</a><a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;" title="注销安全退出">退出</a>
+                </div>
+            </div>
+            <div class="twovar">
+            	<ul>
+                	{if in_array($mod,array('goods'))}
+                    <li><a href="index.php?mod=goods&act=goods_search_index" {if in_array($act,array('index','goods_search_index'))}class="cho"{/if}>货品清单</a></li>
+					{/if}	
+					{if in_array($mod,array('purchaseOrder','stockInvoice','paymentOrder','paymentRecord','moveOrderSku'))}  
+					<li><a href="index.php?mod=purchaseOrder&act=index&three_status=1" {if in_array($mod,array("purchaseOrder")) &&  in_array($act,array("index",'editPurchaseOrder'))}class="cho"{/if}>采购订单管理</a></li>
+					<li><a href="index.php?mod=purchaseOrder&act=pickupList&three_status=1" {if in_array($act,array("pickupList")) }class="cho"{/if}>B仓备货单管理</a></li>
+<!-- 					<li><a href="index.php?mod=purchaseOrder&act=searchCode"  {if in_array($mod,array("purchaseOrder")) &&  in_array($act,array("searchCode"))}class="cho"{/if}>料号查询</a></li> -->
+<!--<li><a href="index.php?mod=stockInvoice&act=index" {if $act=='index' && $mod=='stockInvoice'}class="cho"{/if}>海外备货清单</a></li>
+                    <li><a href="index.php?mod=paymentOrder&act=index&paystatus=3"  {if $act=='index' && $mod=='paymentOrder'}class="cho"{/if}>采购请款单列表</a></li>
+                    <li><a href="index.php?mod=paymentRecord&act=index" {if $act=='index' && $mod=='paymentRecord'}class="cho"{/if}>财务付款记录查询</a></li>-->
+                    <li><a href="index.php?mod=purchaseOrder&act=system_adjust_transport" {if $smarty.get.act =='system_adjust_transport' && $smarty.get.mod =='purchaseOrder'}class="cho"{/if}>特殊运输调整</a></li>
+					 <li><a href="index.php?mod=purchaseOrder&act=checkSuperOrder" {if $smarty.get.act =='checkSuperOrder' && $smarty.get.mod =='purchaseOrder'}class="cho"{/if}>超大订单审核</a></li>
+					 <li><a href="index.php?mod=purchaseOrder&act=moveOrderSku" {if $smarty.get.act =='moveOrderSku' && $smarty.get.mod =='purchaseOrder'}class="cho"{/if}>跨订单到货数量迁移</a></li>
+					{/if}
+                    {if in_array($mod,array('productStockalarm','warning'))}
+                    <li style="display:"><a href="index.php?mod=productStockalarm&act=index" {if in_array($mod,array('productStockalarm')) && in_array($act,array('index'))}class="cho" {/if}>旧系统ERP 预警</a></li>
+                    <li style="display:"><a href="index.php?mod=productStockalarm&act=outStock" {if in_array($mod,array('productStockalarm')) && in_array($act,array('outStock'))}class="cho" {/if}>国内料号超卖控制</a></li>
+                    <li style="display:"><a href="index.php?mod=productStockalarm&act=owOutStock" {if in_array($mod,array('productStockalarm')) && in_array($act,array('owOutStock'))}class="cho" {/if}>海外仓超卖控制</a></li>
+                    <li><a href="index.php?mod=productStockalarm&act=oversea" {if in_array($mod,array('productStockalarm')) && in_array($act,array('oversea'))}class="cho" {/if}>海外仓预警</a></li>
+					<li><a href="index.php?mod=productStockalarm&act=overSkuVolume" {if in_array($mod,array('purToWh')) && in_array($act,array('overSkuVolume'))}class="cho" {/if}>B仓库存立方数</a></li>
+                    <li><a href="index.php?mod=productStockalarm&act=materia" {if in_array($mod,array('productStockalarm')) && in_array($act,array('materia'))}class="cho" {/if}>公司包材预警</a></li>
+					{/if}
+					{if in_array($mod,array('unusualOrder','badGood','pendGood','returnGood','exportExcel','purToWh'))}
+                    <li><a href="index.php?mod=unusualOrder&act=index" {if $smarty.get.act =='index' && $smarty.get.mod =='unusualOrder'} class="cho" {/if}>异常到货列表</a></li>
+                    <li><a href="index.php?mod=unusualOrder&act=list" {if $smarty.get.act =='list' && $smarty.get.mod =='unusualOrder'} class="cho" {/if}>到货查询列表</a></li>
+					<li><a href="index.php?mod=exportExcel&act=index" {if $smarty.get.act =='index' && $smarty.get.mod =='exportExcel'} class="cho" {/if}>报表导出</a></li>
+					<li><a href="index.php?mod=purToWh&act=index" {if $smarty.get.act =='index' && $smarty.get.mod =='purToWh'} class="cho" {/if}>收货管理表</a></li>
+                    <li><a href="index.php?mod=badGood&act=index" {if $smarty.get.act =='index' && $smarty.get.mod =='badGood'} class="cho"{/if}>QC不良品</a></li>
+                    <li><a href="index.php?mod=pendGood&act=index" {if $smarty.get.act =='index' && $smarty.get.mod =='pendGood'} class="cho"{/if}>QC待定产品</a></li>
+					{/if}
+                    {if in_array($mod,array('editProStockAlarm'))}
+                    <li><a href="index.php?mod=productStockalarm&act=index"  class="cho" >采购下单预警管理</a></li>
+                    {/if}
+                    
+                    {if in_array($mod,array('partner','partnerType','agreement')) }
+                    <li><a href="index.php?mod=partner&act=index" {if ($act == 'index' || $act == 'addPartner' || $act == 'editPartner') && $mod == 'partner'} class = "cho"{/if} >供应商列表管理</a></li>
+                    <li><a href="index.php?mod=partnerType&act=index" {if ($act == 'index' || $act == 'addType' || $act == 'editType' ) && $mod == 'partnerType'} class = "cho"{/if}>供应商类型管理</a></li>
+                    <li><a href="index.php?mod=partner&act=blackList" {if $act == 'blackList' && $mod == 'partner'} class = "cho"{/if}>黑名单管理</a></li>
+						{if in_array($userCnName,array('潘旭东','郑凤娇','杨世辉')) }
+                    <li><a href="index.php?mod=agreement&act=index" {if $act == 'index' && $mod == 'agreement'} class = "cho"{/if}>协议管理</a></li>
+						{/if}
+                    {/if}
+                    
+                    
+					{if in_array($mod,array('user','job','dept','platform'))}
+                    <li><a href="index.php?mod=user&act=index" {if $act=='index' && $mod=='user'}class="cho"{/if}>用户管理</a></li>
+					<li><a href="index.php?mod=job&act=index" {if $act=='index' && $mod=='job'}class="cho"{/if}>岗位管理</a></li>
+					<li><a href="index.php?mod=dept&act=index" {if $act=='index' && $mod=='dept'}class="cho"{/if}>部门管理</a></li>
+					<li><a href="index.php?mod=platform&act=index" {if $act=='index' && $mod=='platform'}class="cho"{/if}>销售平台管理</a></li>
+					{/if}
+                </ul>
+            </div>
+            	{if in_array($mod,array('stockInvoice')) && $act!="show"}
+                <div class="threevar">
+            	<ul>                	
+                    <li><a href="index.php?mod=stockInvoice&act=index&status=1" {if $status==1}class="cho"{/if}>已下单({$invoice_order})</a></li>
+                    <li><a href="index.php?mod=stockInvoice&act=index&status=2" {if $status==2}class="cho"{/if}>海运在途({$invoice_transit})</a></li>
+                    <li><a href="index.php?mod=stockInvoice&act=index&status=3" {if $status==3}class="cho"{/if}>已入库({$invoice_stock})</a></li>
+    				                    
+                </ul>
+                </div>
+                {/if}
+               	
+                {if in_array($mod,array('purchaseOrder')) and in_array($act,array('index'))}
+                 <div class="threevar">
+    			<ul>
+    				<li><a
+						href="index.php?mod={$mod}&act=index&three_status=1&search_pur={$smarty.get.search_pur}"  {if $smarty.get.three_status == 1} class="cho" {/if}>未审核({$number1})</a></li>
+    				<li style="display:"><a
+    					href="index.php?mod={$mod}&act=index&three_status=2&search_pur={$smarty.get.search_pur}" {if $smarty.get.three_status == 2} class="cho" {/if}>已审核({$number2})</a></li>
+    				<li>
+    					<a href="index.php?mod={$mod}&act=index&three_status=3&search_pur={$smarty.get.search_pur}" {if $smarty.get.three_status == 3 } class="cho" {/if}>在途订单({$number3})</a></li>
+					<li>
+						<a	href="index.php?mod={$mod}&act=index&three_status=4&search_pur={$smarty.get.search_pur}" {if $smarty.get.three_status == 4 } class="cho" {/if}>已入库订单({$number4})</a>
+					</li>
+					<li>
+						<a	href="index.php?mod={$mod}&act=index&three_status=5&search_pur={$smarty.get.search_pur}" {if $smarty.get.three_status == 5} class="cho" {/if}>已退货({$number5})</a>
+					</li>
+    			</ul>
+                </div>
+    			{/if}
+
+                {if in_array($mod,array('purchaseOrder')) and in_array($act,array('pickupList'))}
+                 <div class="threevar">
+    			<ul>
+    				<li><a
+						href="index.php?mod={$mod}&act=pickupList&three_status=1&search_pur={$smarty.get.search_pur}"  {if $smarty.get.three_status == 1} class="cho" {/if}>未审核({$number1})</a></li>
+    				<li><a
+    					href="index.php?mod={$mod}&act=pickupList&three_status=2&search_pur={$smarty.get.search_pur}" {if $smarty.get.three_status == 2} class="cho" {/if}>已审核({$number2})</a></li>
+    				<li>
+    					<a href="index.php?mod={$mod}&act=pickupList&three_status=3&search_pur={$smarty.get.search_pur}" {if $smarty.get.three_status == 3 } class="cho" {/if}>在途订单({$number3})</a></li>
+					<li>
+						<a	href="index.php?mod={$mod}&act=pickupList&three_status=4&search_pur={$smarty.get.search_pur}" {if $smarty.get.three_status == 4 } class="cho" {/if}>已入库订单({$number4})</a>
+					</li>
+					<li>
+						<a	href="index.php?mod={$mod}&act=pickupList&three_status=5&search_pur={$smarty.get.search_pur}" {if $smarty.get.three_status == 5} class="cho" {/if}>已退货({$number5})</a>
+					</li>
+    			</ul>
+                </div>
+    			{/if}
+				
+				{if in_array($mod,array('paymentOrder')) and in_array($act,array('index'))}
+                 <div class="threevar">
+    			<ul>
+    				<li><a href="index.php?mod={$mod}&act=index&paystatus=3"  {if $paystatus == 3} class="cho" {/if}>等待付款({$orderCout3})</a></li>
+    				<li><a href="index.php?mod={$mod}&act=index&paystatus=4" {if $paystatus == 4} class="cho" {/if}>已付款({$orderCout4})</a></li>
+    			</ul>
+                </div>
+    			{/if}           
+            
+				{literal}
+				<script>
+					var userCnName = Browser.getCookie("userCnName");
+					var powerUser = ["李美琴","潘旭东","陈月葵","陈小霞","郑凤娇","肖金华","周聪","罗莹","陈翠云","包凤明","许振凯","曹莉","陈志强","席慧超","王民伟","陈永峰","左建云","陈智兴","王爱华","杨世辉"];
+					if($.inArray(userCnName,powerUser) > -1){
+						$("#system-set").show();
+					}
+				</script>
+				{/literal}

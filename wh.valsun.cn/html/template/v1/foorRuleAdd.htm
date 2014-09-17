@@ -1,0 +1,26 @@
+{include file='header.htm'}
+{include file='whNav.htm'}
+<script language="javascript" src="js/foorRule.js"></script>
+
+<div class="servar wh-servar" align="center">
+	<form action='index.php?mod=locationPrint&act=sureAddFloor' method="post" id="ruleAddForm"> 
+		<input type="hidden" name="floorId" id="floorId" value="{$lists[0].id}" /> 	
+		<p>
+			<label for="whFloor" style="font-size:20px;">楼层名称: </label>
+			<input value="{$lists[0].whFloor}" class="mf validate[required] text-input" id="whFloor"  name="whFloor" type="text" style="width:200px;height:30px;font-size:20px">
+			<span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<label for="whCode" style="font-size:20px;">楼层代码: </label>
+			<input value="{$lists[0].whCode}" class="mf validate[required] text-input" id="whCode"  name="whCode" type="text" style="width:200px;height:30px;font-size:20px">
+			<span id="showCnMsg" style="color: red;"></span><span style="color:#F00;">*</span>
+		</p>
+		<br/>
+		<p>
+			<input type="submit" id="countriesAddFormSumit" class="input_button" value="提交">
+			<input type="button" class="input_button" id='back' value="返回" />
+		</p>
+	</form>
+</div>
+{include file="footer.htm"}

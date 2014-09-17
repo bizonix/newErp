@@ -1,0 +1,95 @@
+{include file="header.htm"}
+
+<script type="text/javascript" src="./js/printLabel.js"></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="js/inventory.js"></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link href="css/page.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script type="text/javascript" src="./js/ui/jquery-ui.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+{include file='whNav.htm'}
+<div class="servar wh-servar">
+    <span>  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button   type="button" onclick="javascript:window.location.href='./index.php?act=printLabelList&mod=printLabel&storeId={$storeId}';" value="" >查看打标清单</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button   type="button" onclick="javascript:window.location.href='./index.php?act=suppleLabel&mod=printLabel';" value="" >料号补标打印</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="succeedLog" style="color: #0F0">{$succeedLog}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="errorLog" style="color: #F00">{$errorLog}</span>
+   </span>
+</div>
+<br/>
+<div class="searchformdiv servar wh-servar">
+   <!--form style="margin-left:20px" class="navbar-form pull-left" action="./index.php?act=printLabel&mod=printLabel" method="POst"-->
+		&nbsp;&nbsp;&nbsp;点货员：&nbsp;&nbsp;&nbsp;<select class="queryformselect" style="width: 130px;" id="checkUser" name="checkUser">
+			<option value="">请选择</option>
+			{foreach from=$Marking_user item=list}
+				<option value="{$list.global_user_id}" {if $list.global_user_id==$checkUser}selected{/if}>{$list.global_user_name}</option>
+			{/foreach}</select>
+
+       &nbsp;&nbsp;&nbsp;录入员：&nbsp;&nbsp;&nbsp;<select class="queryformselect" style="width: 130px;" id="entryUserId" name="entryUserId">           
+            <option value="">请选择</option>
+            {foreach from=$entryUserList item=entryUser}
+                <option value="{$entryUser.id}" {if $entryUser.id==$entryUserId}selected{/if}>{$entryUser.name}</option>
+            {/foreach}</select> 
+		
+        SKU:&nbsp;&nbsp;&nbsp;<input type="text" name="sku" id="sku" value="{$sku}"/>
+		开始日期：&nbsp;&nbsp;&nbsp;<input type="text" name="startdate" id="startdate" value="{$start}" />
+		结束日期：&nbsp;&nbsp;&nbsp;<input type="text" name="enddate" id="enddate" value="{$end}" />
+		<button  id='serch' value="" />搜 索</button>
+
+    <!--/form-->
+	
+	
+	
+    <div style="clear: both;"></div>
+	<div style="margin-left:20px">打印时分组的最大数量：<input type="text" name="max_num" id="max_num" value="" readonly/>
+	<button id="print" style="margin:0px 20px;">打印</button>
+	<button id="delet" dtype="0" style="margin:0px 20px;">删除</button>
+	<button id="haveprint" style="margin:0px 20px;">标记为已打印</button>
+    <input type='hidden' name="can_submit" value="1"/>
+    <input type="hidden" name="storeId" value="{$storeId}"/>
+	</div>
+</div>
+<div class="main">
+    <table cellspacing="0" width="100%">
+        <thead>
+            <tr class="title">
+                <td width="10%"><input type="checkbox" id="allselect"/></td>
+                <td width="10%">sku</td>
+                <td width="10%">数量</td>
+				<td width="10%">到货库存</td>
+                <td width="10%">点货员</td>
+				<td width="10%">录入员</td>
+                <td width="10%">点货日期</td>
+
+            </tr>
+        </thead>
+        
+        <tbody>
+        {foreach key=key_id from=$lists item=list}
+            <tr class="odd">	
+                
+                 <td width="10%"><input type="checkbox" name="ckbs" value="{$list.id}" /></td>
+                 <td width="10%">{$list.sku}</td>
+                 <td width="10%">{$list.num}</td>
+				 <td width="10%">{$list.arrivalInventory}</td>
+                 <td width="10%">{$list.tallyUserId|getUserNameById}</td>
+				 <td width="10%">{$list.entryUserId|getUserNameById}</td>
+                 <td width="10%">{$list.entryTime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+   
+            </tr>
+         {/foreach}
+        </tbody>
+  
+    </table>
+</div>
+<div class="bottomvar">
+	<div class="texvar">
+	</div>
+	<div class="pagination">
+		{$pagestr}
+	</div>
+</div>
+{include file='footer.htm'}

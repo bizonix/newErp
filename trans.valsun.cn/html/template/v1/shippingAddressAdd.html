@@ -1,0 +1,49 @@
+{header}
+<!-- 
+/*
+ * 发货地址管理添加页面 shippingAddressManageAdd.html
+ * ADD BY 陈伟 2013.7.27
+ */
+-->
+<link rel="stylesheet" href="css/transportlist.css">
+<script type="text/javascript" src="./js/shippingAddressManage.js"></script>
+{navdiv}
+<br />
+<br />
+<br />
+<br />
+<div align="center" class="maincontentdiv" >
+    <form action='index.php?mod=shippingAddressManage&act=shippingAddressAdd' method="post" id="shippingAddressAddForm">
+    	<input type="hidden" name="shippingAddressId" id="shippingAddressId" value="" />
+        <p>
+            <label for="addressNameCnInput" style="font-size:20px;">发货地址中文</label>
+            <input value="" id='addressNameCnInput' class="mf validate[required] text-input" name="addressNameCnInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="addressNameEnInput" style="font-size:20px;">发货地址英文</label>
+            <input value="" class="mf validate[required] text-input" id="addressNameEnInput" name="addressNameEnInput" type="text" style="width:200px;height:20px;font-size:20px">
+            <span style="color:#F00;">*</span>
+        </p>
+        <p>
+            <label for="addressCodeInput" style="font-size:20px;">发货地址代码</label>
+            <input value="" class="mf" id="addressCodeInput" name="addressCodeInput" type="text" style="width:200px;height:20px;font-size:20px">
+        </p>
+        <p>
+            <label for="sellerNameInput" style="font-size:20px;">大卖家</label>
+            <input value="" class="mf validate[required] text-input" id="sellerNameInput" name="sellerNameInput" type="text" style="width:140px;height:20px;font-size:20px">
+            <span style="color:#F00;">*</span>
+        </p>
+            <input class="button" type="submit" style="width:100px;height:35px;font-size:20px" value="提交">
+        <!--    <input class="button" type="reset" style="width:100px;height:35px;font-size:20px" value="重置"> -->
+            <input class="button" type="button" id='returnPage' style="width:100px;height:35px;font-size:20px" value="返回" />
+        </p>
+    </form>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+{footer}

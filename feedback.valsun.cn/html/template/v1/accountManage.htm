@@ -1,0 +1,128 @@
+{include file="header.htm"}
+<div class="fourvar">
+    <div class="pathvar">
+        您的位置：<a href="index.php?mod=user&act=index">授权管理</a>&nbsp;&gt;&gt;&nbsp;account管理
+    </div>
+</div>
+
+<div class="servar">
+{if AccessPerson(array("姚晓东"))}
+<div>
+<input type="text" id="addusername" name=addusername/><span><a href="#" onclick="addUser()">添加</a></span>
+</div>
+{/if}
+<div id="userarea" style="text-align:center">
+<span>
+用户名：<select name="username" id="username">
+           <option value="" {if $account == ''} selected="selected"{/if} >无</option>
+           {if AccessPerson(array("姚晓东"))}<option value='姚晓东'>姚晓东</option>{/if}
+           {foreach from=$userList item=templist}
+           	<option {if $smarty.get.username == $templist.user_name} selected="selected"{/if} value="{$templist.user_name}" id="{$templist.id}">{$templist.user_name}</option>
+           {/foreach}
+      </select> 
+</span>
+
+<span><a href="#" onclick="searchPower()">搜索</a></span>
+<span><a href="#" onclick="savePower()">保存</a></span>
+
+</div>
+</div>
+
+<div id="accountarea" style="width:62%;height:500px; float:left">
+<fieldset name="select">
+<legend>可选账户:</legend>
+{foreach $accountList as $value}
+      <span style="width:160px;float:left">
+		<label for="c{$value.id}">
+			<input type="checkbox" class="ck" name="{$value.account}" {if $useraccountArr&&in_array($value.account,$useraccountArr) }checked="checked"{/if} value="{$value.account}" id="c{$value.id}"/>{$value.account}</label>
+	</span>
+	
+{/foreach}
+  
+</fieldset>
+</div>
+
+
+<div id="resultArea" style="width:35%;height:300px;float:left">
+<fieldset name="result" >
+<legend id="userCanSee">{$smarty.get.username}可见账号：</legend>
+<div>
+<font id="nowUser"></font>
+<textarea name="power_content" id="power_content" cols="60" rows="15" readonly="readonly"> {$useraccount} </textarea>
+</div>
+</fieldset>
+</div>
+{include file="footer.htm"}
+{literal}
+<script>
+$(function(){
+	$(".ck").click(function(){
+		var account    = "";
+		$(".ck:checked").each(function(){
+			account+=$(this).val()+",";
+		});
+		var len    = account.length;
+		account    = account.substring(0,len-1);
+		$("#power_content").text(account);
+	});
+})
+
+function searchPower(){
+	var    username    = $("#username").val();
+	if(username==""){
+		alert("请选择用户名");
+	}else{
+		
+		location.href="index.php?mod=accountManage&act=userPowerSearch&username="+username;
+	}
+}
+function savePower(){
+	var    power	   = $("#power_content").text();
+	var    username    = $("#username").val();
+	if( username==""){
+		alertify.alert("请选择用户！");
+	}else{
+		$.ajax({
+			type	: "POST",
+			dataType: "jsonp",
+			url		: 'json.php?mod=accountManage&act=userPowerSave&jsonp=1',
+			data	: {'power':power,'username':username},
+			success	: function (msg){
+				console.log(msg);
+				if(msg.errCode==200){
+					alertify.success('保存成功');	
+					//window.location.reload();
+				}else{			
+					alertify.error(msg.errMsg);
+				}				
+			}    			
+		});   
+	}
+	
+}
+
+function addUser(){
+	var username    = $.trim($("#addusername").val());
+	if(username==""){
+		alertify.alert("用户名不能为空");
+	}else{
+		//location.href="index.php?mod=accountManage&act=addUserNmae&addusername="+username;
+		$.ajax({
+			type	: "POST",
+			dataType: "jsonp",
+			url		: 'json.php?mod=accountManage&act=addUserNmae&jsonp=1',
+			data	: {'addusername':username},
+			success	: function (msg){
+				console.log(msg);
+				if(msg.errCode==200){
+					alertify.success('保存成功');	
+					window.location.reload();
+				}else{			
+					alertify.error(msg.errMsg);
+				}				
+			}    			
+		}); 
+	}
+}
+</script>
+{/literal}

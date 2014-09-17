@@ -1,0 +1,70 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">
+		您的位置：<a href="index.php?mod=dept&act=index">部门信息管理</a>&nbsp;&gt;&gt;&nbsp;添加岗位
+    </div>     
+    </div>          
+    <div class="main underline-main">
+    <h1>添加部门资料</h1>
+    <form onSubmit="return check()">
+        <table width="90%" border="0" cellpadding="0" cellspacing="0" >     
+            <tr>
+              <td align="right">部门名称：</td>
+                <td align="left">
+                <input type="text" name="deptname" id="deptname" value="" size="35" maxlength="30"/>
+                <span class="red">*</span>
+                </td>
+            </tr>
+			 <tr>
+              <td align="right">部门负责人：</td>
+                <td align="left">
+                <input type="text" name="principal" id="principal" value="" size="35" maxlength="30"/>
+                <span class="red">*</span>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="4" align="center">
+                    <button name="button" type="submit" id="submit-btn" value="search" />提 交</button>
+                    <button name="button" type="button" id="bottom" value="history" onclick="location.href='index.php?mod=dept&act=index'"/>返 回</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    </div>
+    <div class="bottomvar"></div>
+</div>
+{include file="footer.htm"}
+<script>
+{literal}
+$("#submit-btn").click(function(){
+    var deptname,principal;
+	deptname	= $.trim($("#deptname").val());
+    principal	= $.trim($("#principal").val());
+	if(deptname == ''){
+		alertify.error("亲,部门名称不能为空!");
+		$("#deptname").focus();
+		return false;
+	}
+	if(principal == ''){
+		alertify.error("亲,部门负责人不能为空!");
+		$("#principal").focus();
+		return false;
+	}
+	
+	$("#submit-btn").html("提交中,请稍候...");
+	$.post("index.php?mod=dept&act=insert",{"deptname":deptname,"principal":principal},function(rtn){
+		if($.trim(rtn) == "ok"){
+			alertify.success("亲,部门添加成功,5秒后跳转到首页！"); 
+			window.setTimeout(window.location.href = "index.php?mod=dept&act=index",5000);        
+		}else {
+			$("#submit-btn").html("提 交");
+			alertify.error("亲,部门添加失败,请检查数据是否有异常！");        
+		}
+	});
+});
+function check(){
+	return false;
+}
+{/literal}
+</script>

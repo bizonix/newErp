@@ -1,0 +1,38 @@
+{header}
+<div class="fourvar">
+            	{navdiv}
+                
+            </div>
+            <div class="servar">
+                <span>
+                	<input type="button" id='' style="width:150px;height:35px;font-size:20px; cursor:pointer;" value="更新检测标准" />
+                </span>
+            </div>
+            <div class="main">
+            	<table cellspacing="0" width="100%">
+                	<tr class="title">
+                        <td>检测类别</td>
+						<td>数量最小限制</td>
+						<td>数量最大限制</td>
+						<td>样本大小</td>
+						<td>允收数目</td>
+						<td>拒收数目</td>
+						<td>追加数目</td>
+						<td>检测退回百分比</td>
+                    </tr>
+                    <!-- BEGIN list -->
+                    <tr class="odd">
+                            <td>{type}</td>
+                            <td>{minimumLimit}</td>
+                            <td>{maximumLimit}</td>
+                            <td>{sampleNum}</td>
+							<td>{Ac}</td>
+                            <td>{Re}</td>
+                            <td>{Al}</td>
+                            <td>{Rt}</td>
+                    </tr>
+                <!-- END list -->
+                </table>
+            </div>
+
+{footer}

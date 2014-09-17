@@ -1,0 +1,217 @@
+{include file='header.htm'}
+<script type="text/javascript" src="js/whGoodsAssign.js"></script>
+{include file='goodsoutnav.htm'}
+<!--script type="text/javascript" src="http://misc.erp.valsun.cn/js/global.js"--></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="./js/fancybox.js"></script>
+<link href="css/dispatch.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="./js/css/ui-lightness/jquery-ui-1.9.2.custom.min.css" />
+<link rel="stylesheet" media="all" href="./js/css/ui-lightness/jquery-ui-timepicker-addon.css" />
+<script type="text/javascript" src="./js/ui/jquery-ui.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+	
+	<div class="servar wh-servar" style="padding:14px;">
+        <a class="input_button" href="index.php?mod=whGoodsAssign&act=addAssignList">新增调拨单</a>&nbsp;&nbsp;&nbsp;
+        <a class="input_button" onclick="editAssignList()">修改调拨单</a>
+    </div>
+	<br/>
+
+	<div class="fourvar order-fourvar feedback-fourvar products-servar wh-fourvar">
+	 <form id="queryform" method="get" class="queryform">
+			<input type="hidden" name="mod" value="whGoodsAssign" />
+            <input type="hidden" name="act" value="assignList" />
+		<table>
+			<tr>
+				<td style="padding-left:17px;">
+					调拨单查询：
+				</td>
+				<td>
+					<input style="width:250px;" type="text" value="{$keywords}" name='keywords'/>
+				</td>
+				<td style="padding-left:17px;">
+					类型：
+				</td>
+				<td>
+					<select name="keytype" >
+						<option {if $keytype == 1} selected="selected"{/if} value="1">调拨单号</option>
+						<option {if $keytype == 2} selected="selected"{/if} value="2">sku</option>
+                    </select>
+				</td>
+				<td style="padding-left:17px;">
+					状态：
+				</td>
+				<td>
+					<select name="status" id="status">
+                        <option value="1">所有状态</option>
+                        {foreach from = $assign_status key=k item = v}
+                            <option  {if $k == $status}selected="selected"{/if} value="{$k}">{$v}</option>
+                        {/foreach}
+                    </select>
+				</td>
+                <td style="padding-left:17px;">
+					转出仓库：
+				</td>
+				<td>
+					<select name="outStoreId" id="outStoreId">
+                        <option value="0">请选择仓库</option>
+                        {foreach from = $storeLists item=val}
+                            <option  {if $val.id == $outStoreId}selected="selected"{/if} value="{$val.id}">{$val.whName}</option>
+                        {/foreach}
+                    </select>
+				</td>
+                <td style="padding-left:17px;">
+					转入仓库：
+				</td>
+				<td>
+					<select name="inStoreId" id="inStoreId">
+                        <option value="0">请选择仓库</option>
+                        {foreach from = $storeLists item=val}
+                            <option  {if $val.id == $inStoreId}selected="selected"{/if} value="{$val.id}">{$val.whName}</option>
+                        {/foreach}
+                    </select>
+				</td>
+			</tr>
+            <tr>
+                <td style="padding-left:17px;">
+					生成日期：
+				</td>
+				<td>
+					<input style="width: 120px;" type="text" onclick="WdatePicker()" name="startDate" value="{$startDate}" />
+                    -
+                    <input style="width: 120px;" type="text" onclick="WdatePicker()" name="endDate" value="{$endDate}" />
+				</td>
+                <td>
+					<button type="button" onclick="dosearch()" >查 询</button>
+				</td>
+            </tr>
+		</table>
+		</form>
+		<div style="padding-top:5px; padding-left:18px;">
+			<label>
+				全选:<input style="width:20px;padding-top:15px;" onclick="chooseornot(this)" type="checkbox" />
+			</label>
+			<button class="btn" id="application_print">标记打印</button>
+            <button class="btn" onclick="goprintById('1')">打印调拨单</button>
+            <button class="btn" onclick="goprintById('2')">打印调拨出库单</button>
+            <button class="btn" onclick="export_data()">导出到EXCEL</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<!--<input type="text" value="" name='appnum' id='appnum'/><button class="btn" id="more_application" storeId="{$smarty.get.storeId}">批量申请打印</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="btn" id="markUnusual">标记为异常发货单</button>-->
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<!--<select style="margin-left:23px;" name="filesid" id="filesid" onchange="exportstofiles()">
+				<option value="">运单导出</option>
+				<option value="1">Fedex批量处理运单</option>
+				<option value="2">DHL批量处理运单</option>
+			</select>-->
+		</div>
+	</div>
+	<div class="bottomvar">
+		<div class="pagination">
+			{$pagestr}
+		</div>
+	</div>
+    <div class="main order-main wh-main">
+        {foreach $lists as $value }
+		<table cellspacing="0" width="100%" style="text-align:left;">
+			<tr class="title">
+				<td style="width:40px;" align="center" valign="middle">
+					<input class="checkclass" id="orderids" name="orderids" type="checkbox" value="{$value.id}">
+				</td>
+				<td colspan="20">
+					<span style="width:120px;overflow:hidden;">调拨单号：{$value.assignNumber}</span>
+					<span style="width:120px;overflow:hidden;">转出仓库：{$value.outStoreId}</span>
+					<span style="width:120px;overflow:hidden;">转入仓库：{$value.inStoreId}</span>
+					<span style="width:120px;overflow:hidden;">调拨单状态：{$value.status}</span>
+					<span style="width:210px;overflow:hidden;">状态变更时间：{$value.statusTime}</span>
+                    <span style="width:190px;overflow:hidden;">生成时间：{$value.createTime}</span>
+					<span style="width:110px;overflow:hidden;">生成人员：{$value.createUid}</span>
+				</td>
+			</tr>
+			{foreach $value.skuinfo as $skuval}
+			<tr>
+				<td class="unpicurl">
+					<!--a href="javascript:void(0)" id="imga-{$skuval.sku}" class="fancybox">
+						<img src="./images/ajax-loader.gif" name="skuimg" id="imgs-{$skuval.sku}" spu="{$skuval.spu}">
+				   </a-->
+				   <a href="javascript:void(0)" id="imgb-{$skuval.sku}" class="fancybox">
+						<img src="./images/no_image.gif" class="skuimg" id="imgs-{$skuval.sku}"  width="60" height="60" data-spu="{$skuval.spu}" data-sku="{$skuval.sku}">
+			   		</a>
+				</td>
+				<td align="left">
+					<span style="margin-right:20px;width:500px;overflow:hidden;white-space:nowrap;">
+						产品名称：{$skuval.goodsName}
+					</span>
+					<span style="margin-right:20px;width:100px;overflow:hidden;white-space:nowrap;">
+						sku:{$skuval.sku}
+					</span>
+                    <span style="margin-right:20px;width:100px;overflow:hidden;white-space:nowrap;">
+						需求数量:{$skuval.num}
+					</span>
+                    <span style="margin-right:20px;width:100px;overflow:hidden;white-space:nowrap;">
+						配货数量:{$skuval.assignNum}
+					</span>
+                    <span style="margin-right:20px;width:100px;overflow:hidden;white-space:nowrap;">
+						出库复核数量:{$skuval.outCheckNum}
+					</span>
+                    <span style="margin-right:20px;width:100px;overflow:hidden;white-space:nowrap;">
+						接收数量:{$skuval.inCheckNum}
+					</span>
+				</td>
+			</tr>
+			{foreachelse}
+				<tr><td></td><td align="center">该调拨单无料号明细！</td></tr>
+			{/foreach}
+		</table>
+		{foreachelse}
+		<table cellspacing="0" width="100%">
+			<tr><td align="center">没有搜索值！</td></tr>
+		</table>
+		{/foreach}
+    </div>
+	<div class="bottomvar">
+		<div class="pagination">
+			{$pagestr}
+		</div>
+	</div>
+</div>
+<!--p id="back-top">
+    <a href="#toppage"><span></span>Back to Top</a>
+</p-->
+<form target="_blank" action="" method="post" id="hiddenpost" style="display:none;">
+	<input type="hidden" id="idsinput" name="ids" value="">
+	<input type="hidden" name="express" id="expressinput" value="">
+</form>
+{include file='footer.htm'}
+<!--script type="text/javascript">
+//页面加载完成后加载图片
+{literal}
+$(document).ready(function() {
+	var url  = "json.php?mod=common&act=getSkuImg";
+	var skuArr	= $('img[name="skuimg"]'), imgurl="", spu="", sku="";
+	$.each(skuArr,function(i,item){
+		sku	= $(item).attr('id').substring(5);
+		spu	= $(item).attr('spu');
+		$.ajax({
+			url: url,
+			type: "POST",
+			async: true,
+			data	: {spu:spu,sku:sku},
+			dataType: "jsonp",
+			success: function(rtn){
+							sku	= $(item).attr('id').substring(5);
+							//console.log(rtn.errMsg);
+							if ($.trim(rtn.data)) {
+								$("#imgs-"+sku).attr({"src":rtn.data,"width":"60px","height":"60px"});
+							    $("#imga-"+sku).attr("href",rtn.data);
+							} else {
+								$("#imgs-"+sku).attr({"src":"./images/no_image.gif","width":"60px","height":"60px"});
+							    $("#imga-"+sku).attr("href","./images/no_image.gif");
+							}
+				}
+			});
+	});
+});
+{/literal}
+</script-->

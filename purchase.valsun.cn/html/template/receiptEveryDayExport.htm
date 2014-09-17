@@ -1,0 +1,65 @@
+{include file="header.htm"}
+	<div class="fourvar">
+    	<div class="pathvar">
+        	您的位置：<a href="index.php?mod=unusualOrder&act=index">异常到货处理</a>&nbsp;>>&nbsp;<a href="index.php?mod=purToWh&act=index">收货管理列表</a>&nbsp;>>&nbsp;每日报表导出
+        </div>
+		<div class="pagination"></div>
+    </div>
+	 <div class="servar products-servar">
+		<span>
+			仓库数据
+		</span>
+		<span>
+			导出日期:<input id="goods_startTime" onclick="WdatePicker()" type="text" value="{$smarty.get.ser_startTime}" />
+		</span>
+		<span>
+			<a href="javascript:void(0);" id="goodsExport">导出</a>
+		</span>
+		<span id="showgoods"></span>
+		<br/><br/>
+		<span>
+			财务数据
+		</span>
+		<span>
+			导出日期:<input id="finance_startTime" onclick="WdatePicker()" type="text" value="{$smarty.get.ser_startTime}" />
+		</span>
+        <span>
+			<a href="javascript:void(0);" id="financeExport">导出</a>
+		</span>
+		<span id="showfinance"></span>
+    </div>
+	<div class="main underline-main ">
+  
+     </div>
+     <div class="bottomvar">
+     	<div class="pagination">
+
+        </div>
+     </div>
+<script type="text/javascript">
+{literal}
+$("#goodsExport").click(function() {
+	var goodsStartTime 	= $("#goods_startTime").val();
+	if(goodsStartTime == ''){
+		alertify.error('请选择日期再导出');
+		return false;
+	}
+	var html            = '';
+	var path            = './download/receiptExcel/goods_'+goodsStartTime+'.xls';
+	var html            = '<a href="'+path+'">下载数据'+goodsStartTime+'.xls</a>';
+	$('#showgoods').html(html);
+})
+
+$("#financeExport").click(function() {
+	var financeStartTime 	= $("#finance_startTime").val();
+	if(financeStartTime == ''){
+		alertify.error('请选择日期再导出');
+		return false;
+	}
+	var html            = '';
+	var path            = './download/receiptExcel/finance_'+financeStartTime+'.xls';
+	var html            = '<a href="'+path+'">下载数据'+financeStartTime+'.xls</a>';
+	$('#showfinance').html(html);
+})
+{/literal}
+</script>

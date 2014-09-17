@@ -1,0 +1,66 @@
+{include file="header.htm"}
+<script type="text/javascript" src="./js/pm.js"></script>
+<div class="fourvar">
+            	<div class="pathvar">
+                </div>
+                <div class="texvar">
+                </div>
+                <div class="pagination">
+                {$show_page}
+                </div>
+            </div>
+<div class="servar products-servar">
+                {if isAccessAll('packingMaterials','addPm') == true}
+                <a id="add" class="add" href="javascript:void(0)">添加包材</a>
+                {/if}
+            	&nbsp;
+            	<span style="color: red;">{$status}</span>
+            </div>
+            <div class="main feedback-main">
+            	<table class="products-action" cellspacing="0" width="100%">
+                   <tr class="title">
+                         <td>包材名</td>
+                         <td>包材别名</td>
+                         <td>成本(CNY)</td>
+						 <td>长度(cm)</td>
+						 <td>宽度(cm)</td>
+                         <td>高度(cm)</td>
+                         <td>重量(kg)</td>
+                         <td>容积(cm<sup>3</sup>)</td>
+                         <td>包材比除数</td>
+                         <td>比值</td>
+                         <td>备注</td>
+                         <td>操作</td>
+                    </tr>
+                    {foreach $pmList as $value}
+                                <tr class="odd" id="{$value['id']}">
+									<td>{$value['pmName']}</td>
+                                    <td>{$value['pmAlias']}</td>
+                                    <td>{$value['pmCost']}</td>
+									<td>{$value['pmLength']}</td>
+									<td>{$value['pmWidth']}</td>
+									<td>{$value['pmHeight']}</td>
+									<td>{$value['pmWeight']}</td>
+									<td>{$value['pmDimension']}</td>
+									<td>{$value['pmDivider']}</td>
+									<td>{$value['pmRatio']}</td>
+									<td>{$value['pmNotes']}</td>
+									<td>
+                                    {if isAccessAll('packingMaterials','updatePm') == true}
+                                    <input type="button" tid="{$value['id']}" class="mod" value="修改"/>
+                                    {/if}
+                                    <a href="printPMCode.php?pmName={$value['pmName']}">条码</a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                </table>
+            </div>
+            <div class="bottomvar">
+            	<div class="texvar">
+
+            	</div>
+            	<div class="pagination">
+					{$show_page}
+            	</div>
+            </div>
+{include file="footer.htm"}

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title}</title>
+<script type="text/javascript" src="http://misc.erp.valsun.cn/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="./public/js/command.js"></script>
+<script type="text/javascript" src="./public/js/My97DatePicker/WdatePicker.js"></script>
+<script src="./public/js/jquery-ui-1.9.2.custom.js"></script>
+<script src="./public/js/liquidmetal.js" type="text/javascript"></script>
+<script src="./public/js/jquery.flexselect.js" type="text/javascript"></script>
+<link href="http://misc.erp.valsun.cn/css/style.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/page.css" rel="stylesheet" type="text/css" />
+<link href="http://misc.erp.valsun.cn/css/alertify.css" rel="stylesheet" type="text/css" />
+<link href="./public/css/tran.css" rel="stylesheet">
+<link href="./public/css/ui-lightness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<link href="./public/css/flexselect.css" rel="stylesheet" type="text/css" media="screen" />
+
+<script type="text/javascript">
+var web_url = "{$smarty.const.WEB_URL}";
+</script>
+</head>
+<body class="tran-body">
+	<div class="container">
+    	<div class="content">
+        	<div class="header">
+            	<div class="logo">
+                	物流业务开放平台
+                </div>
+                <div class="onevar purchase-onevar">
+                	<ul>
+						{if (in_array('trackWarnInfo',$_competences['mod']))}
+						<li>
+                            <a href="index.php?mod=trackWarnInfo&act=index" class="FreightInquiry {if in_array($mod,array('trackWarnCarrier','trackWarnNode','trackWarnInfo'))}cho{/if}">跟踪号预警</a>
+                        </li>
+						{/if}
+						{if (in_array('wedoApi',$_competences['mod']))}
+						<li>
+                            <a href="index.php?mod=wedoApi&act=index" class="openBusiness {if in_array($mod,array('wedoApi'))}cho{/if}">开放业务管理</a>
+                        </li>
+						{/if}
+						{if (in_array('user',$_competences['mod']))}
+						<li>
+                        	<a href="index.php?mod=user&act=index" class="Authorize {if in_array($mod,array('user','job','dept'))}cho{/if}">授权管理</a>
+                        </li>
+						{/if}
+                    </ul>
+                </div>
+                <div class="user">
+                	<a href="javascript:void(0);" >{$_username}</a><a href="index.php?mod=public&act=logout" style="background: none; font-size: 14px;" title="注销安全退出">退出</a>
+                </div>
+            </div>
+            <div class="twovar {if in_array($mod,array('shippingAddress1'))}nothing-twovar{/if}">
+            	<ul>
+					{if in_array($mod,array('wedoApi'))}
+					<li><a href="index.php?mod=wedoApi&act=index" {if $mod=='wedoApi' && $act=='index' }class="cho"{/if}>开放业务管理</a></li>
+					<li><a href="index.php?mod=wedoApi&act=orderImport" {if $mod=='wedoApi' && in_array($act,array('orderImport','saveOrderImport')) }class="cho"{/if}>运德物流订单导入</a></li>
+					<li><a href="index.php?mod=wedoApi&act=orderExport" {if $mod=='wedoApi' && $act=='orderExport' }class="cho"{/if}>运德物流订单导出</a></li>
+					{/if}
+					{if in_array($mod,array('trackWarnCarrier','trackWarnNode','trackWarnInfo','trackWarnStat','trackWarnExport'))}
+					<li><a href="index.php?mod=trackWarnInfo&act=index" {if $mod=='trackWarnInfo' }class="cho"{/if}>跟踪号预警信息</a></li>
+					{/if}
+					{if in_array($mod,array('user','job','dept'))}
+                    <li><a href="index.php?mod=user&act=index" {if $mod=='user' }class="cho"{/if}>用户管理</a></li>
+					{/if}
+                </ul>
+            </div>

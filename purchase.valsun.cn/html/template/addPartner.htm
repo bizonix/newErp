@@ -1,0 +1,229 @@
+{include file="header.htm"}
+<div class="fourvar">
+	<div class="pathvar">                
+    	您的位置：<a href="index.php?mod=partner&act=index">供应商管理</a>>>添加供应商
+    </div>     
+</div>            
+<div class="main underline-main">
+<table width="75%" border="0" cellpadding="0" cellspacing="0" style=" text-align:inherit; padding-left:40px;" >
+    <tr>
+        <td width="12%">单位名称
+        <input name="company_id" type="hidden" id="id" value="{$partnerInfo.id}"></td>
+        <td width="41%" valign="left"><input name="company_name" type="text" id="company_name" value="{$partnerInfo.company_name}"></td> 
+        <td>姓名</td>
+        <td><input name="username" type="text" id="username" value="{$partnerInfo.username}"></td>             
+    </tr>
+    <tr>                          
+        <td>电话</td>
+        <td valign="left"><input name="tel" type="text" id="tel" value="{$partnerInfo.tel}"></td>
+        <td>移动电话</td>
+        <td><input name="phone" type="text" id="phone" value="{$partnerInfo.phone}"></td>
+    </tr>
+    <tr>                          
+        <td>传真</td>
+        <td valign="left"><input name="fax" type="text" id="fax" value="{$partnerInfo.fax}"></td>                       
+        <td>电子邮件</td> 
+        <td><input name="e_mail" type="text" id="e_mail" value="{$partnerInfo.e_mail}"></td>
+    </tr>
+    <tr>
+        <td>QQ</td>
+        <td valign="left"><input name="QQ" type="text" id="QQ" value="{$partnerInfo.QQ}"></td>
+        <td>阿里旺旺</td>
+        <td><input name="AliIM" type="text" id="AliIM" value="{$partnerInfo.AliIM}" /></td>
+    </tr>
+    <tr>
+        <td>所属城市</td>
+        <td valign="left"><input name="city" type="text" id="city" value="{$partnerInfo.city}"></td>
+        <td>客户地址</td>
+        <td><input name="address" type="text" id="address" value="{$partnerInfo.address}"></td>                          
+    </tr>
+    <tr>
+        <td>店铺链接</td>
+        <td valign="left"><input name="shoplink" type="text" id="shoplink" value="{$partnerInfo.shoplink}" /></td> 
+        <td>备注</td>
+        <td><input name="note" type="text" id="note" value="{$partnerInfo.note}" ></td>                         
+    </tr>
+    <tr>
+        <td>供应商类型</td>
+        <td valign="left">
+        <select name=states id="type_id" style=" width:150px;">
+            {html_options values=$option_values selected=$option_selected output=$option_output}
+        </select>
+        </td>
+		<td>额度</td>
+        <td><input name="limitmoney" type="text" id="limitmoney"  >RMB</td>    
+    </tr>
+    <tr>
+		<td>付款方式</td>
+		<td valign="left">
+			<select name=states id="payWay" style=" width:150px;">
+				<option selected="selected" value="货到付款">货到付款</option>
+				<option value="银行转帐">银行转帐</option>
+				<option value="电子支票">电子支票</option>
+				<option value="支付宝付款">支付宝付款</option>
+			</select>
+		</td>
+		<td>预警额度</td>
+        <td><input name="alertmoney" type="text" id="alertmoney" >RMB</td>    
+    </tr>
+    <tr>
+        <td valign="left">采购员</td>
+        <td>
+        <select name=states id="purchaser_id" style=" width:150px;">
+			{foreach item=list from=$purchaseList}
+				<option value="{$list['global_user_id']}" {if $smarty.session.sysUserId==$list['global_user_id']}selected="selected"{/if}>{$list["global_user_name"]}</option>
+			{/foreach}
+        </select>
+        </td>
+    </tr>
+	<tr>
+		<td>提醒设置</td>
+		<td>
+        <label for="sms_status">短信提醒：
+        <input type="checkbox" name="sms_status" id="sms_status" value="1"/></label>&nbsp;&nbsp;
+        <label for="email_status">邮件提醒：
+        <input type="checkbox" name="email_status" id="email_status" value="1"/></label>
+        </td>
+	</tr>
+    <tr>
+        <td><input name="addPartner" type="button" value="添加" id="button_submit"></td>
+        <td colspan="3">&nbsp;</td>
+    </tr>
+</table>                      
+</div>
+<div class="bottomvar">
+</div>
+{include file="footer.htm"}
+
+<script>
+{literal} 
+
+$('#button_submit').click(function(e){
+    e.preventDefault();    
+	var company_name   = $.trim($('#company_name').val());
+	var username       = $.trim($('#username').val());
+    var tel            = $.trim($('#tel').val());     
+    var phone          = $.trim($('#phone').val());
+    var fax            = $.trim($('#fax').val());  
+    var e_mail         = $.trim($('#e_mail').val());  
+    var address        = $.trim($('#address').val());  
+    var note           = $.trim($('#note').val());  
+    var city           = $.trim($('#city').val());  
+    var QQ             = $.trim($('#QQ').val());  
+    var AliIM          = $.trim($('#AliIM').val());  
+    var shoplink       = $.trim($('#shoplink').val());    
+    var type_id        = $.trim($('#type_id').val());
+    var company_id     = $.trim($('#company_id').val());
+    var purchaser_id   = $.trim($('#purchaser_id').val());  
+    var sms_status     = $("#sms_status").attr("checked");
+    sms_status         = (sms_status == "checked") ? '1' : '0';    
+    var email_status   = $("#email_status").attr("checked");
+    email_status       = (email_status == "checked") ? '1' : '0';    
+
+	var limitmoney     = $.trim($('#limitmoney').val());
+	var alertmoney     = $.trim($('#alertmoney').val());
+	var regmoney       = /^([0-9]*|[0-9]*\.[0-9]+)$/;
+	var payWay = $("#payWay").val();
+   
+	/*单位名称， 姓名，邮箱， 地址必填
+		电话 ， 移动电话二选一
+		QQ，旺旺， 二选一
+	*/
+	var urlRe=/^((http|https|ftp):\/\/)?(\w(\:\w)?@)?([0-9a-z_-]+\.)*?([a-z0-9-]+\.[a-z]{2,6}(\.[a-z]{2})?(\:[0-9]{2,6})?)((\/[^?#<>\/\\*":]*)+(\?[^#]*)?(#.*)?)?$/i;  
+
+		if(urlRe.test(shoplink) == false){
+			alertify.error('Hi,感觉你填写的是错误店铺链接，please check again。。。。。。');
+			return false;
+		}
+    if(company_name.length < 2 || company_name.length > 50) {        
+        alertify.error('单位名称的长度必须介于2-50个字符之间');
+		$('#company_name').focus();
+        return false;
+    }
+    if(username.length < 2 || username.length > 50) {        
+        alertify.error('姓名的长度必须介于2-50个字符之间');
+		$('#username').focus();
+        return false;
+    }    
+
+    if(e_mail == '' || !isEmail(e_mail)) {
+        alertify.error('Hi,email 您好像没填呢 ，要不就是格式不对！');
+		$('#e_mail').focus();
+        return false;
+	}    
+
+    if(tel == '' || !isTelephone(tel)) {
+		if(phone != '' && isMobile(phone)) {
+		}else{
+			alertify.error('hi,您电话号码没填呢，或者格式不对喔,至少得填个手机号码吧！');
+			$('#tel').focus();
+			return false;
+		}
+    }    
+
+    if(phone == '' || !isMobile(phone)) {
+		if(tel != '' && isTelephone(tel)) {
+		}else{
+			alertify.error('hi，移动电话号码格式不对，要不你填个固定电话试试。。。');
+			$('#phone').focus();
+			return false;
+		}
+    }
+    if(fax != '' && !isTelephone(fax)) {
+        alertify.error('传真号码格式不对！');
+		$('#fax').focus();
+        return false;
+    }       
+
+    if(QQ == '' || !isQQ(QQ)) {
+		if(AliIM == ''){
+			alertify.error('QQ 或旺旺 选填一个 ，please。。。');
+			$('#QQ').focus();
+			return false;
+		}
+    }    
+
+	if(AliIM == ''){
+		if(QQ != '' && isQQ(QQ)) {
+		}else{
+			alertify.error('QQ 或旺旺 选填一个 ，please。。。');
+			$('#QQ').focus();
+			return false;
+		}
+	}
+	/*
+    if(company_id == '0' ) {
+        alertify.error('请选择关联公司！');
+        return false;
+    } 
+	/*
+	if(limitmoney == 0 || !regmoney.test(limitmoney)){
+		alertify.error('额度数据格式有误');
+		$('#limitmoney').focus();
+        return false;
+	}
+	if(alertmoney == 0 || !regmoney.test(alertmoney)){
+		alertify.error('预警额度数据格式有误');
+		$('#alertmoney').focus();
+        return false;
+	}
+	*/
+    var url  = "json.php?mod=partner&act=addPartner";    
+    var data = { "company_name":company_name,"username":username,"tel":tel,"phone":phone,"fax":fax,"e_mail":e_mail,"address":address,"note":note,"city":city,"QQ":QQ,"AliIM":AliIM,"shoplink":shoplink,"type_id":type_id,"company_id":company_id,"purchaser_id":purchaser_id,"sms_status":sms_status,"email_status":email_status,"limitmoney":limitmoney,"alertmoney":alertmoney,"payWay":payWay};        
+    $.post(url, data, function(rtn){        
+		if(rtn.code == 1){
+			alertify.alert("添加成功了，thanks....",function(){
+               window.location.href = "index.php?mod=partner&act=index";  
+			}); 
+		} else if(rtn.code == 2) {
+			alertify.alert("该供应商已经存在！"); 
+		} else{
+            alertify.alert("maybe something wrong ,call IT help...."); 
+		}
+     },"json");
+});
+
+{/literal}
+</script>
+
+            

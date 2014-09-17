@@ -1,0 +1,37 @@
+{include file="header.htm"}
+{include file="secendNav_tpl.htm"}
+<link rel="stylesheet" href="./css/msg.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./css/page.css" type="text/css" media="screen" />
+<script type="text/javascript" src="./js/tpllist.js"></script>
+
+<div align="center" style="margin_top:30px;">
+	<form action="index.php?mod=sendEbayCaseMail&act=getTryOpenCaseBuyerMsg" enctype="multipart/form-data" method="post" onSubmit="return checkSumbit()">
+		<input id="upfile" name="upfile" type="file" style="background:#CCCCCC">
+		<input type="submit" value="导入买家信息">
+	</form>
+</div>
+
+<script>
+{literal}
+function checkSumbit() {
+	var upfile		= $('#upfile').val();
+	var str			= upfile.split(".");
+	var extend      = str[1];
+	if(extend != 'xls' && extend != 'xlsx'){
+		alert('请上传表格文件');
+		return false;
+	}
+	if(upfile.length == ''){
+		alert('请选择文件上传');
+		return false;
+	}
+}
+
+function sendMsg() {
+	//发送推送邮件
+	var url				= "index.php?mod=sendEbayCaseMail&act=sendEbayCaseMail";
+	window.location		= url;
+}
+{/literal}
+</script>
+{include file="footer.htm"}

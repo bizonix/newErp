@@ -1,0 +1,114 @@
+<!--
+ * 仓库报表导出管理--脚本总汇 whExportManage.htm
+ * add by 陈先钰 2014.9.5
+-->
+{include file="header.htm"}
+{include file='whNav.htm'}
+<script language="javascript" src="js/bootstrap.min.js"></script>
+<script src="./js/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="./js/ui/jquery-ui-sliderAccess.js"></script>
+<script type="text/javascript" src="./js/whKpiReport.js"></script>
+<div class="servar wh-servar">
+    <table cellspacing="0" width="100%">
+      <tr>
+        <td>
+        	<span style="font-size:20px;">分拣KPI导出:</span>
+        </td> 
+      </tr>
+      <tr>
+      	<td>
+        	<span>开始时间:</span>      
+            <input name="start1" id="start1" class="datetime" type="text" value="" />
+            <span>结束时间:</span>
+            <input name="end1" id="end1" class="datetime" type="text" value="" />
+            <input type="button" value="导出到xls" onclick="xlsbaobiao(1)" />
+            <br />
+            <br />
+            <div id="mstatus1" style="font-size:14px"></div>
+            <br />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+        	<span style="font-size:20px;">分区复核KPI表导出:</span>
+        </td>
+      </tr>
+      <tr>
+      	<td>
+        	<span>开始时间:</span>
+            <input name="start2" id="start2" class="datetime" type="text" value="{$start2}" />
+            <span>结束时间:</span>
+            <input name="end2" id="end2" class="datetime" type="text" value="{$end2}" />
+            <input type="button" value="导出到xls" onclick="xlsbaobiao(2)" />
+            <!--
+            <br />
+            <br />
+            <div id="mstatus2" style="font-size:14px"></div>
+            <br />-->
+        </td>
+      </tr>
+     
+      <tr>
+        <td>
+        	<span style="font-size:20px;">发货组复核KPI报表导出:</span>
+        </td>
+      </tr>
+      <tr>
+      	<td>
+        	<span>开始时间:</span>
+            <input name="start3" id="start3" class="datetime" type="text" value="{$start3}" />
+            <span>结束时间:</span>
+            <input name="end3" id="end3" class="datetime" type="text" value="{$end3}" />
+            <input type="button" value="导出到xls" onclick="xlsbaobiao(3)" />
+            <!--
+            <br />
+            <br />
+            <div id="mstatus3" style="font-size:14px"></div>
+            <br />
+            -->
+        </td>
+      </tr>
+ 
+      <tr>
+        <td>
+        	<span style="font-size:20px;">装车扫描（小包）KPI报表导出:</span>
+        </td>                        
+      </tr>
+      <tr>
+      	<td>
+        	<span>开始时间:</span>
+            <input name="start4" id="start4" class="datetime" type="text" value="" />
+            <span>结束时间:</span>
+            <input name="end4" id="end4" class="datetime" type="text" value="" />
+            <input type="button" value="导出到xls" onclick="xlsbaobiao(4)" />
+          <!--
+            <br />
+            <br />
+            <div id="mstatus2" style="font-size:14px"></div>
+            <br />-->
+        </td>
+      </tr>
+          <!--            
+      <tr>
+        <td>
+        <span style="font-size:20px;">实时sku盘点表导出:</span>
+        </td>                        
+      </tr>
+      <tr>
+      	<td>
+        	<span>开始时间:</span>
+            <input name="start4" id="start4" class="datetime" type="text" value="" />
+            <span>结束时间:</span>
+            <input name="end4" id="end4" class="datetime" type="text" value="" />
+            <input type="button" value="导出到xls" onclick="xlsbaobiao_ex()" />
+            <br />
+            <br />
+            <div id="mstatus4" style="font-size:14px"></div>
+            <br />
+        </td>
+      </tr>
+-->
+	</table>		
+</div>
+{include file="footer.htm"}

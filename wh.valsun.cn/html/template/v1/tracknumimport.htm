@@ -1,0 +1,29 @@
+{include file='header.htm'}
+{include file='goodsoutnav.htm'}
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<div>
+    <table style="width:600px;margin: 0 auto;">
+        <tbody>
+            <tr>
+                <td>
+                    订单号
+                </td>
+                <td>
+                    跟踪号
+                </td>
+            </tr>
+            {foreach $list as $item}
+			<tr style="height:30px; line-height: 30px; font-size: 18px; font-weight: bold; border-bottom: #999999 solid 1px;">
+                <td style="color: #339900;">
+                    {$item.1}
+                </td>
+                <td style="color: #ff3333">
+                    {$item.2}
+                </td>
+            </tr>
+			{/foreach}
+        </tbody>
+    </table>
+</div>
+<div style="font-size: 20px; padding-left: 800px; margin-bottom: 40px;"><a style="text-decoration: none;" href="index.php?mod=expressRecheck&act=trackNumberInput">返回&gt;&gt;</a></div>
+{include file='footer.htm'}
